@@ -36,7 +36,9 @@ Dogfooding —usar el propio producto como un usuario más— manual: 2026-08-25
 
 <!-- /cifras-citadas -->
 
-Rango de IAP (in-app purchase: la compra que se hace dentro de la app) en Google Play: **$0.09 – $299.99**.
+**En qué moneda cobra la tienda.** Las capturas de la ficha del build 1.20.0 traen los precios en dólares —`$0.99 USD`, `$1.99 USD`, `$3.99 USD`—, pero ese material es el mismo para todos los países. **En Colombia el cobro es en pesos:** la ficha de Google Play de `com.stvrae.idilio`, consultada con storefront de Colombia el 26-ago-2026, declara *«Compras en la app: $ 1.900-$ 59.900 por elemento»*. Los montos por paquete en pesos no se pudieron capturar: el checkout web pide iniciar sesión. Cualquier análisis que dependa del precio exacto tiene que esperar a esa captura; el de este entregable depende de las **monedas** que entrega cada paquete, que sí están medidas.
+
+Rango de IAP (in-app purchase: la compra que se hace dentro de la app) en la ficha global: **$0.09 – $299.99**.
 
 La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99** y uno **mensual a $14.99**. O sea que Idilio ya es un modelo híbrido — monedas y suscripción conviviendo — y el muro no ofrece ninguno de los dos: solo dice que hay que descargar la app.
 

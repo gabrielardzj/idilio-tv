@@ -14,7 +14,7 @@ Debajo de esa falla hay otra mayor, que solo aparece al medir el catálogo compl
 |---|---|
 | **F1** | Lo que resolvería el muro —la recompensa diaria, las tareas de la pestaña Recompensas, el pase semanal, el mensual— vive en otra pantalla |
 | **F2** | Nada traduce monedas a episodios, así que el usuario no puede juzgar el precio |
-| **F3** | Dos paquetes distintos dan **las mismas 180 monedas** —uno a US$ 0.99 y otro a US$ 1.99, uno debajo del otro— y subir al siguiente escalón mejora el valor un 3.9% |
+| **F3** | Dos paquetes distintos dan **las mismas 180 monedas** —el segundo al doble de precio, uno debajo del otro— y subir al siguiente escalón mejora el valor un 3.9% |
 | **F4** | La racha pide 7 días de 7 a una base que entra 2.3, y corta a medianoche en un producto que se usa de madrugada |
 | **F5** | El usuario no ve su avance dentro de una serie ni su posición en el sistema |
 
@@ -61,7 +61,7 @@ Costo del episodio: 15        Tu balance: 0
   $0.99 → 180    $1.99 → 180    $3.99 → 375
 ```
 
-> La tienda cobra en dólares —la captura dice `USD`—. Las conversiones a pesos de este documento usan la **TRM del 26-ago-2026: $3.081,67 por dólar** ([Superintendencia Financiera](https://www.datos.gov.co/resource/32sa-8pi3.json)).
+> **De dónde salen estos montos, y en qué moneda paga el usuario.** La captura es de la ficha de tienda, que Idilio publica en dólares — es el mismo material para todos los países. **A un usuario en Colombia la tienda le cobra en pesos:** la ficha de Google Play declara compras dentro de la app de **$1.900 a $59.900 por elemento**. Los montos por paquete en pesos no están en la evidencia que tengo, así que el análisis de abajo va sobre lo que sí está medido y no depende de la moneda: **las monedas que entrega cada paquete y la proporción entre ellos.**
 
 Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más**. Las maneras de conseguir monedas sin pagar —la recompensa diaria y una lista de tareas: compartir la app, seguir las cuentas de Facebook, Instagram, YouTube, TikTok y WhatsApp, calificar la app— viven todas en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
 
@@ -126,7 +126,7 @@ Ese 19% es la señal más informativa del conjunto, precisamente porque el produ
 
 **La conclusión no es que la fuente esté escondida: es que el momento está mal elegido, y que hay un botón de por medio.** El único instante del día en que el usuario quiere monedas es cuando choca con el muro, y ahí la fuente gratuita no aparece.
 
-**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a ≈ $24.620** (US$ 7.99) y uno **mensual a ≈ $46.190** (US$ 14.99): Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal sale más caro que terminar la serie mediana comprándola —600 monedas, entre ≈ $20.430 y ≈ $24.410 según el paquete con que se armen—. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
+**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal** y uno **mensual**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal cuesta más que terminar la serie mediana comprándola, que son 600 monedas. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
 
 Conviene separar dos cosas, porque la estrategia descarta una y propone la otra. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). **Como superficie**, es otra cosa: el producto de mayor valor de la economía no aparece en el momento de máxima intención, y eso es una falla del muro, no de la suscripción.
 
@@ -141,24 +141,24 @@ El paywall muestra `15`, `180`, `375`. Números sueltos, sin referencia. Para en
 | 15 | 1 episodio | ✗ |
 | 180 | 12 episodios | ✗ |
 | 375 | 25 episodios | ✗ |
-| 600 (serie mediana) | 40 episodios · ≈ $20.430 | ✗ |
+| 600 (serie mediana) | 40 episodios | ✗ |
 
-Sin una unidad de valor no hay economía: hay una tarifa opaca. El usuario no puede juzgar si ≈ $3.050 es caro o barato, porque no sabe qué está comprando.
+Sin una unidad de valor no hay economía: hay una tarifa opaca. El usuario no puede juzgar si un paquete es caro o barato, porque no sabe qué está comprando.
 
 ### F3 · Comprar el paquete más grande no le conviene a nadie
 
 Datos reales del paywall:
 
-| Paquete | Precio | Monedas | Episodios | Costo por episodio |
+| Paquete | Precio | Monedas | Episodios | Contra el anterior |
 |---|---|---|---|---|
-| Primero · *«SUPER OFERTA 60%»* | US$ 0.99 · ≈ $3.050 | 180 | 12 | **≈ $254** |
-| Segundo | US$ 1.99 · ≈ $6.130 | 180 | 12 | ≈ $511 |
-| Tercero | US$ 3.99 · ≈ $12.300 | 375 | 25 | ≈ $492 |
+| Primero · *«SUPER OFERTA 60%»* | — | 180 | 12 | — |
+| Segundo | el doble del primero | 180 | 12 | **el doble de precio, las mismas monedas** |
+| Tercero | el doble del segundo | 375 | 25 | el doble de precio, 2,08 veces las monedas |
 
 De ahí salen dos problemas:
 
-1. **Los dos primeros paquetes entregan exactamente las mismas 180 monedas a distinto precio:** US$ 0.99 y US$ 1.99, ≈ $3.050 contra ≈ $6.130. El doble de precio por la misma cantidad, y no en pantallas distintas — en la captura oficial del build 1.20.0 aparecen uno directamente debajo del otro. El de ≈ $6.130 solo se puede leer como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
-2. **Subir del segundo al tercero mejora el valor apenas un 3.9%:** el episodio baja de ≈ $511 a ≈ $492. Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el de ≈ $6.130 y el escalón alto no se vende.
+1. **Los dos primeros paquetes entregan exactamente las mismas 180 monedas a distinto precio.** El doble de precio por la misma cantidad, y no en pantallas distintas — en la captura del build 1.20.0 aparecen uno directamente debajo del otro. El segundo solo se puede leer como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
+2. **Subir del segundo al tercero mejora el valor apenas un 3.9%:** cuesta el doble y entrega 2,08 veces las monedas. Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el segundo y el escalón alto no se vende.
 
 Además, **los cuatro paquetes llevan badge de descuento** (60%, 20%, 20%, 30%). Un precio tachado solo persuade si hay algo sin descuento contra qué compararlo. Cuando todo está en oferta, nada lo está.
 
