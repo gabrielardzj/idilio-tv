@@ -47,3 +47,13 @@ export function Escudo({ s = 18, c = 'currentColor' }: { s?: number; c?: string 
     </svg>
   )
 }
+
+/** El play del anuncio recompensado. Triángulo lleno: es una acción de ver, no
+ *  de reproducir la historia — por eso no reusa el control del player. */
+export function Play({ s = 18, c = 'currentColor' }: { s?: number; c?: string }) {
+  return (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M8.5 6.4 17 12l-8.5 5.6V6.4Z" fill={c} stroke={c} strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  )
+}

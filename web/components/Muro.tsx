@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { EPISODE_COST, MAX_PASSES, episodesLabel } from '@/lib/economy'
+import { EPISODE_COST, FUENTES_HOY, MAX_PASSES, episodesLabel } from '@/lib/economy'
 import type { VistaDelPase } from '@/lib/pase'
 import type { Serie } from '@/lib/supabase/queries'
-import { Moneda, Ticket } from './Moneda'
+import { Moneda, Play, Ticket } from './Moneda'
 import { Racha } from './Racha'
 
 /**
@@ -72,6 +72,24 @@ export function Muro({
 
       {/* 3 · la decisión */}
       {pase.passes > 0 ? <PaseListo pase={pase} onUsar={onUsarPase} /> : <Cita pase={pase} episodio={episodio} />}
+
+      {/* El anuncio recompensado, que el producto YA tiene y este muro no
+          mostraba. Va entre el Pase y lo pago por la regla de D2 —lo gratis
+          antes que lo pago— y debajo del Pase porque el Pase es lo mismo sin
+          los 30 segundos ni el corte en el cliffhanger. Y va traducido: el
+          producto lo rotula «0/10», que no le dice nada a nadie. */}
+      <button className="mt-3 flex w-full items-center gap-2.5 rounded-2xl border border-white/9
+                         bg-white/[.045] px-3.5 py-3 text-left transition hover:bg-white/[.075]">
+        <span className="grid h-8 w-8 flex-none place-items-center rounded-full bg-brand-cyan/12 text-brand-cyan">
+          <Play s={17} />
+        </span>
+        <span className="grid gap-0.5">
+          <b className="text-[13.5px] font-semibold text-ink">Ver un anuncio y abrir este episodio</b>
+          <small className="text-[11.5px] text-ink-low">
+            Te quedan {FUENTES_HOY.anuncio.topeDiario} episodios gratis hoy · 30 s cada uno
+          </small>
+        </span>
+      </button>
 
       <div className="mt-3.5">
         {puedePagar ? (
