@@ -43,7 +43,9 @@ Costo del episodio: 15        Tu balance: 0
   $0.99 → 180    $1.99 → 180    $3.99 → 375
 ```
 
-Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más** —la transcripción de arriba llega hasta el tercero; del cuarto solo pude capturar el badge de −30%, y queda anotado así en el [registro del dogfooding](../00-dogfooding/)—. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
+> La tienda cobra en dólares —la captura dice `USD`—. Las conversiones a pesos de este documento usan la **TRM del 26-ago-2026: $3.081,67 por dólar** ([Superintendencia Financiera](https://www.datos.gov.co/resource/32sa-8pi3.json)).
+
+Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más**. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
 
 ### Hallazgo 2 · Pagar no es la única salida del muro: empezar otra serie es gratis
 
@@ -96,7 +98,7 @@ El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué
 
 La pestaña Recompensas ya está en la barra inferior. Que exista no alcanza. **Un metajuego alojado en un destino que el usuario no visita no puede mover DAU/MAU, por bien diseñado que esté.**
 
-**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a $7.99** y uno **mensual a $14.99**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal a $7.99 sale más caro que terminar la serie mediana comprándola —600 monedas, entre ≈ $6.63 y ≈ $7.92 según el paquete con que se armen—. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
+**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a ≈ $24.620** (US$ 7.99) y uno **mensual a ≈ $46.190** (US$ 14.99): Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal sale más caro que terminar la serie mediana comprándola —600 monedas, entre ≈ $20.430 y ≈ $24.410 según el paquete con que se armen—. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
 
 Vale separar dos cosas que se confunden fácil, porque la estrategia descarta una y propone la otra. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). **Como superficie**, es otra cosa: el producto de mayor valor de la economía no aparece en el momento de máxima intención, y eso es una falla del muro, no de la suscripción.
 
@@ -111,27 +113,24 @@ El paywall muestra `15`, `180`, `375`. Números sueltos, sin referencia. Para en
 | 15 | 1 episodio | ✗ |
 | 180 | 12 episodios | ✗ |
 | 375 | 25 episodios | ✗ |
-| 600 (serie mediana) | 40 episodios · ~$6.63 | ✗ |
+| 600 (serie mediana) | 40 episodios · ≈ $20.430 | ✗ |
 
-Sin una unidad de valor no hay economía: hay una tarifa opaca. El usuario no puede juzgar si $0.99 es caro o barato, porque no sabe qué está comprando.
+Sin una unidad de valor no hay economía: hay una tarifa opaca. El usuario no puede juzgar si ≈ $3.050 es caro o barato, porque no sabe qué está comprando.
 
 ### F3 · Comprar el paquete más grande no le conviene a nadie
 
 Datos reales del paywall:
 
-| Paquete | Monedas | Monedas por USD |
-|---|---|---|
-| $0.99 (oferta de entrada) | 180 | **181.8** |
-| $1.99 | 180 | 90.5 |
-| $3.99 | 375 | **94.0** |
-| (4º paquete) | — | — |
-
-Del cuarto paquete solo pude leer el badge —−30%—: en la captura del paywall queda por debajo del corte, sin precio ni monedas visibles. Va en la tabla igual, porque una tabla de tres donde el producto tiene cuatro es el mismo tipo de omisión que este documento le señala al muro. El argumento de abajo se sostiene sobre los tres que sí se pudieron leer.
+| Paquete | Precio | Monedas | Episodios | Costo por episodio |
+|---|---|---|---|---|
+| Oferta de entrada | US$ 0.99 · ≈ $3.050 | 180 | 12 | **≈ $254** |
+| Segundo | US$ 1.99 · ≈ $6.130 | 180 | 12 | ≈ $511 |
+| Tercero | US$ 3.99 · ≈ $12.300 | 375 | 25 | ≈ $492 |
 
 Dos problemas:
 
-1. **$0.99 y $1.99 entregan exactamente las mismas 180 monedas.** Puestos uno al lado del otro, el de $1.99 se lee como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
-2. **Pasar de $1.99 a $3.99 mejora el valor apenas un 3.9%.** Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el paquete de $1.99 y el escalón alto no se vende.
+1. **El primer paquete y el segundo entregan exactamente las mismas 180 monedas** — ≈ $3.050 contra ≈ $6.130. Puestos uno al lado del otro, el de ≈ $6.130 se lee como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
+2. **Subir del segundo al tercero mejora el valor apenas un 3.9%:** el episodio baja de ≈ $511 a ≈ $492. Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el de ≈ $6.130 y el escalón alto no se vende.
 
 Además, **los cuatro paquetes llevan badge de descuento** (60%, 20%, 20%, 30%). Un precio tachado solo persuade si hay algo sin descuento contra qué compararlo. Cuando todo está en oferta, nada lo está.
 
