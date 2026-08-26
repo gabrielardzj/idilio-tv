@@ -8,6 +8,7 @@
  *   node scripts/recorrer.mjs [url]
  */
 import { chromium } from 'playwright-core'
+import { EPISODE_COST } from '../src/lib/economy.ts'
 
 const URL = process.argv[2] || 'http://localhost:5199/'
 const pasos = []
@@ -99,6 +100,47 @@ await page.locator('.sheet button', { hasText: 'Ver el episodio' }).click()
 await page.waitForTimeout(500)
 paso('vuelve al player con el episodio abierto', (await estado()) === 'player-free')
 paso('sigue siendo la misma serie', (await enPantalla()) === titulo, `«${await enPantalla()}»`)
+
+// ── La otra mitad de la economía: el camino de pago ──────────────────────
+// El pase ya se gastó, así que este es el muro de quien no tiene la vía gratis.
+// Nadie había recorrido esto: la tienda es donde aterriza toda la pedagogía de
+// la moneda, y hasta hoy solo se verificaba saltando a ella con el panel.
+while ((await estado()) === 'player-free') {
+  await page.locator('[aria-label^="Siguiente episodio"]').click()
+  await page.waitForTimeout(90)
+}
+paso('sin pase, el muro vuelve a aparecer', (await estado()) === 'wall-pass-spent')
+
+await page.locator('.sheet button', { hasText: /No quiero esperar|consigue monedas/i }).first().click()
+await page.waitForTimeout(500)
+paso('el muro lleva a la tienda', (await estado()) === 'store')
+
+const meta = await page.locator('.goal').innerText()
+paso('la tienda calcula la meta de ESTA serie', meta.includes(titulo), meta.replace(/\n/g, ' · '))
+
+// El badge «termina esta serie» mintió en 40 de 41 series cuando era fijo.
+// Que caiga sobre un paquete que de verdad alcanza es la corrección, y solo se
+// puede comprobar con una serie de verdad: acá son 60 bloqueados, no 44.
+const cierra = page.locator('.pack').filter({ hasText: 'TERMINA ESTA SERIE' })
+const faltan = Number(meta.match(/(\d+) monedas/)?.[1] ?? 0)
+const ofrece = Number((await cierra.first().innerText()).match(/(\d+) monedas/)?.[1] ?? 0)
+paso('el paquete que cierra la serie de verdad alcanza', ofrece >= faltan,
+  `${ofrece} monedas para una meta de ${faltan}`)
+
+await cierra.first().click()
+await page.waitForTimeout(600)
+paso('comprar devuelve al muro con saldo', (await estado()) === 'wall-with-balance')
+
+const antes = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? 0)
+await page.locator('.sheet button', { hasText: /Abrirlo ahora/ }).first().click()
+await page.waitForTimeout(600)
+paso('pagar desbloquea el episodio', (await estado()) === 'unlocked-via-coins')
+
+await page.locator('.sheet button', { hasText: 'Ver el episodio' }).click()
+await page.waitForTimeout(500)
+const luego = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? 0)
+paso('cobra exactamente el precio del episodio', antes - luego === EPISODE_COST,
+  `${antes} → ${luego}`)
 
 // Volver atrás desde el player
 await page.locator('[aria-label="Volver a la serie"]').click()
