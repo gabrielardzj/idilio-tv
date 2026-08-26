@@ -108,6 +108,50 @@ for (const [nombre, boton] of [['muro', '2 · El muro'], ['tienda', '7 · Tienda
   console.log(`${fallos.length ? '✗' : '✓'} teclado · ${nombre.padEnd(11)} ${fallos.length ? fallos.join(' · ') : 'entra, se queda dentro y Escape cierra'}`)
 }
 
+// ── La versión sobre el stack real, si está levantada ────────────────────
+// No va en CI: allí el sitio se arma como export estático bajo /idilio-tv/, y
+// servirlo en la raíz rompería las rutas de sus recursos, así que la auditoría
+// mediría fallos del andamiaje y no del producto. Con `npm run start` en
+// web/ —o apuntando al sitio publicado— sí se audita:
+//
+//   node scripts/verificar-a11y.mjs http://localhost:5199/ http://localhost:5301/
+const STACK = process.argv[3]
+if (STACK) {
+  const rutas = [
+    ['stack · muro pase listo', 'serie/pasion-a-domicilio/13', null],
+    ['stack · celebración', 'serie/pasion-a-domicilio/13', /Usar (el|un) pase/i],
+    ['stack · muro con saldo', 'serie/la-enfermera-infiltrada/13', null],
+    ['stack · índice', '', null],
+  ]
+  for (const [nombre, ruta, accion] of rutas) {
+    const r0 = await page.goto(new URL(ruta, STACK).href, { waitUntil: 'networkidle' }).catch(() => null)
+    if (!r0?.ok()) { console.log(`· ${nombre} SALTADO — ${STACK} no responde`); continue }
+    await page.waitForTimeout(600)
+    if (accion) { await page.locator('button', { hasText: accion }).first().click(); await page.waitForTimeout(700) }
+    await page.addScriptTag({ content: AXE })
+    const r = await page.evaluate(async () => await window.axe.run(document.querySelector('main'), {
+      runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
+    }))
+    total += r.violations.length
+    console.log(`${r.violations.length ? '✗' : '✓'} ${nombre.padEnd(24)} ${r.passes.length} reglas` +
+      r.violations.map((v) => `\n      ${v.id} · ${v.help}`).join(''))
+  }
+
+  // La celebración de la web tenía el mismo defecto que las hojas del
+  // prototipo: al abrirse dejaba el foco en el body.
+  await page.goto(new URL('serie/pasion-a-domicilio/13', STACK).href, { waitUntil: 'networkidle' })
+  await page.waitForTimeout(600)
+  await page.locator('button', { hasText: /Usar (el|un) pase/i }).first().click()
+  await page.waitForTimeout(700)
+  const dentro = await page.evaluate(() => !!document.activeElement?.closest('[aria-label="Episodio desbloqueado"]'))
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(400)
+  const cerrada = (await page.locator('[aria-label="Episodio desbloqueado"]').count()) === 0
+  const mal = [!dentro && 'el foco no entra', !cerrada && 'Escape no cierra'].filter(Boolean)
+  total += mal.length
+  console.log(`${mal.length ? '✗' : '✓'} teclado · stack           ${mal.length ? mal.join(' · ') : 'el foco entra en la celebración y Escape cierra'}`)
+}
+
 console.log(`\n${total === 0 ? '✓ NINGÚN ESTADO TIENE VIOLACIONES WCAG A/AA' : `✗ ${total} VIOLACIONES`}`)
 
 await browser.close()

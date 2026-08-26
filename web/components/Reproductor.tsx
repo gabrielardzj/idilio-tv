@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { EPISODE_COST, MAX_PASSES, episodesLabel } from '@/lib/economy'
 import type { VistaDelPase } from '@/lib/pase'
 import type { Serie } from '@/lib/supabase/queries'
@@ -128,6 +128,17 @@ export function Reproductor({
 function Celebracion({
   pase, episodio, onCerrar,
 }: { pase: VistaDelPase; episodio: number; onCerrar: () => void }) {
+  // Al abrirse, el foco se quedaba en el body: la hoja aparece sobre todo lo
+  // demás y quien navega con teclado tenía que buscarla a tientas. Se lleva al
+  // botón, que es lo único que hay que hacer aquí, y Escape cierra.
+  const seguir = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    seguir.current?.focus()
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { e.preventDefault(); onCerrar() } }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [onCerrar])
+
   return (
     <>
       <div className="absolute inset-0 z-40 bg-surface-0/62 backdrop-blur-[3px]" />
@@ -158,6 +169,7 @@ function Celebracion({
           <Racha nights={pase.nights} shields={pase.shields} />
         </div>
         <button
+          ref={seguir}
           onClick={onCerrar}
           className="flex h-[54px] w-full items-center justify-center rounded-full bg-gradient-to-b
                      from-primary to-[#6d19e2] text-[15.5px] font-bold text-white transition active:scale-[.975]"
