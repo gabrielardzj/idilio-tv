@@ -64,11 +64,30 @@ Los microdramas terminan en cliffhanger por construcción. Cada capítulo gratis
 
 ---
 
+### D4b · Hay una tercera ubicación posible, y no la había considerado
+
+Planteé dos opciones: **perfil** (lo que hace Idilio, y falla) y **muro** (mi propuesta).
+ReelShort usa una tercera: **prompt al abrir la app**, y es la más barata de construir.
+
+Sigo prefiriendo el muro —el prompt cobra un peaje de interrupción en *todas* las sesiones y
+entrega la economía antes de que exista deseo, mientras que el muro la entrega en el pico— pero
+**es un trade-off, no una obviedad**: el prompt está probado en la categoría, es más simple y no
+toca el reproductor. Si el equipo necesitara la versión más barata posible de la Ola 1, es una
+alternativa legítima. **Lo que no es defendible es dejarlo en el perfil.**
+
+---
+
 ### D5 · El escudo se gana, nunca se compra
 
 **Razón.** El modo de fallo documentado de las rachas es el *abstinence violation effect*: al romperse, el usuario no reintenta, abandona. El contador rígido convierte la aversión a la pérdida —que era el motor— en la razón para irse.
 
 **Y por qué no se vende.** Si el escudo se compra, la racha deja de significar constancia y pasa a significar poder adquisitivo. En ese momento el número deja de tener sentido **para todo el mundo, incluido quien lo compró**. Es una decisión de integridad de la mecánica que **renuncia explícitamente a un ingreso disponible**, y conviene decirlo así en vez de disimularlo.
+
+**Lo que el benchmark obliga a admitir:** no encontré **ningún** competidor con escudo de racha —
+ReelShort reinicia a cero al fallar un día. Eso lo vuelve un diferenciador, pero también significa
+que **la categoría no lo considera necesario**. Mi razón es el *abstinence violation effect*, no una
+práctica del sector. Es una hipótesis mía: si el A/B no muestra supervivencia de rachas tras el
+primer fallo, se corta.
 
 ---
 
@@ -104,7 +123,7 @@ Los microdramas terminan en cliffhanger por construcción. Cada capítulo gratis
 
 ## 5.3 Lo que probablemente esté mal en este trabajo
 
-Cinco puntos débiles, ordenados por probabilidad de estarlo:
+Seis puntos débiles, ordenados por probabilidad de estarlo:
 
 **① El cálculo del 8,7× compara denominadores distintos.**
 19% es una tasa diaria sobre DAU; 6% es acumulada sobre usuarios. La comparación es **direccional, no exacta**. La defensa: el sesgo juega a favor de la conclusión (si el 6% se mide sobre una base más amplia que DAU, el exceso sobre la independencia es aún mayor). Pero si los denominadores fueran muy distintos de lo que asumo, el argumento se debilita. **Es el primer número que pediría verificar con datos reales.**
@@ -120,10 +139,19 @@ no se verifica aritméticamente es una lista de deseos.*
 **③ La tabla de recompensas (1→2→3→3→3→3→5) es una hipótesis sin calibrar.**
 Está construida para poner el premio grande en la noche 3, que es donde el dato dice que está el 2,4×. Pero los valores absolutos salen de un benchmark externo (DramaBox/ReelShort entregan ~250 monedas/día ≈ 4–5 episodios), no de la economía de Idilio. **La curva hay que calibrarla con datos propios; lo defendible aquí es la forma, no los números.**
 
-**④ El brief describe una economía más simple que la real.**
-El brief dice 2 fuentes y 1 sumidero. Las reseñas públicas verificadas muestran que el producto real ya tiene **video recompensado, "retos" y membresía mensual**. Diseñé contra la economía del brief porque es el terreno que se evalúa, pero **la intervención tendría que reconciliarse con esas piezas** — sobre todo con el video recompensado, que es otra fuente ganada y compite directamente con el capítulo de la casa. Es la conversación número uno que tendría con el equipo.
+**④ El brief describe una economía más simple que la real, y eso me costó un agujero.** *(parcialmente resuelto)*
+El brief dice 2 fuentes y 1 sumidero. El producto real ya tiene **video recompensado, "retos" y membresía mensual**. El benchmark ([§6](06-benchmark.md)) convirtió ese riesgo abstracto en un número: en la categoría, el caudal gratuito real **no** es el check-in (0,5 eps/día en ReelShort) sino los **anuncios** — 15–20 al día, ~250 monedas, ~4 episodios. Si el capítulo de la casa sustituye al video recompensado, **desaparece inventario publicitario que hoy se monetiza**, y eso no estaba en ninguno de mis guardarraíles.
 
-**⑤ La cita de regreso depende del permiso de notificaciones.**
+*Resuelto a medias:* añadí el principio de las **tres divisas** (tiempo → capítulo de la casa; atención → anuncio; dinero → compra) y un guardarraíl de impresiones de video recompensado. Sigue sin estar resuelto **cuánto** canibaliza, y por eso el A/B debe probar **3 vs 5 capítulos en la noche 7** en vez de dar 5 por sentado.
+
+**⑤ Mi tabla de recompensas es ~10× más generosa que el check-in de la categoría.**
+ReelShort da 30 monedas en el día 7 = **0,5 episodios**. Yo doy **5 episodios** en la noche 7.
+No lo había dimensionado hasta hacer el benchmark. Mi defensa es que el check-in de ReelShort no
+está diseñado para dar valor sino para enganchar, y que contra el caudal real de la categoría
+(~4 eps/día vía anuncios) mis 5 no son excesivos. **Pero la defensa depende de que el número
+correcto esté entre 3 y 5, y eso hay que probarlo, no argumentarlo.**
+
+**⑥ La cita de regreso depende del permiso de notificaciones.**
 "Mañana a las 8:00 pm · Avísame" es el mecanismo de retorno más directo del diseño y **descansa sobre un recurso escaso**: en iOS el permiso de notificaciones probablemente ya está gastado en avisos de estreno. Si el equipo no está dispuesto a reasignarlo, ese bloque pierde la mitad de su fuerza y queda solo como promesa visual. **Hay que decidir a qué se renuncia, y no lo puedo decidir yo desde fuera.**
 
 ---

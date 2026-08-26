@@ -15,7 +15,11 @@ El 82% no abre perfil. Toda intervención se evalúa primero por *dónde ocurre*
 **P2 · Enseñar la economía es enseñarla en el momento del gasto.**
 Nadie lee un tutorial de monedas. Todo el mundo lee un precio cuando quiere algo. El muro de desbloqueo es la única clase de economía a la que el usuario asiste voluntariamente.
 
-**P3 · Doble moneda: lo que se gana no puede ser lo mismo que lo que se compra.**
+**P3 · Tres divisas, tres disposiciones a pagar: tiempo, atención y dinero.**
+El usuario puede entregar **tiempo** (volver esta noche → capítulo de la casa), **atención**
+(ver un anuncio → monedas bonus que caducan) o **dinero** (comprar → monedas permanentes).
+Los tres coexisten y no compiten, porque cada uno cobra en una divisa distinta.
+Y lo que se gana nunca puede ser lo mismo que lo que se compra:
 Si la racha entrega monedas fungibles con las compradas, cada moneda regalada es ingreso destruido y el usuario aprende a esperar en vez de a pagar. La salida es que lo ganado tenga **naturaleza distinta**: acceso con caducidad, no saldo acumulable. Un pase que caduca esta noche no compite con un paquete de monedas: **crea la ocasión de usarlo** y empuja al muro otra vez.
 *Verificación:* es el patrón de las vidas de Candy Crush y de los pases de DramaBox; y es exactamente lo contrario de regalar saldo, que es lo que las reseñas piden y lo que no hay que hacer.
 
@@ -145,6 +149,7 @@ El orden **no** es por impacto esperado: es por **dependencia y por costo de apr
 | Experiencia | Comprensión de la economía (encuesta 1 pregunta in-app) | sin medir | **medirlo es parte del entregable** |
 | Guardarraíl | ARPDAU | — | **no cae** |
 | Guardarraíl | Episodios por sesión | ~14 | **no cae** |
+| Guardarraíl | **Impresiones de video recompensado por DAU** | — | **no caen más de un 10%** |
 
 > **Corrección.** La primera versión de esta tabla ponía *15% de día-3* y *DAU/MAU 0,38–0,40*
 > en la misma fila, como si una implicara la otra. **No las verifiqué, y no se implican.**
@@ -158,4 +163,10 @@ El orden **no** es por impacto esperado: es por **dependencia y por costo de apr
 > el plan no funciona sin sus piezas menos vistosas** — y es la mejor razón que tengo para
 > defender que I0 va primero y no al final.
 
-Los dos guardarraíles son la parte más importante de esta tabla. Una intervención de gamificación que sube el DAU/MAU y baja el ingreso o el consumo no es un éxito: **es una redistribución disfrazada.**
+> **El tercer guardarraíl lo añadió el benchmark** ([`docs/06-benchmark.md`](06-benchmark.md)).
+> En la categoría, el caudal gratuito real no es el check-in (0,5 episodios al día en ReelShort):
+> son los **anuncios** — 15–20 al día, ~250 monedas, ~4 episodios. Si el capítulo de la casa
+> sustituye al video recompensado, **desaparece inventario publicitario que hoy se monetiza**.
+> No estaba en mi lista y es un agujero real en la propuesta original.
+
+Los guardarraíles son la parte más importante de esta tabla. Una intervención de gamificación que sube el DAU/MAU y baja el ingreso o el consumo no es un éxito: **es una redistribución disfrazada.**

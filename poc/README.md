@@ -1,5 +1,7 @@
 # POC · Racha de Noches
 
+**▶ En vivo: [gabrielardzj.github.io/idilio-racha-de-noches-poc](https://gabrielardzj.github.io/idilio-racha-de-noches-poc/)**
+
 Prototipo funcional (no un click-through): la economía está implementada de verdad en un
 motor puro y testeado, y la interfaz solo la refleja.
 

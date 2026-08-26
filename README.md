@@ -21,8 +21,10 @@
 | 5.1 | **Diagnóstico** | [`docs/01-diagnostico.md`](docs/01-diagnostico.md) | 35% |
 | 5.2 | **Estrategia** | [`docs/02-estrategia.md`](docs/02-estrategia.md) | *(con 5.1)* |
 | 5.3 | **Intervención en profundidad + diseño + flujo** | [`docs/03-intervencion.md`](docs/03-intervencion.md) · [`docs/04-flujo.md`](docs/04-flujo.md) · [`design/`](design/) | 20% craft |
-| 5.4 | **POC funcional** | [`poc/`](poc/) → *link de despliegue* | 25% |
+| 5.4 | **POC funcional** | **▶ [gabrielardzj.github.io/idilio-racha-de-noches-poc](https://gabrielardzj.github.io/idilio-racha-de-noches-poc/)** · código en [`poc/`](poc/) | 25% |
 | — | **Decisiones y análisis crítico** | [`docs/05-decisiones.md`](docs/05-decisiones.md) | 20% claridad |
+| — | **Benchmark de la categoría** (y lo que me obligó a corregir) | [`docs/06-benchmark.md`](docs/06-benchmark.md) | — |
+| — | **Modelo de sensibilidad** del objetivo | [`docs/modelo/`](docs/modelo/README.md) | — |
 | — | **Export tipo Mobbin** (pantallas, flujos y patrones) | [`export/`](export/) | — |
 
 ---
@@ -77,6 +79,8 @@ Las tres decisiones que la sostienen:
 
 Los tests incluyen el caso que rompe rachas hoy: **23:30 y 01:00 de la noche siguiente son la misma noche.**
 
+**▶ [gabrielardzj.github.io/idilio-racha-de-noches-poc](https://gabrielardzj.github.io/idilio-racha-de-noches-poc/)** — ábrelo en el móvil.
+
 ```bash
 cd poc && npm install && npm run dev     # http://localhost:5173
 cd poc && npx vitest run                 # 22 tests
@@ -102,6 +106,30 @@ baratas de la Ola 0 — el corte a las 4am y la migaja en el reproductor).
 **El modelo dice que el plan no funciona sin sus piezas menos vistosas.** Es la mejor razón que
 tengo para defender que la higiene de la economía va primero y no al final.
 Reproducible: `node docs/modelo/sensibilidad.mjs` · [`docs/modelo/`](docs/modelo/README.md)
+
+---
+
+## Lo que el benchmark obligó a corregir
+
+Contrastar la propuesta contra ReelShort y DramaBox **confirmó** dos cosas y **rompió** una tercera.
+
+Confirmó que el principio de doble moneda es el estándar de la categoría (las monedas bonus
+caducan a 7–30 días, las compradas no) y que **el precio de Idilio no es el problema**: ReelShort
+cobra ~$0,60 por episodio.
+
+Rompió un supuesto: **en la categoría el caudal gratuito real no es el check-in** —que da 0,5
+episodios al día— **sino los anuncios**, 15–20 al día, ~4 episodios. Si el capítulo de la casa
+sustituye al video recompensado, desaparece inventario publicitario que hoy se monetiza. **No
+estaba en ninguno de mis guardarraíles.** La corrección: tres divisas —**tiempo** (volver),
+**atención** (anuncio), **dinero** (comprar)— que coexisten sin competir, más un guardarraíl
+nuevo de impresiones de video recompensado.
+
+Y añadió una mejora que sí puedo reclamar: la categoría separa lo ganado de lo comprado **por
+caducidad pero no por unidad** — ambas son "monedas" en la misma cartera. De ahí que DramaBox
+tenga un artículo de ayuda titulado *"¿Por qué desaparecieron mis monedas?"*. Los capítulos de la
+casa **nacen diciendo cuándo se acaban**.
+
+Detalle completo en [`docs/06-benchmark.md`](docs/06-benchmark.md).
 
 ---
 
