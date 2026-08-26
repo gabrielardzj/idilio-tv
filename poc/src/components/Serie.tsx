@@ -2,6 +2,7 @@ import { porId } from '../lib/catalogo'
 import { EPISODE_COST, episodesLabel, toEpisodes } from '../lib/economy'
 import type { State } from '../lib/state'
 import { frameStyle } from '../lib/frame'
+import { arteDe } from '../lib/portada'
 import { Back, Coin, Lock, Pass, Play } from './Icons'
 
 /**
@@ -29,7 +30,24 @@ export function Serie({
 
   return (
     <div className="serie">
-      <div className="serie-art" style={frameStyle(s.tono, s.total)}>
+      {/* El póster real va como primera capa y el fotograma sintético debajo:
+          si el arte no existe todavía, el degradado sigue pintando y la ficha
+          no se queda en negro. Anclado arriba porque el título de la portada
+          vive en la mitad inferior, que es justo la que este recorte se come, y
+          su sello en el borde superior, que la barra de estado ya ocupa. */}
+      <div
+        className="serie-art"
+        style={{
+          ...frameStyle(s.tono, s.total),
+          backgroundImage: `url(${arteDe(s.id)}), ${frameStyle(s.tono, s.total).backgroundImage}`,
+          // Ampliado al 150%: con el recorte justo, la ventana de 296 px se
+          // come o el sello de arriba o el título de abajo, y el título del
+          // póster debajo del <h1> se lee como un eco. Acercando la imagen, la
+          // ventana cae entre los dos y queda la escena sola.
+          backgroundSize: '150%',
+          backgroundPosition: 'center 34%',
+        }}
+      >
         <button className="icon-btn serie-back" onClick={onVolver} aria-label="Volver"><Back /></button>
         <button className="wallet serie-wallet" onClick={onWallet} aria-label={`Saldo: ${state.balance} monedas`}>
           <Coin s={19} />

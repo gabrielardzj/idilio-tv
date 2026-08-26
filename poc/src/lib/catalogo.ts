@@ -6,7 +6,9 @@
  * de las cuales 9 son enteramente gratis y por eso no aparecen acá— está en
  * docs/00-dogfooding/catalogo.json y el script que lo levantó, al lado.
  *
- * Los tonos sí son míos: el POC no usa los pósters reales.
+ * Los tonos son míos: sostienen la portada compuesta que se dibuja cuando una
+ * serie todavía no tiene arte. El resto del tiempo se ve el póster real, bajado
+ * con scripts/bajar-posters.mjs.
  */
 export interface SerieCatalogo {
   id: string

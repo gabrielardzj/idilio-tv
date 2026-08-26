@@ -47,7 +47,7 @@ const FLOWS = [
         id: '01-home', name: 'Home · el catálogo',
         type: 'Home / Browse', patterns: ['Content rails', 'Continue watching', 'Currency balance'],
         elements: ['Top bar', 'Wallet chip', 'Horizontal rail', 'Poster', 'Progress bar', 'Tab bar'],
-        note: 'El chasis del producto real: portadas con el título quemado en el arte y el sello «idilio original», los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
+        note: 'El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
         act: async () => {},
       },
       {

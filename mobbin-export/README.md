@@ -18,7 +18,7 @@ El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de v
 | 2 | [Ficha de serie · la progresión visible](flows/f0-llegar-al-muro/02-serie.png) | Detail | Episode grid, Progress indicator, Unlock cost |
 | 3 | [Player · el core loop](flows/f0-llegar-al-muro/03-player.png) | Media player | Vertical video, Swipe navigation, Progress indicator |
 
-**Home · el catálogo** — El chasis del producto real: portadas con el título quemado en el arte y el sello «idilio original», los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.
+**Home · el catálogo** — El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.
 
 **Ficha de serie · la progresión visible** — Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.
 

@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import { CATALOGO_SERIES, RIELES_GENERO, type SerieCatalogo } from '../lib/catalogo'
 import { EPISODE_COST, episodesLabel } from '../lib/economy'
 import { enCurso, type State } from '../lib/state'
 import { posterStyle } from '../lib/frame'
-import { portada, semilla } from '../lib/portada'
+import { arteDe, portada, semilla } from '../lib/portada'
 import { Coin, Logo } from './Icons'
 
 /**
@@ -12,10 +13,10 @@ import { Coin, Logo } from './Icons'
  * llegar a él como se llega de verdad — eligiendo una serie, viendo un rato y
  * chocando— para que la propuesta se pueda evaluar.
  *
- * Reproduce el chasis del producto real: portadas con el título quemado en el
- * arte y el sello «idilio original», rieles de género con el mismo orden que la
- * app (Estrenos → Seguir viendo → Lo más visto → los géneros → la selección) y
- * la flecha de arrastre asomando en el borde derecho.
+ * Reproduce el chasis del producto real: los pósters de verdad del catálogo
+ * —con su título y su sello quemados en el arte—, rieles de género con el mismo
+ * orden que la app (Estrenos → Seguir viendo → Lo más visto → los géneros → la
+ * selección) y la flecha de arrastre asomando en el borde derecho.
  *
  * Dos cosas se apartan de la app, y SON la propuesta: el chip de saldo lleva su
  * traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido
@@ -104,11 +105,17 @@ function Riel({
   )
 }
 
-/** Una portada del riel: arte, sello, título quemado y —si la serie está
- *  empezada— la barra de avance pegada al borde inferior. */
+/** Una portada del riel: el póster real de la serie y —si está empezada— la
+ *  barra de avance pegada al borde inferior.
+ *
+ *  Si el arte no carga, se cae a la portada compuesta: el degradado del tono
+ *  con el título y el sello dibujados. No es un adorno defensivo — una serie
+ *  recién estrenada puede no tener póster todavía, y ahí una miniatura en negro
+ *  sería peor que una compuesta. */
 function Poster({
   s, state, onSerie, continuar,
 }: { s: SerieCatalogo; state: State; onSerie: (id: string) => void; continuar?: boolean }) {
+  const [sinArte, setSinArte] = useState(false)
   const va = state.vistos[s.id] ?? 0
   const pct = Math.round((va / s.total) * 100)
   const sem = semilla(s.id)
@@ -122,16 +129,25 @@ function Poster({
         ? `${s.titulo}. Episodio ${va} de ${s.total}`
         : `${s.titulo}. ${s.gratis} episodios gratis de ${s.total}`}
     >
-      <span className="poster-art" style={posterStyle(s.tono, sem)}>
-        <span className="poster-brand" aria-hidden="true"><Logo s={6} /><b>idilio</b><i>original</i></span>
-        <span
-          className="poster-tit" data-serif={p.serif || undefined}
-          style={{ fontSize: p.tam }} aria-hidden="true"
-        >
-          {p.lineas.map((l, i) => (
-            <span key={i} style={p.acento && i === p.lineas.length - 1 ? { color: p.acento } : undefined}>{l}</span>
-          ))}
-        </span>
+      <span className="poster-art" data-arte={!sinArte || undefined} style={posterStyle(s.tono, sem)}>
+        {sinArte ? (
+          <>
+            <span className="poster-brand" aria-hidden="true"><Logo s={6} /><b>idilio</b><i>original</i></span>
+            <span
+              className="poster-tit" data-serif={p.serif || undefined}
+              style={{ fontSize: p.tam }} aria-hidden="true"
+            >
+              {p.lineas.map((l, i) => (
+                <span key={i} style={p.acento && i === p.lineas.length - 1 ? { color: p.acento } : undefined}>{l}</span>
+              ))}
+            </span>
+          </>
+        ) : (
+          <img
+            className="poster-img" src={arteDe(s.id)} alt="" aria-hidden="true"
+            loading="lazy" decoding="async" onError={() => setSinArte(true)}
+          />
+        )}
         {/* La barra sale en cualquier riel donde aparezca una serie empezada,
             no solo en «Seguir viendo»: es la misma portada, y el avance viaja
             con ella. */}

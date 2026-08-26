@@ -36,6 +36,16 @@ export interface Portada {
   acento: string | null
 }
 
+/**
+ * El póster real de la serie, bajado con `scripts/bajar-posters.mjs`.
+ *
+ * Ya trae el título y el sello «idilio original» quemados en el arte: cuando
+ * hay póster, la portada compuesta de acá abajo no se dibuja. Sigue existiendo
+ * porque una serie nueva puede no tener arte todavía, y una miniatura vacía es
+ * peor que una compuesta.
+ */
+export const arteDe = (id: string) => `${import.meta.env.BASE_URL}posters/${id}.webp`
+
 const cache = new Map<string, Portada>()
 
 /** Semilla estable por serie: los tonos y la tipografía no deben bailar entre renders. */

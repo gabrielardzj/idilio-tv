@@ -11,7 +11,7 @@ El brief acota el alcance a *"la pantalla o el momento donde ocurre la mecánica
 
 | Pantalla | Para qué está |
 |---|---|
-| **Home** | Las 41 series reales con muro, con sus cifras medidas, en el chasis de la app: portadas con el título quemado en el arte y los rieles en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
+| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, en el chasis de la app: los rieles en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
 | **Ficha de serie** | Donde hoy hay 40 números grises, la grilla dice dónde vas, qué está abierto y qué cuesta terminar. |
 | **Player** | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
 

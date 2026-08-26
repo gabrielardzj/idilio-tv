@@ -472,6 +472,10 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(6,3,9,.42) 0%, transparent 30%, rgba(6,3,9,.66) 100%);
 }
+/* El póster real no lleva velo: ya viene compuesto, con su propio contraste.
+   El degradado es para que el título dibujado se lea sobre el degradado. */
+.poster-art[data-arte]::after { display: none; }
+.poster-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .poster-brand {
   position: absolute; left: 6px; top: 6px; z-index: 2;
   display: flex; align-items: center; gap: 3px;
