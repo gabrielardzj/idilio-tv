@@ -14,7 +14,8 @@
     "docs": "node scripts/publicar-docs.mjs",
     "recorrer": "node scripts/recorrer.mjs",
     "acreditacion": "node scripts/acreditacion.mjs",
-    "enlaces": "node scripts/verificar-enlaces.mjs"
+    "enlaces": "node scripts/verificar-enlaces.mjs",
+    "fuentes": "node scripts/verificar-fuentes.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

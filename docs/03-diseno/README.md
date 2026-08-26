@@ -373,7 +373,7 @@ El botón *«Avísame cuando esté listo»* es lo que cierra el ciclo: sin él, 
 - [Anime News Network · Webtoon Service Ends Daily Pass Feature](https://www.animenewsnetwork.com/news/2025-06-05/webtoon-service-ends-daily-pass-feature/.225053) — historia de la mecánica desde 2020.
 - [The Magic Rain · Webtoon says goodbye to Daily Pass](https://themagicrain.com/2025/06/webtoon-says-goodbye-to-daily-pass-hello-to-new-ways-to-read/) — qué la reemplazó.
 - [ipetitions · Remove the Daily Pass feature](https://www.ipetitions.com/petition/remove-webtoon-daily-pass/) — la queja de los lectores, en sus términos.
-- [WEBTOON (WBTN) Q4 2025 earnings call](https://www.aol.com/articles/webtoon-wbtn-q4-2025-earnings-232039689.html) — MAU 2025, citado sin atribuirle causa.
+- [WEBTOON (WBTN) Q4 2025 earnings call](https://www.fool.com/earnings/call-transcripts/2026/03/03/webtoon-wbtn-q4-2025-earnings-call-transcript/) — MAU 2025 en boca del CFO, *«total MAU of 157 million declined 7.1%»*, citado sin atribuirle causa.
 
 **Sobre la categoría (secundarias, de calidad desigual — marcadas como "a verificar" donde se usan):**
 - [Filmustage · ReelShort vs DramaBox 2026](https://filmustage.com/blog/short-drama-apps-compared-reelshort-vs-dramabox-in-2026/)

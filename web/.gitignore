@@ -1,6 +1,9 @@
 node_modules/
 .next/
 out/
+# caché incremental de tsc: 131 KB que cambian en cada compilación, así que
+# ensucian el estado del repo y hacen dudar de quién tocó qué.
+tsconfig.tsbuildinfo
 next-env.d.ts
 CLAUDE.md
 AGENTS.md
