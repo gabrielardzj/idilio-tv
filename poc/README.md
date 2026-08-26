@@ -50,7 +50,18 @@ pagó — y **percibir el gasto es la mitad de entender la economía**.
 | Luna nueva con halo que se expande una vez | que la racha subió |
 | Chips del HUD que se apagan con el sheet abierto | evita dos cifras desincronizadas en pantalla |
 
-Todas respetan `prefers-reduced-motion`.
+Todas respetan `prefers-reduced-motion`, y **ninguna es infinita**: el grano del vídeo es estático
+—en el producto real el grano viene del vídeo, no de una capa CSS— y la pista de deslizar late
+cuatro veces y para. Una animación que no para nunca cuesta batería durante toda la sesión, en una
+app que se ve de noche, en el móvil, 22 minutos seguidos.
+
+## Sistema visual
+
+| | |
+|---|---|
+| **Escala tipográfica** | 11 pasos (10 · 11 · 12 · 13 · 14 · 15 · 17 · 19 · 21 · 24 · 40). Había 19 tamaños distintos, muchos separados por medio píxel. |
+| **Ritmo vertical** | Rejilla de 4 px. Los ocho estados del muro miden 556–577 px y ninguno scrollea en 375×667. |
+| **Foco de teclado** | Anillo blanco de 2 px con `:focus-visible`. El reproductor pasa a `inert` con una hoja abierta, para que el foco no caiga en botones invisibles detrás. |
 
 ## Alcance declarado
 

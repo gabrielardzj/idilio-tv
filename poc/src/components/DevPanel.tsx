@@ -5,6 +5,8 @@ export interface Preset {
   state: EconomyState;
   ep: number;
   overlay: null | 'unlock' | 'account' | 'shop';
+  /** Congela la hoja en la animación de gasto para poder inspeccionarla. */
+  frozenSpend?: 'pass' | 'coins' | null;
   now?: Date;
   brokenFrom?: number | null;
   toast?: StreakEvent | null;
@@ -95,6 +97,14 @@ const PRESETS: { id: string; label: string; hint: string; make: () => Preset }[]
       state: initialState({ night: 2, passes: 2, passesGranted: 2, coins: 0, lastNightIndex: at(night()) }),
       ep: 4, overlay: null, now: night(),
       toast: { kind: 'continued', night: 2 },
+    }),
+  },
+  {
+    id: 'J', label: '· El momento del gasto',
+    hint: 'La hoja congelada 240 ms después del toque: CTA confirmado, recibo −15, saldo bajando.',
+    make: () => ({
+      state: initialState({ night: 2, passes: 0, passesGranted: 2, coins: 90, unlocked: [11, 12], lastNightIndex: at(night()) }),
+      ep: 13, overlay: 'unlock', now: night(), frozenSpend: 'coins',
     }),
   },
   {

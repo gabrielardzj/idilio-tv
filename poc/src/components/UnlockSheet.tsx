@@ -20,7 +20,7 @@ const SPEND_MS = 880;
  * El precio va DESPUÉS de que el usuario ya sabe que hay una vía sin pagar.
  */
 export function UnlockSheet({
-  ep, state, brokenFrom, nightJustAdvanced, onUnlock, onShop, onClose,
+  ep, state, brokenFrom, nightJustAdvanced, frozenSpend, onUnlock, onShop, onClose,
 }: {
   ep: number;
   state: EconomyState;
@@ -28,6 +28,9 @@ export function UnlockSheet({
   brokenFrom: number | null;
   /** La noche subió en esta sesión: la luna actual entra con animación. */
   nightJustAdvanced: boolean;
+  /** Solo para el panel de estados: deja la hoja congelada en el momento del
+   *  gasto, sin que llegue a cerrarse, para poder inspeccionarlo. */
+  frozenSpend?: UnlockMethod | null;
   onUnlock: (m: UnlockMethod) => void;
   onShop: () => void;
   onClose: () => void;
@@ -36,7 +39,7 @@ export function UnlockSheet({
   const hasPass = state.passes > 0;
   const canPay = state.coins >= COINS_PER_EPISODE;
   const [reminder, setReminder] = useState(false);
-  const [spent, setSpent] = useState<UnlockMethod | null>(null);
+  const [spent, setSpent] = useState<UnlockMethod | null>(frozenSpend ?? null);
 
   // El saldo baja a la vista. Percibir el gasto es la mitad de entender la economía.
   const coins = useTween(state.coins - (spent === 'coins' ? COINS_PER_EPISODE : 0));
@@ -51,7 +54,7 @@ export function UnlockSheet({
   const spend = (m: UnlockMethod) => {
     if (spent) return;
     setSpent(m);
-    window.setTimeout(() => onUnlock(m), SPEND_MS);
+    if (!frozenSpend) window.setTimeout(() => onUnlock(m), SPEND_MS);
   };
 
   const cycleStart = Math.floor((state.night - 1) / CYCLE_LENGTH) * CYCLE_LENGTH;
@@ -62,7 +65,8 @@ export function UnlockSheet({
   return (
     <>
       <div className="scrim" onClick={() => !spent && onClose()} />
-      <section className={`sheet ${spent ? 'is-leaving' : ''}`} role="dialog" aria-modal="true"
+      <section className={`sheet ${spent && !frozenSpend ? 'is-leaving' : ''} ${frozenSpend ? 'is-frozen' : ''}`}
+               role="dialog" aria-modal="true"
                aria-label={`Episodio ${ep} bloqueado`}>
         <div className="grabber" />
 

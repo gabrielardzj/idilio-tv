@@ -2,7 +2,7 @@
   "$schema": "./schema.md",
   "export": {
     "id": "idilio-tv-racha-de-noches",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "generated": "2026-08-25",
     "format": "mobbin-like/v1",
     "locale": "es-419",
@@ -44,6 +44,22 @@
           "product": "newHero",
           "pocSubstitute": "Archivo",
           "reason": "newHero es de licencia comercial; Archivo es el neo-grotesco libre más cercano"
+        },
+        "escala": {
+          "pasos": {
+            "micro": 10,
+            "caption": 11,
+            "small": 12,
+            "body-s": 13,
+            "body": 14,
+            "body-l": 15,
+            "title-s": 17,
+            "sub": 19,
+            "title": 21,
+            "display": 24,
+            "hero": 40
+          },
+          "nota": "Había 19 tamaños distintos, muchos separados por medio píxel. Medio píxel no es una decisión: es ruido. Once pasos, cada uno con un trabajo asignado, aplicados por token tanto en el POC como en el archivo de diseño."
         }
       },
       "semantics": {
@@ -60,12 +76,26 @@
           "El token de texto tenue subió de 0.38 a 0.52 de alfa: 0.38 daba 3,20:1 sobre --home-surface-2, por debajo del 4,5:1 de AA; 0.52 da 4,97:1.",
           "Se quitó maximum-scale=1 del viewport para no bloquear el zoom."
         ],
-        "verificacion": "Los ratios están calculados con docs/modelo/contraste.mjs (fórmula WCAG 2.x sobre sRGB linearizado), no estimados."
+        "verificacion": "Los ratios están calculados con docs/modelo/contraste.mjs (fórmula WCAG 2.x sobre sRGB linearizado), no estimados.",
+        "foco": "Anillo blanco de 2 px con `:focus-visible` — no había ninguno. Y el reproductor pasa a `inert` cuando hay una hoja abierta: sin eso, tabular desde el sheet llevaba el foco a botones invisibles detrás. axe no lo detecta porque esos elementos existen y son accesibles… debajo de otra cosa.",
+        "movimiento": "Ninguna animación es infinita. El grano del vídeo pasó a estático (en el producto real viene del vídeo) y la pista de deslizar late cuatro veces y para. Una animación que no para nunca cuesta batería toda la sesión — en una app que se ve de noche, en el móvil, 22 minutos seguidos."
       },
       "densidad": {
         "medicion": "scrollHeight de la hoja en los 8 estados, medido en el DOM",
         "resultado": "565–585 px · ningún estado scrollea en 430×932 ni en 375×667 (iPhone SE)",
         "nota": "El estado F medía 679 px en la primera versión y en iPhone SE empujaba la cita de regreso por debajo del pliegue — justo el bloque que ese estado más necesita. Se detectó midiendo, no mirando."
+      },
+      "espaciado": {
+        "rejilla": "4 px",
+        "pasos": [
+          4,
+          8,
+          12,
+          16,
+          20,
+          24
+        ],
+        "nota": "El ritmo vertical del sheet va a la rejilla de 4. Tras el ajuste los ocho estados miden 556–577 px (antes 565–585) y ninguno scrollea en 375×667."
       }
     }
   },
@@ -338,7 +368,7 @@
       "file": "screens/13-muro-momento-del-gasto.png",
       "flow": "muro-desbloqueo",
       "name": "Muro · el momento del gasto",
-      "state": "Animación de desbloqueo con monedas · 240 ms después del toque",
+      "state": "Animación de desbloqueo con monedas · alcanzable desde el panel «El momento del gasto»",
       "patterns": [
         "spend-receipt",
         "optimistic-counter",
@@ -352,7 +382,8 @@
         "barra de posición avanzada un capítulo",
         "chips del HUD apagados"
       ],
-      "decision": "Ninguna de estas animaciones es decorativa. Si el saldo simplemente cambia de número, el usuario no percibe que pagó — y percibir el gasto es la mitad de entender la economía. El CTA se confirma en el sitio en vez de desaparecer, para que el desbloqueo se sienta como una transacción y no como un salto."
+      "decision": "Ninguna de estas animaciones es decorativa. Si el saldo simplemente cambia de número, el usuario no percibe que pagó — y percibir el gasto es la mitad de entender la economía. El CTA se confirma en el sitio en vez de desaparecer, para que el desbloqueo se sienta como una transacción y no como un salto.",
+      "nota_captura": "Captura pendiente de rehacer: es de antes de la pasada de escala tipográfica."
     }
   ],
   "patternLibrary": {

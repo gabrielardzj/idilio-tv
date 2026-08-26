@@ -137,6 +137,14 @@ familia cromática. Eso comunica el principio de doble moneda sin una sola líne
 comercial. El POC sustituye por **Outfit** y **Archivo**, los equivalentes libres más
 cercanos en eje geométrico y aperturas. La sustitución se declara; no se disimula.
 
+**Escala tipográfica — 11 pasos.** `10 · 11 · 12 · 13 · 14 · 15 · 17 · 19 · 21 · 24 · 40`.
+Antes había **19 tamaños distintos**, muchos separados por medio píxel. Medio píxel no es una
+decisión: es ruido. Cada paso tiene un trabajo asignado, y los tokens están aplicados tanto en el
+POC como en el archivo de diseño, así que no pueden divergir.
+
+**Ritmo vertical — rejilla de 4 px.** Tras el ajuste, los ocho estados del muro miden
+**556–577 px** (antes 565–585) y ninguno scrollea, ni en 430×932 ni en 375×667.
+
 ---
 
 ## Accesibilidad — verificado, no afirmado
@@ -146,6 +154,18 @@ Auditoría con **axe-core** (`a11y-mcp`) sobre `wcag2a`, `wcag2aa`, `wcag21a`, `
 ```
 violaciones: 0   ·   reglas aprobadas: 23
 ```
+
+**Foco de teclado.** No había ninguno: la pantalla era imposible de recorrer sin ver dónde estabas.
+Ahora hay un anillo blanco de 2 px con `:focus-visible` —blanco es el único color con contraste
+suficiente tanto sobre las superficies oscuras como sobre el CTA ámbar— y **el reproductor pasa a
+`inert` cuando hay una hoja abierta**. Sin eso, tabular desde el sheet llevaba el foco a botones
+invisibles detrás: el fallo clásico que axe no detecta, porque esos elementos existen y son
+perfectamente accesibles… debajo de otra cosa.
+
+**Movimiento.** Ninguna animación es infinita. El grano del vídeo pasó a estático —en el producto
+real el grano viene del vídeo, no de una capa CSS— y la pista de deslizar late cuatro veces y para.
+Una pista que late para siempre deja de ser una pista y pasa a ser una insistencia, y además no deja
+de consumir batería nunca: en una app que se ve de noche, en el móvil, 22 minutos seguidos.
 
 Tres correcciones que salieron de la auditoría y del cálculo de contraste, no de la intuición:
 

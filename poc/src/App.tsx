@@ -38,6 +38,7 @@ export default function App() {
   const [progress, setProgress] = useState(0);
   const [nightJustAdvanced, setNightJustAdvanced] = useState(false);
   const [revealing, setRevealing] = useState(false);
+  const [frozenSpend, setFrozenSpend] = useState<UnlockMethod | null>(null);
   const [dev, setDev] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -149,6 +150,7 @@ export default function App() {
     setEco(p.state);
     setEp(p.ep);
     setBrokenFrom(p.brokenFrom ?? null);
+    setFrozenSpend(p.frozenSpend ?? null);
     setOverlay(p.overlay);
     setToast(p.toast ?? null);
     setNightJustAdvanced(!!p.toast);
@@ -164,7 +166,12 @@ export default function App() {
     <div className="stage">
       <div className="phone">
         {/* ── Reproductor ─────────────────────────────────────────────── */}
-        <main className="player">
+        {/* `inert` saca todo el reproductor del orden de tabulación cuando hay
+            una hoja abierta. Sin esto, tabular desde el sheet lleva el foco a
+            botones invisibles detrás — el fallo clásico que axe no detecta
+            porque los elementos existen y son perfectamente accesibles… debajo
+            de otra cosa. React 19 lo soporta de forma nativa. */}
+        <main className="player" inert={overlay !== null || dev}>
           <div className={`frame ${overlay ? 'dimmed' : ''} ${revealing ? 'revealing' : ''}`}>
             <div className="scene" style={{ background: sceneFor(ep) }}>
               <div className="scene-grain" />
@@ -254,6 +261,8 @@ export default function App() {
           <UnlockSheet
             ep={ep} state={eco} brokenFrom={brokenFrom}
             nightJustAdvanced={nightJustAdvanced}
+            frozenSpend={frozenSpend}
+            key={`${ep}-${frozenSpend ?? 'vivo'}`}
             onUnlock={doUnlock}
             onShop={() => setOverlay('shop')}
             onClose={() => { setEp((e) => Math.max(1, e - 1)); setOverlay(null); }}
