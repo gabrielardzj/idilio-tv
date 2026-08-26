@@ -25,6 +25,7 @@
 | — | **Decisiones y análisis crítico** | [`docs/05-decisiones.md`](docs/05-decisiones.md) | 20% claridad |
 | — | **Benchmark de la categoría** (y lo que me obligó a corregir) | [`docs/06-benchmark.md`](docs/06-benchmark.md) | — |
 | — | **Modelo de sensibilidad** del objetivo | [`docs/modelo/`](docs/modelo/README.md) | — |
+| — | **Preparación de la sesión de cierre** (recorrido + preguntas difíciles) | [`docs/07-sesion-de-cierre.md`](docs/07-sesion-de-cierre.md) | — |
 | — | **Export tipo Mobbin** (pantallas, flujos y patrones) | [`export/`](export/) | — |
 
 ---
@@ -143,4 +144,5 @@ Detalle completo en [`docs/06-benchmark.md`](docs/06-benchmark.md).
 - **No hice research con usuarios.** Uso propio + datos del brief + reseñas públicas citadas.
 - **No probé la app nativa**, donde vive la economía de monedas. Probé la web, que es superficie de captación con paywall de suscripción. Es la principal limitación del diagnóstico.
 - **El brief describe una economía más simple que la real:** las reseñas públicas muestran que el producto ya tiene video recompensado, "retos" y membresía mensual. Diseñé contra la economía del brief, pero esa reconciliación es la conversación número uno con el equipo.
-- Los cuatro puntos donde este trabajo puede estar equivocado están enumerados en [`docs/05-decisiones.md` §5.3](docs/05-decisiones.md).
+- **El tramo del usuario que ya paga no está diseñado.** Para un suscriptor el muro no aparece nunca, así que la mecánica le pasa por encima — y es el usuario de mayor valor. Lo declaro como hueco en vez de inventar una pantalla para taparlo.
+- Los **siete** puntos donde este trabajo puede estar equivocado están enumerados en [`docs/05-decisiones.md` §5.3](docs/05-decisiones.md). Las objeciones que espero en la sesión, con lo que respondería —y las tres que concedería sin pelear— están en [`docs/07-sesion-de-cierre.md`](docs/07-sesion-de-cierre.md).

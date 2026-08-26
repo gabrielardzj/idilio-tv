@@ -139,7 +139,7 @@ primer fallo, se corta.
 
 ## 5.3 Lo que probablemente esté mal en este trabajo
 
-Seis puntos débiles, ordenados por probabilidad de estarlo:
+Siete puntos débiles, ordenados por probabilidad de estarlo:
 
 **① El cálculo del 8,7× compara denominadores distintos.**
 19% es una tasa diaria sobre DAU; 6% es acumulada sobre usuarios. La comparación es **direccional, no exacta**. La defensa: el sesgo juega a favor de la conclusión (si el 6% se mide sobre una base más amplia que DAU, el exceso sobre la independencia es aún mayor). Pero si los denominadores fueran muy distintos de lo que asumo, el argumento se debilita. **Es el primer número que pediría verificar con datos reales.**
@@ -167,7 +167,17 @@ está diseñado para dar valor sino para enganchar, y que contra el caudal real 
 (~4 eps/día vía anuncios) mis 5 no son excesivos. **Pero la defensa depende de que el número
 correcto esté entre 3 y 5, y eso hay que probarlo, no argumentarlo.**
 
-**⑥ La cita de regreso depende del permiso de notificaciones.**
+**⑥ El tramo del usuario que ya paga no está diseñado.**
+Salió al preparar las preguntas de la sesión de cierre ([§7.2 ⑤](07-sesion-de-cierre.md)), no al
+diseñar. Para un suscriptor **el muro no aparece nunca**, así que toda la mecánica le pasa por
+encima — y es justo el usuario de mayor valor. La racha se le sigue acreditando, porque se acredita
+por ver y no por chocar con el muro, y el toast del reproductor funciona igual; pero **la recompensa
+pierde el sentido: no puedes regalarle acceso a quien ya lo compró todo.**
+Mi intuición es que ahí la racha debería premiar algo que no sea acceso (estrenos antes que nadie,
+estatus), pero **es una intuición, no una propuesta**, y prefiero declararlo como hueco antes que
+inventar una pantalla para taparlo.
+
+**⑦ La cita de regreso depende del permiso de notificaciones.**
 "Mañana a las 8:00 pm · Avísame" es el mecanismo de retorno más directo del diseño y **descansa sobre un recurso escaso**: en iOS el permiso de notificaciones probablemente ya está gastado en avisos de estreno. Si el equipo no está dispuesto a reasignarlo, ese bloque pierde la mitad de su fuerza y queda solo como promesa visual. **Hay que decidir a qué se renuncia, y no lo puedo decidir yo desde fuera.**
 
 ---

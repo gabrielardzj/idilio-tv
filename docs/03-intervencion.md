@@ -159,7 +159,7 @@ Orden vertical, y el orden **es** el argumento:
 
 | Pieza | Costo | Nota honesta |
 |---|---|---|
-| Contador de noches + corte 4am local | Bajo | Cuidado con migrar rachas vivas y con el reloj del dispositivo. |
+| Contador de noches + corte 4am local | Bajo | El índice de noche se calcula **en servidor**, con hora de servidor y el huso del usuario guardado en su perfil; la hora del dispositivo se usa **solo para pintar** («mañana a las 8pm»), nunca para acreditar. Si no, basta cambiar la hora del teléfono para farmear pases. Cuidado también con migrar las rachas vivas sin romperlas. |
 | Acreditación por ver (quitar el "reclamar") | Bajo | Solo mueve el disparador del evento. |
 | Rediseño del sheet del muro | Medio | Es UI + el ensamblado de 4 fuentes de datos que hoy no conviven. |
 | **Pases con caducidad (entitlements con TTL)** | **Alto** | **La pieza que más probablemente se corta.** Exige entitlements con expiración, reconciliación con IAP de App Store/Play y defensa contra manipulación del reloj del dispositivo. *Mitigación fase 1:* contador simple no acumulable que se resetea con la noche, sin TTL fino. |
