@@ -1,8 +1,26 @@
 # 1. Diagnóstico
 
-> **Método.** Primero usé la app —el reproductor web de idilio.tv y la evidencia del build nativo 1.20.0— sin mirar las métricas. Después leí las métricas y crucé las dos cosas. El registro completo de ese uso está en [`docs/00-dogfooding`](../00-dogfooding/).
+> **Método.** El análisis parte del uso directo del producto —el reproductor web de idilio.tv y el build nativo 1.20.0— antes de mirar las métricas, y del censo completo de las 50 series del catálogo. Las métricas se leyeron después, y el diagnóstico surge de cruzar las dos fuentes. El registro del uso está en [`docs/00-dogfooding`](../00-dogfooding/).
 
-Tres términos aparecen en todo el documento. Los dejo definidos acá para no repetirlos después:
+## Resumen
+
+El metajuego de Idilio no está mal diseñado: **está en la pantalla equivocada**. Las monedas se regalan en la pestaña Recompensas y se necesitan en el reproductor, al chocar con el muro. El usuario no visita la primera —el 19% reclama la recompensa diaria y el 82% nunca ha abierto el perfil—, así que la única salida gratuita del sistema es invisible justo en el momento en que haría falta.
+
+Debajo de esa falla hay otra mayor, que solo aparece al medir el catálogo completo: **la alternativa a pagar no es irse de la app, es empezar otra serie gratis.** Hay 500 episodios gratis repartidos en 50 títulos, casi cuatro meses de consumo sin pagar, de modo que la economía no ejerce ninguna presión sobre el usuario. Y quien salta de historia en historia no se apega a ninguna: no hay ninguna serie esperándolo mañana, que es precisamente lo que mide un DAU/MAU de 0.33.
+
+| Falla | En una línea |
+|---|---|
+| **F1** | Lo que resolvería el muro —la recompensa diaria, el pase semanal, el mensual— vive en otra pantalla |
+| **F2** | Nada traduce monedas a episodios, así que el usuario no puede juzgar el precio |
+| **F3** | La escalera de paquetes no premia comprar más: dos escalones entregan lo mismo |
+| **F4** | La racha pide 7 días de 7 a una base que entra 2.3, y corta a medianoche en un producto que se usa de madrugada |
+| **F5** | El usuario no ve su avance dentro de una serie ni su posición en el sistema |
+
+**Consecuencia para la estrategia:** el objetivo es stickiness y no conversión, y la respuesta no es recortar los episodios gratis sino dar una razón para quedarse en una historia en vez de saltar a la siguiente.
+
+---
+
+Tres términos se usan a lo largo del documento:
 
 | Término | Qué significa en este documento |
 |---|---|
@@ -28,11 +46,7 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
 
 Y no se arregla eligiendo otra serie: **ninguna del catálogo regala 14 episodios**. El bloque gratis más largo es de 12, y las 9 series que son gratis de punta a punta tienen 10 episodios o menos en total.
 
-Eso vale para la sesión promedio. En una sesión corta el bloque gratis sobra — y 14 es una media, que no dice cuántas sesiones son cortas.
-
-**Hasta ahí llega el dato, y ni un centímetro más.** Lo que la economía limita es **cuánto se avanza dentro de una misma historia**: 10 episodios seguidos, en 37 de las 41 series con muro. Eso es lo único que la cifra sostiene por sí sola.
-
-Decir además que **el muro es lo que corta la sesión** ya es otra afirmación, y el Hallazgo 2 da razones para dudarla: al chocar, al usuario le queda un catálogo entero de arranques gratis, así que podría seguir viendo sin pagar nada. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
+**Alcance del dato.** Lo que la economía limita es **cuánto se avanza dentro de una misma historia**: 10 episodios seguidos, en 37 de las 41 series con muro. Eso es lo que la cifra sostiene por sí sola, y con dos salvedades. La primera, que 14 es una media: en una sesión corta el bloque gratis sobra, y la media no dice cuántas sesiones son cortas. La segunda, que afirmar que **el muro es lo que corta la sesión** es una afirmación distinta y más fuerte — el Hallazgo 2 da razones para dudarla, porque al chocar le queda al usuario un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
 
 Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall (el muro de pago) del build 1.20.0:
 
@@ -62,11 +76,11 @@ A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** (La c
 
 Con ese dato a la vista aparece una lectura tentadora de la sesión promedio: **14 = 10 + 4**. La sesión típica no sería "veo 14 episodios de una historia" sino **"termino los 10 gratis de una serie, choco con el muro y me voy a empezar otra"**.
 
-**Es una hipótesis, no una conclusión.** Una media no se descompone: el mismo 14 sale de muchas sesiones de 2 episodios con unas pocas de 40. Y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10. Vale acá el mismo criterio con el que descarto el 2.4x de retención a 30 días en [§1.3](#13-qué-señales-pesaron-y-cuáles-descarté): una cifra que encaja con la tesis todavía no la demuestra.
+**Es una hipótesis, no una conclusión.** Una media no se descompone: el mismo 14 sale de muchas sesiones de 2 episodios con unas pocas de 40, y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10. Aplica el mismo criterio que descarta el 2.4x de retención a 30 días en [§1.3](#13-qué-señales-pesaron-y-cuáles-descarté): una cifra que encaja con la tesis todavía no la demuestra.
 
 **Lo que la resuelve es una consulta, no un estudio:** la **distribución** de episodios por sesión —no la media— y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie. Si esa fracción es alta, la hipótesis se sostiene. Si es baja, el muro corta historias pero no sesiones, y hay que buscar en otro lado qué las corta.
 
-[§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) eligió no apoyarse en esta suma: ahí la intervención se sostiene en que el corte por precio existe, se descomponga o no el 14. Así que la consulta no decide si la intervención vale, sino cuánto rinde —si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más—. Es igual la primera pregunta que haría con acceso a los datos.
+La intervención de [§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) no se apoya en esta suma: se sostiene en que el corte por precio existe, se descomponga o no el 14. La consulta no decide entonces si la intervención vale, sino cuánto rinde — si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más. Es, aun así, la primera pregunta a hacer con acceso a los datos.
 
 Lo que sí queda firme sin esa consulta es lo más importante: **el muro no saca al usuario de la app, lo saca de la historia** — porque la alternativa gratis existe, está a un toque y hay 500 episodios de ella.
 
@@ -83,7 +97,7 @@ Eso cambia el significado de casi todas las demás señales:
 
 > El muro no falla por ser caro. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante los casi cuatro meses que le dura el colchón. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
 
-**Por eso el objetivo de negocio es stickiness y no conversión.** Y por eso la respuesta correcta no es recortar los episodios gratis —eso frena la adquisición y ataca la métrica equivocada—, sino **darle al usuario una razón para quedarse en una historia en vez de saltar a la siguiente.** De ahí sale la intervención que elegí.
+**Por eso el objetivo de negocio es stickiness y no conversión.** Y por eso la respuesta correcta no es recortar los episodios gratis —eso frena la adquisición y ataca la métrica equivocada—, sino **darle al usuario una razón para quedarse en una historia en vez de saltar a la siguiente.** De ahí sale la intervención que se desarrolla en [§3](../03-diseno/).
 
 ---
 
@@ -100,7 +114,7 @@ La pestaña Recompensas ya está en la barra inferior. Que exista no alcanza. **
 
 **Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a ≈ $24.620** (US$ 7.99) y uno **mensual a ≈ $46.190** (US$ 14.99): Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal sale más caro que terminar la serie mediana comprándola —600 monedas, entre ≈ $20.430 y ≈ $24.410 según el paquete con que se armen—. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
 
-Vale separar dos cosas que se confunden fácil, porque la estrategia descarta una y propone la otra. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). **Como superficie**, es otra cosa: el producto de mayor valor de la economía no aparece en el momento de máxima intención, y eso es una falla del muro, no de la suscripción.
+Conviene separar dos cosas, porque la estrategia descarta una y propone la otra. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). **Como superficie**, es otra cosa: el producto de mayor valor de la economía no aparece en el momento de máxima intención, y eso es una falla del muro, no de la suscripción.
 
 ### F2 · Nadie le dice al usuario cuánto vale una moneda
 
@@ -127,7 +141,7 @@ Datos reales del paywall:
 | Segundo | US$ 1.99 · ≈ $6.130 | 180 | 12 | ≈ $511 |
 | Tercero | US$ 3.99 · ≈ $12.300 | 375 | 25 | ≈ $492 |
 
-Dos problemas:
+De ahí salen dos problemas:
 
 1. **El primer paquete y el segundo entregan exactamente las mismas 180 monedas** — ≈ $3.050 contra ≈ $6.130. Puestos uno al lado del otro, el de ≈ $6.130 se lee como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
 2. **Subir del segundo al tercero mejora el valor apenas un 3.9%:** el episodio baja de ≈ $511 a ≈ $492. Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el de ≈ $6.130 y el escalón alto no se vende.
@@ -141,7 +155,7 @@ Además, **los cuatro paquetes llevan badge de descuento** (60%, 20%, 20%, 30%).
 
 Se le está pidiendo a alguien que entra dos o tres veces por semana que se comporte como si entrara todos los días. Que solo el **6% llegue al día 3** no es un problema de cómo se ve la pantalla de racha: es la consecuencia aritmética de haber elegido el día calendario como unidad de una conducta que no es diaria.
 
-Y hay algo peor: la racha castiga justo el comportamiento más común del producto. **54% de las sesiones ocurren entre las 11 p.m. y las 2 a.m.** Alguien que ve el lunes a las 23:30 y otra vez a las 00:30 vivió "dos noches seguidas". Para un contador de días calendario fue un solo día —el martes—, y el lunes quedó vacío: racha rota. El usuario pierde por un detalle de calendario que nunca va a aceptar como justo.
+El corte de día calendario agrava el problema, porque castiga el comportamiento más común del producto. **54% de las sesiones ocurren entre las 11 p.m. y las 2 a.m.** Alguien que ve el lunes a las 23:30 y otra vez a las 00:30 vivió "dos noches seguidas". Para un contador de días calendario fue un solo día —el martes—, y el lunes quedó vacío: racha rota. El usuario pierde por un detalle de calendario que nunca va a aceptar como justo.
 
 > El release note del build 1.20.0 (21-ago-2026) dice *"New daily streak UI"* («nueva interfaz de la racha diaria»). Se está iterando la **interfaz** de la racha. El problema no está en la interfaz.
 
@@ -172,35 +186,35 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 ### Descarté
 
-**El 2.4x de retención a 30 días, leído como causa.** Es la señal más tentadora del set y me parece la más peligrosa. Quien sostiene tres días seguidos ya era un usuario enganchado antes de que existiera la racha. La racha no lo creó: lo *identificó*. Armar la estrategia sobre "llevemos a más gente al día 3 y tendremos 2.4x" es suponer que el termómetro calienta la habitación.
+**El 2.4x de retención a 30 días, leído como causa.** Es la señal más tentadora del conjunto y la más peligrosa. Quien sostiene tres días seguidos ya era un usuario enganchado antes de que existiera la racha. La racha no lo creó: lo *identificó*. Armar la estrategia sobre "llevemos a más gente al día 3 y tendremos 2.4x" es suponer que el termómetro calienta la habitación.
 
-Sigue siendo un dato útil, pero como **hipótesis a testear**, no como cimiento. La forma de comprobarlo es un experimento con grupo de control: darle racha a la mitad de los usuarios nuevos, no dársela a la otra mitad, y comparar la retención a 30 días entre los dos grupos. Si el 2.4x se sostiene, la racha causa retención. Si cae a 1.1x, lo que estábamos midiendo era que la racha simplemente distingue a los que ya estaban enganchados. Hasta que exista ese número, no apuesto la estrategia a él.
+Sigue siendo un dato útil, pero como **hipótesis a testear**, no como cimiento. La forma de comprobarlo es un experimento con grupo de control: darle racha a la mitad de los usuarios nuevos, no dársela a la otra mitad, y comparar la retención a 30 días entre los dos grupos. Si el 2.4x se sostiene, la racha causa retención. Si cae a 1.1x, lo que se estaba midiendo era que la racha distingue a los que ya estaban enganchados. Hasta que exista ese número, la estrategia no se apoya en él.
 
 **El 23% que vuelve a ver series terminadas, leído como amor al contenido.** La lectura optimista es "les gusta tanto que lo ven de nuevo". La que sale del censo del catálogo es menos halagadora: con 500 episodios gratis disponibles, **volver a ver algo solo tiene sentido cuando ya se acabó lo gratis** —o cuando ninguna de las 50 series nuevas enganchó lo suficiente como para empezarla. Las dos lecturas apuntan a lo mismo: falta apego, no sobra.
 
-No lo doy por cierto. Se contrasta con dos consultas: cruzar *quién vuelve a ver* contra *cuántos episodios gratis del catálogo le quedan sin ver*, y contra *cuántas monedas tenía en ese momento*. Si los que vuelven a ver todavía tienen cientos de episodios gratis por delante, mi lectura está mal y la optimista es la correcta.
+Ninguna de las dos está confirmada. Se contrastan con dos consultas: cruzar *quién vuelve a ver* contra *cuántos episodios gratis del catálogo le quedan sin ver*, y contra *cuántas monedas tenía en ese momento*. Si quienes vuelven a ver todavía tienen cientos de episodios gratis por delante, esta lectura es incorrecta y la optimista es la buena.
 
 **El perfil como palanca de engagement.** 82% nunca entra. Rediseñarlo es amoblar un cuarto al que nadie va. Lo que hay que mover es *dónde vive* el metajuego, no cómo se ve el cuarto.
 
-**Mecánicas sociales (rankings, tablas de posiciones, comparación con amigos).** El contexto es de 11 p.m. a 2 a.m., consumo solitario, un género que carga cierto pudor ("novelas de celular"), y 88% de invitados sin identidad. Una tabla de posiciones acá no motiva: expone. Descartado por el contexto, no por la calidad de la mecánica.
+**Mecánicas sociales (rankings, tablas de posiciones, comparación con amigos).** El contexto es de 11 p.m. a 2 a.m., consumo solitario, un género que carga cierto pudor, y 88% de invitados sin identidad. Una tabla de posiciones acá no motiva: expone. Descartado por el contexto, no por la calidad de la mecánica.
 
 **Coleccionables e insignias como intervención principal.** Nada en las señales disponibles indica motivación de coleccionista, agregan carga mental a un loop —el ciclo que el usuario repite— que debe operarse con una sola mano, y su relación con DAU/MAU (usuarios activos por día sobre usuarios activos por mes: qué tan seguido vuelve la gente) es indirecta. Pueden entrar después, como una capa; no como la apuesta.
 
 
 ---
 
-## 1.4 Una tensión que señalo y no resuelvo
+## 1.4 Una palanca fuera del alcance de este objetivo
 
-El censo destapa una palanca más grande que cualquiera de mis intervenciones, y que **no me corresponde accionar**: los 500 episodios gratis del catálogo. Los llamo *el colchón*: todo lo que un usuario puede ver sin pagar nunca. Corregir el censo lo hizo más grande, no más chico —eran 428 en la primera medición—, así que este apartado es hoy más fuerte que cuando lo escribí.
+El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: los 500 episodios gratis del catálogo. Este documento la llama **el colchón** — todo lo que un usuario puede ver sin pagar nunca.
+
+Qué haría con ella depende enteramente de cuál sea el objetivo:
 
 | Si el objetivo fuera… | La palanca diría… |
 |---|---|
-| **Convertir usuarios en pagadores** | Casi cuatro meses de contenido gratis es muchísimo. Bajar el bloque gratis a 6 episodios por serie recortaría el colchón un 40% —200 de los 500— y pondría el muro donde todavía queda deseo. |
+| **Convertir usuarios en pagadores** | Casi cuatro meses de contenido gratis es demasiado. Bajar el bloque gratis a 6 episodios por serie recortaría el colchón un 40% —de 500 episodios a 300— y pondría el muro donde todavía queda deseo. |
 | **Adquirir usuarios y retenerlos el primer día** | Esos 10 episodios gratis son exactamente lo que engancha en la primera sesión. Tocarlos es tocar el motor de crecimiento. |
 | **Stickiness (el objetivo real acá)** | **Ninguna de las dos.** Recortar lo gratis no hace que el usuario vuelva mañana: hace que se vaya antes. Y dejarlo como está tampoco lo trae de vuelta. |
 
-*(Una corrección sobre esa primera fila: una pasada anterior la cambió por "recortaría un 40% el bloque gratis de cada serie", creyendo que el 40% no cerraba. Cierra, pero es del colchón, no de cada serie: con un tope de 6, las 50 series pasan de 500 episodios gratis a 300 —exactamente 200 menos, el 40.0%—. Por serie el recorte no es 40% en las cinco que no empiezan en 10, y el número que importa acá es cuánto se achica el colchón, que es lo que sostiene los "casi cuatro meses".)*
+Por eso el colchón queda intacto en esta propuesta. El objetivo del ejercicio es DAU/MAU, y el colchón no es una palanca de DAU/MAU sino de conversión. Pero es la variable más pesada de toda la economía y está a una sola decisión de distancia, así que quien lea este diagnóstico debe saber que existe.
 
-Por eso no propongo tocar el colchón. El objetivo del ejercicio es DAU/MAU, y el colchón no es una palanca de DAU/MAU: es una de conversión. Pero es la variable más pesada de toda la economía, está a una sola decisión de distancia, y quien lea este diagnóstico debería saber que está ahí.
-
-**Lo que sí cambia en mi propuesta por saber esto:** el Pase de la Noche no compite contra "pagar". Compite contra **"empezar otra serie gratis"**, que es lo que el usuario hace hoy y no le cuesta nada. Ahí es donde tiene su mejor argumento: es lo único en todo el producto que te deja seguir *donde estabas*.
+**Lo que sí cambia en la propuesta por saber esto:** el Pase de la Noche no compite contra pagar. Compite contra **empezar otra serie gratis**, que es lo que el usuario hace hoy y no le cuesta nada. Ahí está su mejor argumento: es lo único en todo el producto que permite seguir *donde estabas*.
