@@ -102,7 +102,7 @@ De ahí sale el hallazgo: **el muro no saca al usuario de la app, lo saca de la 
 
 Eso cambia el significado de casi todas las demás señales:
 
-| Señal | Lectura ingenua | Lectura con el catálogo a la vista |
+| Señal | Lectura sin el censo | Lectura con el catálogo a la vista |
 |---|---|---|
 | Sesión de 22 min / 14 eps | Buen engagement (que la gente usa mucho la app) | Al menos una serie agotada — y, si la hipótesis de arriba se sostiene, otra recién empezada |
 | 23% vuelve a ver series que ya terminó | Aman el contenido | Ya vieron lo que era gratis y no tienen a dónde ir |
