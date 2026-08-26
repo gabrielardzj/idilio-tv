@@ -7,6 +7,10 @@ reutilizarse en el proyecto: cada entrada trae la decisión que la sostiene, no 
 - **Capturas:** [`screens/`](./screens) — 430×932 (iPhone 15 Pro Max, CSS px)
 - **Origen:** todas las capturas salen del **POC funcional**, no de mockups. Cada estado es
   alcanzable en el prototipo desde el panel `Estados`.
+- **Salvedad declarada:** la captura 13 es la única tomada antes de la pasada de escala tipográfica.
+  La diferencia con el build actual es de medio píxel en algunos tamaños; el estado, el copy y la
+  composición son los de ahora. Se dejó así porque el backend de captura dejó de responder, y es
+  preferible decirlo a rehacerla desde el archivo de diseño y hacerla pasar por una captura del POC.
 
 ---
 
@@ -34,7 +38,7 @@ reutilizarse en el proyecto: cada entrada trae la decisión que la sostiene, no 
 | <img src="screens/08-muro-F-racha-rota.png" width="150"> | **F · Racha rota** | venía de 5 noches |
 | <img src="screens/09-muro-G-escudo-consumido.png" width="150"> | **G · Escudo consumido** | racha intacta en 6 |
 | <img src="screens/10-muro-H-noche7-ciclo-completo.png" width="150"> | **H · Noche 7, con cuenta** | 5 pases · 2 escudos |
-| <img src="screens/13-muro-momento-del-gasto.png" width="150"> | **El momento del gasto** | 240 ms después del toque |
+| <img src="screens/13-muro-momento-del-gasto.png" width="150"> | **El momento del gasto** | 240 ms después del toque · alcanzable desde el panel `Estados` |
 
 > **Sobre las animaciones.** Ninguna es decorativa. Si el saldo simplemente cambia de número,
 > el usuario no percibe que pagó — y **percibir el gasto es la mitad de entender la economía**.

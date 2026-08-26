@@ -383,7 +383,7 @@
         "chips del HUD apagados"
       ],
       "decision": "Ninguna de estas animaciones es decorativa. Si el saldo simplemente cambia de número, el usuario no percibe que pagó — y percibir el gasto es la mitad de entender la economía. El CTA se confirma en el sitio en vez de desaparecer, para que el desbloqueo se sienta como una transacción y no como un salto.",
-      "nota_captura": "Captura pendiente de rehacer: es de antes de la pasada de escala tipográfica."
+      "nota_captura": "Única captura tomada antes de la pasada de escala tipográfica. La diferencia con el build actual es de medio píxel en algunos tamaños de fuente; el estado, el copy y la composición son los de ahora. No se rehízo porque el backend de captura dejó de responder, y prefiero declararlo a rehacerla desde el archivo de diseño y hacerla pasar por una captura del POC."
     }
   ],
   "patternLibrary": {
