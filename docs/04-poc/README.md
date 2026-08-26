@@ -69,7 +69,7 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Episodios gratis por serie | **10** (moda: 37 de las 41 series con muro) | Censo de las 50 series del catálogo |
 | Series del catálogo | 50 · 2.230 episodios | Censo |
 | Episodios gratis en total | 500 (22% del catálogo) | Censo |
-| Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
+| Precio de la serie mediana | 600 monedas ≈ $ 21.000 | 40 bloqueados × 15, al peldaño regular |
 | Paquetes actuales | 180/$ 2.500 · 375/$ 13.500 · 725/$ 25.500 | Pestaña Recompensas, app nativa, storefront CO |
 | Fuentes gratuitas | anuncio 15 monedas ×10 diarios · diaria 40 · tareas 90 | Pestaña Recompensas, app nativa |
 | Pase Idilio | $ 12.500 semanal · $ 24.500 mensual | Pestaña Recompensas, app nativa |

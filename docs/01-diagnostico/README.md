@@ -8,7 +8,7 @@ El metajuego de Idilio no está mal diseñado: **llega en el momento equivocado*
 
 Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que el producto nunca traduce a episodios.
 
-Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese colchón corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. Nada de eso está en el muro, así que el usuario que no va a buscarlo se topa con una pantalla que solo vende.
+Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese colchón corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. El muro tiene el anuncio y la suscripción, pero los ordena al revés: abre con lo más caro y deja la salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris.
 
 Sin escasez, la moneda no significa nada y el metajuego no puede mover el regreso. Y la alternativa a pagar nunca es irse: es empezar otra serie gratis. Quien salta de historia en historia no se apega a ninguna, así que no hay ninguna serie esperándolo mañana — que es precisamente lo que mide un DAU/MAU de 0.33.
 
@@ -119,7 +119,7 @@ Eso cambia el significado de casi todas las demás señales:
 
 ## 1.2 Las cinco fallas
 
-### F1 · La fuente llega cuando no hace falta, y falta cuando hace falta
+### F1 · La economía está a la vista y ordenada al revés
 
 El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan **en el tiempo**.
 
@@ -247,7 +247,7 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 ## 1.4 Una palanca fuera del alcance de este objetivo
 
-El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: los 500 episodios gratis del catálogo. Este documento la llama **el colchón** — todo lo que un usuario puede ver sin pagar nunca. Y el colchón es solo la mitad: encima corren las fuentes recurrentes de [F1](#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta), que con los anuncios dan hasta 70 episodios por semana. El stock se agota una vez; el flujo, no.
+El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: los 500 episodios gratis del catálogo. Este documento la llama **el colchón** — todo lo que un usuario puede ver sin pagar nunca. Y el colchón es solo la mitad: encima corren las fuentes recurrentes de [F1](#f1--la-economía-está-a-la-vista-y-ordenada-al-revés), que con los anuncios dan hasta 70 episodios por semana. El stock se agota una vez; el flujo, no.
 
 Qué haría con ella depende enteramente de cuál sea el objetivo:
 

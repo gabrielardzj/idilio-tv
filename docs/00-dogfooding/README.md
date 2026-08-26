@@ -52,7 +52,7 @@ Vive en la pestaña **Recompensas** y **también en el muro**, donde encabeza la
 
 ### Las cuatro fuentes gratuitas de monedas
 
-Medidas en la pestaña Recompensas de la app, con storefront de Colombia. Están las cuatro en un solo lugar, y **ninguna aparece en el muro**.
+Medidas en la pestaña Recompensas de la app, con storefront de Colombia. **La mayor de las cuatro —el anuncio— también está en el muro**, en la tarjeta de abajo; las otras tres solo viven acá.
 
 | Fuente | Cuánto da | Cadencia | En episodios |
 |---|---|---|---|
@@ -71,7 +71,7 @@ Hay una tensión de diseño encima: el Pase Idilio se vende con *«sin anuncios�
 - Tab bar (la barra de pestañas de abajo) de 3: **Inicio · Recompensas · Perfil** (Perfil con punto rojo de notificación).
 - Player: overlay (la capa de botones encima del video) tipo TikTok (corazón, comentario, compartir), chip de saldo abajo-izquierda, "ver más" para sinopsis.
 - **Ficha de serie:** barra «Volver» y nada más arriba —el título no se repite, va quemado en el arte del póster—, bloque **«Resumen»** con la miniatura a la izquierda y la sinopsis del catálogo al lado, y después **«Capítulos»**: una lista de tarjetas, no una grilla. Cada tarjeta lleva `Capítulo N` en violeta, el número del episodio como título, un galón a la derecha y —en algunos— la píldora **«Interactiva»**. Los bloqueados llevan candado: el primero en violeta encendido, los siguientes atenuados. **En ninguna tarjeta aparece el precio.**
-- **La recompensa diaria se ofrece al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que exige tocar **Reclamar**. No es solo un contenido de la pestaña Recompensas —donde también vive—: es un interstitial ineludible entre el usuario y la app. *Dato aportado por el equipo de Idilio, no observado en el dogfooting: el build al que tuve acceso no lo mostró. Es el hecho que sostiene [F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta), así que conviene que su procedencia esté declarada.*
+- **La recompensa diaria se ofrece al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que exige tocar **Reclamar**. No es solo un contenido de la pestaña Recompensas —donde también vive—: es un interstitial ineludible entre el usuario y la app. *Dato aportado por el equipo de Idilio, no observado en el dogfooting: el build al que tuve acceso no lo mostró. Es el hecho que sostiene [F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés), así que conviene que su procedencia esté declarada.*
 - **La pestaña Recompensas no es solo la recompensa diaria.** Lleva además una lista de tareas de una sola vez: **compartir la app** y seguir las cuentas de **Facebook, Instagram, YouTube, TikTok y WhatsApp** a **10 monedas** cada una, y **calificar la app** a **30**. Son 90 monedas —seis episodios exactos— y se agotan: a nadie se le paga dos veces por seguir la misma cuenta. La captura está abajo.
 - Release notes 1.20.0 (2026-08-21): *"Downloads for suscriptions / New daily streak UI"* —«nueva interfaz de la racha diaria»— → la racha se está iterando ahora mismo.
 

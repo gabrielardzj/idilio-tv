@@ -44,7 +44,7 @@ Son dos cosas distintas y conviene no mezclarlas:
 - **Emisión.** El sistema genera **un pase por noche, por el reloj, hasta 7 por semana**. Ocurre esté el usuario o no: el derecho se genera aunque nadie abra la app.
 - **Entrega.** El pase se acredita **cuando el usuario termina un episodio**. Ahí entra lo que tenga pendiente —uno si volvió anoche, dos si faltó—, avanza la racha y se paga el bono si toca. El usuario no toca nada: un toast de dos segundos se lo dice y sigue viendo. Nunca hay un botón, y nunca llega una notificación diciendo que algo *«se venció»*.
 
-Es la corrección directa al **19% de reclamo** de la recompensa diaria, y la evidencia detrás es más fuerte de lo que parece. Hoy esa recompensa se ofrece en un diálogo al abrir la app: es ineludible, la ve todo el mundo, y aun así cuatro de cada cinco la cierran ([F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta)). O sea que la visibilidad ya está resuelta y el 19% no la explica. Lo que queda es el momento y el botón. Cambiando el momento —al muro, cuando el usuario quiere el episodio— y quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
+Es la corrección directa al **19% de reclamo** de la recompensa diaria, y la evidencia detrás es más fuerte de lo que parece. Hoy esa recompensa se ofrece en un diálogo al abrir la app: es ineludible, la ve todo el mundo, y aun así cuatro de cada cinco la cierran ([F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). O sea que la visibilidad ya está resuelta y el 19% no la explica. Lo que queda es el momento y el botón. Cambiando el momento —al muro, cuando el usuario quiere el episodio— y quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
 
 > La entrega al ver está tomada de la versión paralela de este mismo reto, donde está mejor resuelta que en la mía. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
 
@@ -303,7 +303,7 @@ Tres lecturas que salen de ahí:
 
 La restricción del brief es explícita: *«cualquier fuente nueva de moneda debe equilibrarse con la sostenibilidad de la economía y con la conversión a pagador»*.
 
-> **La escala del problema, primero, porque cambia qué hay que defender.** Idilio ya regala **hasta 70 episodios por semana** en anuncios recompensados —15 monedas, tope de 10 diarios— más 2 al día por la recompensa diaria ([diagnóstico F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta)). El usuario promedio consume unos 32 episodios semanales. **La fuente gratuita recurrente ya más que duplica el consumo**, así que la economía no tiene escasez que proteger.
+> **La escala del problema, primero, porque cambia qué hay que defender.** Idilio ya regala **hasta 70 episodios por semana** en anuncios recompensados —15 monedas, tope de 10 diarios— más 2 al día por la recompensa diaria ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). El usuario promedio consume unos 32 episodios semanales. **La fuente gratuita recurrente ya más que duplica el consumo**, así que la economía no tiene escasez que proteger.
 >
 > Eso no vuelve irrelevante el techo del Pase — lo vuelve **secundario**. Lo que sigue muestra que el Pase agrega poco volumen sobre lo que ya se regala; lo que de verdad sostiene el argumento es que el Pase no está ahí para dar episodios, sino para ponerles hora.
 

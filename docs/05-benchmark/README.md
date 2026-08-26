@@ -40,26 +40,24 @@ in-app reales:
 
 | Producto | Precio |
 |---|---|
-| Promo 180 monedas | $0.49 – $0.99 |
-| Packs de 75 a 1.500 monedas | $0.99 – $11.99 |
-| **Pase semanal** | **$7.99** |
-| **Pase mensual** | **$14.99** |
+| Promo 180 monedas | **$ 1.900 – $ 2.900 COP** |
+| Packs de 75 a 1.500 monedas | **$ 4.900 – $ 59.900 COP** |
+| **Pase semanal** | **$ 12.500 COP / semana** |
+| **Pase mensual** | **$ 24.500 COP / mes** · *«Ahorra 55%»* |
 
 Es decir: **Idilio ya es un modelo híbrido — suscripción + monedas —, no solo monedas.**
-El diagnóstico (§1.2, F3) analizó la escalera de packs porque es lo único que aparece en el muro
-del build 1.20.0. Que exista una suscripción que **no se ofrece en el momento de máxima intención**
-no debilita el hallazgo F1: lo agrava. El metajuego no es lo único que vive en otro edificio;
-el producto de mayor valor de la economía también.
+El muro real —capturado dentro de la app con storefront de Colombia— **sí ofrece la suscripción**:
+la encabeza, con los dos planes y el mensual marcado *RECOMENDADO*. Así que la falla no es de
+ubicación. Es de orden: lo más caro va arriba y la salida gratuita queda en la tarjeta de abajo.
 
-Y hay un segundo problema, de precio, que no hace falta salir del catálogo para verlo. El pase
-semanal cuesta **$7.99**. La serie mediana de Idilio —40 episodios bloqueados a 15 monedas— cuesta
-**600 monedas**, y cuántos dólares son esas 600 monedas depende del escalón que compre el usuario.
-El censo convierte al escalón de 180 monedas por $1.99 —el que muestra el paywall (el muro de pago) nativo del build
-1.20.0, y el que usa el anexo de dogfooding, el de usar el propio producto como un usuario más—: con esa tasa la serie mediana sale **≈ $6,63** y el
-pase semanal queda **un 20 % más caro que terminar la serie entera comprándola**. En el peor
-escalón —**75 monedas por $0.99**, ocho paquetes para juntar 600— la misma serie sale **≈ $7,92**,
-y ahí es un empate técnico. En ningún punto de la escalera la semana de suscripción sale más
-barata que la serie completa.
+Y hay un segundo problema, de precio, que no hace falta salir del catálogo para verlo — y va en
+la dirección contraria a la que este anexo sostuvo mientras leyó los precios de la ficha en
+dólares. Con las cifras reales en pesos, **la suscripción es el mejor negocio de la pantalla**:
+terminar la serie mediana comprando monedas —600, al peldaño regular de $ 540 el episodio— sale
+unos **$ 21.000**, y el **mensual abre el catálogo entero por $ 24.500**. Una sola serie cuesta
+casi lo mismo que un mes de todo, y el semanal ($ 12.500) sale por la mitad de lo que cuesta
+terminar una. El desajuste no está en la suscripción: está en la escalera de monedas, que cobra
+por una serie lo que la suscripción cobra por todas.
 
 Con una salvedad que conviene decir, porque es la diferencia entre un argumento y un eslogan: **el
 muro no publica ese precio en ninguna parte.** Publica paquetes. Las 600 monedas hay que armarlas
@@ -435,15 +433,15 @@ Eso sigue siendo original de este diagnóstico.
 
 **Se corrige o se añade:**
 
-1. **El muro debe ofrecer la suscripción.** El producto ya tiene pase semanal ($7.99) y mensual
-   ($14.99) y no los muestra en el momento de máxima intención. Esto entra en el diagnóstico
-   como falla, y en el rediseño del muro como tercera salida junto al pase y al pack.
-2. **El pase semanal está mal calibrado contra el propio catálogo.** $7.99 la semana contra los
-   ≈ $6,63 que cuesta terminar la serie mediana comprando sus episodios al escalón de 180 monedas:
-   la suscripción sale un 20 % más cara que el resultado que promete, y en el peor escalón de la
-   escalera empata (§5.1). La cadencia no es el problema —el plan semanal se lleva el 29 % de los
-   ingresos de suscripción de Latinoamérica—; el número sí. No es materia de esta intervención,
-   pero es un hallazgo de pricing que el equipo debería mirar.
+1. **El muro ya ofrece la suscripción, y ese no era el problema.** Este anexo dio por hecho que no
+   la mostraba, leyendo la captura de la ficha de tienda. El muro real la encabeza. Lo que entra en
+   el diagnóstico como falla es el **orden**: lo más caro primero y la salida gratuita —el anuncio
+   recompensado, diez episodios diarios— en la tarjeta más apagada, con su valor escrito `0/10`.
+2. **La escalera de monedas está mal calibrada contra la propia suscripción.** Terminar la serie
+   mediana comprando sus episodios sale ≈ $ 21.000; el mensual abre el catálogo entero por
+   $ 24.500. Comprar una serie cuesta casi lo mismo que un mes de todo, y las dos ofertas están en
+   la misma pantalla. No es materia de esta intervención, pero es un hallazgo de pricing que el
+   equipo debería mirar.
 3. **La barra de éxito baja y se vuelve relativa.** Con D7 de categoría en 8,6 %, la promesa
    honesta es mover D7 unos puntos, no duplicar D30. Nadie en el sector lo ha logrado.
 4. **Hay que escribir la distinción anti-DSA.** Una línea en el documento de producto: se premia
