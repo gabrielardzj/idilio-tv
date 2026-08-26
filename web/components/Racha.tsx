@@ -15,8 +15,12 @@ export function Racha({ nights, shields }: { nights: number; shields: number }) 
       <ol className="grid grid-cols-7 gap-1.5">
         {STREAK.map((r) => {
           const hecha = r.night <= nights
+          const da = `pase${r.coins > 0 ? ` y ${r.coins} monedas` : ''}${r.shield ? ' y un comodín' : ''}`
           return (
             <li key={r.night} className="grid justify-items-center gap-1.5">
+              {/* Sin esto un lector de pantalla oye «3, pase +30» y no sabe si esa
+                  noche está cumplida, que es la única información que la tira da. */}
+              <span className="sr-only">Noche {r.night}, {hecha ? 'cumplida' : 'pendiente'}. Da {da}.</span>
               <span
                 className={[
                   'grid aspect-square w-full max-w-[38px] place-items-center rounded-xl border text-xs font-bold',

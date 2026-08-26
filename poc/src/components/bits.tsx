@@ -71,24 +71,33 @@ export function StreakStrip({
         <span className="sub">La noche corre de 5 a.m. a 5 a.m.</span>
       </div>
 
-      <div className="nights">
+      {/* Una lista de verdad. El punto llevaba `aria-label` sobre un div sin rol,
+          que es un atributo prohibido —axe lo marca como serio— y que los
+          lectores de pantalla ignoran: la tira, que es el elemento central de la
+          intervención, no se anunciaba. Ahora lo visible va oculto a la voz y
+          cada noche dice en qué estado está y qué da, que es más de lo que el
+          `aria-label` decía cuando funcionaba. */}
+      <ol className="nights">
         {STREAK.map((r) => {
           const done = r.night < nights || (r.night === nights && !justAdvanced)
           const today = r.night === nights && justAdvanced
+          const estado = today ? 'hoy' : done ? 'cumplida' : 'pendiente'
+          const da = `pase${r.coins > 0 ? ` y ${r.coins} monedas` : ''}${r.shield ? ' y un comodín' : ''}`
           return (
-            <div key={r.night} className={`night ${done ? 'done' : ''} ${today ? 'today' : ''}`}>
-              <div className="dot" aria-label={`Noche ${r.night}`}>
+            <li key={r.night} className={`night ${done ? 'done' : ''} ${today ? 'today' : ''}`}>
+              <div className="dot" aria-hidden="true">
                 {r.shield ? <Shield s={16} c={today ? '#2A1A02' : done ? '#3FE0D0' : '#7C6E8B'} /> : r.night}
               </div>
               {/* Todas las noches dan pase; el bono se SUMA. El ternario que había
                   aquí ponía «+30» en lugar de «pase», así que la tira leía como
                   si la noche 3 diera bono en vez de pase — justo el malentendido
                   que esta pantalla existe para deshacer. */}
-              <small>pase{r.coins > 0 ? <em> +{r.coins}</em> : null}</small>
-            </div>
+              <small aria-hidden="true">pase{r.coins > 0 ? <em> +{r.coins}</em> : null}</small>
+              <span className="sr">Noche {r.night}, {estado}. Da {da}.</span>
+            </li>
           )
         })}
-      </div>
+      </ol>
 
       {shieldJustUsed ? (
         <div className="shield-row spent">

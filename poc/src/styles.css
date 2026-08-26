@@ -272,7 +272,7 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .streak-h b { font-size: 14px; font-weight: 700; }
 .streak-h .sub { font-size: 11.5px; color: var(--tx-lo); }
 
-.nights { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.nights { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; list-style: none; margin: 0; padding: 0; }
 .night { display: grid; place-items: center; gap: 6px; }
 .night .dot {
   width: 100%; aspect-ratio: 1; max-width: 38px; border-radius: 12px;
