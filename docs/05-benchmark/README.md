@@ -485,8 +485,12 @@ Eso sigue siendo original de este diagnóstico.
   producto. Los cito como reclamo comercial, no como dato independiente. **Y la tabla D1/D7/D14
   de §5.2 sale del mismo blog**, aunque el cuerpo la atribuía a Sensor Tower hasta esta pasada:
   es la fuente más cargada de todo el anexo sosteniendo su sección más citada.
-- **La mecánica exacta de "retos" y video recompensado dentro de Idilio.** Sigue apoyada solo en
-  reseñas públicas de Google Play, igual que en el diagnóstico.
+- ~~**La mecánica exacta de "retos" y video recompensado dentro de Idilio.**~~ **Ya no es una
+  incógnita: está medida.** La pestaña Recompensas da **15 monedas por anuncio con tope de 10
+  diarios** —hasta 10 episodios gratis por día—, 40 monedas por la recompensa diaria y 90 en tareas
+  sociales de una sola vez. Capturas en el [registro de dogfooding](../00-dogfooding/#las-cuatro-fuentes-gratuitas-de-monedas).
+  Con eso, Idilio deja de ser el caso sin anuncios de la comparación de §5.3 y pasa a estar en el
+  centro del estándar de la categoría.
 - **Ninguna app de series verticales con un pase gratuito diario asignable por serie.**
   Amplié la búsqueda a las trece apps que nombra §5.3 y la conclusión se sostiene: la categoría usa
   check-in, anuncios, tareas rotativas, ver-para-ganar y programación —las cinco familias del

@@ -8,7 +8,9 @@ El metajuego de Idilio no está mal diseñado: **llega en el momento equivocado*
 
 Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que el producto nunca traduce a episodios.
 
-Debajo de esa falla hay otra mayor, que solo aparece al medir el catálogo completo: **la alternativa a pagar no es irse de la app, es empezar otra serie gratis.** Hay 500 episodios gratis repartidos en 50 títulos, casi cuatro meses de consumo sin pagar, de modo que la economía no ejerce ninguna presión sobre el usuario. Y quien salta de historia en historia no se apega a ninguna: no hay ninguna serie esperándolo mañana, que es precisamente lo que mide un DAU/MAU de 0.33.
+Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese colchón corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. Nada de eso está en el muro, así que el usuario que no va a buscarlo se topa con una pantalla que solo vende.
+
+Sin escasez, la moneda no significa nada y el metajuego no puede mover el regreso. Y la alternativa a pagar nunca es irse: es empezar otra serie gratis. Quien salta de historia en historia no se apega a ninguna, así que no hay ninguna serie esperándolo mañana — que es precisamente lo que mide un DAU/MAU de 0.33.
 
 | Falla | En una línea |
 |---|---|
@@ -111,7 +113,18 @@ El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué
 
 La fuente gratuita **recurrente** se ofrece **al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que hay que reclamar con un botón. La misma recompensa vive además en la pestaña **Recompensas**. El gasto ocurre horas después, en el **player** —el reproductor—, al chocar con el muro.
 
-No es la única fuente gratuita, y conviene decirlo con precisión: la pestaña **Recompensas** lleva además una lista de tareas —compartir la app, seguir las cuentas de Facebook, Instagram, YouTube, TikTok y WhatsApp a 10 monedas cada una, calificar la app a 30— [capturada acá](../00-dogfooding/#capturas-de-la-evidencia). Son otra cosa que la recompensa diaria: por su naturaleza se cobran **una sola vez** —a nadie se le paga dos veces por seguir la misma cuenta—, así que suman 90 monedas, **seis episodios exactos**, y se acaban. Sirven para el arranque, no para volver cada noche. Lo que sigue vale para las dos: ninguna aparece en el muro.
+Y no es la única fuente. La pestaña **Recompensas** concentra cuatro, [capturadas acá](../00-dogfooding/#capturas-de-la-evidencia):
+
+| Fuente | Cuánto da | En episodios |
+|---|---|---|
+| **Ver anuncios** | 15 monedas · tope **10 diarios** | **hasta 10 episodios por día** |
+| Recompensa diaria | 40 monedas al día | 2 episodios por día |
+| Tareas sociales (una sola vez) | 10 cada una · 30 por calificar | 6 en total |
+| Programa de referidos | sin cifra capturada | — |
+
+**La más grande, por mucho, es el anuncio recompensado — y cambia el diagnóstico.** Diez anuncios diarios son 150 monedas: **70 episodios gratis por semana**. El usuario promedio entra 2.3 veces y ve 14 episodios por sesión, unos 32 a la semana. **La fuente gratuita recurrente más que duplica el consumo.** Quien sepa que ese botón existe no choca nunca con un muro.
+
+Ninguna de las cuatro aparece en el muro.
 
 - **19% de los usuarios activos reclama la recompensa diaria.** El diálogo no se puede no ver: se interpone entre el usuario y la app. Así que el 81% restante **no la deja pasar por no encontrarla: la descarta**.
 - **82% nunca abrió el perfil.** Lo que vive en una pestaña aparte, para este usuario, no existe — y eso sí aplica a todo lo demás del metajuego.
@@ -149,18 +162,19 @@ Sin una unidad de valor no hay economía: hay una tarifa opaca. El usuario no pu
 
 Datos reales del paywall:
 
-| Paquete | Precio | Monedas | Episodios | Contra el anterior |
+| Paquete | Precio | Episodios | **Precio por episodio** | Badge |
 |---|---|---|---|---|
-| Primero · *«SUPER OFERTA 60%»* | — | 180 | 12 | — |
-| Segundo | el doble del primero | 180 | 12 | **el doble de precio, las mismas monedas** |
-| Tercero | el doble del segundo | 375 | 25 | el doble de precio, 2,08 veces las monedas |
+| 180 monedas | $ 2.500 | 12 | **$ 208** | SUPER OFERTA 69% |
+| 375 monedas | $ 13.500 | 25 | **$ 540** | −20% DTO |
+| 725 monedas | $ 25.500 | 48 | **$ 531** | −24% DTO |
 
-De ahí salen dos problemas:
+De ahí salen tres problemas:
 
-1. **Los dos primeros paquetes entregan exactamente las mismas 180 monedas a distinto precio.** El doble de precio por la misma cantidad, y no en pantallas distintas — en la captura del build 1.20.0 aparecen uno directamente debajo del otro. El segundo solo se puede leer como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
-2. **Subir del segundo al tercero mejora el valor apenas un 3.9%:** cuesta el doble y entrega 2,08 veces las monedas. Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el segundo y el escalón alto no se vende.
+1. **Los dos escalones grandes son el mismo precio.** Pasar de 375 a 725 monedas cuesta casi el doble de dinero y mejora el precio por episodio un **1,7%**: nueve pesos. Una escalera de paquetes existe para que al usuario le convenga subir; esta no le da ninguna razón.
+2. **El escalón barato es 2,6 veces mejor que los otros dos**, y lleva encima el badge más agresivo. Un usuario que compare una sola vez aprende que fuera de la oferta el episodio cuesta el triple, y esa es la lección que se lleva de la economía entera.
+3. **Los tres llevan badge de descuento a la vez** —69%, 20%, 24%—. Un precio tachado solo persuade si hay algo sin descuento contra qué compararlo. Cuando todo está en oferta, nada lo está.
 
-Además, **los cuatro paquetes llevan badge de descuento** (60%, 20%, 20%, 30%). Un precio tachado solo persuade si hay algo sin descuento contra qué compararlo. Cuando todo está en oferta, nada lo está.
+Y por encima de la escalera hay un número que la desarma: terminar la serie mediana comprando monedas —600— sale unos **$ 21.000**, y el **Pase Idilio mensual abre el catálogo entero por $ 24.500**. Comprar una serie cuesta casi lo mismo que un mes de todo, y el muro no menciona la suscripción.
 
 ### F4 · La racha le exige al usuario una frecuencia que no tiene
 
@@ -219,7 +233,7 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 ## 1.4 Una palanca fuera del alcance de este objetivo
 
-El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: los 500 episodios gratis del catálogo. Este documento la llama **el colchón** — todo lo que un usuario puede ver sin pagar nunca.
+El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: los 500 episodios gratis del catálogo. Este documento la llama **el colchón** — todo lo que un usuario puede ver sin pagar nunca. Y el colchón es solo la mitad: encima corren las fuentes recurrentes de [F1](#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta), que con los anuncios dan hasta 70 episodios por semana. El stock se agota una vez; el flujo, no.
 
 Qué haría con ella depende enteramente de cuál sea el objetivo:
 

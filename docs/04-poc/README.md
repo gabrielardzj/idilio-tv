@@ -70,13 +70,16 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Series del catálogo | 50 · 2.230 episodios | Censo |
 | Episodios gratis en total | 500 (22% del catálogo) | Censo |
 | Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
-| Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 · y un cuarto del que solo se lee el badge | Captura oficial del paywall (build 1.20.0) |
+| Paquetes actuales | 180/$ 2.500 · 375/$ 13.500 · 725/$ 25.500 | Pestaña Recompensas, app nativa, storefront CO |
+| Fuentes gratuitas | anuncio 15 monedas ×10 diarios · diaria 40 · tareas 90 | Pestaña Recompensas, app nativa |
+| Pase Idilio | $ 12.500 semanal · $ 24.500 mensual | Pestaña Recompensas, app nativa |
 
-**Y las cifras se verifican solas.** `npm run verificar` corre 44 comprobaciones de los
-documentos contra el código y contra el censo del catálogo: 38 son cifras —episodios, monedas,
-precios, porcentajes, y los conteos que anuncian los encabezados— y 6 son invariantes que ninguna
-cifra sola expresa: que cada serie cuadre, que la escalera de precios baje en cada escalón, que
-ningún paquete lleve precio tachado.
+**Y las cifras se verifican solas.** `npm run verificar` corre 54 comprobaciones de los
+documentos contra el código y contra el censo del catálogo: 46 son cifras —episodios, monedas,
+precios en pesos, porcentajes, los topes de las fuentes gratuitas y los conteos que anuncian los
+encabezados— y 8 son invariantes que ninguna cifra sola expresa: que cada serie cuadre, que la
+escalera propuesta baje en cada escalón, que la real **no** lo haga en el último, que la fuente
+gratuita de hoy supere el consumo semanal, que ningún paquete lleve precio tachado.
 Aparte, rastrea los textos buscando cifras que se corrigieron en el camino y podrían haber
 sobrevivido a una edición, y audita el contraste de los tokens de texto. Corre en el pipeline
 antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar al entregable.
@@ -106,7 +109,7 @@ Cinco reglas del diseño no salieron de escribirlo sino de construirlo y de medi
 
 *El 46% son 19 de las 41 series con muro, no una fracción de las compras: ponderar por compras exigiría volumen de ventas, que el censo del catálogo no tiene.*
 
-**5 · La escalera se mide en precio por episodio, no en monedas por dólar.** «Monedas por dólar» es la métrica que el producto real usa y la que le permite llamar escalera a algo que no sube. En la unidad legible la escalera queda monótona de verdad: **$0.15 → $0.11 → $0.10**, cada escalón más barato que el anterior.
+**5 · La escalera se mide en precio por episodio, en pesos.** Contar monedas por unidad de dinero es lo que le permite al producto llamar escalera a algo que no sube. En la unidad legible —pesos por episodio— la real es **$ 540 → $ 531 → $ 599**: se aplana y en el último escalón empeora. La propuesta queda monótona de verdad: **$ 540 → $ 510 → $ 499**.
 
 **Y las cinco están sostenidas por el pipeline, no por la revisión.** `verificar` compara las cifras de estos documentos contra el código y contra el censo; `recorrer` maneja el prototipo como una persona y comprueba en cada pantalla el estado **y** la identidad de la serie; `acreditacion` avanza el reloj noche por noche y verifica la emisión, la entrega, el tope, el comodín y la vuelta de la escalera. Los tres corren antes de cada despliegue: una cifra vieja o una regla rota no llegan al entregable.
 

@@ -26,9 +26,13 @@ export const FREE_EPISODES = 10
  *  numeración de episodios. No es un error de suma.) */
 export const CATALOGO = { series: 50, episodios: 2230, gratis: 500, bloqueados: 1728 } as const
 
-/** Paquetes.
- *  `live` = lo que entrega hoy el producto (verificado en el paywall nativo).
- *  `coins` = la propuesta (I3).
+/** Paquetes. Precios en **pesos colombianos**, que es como cobra la tienda:
+ *  medido en la app con storefront de Colombia el 26-ago-2026. Las capturas de
+ *  la ficha de App Store están en dólares porque ese material es el mismo para
+ *  todos los países — no es lo que ve un usuario en Colombia.
+ *
+ *  `live` = lo que entrega hoy el producto. `liveCop` = a qué precio.
+ *  `coins` / `cop` = la propuesta (I3).
  *
  *  Ningún paquete lleva precio tachado. Hoy los cuatro del paywall real llevan
  *  badge de descuento simultáneo (60%, 20%, 20%, 30%) contra anclas de $2.49 y
@@ -47,11 +51,41 @@ export const PACKS = [
   // precio regular, así que anclar contra $2.49 sería anclar contra un producto
   // inventado. El "$0.08 por episodio" frente al "$0.15" del siguiente escalón
   // ya dice todo lo que el ancla pretendía decir, y es verdad.
-  { id: 'intro', usd: 0.99, coins: 180, live: 180, tag: 'Bienvenida · una sola vez', best: false, intro: true },
-  { id: 'p1', usd: 1.99, coins: 195, live: 180, tag: null, best: false, intro: false },
-  { id: 'p2', usd: 4.99, coins: 660, live: 375, tag: null, best: true, intro: false },
-  { id: 'p3', usd: 9.99, coins: 1500, live: null, tag: null, best: false, intro: false },
+  { id: 'intro', cop: 2500, coins: 180, live: 180, liveCop: 2500, tag: 'Bienvenida · una sola vez', best: false, intro: true },
+  { id: 'p1', cop: 13500, coins: 375, live: 375, liveCop: 13500, tag: null, best: false, intro: false },
+  { id: 'p2', cop: 25500, coins: 750, live: 725, liveCop: 25500, tag: null, best: true, intro: false },
+  { id: 'p3', cop: 49900, coins: 1500, live: 1500, liveCop: 59900, tag: null, best: false, intro: false },
 ] as const
+
+/** La escalera REAL de hoy, para el diagnóstico. Precio por episodio:
+ *      180 → $ 208 · 375 → $ 540 · 725 → $ 531
+ *  Subir del de 375 al de 725 cuesta casi el doble y mejora el episodio un
+ *  1.6%. Y el de 1500, el más caro del catálogo, es el PEOR de todos a $ 599
+ *  por episodio: la escalera no solo es plana, en el último escalón baja. */
+export const LIVE_LADDER = [
+  { coins: 180, cop: 2500 },
+  { coins: 375, cop: 13500 },
+  { coins: 725, cop: 25500 },
+  { coins: 1500, cop: 59900 },
+] as const
+
+/** PROPUESTA · el Pase Idilio ya existe y no aparece en el muro. Precios reales. */
+export const SUBSCRIPTION = { semanal: 12500, mensual: 24500 } as const
+
+/** REAL · las fuentes gratuitas que el producto ya tiene, medidas en la
+ *  pestaña Recompensas. La grande es el anuncio: 10 diarios × 15 monedas son
+ *  150 al día, o sea **hasta 70 episodios gratis por semana** — más del doble
+ *  de los ~32 que consume el usuario promedio (14 por sesión × 2.3 sesiones).
+ *  Es el dato que dice que esta economía no tiene escasez que proteger, y el
+ *  que obliga a que el Pase de la Noche NO se defienda por volumen. */
+export const FUENTES_HOY = {
+  anuncio: { monedas: 15, topeDiario: 10 },
+  diaria: { monedas: 40 },
+  tareasUnaVez: { monedas: 90 },
+} as const
+
+export const episodiosGratisPorSemanaHoy =
+  Math.floor((FUENTES_HOY.anuncio.monedas * FUENTES_HOY.anuncio.topeDiario * 7) / EPISODE_COST)
 
 /** PROPUESTA · la ventana de la "noche" corre de 5am a 5am en la zona del usuario.
  *  54% de las sesiones son entre 11pm y 2am: cortar a medianoche parte esa
@@ -128,11 +162,14 @@ export function episodesLabel(coins: number) {
   return `${n} episodio${n === 1 ? '' : 's'}`
 }
 
-export const coinsPerDollar = (coins: number, usd: number) => Math.round(coins / usd)
+/** La métrica legible de la escalera: cuánto cuesta un episodio en este
+ *  paquete, en pesos. Redondeado al peso: los decimales no significan nada
+ *  en una moneda cuya unidad mínima de uso son cientos. */
+export const pricePerEpisode = (coins: number, cop: number) =>
+  Math.round(cop / toEpisodes(coins))
 
-/** La métrica legible de la escalera: cuánto cuesta un episodio en este paquete. */
-export const pricePerEpisode = (coins: number, usd: number) =>
-  (usd / toEpisodes(coins)).toFixed(2)
+/** Formato de pesos colombianos: separador de miles con punto, sin decimales. */
+export const cop = (n: number) => `$ ${n.toLocaleString('es-CO')}`
 
 /**
  * Cuál paquete termina la serie en la que está el usuario.

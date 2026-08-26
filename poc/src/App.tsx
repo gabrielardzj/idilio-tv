@@ -193,7 +193,7 @@ export default function App() {
             {sheet.kind === 'store' && (
               <Store
                 state={state}
-                onBuy={(coins, usd) => dispatch({ t: 'buy', coins, usd })}
+                onBuy={(coins, cop) => dispatch({ t: 'buy', coins, cop })}
                 onClose={() => dispatch({ t: 'open', sheet: { kind: 'unlock' } })}
               />
             )}

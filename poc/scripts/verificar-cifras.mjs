@@ -6,7 +6,8 @@
  *   npm run verificar
  */
 import { EPISODE_COST, FREE_EPISODES, MAX_PASSES, PACKS, CATALOGO, STREAK,
-         weeklyIssuance, toEpisodes, pricePerEpisode, coinsPerDollar } from '../src/lib/economy.ts'
+         weeklyIssuance, toEpisodes, pricePerEpisode, LIVE_LADDER, SUBSCRIPTION,
+         FUENTES_HOY, episodiosGratisPorSemanaHoy } from '../src/lib/economy.ts'
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -94,26 +95,42 @@ v('tope de acumulación', MAX_PASSES, 2)
 v('bonos de racha (3/5/7)', STREAK.filter(n => n.coins).map(n => n.coins).join('/'), '30/45/75')
 
 console.log('\n── escalera de precios propuesta ──────────────────────────────')
-for (const [id, eps, porEp] of [['intro', 12, '0.08'], ['p1', 13, '0.15'], ['p2', 44, '0.11'], ['p3', 100, '0.10']]) {
+for (const [id, eps, porEp] of [['intro', 12, 208], ['p1', 25, 540], ['p2', 50, 510], ['p3', 100, 499]]) {
   const p = PACKS.find(x => x.id === id)
   v(`${id} · episodios`, toEpisodes(p.coins), eps)
-  v(`${id} · precio por episodio`, pricePerEpisode(p.coins, p.usd), porEp)
+  v(`${id} · precio por episodio (COP)`, pricePerEpisode(p.coins, p.cop), porEp)
 }
-const escalera = PACKS.filter(p => !p.intro).map(p => +pricePerEpisode(p.coins, p.usd))
+const escalera = PACKS.filter(p => !p.intro).map(p => pricePerEpisode(p.coins, p.cop))
 v('la escalera baja en cada escalón', escalera.every((x, i) => i === 0 || x < escalera[i - 1]), true)
 v('ningún paquete lleva precio tachado', PACKS.every(p => !('anchor' in p)), true)
 
 console.log('\n── el defecto que le señalo al producto actual ────────────────')
-v('hoy $1.99 → monedas por dólar', coinsPerDollar(180, 1.99), 90)
-v('hoy $3.99 → monedas por dólar', coinsPerDollar(375, 3.99), 94)
-v('mejora al subir de escalón', ((94 / 90.5 - 1) * 100).toFixed(1) + '%', '3.9%')
+const real = LIVE_LADDER.map(p => pricePerEpisode(p.coins, p.cop))
+v('hoy · 180 monedas → precio por episodio', real[0], 208)
+v('hoy · 375 monedas → precio por episodio', real[1], 540)
+v('hoy · 725 monedas → precio por episodio', real[2], 531)
+v('hoy · 1500 monedas → precio por episodio', real[3], 599)
+v('mejora al subir de 375 a 725', ((1 - real[2] / real[1]) * 100).toFixed(1) + '%', '1.7%')
+v('el escalón más caro es el peor por episodio', real[3] > real[2], true)
+v('pase semanal (COP)', SUBSCRIPTION.semanal, 12500)
+v('pase mensual (COP)', SUBSCRIPTION.mensual, 24500)
+
+console.log('\n── las fuentes gratuitas que el producto ya tiene ─────────────')
+v('monedas por anuncio', FUENTES_HOY.anuncio.monedas, 15)
+v('tope diario de anuncios', FUENTES_HOY.anuncio.topeDiario, 10)
+v('recompensa diaria', FUENTES_HOY.diaria.monedas, 40)
+v('episodios gratis por semana solo en anuncios', episodiosGratisPorSemanaHoy, 70)
+v('la fuente gratuita supera el consumo semanal', episodiosGratisPorSemanaHoy > 14 * 2.3, true)
 
 console.log('\n── el texto de los documentos ─────────────────────────────────')
 
 const DOCS = [
   'README.md', 'docs/00-dogfooding/README.md', 'docs/01-diagnostico/README.md',
   'docs/02-estrategia/README.md', 'docs/03-diseno/README.md', 'docs/03-diseno/sistema.md',
-  'docs/03-diseno/pencil/README.md', 'docs/04-poc/README.md', 'web/README.md',
+  // Los dos: `pen/` es el archivo vigente y `pencil/` la primera versión, que se
+  // conserva a propósito. Vigilar solo uno deja al otro publicando cifras viejas.
+  'docs/03-diseno/pen/README.md', 'docs/03-diseno/pencil/README.md',
+  'docs/04-poc/README.md', 'web/README.md',
   // Estos dos ya no son páginas del sitio, pero se siguen vigilando: el benchmark
   // publicaba «428 episodios gratis repartidos en 43 títulos» y el guardián no lo
   // veía porque no lo estaba mirando. Dejar de publicar un documento no lo saca
@@ -147,6 +164,14 @@ const EXPORT = existsSync(rutaManifiesto)
   : null
 if (!EXPORT) console.log('· aviso: no hay mobbin-export/manifest.json — no se verifica el conteo de pantallas y flujos')
 else console.log(`· el export tiene ${EXPORT.pantallas} pantallas en ${EXPORT.flujos} flujos`)
+
+/** El archivo de diseño en Figma. No se puede contar desde acá —vive fuera del
+ *  repo—, así que va declarado, en un solo lugar y con la fecha en que lo
+ *  verifiqué contra el archivo: 26-ago-2026, vía el MCP de Figma sobre
+ *  `CCI8plwuWvfTV8VBpowN5X`. Está acá y no repartido por los documentos porque
+ *  «pantallas» significa dos cosas en este entregable, y sin los dos números a
+ *  la vista el guardián no puede distinguir un conteo de otro. */
+const DISENO = { pantallas: 10, componentes: 4 }
 
 /** Exención de línea, para la prosa que cita una cifra vieja al explicarla.
  *
@@ -189,11 +214,22 @@ const OBSOLETOS = [
     // dos cosas que se cuentan por separado. Las exenciones son literales —la
     // frase exacta con la que cada documento nombra al archivo de diseño— para
     // que ningún conteo del export se escape por parecerse.
+    // `soloEn` y no más frases en `salvo`. En el entregable hay dos cosas que se
+    // llaman «pantallas» y se cuentan distinto: las del export (22) y las del
+    // archivo de diseño en Figma (10). Perseguirlas con una sola regex obliga a
+    // ir sumando excepciones de redacción —«hoja de sistema», «archivo de
+    // diseño», «y las»— y cada una es una rendija por donde el conteo del export
+    // se escapa de verdad. Acotar la comprobación a los documentos que describen
+    // el export es exacto y no depende de cómo esté escrita la frase.
     { patron: /(\d+) pantallas/,
-      salvo: /hoja de sistema|archivo de diseño|con las mismas|y las\s*$|pantallas del diseño/i,
-      ok: m => +m[1] === EXPORT.pantallas,
-      porque: m => `el export tiene ${EXPORT.pantallas} pantallas, no ${m[1]}` },
-    { patron: /(\d+) flujos/, salvo: NARRA,
+      soloEn: [/^README\.md$/, /^docs\/04-poc\//, /^mobbin-export\//, /^poc\/scripts\/export-mobbin/],
+      // Dos conteos válidos, no una excepción: el del export y el del archivo de
+      // diseño. Verificar contra los dos es más estricto que eximir al segundo,
+      // porque un «11 pantallas» sigue fallando contra ambos.
+      ok: m => +m[1] === EXPORT.pantallas || +m[1] === DISENO.pantallas,
+      porque: m => `hay ${EXPORT.pantallas} pantallas en el export y ${DISENO.pantallas} en el archivo de diseño; ${m[1]} no es ninguna` },
+    { patron: /(\d+) flujos/,
+      soloEn: [/^README\.md$/, /^docs\/04-poc\//, /^mobbin-export\//, /^poc\/scripts\/export-mobbin/],
       ok: m => +m[1] === EXPORT.flujos,
       porque: m => `el export tiene ${EXPORT.flujos} flujos, no ${m[1]}` },
   ] : []),
@@ -251,7 +287,8 @@ for (const ruta of DOCS) {
     fallos++
   }
 
-  for (const { patron, salvo, porque, ok } of OBSOLETOS) {
+  for (const { patron, salvo, porque, ok, soloEn } of OBSOLETOS) {
+    if (soloEn && !soloEn.some((re) => re.test(ruta))) continue
     // matchAll y no test(): las entradas que capturan un número necesitan el
     // número, y una misma línea puede traer más de una cifra equivocada.
     const global = new RegExp(patron.source, patron.flags.includes('g') ? patron.flags : patron.flags + 'g')

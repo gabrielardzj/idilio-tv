@@ -27,20 +27,43 @@ Dogfooding —usar el propio producto como un usuario más— manual: 2026-08-25
 <!-- Los precios tachados de acá abajo son los del producto REAL, no los de la
      propuesta. El guardián de cifras persigue "$2.49" porque la escalera que
      proponemos no lleva ancla tachada; acá es evidencia, no una recaída. -->
-| Precio ancla | Precio | Monedas | Badge | Monedas por USD |
+| Monedas | Precio | Badge | Episodios | **Precio por episodio** |
 |---|---|---|---|---|
-| $2.49 | **$0.99** | 180 | SUPER OFERTA 60% | 181.8 |
-| $2.49 | **$1.99** | 180 | −20% DTO | 90.5 |
-| $4.99 | **$3.99** | 375 | −20% DTO | 94.0 |
-| — | (4º paquete) | — | −30% DTO | — |
+| 180 | **$ 2.500 COP** | SUPER OFERTA 69% | 12 | **$ 208** |
+| 375 | **$ 13.500 COP** | −20% DTO | 25 | **$ 540** |
+| 725 | **$ 25.500 COP** | −24% DTO | 48 | **$ 531** |
 
 <!-- /cifras-citadas -->
 
-**En qué moneda cobra la tienda.** Las capturas de la ficha del build 1.20.0 traen los precios en dólares —`$0.99 USD`, `$1.99 USD`, `$3.99 USD`—, pero ese material es el mismo para todos los países. **En Colombia el cobro es en pesos:** la ficha de Google Play de `com.stvrae.idilio`, consultada con storefront de Colombia el 26-ago-2026, declara *«Compras en la app: $ 1.900-$ 59.900 por elemento»*. Los montos por paquete en pesos no se pudieron capturar: el checkout web pide iniciar sesión. Cualquier análisis que dependa del precio exacto tiene que esperar a esa captura; el de este entregable depende de las **monedas** que entrega cada paquete, que sí están medidas.
+**En qué moneda cobra la tienda.** En pesos. Las capturas de la ficha del build 1.20.0 traen los precios en dólares —`$0.99 USD`, `$1.99 USD`, `$3.99 USD`— pero ese material es de la **ficha de tienda**, la misma imagen para todos los países. La tabla de arriba está medida dentro de la app con storefront de Colombia, y coincide con lo que declara Google Play: *«Compras en la app: $ 1.900-$ 59.900 por elemento»*.
 
-Rango de IAP (in-app purchase: la compra que se hace dentro de la app) en la ficha global: **$0.09 – $299.99**.
+**La escalera de precios, medida.** El primer paquete cuesta **$ 208 por episodio** y los otros dos, **$ 540 y $ 531**. Los dos escalones grandes se diferencian en un 1,7%: subir de 375 a 725 monedas —casi el doble de dinero— mejora el precio por episodio en nueve pesos. Y los tres llevan badge de descuento a la vez.
 
-La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99** y uno **mensual a $14.99**. O sea que Idilio ya es un modelo híbrido — monedas y suscripción conviviendo — y el muro no ofrece ninguno de los dos: solo dice que hay que descargar la app.
+### El Pase Idilio (suscripción)
+
+| Plan | Precio | Lo que ofrece |
+|---|---|---|
+| **Semanal** | **$ 12.500 COP / semana** | Acceso ilimitado a episodios · sin anuncios |
+| **Mensual** | **$ 24.500 COP / mes** | Lo mismo, con badge *RECOMMENDED* y *«Save 55%»* |
+
+Vive en la pestaña **Recompensas**, encabezando la sección, con las dos opciones comparadas. El muro no lo ofrece.
+
+**El número que hay que mirar:** terminar la serie mediana comprando monedas —40 episodios bloqueados × 15 = 600 monedas— sale unos **$ 21.000** al precio de los escalones grandes. El mensual, que abre **el catálogo entero**, cuesta **$ 24.500**. Una sola serie cuesta casi lo mismo que un mes de todo.
+
+### Las cuatro fuentes gratuitas de monedas
+
+Medidas en la pestaña Recompensas de la app, con storefront de Colombia. Están las cuatro en un solo lugar, y **ninguna aparece en el muro**.
+
+| Fuente | Cuánto da | Cadencia | En episodios |
+|---|---|---|---|
+| **Ver anuncios** | 15 monedas por anuncio · **tope 10 diarios** | recurrente, diaria | **hasta 10 episodios por día** |
+| **Recompensa diaria** | 40 monedas | recurrente, diaria | 2 episodios por día |
+| Tareas sociales | 10 monedas cada una · 30 por calificar la app | **una sola vez** | 6 episodios en total |
+| Programa de referidos | sin cifra capturada | por referido | — |
+
+**El anuncio recompensado es, con diferencia, la fuente más grande del sistema, y este entregable no la tenía.** Diez anuncios diarios a 15 monedas son 150 monedas al día: **70 episodios gratis por semana**. La sesión promedio consume 14 episodios y el usuario entra 2.3 veces por semana, o sea unos 32 episodios semanales. **La fuente gratuita recurrente duplica con creces el consumo.** Un usuario que sepa que el botón existe no choca nunca con un muro.
+
+Hay una tensión de diseño encima: el Pase Idilio se vende con *«sin anuncios»* como una de sus dos ventajas. O sea que la suscripción cobra por quitar la fuente gratuita más generosa del producto.
 
 ### La app nativa, tal como es hoy
 - Barra superior: logo + **chip de saldo** (la pastilla que muestra las monedas, ej. 2543) + búsqueda.
@@ -70,7 +93,12 @@ La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99**
 | ![Muro web](evidencia/muro-web-ep13.png) | ![Player web](evidencia/player-web.png) |
 | **Muro del reproductor web.** *"Se desbloquea en la app con 15 monedas"* y una sola salida: descargar la app. El contexto de serie y episodio se pierde en el salto. | **Reproductor web.** Funciona bien, autoplay al siguiente episodio incluido — pero sin saldo, sin recompensas y sin ninguna huella de la economía. |
 
-**La pestaña Recompensas.** La otra mitad de la fuente gratuita, y la que el muro tampoco menciona: siete tareas a la vista —la lista sigue hacia abajo—, todas de una sola vez, todas a un toque de distancia del usuario **si se le ocurre ir a buscarlas**.
+**La pestaña Recompensas.** Ahí vive toda la economía menos el gasto: las cuatro fuentes gratuitas, los tres paquetes y la suscripción. Todo a un toque del usuario **si se le ocurre ir a buscarlo** — y nada de eso aparece en el muro, que es donde el usuario está cuando necesita monedas.
+
+| | |
+|---|---|
+| ![Recompensas · paquetes y anuncios](evidencia/recompensas-nativo-cop.png) | ![Pase Idilio](evidencia/pase-idilio-nativo-cop.png) |
+| **Los paquetes y los anuncios.** 180 a $ 2.500, 375 a $ 13.500 y 725 a $ 25.500, los tres con badge de descuento. Debajo, *«Ver anuncios · 0/10 vistos (límite diario) · 15 por anuncio»* — la fuente más grande del sistema. Y más abajo, el programa de referidos. | **El Pase Idilio y la recompensa diaria.** *«Claim your daily reward — Come back tomorrow and claim +40 coins»*, y debajo los dos planes: semanal $ 12.500 COP y mensual $ 24.500 COP con *«Save 55%»*. Las dos ventajas que vende son acceso ilimitado y **sin anuncios**. |
 
 | | |
 |---|---|

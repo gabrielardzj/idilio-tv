@@ -92,7 +92,7 @@ export type Action =
   | { t: 'hitWall'; ep: number }
   | { t: 'claimPass'; series: string }
   | { t: 'unlockWithCoins' }
-  | { t: 'buy'; coins: number; usd: number }
+  | { t: 'buy'; coins: number; cop: number }
   | { t: 'toggleRemind' }
   | { t: 'createAccount' }
   | { t: 'dismissAccount' }

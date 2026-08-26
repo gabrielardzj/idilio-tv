@@ -6,7 +6,7 @@ Ocho intervenciones en tres olas, sobre un trimestre. La compuerta que las orden
 
 | Ola | Semanas | Qué hace | Intervenciones |
 |---|---|---|---|
-| **1** | 1–4 | Hacer legible y accesible lo que el producto ya tiene | I1 la moneda habla en episodios · I2 la fuente se muda al muro · I3 la escalera de precios vuelve a subir · I4 continuidad web→app |
+| **1** | 1–4 | Hacer legible y accesible lo que el producto ya tiene | I1 la moneda habla en episodios · I2 el muro muestra las salidas que ya existen · I3 la escalera de precios vuelve a subir · I4 continuidad web→app |
 | **2** | 4–9 | Cambiar la unidad del regreso — **es la que se lleva a diseño y POC** | I5 el Pase de la Noche y la Racha de Noches · I6 progreso de serie visible |
 | **3** | 9–13 | Convertir el hábito en cuenta y en catálogo | I7 la cuenta se pide cuando hay algo que perder · I8 el pase como puente entre series |
 
@@ -54,16 +54,20 @@ Cada cifra de monedas del producto lleva su traducción a episodios. `180` pasa 
 | **Costo** | ~1 semana. Es copy y un componente. |
 | **Compuerta ①** | ✅ ocurre en el muro, dentro del loop. |
 
-#### I2 · El sumidero es también la fuente
-La recompensa diaria se reclama **dentro del muro de desbloqueo**. Deja de ser un trámite de bienvenida y pasa a ser una opción en el momento de necesidad.
+#### I2 · El muro muestra las salidas que ya existen
+El muro solo vende paquetes. Las cuatro fuentes gratuitas del producto —**ver un anuncio (15 monedas), la recompensa diaria (40), las tareas sociales y los referidos**— viven en la pestaña Recompensas, y la suscripción también. La intervención es traerlas al muro, con el anuncio primero: es la única que da monedas ahí mismo, en treinta segundos, sin pagar.
+
+Esto es lo más barato y de mayor alcance de todo el portafolio, y no inventa nada. **El producto ya regala hasta 70 episodios por semana en anuncios** ([diagnóstico F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta)); lo que no hace es decírselo al usuario en el único segundo del día en que le importa.
 
 | | |
 |---|---|
-| **Hipótesis** | El 81% que no reclama sí ve la oferta —el diálogo de bienvenida es ineludible— y la descarta porque llega antes de necesitarla y en una unidad que no sabe leer. Ofrecida en el segundo en que le faltan 15 monedas para el episodio que quiere, y traducida a episodios por I1, la tasa de reclamo se multiplica. |
-| **Mueve** | Reclamo diario 19% → objetivo 55%+. Vía reclamo, DAU/MAU. |
-| **Cómo lo sé** | *Leading:* % de DAU que reclama. *Lagging:* DAU/MAU. *Guardrail:* ARPDAU y % de pagadores no caen más de 5% relativo. |
-| **Costo** | ~2 semanas. |
+| **Hipótesis** | El muro no convierte ni retiene porque presenta el pago como única salida cuando el producto tiene cuatro gratuitas. Puestas ahí —el anuncio arriba, traducido a episodios por I1— el muro deja de ser un callejón sin salida y el usuario aprende que la economía tiene fuentes. |
+| **Mueve** | % de muros que terminan en desbloqueo y no en cierre. Anuncios vistos por DAU. Vía ambas, DAU/MAU. |
+| **Cómo lo sé** | *Leading:* % de muros que terminan en algo distinto de cerrar. *Lagging:* DAU/MAU. *Guardrail:* ARPDAU y % de pagadores no caen más de 5% relativo — si el anuncio en el muro caniboliza la compra, se ve acá. |
+| **Costo** | ~2 semanas. El SDK de anuncios y el ledger ya existen; es superficie. |
 | **Compuerta ①** | ✅ |
+
+> **Y ojo con el conflicto que esto destapa:** el Pase Idilio vende *«sin anuncios»* como una de sus dos ventajas. O sea que la suscripción cobra por quitar la fuente gratuita más generosa del producto. Poner el anuncio en el muro hace ese conflicto más visible, y es una decisión de negocio que hay que tomar a la vista y no por omisión.
 
 #### I3 · La escalera de precios vuelve a ser una escalera
 Diferenciar los dos paquetes de 180 monedas (hoy $0.99 y $1.99 dan lo mismo). Dar mejora real de valor por escalón. Reservar el badge de descuento para descuentos reales.
@@ -208,6 +212,6 @@ I8                                ██████
 | Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo — y el argumento más fuerte no es ese 82% sino el 81%: la pestaña de Recompensas **regala monedas** y cuatro de cada cinco usuarios no van. Si no navegan por dinero gratis, tampoco van a navegar por unas estadísticas. El 82% no es síntoma de un perfil vacío, es síntoma de que en esta sesión —entrar de madrugada, tocar «seguir viendo», cerrar— no hay ningún momento de navegación. *Descarto el rediseño, no la sección:* I5 e I7 sí tocan el perfil, con cuatro piezas chicas que no son engagement sino consecuencia —interruptor de avisos, la línea de la noche, el espejo de «Tu economía» y restaurar compras—. Van listadas dentro de cada intervención, y no como una novena, porque darles entidad propia contradiría la compuerta ① de [§2.2](#22-criterio-de-priorización). |
 | Rankings, tablas, comparación social | 11 p.m.–2 a.m., consumo solitario, vertical con pudor, 88% sin identidad. No es motivación, es exposición. |
 | Insignias y coleccionables como apuesta principal | Vínculo indirecto con DAU/MAU, carga cognitiva alta, sin evidencia de motivación de coleccionista. Candidatos a capa posterior. |
-| Anuncios recompensados como fuente | Es la fuente obvia y ya es estándar de la categoría: DramaBox permite hasta 15 anuncios diarios ≈ 30 monedas, y ReelShort también los ofrece. Pero cambia la naturaleza del producto (de corto-premium a ad-supported) y ese es un llamado de negocio, no de diseño: queda señalado y no decidido acá. La cifra de DramaBox es de fuente secundaria —una guía de terceros, no la app— y queda por verificar; la uso porque es la mejor que encontré. Sin precio por episodio de DramaBox en ninguna de las fuentes que junté, la cifra no se puede convertir a episodios por día: queda en monedas. |
+| Anuncios recompensados **como fuente nueva** | No hay nada que introducir: **el producto ya los tiene** — 15 monedas por anuncio, tope de 10 diarios, o sea hasta 70 episodios gratis por semana ([diagnóstico F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta)). La pregunta deja de ser si adoptarlos y pasa a ser dónde se ofrecen, que es lo que hace [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen). Lo que sí queda afuera es **subir el tope diario**: con la fuente ya duplicando el consumo, más volumen no compra más regreso — compra menos motivo para pagar. |
 | Suscripción **como mecánica de retención** | Ya existe en el producto —pase semanal a $7.99, mensual a $14.99— y es una respuesta de monetización a un problema de retención: no mueve DAU/MAU del no-pagador, que es el 95%+ de la base. Por eso queda fuera como palanca del objetivo del trimestre. Lo que sí entra, y no es lo mismo, es ofrecerla **como superficie**: que el mensual aparezca en el muro, debajo del pase, porque hoy el producto de mayor valor de la economía no está en el momento de máxima intención ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)). Descartarla como motor de regreso no obliga a esconderla como opción de compra: son dos decisiones distintas y se resuelven distinto. |
 | **Recortar los episodios gratis del catálogo** | Es la palanca más pesada de toda la economía —500 episodios gratis, casi cuatro meses de colchón— y está a una decisión de distancia. Pero es una palanca de **conversión**, no de stickiness: recortarla no hace que el usuario vuelva mañana, hace que se vaya antes. Y toca directamente el motor de adquisición. Queda señalada en el [diagnóstico §1.4](../01-diagnostico/#14-una-palanca-fuera-del-alcance-de-este-objetivo) porque quien lea esto debe saber que existe, y queda sin accionar porque el objetivo del ejercicio es DAU/MAU. |
