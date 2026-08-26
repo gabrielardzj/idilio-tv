@@ -1,14 +1,29 @@
+import { useRef } from 'react'
 import { Back, Chat, Heart, Logo, Share, Coin } from './Icons'
 import { frameStyle } from '../lib/frame'
 import { episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
 
 export function Player({
-  series, ep, balance, walletPulse, onWallet, onNext,
+  series, ep, balance, walletPulse, onWallet, onNext, onPrev, onVolver,
 }: {
   series: Series; ep: number; balance: number; walletPulse: boolean
-  onWallet: () => void; onNext: () => void
+  onWallet: () => void; onNext: () => void; onPrev: () => void; onVolver: () => void
 }) {
+  // El gesto del core loop: deslizar arriba pasa al siguiente episodio, igual
+  // que en el producto. Sin esto el POC no se siente como la app que evalúa.
+  const inicio = useRef<number | null>(null)
+  const gesto = {
+    onPointerDown: (e: React.PointerEvent) => { inicio.current = e.clientY },
+    onPointerUp: (e: React.PointerEvent) => {
+      if (inicio.current === null) return
+      const d = inicio.current - e.clientY
+      inicio.current = null
+      if (d > 60) onNext()
+      else if (d < -60) onPrev()
+      else onNext()
+    },
+  }
   const epData = series.episodes[ep]
   const pct = Math.round((ep / series.total) * 100)
 
@@ -17,7 +32,7 @@ export function Player({
       <div className="frame grain" style={frameStyle(series.hue, ep)} />
 
       <div className="p-top">
-        <button className="icon-btn" aria-label="Volver"><Back /></button>
+        <button className="icon-btn" onClick={onVolver} aria-label="Volver a la serie"><Back /></button>
         <div className="p-title">
           <b>{series.title}</b>
           <span>Temporada 1 · {series.total} episodios</span>
@@ -65,10 +80,14 @@ export function Player({
       >Siguiente episodio</button>
 
       {/* zona táctil: tocar el video avanza (así se llega al muro) */}
-      <button
-        onClick={onNext}
-        aria-label="Siguiente episodio"
-        style={{ position: 'absolute', inset: '100px 78px 210px 0', zIndex: 15, background: 'transparent' }}
+      {/* Zona de gesto: deslizar o tocar avanza; deslizar hacia abajo retrocede */}
+      <div
+        {...gesto}
+        role="button"
+        tabIndex={0}
+        aria-label="Siguiente episodio · desliza hacia abajo para el anterior"
+        onKeyDown={(e) => { if (e.key === 'ArrowUp' || e.key === 'Enter') onNext(); if (e.key === 'ArrowDown') onPrev() }}
+        style={{ position: 'absolute', inset: '100px 78px 210px 0', zIndex: 15, background: 'transparent', touchAction: 'none' }}
       />
       <div style={{ position: 'absolute', left: 16, top: 14, zIndex: 61, opacity: .001 }}><Logo s={14} /></div>
     </div>

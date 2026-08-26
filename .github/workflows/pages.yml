@@ -40,9 +40,13 @@ jobs:
         env:
           DEPLOY_TARGET: pages
 
+      # 3 · los entregables de texto, como páginas del sitio y no como markdown
+      #     suelto en el repo: el brief pide un solo link con los cuatro.
+      - run: node scripts/publicar-docs.mjs ../_site/docs
+        working-directory: poc
+
       - name: Armar el sitio
         run: |
-          mkdir -p _site
           cp -r poc/dist/*      _site/
           cp -r mobbin-export   _site/flujos
           cp -r web/out         _site/stack

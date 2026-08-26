@@ -8,6 +8,77 @@
   "language": "es-419",
   "flows": [
     {
+      "id": "f0-llegar-al-muro",
+      "name": "Cómo se llega al muro",
+      "intent": "El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de verdad: eligiendo una serie del catálogo, viendo un rato y chocando. Estas tres pantallas son el camino.",
+      "screens": [
+        {
+          "id": "01-home",
+          "name": "Home · el catálogo",
+          "screenType": "Home / Browse",
+          "patterns": [
+            "Content rails",
+            "Continue watching",
+            "Currency balance"
+          ],
+          "elements": [
+            "Top bar",
+            "Wallet chip",
+            "Horizontal rail",
+            "Poster",
+            "Progress bar",
+            "Tab bar"
+          ],
+          "note": "El chasis del producto real con las 35 series y sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.",
+          "stateKey": "home",
+          "image": "flows/f0-llegar-al-muro/01-home.png",
+          "preview": "flows/f0-llegar-al-muro/01-home.webp"
+        },
+        {
+          "id": "02-serie",
+          "name": "Ficha de serie · la progresión visible",
+          "screenType": "Detail",
+          "patterns": [
+            "Episode grid",
+            "Progress indicator",
+            "Unlock cost"
+          ],
+          "elements": [
+            "Hero",
+            "Progress bar",
+            "Reward card",
+            "Episode grid",
+            "Fine print"
+          ],
+          "note": "Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.",
+          "stateKey": "serie-detalle",
+          "image": "flows/f0-llegar-al-muro/02-serie.png",
+          "preview": "flows/f0-llegar-al-muro/02-serie.webp"
+        },
+        {
+          "id": "03-player",
+          "name": "Player · el core loop",
+          "screenType": "Media player",
+          "patterns": [
+            "Vertical video",
+            "Swipe navigation",
+            "Progress indicator"
+          ],
+          "elements": [
+            "Video",
+            "Top bar",
+            "Wallet chip",
+            "Action rail",
+            "Progress bar"
+          ],
+          "note": "Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.",
+          "stateKey": "player-free",
+          "image": "flows/f0-llegar-al-muro/03-player.png",
+          "preview": "flows/f0-llegar-al-muro/03-player.webp"
+        }
+      ]
+    },
+    {
       "id": "f1-pase-de-la-noche",
       "name": "Desbloqueo con el Pase de la Noche",
       "intent": "El invitado ve un episodio y la noche se acredita sola. Después llega al muro sin monedas y sale con el episodio abierto. En ningún momento reclama nada.",
@@ -30,7 +101,7 @@
             "Scrubber"
           ],
           "note": "El saldo nunca viaja solo: el chip lleva siempre la traducción a episodios. Es la única huella permanente del metajuego dentro del core loop.",
-          "stateKey": "player-free",
+          "stateKey": "home",
           "image": "flows/f1-pase-de-la-noche/01-player-libre.png",
           "preview": "flows/f1-pase-de-la-noche/01-player-libre.webp"
         },
@@ -50,7 +121,7 @@
             "Progress bar"
           ],
           "note": "El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.",
-          "stateKey": "player-free",
+          "stateKey": "home",
           "image": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.png",
           "preview": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.webp"
         },
@@ -135,7 +206,7 @@
             "Progress bar"
           ],
           "note": "El regreso al loop es inmediato: un toque desde la celebración, sin pantallas intermedias.",
-          "stateKey": "player-free",
+          "stateKey": "home",
           "image": "flows/f1-pase-de-la-noche/05-player-desbloqueado.png",
           "preview": "flows/f1-pase-de-la-noche/05-player-desbloqueado.webp"
         }
@@ -407,11 +478,13 @@
     }
   ],
   "summary": {
-    "flows": 7,
-    "screens": 17,
+    "flows": 8,
+    "screens": 20,
     "screenTypes": [
       "Account / Wallet",
       "Confirmation",
+      "Detail",
+      "Home / Browse",
       "Media player",
       "Paywall",
       "Selection",
@@ -424,10 +497,13 @@
       "Balance spend",
       "Bottom sheet",
       "Cliffhanger",
+      "Content rails",
       "Contextual auth",
+      "Continue watching",
       "Countdown",
       "Cross-content discovery",
       "Currency balance",
+      "Episode grid",
       "Forgiveness mechanic",
       "Guest-first",
       "IAP packs",
@@ -449,8 +525,10 @@
       "Streak advance",
       "Streak protection",
       "Streak reset",
+      "Swipe navigation",
       "Toast",
       "Unit-of-value translation",
+      "Unlock cost",
       "Value ladder",
       "Vertical video"
     ],
@@ -463,12 +541,16 @@
       "Breakdown list",
       "Clock time",
       "Countdown timer",
+      "Episode grid",
       "Fine print",
       "Goal row",
       "Headline",
+      "Hero",
+      "Horizontal rail",
       "Medal",
       "Notice",
       "Pack list",
+      "Poster",
       "Price per unit",
       "Primary button",
       "Progress bar",
@@ -482,6 +564,7 @@
       "Stat tiles",
       "Status row",
       "Streak strip",
+      "Tab bar",
       "Text button",
       "Thumbnail",
       "Toast",

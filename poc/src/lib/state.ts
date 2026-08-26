@@ -1,5 +1,6 @@
 import { EPISODE_COST, HORA_HABITUAL, MAX_PASSES, MAX_SHIELDS, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS, STREAK } from './economy'
 import { SERIES, type SeriesId } from './content'
+import { CATALOGO_SERIES } from './catalogo'
 
 export type Sheet =
   | { kind: 'none' }
@@ -10,7 +11,16 @@ export type Sheet =
   | { kind: 'account' }           // guardar racha + saldo
   | { kind: 'unlocked'; via: 'pass' | 'coins'; ep: number }
 
+/** Dónde está el usuario. El POC deja de ser una pantalla y pasa a ser una app. */
+export type Pantalla =
+  | { en: 'home' }
+  | { en: 'serie'; id: string }
+  | { en: 'player' }
+
 export interface State {
+  pantalla: Pantalla
+  /** progreso por serie del catálogo: hasta qué episodio llegó */
+  vistos: Record<string, number>
   balance: number
   nights: number                  // noches consecutivas
   shields: number                 // comodines
@@ -29,7 +39,18 @@ export interface State {
   toast: string | null
 }
 
+/** Arranque: ya empezó tres series, como cualquiera que lleva un par de semanas. */
+const VISTOS_INICIALES: Record<string, number> = {
+  'pasion-a-domicilio': 12,
+  'la-herencia-del-patriarca-enamorado': 18,
+  'la-enfermera-infiltrada': 12,
+  'el-hermanastro-enamorado': 4,
+  'mi-esposo-es-la-muerte': 7,
+}
+
 export const initialState = (now: number): State => ({
+  pantalla: { en: 'home' },
+  vistos: { ...VISTOS_INICIALES },
   balance: 0,
   nights: 2,
   shields: 0,
@@ -64,6 +85,9 @@ export type Action =
   | { t: 'devSetState'; patch: Partial<State> }
   | { t: 'devNextNight'; attended: boolean }
   | { t: 'toast'; msg: string | null }
+  | { t: 'ir'; a: Pantalla }
+  | { t: 'verSerie'; id: string }
+  | { t: 'abrirEpisodio'; id: string; n: number }
 
 export interface Ctx { state: State; sheet: Sheet }
 
@@ -165,6 +189,28 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
 
     case 'toast':
       return { ...ctx, state: { ...s, toast: a.msg } }
+
+    case 'ir':
+      return { ...ctx, sheet: { kind: 'none' }, state: { ...s, pantalla: a.a } }
+
+    case 'verSerie':
+      return { ...ctx, sheet: { kind: 'none' }, state: { ...s, pantalla: { en: 'serie', id: a.id } } }
+
+    case 'abrirEpisodio': {
+      // Entrar a un episodio es ver: si es noche nueva, se acredita acá también.
+      const acreditado = acreditarNoche(s)
+      const libre = a.n <= (acreditado.vistos[a.id] ?? 0)
+      const conocida = ID_A_SERIE[a.id]
+      return {
+        state: {
+          ...acreditado,
+          pantalla: { en: 'player' },
+          episode: a.n,
+          ...(conocida ? { seriesId: conocida } : {}),
+        },
+        sheet: libre ? { kind: 'none' } : { kind: 'unlock' },
+      }
+    }
   }
 }
 
@@ -183,7 +229,10 @@ export function stateName(s: State, sheet: Sheet): string {
     case 'streak': return 'streak-detail'
     case 'account': return 'account-prompt'
     case 'unlocked': return `unlocked-via-${sheet.via}`
-    default: return 'player-free'
+    default:
+      return s.pantalla.en === 'home' ? 'home'
+           : s.pantalla.en === 'serie' ? 'serie-detalle'
+           : 'player-free'
   }
 }
 
@@ -258,5 +307,22 @@ function acreditarNoche(s: State): State {
     balance: s.balance + reward.coins,
   }
 }
+
+/** Las tres series con guion escrito tienen su equivalente en el catálogo real. */
+export const ID_A_SERIE: Record<string, SeriesId> = {
+  'pasion-a-domicilio': 'pasion',
+  'la-herencia-del-patriarca-enamorado': 'herencia',
+  'la-enfermera-infiltrada': 'enfermera',
+}
+export const SERIE_A_ID: Record<SeriesId, string> = {
+  pasion: 'pasion-a-domicilio',
+  herencia: 'la-herencia-del-patriarca-enamorado',
+  enfermera: 'la-enfermera-infiltrada',
+}
+
+/** Cuántas series del catálogo tiene empezadas. Alimenta el riel "Seguir viendo". */
+export const enCurso = (s: State) =>
+  CATALOGO_SERIES.filter((c) => (s.vistos[c.id] ?? 0) > 0)
+    .sort((a, b) => (s.vistos[b.id] ?? 0) - (s.vistos[a.id] ?? 0))
 
 export const seriesOf = (id: SeriesId) => SERIES[id]

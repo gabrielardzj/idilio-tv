@@ -39,6 +39,34 @@ async function dismissIfAccount(page) {
 /** Cada shot: cómo llegar + qué es. `do` recibe la página. */
 const FLOWS = [
   {
+    id: 'f0-llegar-al-muro',
+    name: 'Cómo se llega al muro',
+    intent: 'El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de verdad: eligiendo una serie del catálogo, viendo un rato y chocando. Estas tres pantallas son el camino.',
+    screens: [
+      {
+        id: '01-home', name: 'Home · el catálogo',
+        type: 'Home / Browse', patterns: ['Content rails', 'Continue watching', 'Currency balance'],
+        elements: ['Top bar', 'Wallet chip', 'Horizontal rail', 'Poster', 'Progress bar', 'Tab bar'],
+        note: 'El chasis del producto real con las 35 series y sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
+        act: async () => {},
+      },
+      {
+        id: '02-serie', name: 'Ficha de serie · la progresión visible',
+        type: 'Detail', patterns: ['Episode grid', 'Progress indicator', 'Unlock cost'],
+        elements: ['Hero', 'Progress bar', 'Reward card', 'Episode grid', 'Fine print'],
+        note: 'Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.',
+        act: async (p) => { await p.locator('.poster').first().click(); await p.waitForTimeout(500) },
+      },
+      {
+        id: '03-player', name: 'Player · el core loop',
+        type: 'Media player', patterns: ['Vertical video', 'Swipe navigation', 'Progress indicator'],
+        elements: ['Video', 'Top bar', 'Wallet chip', 'Action rail', 'Progress bar'],
+        note: 'Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.',
+        act: async (p) => { await p.locator('.ep.abierto').first().click(); await p.waitForTimeout(600) },
+      },
+    ],
+  },
+  {
     id: 'f1-pase-de-la-noche',
     name: 'Desbloqueo con el Pase de la Noche',
     intent: 'El invitado ve un episodio y la noche se acredita sola. Después llega al muro sin monedas y sale con el episodio abierto. En ningún momento reclama nada.',

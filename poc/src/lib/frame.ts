@@ -20,3 +20,21 @@ export function frameStyle(hue: [string, string], seed: number): CSSProperties {
   }
 }
 
+
+/**
+ * Versión barata, para las miniaturas.
+ *
+ * `frameStyle` apila cinco degradados —dos de ellos radiales— porque simula un
+ * fotograma a pantalla completa. En el home hay 35 pósters: eso son 175 capas
+ * de degradado que el navegador tiene que rasterizar de una, y se nota. La
+ * miniatura mide 104x148 px y no necesita esa estructura lumínica: con dos
+ * capas se ve igual y pinta en una fracción del tiempo.
+ */
+export function posterStyle(hue: [string, string], seed: number): CSSProperties {
+  const a = 24 + ((seed * 37) % 40)
+  return {
+    backgroundImage:
+      `radial-gradient(70% 48% at ${a}% 26%, ${hue[0]} 0%, transparent 74%),` +
+      `linear-gradient(${150 + (seed % 40)}deg, ${hue[0]}44, ${hue[1]} 68%)`,
+  }
+}

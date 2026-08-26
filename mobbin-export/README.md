@@ -1,14 +1,30 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-17 pantallas · 7 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+20 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
 
 Regenerar: `cd poc && npm run export` (con el dev server arriba).
 
-## Flujo 1 · Desbloqueo con el Pase de la Noche
+## Flujo 1 · Cómo se llega al muro
+
+El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de verdad: eligiendo una serie del catálogo, viendo un rato y chocando. Estas tres pantallas son el camino.
+
+| # | Pantalla | Tipo | Patrones |
+|---|---|---|---|
+| 1 | [Home · el catálogo](flows/f0-llegar-al-muro/01-home.png) | Home / Browse | Content rails, Continue watching, Currency balance |
+| 2 | [Ficha de serie · la progresión visible](flows/f0-llegar-al-muro/02-serie.png) | Detail | Episode grid, Progress indicator, Unlock cost |
+| 3 | [Player · el core loop](flows/f0-llegar-al-muro/03-player.png) | Media player | Vertical video, Swipe navigation, Progress indicator |
+
+**Home · el catálogo** — El chasis del producto real con las 35 series y sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.
+
+**Ficha de serie · la progresión visible** — Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.
+
+**Player · el core loop** — Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.
+
+## Flujo 2 · Desbloqueo con el Pase de la Noche
 
 El invitado ve un episodio y la noche se acredita sola. Después llega al muro sin monedas y sale con el episodio abierto. En ningún momento reclama nada.
 
@@ -33,7 +49,7 @@ El invitado ve un episodio y la noche se acredita sola. Después llega al muro s
 
 **Player · episodio 13 abierto** — El regreso al loop es inmediato: un toque desde la celebración, sin pantallas intermedias.
 
-## Flujo 2 · El pase ya se usó · la cita de mañana
+## Flujo 3 · El pase ya se usó · la cita de mañana
 
 El muro deja de ser un final y pasa a ser una hora. El countdown es el motivo del próximo regreso.
 
@@ -46,7 +62,7 @@ El muro deja de ser un final y pasa a ser una hora. El countdown es el motivo de
 
 **Muro · con saldo suficiente** — Con saldo, la acción de pago sube a primaria — pero el saldo restante se declara en episodios, no en monedas.
 
-## Flujo 3 · Conseguir monedas
+## Flujo 4 · Conseguir monedas
 
 La tienda deja de vender monedas y pasa a vender episodios.
 
@@ -56,7 +72,7 @@ La tienda deja de vender monedas y pasa a vender episodios.
 
 **Tienda · el precio en episodios** — Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.
 
-## Flujo 4 · Faltar noches · el perdón del sistema
+## Flujo 5 · Faltar noches · el perdón del sistema
 
 Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.
 
@@ -72,7 +88,7 @@ Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de per
 
 **Dos pases acumulados · el tope** — Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.
 
-## Flujo 5 · Guardar la racha · de invitado a cuenta
+## Flujo 6 · Guardar la racha · de invitado a cuenta
 
 88% consume como invitado. La cuenta se pide una sola vez y solo cuando ya hay algo que perder.
 
@@ -82,7 +98,7 @@ Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de per
 
 **Tienes algo que guardar** — No hay muro de registro. El argumento no es "crea tu cuenta" sino "no pierdas estas 4 noches y estas 75 monedas".
 
-## Flujo 6 · Mi economía
+## Flujo 7 · Mi economía
 
 Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posición. Se abre desde el chip de saldo, dentro del player.
 
@@ -92,7 +108,7 @@ Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posici�
 
 **De dónde salen mis monedas** — La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.
 
-## Flujo 7 · Sobre el stack real de Idilio
+## Flujo 8 · Sobre el stack real de Idilio
 
 La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, con los tokens de producción. El estado económico se resuelve en el servidor, que es el riesgo técnico nº 1 de la propuesta.
 
@@ -110,8 +126,8 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 
 ## Taxonomía
 
-**Tipos de pantalla:** Account / Wallet · Confirmation · Media player · Paywall · Selection · Sign up · Store
+**Tipos de pantalla:** Account / Wallet · Confirmation · Detail · Home / Browse · Media player · Paywall · Selection · Sign up · Store
 
-**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Contextual auth · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Toast · Unit-of-value translation · Value ladder · Vertical video
+**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Episode grid · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
 
-**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Clock time · Countdown timer · Fine print · Goal row · Headline · Medal · Notice · Pack list · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Clock time · Countdown timer · Episode grid · Fine print · Goal row · Headline · Hero · Horizontal rail · Medal · Notice · Pack list · Poster · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip

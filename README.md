@@ -13,9 +13,16 @@
 
 | | |
 |---|---|
-| **Prototipo** | **https://gabrielardzj.github.io/idilio-tv/** |
-| **Export de flujos** | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
+| **Prototipo** — home, catálogo, ficha de serie y el muro | **https://gabrielardzj.github.io/idilio-tv/** |
+| **Diagnóstico y estrategia** — los entregables de texto | **https://gabrielardzj.github.io/idilio-tv/docs/diagnostico.html** |
+| **Export de flujos** — 20 pantallas en 8 flujos | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
+| **Diseño** — 6 pantallas + hoja de sistema | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
+
+> **Sobre Figma:** no hay archivo de Figma. El conector necesita una autorización
+> OAuth que esta sesión no puede hacer, así que el diseño se hizo en **Pencil**.
+> Los detalles y el camino para llevarlo a Figma están en
+> [el archivo de diseño](docs/03-diseno/pencil/) y en [el sistema visual](docs/03-diseno/sistema.md#del-prototipo-a-figma).
 
 ---
 

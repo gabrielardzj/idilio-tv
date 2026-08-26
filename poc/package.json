@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "export": "node scripts/export-mobbin.mjs",
     "tokens": "node scripts/export-tokens.mjs",
-    "verificar": "node --experimental-strip-types scripts/verificar-cifras.mjs"
+    "verificar": "node --experimental-strip-types scripts/verificar-cifras.mjs",
+    "docs": "node scripts/publicar-docs.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",
@@ -21,6 +22,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.1.0",
+    "marked": "^18.0.11",
     "oxlint": "^1.79.0",
     "playwright-core": "^1.62.1",
     "typescript": "~6.0.2",

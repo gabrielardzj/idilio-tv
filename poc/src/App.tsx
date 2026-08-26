@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import './styles.css'
+import { Home } from './components/Home'
 import { Player } from './components/Player'
+import { Serie } from './components/Serie'
 import { Wall } from './components/Wall'
 import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './components/Sheets'
 import { Coin, Logo } from './components/Icons'
 import { SERIES, type SeriesId } from './lib/content'
+import { SERIE_A_ID } from './lib/state'
 import { CATALOGO, EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
 import { initialState, proximaCita, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
 
@@ -18,11 +21,16 @@ export default function App() {
   const [speed, setSpeed] = useState(1)
   const prevBalance = useRef(state.balance)
 
-  // reloj: el countdown corre de verdad. `speed` solo existe para el recorrido.
+  // El reloj solo corre cuando hay una cuenta regresiva a la vista. Tickear
+  // siempre re-renderizaba la app entera cada segundo — con 35 pósters en el
+  // home eso es trabajo tirado, y además impedía que la pantalla llegara nunca
+  // a estar quieta.
+  const relojVisible = sheet.kind === 'unlock' && state.passes === 0 && state.passNextAt !== null
   useEffect(() => {
+    if (!relojVisible && speed === 1) return
     const id = setInterval(() => dispatch({ t: 'tick', now: ctx.state.now + 1000 * speed }), 1000)
     return () => clearInterval(id)
-  }, [ctx.state.now, speed])
+  }, [ctx.state.now, speed, relojVisible])
 
   useEffect(() => {
     if (state.balance !== prevBalance.current) {
@@ -75,11 +83,33 @@ export default function App() {
           <span className="sb-r">▪▪▪ ⌁ <b style={{ fontSize: 12 }}>38</b></span>
         </div>
 
-        <Player
-          series={series} ep={state.episode} balance={state.balance} walletPulse={pulse}
-          onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
-          onNext={() => dispatch({ t: 'nextEpisode' })}
-        />
+        {state.pantalla.en === 'home' && (
+          <Home
+            state={state}
+            onSerie={(id) => dispatch({ t: 'verSerie', id })}
+            onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+          />
+        )}
+
+        {state.pantalla.en === 'serie' && (
+          <Serie
+            id={state.pantalla.id}
+            state={state}
+            onVolver={() => dispatch({ t: 'ir', a: { en: 'home' } })}
+            onEpisodio={(n) => dispatch({ t: 'abrirEpisodio', id: (state.pantalla as { id: string }).id, n })}
+            onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+          />
+        )}
+
+        {state.pantalla.en === 'player' && (
+          <Player
+            series={series} ep={state.episode} balance={state.balance} walletPulse={pulse}
+            onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+            onNext={() => dispatch({ t: 'nextEpisode' })}
+            onPrev={() => dispatch({ t: 'devSetState', patch: { episode: Math.max(1, state.episode - 1) } })}
+            onVolver={() => dispatch({ t: 'verSerie', id: SERIE_A_ID[state.seriesId] })}
+          />
+        )}
 
         {/* El acuse es del player. Si hay una hoja abierta —el caso real: terminas
             el episodio, se acredita la noche y acto seguido se abre el muro— el
