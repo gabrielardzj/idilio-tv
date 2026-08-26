@@ -65,8 +65,9 @@ Esto empuja deliberadamente hacia arriba las intervenciones **baratas y de alcan
 #### **I1 — ⭐ El muro de desbloqueo se convierte en la clase de economía** *(candidata a profundizar)*
 - **Hipótesis:** si el usuario ve, en el mismo momento en que quiere el episodio, **las tres piezas juntas** —cuánto tiene, de dónde sale lo que no compró, y dónde va— aprende la economía completa en el único momento en que le importa. Y si la recompensa diaria se entrega **ahí** en vez de en el perfil, deja de depender de que alguien la busque.
 - **Por qué esta y no otra:** es la intersección exacta de las cuatro señales del diagnóstico. Alcance 100% (14 eps/sesión > 10 gratis: **todo el mundo la ve, casi todos los días**). Evidencia máxima (2,4× D30 de la racha, 19% de descubrimiento de la fuente, 82% que no abre perfil). Y no requiere pantalla nueva: **rediseña una que ya existe y ya tiene tráfico.**
-- **Qué mueve:** (1) % que reclama recompensa diaria 19% → objetivo 55%+; (2) % día-3 de racha 6% → objetivo 15%+; (3) DAU/MAU, por vía indirecta vía (2).
-- **Cómo lo sabríamos:** A/B del muro. Primaria: *% de DAU con racha activa ≥1*. Secundaria: día-3. **Guardarraíl duro: ARPDAU y conversión a primer pago no pueden caer.** Si la comprensión sube y el ingreso baja, la intervención fracasó aunque el objetivo de experiencia se haya cumplido.
+- **Qué mueve:** (1) % de DAU que **vuelve la noche siguiente** (racha ≥2); (2) % que alcanza la noche 3: 6% → 15%; (3) DAU/MAU, por vía indirecta vía (1) y (2).
+- **⚠️ La intervención invalida la métrica actual, y hay que decirlo.** Hoy se mide *"% de DAU que reclama la recompensa diaria" = 19%*. Al quitar el paso de reclamar (§3.1), esa métrica se va a ~100% **por construcción** — recibirla y ver un episodio pasan a ser el mismo evento. **Un salto de 19% a 100% no sería un éxito: sería un cambio de definición.** Si el equipo mide eso, va a celebrar un artefacto. La métrica tiene que cambiar con la mecánica.
+- **Cómo lo sabríamos:** A/B del muro. **Primaria: % de DAU que vuelve la noche siguiente** — es la única que pregunta lo que de verdad queremos (¿volvió?) y no es trivial por construcción. Secundaria: noche-3. **Guardarraíl duro: ARPDAU y conversión a primer pago no pueden caer.** Si la comprensión sube y el ingreso baja, la intervención fracasó aunque el objetivo de experiencia se haya cumplido.
 - **Costo:** medio. **Riesgo principal:** convertir el muro en una pantalla densa y bajar la conversión a compra. Se mitiga con jerarquía, no con menos información (ver §3).
 
 #### **I2 — Pase nocturno: lo que se gana caduca** *(mecánica que I1 entrega)*
@@ -138,8 +139,9 @@ El orden **no** es por impacto esperado: es por **dependencia y por costo de apr
 | Nivel | Métrica | Hoy | Objetivo a 1 trimestre |
 |---|---|---|---|
 | Negocio | **DAU/MAU** | 0,33 | **0,37 con la intervención sola · 0,38 con la Ola 0** |
-| Mecánica | % DAU con racha activa ≥1 | ~19% | 55% |
-| Mecánica | % que alcanza día 3 | 6% | 15% |
+| Mecánica | % de DAU que **vuelve la noche siguiente** (racha ≥2) | sin medir · cota implícita ≈19% | 35% |
+| Mecánica | % que alcanza la noche 3 | 6% | 15% |
+| — | ~~% que reclama la recompensa diaria~~ | 19% | **se retira**: la intervención la vuelve trivial (→100% por construcción) |
 | Experiencia | Comprensión de la economía (encuesta 1 pregunta in-app) | sin medir | **medirlo es parte del entregable** |
 | Guardarraíl | ARPDAU | — | **no cae** |
 | Guardarraíl | Episodios por sesión | ~14 | **no cae** |

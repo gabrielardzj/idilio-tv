@@ -32,7 +32,7 @@ Al mover la acreditación a *terminar un episodio*, la adopción de la fuente pa
 
 **Contraargumento honesto.** ¿Se devalúa una recompensa que no cuesta obtener? Sí, es el riesgo real. Mitigado por dos cosas: el requisito es *terminar*, no *abrir* (acción con costo de atención y correlacionada con valor); y la recompensa **escala con la racha**, así que la escasez se muda del acto de reclamar a la constancia — que es lo que de verdad queremos premiar.
 
-**Cómo sabríamos que fue un error:** si el % con racha activa se dispara pero el % que llega a la noche 3 **no se mueve**. Significaría que la racha se volvió ruido de fondo y dejó de motivar.
+**Cómo sabríamos que fue un error:** si el % que **vuelve la noche siguiente** no se mueve. Ojo con la trampa de medición: *"% que reclama la recompensa diaria"* saltará de 19% a ~100% **por construcción**, porque recibirla y ver un episodio pasan a ser el mismo evento. **Ese salto no prueba nada** — hay que retirar esa métrica junto con el botón que la generaba.
 
 ---
 
