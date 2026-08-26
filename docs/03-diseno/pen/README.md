@@ -21,6 +21,25 @@ instancias y variables enlazadas. No son imágenes exportadas de otra parte.
 
 ---
 
+## En qué va por detrás del prototipo, y por qué se dice
+
+Los dos archivos son de antes de que las capturas del muro real obligaran a
+corregir el diagnóstico. Se quedan como están y la diferencia se declara, que es
+más útil que retocarlos y dejar al lector adivinando cuál manda: **el prototipo
+es la referencia vigente.** Dos cosas cambiaron después:
+
+| | En los archivos de diseño | En el prototipo hoy |
+|---|---|---|
+| **El anuncio recompensado** | no aparece | va entre el Pase y el pago, con su tope traducido a *«te quedan 10 episodios gratis hoy»* |
+| **La escalera de la racha** | las noches con bono dicen `+30` | dicen `pase +30`: todas las noches dan pase y el bono se **suma** |
+
+Ninguna de las dos toca el sistema —los tokens, los componentes y las variables
+son los mismos— y ninguna cambia el orden que la intervención defiende. La
+primera añade un renglón dentro del bloque gratuito; la segunda corrige una
+etiqueta que hacía leer el bono como si sustituyera al pase.
+
+---
+
 ## Las diez pantallas
 
 | | Pantalla | Qué resuelve |
