@@ -6,8 +6,7 @@ import { Serie } from './components/Serie'
 import { Wall } from './components/Wall'
 import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './components/Sheets'
 import { Coin, Logo } from './components/Icons'
-import { SERIES, type SeriesId } from './lib/content'
-import { SERIE_A_ID } from './lib/state'
+import { enCurso, serieDe } from './lib/state'
 import { CATALOGO, EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
 import { initialState, proximaCita, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
 
@@ -52,10 +51,12 @@ export default function App() {
     return () => clearTimeout(id)
   }, [state.toast])
 
-  const series = SERIES[state.seriesId]
-  const activeSeries = (Object.keys(SERIES) as SeriesId[]).length
+  const series = serieDe(state.seriesId)
+  // Cuántas historias tiene empezadas de verdad. Con una sola, pedirle que
+  // elija sería teatro: el pase va donde está.
+  const activeSeries = enCurso(state).length
 
-  const claim = (id: SeriesId) => {
+  const claim = (id: string) => {
     dispatch({ t: 'claimPass', series: id })
     setJustAdvanced(true)
     setTimeout(() => setJustAdvanced(false), 2600)
@@ -120,7 +121,7 @@ export default function App() {
             onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
             onNext={() => dispatch({ t: 'nextEpisode' })}
             onPrev={() => dispatch({ t: 'devSetState', patch: { episode: Math.max(1, state.episode - 1) } })}
-            onVolver={() => dispatch({ t: 'verSerie', id: SERIE_A_ID[state.seriesId] })}
+            onVolver={() => dispatch({ t: 'verSerie', id: state.seriesId })}
           />
           </div>
         )}

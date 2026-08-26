@@ -1,5 +1,5 @@
 import { EPISODE_COST, HORA_HABITUAL, MAX_PASSES, MAX_SHIELDS, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS, STREAK } from './economy'
-import { SERIES, type SeriesId } from './content'
+import { SERIES, type Series, type SeriesId } from './content'
 import { CATALOGO_SERIES, porId } from './catalogo'
 
 export type Sheet =
@@ -30,8 +30,10 @@ export interface State {
   lastNight: string | null        // última noche en que se acreditó (YYYY-MM-DD)
   passNextAt: number | null       // epoch ms del próximo pase; null si está al tope
   now: number
-  seriesId: SeriesId
-  unlocked: Record<SeriesId, number>
+  /** la serie que se está viendo, por id del catálogo */
+  seriesId: string
+  /** hasta qué episodio está ABIERTA cada serie (visto + pase + comprado) */
+  unlocked: Record<string, number>
   episode: number
   remind: boolean
   hasAccount: boolean
@@ -60,8 +62,12 @@ export const initialState = (now: number): State => ({
   lastNight: nocheDe(now),
   passNextAt: null,
   now,
-  seriesId: 'pasion',
-  unlocked: { pasion: 12, herencia: 18, enfermera: 12 },
+  seriesId: 'pasion-a-domicilio',
+  unlocked: {
+    'pasion-a-domicilio': 12,
+    'la-herencia-del-patriarca-enamorado': 18,
+    'la-enfermera-infiltrada': 12,
+  },
   episode: 12,
   remind: false,
   hasAccount: false,
@@ -74,14 +80,14 @@ export type Action =
   | { t: 'open'; sheet: Sheet }
   | { t: 'close' }
   | { t: 'hitWall'; ep: number }
-  | { t: 'claimPass'; series: SeriesId }
+  | { t: 'claimPass'; series: string }
   | { t: 'unlockWithCoins' }
   | { t: 'buy'; coins: number; usd: number }
   | { t: 'toggleRemind' }
   | { t: 'createAccount' }
   | { t: 'dismissAccount' }
   | { t: 'nextEpisode' }
-  | { t: 'switchSeries'; series: SeriesId }
+  | { t: 'switchSeries'; series: string }
   | { t: 'devSetState'; patch: Partial<State> }
   | { t: 'devNextNight'; attended: boolean }
   | { t: 'toast'; msg: string | null }
@@ -116,7 +122,7 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       // Gastar el pase ya no avanza la racha: eso pasó al terminar el episodio.
       // Aquí solo se descuenta el pase y se abre el episodio.
       if (s.passes < 1) return ctx
-      const targetEp = s.unlocked[a.series] + 1
+      const targetEp = desbloqueadoDe(s, a.series) + 1
       const passes = s.passes - 1
       return {
         state: {
@@ -133,7 +139,7 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
 
     case 'unlockWithCoins': {
       if (s.balance < EPISODE_COST) return { ...ctx, sheet: { kind: 'store' }, state: { ...s } }
-      const ep = s.unlocked[s.seriesId] + 1
+      const ep = desbloqueadoDe(s, s.seriesId) + 1
       return {
         state: {
           ...s,
@@ -202,9 +208,8 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       // Un episodio está abierto si ya lo vio O si cae dentro de los gratis de
       // la serie. Mirar solo lo visto mandaba al muro el episodio 1 de
       // cualquier serie sin empezar, que es justo por donde entra todo el mundo.
-      const desbloqueado = Math.max(acreditado.vistos[a.id] ?? 0, porId(a.id)?.gratis ?? 0)
+      const desbloqueado = desbloqueadoDe(acreditado, a.id)
       const libre = a.n <= desbloqueado
-      const conocida = ID_A_SERIE[a.id]
       return {
         state: {
           ...acreditado,
@@ -214,7 +219,11 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
           vistos: libre
             ? { ...acreditado.vistos, [a.id]: Math.max(acreditado.vistos[a.id] ?? 0, a.n) }
             : acreditado.vistos,
-          ...(conocida ? { seriesId: conocida } : {}),
+          // La serie que se ve es SIEMPRE la que el usuario tocó. Antes esto
+          // solo se movía para las tres con guion, así que abrir cualquier otra
+          // dejaba el player y el muro hablando de la anterior.
+          seriesId: a.id,
+          unlocked: { ...acreditado.unlocked, [a.id]: desbloqueado },
         },
         sheet: libre ? { kind: 'none' } : { kind: 'unlock' },
       }
@@ -337,21 +346,40 @@ function acreditarNoche(s: State): State {
   }
 }
 
-/** Las tres series con guion escrito tienen su equivalente en el catálogo real. */
-export const ID_A_SERIE: Record<string, SeriesId> = {
-  'pasion-a-domicilio': 'pasion',
-  'la-herencia-del-patriarca-enamorado': 'herencia',
-  'la-enfermera-infiltrada': 'enfermera',
+/**
+ * La serie que se está viendo, tenga guion o no.
+ *
+ * Las tres con guion traen sus cliffhangers escritos. Las otras 47 se arman del
+ * censo real —título, total y gratis son medidos— y el muro cae en «La historia
+ * sigue.», que es verdad. Inventarles un gancho sería peor: el POC estaría
+ * mintiendo sobre un contenido que no leyó nadie.
+ *
+ * Antes esto no existía y abrir cualquiera de las 47 te dejaba en el player de
+ * *Pasión a Domicilio*: tocabas una historia y te daba otra.
+ */
+export const serieDe = (id: string): Series => {
+  const escrita = SERIES[id as SeriesId]
+  if (escrita) return escrita
+  const c = porId(id)
+  return {
+    id,
+    title: c?.titulo ?? 'Serie',
+    total: c?.total ?? 0,
+    free: c?.gratis ?? 0,
+    unlockedThrough: c?.gratis ?? 0,
+    hue: c?.tono ?? ['#2A0A1C', '#0A0A0A'],
+    episodes: {},
+  }
 }
-export const SERIE_A_ID: Record<SeriesId, string> = {
-  pasion: 'pasion-a-domicilio',
-  herencia: 'la-herencia-del-patriarca-enamorado',
-  enfermera: 'la-enfermera-infiltrada',
-}
+
+/** Hasta qué episodio está abierta una serie. Las del catálogo que el usuario
+ *  nunca tocó no tienen entrada en `unlocked`: ahí manda lo gratis. */
+export const desbloqueadoDe = (s: State, id: string) =>
+  s.unlocked[id] ?? Math.max(s.vistos[id] ?? 0, porId(id)?.gratis ?? 0)
 
 /** Cuántas series del catálogo tiene empezadas. Alimenta el riel "Seguir viendo". */
 export const enCurso = (s: State) =>
   CATALOGO_SERIES.filter((c) => (s.vistos[c.id] ?? 0) > 0)
     .sort((a, b) => (s.vistos[b.id] ?? 0) - (s.vistos[a.id] ?? 0))
 
-export const seriesOf = (id: SeriesId) => SERIES[id]
+export const seriesOf = serieDe

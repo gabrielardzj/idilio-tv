@@ -1,4 +1,4 @@
-export type SeriesId = 'pasion' | 'herencia' | 'enfermera'
+export type SeriesId = 'pasion-a-domicilio' | 'la-herencia-del-patriarca-enamorado' | 'la-enfermera-infiltrada'
 
 export interface Episode {
   n: number
@@ -8,7 +8,8 @@ export interface Episode {
 }
 
 export interface Series {
-  id: SeriesId
+  /** el id del catálogo: mismo espacio de nombres que `vistos` y `unlocked` */
+  id: string
   title: string
   total: number
   free: number
@@ -22,8 +23,8 @@ export interface Series {
  *  Se eligieron para que el POC muestre las tres estructuras que existen:
  *  la moda (10 gratis), una excepción por arriba (12) y una por abajo (7). */
 export const SERIES: Record<SeriesId, Series> = {
-  pasion: {
-    id: 'pasion',
+  'pasion-a-domicilio': {
+    id: 'pasion-a-domicilio',
     title: 'Pasión a Domicilio',
     total: 56,
     free: 12,         // excepción: la serie con más gratis del catálogo
@@ -36,8 +37,8 @@ export const SERIES: Record<SeriesId, Series> = {
       15: { n: 15, title: 'Sin coartada', cliff: 'El portero declara que esa noche nadie entró al edificio.' },
     },
   },
-  herencia: {
-    id: 'herencia',
+  'la-herencia-del-patriarca-enamorado': {
+    id: 'la-herencia-del-patriarca-enamorado',
     title: 'La Herencia del Patriarca Enamorado',
     total: 66,
     free: 7,          // la serie con menos gratis de todo el catálogo
@@ -49,8 +50,8 @@ export const SERIES: Record<SeriesId, Series> = {
       20: { n: 20, title: 'El heredero que faltaba', cliff: 'Hay un cuarto nombre en el acta y nadie lo había leído.' },
     },
   },
-  enfermera: {
-    id: 'enfermera',
+  'la-enfermera-infiltrada': {
+    id: 'la-enfermera-infiltrada',
     title: 'La Enfermera Infiltrada',
     total: 65,
     free: 10,         // la moda del catálogo

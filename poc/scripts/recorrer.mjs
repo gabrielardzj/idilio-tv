@@ -41,6 +41,13 @@ await nuevas.first().click()
 await page.waitForTimeout(500)
 paso('entra a una serie sin empezar', (await estado()) === 'serie-detalle', `«${titulo}»`)
 
+// Comprobar `data-state` no alcanza: el prototipo llegó a mandar al player de
+// *Pasión a Domicilio* a quien había tocado cualquiera de las otras 47 series
+// del catálogo. El estado era el correcto y la historia era otra.
+const enPantalla = async () =>
+  (await page.locator('.phone .topbar b, .phone h1, .phone .serie-title').first().innerText()).trim()
+paso('la ficha es la serie que tocó', (await enPantalla()) === titulo, `«${await enPantalla()}»`)
+
 const abiertos = await page.locator('.ep.abierto, .ep.visto').count()
 const cerrados = await page.locator('.ep.cerrado').count()
 paso('la grilla separa gratis de bloqueados', abiertos > 0 && cerrados > 0,
@@ -49,6 +56,7 @@ paso('la grilla separa gratis de bloqueados', abiertos > 0 && cerrados > 0,
 await page.locator('.ep.abierto, .ep.visto').first().click()
 await page.waitForTimeout(600)
 paso('el primer episodio abre el player', (await estado()) === 'player-free')
+paso('el player es la serie que tocó', (await enPantalla()) === titulo, `«${await enPantalla()}»`)
 
 // Ver hasta chocar. Cada toque avanza un episodio.
 let toques = 0
@@ -64,10 +72,27 @@ paso('el muro abre con la historia, no con el precio',
   muro.indexOf('CONTINUARÁ') < muro.indexOf('monedas'))
 paso('el muro ofrece la vía gratuita antes que la de pago',
   muro.includes('Pase de la Noche'))
+paso('el muro habla de la serie que tocó', muro.includes(titulo))
+
+// El muro no puede contradecir la mecánica que la intervención propone: esta
+// hoja llegó a decir «el que no uses hoy no se acumula», que es la regla vieja.
+await page.locator('.sheet button', { hasText: 'Usar el pase' }).click()
+await page.waitForTimeout(400)
+const eleccion = await page.locator('.sheet').innerText()
+paso('la elección incluye la serie que está viendo', eleccion.includes(titulo))
+paso('la elección no promete que el pase caduca', !/no se acumula|se pierde hoy/i.test(eleccion))
+await page.locator('.sheet button', { hasText: 'Usar el pase aquí' }).click()
+await page.waitForTimeout(500)
+paso('usar el pase desbloquea', (await estado()) === 'unlocked-via-pass')
+
+// Y el episodio que abre es el que sigue, no cualquiera: el pase tiene que
+// devolver al usuario a SU historia, en el punto donde la dejó.
+await page.locator('.sheet button', { hasText: 'Ver el episodio' }).click()
+await page.waitForTimeout(500)
+paso('vuelve al player con el episodio abierto', (await estado()) === 'player-free')
+paso('sigue siendo la misma serie', (await enPantalla()) === titulo, `«${await enPantalla()}»`)
 
 // Volver atrás desde el player
-await page.locator('.sheet-close').click()
-await page.waitForTimeout(300)
 await page.locator('[aria-label="Volver a la serie"]').click()
 await page.waitForTimeout(500)
 paso('el player vuelve a la ficha de la serie', (await estado()) === 'serie-detalle')

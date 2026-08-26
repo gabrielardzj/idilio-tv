@@ -2,9 +2,8 @@ import { useState } from 'react'
 import { Coin, Pass, Shield, X } from './Icons'
 import { StreakStrip } from './bits'
 import { frameStyle } from '../lib/frame'
-import { EPISODE_COST, PACKS, STREAK, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
-import { SERIES, type SeriesId } from '../lib/content'
-import type { State } from '../lib/state'
+import { EPISODE_COST, MAX_PASSES, PACKS, STREAK, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
+import { desbloqueadoDe, enCurso, serieDe, type State } from '../lib/state'
 
 /* ═══ Elección del pase ═══════════════════════════════════════
    Es el corazón pedagógico de la intervención. Al obligar a elegir
@@ -12,9 +11,15 @@ import type { State } from '../lib/state'
    con recurso escaso. Aprende el sistema usándolo, no leyéndolo. */
 export function PassChoice({
   state, onPick, onClose,
-}: { state: State; onPick: (s: SeriesId) => void; onClose: () => void }) {
-  const [sel, setSel] = useState<SeriesId>(state.seriesId)
-  const active = (Object.keys(SERIES) as SeriesId[]).filter((id) => state.unlocked[id] > 0)
+}: { state: State; onPick: (s: string) => void; onClose: () => void }) {
+  const [sel, setSel] = useState<string>(state.seriesId)
+  // Antes esto listaba solo las tres series con guion. Si el usuario venía
+  // viendo otra del catálogo, no podía darle el pase a la historia que le
+  // importaba — que es justo la elección que esta pantalla existe para pedir.
+  // La serie del muro va SIEMPRE primera y siempre está: es la que el usuario
+  // tiene delante y la que `sel` trae por defecto. Ordenar solo por progreso la
+  // dejaba fuera del corte y la hoja abría sin ninguna opción marcada.
+  const active = [state.seriesId, ...enCurso(state).map((c) => c.id).filter((id) => id !== state.seriesId)].slice(0, 4)
 
   return (
     <div className="sheet" role="dialog" aria-label="Elegir serie para el pase">
@@ -24,19 +29,27 @@ export function PassChoice({
       <div className="cliff">
         <div className="kicker">Pase de la Noche</div>
         <h2>¿A cuál le das el pase?</h2>
-        <p>Tienes un pase por noche. El que no uses hoy no se acumula.</p>
+        {/* Esta línea decía «El que no uses hoy no se acumula», que es la regla
+            vieja — el "úsalo o piérdelo" que §3.4bis documenta como el error de
+            Webtoon y que esta mecánica corrigió. Sobrevivió a la corrección
+            porque el texto de la UI no lo probaba nadie. Ahora sale del estado. */}
+        <p>
+          {state.passes >= MAX_PASSES
+            ? `Tienes ${state.passes} pases: estás en el tope. El próximo empieza a acumularse cuando uses uno.`
+            : 'Tienes un pase. Si no lo usas hoy no se pierde — se guardan hasta dos.'}
+        </p>
       </div>
 
       {active.map((id) => {
-        const s = SERIES[id]
-        const next = state.unlocked[id] + 1
+        const s = serieDe(id)
+        const next = desbloqueadoDe(state, id) + 1
         return (
           <button key={id} className={`choice ${sel === id ? 'sel' : ''}`} onClick={() => setSel(id)} aria-pressed={sel === id}>
             <div className="thumb" style={frameStyle(s.hue, next)} />
             <div className="choice-body">
               <b>{s.title}</b>
               <div className="next">Abre el episodio {next}</div>
-              <div className="prog">Vas {state.unlocked[id]} de {s.total} · quedan {s.total - state.unlocked[id]}</div>
+              <div className="prog">Vas {desbloqueadoDe(state, id)} de {s.total} · quedan {s.total - desbloqueadoDe(state, id)}</div>
             </div>
             <div className="radio" />
           </button>
@@ -57,8 +70,8 @@ export function Store({
   state, onBuy, onClose,
 }: { state: State; onBuy: (coins: number, usd: number) => void; onClose: () => void }) {
   const missing = Math.max(0, EPISODE_COST - state.balance)
-  const serie = SERIES[state.seriesId]
-  const restantes = serie.total - state.unlocked[state.seriesId]
+  const serie = serieDe(state.seriesId)
+  const restantes = serie.total - desbloqueadoDe(state, state.seriesId)
   const paraTerminar = restantes * EPISODE_COST
   const completa = packThatCompletes(paraTerminar - state.balance)
   return (

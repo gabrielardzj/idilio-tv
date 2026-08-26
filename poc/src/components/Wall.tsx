@@ -2,7 +2,7 @@ import { Bell, Coin, Lock, Pass, X } from './Icons'
 import { NextPass, StreakStrip } from './bits'
 import { EPISODE_COST, MAX_PASSES, episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
-import type { State } from '../lib/state'
+import { desbloqueadoDe, type State } from '../lib/state'
 
 /**
  * EL MURO — la pantalla donde ocurre todo.
@@ -23,12 +23,13 @@ export function Wall({
   state: State; series: Series; justAdvanced?: boolean
   onClaim: () => void; onCoins: () => void; onStore: () => void; onClose: () => void; onRemind: () => void
 }) {
-  const ep = state.unlocked[series.id] + 1
-  const prev = series.episodes[state.unlocked[series.id]]
+  const abierto = desbloqueadoDe(state, series.id)
+  const ep = abierto + 1
+  const prev = series.episodes[abierto]
   const canPayNow = state.balance >= EPISODE_COST
   const atCap = state.passes >= MAX_PASSES
   const missing = EPISODE_COST - state.balance
-  const pct = Math.round((state.unlocked[series.id] / series.total) * 100)
+  const pct = Math.round((abierto / series.total) * 100)
 
   return (
     <div className="sheet" role="dialog" aria-label="Desbloquear episodio">
@@ -39,13 +40,13 @@ export function Wall({
       <div className="cliff">
         <div className="kicker">Continuará · Episodio {ep}</div>
         <h2>{prev?.cliff || 'La historia sigue.'}</h2>
-        <p>Quedan {series.total - state.unlocked[series.id]} episodios de {series.title}.</p>
+        <p>Quedan {series.total - abierto} episodios de {series.title}.</p>
       </div>
 
       {/* 2 · dónde estoy */}
       <div style={{ marginBottom: 22 }}>
         <div className="pp-row" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 7 }}>
-          <b style={{ fontSize: 12, fontWeight: 600 }}>Vas {state.unlocked[series.id]} de {series.total}</b>
+          <b style={{ fontSize: 12, fontWeight: 600 }}>Vas {abierto} de {series.total}</b>
           <span style={{ fontSize: 11, color: 'var(--tx-lo)' }}>{pct}%</span>
         </div>
         <div className="bar"><i style={{ width: `${pct}%` }} /></div>
