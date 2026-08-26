@@ -5,11 +5,19 @@ maquetación automática de Figma: los elementos se reacomodan solos), component
 instancias y variables enlazadas. No son imágenes exportadas de otra parte.
 
 > **[`CCI8plwuWvfTV8VBpowN5X`](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X)** — una página
-> con tres secciones: 31 variables con *scope* (dónde se puede usar cada una) y *code syntax* (el
-> nombre que lleva en el código), 9 estilos de texto, 4 componentes y **las 10 pantallas**. Las
+> con tres secciones: **31 variables** —18 de color, 5 de radio y 8 de espaciado— con *scope*
+> (dónde se puede usar cada una) y *code syntax* (el nombre que lleva en el código), **9 estilos
+> de texto**, **4 componentes** —chip de saldo, tarjeta del Pase, tira de racha y el botón con sus
+> cuatro variantes, con 21 instancias repartidas por las pantallas— y **las 10 pantallas**. Las
 > variables llevan el *code syntax* apuntando a los tokens (los valores del sistema —colores,
 > tipografías, espacios— con nombre propio) reales del prototipo, así que el archivo sirve para
 > Dev Mode (el modo de Figma donde quien implementa lee medidas y código).
+>
+> Los dos artefactos dicen lo mismo, y se puede comprobar: los trece colores que el archivo
+> devuelve por su *code syntax* —`var(--tx-lo)`, `var(--violet)`, `var(--cyan)`…— coinciden dígito
+> a dígito con `styles.css`, incluido el `#8F8896` de `--tx-lo`, que es el valor **corregido** para
+> pasar contraste AA y no el que fallaba. Las 2 de movimiento y las 9 de tipografía no son
+> variables: la tipografía vive en los estilos de texto, y las curvas y duraciones en el CSS.
 
 ---
 
