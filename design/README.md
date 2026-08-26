@@ -13,6 +13,15 @@ producto real en producción. Exportado a PNG @2x en [`pencil/`](pencil).
 | <img src="pencil/05-muro-H-noche7.png" width="130"> | **Muro · H** — noche 7, ciclo completo |
 | <img src="pencil/06-reproductor-toast.png" width="130"> | **Reproductor** — confirmación de racha *(toast, no modal)* |
 | <img src="pencil/07-cuenta-noche3.png" width="130"> | **Cuenta** — "tu racha vive solo en este teléfono" |
+| <img src="pencil/08-muro-C-pase-gastado-con-saldo.png" width="130"> | **Muro · C** — pase gastado, con saldo |
+| <img src="pencil/09-muro-D-noche2.png" width="130"> | **Muro · D** — noche 2, con el toast de acreditación |
+| <img src="pencil/10-muro-G-escudo-consumido.png" width="130"> | **Muro · G** — escudo consumido |
+| <img src="pencil/11-muro-momento-del-gasto.png" width="130"> | **El momento del gasto** — CTA confirmado, recibo `−15`, HUD apagado |
+| <img src="pencil/12-tienda-monedas.png" width="130"> | **Tienda** — paquetes rotulados en capítulos |
+
+Los **13 estados** del [export](../export) están cubiertos en el archivo de diseño.
+Las cuatro variantes que faltan (`01` reproductor libre, `02` muro A ya presente, etc.)
+comparten estructura y solo cambian datos: se generan del mismo componente.
 
 ## Tokens
 
