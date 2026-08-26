@@ -1,7 +1,7 @@
 # 4. El POC
 
 **`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens.
-**`/mobbin-export`** · 21 pantallas en 8 flujos, capturadas automáticamente de los dos prototipos.
+**`/mobbin-export`** · 22 pantallas en 8 flujos, capturadas automáticamente de los dos prototipos.
 
 ---
 
@@ -98,7 +98,13 @@ Las tres series del POC son reales y están elegidas para cubrir la moda y los d
 
 La raíz era una duplicación: el estado guardaba el progreso dos veces, en `vistos` (por id del catálogo) y en `unlocked` (por las tres con guion), o sea dos espacios de nombres para el mismo hecho. Se unificaron en el del catálogo, y `serieDe()` arma la serie desde el censo cuando no hay guion: título, total y gratis son cifras medidas. El muro cae entonces en *«La historia sigue.»* — que es verdad. Inventarle un cliffhanger a un contenido que no leyó nadie habría sido peor.
 
-*Por qué no lo vio nadie antes.* [`recorrer.mjs`](../../poc/scripts/recorrer.mjs) caminaba justo por ese camino y pasaba, porque comprobaba `data-state` y nunca la **identidad**: el estado era el correcto y la historia era otra. Ahora comprueba las dos cosas en cada pantalla y camina además el flujo del pase entero —elegir serie, desbloquear, volver al episodio—, que es el corazón de la intervención y hasta hoy no lo recorría nadie. Son 19 comprobaciones donde había 11. Con el fallo puesto a propósito, caen cuatro y señalan la sustitución.
+*Por qué no lo vio nadie antes.* [`recorrer.mjs`](../../poc/scripts/recorrer.mjs) caminaba justo por ese camino y pasaba, porque comprobaba `data-state` y nunca la **identidad**: el estado era el correcto y la historia era otra. Ahora comprueba las dos cosas en cada pantalla y camina además el flujo del pase entero —elegir serie, desbloquear, volver al episodio—, que es el corazón de la intervención y hasta hoy no lo recorría nadie. Con el fallo puesto a propósito, caen cuatro y señalan la sustitución.
+
+**Después recorrí la otra mitad: la de pago.** La tienda es donde aterriza toda la pedagogía de la moneda, y hasta ese momento solo se verificaba saltando a ella con el panel. El camino entero —gratis, muro, pase, muro otra vez, tienda, compra, desbloqueo con monedas— funciona y **no encontró ningún fallo**. Vale decirlo igual: una prueba que solo se reporta cuando falla convierte el silencio en ambigüedad.
+
+Lo que sí faltaba era que CI lo cubriera. Ahora son **29 comprobaciones donde había 11**. La que más pesa es la del badge *«termina esta serie»*, que cuando era fijo mentía en 40 de las 41 series con muro: se comprueba contra una serie de verdad —60 episodios bloqueados, no los 44 de *Pasión a Domicilio*— y verifica que el paquete ofrecido **alcance** para la meta. Con el badge fijo otra vez, el paso cae diciendo *«660 monedas para una meta de 885»*: el fallo original con sus números. Y el precio del episodio se importa del modelo en vez de escribirse a mano, para que no puedan divergir en silencio.
+
+*Una cosa que parecía un fallo y no lo era.* El paquete de $0.99 da 12 episodios y el de $1.99 da 13: pagas el doble por uno más. Fui a mirar antes de tocarlo y en el producto real **los dos dan 180 monedas** —la bienvenida es un 50% sobre el mismo paquete—, así que el escalón es del producto, no de la propuesta. Queda registrado en `PACKS` con `live` al lado de `coins`, y el pie de la tienda excluye la bienvenida de la promesa de la escalera.
 
 **La hoja del pase desmentía la mecánica.** Decía, quemado en el componente: *«Tienes un pase por noche. El que no uses hoy no se acumula.»* Es literalmente la regla vieja — el «úsalo o piérdelo» que [§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra) documenta como el error que hundió al Daily Pass de Webtoon y que esta mecánica corrigió. La pantalla central de la intervención le decía al usuario lo contrario de lo que el sistema hace. Sobrevivió a todas las correcciones del documento porque **nadie probaba el texto de la UI**; ahora sale del estado y el recorrido falla si vuelve a prometer que el pase caduca.
 

@@ -544,7 +544,7 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   background-size: cover; background-position: center; background-color: var(--ink-800);
 }
 .serie-resumen h2 { font-size: 19px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 9px; }
-.serie-resumen p { font-size: 15px; line-height: 1.5; color: #D6D6DB; }
+.serie-resumen p { font-size: 15px; line-height: 1.5; color: #E4E4E8; }
 
 /* ── La propuesta: dónde vas y qué cuesta seguir ─────────────── */
 .serie-avance { padding: 20px 17px 4px; }

@@ -1,7 +1,7 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-21 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+22 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
@@ -16,11 +16,14 @@ El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de v
 |---|---|---|---|
 | 1 | [Home · el catálogo](flows/f0-llegar-al-muro/01-home.png) | Home / Browse | Content rails, Continue watching, Currency balance |
 | 2 | [Ficha de serie · la progresión visible](flows/f0-llegar-al-muro/02-serie.png) | Detail | Chapter list, Progress indicator, Unlock cost |
-| 3 | [Player · el core loop](flows/f0-llegar-al-muro/03-player.png) | Media player | Vertical video, Swipe navigation, Progress indicator |
+| 3 | [Ficha de serie · la lista de capítulos](flows/f0-llegar-al-muro/02b-serie-capitulos.png) | Detail | Chapter list, Unlock cost, Progress indicator |
+| 4 | [Player · el core loop](flows/f0-llegar-al-muro/03-player.png) | Media player | Vertical video, Swipe navigation, Progress indicator |
 
 **Home · el catálogo** — El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.
 
 **Ficha de serie · la progresión visible** — El chasis es el de la app nativa, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.
+
+**Ficha de serie · la lista de capítulos** — La misma ficha, bajando. Las tarjetas son las del producto —«Capítulo N», el número como título, «Interactiva» y el candado—; lo que el producto no tiene son las tres marcas de la propuesta: el visto de los que ya viste, el «Seguir viendo» de dónde te quedaste, y el precio en la tarjeta del capítulo 11, que es donde está el muro. Del 12 en adelante la tarjeta se apaga, igual que en la app.
 
 **Player · el core loop** — Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.
 
@@ -133,4 +136,4 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 
 **Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Chapter list · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
 
-**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Chapter list · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Lock · Medal · Notice · Pack list · Poster · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Chapter list · Chevron · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Lock · Medal · Notice · Pack list · Poster · Price per unit · Price row · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip

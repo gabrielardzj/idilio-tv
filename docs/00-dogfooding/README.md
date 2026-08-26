@@ -45,12 +45,13 @@ La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99**
 - Rieles home: círculos "Volver por tu próxima novela" → Estrenos → Seguir viendo → Lo más visto → Última Hora → Nuestra selección para ti.
 - Tab bar de 3: **Inicio · Recompensas · Perfil** (Perfil con punto rojo de notificación).
 - Player: overlay tipo TikTok (corazón, comentario, compartir), chip de saldo abajo-izquierda, "ver más" para sinopsis.
+- **Ficha de serie:** barra «Volver» y nada más arriba —el título no se repite, va quemado en el arte del póster—, bloque **«Resumen»** con la miniatura a la izquierda y la sinopsis del catálogo al lado, y después **«Capítulos»**: una lista de tarjetas, no una grilla. Cada tarjeta lleva `Capítulo N` en violeta, el número del episodio como título, un galón a la derecha y —en algunos— la píldora **«Interactiva»**. Los bloqueados llevan candado: el primero en violeta encendido, los siguientes atenuados. **En ninguna tarjeta aparece el precio.**
 - Release notes 1.20.0 (2026-08-21): *"Downloads for suscriptions / New daily streak UI"* → la racha se está iterando ahora mismo.
 
 ## Fricciones observadas de primera mano (web)
 1. El reproductor web **no muestra saldo ni economía**: quien llega por un link compartido no ve el sistema, solo un muro.
 2. El muro web es un callejón: única salida "Descargar la app". El contexto (serie, episodio, progreso) **no se transfiere** al deep link.
-3. La lista de episodios muestra 44 números grises sin precio, sin total, sin "cuánto me falta". La progresión no es legible.
+3. La lista de episodios muestra 44 números grises sin precio, sin total, sin "cuánto me falta". La progresión no es legible. **En la app nativa la lista es otra —tarjetas de «Capítulo N», no una grilla— y el resultado es el mismo:** dice cuáles están bloqueados y no dice cuántos faltan, cuánto lleva visto el usuario ni cuánto cuesta abrir el siguiente.
 4. El autoplay al siguiente episodio funciona muy bien hasta el ep. 12; en el 13 el loop se corta en seco sin transición.
 5. Imágenes de póster bloqueadas por CSP en el web player (error de consola) → el catálogo carga con huecos.
 
@@ -64,6 +65,13 @@ La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99**
 | **Paywall nativo, build 1.20.0.** `Costo del episodio: 15` · `Tu balance: 0` · solo opciones de compra. Dos paquetes distintos entregan las mismas 180 monedas. | **Home nativo.** Chip de saldo arriba a la derecha, tab bar de 3 con *Recompensas* y *Perfil*. La fuente gratuita vive aquí; el sumidero vive en el player. |
 | ![Muro web](evidencia/muro-web-ep13.png) | ![Player web](evidencia/player-web.png) |
 | **Muro del reproductor web.** *"Se desbloquea en la app con 15 monedas"* y una sola salida: descargar la app. El contexto de serie y episodio se pierde en el salto. | **Reproductor web.** Funciona bien, autoplay al siguiente episodio incluido — pero sin saldo, sin recompensas y sin ninguna huella de la economía. |
+
+**La ficha de serie en la app nativa.** Es la pantalla que el prototipo reproduce, y estas tres capturas son la fuente: de acá salen la estructura, los colores y hasta la píldora «Interactiva».
+
+| | | |
+|---|---|---|
+| ![Ficha nativa · resumen](evidencia/ficha-nativa-1-resumen.png) | ![Ficha nativa · capítulos](evidencia/ficha-nativa-2-capitulos.png) | ![Ficha nativa · bloqueados](evidencia/ficha-nativa-3-bloqueados.png) |
+| **Arriba: «Volver» y «Resumen».** Sin título, sin contador de episodios, sin barra de avance. El póster a la izquierda y la sinopsis del catálogo al lado. | **«Capítulos».** Tarjetas de `Capítulo N` con el número como título y el galón a la derecha. La píldora «Interactiva» marca los episodios con decisión. | **El muro, dicho con un candado.** El capítulo 11 lleva candado violeta encendido; del 12 en adelante la tarjeta entera se apaga. **El precio no aparece en ningún lado.** |
 
 ---
 

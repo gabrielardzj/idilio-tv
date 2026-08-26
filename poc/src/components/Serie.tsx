@@ -116,7 +116,14 @@ export function Serie({
                   <button
                     className={`ep ${abierto ? 'abierto' : 'cerrado'} ${visto ? 'visto' : ''} ${!abierto && !muro ? 'lejos' : ''}`}
                     onClick={() => onEpisodio(n)}
-                    aria-label={`Capítulo ${n}${abierto ? '' : `, bloqueado, ${EPISODE_COST} monedas`}`}
+                    aria-label={
+                      // Lo que oye quien no ve tiene que ser lo que dice la
+                      // tarjeta: si el pase abre este capítulo, el precio no es
+                      // la información.
+                      abierto
+                        ? `Capítulo ${n}${visto ? ', visto' : ''}`
+                        : `Capítulo ${n}, bloqueado, ${muro && state.passes > 0 ? 'lo abre tu Pase de la Noche' : `${EPISODE_COST} monedas`}`
+                    }
                   >
                     <span className="ep-txt">
                       <span className="ep-cap">

@@ -32,6 +32,16 @@ de otra parte.
 | ![Tienda](09-tienda.png) | **09 · Tienda** | Episodios grande, monedas de subtítulo, precio por episodio. La meta calculada de la serie que el usuario está viendo. |
 | ![Racha rota](10-racha-rota.png) | **10 · Se cortó la racha** | El fallo sin castigo: sin rojo, sin alarma y sin oferta para «recuperarla» pagando. |
 
+> **La ficha de serie se rehízo contra la app nativa.** La primera versión dibujaba una grilla de
+> episodios: eso es el reproductor **web**. La app —[capturas](../../00-dogfooding/#capturas-de-la-evidencia)—
+> muestra «Resumen» con el póster y la sinopsis, y después una **lista de capítulos**. El chasis de
+> la pantalla es ahora el de la app, con sus colores muestreados de las capturas, y encima va la
+> propuesta. Es la única pantalla del archivo que no cabe en 390×844: la ficha real tampoco cabe
+> —el resumen se come la primera pantalla—, así que el frame va con el scroll desplegado.
+>
+> **Está actualizada en Figma y todavía no en Pen.** Las otras nueve dicen lo mismo en las dos
+> herramientas; esta, por ahora, solo en Figma.
+
 ---
 
 ## Dos cosas que aprendí construyéndolo dos veces

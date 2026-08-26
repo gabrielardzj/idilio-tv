@@ -147,7 +147,7 @@ Y hay algo peor: la racha castiga justo el comportamiento más común del produc
 
 ### F5 · El usuario no puede ver su propio progreso
 
-La serie mediana tiene 50 episodios y 40 de ellos bloqueados. El usuario ve una grilla de 40 números grises. En ningún lado aparece:
+La serie mediana tiene 50 episodios y 40 de ellos bloqueados. El usuario ve una lista de capítulos numerados —tarjetas de `Capítulo N` en la app nativa, una grilla de números grises en el reproductor web ([capturas](../00-dogfooding/#capturas-de-la-evidencia))—. Las dos superficies dicen exactamente lo mismo: cuáles están bloqueados. En ningún lado aparece:
 
 - cuánto lleva visto y cuánto le falta,
 - cuánto costaría terminar la serie,

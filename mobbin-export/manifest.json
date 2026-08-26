@@ -60,6 +60,27 @@
           "preview": "flows/f0-llegar-al-muro/02-serie.webp"
         },
         {
+          "id": "02b-serie-capitulos",
+          "name": "Ficha de serie · la lista de capítulos",
+          "screenType": "Detail",
+          "patterns": [
+            "Chapter list",
+            "Unlock cost",
+            "Progress indicator"
+          ],
+          "elements": [
+            "Chapter list",
+            "Badge",
+            "Lock",
+            "Chevron",
+            "Price row"
+          ],
+          "note": "La misma ficha, bajando. Las tarjetas son las del producto —«Capítulo N», el número como título, «Interactiva» y el candado—; lo que el producto no tiene son las tres marcas de la propuesta: el visto de los que ya viste, el «Seguir viendo» de dónde te quedaste, y el precio en la tarjeta del capítulo 11, que es donde está el muro. Del 12 en adelante la tarjeta se apaga, igual que en la app.",
+          "stateKey": "serie-detalle",
+          "image": "flows/f0-llegar-al-muro/02b-serie-capitulos.png",
+          "preview": "flows/f0-llegar-al-muro/02b-serie-capitulos.webp"
+        },
+        {
           "id": "03-player",
           "name": "Player · el core loop",
           "screenType": "Media player",
@@ -503,7 +524,7 @@
   ],
   "summary": {
     "flows": 8,
-    "screens": 21,
+    "screens": 22,
     "screenTypes": [
       "Account / Wallet",
       "Confirmation",
@@ -564,6 +585,7 @@
       "Bottom sheet",
       "Breakdown list",
       "Chapter list",
+      "Chevron",
       "Clock time",
       "Countdown timer",
       "Fine print",
@@ -576,6 +598,7 @@
       "Pack list",
       "Poster",
       "Price per unit",
+      "Price row",
       "Primary button",
       "Progress bar",
       "Progress label",

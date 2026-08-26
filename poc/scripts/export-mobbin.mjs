@@ -68,12 +68,32 @@ const FLOWS = [
         },
       },
       {
+        id: '02b-serie-capitulos', name: 'Ficha de serie · la lista de capítulos',
+        estado: 'serie-detalle',
+        type: 'Detail', patterns: ['Chapter list', 'Unlock cost', 'Progress indicator'],
+        elements: ['Chapter list', 'Badge', 'Lock', 'Chevron', 'Price row'],
+        // La ficha no cabe en una pantalla —en el producto real tampoco: el
+        // resumen se come la primera—, así que la lista va en su propia
+        // captura. Es la mitad donde vive la propuesta, y recortarla dejaría el
+        // entregable mostrando solo el chasis copiado.
+        note: 'La misma ficha, bajando. Las tarjetas son las del producto —«Capítulo N», el número como título, «Interactiva» y el candado—; lo que el producto no tiene son las tres marcas de la propuesta: el visto de los que ya viste, el «Seguir viendo» de dónde te quedaste, y el precio en la tarjeta del capítulo 11, que es donde está el muro. Del 12 en adelante la tarjeta se apaga, igual que en la app.',
+        act: async (p) => {
+          await p.locator('.ep.cerrado').first().scrollIntoViewIfNeeded()
+          await p.locator('.serie-scroll').evaluate((e) => { e.scrollTop -= 150 })
+          await p.waitForTimeout(400)
+        },
+      },
+      {
         id: '03-player', name: 'Player · el core loop',
         estado: 'player-free',
         type: 'Media player', patterns: ['Vertical video', 'Swipe navigation', 'Progress indicator'],
         elements: ['Video', 'Top bar', 'Wallet chip', 'Action rail', 'Progress bar'],
         note: 'Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.',
-        act: async (p) => { await p.locator('.ep.abierto').first().click(); await p.waitForTimeout(600) },
+        act: async (p) => {
+          await p.locator('.serie-scroll').evaluate((e) => { e.scrollTop = 0 })
+          await p.locator('.ep.abierto').first().click()
+          await p.waitForTimeout(600)
+        },
       },
     ],
   },
