@@ -1,6 +1,6 @@
 # 4. El POC
 
-**`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens.
+**`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens (los valores del sistema —colores, tipografías, espacios— con nombre propio).
 **`/mobbin-export`** · 22 pantallas en 8 flujos, capturadas automáticamente de los dos prototipos.
 
 ---
@@ -11,19 +11,19 @@ El brief acota el alcance a *"la pantalla o el momento donde ocurre la mecánica
 
 | Pantalla | Para qué está |
 |---|---|
-| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, sobre la estructura de la app tal como es hoy: los rieles en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
+| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, sobre la estructura de la app tal como es hoy: los rieles —las filas horizontales de pósters— en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
 | **Ficha de serie** | La pantalla de la app nativa tal como es hoy, capítulo por capítulo: «Volver», «Resumen» con el póster y **la sinopsis real del catálogo**, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima, tres cosas que la ficha real no dice: dónde vas, qué ya viste, y **qué abre el siguiente** —el pase si lo tienes, el precio si no— dicho en la tarjeta donde está el muro. |
-| **Player** | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
+| **Player** (el reproductor) | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
 
 Y el muro, con sus trece estados:
 
 | # | Estado | Qué demuestra |
 |---|---|---|
-| 1 | Player · episodio gratis | El chip de saldo con traducción a episodios; progreso de serie |
+| 1 | Player · episodio gratis | El chip de saldo —la pastilla de monedas— con traducción a episodios; progreso de serie |
 | 2 | Muro · pase disponible | La jerarquía: historia → progreso → gratis → pago → racha |
 | 3 | Elección de serie | El recurso escaso que hay que asignar |
 | 4 | Desbloqueo + racha avanza | Recompensa, bono de noche 3, comodín ganado |
-| 5 | Player · episodio abierto | El regreso al loop en un toque |
+| 5 | Player · episodio abierto | El regreso al loop —el ciclo de ver y seguir— en un toque |
 | 6 | Muro · pase gastado (la cita) | «Hoy a las 21:30 · tu hora de siempre», el intervalo debajo, y avísame |
 | 7 | Muro · con saldo | El pago sube a primario, el saldo se declara en episodios |
 | 8 | Tienda | Episodios grandes, monedas de subtítulo, precio por episodio |
@@ -65,7 +65,7 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 
 | Constante | Valor | Dónde se verificó |
 |---|---|---|
-| Costo de episodio | 15 monedas | Muro de idilio.tv + paywall nativo |
+| Costo de episodio | 15 monedas | Muro de idilio.tv + paywall nativo (el muro de pago de la app) |
 | Episodios gratis por serie | **10** (moda: 37 de las 41 series con muro) | Censo de las 50 series del catálogo |
 | Series del catálogo | 50 · 2.230 episodios | Censo |
 | Episodios gratis en total | 500 (22% del catálogo) | Censo |
@@ -138,7 +138,7 @@ Las tres se sostienen desde [`recorrer.mjs`](../../poc/scripts/recorrer.mjs), qu
 
 ## 4.5 Qué queda fuera, a propósito
 
-Navegación general, home, catálogo, búsqueda, perfil, reproducción de video real, compra real por IAP y persistencia entre sesiones. El brief lo excluye explícitamente y agregarlo diluiría la profundidad del único momento que sí importa evaluar.
+Navegación general, home, catálogo, búsqueda, perfil, reproducción de video real, compra real por IAP (in-app purchase: la compra dentro de la app) y persistencia entre sesiones. El brief lo excluye explícitamente y agregarlo diluiría la profundidad del único momento que sí importa evaluar.
 
 ## 4.6 Accesibilidad y contexto de uso
 

@@ -5,7 +5,7 @@
 > **Una frase:** el muro de desbloqueo deja de ser el final de la sesión y pasa a ser una cita con hora, en la historia que el usuario ya está viendo.
 
 **En este apartado:** la justificación de la elección · la mecánica · el diagrama de flujo · nueve decisiones de diseño · la revisión crítica del precedente · el modelo económico · los riesgos técnicos.
-**Además:** [el archivo de diseño](pencil/) (6 pantallas + hoja de sistema), [el sistema visual](sistema.md) (42 tokens, 7 componentes, y cómo llevarlo a Figma) y [`tokens.json`](tokens.json).
+**Además:** [el archivo de diseño](pencil/) (6 pantallas + hoja de sistema), [el sistema visual](sistema.md) (42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio—, 7 componentes, y cómo llevarlo a Figma) y [`tokens.json`](tokens.json).
 
 ---
 
@@ -30,7 +30,7 @@ Por eso la elección entre series (R2) no es solo pedagógica. Es el momento en 
 El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus sumideros y su posición. La tentación es una pantalla que lo explique. Nadie lee esa pantalla. Aquí el usuario aprende el sistema porque tiene que **operarlo**: recibe un recurso escaso (un pase), decide dónde gastarlo (qué serie), ve el efecto (episodio abierto, racha +1) y ve el precio de la alternativa ($0.15 por episodio, el peldaño regular de la tienda). Es aprendizaje por uso.
 
 **4. Funciona para el 88% que es invitado, desde el día uno.**
-Sin cuenta, sin onboarding, sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
+Sin cuenta, sin onboarding (la seguidilla de pantallas de bienvenida), sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
 
 **Lo que descarté con más pena:** el rediseño de la recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Ola 1 y como el reclamo inline del pase.
 
@@ -144,7 +144,7 @@ stateDiagram-v2
 
 De arriba a abajo: **cliffhanger → dónde voy → lo gratis → lo pago → mi racha.**
 
-El paywall actual abre con `Costo del episodio: 15 / Tu balance: 0`. Eso enseña, en el primer segundo, que el sistema es una tienda y que el usuario no tiene con qué. La propuesta abre con *«Camila abre la puerta y el que está del otro lado no es Andrés»*.
+El paywall (el muro de pago) actual abre con `Costo del episodio: 15 / Tu balance: 0`. Eso enseña, en el primer segundo, que el sistema es una tienda y que el usuario no tiene con qué. La propuesta abre con *«Camila abre la puerta y el que está del otro lado no es Andrés»*.
 
 No es adorno narrativo. Es que el usuario llegó ahí por la historia, y el muro es el único lugar del producto donde recordárselo tiene consecuencia económica: el deseo es el que le da valor a la moneda. Un muro que arranca con precios está vendiendo antes de haber recordado qué se vende.
 
@@ -163,7 +163,7 @@ El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisi�
 
    > *Acá decía que «con un pase disponible» la compra baja a un link chico, y que eso cubría «los tres casos». Estaba mal: fui a leer `Wall.tsx` y la primera condición es el saldo, no el pase — con 15 monedas encima el botón entero aparece igual, tengas pase o no. La versión anterior dejaba afuera el estado más interesante, el de pase **y** saldo, que es el único donde el usuario elige entre dos formas de seguir viendo ya mismo.*
 
-La contrapartida honesta: si el guardrail de ARPDAU cae más de 8% de forma sostenida, esta jerarquía es lo primero que hay que revisar.
+La contrapartida honesta: si el guardrail —la métrica de guardia— de ARPDAU (ingreso promedio por usuario activo al día) cae más de 8% de forma sostenida, esta jerarquía es lo primero que hay que revisar.
 
 ### D2b · La cita se ancla a la hora de siempre, no a «+24 h desde que lo usaste»
 
@@ -187,7 +187,7 @@ En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 
 | Superficie | Antes | Después |
 |---|---|---|
-| Chip de saldo | `2543` | `90` · *6 episodios* |
+| Chip de saldo (la pastilla de monedas) | `2543` | `90` · *6 episodios* |
 | Muro | `Tu balance: 0` | *Te faltan 15 monedas para este episodio* |
 | Tienda · oferta de bienvenida | `180 monedas · $0.99` | **12 episodios** · 180 monedas · **$0.08 por episodio** |
 | Paquete grande | `375 monedas · $3.99` | **44 episodios** · *Termina esta serie* · $4.99 |
@@ -267,7 +267,7 @@ Cuando escribí la primera versión de este documento apoyé la mecánica en el 
 
 La queja dominante de los lectores durante los cinco años de vida de la mecánica —hubo hasta una petición pública para eliminarla— fue siempre la misma: **convertía la lectura en una tarea diaria**. "La gracia del webtoon es maratonearlo; si no puedo, me voy a otro lado."
 
-*(Nota de rigor: la MAU global de Webtoon cayó 7.1% en 2025. **No** atribuyo esa caída al retiro del Daily Pass — el retiro fue en mayo y la caída es del año completo. Sería exactamente el mismo error de causalidad que le señalo al 2.4x de D30.)*
+*(Nota de rigor: la MAU (usuarios distintos en un mes) global de Webtoon cayó 7.1% en 2025. **No** atribuyo esa caída al retiro del Daily Pass — el retiro fue en mayo y la caída es del año completo. Sería exactamente el mismo error de causalidad que le señalo al 2.4x de D30 —cuántos siguen ahí a los 30 días—.)*
 
 ### Por qué la crítica no aplica igual aquí — y en qué sí aplica
 
@@ -369,7 +369,7 @@ Un countdown en cliente se rompe cambiando la hora del teléfono. El cliente deb
 **2. La ventana de 5 a.m. se calcula en la zona del usuario.**
 México, Colombia y el público hispano de EE. UU. cruzan cuatro husos horarios. Si el corte se calcula en UTC, a un usuario de Los Ángeles la racha se le rompe a las 10 p.m. Es una decisión de producto disfrazada de detalle técnico: hay que fijarla antes del primer endpoint.
 
-**3. Push es el 40% del valor del pase y hoy no llega al 88% de la base.**
+**3. Push —el aviso que llega al teléfono— es el 40% del valor del pase y hoy no llega al 88% de la base.**
 El botón *«Avísame cuando esté listo»* es lo que cierra el ciclo: sin él, la cita depende de que el usuario se acuerde. iOS y Android permiten push anónimo por token de dispositivo, así que se puede lanzar sin cuenta — pero el valor completo (cross-device, recuperación de racha, segmentación) llega con I7.
 
 **Fuera del trimestre:** si el análisis dice que el pase funciona pero que la elección entre series confunde, la versión simplificada — un pase que se aplica automáticamente a la última serie vista — es un fallback de una semana. Pero pierde la parte pedagógica, que es media intervención.

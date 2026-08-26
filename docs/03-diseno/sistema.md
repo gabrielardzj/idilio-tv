@@ -1,6 +1,6 @@
 # Sistema visual
 
-No construí un design system — el brief no lo pide y habría sido tiempo mal gastado. Construí lo mínimo que hace falta para que trece pantallas se vean como una sola cosa: **42 tokens y siete componentes.**
+No construí un design system (un sistema de diseño completo: la biblioteca de piezas y reglas de la que sale cualquier pantalla futura) — el brief no lo pide y habría sido tiempo mal gastado. Construí lo mínimo que hace falta para que trece pantallas se vean como una sola cosa: **42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio— y siete componentes.**
 
 Los tokens están en [`tokens.json`](tokens.json), en formato W3C Design Tokens, y se **generan desde el CSS del prototipo** (`npm run tokens`). El CSS es la fuente de verdad; el archivo de tokens se deriva de él y por construcción no puede desincronizarse.
 
@@ -124,14 +124,15 @@ El prototipo es la fuente de verdad y hay dos caminos para llevarlo a Figma, seg
 
 > **Ya construido.** Los 31 tokens están creados como variables en
 > [el archivo de Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X), cada uno con su
-> *scope* explícito y su **code syntax** apuntando al token CSS real del prototipo
-> (`var(--gold-400)`, `var(--sp-4)`). Dev Mode devuelve el token que **existe** en el código,
+> *scope* explícito —dónde se puede usar cada variable— y su **code syntax** —el nombre que lleva
+> en el código— apuntando al token CSS real del prototipo
+> (`var(--gold-400)`, `var(--sp-4)`). Dev Mode (el modo de Figma donde quien implementa lee medidas y código) devuelve el token que **existe** en el código,
 > no uno inventado. Lo de abajo queda como referencia para reimportarlos en otro archivo.
 
 **Para los tokens** — importar [`tokens.json`](tokens.json) con **Tokens Studio**. Quedan como variables de Figma, agrupadas por superficie / texto / marca / moneda / estado / radio / espaciado / movimiento / tipografía.
 
 **Para las pantallas** — dos opciones:
-1. **Capas editables:** el plugin **html.to.design** sobre el prototipo corriendo (`npm run dev`). Importa el DOM como capas de Figma con texto real y auto-layout, no como imagen.
+1. **Capas editables:** el plugin **html.to.design** sobre el prototipo corriendo (`npm run dev`). Importa el DOM —el árbol de elementos de la página— como capas de Figma con texto real y auto-layout (la maquetación automática: los elementos se reacomodan solos), no como imagen.
 2. **Referencia visual:** los PNG a 3× de [`mobbin-export/flows/`](../../mobbin-export/flows/) — 1170 × 2532, listos para pegar como fondo de un frame de iPhone.
 
 **Regenerar todo:**

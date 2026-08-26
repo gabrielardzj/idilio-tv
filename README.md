@@ -3,7 +3,7 @@
 
 **¿Cómo podríamos usar mecánicas de gamificación para que volver a Idilio forme parte natural de la experiencia de ver microdramas?**
 
-> El metajuego de Idilio existe, pero vive en una pestaña. El core loop vive en el player.
+> El metajuego de Idilio existe, pero vive en una pestaña. El core loop (lo que el usuario hace una y otra vez) vive en el player.
 > La propuesta entera consiste en mudar el metajuego al lugar donde el usuario ya está,
 > y en cambiar la unidad de todo: de monedas a episodios, de días calendario a noches.
 
@@ -20,8 +20,9 @@
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
 
 > **El diseño es nativo de [Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X):** una
-> página con tres secciones — 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4
-> componentes y las 10 pantallas. Detalle en [el archivo de diseño](docs/03-diseno/pen/).
+> página con tres secciones — 31 variables con *scope* (dónde se puede usar cada una) y *code
+> syntax* (el nombre que lleva en el código), 9 estilos de texto, 4 componentes y las 10
+> pantallas. Detalle en [el archivo de diseño](docs/03-diseno/pen/).
 
 ---
 
@@ -29,13 +30,13 @@
 
 | | Entregable | Qué hay adentro |
 |---|---|---|
-| **1** | **[Diagnóstico](docs/01-diagnostico/)** | Qué falla hoy, a partir de usar la app y leer los datos. Qué señales pesaron y qué descarté — incluido por qué no construyo sobre el 2.4x de D30. |
-| **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres olas, con hipótesis, métricas, guardrails y criterio de priorización. Y qué no cabe en un trimestre. |
-| **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, ocho decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [archivo de diseño](docs/03-diseno/pencil/), el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json). |
+| **1** | **[Diagnóstico](docs/01-diagnostico/)** | Qué falla hoy, a partir de usar la app y leer los datos. Qué señales pesaron y qué descarté — incluido por qué no construyo sobre el 2.4x de D30 (cuántos siguen ahí a los 30 días). |
+| **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres olas, con hipótesis, métricas, guardrails (las métricas de guardia: las que dicen cuándo parar) y criterio de priorización. Y qué no cabe en un trimestre. |
+| **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, ocho decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [archivo de diseño](docs/03-diseno/pencil/), el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json) (los valores del sistema —colores, tipografías, espacios— con nombre propio). |
 | **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 22 pantallas en 8 flujos. |
 | **+** | **[Sobre el stack real](web/)** | La misma intervención implementada en Next.js App Router + Tailwind v4 + Supabase, el stack que Idilio corre hoy. Incluye la migración SQL completa. Es la respuesta a *«la viabilidad de implementación hace parte de la propuesta»*. |
 
-**Anexos ·** No son páginas del sitio publicado; se leen acá, en el repo. · [Registro de dogfooding](docs/00-dogfooding/) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.
+**Anexos ·** No son páginas del sitio publicado; se leen acá, en el repo. · [Registro de dogfooding](docs/00-dogfooding/) (dogfooding: usar el propio producto como un usuario más) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.
 
 ---
 
@@ -47,7 +48,7 @@ Medí las **50 series del catálogo** ([censo completo](docs/00-dogfooding/)). L
 
 **Primero: la sesión no termina cuando el usuario se sacia. Termina cuando choca.** El bloque gratis típico son 10 episodios —37 de las 41 series con muro— y la sesión promedio llega a 14. No es una demostración: 14 es una media, y una media no se descompone en 10 + 4. Pero es la lectura más simple de esa diferencia, y si es la correcta, los 22 minutos no son salud: son el techo que impone la economía, y el usuario se va con hambre para cuatro episodios más.
 
-Y lo que hay en ese choque, verificado en el paywall real del build 1.20.0:
+Y lo que hay en ese choque, verificado en el paywall (el muro de pago) real del build 1.20.0:
 
 ```
 Costo del episodio: 15        Tu balance: 0

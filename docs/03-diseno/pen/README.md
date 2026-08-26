@@ -1,12 +1,15 @@
 # El archivo de diseño
 
-Las diez pantallas viven en **Figma**, construidas de forma nativa —frames con auto-layout,
-componentes reales, instancias y variables enlazadas. No son imágenes exportadas de otra parte.
+Las diez pantallas viven en **Figma**, construidas de forma nativa —frames con auto-layout (la
+maquetación automática de Figma: los elementos se reacomodan solos), componentes reales,
+instancias y variables enlazadas. No son imágenes exportadas de otra parte.
 
 > **[`CCI8plwuWvfTV8VBpowN5X`](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X)** — una página
-> con tres secciones: 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4 componentes
-> y **las 10 pantallas**. Las variables llevan el *code syntax* apuntando a los tokens reales del
-> prototipo, así que el archivo sirve para Dev Mode.
+> con tres secciones: 31 variables con *scope* (dónde se puede usar cada una) y *code syntax* (el
+> nombre que lleva en el código), 9 estilos de texto, 4 componentes y **las 10 pantallas**. Las
+> variables llevan el *code syntax* apuntando a los tokens (los valores del sistema —colores,
+> tipografías, espacios— con nombre propio) reales del prototipo, así que el archivo sirve para
+> Dev Mode (el modo de Figma donde quien implementa lee medidas y código).
 
 ---
 
@@ -16,7 +19,7 @@ componentes reales, instancias y variables enlazadas. No son imágenes exportada
 |---|---|---|
 | ![Home](01-home.png) | **01 · Home** | La estructura del producto tal como es hoy, con el catálogo real. Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
 | ![Ficha](02-ficha-de-serie.png) | **02 · Ficha de serie** | La pantalla de la app nativa tal como es hoy —«Resumen» con el póster y la lista de «Capítulo N»— y encima lo que la ficha real no dice: dónde vas, qué ya viste y qué abre el siguiente capítulo. Si hay pase disponible, lo dice antes que el precio. |
-| ![Player](03-player.png) | **03 · Player** | El core loop. El muro aparece cuando el siguiente episodio está bloqueado, no antes. |
+| ![Player](03-player.png) | **03 · Player** | El core loop (lo que el usuario hace una y otra vez: ver un episodio y pasar al siguiente). El muro aparece cuando el siguiente episodio está bloqueado, no antes. |
 | ![Acuse](04-acuse-de-la-noche.png) | **04 · El acuse de la noche** | El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Sin botón: la noche se acredita al ver. |
 | ![Pase listo](05-muro-pase-listo.png) | **05 · Muro · el Pase está listo** | El orden que sostiene toda la intervención: historia → posición → gratis → pago → racha. |
 | ![Elección](06-eleccion-de-serie.png) | **06 · ¿A cuál le das el pase?** | El corazón pedagógico: un recurso escaso que hay que asignar. Aquí el usuario declara cuál historia le importa. |

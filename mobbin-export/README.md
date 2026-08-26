@@ -6,6 +6,11 @@
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
 
+> La taxonomía —«Paywall», «Bottom sheet», «Reward claim»— va en inglés a propósito: es el
+> vocabulario con el que Mobbin indexa estos flujos, y traducirlo lo haría inbuscable. Traducidos:
+> *paywall* es el muro de pago, *bottom sheet* la tarjeta que sube desde abajo, *reward claim* el
+> reclamo de la recompensa, *streak* la racha y *countdown* la cuenta regresiva.
+
 Regenerar: `cd poc && npm run export` (con el dev server arriba).
 
 ## Flujo 1 · Cómo se llega al muro
@@ -25,7 +30,7 @@ El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de v
 
 **Ficha de serie · la lista de capítulos** — La misma ficha, bajando. Las tarjetas son las del producto —«Capítulo N», el número como título, «Interactiva» y el candado—; lo que el producto no tiene son las tres marcas de la propuesta: el visto de los que ya viste, el «Seguir viendo» de dónde te quedaste, y el precio en la tarjeta del capítulo 11, que es donde está el muro. Del 12 en adelante la tarjeta se apaga, igual que en la app.
 
-**Player · el core loop** — Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.
+**Player · el core loop** — El core loop: lo que el usuario hace una y otra vez. Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.
 
 ## Flujo 2 · Desbloqueo con el Pase de la Noche
 
@@ -126,7 +131,7 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 
 **Muro · el Pase está listo** — Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.
 
-**La cita · hoy a las 21:30** — El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.
+**La cita · hoy a las 21:30** — El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push —el aviso que llega al teléfono—, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.
 
 **Faltan 42 minutos** — Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.
 

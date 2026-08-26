@@ -96,7 +96,7 @@
             "Action rail",
             "Progress bar"
           ],
-          "note": "Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.",
+          "note": "El core loop: lo que el usuario hace una y otra vez. Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.",
           "stateKey": "player-free",
           "image": "flows/f0-llegar-al-muro/03-player.png",
           "preview": "flows/f0-llegar-al-muro/03-player.webp"
@@ -495,7 +495,7 @@
             "Primary button",
             "Streak strip"
           ],
-          "note": "El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.",
+          "note": "El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push —el aviso que llega al teléfono—, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.",
           "stateKey": "wall-pass-spent",
           "image": "flows/f7-stack-real/02-la-cita.png",
           "preview": "flows/f7-stack-real/02-la-cita.webp"

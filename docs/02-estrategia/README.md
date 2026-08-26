@@ -2,7 +2,7 @@
 
 ## 2.1 La tesis
 
-> El metajuego de Idilio existe, pero vive en una pestaña. El core loop vive en el player. **La estrategia entera consiste en mudar el metajuego al lugar donde el usuario ya está**, y en cambiar la unidad de todo — de monedas a episodios, de días calendario a noches — para que hable el idioma del producto.
+> El metajuego de Idilio existe, pero vive en una pestaña. El core loop (lo que el usuario hace una y otra vez) vive en el player. **La estrategia entera consiste en mudar el metajuego al lugar donde el usuario ya está**, y en cambiar la unidad de todo — de monedas a episodios, de días calendario a noches — para que hable el idioma del producto.
 
 No propongo agregar mecánicas. Propongo **re-situar y re-denominar** las que ya existen, y recién después agregar.
 
@@ -30,13 +30,13 @@ Ocho intervenciones, tres olas. Cada una: hipótesis → qué mueve → cómo lo
 Nada de esto inventa economía. Todo es re-situar y re-denominar. Es la ola más barata y la de mayor alcance.
 
 #### I1 · La moneda habla en episodios
-Cada cifra de monedas del producto lleva su traducción a episodios. `180` pasa a ser `180 monedas · 12 episodios`. El paywall abre con *"Te falta 1 episodio"*, no con *"Tu balance: 0"*.
+Cada cifra de monedas del producto lleva su traducción a episodios. `180` pasa a ser `180 monedas · 12 episodios`. El paywall (el muro de pago) abre con *"Te falta 1 episodio"*, no con *"Tu balance: 0"*.
 
 | | |
 |---|---|
 | **Hipótesis** | El usuario no rechaza el precio: no lo puede calcular. Dándole la unidad que le importa, decide — y decidir, aunque sea que no, es mejor que abandonar. |
 | **Mueve** | Comprensión de la economía (objetivo de experiencia). Secundariamente conversión a pagador. |
-| **Cómo lo sé** | *Leading:* tasa de interacción con el muro (hoy: cuántos tocan algo vs. cuántos cierran). *Lagging:* conversión a primera compra. *Guardrail:* ARPDAU no cae. |
+| **Cómo lo sé** | *Leading* —la señal temprana, la que se mueve en días—: tasa de interacción con el muro (hoy: cuántos tocan algo vs. cuántos cierran). *Lagging* —la señal tardía, la que confirma—: conversión a primera compra. *Guardrail* —la métrica de guardia, la que dice cuándo parar—: ARPDAU (ingreso promedio por usuario activo al día) no cae. |
 | **Costo** | ~1 semana. Es copy y un componente. |
 | **Compuerta ①** | ✅ ocurre en el muro, dentro del loop. |
 
@@ -67,9 +67,9 @@ El link compartido de idilio.tv abre la app **en ese episodio de esa serie**, no
 
 | | |
 |---|---|
-| **Hipótesis** | El compartir ya existe y funciona; lo que se rompe es el aterrizaje. Un deferred deep link recupera intención que hoy se tira. |
+| **Hipótesis** | El compartir ya existe y funciona; lo que se rompe es el aterrizaje. Un deferred deep link (el enlace que sobrevive a la instalación y abre la app justo en el episodio compartido) recupera intención que hoy se tira. |
 | **Mueve** | Instalaciones activadas, y el primer episodio visto post-install. |
-| **Cómo lo sé** | *Leading:* % de installs desde link que llegan al episodio correcto. *Lagging:* D1 de la cohorte de link compartido. |
+| **Cómo lo sé** | *Leading:* % de installs desde link que llegan al episodio correcto. *Lagging:* D1 (cuántos vuelven al día siguiente) de la cohorte (el grupo que entró por ahí) de link compartido. |
 | **Costo** | ~1 semana (Branch/AppsFlyer o Universal Links propios). |
 | **Compuerta ①** | ✅ |
 
@@ -132,10 +132,10 @@ No hay muro de registro. La cuenta se ofrece en un solo momento: cuando el invit
 | | |
 |---|---|
 | **Hipótesis** | 88% consume como invitado porque hoy la cuenta no le da nada. Con racha y saldo, la cuenta pasa a ser un seguro sobre algo que ya siente propio. Ese es el único momento en que registrarse tiene precio emocional. |
-| **Mueve** | Cuentas creadas 12% → objetivo 30%. Habilita push, cross-device y medición real de retención. |
-| **Cómo lo sé** | *Leading:* conversión del prompt contextual vs. el registro actual. *Lagging:* % con cuenta; D30 de la cohorte que se registró tras el prompt. *Guardrail:* abandono en el momento del prompt no sube. |
+| **Mueve** | Cuentas creadas 12% → objetivo 30%. Habilita push (el aviso que llega al teléfono), cross-device (seguir en otro aparato) y medición real de retención. |
+| **Cómo lo sé** | *Leading:* conversión del prompt contextual vs. el registro actual. *Lagging:* % con cuenta; D30 (cuántos siguen ahí a los 30 días) de la cohorte que se registró tras el prompt. *Guardrail:* abandono en el momento del prompt no sube. |
 | **Costo** | ~3 semanas (merge de estado invitado→cuenta es lo caro). |
-| **Compuerta ①** | ✅ el prompt aparece en el muro, no en un onboarding. |
+| **Compuerta ①** | ✅ el prompt aparece en el muro, no en un onboarding (la seguidilla de pantallas de bienvenida). |
 
 #### I8 · El pase como puente entre series
 Cuando el usuario termina una serie o se queda sin pase, se le ofrece dirigir el pase de mañana a una serie nueva del catálogo. El metajuego pasa a ser también descubrimiento.
@@ -185,7 +185,7 @@ I8                                ██████
 
 1. **El reloj no puede vivir en el dispositivo.** Un countdown en cliente se vulnera cambiando la hora del teléfono. Necesita ser server-authoritative, con el cliente mostrando un delta contra `server_time`. Presupuestado dentro de las 4–5 semanas.
 2. **La ventana de 5 a.m. necesita zona horaria del usuario, no del servidor.** MX, CO y US-Hispano cruzan cuatro husos. Si el corte se calcula en UTC, a un usuario de Los Ángeles se le rompe la racha a las 10 p.m. Esto es una decisión de producto disfrazada de detalle técnico y hay que resolverla antes de escribir el primer endpoint.
-3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** Ese 40% es una estimación mía y no un dato medido: no hay medición de push en este producto y no la voy a inventar. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
+3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** Ese 40% es una estimación mía y no un dato medido: no hay medición de push en este producto y no la voy a inventar. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
 
 ## 2.6 Qué queda deliberadamente afuera
 

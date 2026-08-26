@@ -1,5 +1,5 @@
 # Registro de dogfooding — Idilio TV
-Dogfooding manual: 2026-08-25 · Censo del catálogo, rehecho y corregido: 2026-08-26 · Superficies usadas: web player (idilio.tv) + App Store MX (build 1.20.0, 2026-08-21)
+Dogfooding —usar el propio producto como un usuario más— manual: 2026-08-25 · Censo del catálogo, rehecho y corregido: 2026-08-26 · Superficies usadas: web player (el reproductor en el navegador, idilio.tv) + App Store MX (build 1.20.0, 2026-08-21)
 
 ## Qué se pudo usar y qué no
 - **idilio.tv es un reproductor web funcional**, no solo un landing. Reproduce episodios, tiene lista de episodios, autoplay al siguiente y muro de bloqueo. No tiene economía (ni saldo, ni recompensas, ni perfil).
@@ -18,7 +18,7 @@ Dogfooding manual: 2026-08-25 · Censo del catálogo, rehecho y corregido: 2026-
 ### Precio del sumidero
 | Dato | Valor | Fuente |
 |---|---|---|
-| Costo de desbloqueo | **15 monedas / episodio** | muro web ("Se desbloquea en la app con 15 monedas") + paywall nativo ("Costo del episodio: 15") |
+| Costo de desbloqueo | **15 monedas / episodio** | muro web ("Se desbloquea en la app con 15 monedas") + paywall nativo, el muro de pago de la app ("Costo del episodio: 15") |
 | Costo de completar la serie | **660 monedas** | 44 × 15 |
 
 ### Paquetes de monedas (paywall nativo, captura oficial)
@@ -36,21 +36,21 @@ Dogfooding manual: 2026-08-25 · Censo del catálogo, rehecho y corregido: 2026-
 
 <!-- /cifras-citadas -->
 
-Rango de IAP en Google Play: **$0.09 – $299.99**.
+Rango de IAP (in-app purchase: la compra que se hace dentro de la app) en Google Play: **$0.09 – $299.99**.
 
 La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99** y uno **mensual a $14.99**. O sea que Idilio ya es un modelo híbrido — monedas y suscripción conviviendo — y el muro no ofrece ninguno de los dos: solo dice que hay que descargar la app.
 
 ### La app nativa, tal como es hoy
-- Barra superior: logo + **chip de saldo** (ej. 2543) + búsqueda.
-- Rieles home: círculos "Volver por tu próxima novela" → Estrenos → Seguir viendo → Lo más visto → Última Hora → Nuestra selección para ti.
-- Tab bar de 3: **Inicio · Recompensas · Perfil** (Perfil con punto rojo de notificación).
-- Player: overlay tipo TikTok (corazón, comentario, compartir), chip de saldo abajo-izquierda, "ver más" para sinopsis.
+- Barra superior: logo + **chip de saldo** (la pastilla que muestra las monedas, ej. 2543) + búsqueda.
+- Rieles home (las filas horizontales de pósters que se arrastran con el dedo): círculos "Volver por tu próxima novela" → Estrenos → Seguir viendo → Lo más visto → Última Hora → Nuestra selección para ti.
+- Tab bar (la barra de pestañas de abajo) de 3: **Inicio · Recompensas · Perfil** (Perfil con punto rojo de notificación).
+- Player: overlay (la capa de botones encima del video) tipo TikTok (corazón, comentario, compartir), chip de saldo abajo-izquierda, "ver más" para sinopsis.
 - **Ficha de serie:** barra «Volver» y nada más arriba —el título no se repite, va quemado en el arte del póster—, bloque **«Resumen»** con la miniatura a la izquierda y la sinopsis del catálogo al lado, y después **«Capítulos»**: una lista de tarjetas, no una grilla. Cada tarjeta lleva `Capítulo N` en violeta, el número del episodio como título, un galón a la derecha y —en algunos— la píldora **«Interactiva»**. Los bloqueados llevan candado: el primero en violeta encendido, los siguientes atenuados. **En ninguna tarjeta aparece el precio.**
-- Release notes 1.20.0 (2026-08-21): *"Downloads for suscriptions / New daily streak UI"* → la racha se está iterando ahora mismo.
+- Release notes 1.20.0 (2026-08-21): *"Downloads for suscriptions / New daily streak UI"* —«nueva interfaz de la racha diaria»— → la racha se está iterando ahora mismo.
 
 ## Fricciones observadas de primera mano (web)
 1. El reproductor web **no muestra saldo ni economía**: quien llega por un link compartido no ve el sistema, solo un muro.
-2. El muro web es un callejón: única salida "Descargar la app". El contexto (serie, episodio, progreso) **no se transfiere** al deep link.
+2. El muro web es un callejón: única salida "Descargar la app". El contexto (serie, episodio, progreso) **no se transfiere** al deep link (el enlace que debería abrir la app justo en esa pantalla).
 3. La lista de episodios muestra 44 números grises sin precio, sin total, sin "cuánto me falta". La progresión no es legible. **En la app nativa la lista es otra —tarjetas de «Capítulo N», no una grilla— y el resultado es el mismo:** dice cuáles están bloqueados y no dice cuántos faltan, cuánto lleva visto el usuario ni cuánto cuesta abrir el siguiente.
 4. El autoplay al siguiente episodio funciona muy bien hasta el ep. 12; en el 13 el loop se corta en seco sin transición.
 5. Imágenes de póster bloqueadas por CSP en el web player (error de consola) → el catálogo carga con huecos.

@@ -31,7 +31,7 @@ O sea que a la sesión promedio le sobran cuatro episodios de apetito después d
 
 Conviene no estirar el hallazgo ni un centímetro de más. *(Acá decía "el muro llega **siempre** antes que el cansancio". El "siempre" es falso en las 9 series sin muro y en cualquier sesión que arranque a mitad de una historia, que es el mismo centímetro de más que este párrafo pide no estirar.)* A lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
 
-Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall del build 1.20.0:
+Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall (el muro de pago) del build 1.20.0:
 
 ```
 Costo del episodio: 15        Tu balance: 0
@@ -69,7 +69,7 @@ Eso cambia el significado de casi todas las demás señales:
 
 | Señal | Lectura ingenua | Lectura con el catálogo a la vista |
 |---|---|---|
-| Sesión de 22 min / 14 eps | Buen engagement | Al menos una serie agotada — y, si la hipótesis de arriba se sostiene, otra recién empezada |
+| Sesión de 22 min / 14 eps | Buen engagement (que la gente usa mucho la app) | Al menos una serie agotada — y, si la hipótesis de arriba se sostiene, otra recién empezada |
 | 23% vuelve a ver series que ya terminó | Aman el contenido | Ya vieron lo que era gratis y no tienen a dónde ir |
 | DAU/MAU 0.33 | Les falta hábito | **Ninguna historia en particular los está esperando** |
 | 19% reclama la recompensa diaria | La pantalla de recompensas está mal resuelta | Todavía nadie necesita monedas |
@@ -88,7 +88,7 @@ Eso cambia el significado de casi todas las demás señales:
 
 *(Esta falla se llamaba "Las monedas se ganan en un lugar y se gastan en otro". Ensanché el título, no el contenido: el desajuste fuente↔sumidero es el primer caso, pero el segundo —la suscripción, que tampoco está en el muro— no es un problema de monedas y bajo el título viejo entraba de contrabando. Preferí ensanchar antes que abrir una F6: F2–F5 se citan por número en los otros documentos.)*
 
-El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan. La única fuente gratuita —la recompensa diaria y su racha— vive en la pestaña **Recompensas**. El gasto ocurre en el **player**, al chocar con el muro. Son dos pantallas distintas, y cuando el usuario necesita monedas siempre está en la segunda.
+El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan. La única fuente gratuita —la recompensa diaria y su racha— vive en la pestaña **Recompensas**. El gasto ocurre en el **player** —el reproductor—, al chocar con el muro. Son dos pantallas distintas, y cuando el usuario necesita monedas siempre está en la segunda.
 
 - **19% de los usuarios activos reclama la recompensa diaria.** El 81% restante no la rechaza: no sabe que existe, porque nunca aparece en el momento en que le haría falta.
 - **82% nunca abrió el perfil.** El patrón se repite: para este usuario, lo que vive en una pestaña aparte no existe.
@@ -143,7 +143,7 @@ Se le está pidiendo a alguien que entra dos o tres veces por semana que se comp
 
 Y hay algo peor: la racha castiga justo el comportamiento más común del producto. **54% de las sesiones ocurren entre las 11 p.m. y las 2 a.m.** Alguien que ve el lunes a las 23:30 y otra vez a las 00:30 vivió "dos noches seguidas". Para un contador de días calendario fue un solo día —el martes—, y el lunes quedó vacío: racha rota. El usuario pierde por un detalle de calendario que nunca va a aceptar como justo.
 
-> El release note del build 1.20.0 (21-ago-2026) dice *"New daily streak UI"*. Se está iterando la **interfaz** de la racha. El problema no está en la interfaz.
+> El release note del build 1.20.0 (21-ago-2026) dice *"New daily streak UI"* («nueva interfaz de la racha diaria»). Se está iterando la **interfaz** de la racha. El problema no está en la interfaz.
 
 ### F5 · El usuario no puede ver su propio progreso
 
@@ -184,7 +184,7 @@ No lo doy por cierto. Se contrasta con dos consultas: cruzar *quién vuelve a ve
 
 **Mecánicas sociales (rankings, tablas de posiciones, comparación con amigos).** El contexto es de 11 p.m. a 2 a.m., consumo solitario, un género que carga cierto pudor ("novelas de celular"), y 88% de invitados sin identidad. Una tabla de posiciones acá no motiva: expone. Descartado por el contexto, no por la calidad de la mecánica.
 
-**Coleccionables e insignias como intervención principal.** Nada en las señales disponibles indica motivación de coleccionista, agregan carga mental a un loop que debe operarse con una sola mano, y su relación con DAU/MAU es indirecta. Pueden entrar después, como una capa; no como la apuesta.
+**Coleccionables e insignias como intervención principal.** Nada en las señales disponibles indica motivación de coleccionista, agregan carga mental a un loop —el ciclo que el usuario repite— que debe operarse con una sola mano, y su relación con DAU/MAU (usuarios activos por día sobre usuarios activos por mes: qué tan seguido vuelve la gente) es indirecta. Pueden entrar después, como una capa; no como la apuesta.
 
 
 ---

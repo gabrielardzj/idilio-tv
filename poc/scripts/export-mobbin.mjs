@@ -88,7 +88,7 @@ const FLOWS = [
         estado: 'player-free',
         type: 'Media player', patterns: ['Vertical video', 'Swipe navigation', 'Progress indicator'],
         elements: ['Video', 'Top bar', 'Wallet chip', 'Action rail', 'Progress bar'],
-        note: 'Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.',
+        note: 'El core loop: lo que el usuario hace una y otra vez. Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.',
         act: async (p) => {
           await p.locator('.serie-scroll').evaluate((e) => { e.scrollTop = 0 })
           await p.locator('.ep.abierto').first().click()
@@ -299,7 +299,7 @@ const FLOWS = [
         id: '02-la-cita', name: 'La cita · hoy a las 21:30',
         type: 'Paywall', patterns: ['Countdown', 'Appointment', 'Opt-in notification'],
         elements: ['Bottom sheet', 'Clock time', 'Reminder toggle', 'Primary button', 'Streak strip'],
-        note: 'El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.',
+        note: 'El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push —el aviso que llega al teléfono—, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.',
         estado: 'wall-pass-spent',
         goto: '/serie/la-herencia-del-patriarca/19',
       },
@@ -514,6 +514,11 @@ ${m.summary.screens} pantallas · ${m.summary.flows} flujos · ${m.device} · ${
 
 Abre \`index.html\` para la galería navegable. \`manifest.json\` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
+
+> La taxonomía —«Paywall», «Bottom sheet», «Reward claim»— va en inglés a propósito: es el
+> vocabulario con el que Mobbin indexa estos flujos, y traducirlo lo haría inbuscable. Traducidos:
+> *paywall* es el muro de pago, *bottom sheet* la tarjeta que sube desde abajo, *reward claim* el
+> reclamo de la recompensa, *streak* la racha y *countdown* la cuenta regresiva.
 
 Regenerar: \`cd poc && npm run export\` (con el dev server arriba).
 

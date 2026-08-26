@@ -1,5 +1,7 @@
 # Anexo · Benchmark competitivo
 
+*Benchmark: mirar qué hicieron los demás con el mismo problema, para no estrenar errores ya cometidos.*
+
 > **Pregunta:** ¿qué es exactamente Idilio TV, quién más está construyendo un metajuego sobre
 > contenido serializado, cómo lo hace, contra qué chocó y cómo lo resolvió?
 >
@@ -52,8 +54,8 @@ el producto de mayor valor de la economía también.
 Y hay un segundo problema, de precio, que no hace falta salir del catálogo para verlo. El pase
 semanal cuesta **$7.99**. La serie mediana de Idilio —40 episodios bloqueados a 15 monedas— cuesta
 **600 monedas**, y cuántos dólares son esas 600 monedas depende del escalón que compre el usuario.
-El censo convierte al escalón de 180 monedas por $1.99 —el que muestra el paywall nativo del build
-1.20.0, y el que usa el anexo de dogfooding—: con esa tasa la serie mediana sale **≈ $6,63** y el
+El censo convierte al escalón de 180 monedas por $1.99 —el que muestra el paywall (el muro de pago) nativo del build
+1.20.0, y el que usa el anexo de dogfooding, el de usar el propio producto como un usuario más—: con esa tasa la serie mediana sale **≈ $6,63** y el
 pase semanal queda **un 20 % más caro que terminar la serie entera comprándola**. En el peor
 escalón —**75 monedas por $0.99**, ocho paquetes para juntar 600— la misma serie sale **≈ $7,92**,
 y ahí es un empate técnico. En ningún punto de la escalera la semana de suscripción sale más
@@ -66,7 +68,7 @@ es que la comparación está al alcance del usuario, en la única pantalla donde
 precios, y que ninguna forma de armarla favorece al pase semanal. No es un problema de cadencia —en Latinoamérica el plan semanal se lleva el **29 % de los
 ingresos de suscripción de la región**, según RevenueCat—: es un problema del número.
 
-*(Dos correcciones acá. La primera: esto cerraba en «$6,63» a secas, y la tabla de IAP de arriba le
+*(Dos correcciones acá. La primera: esto cerraba en «$6,63» a secas, y la tabla de IAP (in-app purchase: las compras dentro de la app) de arriba le
 daba al lector con qué desarmarlo —en el escalón de 75 monedas la cuenta empata—. El $6,63 no es un
 precio, es una conversión, y hay que decir con qué tasa se hace. La segunda: decía que el 29 % es
 «la proporción más alta de cualquier región». La ficha de ese reporte, en §5.7, trae el 29 % de
@@ -87,14 +89,14 @@ Antes de comparar mecánicas, hay que fijar la vara. La retención de la categor
 
 | | Categoría global | China | DramaBox |
 |---|---|---|---|
-| **D1** | 26,9 % | 28,8 % | 27,5 % |
-| **D7** | 8,6 % | 11,5 % | 7,8 % |
-| **D14** | 5,6 % | 6,8 % | 5,0 % |
+| **D1** *(vuelven al día siguiente)* | 26,9 % | 28,8 % | 27,5 % |
+| **D7** *(siguen a la semana)* | 8,6 % | 11,5 % | 7,8 % |
+| **D14** *(a las dos semanas)* | 5,6 % | 6,8 % | 5,0 % |
 
 *(Acá decía «los datos de retención de Sensor Tower». Es un cruce mío: la única fuente que este
 anexo tiene para estos tres números es el blog de Adjoe (§5.7), y Sensor Tower es la fuente de los
 ingresos de la categoría, que están más abajo. Importa porque Adjoe no es un tercero neutral —vende
-engagement recompensado a estas mismas apps—, así que la tabla vale como orden de magnitud del
+engagement recompensado (uso a cambio de premios) a estas mismas apps—, así que la tabla vale como orden de magnitud del
 sector, no como medición independiente, y toda esta sección se apoya en ella. Queda anotado
 también en [§5.6](#56--lo-que-no-pude-verificar).)*
 
@@ -107,7 +109,7 @@ Dos lecturas se siguen de ahí, y las dos importan:
 1. **La intervención no está corrigiendo un defecto de Idilio. Está atacando el techo de la
    categoría.** Eso sube el valor estratégico de acertar y baja la probabilidad de acertar rápido:
    nadie en el sector lo tiene resuelto.
-2. **La barra de éxito debe ser relativa, no absoluta.** Prometer "D30 al doble" es prometer contra
+2. **La barra de éxito debe ser relativa, no absoluta.** Prometer "D30 —los que siguen a los 30 días— al doble" es prometer contra
    una física que ningún competidor venció. Prometer "mover D7 de 8,6 % a 11 %" es una apuesta
    defendible y medible.
 
@@ -148,7 +150,7 @@ y **fallar un día devuelve al día 1**.
 | **ShortMax** | 25–30 monedas diarias según el día del ciclo |
 | **GoodShort** | El check-in da **puntos que extienden el VIP**, no saldo |
 | **FlexTV** | Mismo patrón — y la queja registrada de sus usuarios es que **lo que da no alcanza** |
-| **Kalos TV** | Sección "Rewards" con tareas; hay reportes de que el check-in falla |
+| **Kalos TV** | Sección "Rewards" —recompensas— con tareas; hay reportes de que el check-in falla |
 
 **Lo que esto confirma:** la racha rota de Idilio no es un error de Idilio, es un calco del
 estándar. Y el estándar está calibrado para un usuario de 7 días/semana que, según los datos de
@@ -172,7 +174,7 @@ que el dato es de tercera mano.)*
 ### Familia 3 · Tareas rotativas ("rewards center")
 
 Las fuentes secundarias describen a **ReelShort** rotando micro-encargos: ver episodios, compartir
-en redes, **activar notificaciones push**, invitar amigos. Sería la familia más flexible y la que
+en redes, **activar notificaciones push** (los avisos que llegan al teléfono), invitar amigos. Sería la familia más flexible y la que
 más se parece a un metajuego real, porque el diseñador elige qué conducta premiar cada semana.
 
 El detalle que importaría es que una de las tareas premiadas fuera **activar las notificaciones**:
@@ -203,7 +205,7 @@ al de Idilio:
 - **Todo gratis, financiado por publicidad.** No hay muro de monedas.
 - El usuario **gana monedas de oro viendo** y las **convierte en dinero real** ("regístrate 7
   días y retira hasta ¥4,79").
-- Onboarding con credenciales de Douyin, lo que le abarata la adquisición.
+- Onboarding —la entrada del usuario nuevo— con credenciales de Douyin, lo que le abarata la adquisición.
 
 Es el mismo mecanismo de "tarea → recompensa por tiempo de pantalla" que la Comisión Europea
 **prohibió permanentemente** en TikTok Lite (§5.4, D5). Opera a escala de esos **304 M de MAU** en
@@ -331,7 +333,7 @@ vuelves a cero (ReelShort lo hace explícito). Fuera de la categoría hay dos co
   un 40 % la cantidad de learners con rachas de 7+ días**; un año después, **algo más de la mitad**
   de sus learners diarios sostenía 7+ días, contra **un tercio** antes. Bajar la barra sube la
   racha, y está medido. Además dejan al usuario **configurar la hora de inicio de su día** —el
-  rollover no es medianoche por decreto— y venden el *streak freeze* como red de seguridad, no
+  rollover no es medianoche por decreto— y venden el *streak freeze* (el congelador de racha: un día libre que no la rompe) como red de seguridad, no
   como castigo.
 - **Snapchat** monetiza el rescate, y el detalle importa para el diseño: **el primer Streak Restore
   es gratis y cada uno adicional cuesta 99 centavos** en Estados Unidos (el precio varía por país);
@@ -541,7 +543,7 @@ Eso sigue siendo original de este diagnóstico.
   industria no aparece en el newsroom de Snap ni en ninguna fuente que haya podido abrir. La saqué
   del anexo. El precio (99 centavos a partir del segundo rescate) sí está en el soporte de Snapchat
   y se queda.
-- **El ARPU de apps en Latinoamérica.** El $11,30 mensual que citaba la versión anterior de este
+- **El ARPU (ingreso promedio por usuario) de apps en Latinoamérica.** El $11,30 mensual que citaba la versión anterior de este
   anexo no está en el *State of Subscription Apps 2026* de RevenueCat, y la única fuente que lo
   publica es un resumen de tercero que no abre. Lo reemplacé por lo que el reporte sí trae
   (MRR mediano +17,2 %, ~$0,10 de ingreso por instalación a D14, 29 % de ingresos en plan semanal),
