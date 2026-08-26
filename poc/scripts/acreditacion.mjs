@@ -55,6 +55,51 @@ const falto = await desdeCero('Falté una noche')
 caso('faltó una noche: entran los dos pendientes', falto.pases === '2/2', `${falto.antes} → ${falto.pases}`)
 caso('faltó una noche: el comodín cubre la racha', falto.racha === '4', `racha ${falto.racha}`)
 
+// ── R5 · la escalera da la vuelta ────────────────────────────────────────
+// Sin esto la racha se clavaba en 7: el bono de la noche 7 se pagaba TODAS las
+// noches —525 monedas por semana donde el modelo dice 150— y el comodín, que se
+// gana en la noche 3, no volvía nunca, aunque el muro promete otro.
+await page.goto(URL, { waitUntil: 'networkidle' })
+await page.waitForTimeout(600)
+const cerrar = async () => {
+  const c = page.locator('.sheet-close')
+  if (await c.count()) { await c.first().click(); await page.waitForTimeout(150) }
+}
+await btn('Falté una noche').click()   // gasta el comodín ganado en la noche 3
+await page.waitForTimeout(250)
+await cerrar()
+
+const comodines = async () => Number((await nota()).match(/comodines (\d+)/)[1])
+const noche = async () => {
+  await btn('Es mañana y volví').click()
+  await page.waitForTimeout(200)
+  await cerrar()
+  return Number(await racha())
+}
+
+const vuelta = []
+for (let i = 0; i < 8 && vuelta.at(-1) !== 1; i++) vuelta.push(await noche())
+caso('la escalera vuelve a 1 después de la 7',
+  vuelta.at(-1) === 1 && vuelta.at(-2) === 7, vuelta.join('→'))
+
+// Y acá está el punto: gastar el comodín YA en la vuelta nueva y comprobar que
+// vuelve. La versión anterior de esta comprobación pasaba con la noche 3 de la
+// PRIMERA vuelta, así que no probaba nada de lo que decía probar.
+await btn('Falté una noche').click()
+await page.waitForTimeout(250)
+await cerrar()
+caso('gastarlo en la vuelta nueva lo deja en cero', (await comodines()) === 0)
+const hasta3 = []
+for (let i = 0; i < 3 && hasta3.at(-1) !== 3; i++) hasta3.push(await noche())
+caso('el comodín vuelve en la noche 3 de la vuelta nueva',
+  hasta3.at(-1) === 3 && (await comodines()) === 1, `noches ${hasta3.join('→')}`)
+
+// El saldo es la prueba dura de que la emisión no se disparó: ocho noches de
+// escalera son 30+45+75 de la primera vuelta y 30+45 de la segunda.
+const saldoFinal = Number((await nota()).match(/Saldo (\d+)/)[1])
+caso('la emisión de monedas sigue la escalera, no el bono repetido', saldoFinal <= 250,
+  `${saldoFinal} monedas tras ocho noches (con el bono clavado eran 525)`)
+
 console.log(`\n${fallos === 0 ? '✓ LA ACREDITACIÓN CUMPLE LO QUE EL ENTREGABLE PROMETE' : `✗ ${fallos} REGLAS ROTAS`}`)
 
 await browser.close()

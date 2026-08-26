@@ -58,7 +58,11 @@ Con dos o más series empezadas, usar el pase abre una elección. Esta regla par
 54% de las sesiones pasan entre 11 p.m. y 2 a.m. Con corte a medianoche, ver el martes a las 23:40 y el miércoles a las 00:20 cuenta como una sola visita y el martes queda roto. Con corte a las 5 a.m., son dos noches — que es como el usuario las vivió. El corte se calcula en la zona horaria del usuario, nunca en UTC.
 
 **R4 · Un comodín, ganado en la noche 3, que se consume solo.**
-Un usuario de 2.3 días por semana no puede sostener 7 de 7. El comodín absorbe una falta sin que haya que reclamarlo, comprarlo ni enterarse. Se recarga al completar el ciclo de 7 noches.
+Un usuario de 2.3 días por semana no puede sostener 7 de 7. El comodín absorbe una falta sin que haya que reclamarlo, comprarlo ni enterarse. La escalera **da la vuelta**: después de la noche 7 empieza otra de siete, y el comodín se recarga en la **noche 3 de cada vuelta** — uno por ciclo.
+
+> *Acá decía «se recarga al completar el ciclo de 7 noches», y no es exacto: el comodín se gana en la noche 3, no en la 7. La diferencia importa porque la protección tiene que llegar cuando todavía quedan noches que perder, no cuando el ciclo ya terminó. El muro dice lo mismo que esta regla.*
+>
+> *Y la vuelta no estaba implementada.* El reducer y `credit_night()` topaban la racha en 7 y la dejaban ahí. Con la escalera clavada, el bono de la noche 7 se pagaba **todas las noches** —525 monedas por semana donde el modelo de sostenibilidad dice 150— y el comodín no volvía nunca, aunque el muro promete otro. Corregido en las dos, y [`acreditacion.mjs`](../../poc/scripts/acreditacion.mjs) lo sostiene: con el tope clavado otra vez, la racha sale `7→7→7` y el saldo 600, y los tres pasos caen.
 *La regla detrás de la regla: si hay que hacer algo para no perder la racha, la racha ya es una tarea.*
 
 **R5 · La escalera de la racha paga en pases, no en monedas.**

@@ -89,7 +89,7 @@ export function StreakStrip({
       {shieldJustUsed ? (
         <div className="shield-row spent">
           <Shield s={17} c="#FB923C" />
-          <p><b>Tu comodín te cubrió.</b> Faltaste una noche y la racha sigue viva. Ganas otro al completar las 7 noches.</p>
+          <p><b>Tu comodín te cubrió.</b> Faltaste una noche y la racha sigue viva. Ganas otro en la noche 3 de la próxima vuelta.</p>
         </div>
       ) : shields > 0 ? (
         <div className="shield-row">

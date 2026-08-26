@@ -139,11 +139,13 @@ begin
     return;
   end if;
 
+  -- La escalera da la vuelta en vez de clavarse en 7: si no, el bono de la
+  -- noche 7 se paga todas las noches y el comodín de la noche 3 no vuelve nunca.
   if v_st.last_night is null or v_st.last_night = v_night - 1 then
-    v_st.nights := least(v_st.nights + 1, 7);
+    v_st.nights := case when v_st.nights >= 7 then 1 else v_st.nights + 1 end;
   elsif v_st.shields > 0 then
     v_st.shields := v_st.shields - 1;            -- el comodín se consume solo
-    v_st.nights  := least(v_st.nights + 1, 7);
+    v_st.nights  := case when v_st.nights >= 7 then 1 else v_st.nights + 1 end;
   else
     v_st.nights := 1;                             -- se cortó
     v_broke := true;

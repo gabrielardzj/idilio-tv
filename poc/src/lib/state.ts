@@ -301,12 +301,19 @@ function acreditarNoche(s: State): State {
   let shieldJustUsed = false
   let streakJustBroke = false
 
+  // La escalera da la vuelta: después de la noche 7 empieza otra de siete.
+  // Antes se quedaba clavada en 7, y eso rompía las dos promesas de la
+  // mecánica a la vez — el bono de la noche 7 se pagaba TODAS las noches (525
+  // monedas por semana donde `weeklyIssuance` dice 150) y el comodín, que se
+  // gana en la noche 3, no volvía nunca, aunque el muro promete otro.
+  const siguiente = (n: number) => (n >= 7 ? 1 : n + 1)
+
   if (consecutiva || s.lastNight === null) {
-    nights = Math.min(nights + 1, 7)
+    nights = siguiente(nights)
   } else if (shields > 0) {
     shields -= 1
     shieldJustUsed = true
-    nights = Math.min(nights + 1, 7)
+    nights = siguiente(nights)
   } else {
     nights = 1
     streakJustBroke = true
