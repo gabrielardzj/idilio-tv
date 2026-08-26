@@ -55,11 +55,15 @@ semanal cuesta **$7.99**. La serie mediana de Idilio —40 episodios bloqueados 
 El censo convierte al escalón de 180 monedas por $1.99 —el que muestra el paywall nativo del build
 1.20.0, y el que usa el anexo de dogfooding—: con esa tasa la serie mediana sale **≈ $6,63** y el
 pase semanal queda **un 20 % más caro que terminar la serie entera comprándola**. En el peor
-escalón de la tabla de acá arriba —el de 75 monedas, ocho paquetes para juntar 600— la misma serie
-sale **≈ $7,92**, y ahí es un empate técnico. En ningún punto de la escalera la semana de
-suscripción sale más barata que la serie completa. El propio muro publica un precio igual o más
-bajo para el mismo resultado, y lo hace en la única pantalla donde el usuario está mirando el
-precio. No es un problema de cadencia —en Latinoamérica el plan semanal se lleva el **29 % de los
+escalón —**75 monedas por $0.99**, ocho paquetes para juntar 600— la misma serie sale **≈ $7,92**,
+y ahí es un empate técnico. En ningún punto de la escalera la semana de suscripción sale más
+barata que la serie completa.
+
+Con una salvedad que conviene decir, porque es la diferencia entre un argumento y un eslogan: **el
+muro no publica ese precio en ninguna parte.** Publica paquetes. Las 600 monedas hay que armarlas
+—y las conversiones de arriba son mías, no del producto—. Lo que sí es cierto sin ninguna cuenta
+es que la comparación está al alcance del usuario, en la única pantalla donde está mirando
+precios, y que ninguna forma de armarla favorece al pase semanal. No es un problema de cadencia —en Latinoamérica el plan semanal se lleva el **29 % de los
 ingresos de suscripción de la región**, según RevenueCat—: es un problema del número.
 
 *(Dos correcciones acá. La primera: esto cerraba en «$6,63» a secas, y la tabla de IAP de arriba le

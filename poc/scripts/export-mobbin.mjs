@@ -250,7 +250,7 @@ const FLOWS = [
         goto: '/serie/pasion-a-domicilio/13',
       },
       {
-        id: '02-la-cita', name: 'La cita · faltan 17 h',
+        id: '02-la-cita', name: 'La cita · hoy a las 21:30',
         type: 'Paywall', patterns: ['Countdown', 'Appointment', 'Opt-in notification'],
         elements: ['Bottom sheet', 'Clock time', 'Reminder toggle', 'Primary button', 'Streak strip'],
         note: 'El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.',

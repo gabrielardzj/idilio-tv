@@ -266,6 +266,14 @@ export function proximaCita(now: number): number {
 }
 
 /**
+ * Cuántas noches pasaron entre dos noches. Las noches son fechas locales
+ * `YYYY-MM-DD`, así que se comparan en UTC a propósito: así la diferencia son
+ * múltiplos exactos de un día y un cambio de horario de verano no la corre.
+ */
+const nochesEntre = (desde: string, hasta: string) =>
+  Math.round((Date.parse(`${hasta}T00:00:00Z`) - Date.parse(`${desde}T00:00:00Z`)) / 86_400_000)
+
+/**
  * Acredita la noche si es nueva: avanza la racha, entrega el pase y paga el
  * bono. Si se saltó noches, consume el comodín; si no queda, la racha se corta.
  * Es idempotente dentro de una misma noche.
@@ -292,12 +300,20 @@ function acreditarNoche(s: State): State {
   }
 
   const reward = STREAK[nights - 1]
-  const passes = Math.min(s.passes + 1, MAX_PASSES)
+
+  // Emisión por reloj, entrega al ver (R1). Al volver entra todo lo que se
+  // emitió mientras el usuario no estaba, no un solo pase: si solo entrara uno,
+  // faltar una noche costaría el pase de esa noche —el "use it or lose it" que
+  // esta mecánica existe para no repetir—. El tope lo corta en MAX_PASSES.
+  const pendientes = s.lastNight === null ? 1 : nochesEntre(s.lastNight, noche)
+  const passes = Math.min(s.passes + pendientes, MAX_PASSES)
+  const entregados = passes - s.passes
 
   // Acreditar en silencio dejaría el metajuego invisible — que es exactamente
   // el defecto que este diseño corrige. El acuse es un toast de 2 s en el
   // player: entera sin interrumpir y sin pedir nada.
-  const partes = [`Noche ${nights}`, passes > s.passes ? '+1 pase' : null,
+  const partes = [`Noche ${nights}`,
+                  entregados > 0 ? `+${entregados} ${entregados === 1 ? 'pase' : 'pases'}` : null,
                   reward.coins ? `+${reward.coins} monedas` : null].filter(Boolean)
 
   return {

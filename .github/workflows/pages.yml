@@ -35,7 +35,7 @@ jobs:
       # Saltar a un estado con el panel prueba que el estado existe, no que se
       # pueda llegar a él. Esta comprobación ya encontró un bug que el panel
       # escondía: el episodio 1 de una serie sin empezar abría el muro.
-      - name: Recorrer el prototipo como una persona
+      - name: Recorrer el prototipo y verificar la acreditación del pase
         working-directory: poc
         run: |
           npx playwright install chromium-headless-shell --only-shell
@@ -46,6 +46,7 @@ jobs:
           trap 'kill $SERVIDOR 2>/dev/null || true' EXIT
           npx wait-on http://localhost:5199 -t 30000
           npm run recorrer
+          npm run acreditacion
 
       # 2 · la implementación sobre el stack real (Next.js) va en /stack
       - name: Verificar que el modelo económico no divergió

@@ -34,7 +34,7 @@ Y el muro, con sus trece estados:
 | 13 | Mi economía | Fuentes, sumidero y posición, en una sola vista |
 
 Y tres más en [`web/`](../../web/), sobre el stack real, que son **rutas prerrenderizadas** y no
-estados de un panel: el pase listo, la cita de mañana con «Avísame», y el contador de 42 minutos
+estados de un panel: el pase listo, la cita de las 21:30 con «Avísame», y el contador de 42 minutos
 donde los segundos vuelven a ser el héroe.
 
 **El recorrido completo se verifica solo.** `npm run recorrer` maneja el prototipo como una persona —home → una serie sin empezar → ver los gratis → chocar con el muro— y comprueba once cosas, entre ellas que el muro abra con la historia antes que con el precio. Corre en el pipeline.
@@ -93,6 +93,10 @@ Las tres series del POC son reales y están elegidas para cubrir la moda y los d
 **El countdown gigante estaba mal.** La primera versión mostraba `17h 47m 03s` como héroe. Al usarlo, comunica *«falta muchísimo»* — el mensaje opuesto al buscado. Se reemplazó por la hora del reloj (`HOY A LAS 21:30`, la hora de siempre del usuario) con el intervalo debajo. El countdown vuelve a ser héroe solo cuando falta menos de una hora.
 
 **El pase caducaba, y eso era el error de Webtoon otra vez.** La primera versión decía *"no se acumula, el que no se usa se pierde"*. Al verificar el precedente — el Daily Pass de Webtoon, retirado en mayo de 2025 — resultó que la queja dominante de sus lectores durante cinco años fue justamente el "úsalo o piérdelo": convertía leer en una tarea. Era la misma trampa que el diagnóstico le señala a la racha diaria de Idilio, reintroducida sin darme cuenta. Los pases ahora se acumulan hasta 2: faltar una noche no cuesta nada y volver seguido sigue rindiendo más. Detalle completo en [§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra).
+
+**El documento prometía un pase que el código no entregaba.** El diseño dice que el pase se *emite por reloj* y se *entrega al ver*, y que por eso al volver de una noche de ausencia hay **dos** esperando. Las dos implementaciones —el reducer del prototipo y `credit_night()` en SQL— entregaban `+1` por visita. La diferencia solo se nota en el caso que la mecánica existe para cubrir: quien gastó su pase anoche y faltó hoy volvía a encontrar uno solo, o sea *use it or lose it* — el error de Webtoon, otra vez, ahora escondido en una línea de código en vez de en una frase. Se corrigió en las dos, y ahora [`scripts/acreditacion.mjs`](../../poc/scripts/acreditacion.mjs) lo sostiene en CI: le devolví el `+1` fijo al reducer y la prueba cae señalando exactamente esa regla.
+
+*Por qué hacía falta una prueba nueva.* [`recorrer.mjs`](../../poc/scripts/recorrer.mjs) evita el panel del director a propósito, porque saltar a un estado no prueba que se pueda llegar a él. Pero estas reglas hablan del **paso del tiempo**, y no hay forma de esperar una noche dentro de una prueba: ahí el panel es la única vía. Son dos scripts porque prueban dos cosas distintas, no por comodidad.
 
 **El badge «Una serie completa» era falso en 40 de las 41 series con muro.** Estaba fijo sobre el paquete de 660 monedas porque *Pasión a Domicilio* cuesta exactamente eso — y es la única que cuesta exactamente eso. El censo mostró que las series van de 150 a 960 monedas, y los dos números que salen de ahí dicen cosas distintas: el badge es literalmente inexacto en 40 de 41, y en **19 de las 41 (el 46%)** el paquete directamente no alcanza para terminar la serie. Ese segundo caso es el que cuesta confianza, porque el usuario paga creyendo el badge y sigue frente al muro. Ahora la tienda abre con la meta calculada de la serie que el usuario está viendo y el badge cae sobre el paquete que de verdad alcanza.
 

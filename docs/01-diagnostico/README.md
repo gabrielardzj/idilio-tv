@@ -14,7 +14,7 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
 
 ## 1.1 Los dos hallazgos que ordenan todo lo demás
 
-> **Una corrección de método.** La primera versión de este diagnóstico decía "12 episodios gratis por serie", y ese número salía de la única serie que me había tocado abrir. Después medí las 50 del catálogo: lo más frecuente son **10** episodios gratis por serie, y *Pasión a Domicilio* es una de cuatro excepciones. El censo completo está en [`docs/00-dogfooding`](../00-dogfooding/). Corregir el número no debilitó el hallazgo: lo volvió más nítido, y destapó uno más grande.
+> **Una corrección de método.** La primera versión de este diagnóstico decía "12 episodios gratis por serie", y ese número salía de la única serie que me había tocado abrir. Después medí las 50 del catálogo: lo más frecuente son **10** episodios gratis por serie —37 de las 41 series con muro—, y *Pasión a Domicilio* es una de las cuatro excepciones que sí tienen muro. Contando también las 9 series que son gratis enteras, las excepciones son cinco. El censo completo está en [`docs/00-dogfooding`](../00-dogfooding/). Corregir el número no debilitó el hallazgo: lo volvió más nítido, y destapó uno más grande.
 
 ### Hallazgo 1 · Ninguna historia dura lo que dura una sesión: 10 episodios gratis contra 14 por sesión
 
@@ -27,7 +27,7 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
                    EL MURO
 ```
 
-O sea que el usuario promedio se queda con hambre de cuatro episodios más. Ninguna historia le alcanza para una sesión entera —el bloque gratis más largo del catálogo es de 12 episodios—: en las 41 series con muro se acaba lo gratis, y en las 9 que son gratis enteras se acaba la serie, que ninguna pasa de 10 episodios.
+O sea que a la sesión promedio le sobran cuatro episodios de apetito después del último gratis de una serie. Ninguna historia del catálogo alcanza para cubrir **una sesión promedio**: el bloque gratis más largo es de 12 episodios, y las 9 series que son gratis enteras no pasan de 10. *(Para una sesión corta sí alcanza, y de sobra — la media de 14 no dice cuántas sesiones son cortas. Ver la nota de abajo.)*
 
 Conviene no estirar el hallazgo ni un centímetro de más. *(Acá decía "el muro llega **siempre** antes que el cansancio". El "siempre" es falso en las 9 series sin muro y en cualquier sesión que arranque a mitad de una historia, que es el mismo centímetro de más que este párrafo pide no estirar.)* A lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
 
@@ -40,7 +40,7 @@ Costo del episodio: 15        Tu balance: 0
   $0.99 → 180    $1.99 → 180    $3.99 → 375
 ```
 
-Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más** —la captura de arriba llega hasta el tercero; el cuarto lleva badge de −30% y está en el [registro del dogfooding](../00-dogfooding/), y F3 los cuenta a los cuatro—. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
+Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más** —la transcripción de arriba llega hasta el tercero; del cuarto solo pude capturar el badge de −30%, y queda anotado así en el [registro del dogfooding](../00-dogfooding/)—. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
 
 ### Hallazgo 2 · Pagar no es la única salida del muro: empezar otra serie es gratis
 
@@ -95,7 +95,9 @@ El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué
 
 La pestaña Recompensas ya está en la barra inferior. Que exista no alcanza. **Un metajuego alojado en un destino que el usuario no visita no puede mover DAU/MAU, por bien diseñado que esté.**
 
-**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a $7.99** y uno **mensual a $14.99**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal a $7.99 sale más caro que terminar la serie mediana comprándola —600 monedas ≈ $6.63—, así que el propio muro publica un precio más bajo para el mismo resultado. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
+**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a $7.99** y uno **mensual a $14.99**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal a $7.99 sale más caro que terminar la serie mediana comprándola —600 monedas, entre ≈ $6.63 y ≈ $7.92 según el paquete con que se armen—. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
+
+Vale separar dos cosas que se confunden fácil, porque la estrategia descarta una y propone la otra. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). **Como superficie**, es otra cosa: el producto de mayor valor de la economía no aparece en el momento de máxima intención, y eso es una falla del muro, no de la suscripción.
 
 ### F2 · Nadie le dice al usuario cuánto vale una moneda
 
@@ -121,6 +123,9 @@ Datos reales del paywall:
 | $0.99 (oferta de entrada) | 180 | **181.8** |
 | $1.99 | 180 | 90.5 |
 | $3.99 | 375 | **94.0** |
+| (4º paquete) | — | — |
+
+Del cuarto paquete solo pude leer el badge —−30%—: en la captura del paywall queda por debajo del corte, sin precio ni monedas visibles. Va en la tabla igual, porque una tabla de tres donde el producto tiene cuatro es el mismo tipo de omisión que este documento le señala al muro. El argumento de abajo se sostiene sobre los tres que sí se pudieron leer.
 
 Dos problemas:
 

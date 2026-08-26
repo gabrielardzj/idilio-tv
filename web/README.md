@@ -31,9 +31,18 @@ vulnera cambiando la hora del teléfono, y con él la mecánica entera.
 
 Acá el estado económico se resuelve en un **Server Component**
 ([`app/serie/[slug]/[ep]/page.tsx`](app/serie/[slug]/[ep]/page.tsx)) y el cliente solo
-pinta el delta contra `serverNow`. La acreditación de pases es **perezosa** —se calcula al
-leer el estado, no con un cron por usuario— tanto en [`lib/pase.ts`](lib/pase.ts) como en
-`accrue_passes()` de Postgres.
+pinta el delta contra `serverNow`.
+
+La entrega del pase **no cuelga de ningún reloj que dispare solo**: `credit_night()`
+([`lib/supabase/schema.sql`](lib/supabase/schema.sql)) se llama al terminar un episodio, y es
+idempotente dentro de la misma noche, así que llamarla en cada episodio es seguro. No hay cron
+por usuario ni job que corra de madrugada — que es lo que hace que no haga falta ningún botón, y
+lo que lleva la adopción de la fuente del 19% de hoy a ~100% por construcción.
+
+> **Acá decía `accrue_passes()`, y esa función no existe.** El esquema tiene `night_of()`,
+> `use_pass()`, `credit_night()` y `claim_guest()`, nada más. La frase describía además una
+> acreditación «perezosa, al leer el estado», que es justo el modelo que el diseño abandonó:
+> si el pase se acreditara al leer, volvería a poder llegar sin el usuario delante.
 
 **Con una salvedad que conviene decir acá, porque se ve al abrir el link.** El sitio publicado
 cuenta contra un **ancla de tiempo fija**, y eso no lo causa el export estático: `estadoDelPase`

@@ -110,7 +110,8 @@ export async function desbloqueadoHasta(slug: string): Promise<number> {
  * Estado del metajuego.
  *
  * En producción es una fila por espectador y no depende de la serie:
- * `select accrue_passes(v); select * from pass_state where viewer_id = v`.
+ * `select * from pass_state where viewer_id = v`. Sin función de acreditación previa:
+ * el pase ya se entregó al terminar el episodio, vía `credit_night()`.
  *
  * En el fixture, en cambio, cada serie devuelve un estado distinto — es la forma
  * de que las tres situaciones del muro sean rutas reales y prerrenderizadas, en

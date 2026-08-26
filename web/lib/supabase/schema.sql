@@ -126,6 +126,7 @@ declare
   v_st     pass_state%rowtype;
   v_bonus  int := 0;
   v_broke  boolean := false;
+  v_passes smallint;
 begin
   select timezone, habitual_hour into v_tz, v_hab from viewer v
     join pass_state ps on ps.viewer_id = v.id where v.id = p_viewer;
@@ -148,15 +149,21 @@ begin
     v_broke := true;
   end if;
 
+  -- Emisión por reloj, entrega al ver (R1): entra todo lo emitido desde la
+  -- última noche acreditada, no un solo pase. Con +1 fijo, faltar una noche
+  -- costaría el pase de esa noche, que es el "use it or lose it" que esta
+  -- mecánica existe para no repetir. El tope de acumulación lo corta en 2.
+  v_passes := least(v_st.passes + greatest(1, v_night - coalesce(v_st.last_night, v_night - 1)), 2)::smallint;
+
   v_bonus := case v_st.nights when 3 then 30 when 5 then 45 when 7 then 75 else 0 end;
 
   update pass_state set
     nights       = v_st.nights,
     shields      = least(v_st.shields + case when v_st.nights = 3 then 1 else 0 end, 1),
-    passes       = least(passes + 1, 2),
+    passes       = v_passes,
     last_night   = v_night,
     -- la cita de mañana, a la hora de siempre de este usuario
-    next_pass_at = case when least(passes + 1, 2) >= 2 then null
+    next_pass_at = case when v_passes >= 2 then null
                         else (v_night + 1 + (v_hab || ' hours')::interval) at time zone v_tz end,
     updated_at   = v_now
   where viewer_id = p_viewer;

@@ -72,7 +72,7 @@ Por eso la respuesta no es recortar los gratis (eso ataca conversión, no sticki
 
 ## La propuesta, en cinco reglas
 
-1. **No hay nada que reclamar.** El Pase se acredita al terminar un episodio, una vez por noche, y avanza la racha. Un toast de dos segundos lo dice y el usuario sigue viendo. Se guardan hasta dos.
+1. **No hay nada que reclamar.** Se emite un pase por noche —por el reloj, esté el usuario o no— y se **entrega** al terminar un episodio, que es cuando también avanza la racha. Un toast de dos segundos lo dice y el usuario sigue viendo. Lo pendiente se acumula hasta dos: por eso faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.
 2. **El usuario elige a qué serie se lo da.** Un recurso que se asigna se entiende; uno que se recibe, no.
 3. **La noche corre de 5 a.m. a 5 a.m.**, no de medianoche a medianoche. 54% de las sesiones son entre 11 p.m. y 2 a.m.
 4. **Un comodín que se consume solo.** Si hay que hacer algo para no perder la racha, la racha ya es una tarea.
