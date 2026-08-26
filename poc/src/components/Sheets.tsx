@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Coin, Pass, Shield, X } from './Icons'
 import { StreakStrip } from './bits'
 import { frameStyle } from '../lib/frame'
-import { EPISODE_COST, PACKS, STREAK, episodesLabel, pricePerEpisode, toEpisodes } from '../lib/economy'
+import { EPISODE_COST, PACKS, STREAK, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
 import { SERIES, type SeriesId } from '../lib/content'
 import type { State } from '../lib/state'
 
@@ -57,6 +57,10 @@ export function Store({
   state, onBuy, onClose,
 }: { state: State; onBuy: (coins: number, usd: number) => void; onClose: () => void }) {
   const missing = Math.max(0, EPISODE_COST - state.balance)
+  const serie = SERIES[state.seriesId]
+  const restantes = serie.total - state.unlocked[state.seriesId]
+  const paraTerminar = restantes * EPISODE_COST
+  const completa = packThatCompletes(paraTerminar - state.balance)
   return (
     <div className="sheet" role="dialog" aria-label="Conseguir monedas">
       <div className="grab" />
@@ -68,9 +72,17 @@ export function Store({
         <p>1 episodio = {EPISODE_COST} monedas. Tienes {state.balance} · {episodesLabel(state.balance)}.</p>
       </div>
 
+      {/* La meta concreta, calculada contra la serie que está viendo */}
+      <div className="goal">
+        <span>Para terminar <b>{serie.title}</b></span>
+        <span className="goal-n">{restantes} episodios · {paraTerminar} monedas</span>
+      </div>
+
       {PACKS.map((p) => (
-        <button key={p.id} className={`pack ${p.best ? 'best' : ''} ${p.intro ? 'intro' : ''}`} onClick={() => onBuy(p.coins, p.usd)}>
-          {p.tag && <span className="pack-tag">{p.tag}</span>}
+        <button key={p.id} className={`pack ${p.id === completa ? 'best' : ''} ${p.intro ? 'intro' : ''}`} onClick={() => onBuy(p.coins, p.usd)}>
+          {p.id === completa
+            ? <span className="pack-tag">Termina esta serie</span>
+            : p.tag && <span className="pack-tag">{p.tag}</span>}
           <Coin s={30} />
           <div className="pack-body">
             <div className="pack-eps">{toEpisodes(p.coins)} episodios</div>
@@ -78,10 +90,7 @@ export function Store({
               {p.coins} monedas · <b style={{ color: 'var(--gold-300)', fontWeight: 700 }}>${pricePerEpisode(p.coins, p.usd)} por episodio</b>
             </div>
           </div>
-          <div>
-            {p.anchor && <span className="pack-anchor">${p.anchor.toFixed(2)}</span>}
-            <div className="pack-price">${p.usd.toFixed(2)}</div>
-          </div>
+          <div className="pack-price">${p.usd.toFixed(2)}</div>
         </button>
       ))}
 

@@ -9,12 +9,27 @@
 /** REAL · costo de desbloqueo de un episodio */
 export const EPISODE_COST = 15
 
-/** REAL · episodios gratis al inicio de cada serie */
-export const FREE_EPISODES = 12
+/** REAL · episodios gratis al inicio de una serie.
+ *  Medido en las 43 series del catálogo: la moda es 10 (32 de 35 series con
+ *  muro). Hay tres excepciones — Pasión a Domicilio 12, La Mágica Navidad 11,
+ *  La Herencia del Patriarca 7 — y 8 series de ≤10 episodios sin muro alguno.
+ *  Censo completo en docs/00-dogfooding/catalogo.json */
+export const FREE_EPISODES = 10
+
+/** REAL · el catálogo entero, medido el 25-ago-2026.
+ *  428 episodios gratis a 14 por sesión son 31 sesiones sin pagar; a 2.3
+ *  sesiones por semana, tres meses. Es el dato que explica por qué el muro
+ *  no convierte: la alternativa a pagar no es irse, es empezar otra serie. */
+export const CATALOGO = { series: 43, episodios: 1885, gratis: 428, bloqueados: 1455 } as const
 
 /** Paquetes.
  *  `live` = lo que entrega hoy el producto (verificado en el paywall nativo).
  *  `coins` = la propuesta (I3).
+ *
+ *  Ningún paquete lleva precio tachado. Hoy los cuatro del paywall real llevan
+ *  badge de descuento simultáneo (60%, 20%, 20%, 30%) contra anclas de $2.49 y
+ *  $4.99: cuando todo está en oferta, el ancla deja de anclar y empieza a restar
+ *  confianza justo en el momento de pagar.
  *
  *  El problema de hoy: $1.99 y $3.99 rinden 90.5 y 94.0 monedas por dólar.
  *  Subir de escalón mejora el valor 3.9% — no hay razón para hacerlo.
@@ -24,10 +39,14 @@ export const FREE_EPISODES = 12
  *  La oferta de bienvenida queda fuera de la escalera y se declara como tal.
  */
 export const PACKS = [
-  { id: 'intro', usd: 0.99, anchor: 2.49, coins: 180, live: 180, tag: 'Bienvenida · una sola vez', best: false, intro: true },
-  { id: 'p1', usd: 1.99, anchor: null, coins: 195, live: 180, tag: null, best: false, intro: false },
-  { id: 'p2', usd: 4.99, anchor: null, coins: 660, live: 375, tag: 'Una serie completa', best: true, intro: false },
-  { id: 'p3', usd: 9.99, anchor: null, coins: 1500, live: null, tag: null, best: false, intro: false },
+  // Sin precio tachado: en esta escalera no existe un paquete de 180 monedas a
+  // precio regular, así que anclar contra $2.49 sería anclar contra un producto
+  // inventado. El "$0.08 por episodio" frente al "$0.15" del siguiente escalón
+  // ya dice todo lo que el ancla pretendía decir, y es verdad.
+  { id: 'intro', usd: 0.99, coins: 180, live: 180, tag: 'Bienvenida · una sola vez', best: false, intro: true },
+  { id: 'p1', usd: 1.99, coins: 195, live: 180, tag: null, best: false, intro: false },
+  { id: 'p2', usd: 4.99, coins: 660, live: 375, tag: null, best: true, intro: false },
+  { id: 'p3', usd: 9.99, coins: 1500, live: null, tag: null, best: false, intro: false },
 ] as const
 
 /** PROPUESTA · la ventana de la "noche" corre de 5am a 5am en la zona del usuario.
@@ -89,6 +108,18 @@ export const coinsPerDollar = (coins: number, usd: number) => Math.round(coins /
 /** La métrica legible de la escalera: cuánto cuesta un episodio en este paquete. */
 export const pricePerEpisode = (coins: number, usd: number) =>
   (usd / toEpisodes(coins)).toFixed(2)
+
+/**
+ * Cuál paquete termina la serie en la que está el usuario.
+ *
+ * La primera versión etiquetaba el paquete de 660 monedas como "Una serie
+ * completa" de forma fija. Al medir el catálogo resultó que las series van de
+ * 150 a 960 monedas: la etiqueta habría sido falsa en el 40% de los casos.
+ * Ahora se calcula contra la serie que el usuario está viendo, así que o es
+ * cierta o no aparece.
+ */
+export const packThatCompletes = (coinsNeeded: number) =>
+  PACKS.filter((p) => !p.intro).find((p) => p.coins >= coinsNeeded)?.id ?? null
 
 /** Emisión semanal esperada, para el modelo de sostenibilidad. */
 export function weeklyIssuance(nightsAttended: number) {

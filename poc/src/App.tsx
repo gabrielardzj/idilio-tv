@@ -5,7 +5,7 @@ import { Wall } from './components/Wall'
 import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './components/Sheets'
 import { Coin, Logo } from './components/Icons'
 import { SERIES, type SeriesId } from './lib/content'
-import { EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
+import { CATALOGO, EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
 import { initialState, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
 
 const T0 = 1_756_099_020_000 // reloj fijo a las 00:17: el POC vive en la franja de las 11pm-2am
@@ -230,8 +230,9 @@ function Director({
       </div>
 
       <div className="note" style={{ paddingTop: 6, borderTop: '1px solid rgba(255,255,255,.07)' }}>
-        Datos reales del producto: 1 episodio = {EPISODE_COST} monedas, 12 episodios gratis por serie,
-        56 episodios en <i>Pasión a Domicilio</i>. El cooldown del pase es de {PASS_COOLDOWN_MS / 3600_000} h reales.
+        Datos medidos en las {CATALOGO.series} series del catálogo: 1 episodio = {EPISODE_COST} monedas
+        sin excepción, {CATALOGO.gratis} episodios gratis de {CATALOGO.episodios} totales.
+        El cooldown del pase es de {PASS_COOLDOWN_MS / 3600_000} h reales.
       </div>
     </aside>
   )

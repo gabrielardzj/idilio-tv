@@ -48,18 +48,23 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Constante | Valor | Dónde se verificó |
 |---|---|---|
 | Costo de episodio | 15 monedas | Muro de idilio.tv + paywall nativo |
-| Episodios gratis por serie | 12 | Panel de episodios de *Pasión a Domicilio* |
-| Episodios de la serie | 56 | Panel de episodios |
-| Precio de la serie completa | 660 monedas | 44 bloqueados × 15 |
+| Episodios gratis por serie | **10** (moda de 35 series) | Censo de las 43 series del catálogo |
+| Series del catálogo | 43 · 1.885 episodios | Censo |
+| Episodios gratis en total | 428 (23% del catálogo) | Censo |
+| Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
 | Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 | Captura oficial del paywall (build 1.20.0) |
 
 `src/lib/economy.ts` marca cada constante como **REAL** o **PROPUESTA**. Es, a la vez, el modelo del POC y la especificación de la economía.
 
-## 4.4 Tres cosas que cambiaron por verificar y por usar el prototipo
+Las tres series del POC son reales y están elegidas para cubrir las tres estructuras que existen en el catálogo: *La Enfermera Infiltrada* con 10 gratis (la moda), *Pasión a Domicilio* con 12 (la excepción por arriba) y *La Herencia del Patriarca Enamorado* con 7 (la excepción por abajo).
+
+## 4.4 Cuatro cosas que cambiaron por verificar y por usar el prototipo
 
 **El countdown gigante estaba mal.** La primera versión mostraba `17h 47m 03s` como héroe. Al usarlo, comunica *«falta muchísimo»* — el mensaje opuesto al buscado. Se reemplazó por la hora del reloj (`HOY A LAS 18:05`) con el intervalo debajo. El countdown vuelve a ser héroe solo cuando falta menos de una hora.
 
 **El pase caducaba, y eso era el error de Webtoon otra vez.** La primera versión decía *"no se acumula, el que no se usa se pierde"*. Al verificar el precedente — el Daily Pass de Webtoon, retirado en mayo de 2025 — resultó que la queja dominante de sus lectores durante cinco años fue justamente el "úsalo o piérdelo": convertía leer en una tarea. Era la misma trampa que el diagnóstico le señala a la racha diaria de Idilio, reintroducida sin darme cuenta. Los pases ahora se acumulan hasta 2: faltar una noche no cuesta nada y volver seguido sigue rindiendo más. Detalle completo en [§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra).
+
+**El badge «Una serie completa» habría mentido en el 40% de las compras.** Estaba fijo sobre el paquete de 660 monedas porque *Pasión a Domicilio* cuesta eso. El censo mostró que las series van de 150 a 960 monedas. Ahora la tienda abre con la meta calculada de la serie que el usuario está viendo y el badge cae sobre el paquete que de verdad alcanza.
 
 **La tienda se contradecía a sí misma.** La primera versión mostraba «monedas por dólar» y el pie decía *«cada paquete rinde más por dólar que el anterior»* — pero los números daban 182, 151, 165, 180. Es exactamente el defecto que el diagnóstico le señala al producto real, reproducido por descuido. Se corrigió a **precio por episodio**, que además es la unidad legible, y la escalera quedó monótona de verdad: $0.15 → $0.11 → $0.10.
 

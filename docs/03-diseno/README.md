@@ -14,10 +14,15 @@
 De las ocho intervenciones de la estrategia, elegí esta por cuatro razones, en orden de peso.
 
 **1. Es la única que ataca el punto exacto donde muere la sesión.**
-12 episodios gratis + 14 episodios de sesión promedio = la sesión promedio termina en el muro. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
+10 episodios gratis + 14 de sesión promedio = la sesión termina en el muro, con hambre para cuatro más. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
 
 **2. Es la única que puede mover DAU/MAU por sí sola.**
-Stickiness es una métrica de *regreso*. Para moverla hace falta darle al usuario una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo que no puede tener — es decir, el único donde una promesa a futuro tiene valor real. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso por sí mismas.
+Stickiness es una métrica de *regreso*. Para moverla hace falta una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo que no puede tener — el único donde una promesa a futuro tiene valor real. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso.
+
+**2bis. Y es la única que compite contra lo que el usuario realmente hace.**
+El censo del catálogo mostró que la alternativa a pagar no es irse: es **empezar otra de las 43 series y comerse sus 10 episodios gratis**. Eso es lo que gana hoy, y sale gratis. El Pase de la Noche es lo único en todo el producto que ofrece algo que ese camino no puede dar: **seguir donde estabas**. Empezar otra serie te devuelve al episodio 1 de una historia que todavía no te importa; el pase te devuelve al episodio 11 de la que sí.
+
+Por eso la elección entre series (R2) no es solo pedagógica. Es el momento en que el usuario **declara cuál historia le importa** — que es exactamente el apego que hoy no existe y que la métrica de stickiness necesita.
 
 **3. Resuelve el objetivo de experiencia como efecto secundario, no como pantalla aparte.**
 El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus sumideros y su posición. La tentación es una pantalla que lo explique. Nadie lee esa pantalla. Aquí el usuario aprende el sistema porque tiene que **operarlo**: recibe un recurso escaso (un pase), decide dónde gastarlo (qué serie), ve el efecto (episodio abierto, racha +1) y ve el precio de la alternativa ($0.15 por episodio). Es aprendizaje por uso.
@@ -153,9 +158,13 @@ En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 | Chip de saldo | `2543` | `90` · *6 episodios* |
 | Muro | `Tu balance: 0` | *Te faltan 15 monedas para este episodio* |
 | Tienda | `180 monedas · $0.99` | **12 episodios** · 180 monedas · **$0.08 por episodio** |
-| Paquete grande | `375 monedas · $3.99` | **44 episodios** · *Una serie completa* · $4.99 |
+| Paquete grande | `375 monedas · $3.99` | **44 episodios** · *Termina esta serie* · $4.99 |
 
-El caso de *«Una serie completa»* es el que más me gusta: 44 episodios bloqueados × 15 monedas = 660 monedas. Es una cifra que sale del catálogo real y le da al paquete un significado que el usuario puede evaluar contra algo que quiere.
+El caso de *«Termina esta serie»* es el que más me gusta, y es el que más cambió al medir el catálogo.
+
+La primera versión ponía esa etiqueta fija sobre el paquete de 660 monedas, porque *Pasión a Domicilio* cuesta exactamente eso. Al censar las 43 series resultó que van de **150 a 960 monedas**: la etiqueta habría sido **falsa en el 40% de los casos**. Un badge que miente en dos de cada cinco compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
+
+Ahora se calcula. La tienda abre con la meta real de la serie que el usuario está viendo — *«Para terminar Pasión a Domicilio: 44 episodios · 660 monedas»* — y el badge cae sobre el paquete más chico que alcanza. O es cierto, o no aparece.
 
 ### D5 · La escalera de precios se corrige para que subir tenga sentido
 
@@ -172,7 +181,13 @@ Propuesta, medida en la unidad que el usuario entiende:
 
 Fuera de la oferta de bienvenida, el precio por episodio baja en cada escalón. La oferta de bienvenida queda declarada como tal y no rompe la lógica de la escalera: es una oferta de adquisición, no un peldaño.
 
-Y se van los cuatro badges de descuento simultáneos. Cuando todo está rebajado, el ancla tachada deja de anclar y empieza a restar confianza.
+**Y se van todos los precios tachados, incluido el de la oferta de bienvenida.**
+
+Hoy los cuatro paquetes llevan badge de descuento a la vez (60%, 20%, 20%, 30%) contra anclas de $2.49 y $4.99. Cuando todo está rebajado, el ancla deja de anclar y empieza a restar confianza justo en el segundo de pagar.
+
+Mi primera versión conservaba el tachado en la oferta de bienvenida, que parecía inofensivo. No lo es: en la escalera propuesta **no existe un paquete de 180 monedas a precio regular**, así que $2.49 anclaría contra un producto inventado. Es el mismo patrón que critico, con mejor coartada.
+
+La columna de precio por episodio hace el trabajo sola y sin mentir: **$0.08 contra $0.15** dice exactamente lo que el tachado pretendía decir.
 
 ### D6 · El oro está racionado
 
@@ -220,7 +235,7 @@ La queja dominante de los lectores durante los cinco años de vida de la mecáni
 
 **Dónde no aplica.** El Daily Pass de Webtoon era **restrictivo**: tomaba contenido que el lector podía consumir de corrido y lo racionaba a uno por día. La mecánica *era* el techo de consumo, y por eso se sentía como un peaje.
 
-El Pase de la Noche es **aditivo**. El muro de Idilio ya existe: 12 gratis y 15 monedas por episodio a partir de ahí. El pase no le quita nada a nadie — agrega un desbloqueo gratis encima de un paywall que no cambia. **No puede convertir el maratón en tarea porque no es el pase el que corta el maratón: eso ya lo hace el precio.** La comparación correcta no es "pase contra maratón libre", es "pase contra pantalla sin salida".
+El Pase de la Noche es **aditivo**. El muro de Idilio ya existe: 10 gratis y 15 monedas por episodio a partir de ahí. El pase no le quita nada a nadie — agrega un desbloqueo gratis encima de un paywall que no cambia. **No puede convertir el maratón en tarea porque no es el pase el que corta el maratón: eso ya lo hace el precio.** La comparación correcta no es "pase contra maratón libre", es "pase contra pantalla sin salida".
 
 **Dónde sí aplica, y qué cambié por eso.** El mecanismo psicológico que hundió al Daily Pass no era solo la restricción: era el **"úsalo o piérdelo"**. Un recurso que caduca cada 24 h no se siente como un regalo, se siente como un turno que hay que ir a marcar. Mi primera versión tenía exactamente eso: *"no se acumula, el que no se usa se pierde"*.
 
@@ -271,7 +286,9 @@ La restricción del brief es explícita: *«cualquier fuente nueva de moneda deb
 
 Con acumulación hasta 2, quien entra N noches recolecta hasta 2N pases — pero la emisión nunca pasa de 7 por semana, porque solo se acredita uno cada 24 h. Por eso las filas de 5 y 7 noches convergen: **el techo lo pone el reloj, no la asistencia.**
 
-El usuario mediano de hoy — 2.3 noches por semana — recibe **4 episodios gratis por semana**. En una serie de 56 episodios con 44 bloqueados, eso es el 9% del contenido pago de una sola serie. No es una economía que se vacía; es un goteo que compra un regreso.
+El usuario mediano de hoy — 2.3 noches por semana — recibe **4 episodios gratis por semana**. En la serie mediana del catálogo (50 episodios, 40 bloqueados) eso es el 10% del contenido pago de un solo título, y el 0.3% de los 1.455 episodios bloqueados del catálogo. No es una economía que se vacía; es un goteo que compra un regreso.
+
+**Y hay que ponerlo en perspectiva:** el catálogo ya regala 428 episodios. El pase agrega, para el usuario mediano, unos 200 más al año. Es un 47% sobre un colchón que ya existe — pero a diferencia del colchón, estos 200 episodios están dirigidos: van a la historia que el usuario eligió, no a diez arranques distintos.
 
 **El gradiente que sostiene DAU/MAU:** entrar 2 noches rinde 4 episodios; entrar 4 o más rinde 7. Volver seguido sigue siendo estrictamente mejor. Si el tope fuera 7 en vez de 2, acumular la semana entera y entrar un solo día daría lo mismo que entrar todos los días — y la mecánica dejaría de mover la métrica que existe para mover.
 
@@ -281,7 +298,7 @@ Vive en la cola de asistencia perfecta (17 eps/semana ≈ $1.90 de valor a preci
 Tres palancas, en orden de uso si el guardrail se dispara:
 1. Bajar los bonos de las noches 5 y 7 (−45, −75). Deja los pases intactos, que son el mecanismo de regreso.
 2. Hacer que el pase abra solo el *siguiente* episodio de la serie y nunca uno adelantado. (Ya está así.)
-3. Restringir el pase a series donde el usuario ya agotó los 12 gratis. (Ya está así.)
+3. Restringir el pase a series donde el usuario ya agotó los episodios gratis. (Ya está así.)
 
 **Guardrail y criterio de kill:** ARPDAU medido contra holdout. Si cae más de **8% relativo sostenido durante 2 semanas**, se revierte y se prueba con la palanca 1.
 

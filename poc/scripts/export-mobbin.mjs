@@ -107,8 +107,8 @@ const FLOWS = [
       {
         id: '01-tienda', name: 'Tienda · el precio en episodios',
         type: 'Store', patterns: ['IAP packs', 'Value ladder', 'Unit-of-value translation'],
-        elements: ['Bottom sheet', 'Pack list', 'Badge', 'Price', 'Anchor price'],
-        note: 'Jerarquía invertida: EPISODIOS grande, monedas como subtítulo, precio a la derecha. Y la escalera sube de verdad — hoy $1.99 y $3.99 rinden casi lo mismo por dólar.',
+        elements: ['Bottom sheet', 'Goal row', 'Pack list', 'Badge', 'Price per unit'],
+        note: 'Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.',
         act: async (p) => { await click(p, '7 · Tienda') },
       },
     ],

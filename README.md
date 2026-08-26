@@ -22,13 +22,11 @@
 
 ---
 
-## El hallazgo que ordena todo
+## Los dos hallazgos que ordenan todo
 
-La app tiene **12 episodios gratis** por serie. Cada desbloqueo cuesta **15 monedas**. La sesión promedio dura **22 minutos ≈ 14 episodios**.
+Medí las **43 series del catálogo** ([censo completo](docs/00-dogfooding/)). La moda es **10 episodios gratis** por serie y el desbloqueo cuesta **15 monedas**, sin excepción. La sesión promedio dura **22 minutos ≈ 14 episodios**.
 
-**12 gratis + el muro ≈ 14 episodios.**
-
-La sesión promedio no termina cuando el usuario se sacia: termina cuando choca. Los 22 minutos no son una métrica de salud, son el techo que impone la economía.
+**Primero: 14 = 10 + 4.** La sesión promedio no termina cuando el usuario se sacia — termina cuando choca, con hambre para cuatro episodios más. Los 22 minutos no son salud, son el techo que impone la economía.
 
 Y lo que hay en ese choque, verificado en el paywall real del build 1.20.0:
 
@@ -42,6 +40,12 @@ Costo del episodio: 15        Tu balance: 0
 Un usuario que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, recibe una tienda y ninguna otra salida. La recompensa diaria — la única fuente gratuita — vive en otra pestaña.
 
 **No es que el metajuego esté mal diseñado. Está en otro edificio.**
+
+**Segundo, y más grande: hay una salida más barata que pagar.** El catálogo tiene **428 episodios gratis** repartidos en 43 series — el 23% de sus 1.885 episodios. A 14 por sesión son **31 sesiones sin pagar un peso: tres meses**.
+
+Así que el 14 = 10 + 4 significa otra cosa: la sesión típica es *"agoto los 10 gratis de una serie, choco, y me voy a empezar otra"*. **El muro no expulsa al usuario de la app. Lo expulsa de la historia.** Y alguien que rota entre 43 títulos sin apegarse a ninguno no tiene motivo para volver mañana — tiene relación con el catálogo, no con una serie.
+
+Por eso la respuesta no es recortar los gratis (eso ataca conversión, no stickiness). Es **darle una razón para quedarse en una historia en vez de saltar a la siguiente**.
 
 ---
 

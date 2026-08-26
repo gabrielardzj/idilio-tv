@@ -51,7 +51,7 @@ La tienda deja de vender monedas y pasa a vender episodios.
 |---|---|---|---|
 | 1 | [Tienda · el precio en episodios](flows/f3-tienda/01-tienda.png) | Store | IAP packs, Value ladder, Unit-of-value translation |
 
-**Tienda · el precio en episodios** — Jerarquía invertida: EPISODIOS grande, monedas como subtítulo, precio a la derecha. Y la escalera sube de verdad — hoy $1.99 y $3.99 rinden casi lo mismo por dólar.
+**Tienda · el precio en episodios** — Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.
 
 ## Flujo 4 · Faltar noches · el perdón del sistema
 
@@ -95,4 +95,4 @@ Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posici�
 
 **Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Contextual auth · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Unit-of-value translation · Value ladder · Vertical video
 
-**Elementos:** Action rail · Anchor price · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Countdown timer · Fine print · Headline · Medal · Notice · Pack list · Price · Primary button · Progress bar · Progress label · Radio list · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Countdown timer · Fine print · Goal row · Headline · Medal · Notice · Pack list · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Top bar · Total row · Video · Wallet chip

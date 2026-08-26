@@ -1,0 +1,416 @@
+[
+  {
+    "id": "b658b6c9-f59f-4d3a-8d28-8371e7269c7f",
+    "titulo": "Mi Mejor Pasajera",
+    "total": 30,
+    "gratis": 10,
+    "bloqueados": 20,
+    "costo": 15,
+    "costoSerie": 300
+  },
+  {
+    "id": "8f1ad02a-0e95-4f2e-868b-5be4b3adfb3b",
+    "titulo": "Apasionada por el Padre de mi Hijo que no es mi Esposo",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 39,
+    "costo": 15,
+    "costoSerie": 585
+  },
+  {
+    "id": "280455e5-ccd8-41db-b4ec-b8a7e6f6250a",
+    "titulo": "Simona la Libertadora Enamorada",
+    "total": 30,
+    "gratis": 10,
+    "bloqueados": 20,
+    "costo": 15,
+    "costoSerie": 300
+  },
+  {
+    "id": "d8838e1d-01ab-43fb-b992-4ced0e2448e0",
+    "titulo": "La Más Hermosa y el Espejo",
+    "total": 49,
+    "gratis": 10,
+    "bloqueados": 39,
+    "costo": 15,
+    "costoSerie": 585
+  },
+  {
+    "id": "d2a54ed9-076f-4748-90bc-f1c8a62b21d0",
+    "titulo": "Enamoradas del Motociclista Mafioso",
+    "total": 70,
+    "gratis": 10,
+    "bloqueados": 60,
+    "costo": 15,
+    "costoSerie": 900
+  },
+  {
+    "id": "1f522266-4c1b-437a-b4c2-8ca1d2077fde",
+    "titulo": "Pasión a Domicilio",
+    "total": 56,
+    "gratis": 12,
+    "bloqueados": 44,
+    "costo": 15,
+    "costoSerie": 660
+  },
+  {
+    "id": "61c92cb5-164d-4b46-bdba-18b081deaede",
+    "titulo": "Chamado na Madrugada",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "0a1055d9-99e3-4de7-8fa9-80d070110e01",
+    "titulo": "El Hermanastro Enamorado",
+    "total": 74,
+    "gratis": 10,
+    "bloqueados": 64,
+    "costo": 15,
+    "costoSerie": 960
+  },
+  {
+    "id": "f8a908a9-81df-467f-890f-5e4625d65e76",
+    "titulo": "El Pecado de Nuestro Amor",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "6d84ce2a-8d98-4902-9c9e-23ea1260721b",
+    "titulo": "La Enfermera Infiltrada",
+    "total": 65,
+    "gratis": 10,
+    "bloqueados": 55,
+    "costo": 15,
+    "costoSerie": 825
+  },
+  {
+    "id": "88ddbbba-cae8-44e7-8d92-4fe04dd5e465",
+    "titulo": "Aún Eres Tú",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "08d3d08c-110b-47aa-8f65-f2cb7ec8ab04",
+    "titulo": "Aún Sigues Siendo Tú",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "d7ef3456-d362-40b6-8be3-45403bc016b1",
+    "titulo": "Enamorada de la Voz del Lobo",
+    "total": 60,
+    "gratis": 10,
+    "bloqueados": 50,
+    "costo": 15,
+    "costoSerie": 750
+  },
+  {
+    "id": "63a9a740-83a8-435e-8be2-4febdf254789",
+    "titulo": "?",
+    "total": 0,
+    "gratis": 0,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "a2cb30d6-afbd-4407-b0f3-43caea734b3d",
+    "titulo": "?",
+    "total": 0,
+    "gratis": 0,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "f1a73063-a90b-4cc0-9faa-c18583444684",
+    "titulo": "Mi Final Feliz",
+    "total": 30,
+    "gratis": 10,
+    "bloqueados": 20,
+    "costo": 15,
+    "costoSerie": 300
+  },
+  {
+    "id": "c90fa131-99c4-4956-a2ff-08c6c20b8f83",
+    "titulo": "?",
+    "total": 0,
+    "gratis": 0,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "e42acf64-b22b-41e1-bbb5-f5c5c8d0b849",
+    "titulo": "La Mágica Navidad del Amargado Millonario",
+    "total": 51,
+    "gratis": 11,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "a102e526-726d-4625-a8a0-1b878af6d7d3",
+    "titulo": "La Niñera Poderosa",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "5953c8e6-a6bd-4fae-b1ef-246fa59f6278",
+    "titulo": "Buscando a mi Padre me Enamoré de mi Hermano",
+    "total": 40,
+    "gratis": 10,
+    "bloqueados": 30,
+    "costo": 15,
+    "costoSerie": 450
+  },
+  {
+    "id": "4cfa45dd-670d-4696-be99-2adeaa49eaa3",
+    "titulo": "Sesiones Prohibidas",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "8f38a1be-7e92-46e8-b08f-c29547fd874c",
+    "titulo": "Milagro de Amor en Nochebuena",
+    "total": 31,
+    "gratis": 10,
+    "bloqueados": 21,
+    "costo": 15,
+    "costoSerie": 315
+  },
+  {
+    "id": "397969c6-4236-479b-8d46-ae821846c241",
+    "titulo": "Somos Cuatro",
+    "total": 24,
+    "gratis": 10,
+    "bloqueados": 14,
+    "costo": 15,
+    "costoSerie": 210
+  },
+  {
+    "id": "8670f2c1-1534-4e9e-bc56-beb5654d3679",
+    "titulo": "Última Hora",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "b493964f-1b0f-4510-9e2b-85f497266a7d",
+    "titulo": "La Herencia del Patriarca Enamorado",
+    "total": 66,
+    "gratis": 7,
+    "bloqueados": 59,
+    "costo": 15,
+    "costoSerie": 885
+  },
+  {
+    "id": "57d70285-ffea-403c-9027-0abf52830819",
+    "titulo": "La Secretaria Heredera",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "7fa61250-381a-41ce-b3f6-6e07817bd756",
+    "titulo": "Dulce Destino",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "f300daf9-fa2f-43c0-8a73-3421d7b1b663",
+    "titulo": "La Mujer en el Bar",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "51206fc5-8622-454f-80e4-2a64ccb78d1e",
+    "titulo": "Amor a Muerte",
+    "total": 8,
+    "gratis": 8,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "9d08a874-14b5-4a2b-9f20-4f2f5ae2f282",
+    "titulo": "Pasión Frente a los Colmillos del Conde",
+    "total": 21,
+    "gratis": 10,
+    "bloqueados": 10,
+    "costo": 15,
+    "costoSerie": 150
+  },
+  {
+    "id": "d13775d5-1c8e-4a01-86a1-98126cc89f95",
+    "titulo": "La Bandida que me Amó",
+    "total": 30,
+    "gratis": 10,
+    "bloqueados": 20,
+    "costo": 15,
+    "costoSerie": 300
+  },
+  {
+    "id": "dc3a1f7f-3cc1-4b1f-844a-05ee01ed7835",
+    "titulo": "La Prometida del Enemigo",
+    "total": 10,
+    "gratis": 10,
+    "bloqueados": 0,
+    "costo": null,
+    "costoSerie": null
+  },
+  {
+    "id": "d31530c8-3273-42d1-8a0e-17dfcb039e03",
+    "titulo": "Tres Meses de Amor",
+    "total": 30,
+    "gratis": 10,
+    "bloqueados": 20,
+    "costo": 15,
+    "costoSerie": 300
+  },
+  {
+    "id": "ee31de68-8b7f-466f-bf43-4397e500ddfa",
+    "titulo": "Quiero a mi Ex Fuera de mi Vida",
+    "total": 60,
+    "gratis": 10,
+    "bloqueados": 50,
+    "costo": 15,
+    "costoSerie": 750
+  },
+  {
+    "id": "82259ac6-1183-420e-8735-4cd03f7c25e3",
+    "titulo": "Enamorándome de mi Guardián Prohibido",
+    "total": 64,
+    "gratis": 10,
+    "bloqueados": 54,
+    "costo": 15,
+    "costoSerie": 810
+  },
+  {
+    "id": "e57b0559-0d9d-4c1a-a675-d0b8dcc224de",
+    "titulo": "La Venganza de la Abogada",
+    "total": 61,
+    "gratis": 10,
+    "bloqueados": 51,
+    "costo": 15,
+    "costoSerie": 765
+  },
+  {
+    "id": "ff36a2da-b35e-4173-b373-daeb96bf3ddd",
+    "titulo": "Abrázame Fuerte Señor Bombero",
+    "total": 62,
+    "gratis": 10,
+    "bloqueados": 52,
+    "costo": 15,
+    "costoSerie": 780
+  },
+  {
+    "id": "2a800b0f-ae0e-4ebf-b139-dba98c1b33ed",
+    "titulo": "Mi Amante Secreto",
+    "total": 62,
+    "gratis": 10,
+    "bloqueados": 52,
+    "costo": 15,
+    "costoSerie": 780
+  },
+  {
+    "id": "ba6ea548-ef9d-4c69-aae3-d3b480897344",
+    "titulo": "Esposa del Playboy Billonario",
+    "total": 70,
+    "gratis": 10,
+    "bloqueados": 60,
+    "costo": 15,
+    "costoSerie": 900
+  },
+  {
+    "id": "12ea5087-182e-466a-8937-1ab614e609d0",
+    "titulo": "Rico Padre Pobre Madre",
+    "total": 69,
+    "gratis": 10,
+    "bloqueados": 59,
+    "costo": 15,
+    "costoSerie": 885
+  },
+  {
+    "id": "dadb8649-ce31-406a-aa20-3d142ec0189b",
+    "titulo": "Había una Vez un Divorcio: La Doble Vida de Lady Diana",
+    "total": 70,
+    "gratis": 10,
+    "bloqueados": 60,
+    "costo": 15,
+    "costoSerie": 900
+  },
+  {
+    "id": "a8981662-1fa8-4856-8fd4-baab4f131270",
+    "titulo": "Mi Esposo es la Muerte",
+    "total": 72,
+    "gratis": 10,
+    "bloqueados": 62,
+    "costo": 15,
+    "costoSerie": 930
+  },
+  {
+    "id": "731b8dc4-d6af-4b19-827b-0cef6136cacb",
+    "titulo": "Creo que mi esposa quiere matarme",
+    "total": 60,
+    "gratis": 10,
+    "bloqueados": 50,
+    "costo": 15,
+    "costoSerie": 750
+  },
+  {
+    "id": "0e180e45-fbae-413f-8848-22043fb3bb39",
+    "titulo": "Mi Apuesto Guardaespaldas",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "2441b925-c2cf-4f6f-a874-8d3cb077997c",
+    "titulo": "El Juego de la Herencia",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  },
+  {
+    "id": "8cab0a7b-7df6-4565-88c4-4f9100db9d05",
+    "titulo": "Intenciones ocultas",
+    "total": 50,
+    "gratis": 10,
+    "bloqueados": 40,
+    "costo": 15,
+    "costoSerie": 600
+  }
+]

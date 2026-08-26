@@ -18,13 +18,15 @@ export interface Series {
   episodes: Record<number, Episode>
 }
 
-/** Serie real del catálogo, con sus cifras reales (56 eps, 12 gratis). */
+/** Tres series reales del catálogo, con sus cifras medidas el 25-ago-2026.
+ *  Se eligieron para que el POC muestre las tres estructuras que existen:
+ *  la moda (10 gratis), una excepción por arriba (12) y una por abajo (7). */
 export const SERIES: Record<SeriesId, Series> = {
   pasion: {
     id: 'pasion',
     title: 'Pasión a Domicilio',
     total: 56,
-    free: 12,
+    free: 12,         // excepción: la serie con más gratis del catálogo
     unlockedThrough: 12,
     hue: ['#7B1E4B', '#2A0A1C'],
     episodes: {
@@ -36,9 +38,9 @@ export const SERIES: Record<SeriesId, Series> = {
   },
   herencia: {
     id: 'herencia',
-    title: 'La Herencia del Patriarca',
-    total: 64,
-    free: 12,
+    title: 'La Herencia del Patriarca Enamorado',
+    total: 66,
+    free: 7,          // la serie con menos gratis de todo el catálogo
     unlockedThrough: 18,
     hue: ['#1E3A5F', '#0A1420'],
     episodes: {
@@ -50,8 +52,8 @@ export const SERIES: Record<SeriesId, Series> = {
   enfermera: {
     id: 'enfermera',
     title: 'La Enfermera Infiltrada',
-    total: 48,
-    free: 12,
+    total: 65,
+    free: 10,         // la moda del catálogo
     unlockedThrough: 12,
     hue: ['#2F5D50', '#0A1714'],
     episodes: {

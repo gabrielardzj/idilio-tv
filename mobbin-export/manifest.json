@@ -179,12 +179,12 @@
           ],
           "elements": [
             "Bottom sheet",
+            "Goal row",
             "Pack list",
             "Badge",
-            "Price",
-            "Anchor price"
+            "Price per unit"
           ],
-          "note": "Jerarquía invertida: EPISODIOS grande, monedas como subtítulo, precio a la derecha. Y la escalera sube de verdad — hoy $1.99 y $3.99 rinden casi lo mismo por dólar.",
+          "note": "Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.",
           "stateKey": "store",
           "image": "flows/f3-tienda/01-tienda.png"
         }
@@ -352,7 +352,6 @@
     ],
     "elements": [
       "Action rail",
-      "Anchor price",
       "Badge",
       "Balance caption",
       "Balance headline",
@@ -360,11 +359,12 @@
       "Breakdown list",
       "Countdown timer",
       "Fine print",
+      "Goal row",
       "Headline",
       "Medal",
       "Notice",
       "Pack list",
-      "Price",
+      "Price per unit",
       "Primary button",
       "Progress bar",
       "Progress label",
