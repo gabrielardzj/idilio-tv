@@ -17,6 +17,7 @@ Corolarios:
 | Regla | Por qué |
 |---|---|
 | El blanco máximo es `#F2EBF7`, no `#FFFFFF` | 8% menos de luminancia. 54% de las sesiones son entre 11 p.m. y 2 a.m. |
+| Pero el contraste AA es un piso, no una preferencia | El texto terciario era `#7C6E8B` — **3.7:1**, por debajo del 4.5:1 de WCAG AA. axe no lo marcaba porque va sobre degradados que no sabe medir. Atenuar el texto primario es confort; dejar el terciario ilegible no lo es. Ahora es `#8F8896`, **5.2:1**. |
 | El violeta es de las acciones de **pago**, nunca de las gratuitas | Separa los dos caminos sin necesidad de leer |
 | El cian marca **progreso y racha cumplida** | Es lo ya conseguido; el oro es lo por conseguir |
 | No hay rojo en todo el sistema | Ni siquiera cuando se rompe la racha. Un sistema que regaña enseña que es adversario |
@@ -116,6 +117,10 @@ Una sola curva, `cubic-bezier(.22, 1, .36, 1)`: rápido al inicio, asentado al f
 ## Del prototipo a Figma
 
 El prototipo es la fuente de verdad y hay dos caminos para llevarlo a Figma, según qué se necesite:
+
+> El contraste de los seis tokens de texto se calcula en `npm run verificar`, contra las
+> superficies declaradas de cada árbol. Corre en el pipeline: un token que baje de 4.5:1 rompe
+> el despliegue.
 
 **Para los tokens** — importar [`tokens.json`](tokens.json) con **Tokens Studio**. Quedan como variables de Figma, agrupadas por superficie / texto / marca / moneda / estado / radio / espaciado / movimiento / tipografía.
 

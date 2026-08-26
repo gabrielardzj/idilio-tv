@@ -22,9 +22,13 @@
   --color-surface-1: #141414;
   --color-surface-2: #1a1a1a;
 
-  /* ── PROPUESTA · derivados de texto ──────────────────────── */
-  --color-ink-mid: #a0a0a8;
-  --color-ink-low: #6e6e78;
+  /* ── PROPUESTA · derivados de texto ────────────────────────
+     Contraste medido contra las tres superficies de producción.
+     --color-ink-low era #6e6e78 y daba 3.45:1, por debajo del 4.5:1 de WCAG AA.
+     El contexto nocturno justifica no usar blanco puro en el texto primario;
+     no justifica dejar el terciario por debajo del mínimo legible. */
+  --color-ink-mid: #a0a0a8;  /* 6.7:1 en el peor fondo */
+  --color-ink-low: #8a8a94;  /* 5.1:1 — antes 3.45, no cumplía */
 
   /* ── PROPUESTA · el oro del Pase ─────────────────────────
      Se deriva del --color-brand-amber de producción (#f5a93f).

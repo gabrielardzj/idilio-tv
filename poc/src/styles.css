@@ -13,10 +13,19 @@
   --ink-600:  #291C36;
   --ink-500:  #3A2A4A;
 
-  /* Texto — el máximo es #F2EBF7, no #FFF: 8% menos de luminancia a 1am */
-  --tx-hi:  #F2EBF7;
-  --tx-mid: #B7A9C4;
-  --tx-lo:  #7C6E8B;
+  /* Texto.
+     El máximo es #F2EBF7 y no #FFF: 8% menos de luminancia a la 1 a.m.
+     Pero hay un piso que el contexto nocturno NO justifica cruzar. La primera
+     versión usaba --tx-lo #7C6E8B, que da 3.70:1 sobre la hoja — por debajo del
+     4.5:1 de WCAG AA. axe no lo marcaba porque ese texto va sobre degradados que
+     no sabe medir, así que el defecto quedó escondido hasta que calculé los
+     ratios a mano.
+     Atenuar el texto primario es una decisión de confort; dejar el terciario por
+     debajo del mínimo legible no lo es. --tx-lo sube a 5.08:1 conservando el
+     matiz violeta. */
+  --tx-hi:  #F2EBF7;   /* 14.8:1 sobre la hoja */
+  --tx-mid: #B7A9C4;   /*  8.4:1 */
+  --tx-lo:  #8F8896;   /*  5.1:1 — antes 3.70, no cumplía */
 
   /* Marca (tomada del logo: barra magenta, barra cian, punto ámbar) */
   --violet: #A855F7;

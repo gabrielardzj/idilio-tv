@@ -334,7 +334,7 @@ h1{font-size:36px;font-weight:800;letter-spacing:-1.2px;line-height:1.1}
 .tax{margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08)}
 .tax h2{font-size:19px;margin-bottom:22px;font-weight:700}
 .taxgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
-.taxgrid h4{font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--lo);margin-bottom:11px;font-weight:700}
+.taxgrid h3{font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--lo);margin-bottom:11px;font-weight:700}
 .taxgrid>div{line-height:2.2}
 footer{margin-top:56px;color:var(--lo);font-size:12.5px;line-height:1.75}
 code{color:var(--c);font-size:11.5px}
@@ -347,6 +347,7 @@ code{color:var(--c);font-size:11.5px}
 <span class="tag">${m.theme}</span><span class="tag">${m.language}</span><span class="tag">${m.captured}</span>
 </div>
 </header>
+<main>
 ${m.flows.map((f, i) => `<section class="flow">
 <h2><i>Flujo ${i + 1}</i> ${f.name}</h2>
 <p class="intent">${f.intent}</p>
@@ -361,10 +362,11 @@ ${m.flows.map((f, i) => `<section class="flow">
 <div class="chips">${s.elements.map(e => `<span class="chip el">${e}</span>`).join('')}</div>
 </article>`).join('')}</div></section>`).join('')}
 <section class="tax"><h2>Taxonomía</h2><div class="taxgrid">
-<div><h4>Tipos de pantalla</h4>${m.summary.screenTypes.map(t => `<span class="chip">${t}</span> `).join('')}</div>
-<div><h4>Patrones</h4>${m.summary.patterns.map(t => `<span class="chip">${t}</span> `).join('')}</div>
-<div><h4>Elementos</h4>${m.summary.elements.map(t => `<span class="chip el">${t}</span> `).join('')}</div>
+<div><h3>Tipos de pantalla</h3>${m.summary.screenTypes.map(t => `<span class="chip">${t}</span> `).join('')}</div>
+<div><h3>Patrones</h3>${m.summary.patterns.map(t => `<span class="chip">${t}</span> `).join('')}</div>
+<div><h3>Elementos</h3>${m.summary.elements.map(t => `<span class="chip el">${t}</span> `).join('')}</div>
 </div></section>
+</main>
 <footer>Capturado automáticamente de los prototipos con <code>poc/scripts/export-mobbin.mjs</code>.
 Cada tarjeta abre la captura a 3× al hacer clic.<br>
 Cifras medidas en las 43 series del catálogo el 25-ago-2026: 1 episodio = <b>15 monedas</b> sin

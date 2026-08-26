@@ -114,5 +114,45 @@ for (const ruta of DOCS) {
 }
 if (!fallos) console.log('✓ ninguna cifra obsoleta sobrevivió a las ediciones')
 
+console.log('\n── contraste de los tokens de texto (WCAG AA, 4.5:1) ─────────')
+
+/**
+ * axe solo mide texto sobre fondos que sabe resolver, y buena parte de este
+ * diseño va sobre degradados. Por eso el contraste se calcula acá contra las
+ * superficies declaradas: es la única forma de que un token que no cumple no se
+ * escape. Ya se escapó una vez.
+ */
+const canalLineal = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4 }
+const luminancia = (hex) => {
+  const [r, g, b] = hex.replace('#', '').match(/\w\w/g).map((h) => parseInt(h, 16))
+  return 0.2126 * canalLineal(r) + 0.7152 * canalLineal(g) + 0.0722 * canalLineal(b)
+}
+const contraste = (a, b) => {
+  const [alta, baja] = [luminancia(a), luminancia(b)].sort((x, y) => y - x)
+  return (alta + 0.05) / (baja + 0.05)
+}
+
+const leerVar = (css, nombre) => css.match(new RegExp(`--${nombre}:\\s*(#[0-9a-fA-F]{6})`))?.[1]
+
+const cssPoc = readFileSync(join(RAIZ, 'poc/src/styles.css'), 'utf8')
+const cssWeb = readFileSync(join(RAIZ, 'web/app/globals.css'), 'utf8')
+
+const PARES = [
+  ['prototipo · tx-hi',  leerVar(cssPoc, 'tx-hi'),  ['#130C1B', '#0B0710', '#1C1327']],
+  ['prototipo · tx-mid', leerVar(cssPoc, 'tx-mid'), ['#130C1B', '#0B0710', '#1C1327']],
+  ['prototipo · tx-lo',  leerVar(cssPoc, 'tx-lo'),  ['#130C1B', '#0B0710', '#1C1327']],
+  ['stack · ink',        leerVar(cssWeb, 'color-ink'),     ['#0a0a0a', '#141414', '#1a1a1a']],
+  ['stack · ink-mid',    leerVar(cssWeb, 'color-ink-mid'), ['#0a0a0a', '#141414', '#1a1a1a']],
+  ['stack · ink-low',    leerVar(cssWeb, 'color-ink-low'), ['#0a0a0a', '#141414', '#1a1a1a']],
+]
+
+for (const [etiqueta, color, fondos] of PARES) {
+  if (!color) { console.log(`✗ ${etiqueta}: token no encontrado en el CSS`); fallos++; continue }
+  const peor = Math.min(...fondos.map((bg) => contraste(color, bg)))
+  const ok = peor >= 4.5
+  if (!ok) fallos++
+  console.log(`${ok ? '✓' : '✗'} ${etiqueta.padEnd(22)} ${color}  peor=${peor.toFixed(2)}:1`)
+}
+
 console.log(fallos === 0 ? '\n✓ TODO CONSISTENTE' : `\n✗ ${fallos} DESAJUSTES`)
 process.exit(fallos ? 1 : 0)

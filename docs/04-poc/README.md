@@ -89,7 +89,7 @@ Navegación general, home, catálogo, búsqueda, perfil, reproducción de video 
 - Objetivos táctiles ≥44 px; todo alcanzable con el pulgar en el tercio inferior.
 - Roles y `aria-label` en diálogos, temporizador, listas de selección y el chip de saldo (que se anuncia como *"Saldo: 90 monedas, 6 episodios"*).
 - `prefers-reduced-motion` respetado: todas las animaciones se anulan.
-- Blanco máximo `#F2EBF7` en lugar de `#FFFFFF`, pensado para brillo bajo en la franja de 11 p.m. a 2 a.m.
+- Blanco máximo `#F2EBF7` en lugar de `#FFFFFF`, pensado para brillo bajo en la franja de 11 p.m. a 2 a.m. — pero **ningún** token de texto por debajo de 4.5:1, y el ratio se calcula en el pipeline.
 - Ningún estado depende solo del color: la racha combina color, icono y etiqueta de texto.
 
-Los dos árboles auditados con **axe-core** (`wcag2a`, `wcag2aa`, `wcag21aa`, `best-practice`): **0 violaciones** en los dos (24 y 33 reglas aprobadas). La primera pasada del prototipo encontró cuatro — `maximum-scale` bloqueando el zoom, falta de landmark `main`, contenido fuera de landmarks y orden de encabezados — y están corregidas.
+Los dos árboles auditados con **axe-core** (`wcag2a`, `wcag2aa`, `wcag21aa`, `best-practice`): **0 violaciones** en las tres superficies desplegadas — prototipo, galería de flujos y versión sobre el stack. La primera pasada del prototipo encontró cuatro — `maximum-scale` bloqueando el zoom, falta de landmark `main`, contenido fuera de landmarks y orden de encabezados — y están corregidas.
