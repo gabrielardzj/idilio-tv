@@ -58,6 +58,12 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
 | Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 | Captura oficial del paywall (build 1.20.0) |
 
+**Y las cifras se verifican solas.** `npm run verificar` comprueba 36 afirmaciones numéricas de
+los documentos contra el código y contra el censo del catálogo, y además rastrea los textos
+buscando cifras que se corrigieron en el camino y podrían haber sobrevivido a una edición. Corre
+en el pipeline antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar
+al entregable.
+
 `src/lib/economy.ts` marca cada constante como **REAL** o **PROPUESTA**. Es, a la vez, el modelo del POC y la especificación de la economía.
 
 Las tres series del POC son reales y están elegidas para cubrir las tres estructuras que existen en el catálogo: *La Enfermera Infiltrada* con 10 gratis (la moda), *Pasión a Domicilio* con 12 (la excepción por arriba) y *La Herencia del Patriarca Enamorado* con 7 (la excepción por abajo).

@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "export": "node scripts/export-mobbin.mjs",
-    "tokens": "node scripts/export-tokens.mjs"
+    "tokens": "node scripts/export-tokens.mjs",
+    "verificar": "node --experimental-strip-types scripts/verificar-cifras.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

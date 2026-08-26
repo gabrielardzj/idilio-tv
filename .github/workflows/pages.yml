@@ -23,7 +23,12 @@ jobs:
         with: { node-version: 22 }
 
       # 1 · el prototipo (React + Vite) va en la raíz
-      - run: npm ci && npm run build
+      - run: npm ci
+        working-directory: poc
+      - name: Verificar que ninguna cifra publicada quedó obsoleta
+        run: npm run verificar
+        working-directory: poc
+      - run: npm run build
         working-directory: poc
 
       # 2 · la implementación sobre el stack real (Next.js) va en /stack

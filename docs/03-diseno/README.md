@@ -176,7 +176,7 @@ Propuesta, medida en la unidad que el usuario entiende:
 |---|---|---|---|
 | Bienvenida (una vez) | 12 | $0.99 | **$0.08** |
 | — | 13 | $1.99 | $0.15 |
-| Una serie completa | 44 | $4.99 | $0.11 |
+| Termina esta serie *(calculado)* | 44 | $4.99 | $0.11 |
 | — | 100 | $9.99 | $0.10 |
 
 Fuera de la oferta de bienvenida, el precio por episodio baja en cada escalón. La oferta de bienvenida queda declarada como tal y no rompe la lógica de la escalera: es una oferta de adquisición, no un peldaño.
@@ -259,13 +259,13 @@ La categoría directa —no cómics, microdramas— ya validó que la fuente gra
 |---|---|---|---|---|
 | Check-in diario | ~10 monedas | Sí, y **la racha se rompe al faltar** | Sí, lo reclama el 19% | Pase de la Noche, en el muro |
 | Anuncios recompensados | Sí | Hasta 15/día ≈ **6 episodios diarios** | No | No (fuera de alcance) |
-| Costo de una serie | $37–47 (80 eps) | — | **~$7.29** (56 eps) | igual |
+| Costo de una serie | $37–47 (80 eps) | — | **~$6.63** (serie mediana, 50 eps) | igual |
 
 Dos lecturas que salen de ahí:
 
 1. **Lo que propongo es conservador para la categoría.** 4 episodios gratis por semana para el usuario mediano, contra los ~6 *diarios* que DramaBox regala por ver anuncios. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
 2. **DramaBox rompe la racha al faltar un día, igual que Idilio.** Es el estándar de la categoría, y es el estándar que este diseño decide no seguir. Que todos lo hagan no lo vuelve correcto para una base que entra 2.3 días por semana.
-3. **Idilio es ~5 veces más barato por serie que los líderes.** Si el dato se confirma con cifras propias, el margen para regalar episodios es menor de lo que sugiere la comparación bruta — cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
+3. **Idilio es entre 5 y 7 veces más barato por serie que los líderes.** La serie mediana del catálogo cuesta $6.63 contra los $37–47 que reportan de ReelShort. Si el dato se confirma con cifras propias, el margen para regalar episodios es *menor* de lo que sugiere la comparación bruta: cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
 
 ---
 

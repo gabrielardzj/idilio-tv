@@ -79,4 +79,4 @@ cd poc && npm install && npm run dev   # el prototipo — http://localhost:5173
 cd web && npm install && npm run dev   # sobre el stack real — http://localhost:5301
 ```
 
-O abrir [`mobbin-export/index.html`](mobbin-export/index.html) para ver los 6 flujos completos sin instalar nada.
+O abrir [`mobbin-export/index.html`](mobbin-export/index.html) para ver los 7 flujos completos sin instalar nada.
