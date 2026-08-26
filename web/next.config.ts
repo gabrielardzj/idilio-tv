@@ -12,7 +12,16 @@ import type { NextConfig } from 'next'
 const isPages = process.env.DEPLOY_TARGET === 'pages'
 
 const config: NextConfig = {
-  ...(isPages ? { output: 'export', basePath: '/idilio-tv/stack', images: { unoptimized: true } } : {}),
+  ...(isPages
+    ? {
+        output: 'export',
+        basePath: '/idilio-tv/stack',
+        // En hosting estático `/13` y `/13/` tienen que resolver los dos: la
+        // gente pega links con y sin barra. Con esto Next emite `13/index.html`.
+        trailingSlash: true,
+        images: { unoptimized: true },
+      }
+    : {}),
   reactStrictMode: true,
 }
 
