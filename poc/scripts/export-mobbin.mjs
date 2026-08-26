@@ -55,10 +55,17 @@ const FLOWS = [
       {
         id: '02-serie', name: 'Ficha de serie · la progresión visible',
         estado: 'serie-detalle',
-        type: 'Detail', patterns: ['Episode grid', 'Progress indicator', 'Unlock cost'],
-        elements: ['Hero', 'Progress bar', 'Reward card', 'Episode grid', 'Fine print'],
-        note: 'Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.',
-        act: async (p) => { await p.locator('.poster').first().click(); await p.waitForTimeout(500) },
+        type: 'Detail', patterns: ['Chapter list', 'Progress indicator', 'Unlock cost'],
+        elements: ['Top bar', 'Poster', 'Synopsis', 'Progress bar', 'Reward card', 'Chapter list', 'Badge', 'Lock', 'Fine print'],
+        note: 'El chasis es el de la app nativa, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.',
+        // Esta serie y no la primera del riel: es de la que hay capturas de la
+        // app nativa, así que esta pantalla se puede poner al lado de la del
+        // producto y compararse tarjeta por tarjeta. También es la única con
+        // capítulos «Interactiva» medidos, que es un elemento del chasis real.
+        act: async (p) => {
+          await p.locator('.poster[aria-label*="Apasionada"]').first().click()
+          await p.waitForTimeout(500)
+        },
       },
       {
         id: '03-player', name: 'Player · el core loop',

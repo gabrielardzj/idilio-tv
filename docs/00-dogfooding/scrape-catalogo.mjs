@@ -54,6 +54,19 @@ const get = async (url, minimo = 0) => {
   throw new Error(`${ultimo.message} · ${url}`)
 }
 
+/** Texto de un nodo del HTML servido: sin los comentarios de hidratación que
+ *  Next mete en medio de las palabras, y con las entidades resueltas. */
+const textoPlano = (html) =>
+  html
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .trim()
+
 /** El catálogo que el sitio declara, no el que muestra en los rieles del home. */
 const ids = async () => {
   const xml = await get(`${SITIO}/sitemap.xml`)
@@ -84,6 +97,23 @@ const serie = async (id) => {
   const declarado = Number(html.match(/children\\":\[(\d+),\\" episodios/)?.[1])
   if (!Number.isInteger(declarado) || declarado <= 0) throw new Error(`sin contador de episodios · ${titulo}`)
 
+  // La sinopsis que publica la ficha: el mismo texto que la app nativa muestra
+  // bajo «Resumen». Entra al censo porque el POC lo dibuja, y sin él esa mitad
+  // de la pantalla sería relleno inventado sobre un catálogo real.
+  //
+  // Sale del HTML renderizado y no del payload de Next a propósito: en el
+  // payload el texto viene con las comillas escapadas, y las sinopsis que citan
+  // un apodo —«contrata a "Felipe" como prometido falso»— se cortaban por la
+  // mitad sin que se notara.
+  //
+  // `null` no es un fallo: hay series sin sinopsis cargada, y ahí el sitio
+  // repite el título en su lugar. Eso es un dato del catálogo, no un error de
+  // lectura, y por eso se registra en vez de tumbar el censo.
+  const crudo = html.match(/<p class="text-ink mb-6 max-w-\[620px\] text-base leading-relaxed">([\s\S]*?)<\/p>/)?.[1]
+  if (crudo === undefined) throw new Error(`sin párrafo de sinopsis · ${titulo}`)
+  const texto = textoPlano(crudo)
+  const sinopsis = texto === titulo ? null : texto
+
   const bloqueados = [...new Set([...html.matchAll(/Episodio (\d+), bloqueado/g)].map((m) => +m[1]))].sort((a, b) => a - b)
   const listados = [...new Set([...html.matchAll(/Episodio (\d+)"/g)].map((m) => +m[1]))].sort((a, b) => a - b)
   const maxNumerado = Math.max(0, ...listados, ...bloqueados)
@@ -102,6 +132,7 @@ const serie = async (id) => {
   return {
     id,
     titulo,
+    sinopsis,
     total: declarado,
     gratis,
     bloqueados: bloqueados.length,

@@ -15,12 +15,12 @@ El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de v
 | # | Pantalla | Tipo | Patrones |
 |---|---|---|---|
 | 1 | [Home · el catálogo](flows/f0-llegar-al-muro/01-home.png) | Home / Browse | Content rails, Continue watching, Currency balance |
-| 2 | [Ficha de serie · la progresión visible](flows/f0-llegar-al-muro/02-serie.png) | Detail | Episode grid, Progress indicator, Unlock cost |
+| 2 | [Ficha de serie · la progresión visible](flows/f0-llegar-al-muro/02-serie.png) | Detail | Chapter list, Progress indicator, Unlock cost |
 | 3 | [Player · el core loop](flows/f0-llegar-al-muro/03-player.png) | Media player | Vertical video, Swipe navigation, Progress indicator |
 
 **Home · el catálogo** — El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.
 
-**Ficha de serie · la progresión visible** — Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.
+**Ficha de serie · la progresión visible** — El chasis es el de la app nativa, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.
 
 **Player · el core loop** — Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.
 
@@ -131,6 +131,6 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 
 **Tipos de pantalla:** Account / Wallet · Confirmation · Detail · Home / Browse · Media player · Paywall · Selection · Sign up · Store
 
-**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Episode grid · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
+**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Chapter list · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
 
-**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Clock time · Countdown timer · Episode grid · Fine print · Goal row · Headline · Hero · Horizontal rail · Medal · Notice · Pack list · Poster · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Chapter list · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Lock · Medal · Notice · Pack list · Poster · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip

@@ -16,6 +16,16 @@ export interface SerieCatalogo {
   total: number
   gratis: number
   tono: [string, string]
+  /**
+   * Los capítulos que la app nativa marca «Interactiva».
+   *
+   * Solo se llena donde hay evidencia. El reproductor web no publica el dato
+   * —no aparece la palabra en el HTML de ninguna ficha—, así que la única
+   * fuente son las capturas de la app: de ahí salen los de «Apasionada por el
+   * Padre de mi Hijo…». Generalizar ese patrón al resto del catálogo sería
+   * inventarlo, y este censo no inventa.
+   */
+  interactivos?: number[]
 }
 
 export const CATALOGO_SERIES: SerieCatalogo[] = [
@@ -41,7 +51,7 @@ export const CATALOGO_SERIES: SerieCatalogo[] = [
   { id: 'pasion-a-domicilio', titulo: "Pasión a Domicilio", total: 56, gratis: 12, tono: ['#5C2E7E', '#1A0A28'] },
   { id: 'las-flores-del-amor', titulo: "Las Flores del Amor", total: 52, gratis: 12, tono: ['#6E2A5C', '#260E20'] },
   { id: 'la-magica-navidad-del-amargado-millona', titulo: "La Mágica Navidad del Amargado Millonario", total: 51, gratis: 11, tono: ['#7A3A1E', '#2A1208'] },
-  { id: 'apasionada-por-el-padre-de-mi-hijo-que', titulo: "Apasionada por el Padre de mi Hijo que no es mi Esposo", total: 50, gratis: 10, tono: ['#1F4B4E', '#08191A'] },
+  { id: 'apasionada-por-el-padre-de-mi-hijo-que', titulo: "Apasionada por el Padre de mi Hijo que no es mi Esposo", total: 50, gratis: 10, tono: ['#1F4B4E', '#08191A'], interactivos: [1, 10] },
   { id: 'el-pecado-de-nuestro-amor', titulo: "El Pecado de Nuestro Amor", total: 50, gratis: 10, tono: ['#6B1F2E', '#240A11'] },
   { id: 'aun-eres-tu', titulo: "Aún Eres Tú", total: 50, gratis: 10, tono: ['#3A2A6B', '#120E24'] },
   { id: 'aun-sigues-siendo-tu', titulo: "Aún Sigues Siendo Tú", total: 50, gratis: 10, tono: ['#5E4A18', '#1F1806'] },

@@ -109,7 +109,6 @@ export default function App() {
             state={state}
             onVolver={() => dispatch({ t: 'ir', a: { en: 'home' } })}
             onEpisodio={(n) => dispatch({ t: 'abrirEpisodio', id: (state.pantalla as { id: string }).id, n })}
-            onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
           />
           </div>
         )}

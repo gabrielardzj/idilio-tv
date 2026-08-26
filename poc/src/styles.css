@@ -506,24 +506,51 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .tab { display: grid; justify-items: center; gap: 3px; font-size: 10.5px; font-weight: 600; color: var(--tx-lo); }
 .tab.on { color: var(--tx-hi); }
 
-/* ═══ Ficha de serie ═══════════════════════════════════════════ */
-.serie { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--ink-1000); }
-.serie-art { position: relative; height: 296px; flex-shrink: 0; }
-.serie-art::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(6,3,9,.55) 0%, transparent 34%, rgba(11,7,16,.9) 86%, var(--ink-1000) 100%);
-}
-.serie-back { position: absolute; left: var(--sp-4); top: 56px; z-index: 2; }
-.serie-wallet { position: absolute; right: var(--sp-4); top: 56px; z-index: 2; }
-.serie-head { position: absolute; left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4); z-index: 2; }
-.serie-head h1 { font-size: 24px; font-weight: 700; letter-spacing: -.6px; line-height: 1.15; }
-.serie-head p { font-size: 12.5px; color: var(--tx-mid); margin-top: 5px; }
+/* ═══ Ficha de serie ═══════════════════════════════════════════
+   El chasis es el de la app nativa y los valores están muestreados de sus
+   capturas, no elegidos: negro puro de fondo —no el --ink-1000 del resto del
+   POC—, tarjeta #1A1A1A, «Capítulo N» en #6D1EED, píldora en #8C3CFD, galón
+   en #757575. Por eso acá hay literales donde en el resto del archivo hay
+   tokens: estos colores son del producto, no del sistema de la propuesta.
+   ═════════════════════════════════════════════════════════════ */
+.serie { position: absolute; inset: 0; display: flex; flex-direction: column; background: #000; }
 
-.serie-scroll { flex: 1; overflow-y: auto; padding: var(--sp-4) var(--sp-4) var(--sp-8); }
+/* La barra de la app: solo «Volver», y ocupa 122 px porque el área segura de
+   arriba en el producto es así de alta. Se respeta: recortarla haría que la
+   ficha entrara antes que en el original y la comparación dejaría de valer. */
+.serie-bar {
+  flex-shrink: 0; height: 122px; padding: 58px 6px 0;
+  display: flex; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+.serie-volver { display: flex; align-items: center; gap: 7px; padding: 6px 10px; font-size: 17px; color: #fff; }
+
+.serie-scroll { flex: 1; overflow-y: auto; padding-bottom: var(--sp-10); }
 .serie-scroll::-webkit-scrollbar { width: 0 }
-.serie-prog .pp-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
-.serie-prog .pp-row b { font-size: 12.5px; font-weight: 600; }
-.serie-prog .pp-row span { font-size: 11px; color: var(--tx-lo); }
+
+/* Solo para lectores de pantalla: el título de la serie, que en la pantalla
+   vive quemado dentro del arte del póster. */
+.oculto {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+.serie-resumen {
+  display: flex; gap: 22px; padding: 21px 17px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+.serie-poster {
+  width: 135px; height: 180px; flex-shrink: 0; border-radius: 10px;
+  background-size: cover; background-position: center; background-color: var(--ink-800);
+}
+.serie-resumen h2 { font-size: 19px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 9px; }
+.serie-resumen p { font-size: 15px; line-height: 1.5; color: #D6D6DB; }
+
+/* ── La propuesta: dónde vas y qué cuesta seguir ─────────────── */
+.serie-avance { padding: 20px 17px 4px; }
+.serie-avance .pp-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; gap: 10px; }
+.serie-avance .pp-row b { font-size: 13px; font-weight: 600; }
+.serie-avance .pp-row span { font-size: 11.5px; color: var(--tx-lo); }
 
 .serie-pase {
   display: flex; align-items: center; gap: 11px; margin-top: var(--sp-4);
@@ -542,17 +569,48 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 }
 .serie-meta b { color: var(--gold-300); font-size: 12px; white-space: nowrap; }
 
-.ep-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; list-style: none; }
+/* ── Capítulos ──────────────────────────────────────────────── */
+.serie-caps { padding: 22px 17px 0; }
+.serie-caps h2 { font-size: 20px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 15px; }
+
+.ep-lista { list-style: none; display: grid; gap: 15px; }
 .ep {
-  width: 100%; aspect-ratio: 1; border-radius: 10px; display: grid; place-items: center; gap: 1px;
-  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); color: var(--tx-lo);
+  width: 100%; display: flex; align-items: center; gap: 10px;
+  padding: 13px 15px; border-radius: 13px; background: #1A1A1A; text-align: left;
   transition: transform .14s var(--ease);
 }
-.ep:active { transform: scale(.93); }
-.ep-n { font-size: 12px; font-weight: 700; line-height: 1; }
-.ep.abierto { background: rgba(63,224,208,.11); border-color: rgba(63,224,208,.3); color: var(--cyan); }
-.ep.visto { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.14); color: var(--tx-mid); }
-.serie-pie { font-size: 11.5px; color: var(--tx-lo); line-height: 1.5; margin-top: var(--sp-4); text-align: center; }
+.ep:active { transform: scale(.985); }
+.ep-txt { flex: 1; min-width: 0; }
+.ep-cap { display: flex; align-items: center; gap: 9px; }
+/* El violeta del rótulo es el del producto y da 2.54:1 sobre la tarjeta —por
+   debajo del 4.5:1 de WCAG AA—. Se copia igual porque esta pantalla existe para
+   reproducir el chasis real, y corregirlo acá escondería el defecto en vez de
+   mostrarlo. Lo que sí se evita es depender de él: el dato del capítulo —el
+   número— va en blanco a 17:1, así que nada se lee solo en violeta. */
+.ep-cap b { font-size: 14.5px; font-weight: 700; color: #6D1EED; letter-spacing: -.1px; }
+.ep-badge {
+  font-style: normal; font-size: 9.5px; font-weight: 700; color: #fff;
+  background: #8C3CFD; border-radius: var(--r-full); padding: 3px 9px 3.5px;
+}
+.ep-n { display: block; margin-top: 3px; font-size: 15.5px; font-weight: 700; color: #FDFDFD; }
+.ep-chevron { color: #757575; display: flex; }
+.ep-lock { color: #8C3CFD; display: flex; }
+
+/* Los capítulos que no son el siguiente se apagan enteros. En el producto la
+   tarjeta baja a #0A0A0A y el violeta a #2D1064: las dos cosas son el mismo
+   44% sobre negro, así que se hace con una opacidad y no con seis colores. */
+.ep.lejos { opacity: .44; }
+
+/* Marcas de la propuesta dentro de la tarjeta. */
+.ep-visto { color: var(--cyan); display: flex; opacity: .8; }
+.ep-marca { display: block; margin-top: 4px; font-size: 11px; font-weight: 600; color: var(--cyan); }
+.ep-precio {
+  display: flex; align-items: center; gap: 5px; margin-top: 5px;
+  font-size: 11.5px; font-weight: 600; color: var(--gold-300);
+}
+.ep-precio.pase { color: var(--gold-400); }
+
+.serie-pie { font-size: 11.5px; color: var(--tx-lo); line-height: 1.5; margin: var(--sp-5) var(--sp-4) 0; text-align: center; }
 
 /* Transiciones de pantalla. El contenedor se remonta con `key`, así que basta
    una animación de entrada: no hace falta orquestar salidas. */

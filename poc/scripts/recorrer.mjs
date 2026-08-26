@@ -48,10 +48,18 @@ const enPantalla = async () =>
   (await page.locator('.phone .topbar b, .phone h1, .phone .serie-title').first().innerText()).trim()
 paso('la ficha es la serie que tocó', (await enPantalla()) === titulo, `«${await enPantalla()}»`)
 
+paso('la ficha abre con el resumen del catálogo real',
+  (await page.locator('.serie-resumen p').innerText()).length > 60)
+
 const abiertos = await page.locator('.ep.abierto, .ep.visto').count()
 const cerrados = await page.locator('.ep.cerrado').count()
-paso('la grilla separa gratis de bloqueados', abiertos > 0 && cerrados > 0,
+paso('la lista de capítulos separa gratis de bloqueados', abiertos > 0 && cerrados > 0,
   `${abiertos} abiertos · ${cerrados} bloqueados`)
+
+// El precio no está en ninguna parte de la ficha real: es la propuesta, y va
+// donde se decide —la tarjeta del primer capítulo bloqueado—, no en el pie.
+paso('el capítulo del muro dice qué lo abre',
+  (await page.locator('.ep.cerrado').first().innerText()).match(/monedas|Pase de la Noche/) !== null)
 
 await page.locator('.ep.abierto, .ep.visto').first().click()
 await page.waitForTimeout(600)

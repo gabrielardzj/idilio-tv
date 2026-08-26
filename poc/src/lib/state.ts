@@ -48,6 +48,10 @@ const VISTOS_INICIALES: Record<string, number> = {
   'la-enfermera-infiltrada': 12,
   'el-hermanastro-enamorado': 4,
   'mi-esposo-es-la-muerte': 7,
+  // La serie de la que hay capturas de la app nativa. Está empezada a
+  // propósito: es la ficha que el export usa para que la pantalla del POC se
+  // pueda poner al lado de la del producto y compararse capítulo por capítulo.
+  'apasionada-por-el-padre-de-mi-hijo-que': 6,
 }
 
 export const initialState = (now: number): State => ({
