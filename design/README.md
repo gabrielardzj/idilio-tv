@@ -26,7 +26,7 @@ comparten estructura y solo cambian datos: se generan del mismo componente.
 ## Tokens
 
 Extraídos con `getComputedStyle` sobre `www.idilio.tv`, no inventados
-(ver [`.context/research/01-design-tokens-idilio.md`](../.context/research/01-design-tokens-idilio.md)).
+(ver [Anexo A](../docs/anexos/A-tokens-extraidos.md)).
 
 ```
 --home-black     #000000      --home-magenta   #d25af0

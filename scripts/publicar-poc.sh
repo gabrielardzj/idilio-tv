@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publica el POC en el repo público que sirve el link del entregable.
+# Publica el entregable completo en el repo público que sirve el link.
 #
 # El repo principal es privado y GitHub Pages en repos privados requiere plan de
 # pago, así que el POC vive también en gabrielardzj/idilio-racha-de-noches-poc,
@@ -8,7 +8,8 @@
 #   ./scripts/publicar-poc.sh "mensaje de commit"
 set -euo pipefail
 
-ORIGEN="$(cd "$(dirname "${BASH_SOURCE[0]}")/../poc" && pwd)"
+RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ORIGEN="$RAIZ/poc"
 DESTINO="${POC_PUB_DIR:-/tmp/idilio-poc-pub}"
 MENSAJE="${1:-Sincronizar el POC desde el workspace}"
 
@@ -18,12 +19,14 @@ MENSAJE="${1:-Sincronizar el POC desde el workspace}"
   exit 1
 }
 
-# --exclude .github es obligatorio: el workspace no tiene .github/ dentro de poc/,
-# así que sin esta exclusión --delete borra el workflow de despliegue del repo
-# público y el link deja de actualizarse en silencio. Ya pasó una vez.
+# Ojo: nunca sincronizar sobre la raíz del repo público con --delete, porque
+# borraría .github/ y el link dejaría de actualizarse en silencio. Ya pasó una vez.
+# Por eso el POC va a $DESTINO/poc/ y el resto se copia carpeta a carpeta.
 rsync -a --delete \
-  --exclude node_modules --exclude dist --exclude .git --exclude .github \
-  "$ORIGEN/" "$DESTINO/"
+  --exclude node_modules --exclude dist --exclude .git \
+  "$ORIGEN/" "$DESTINO/poc/"
+rsync -a --delete "$RAIZ/docs" "$RAIZ/design" "$RAIZ/export" "$RAIZ/scripts" "$DESTINO/"
+cp "$RAIZ/README.md" "$DESTINO/README.md"
 
 cd "$DESTINO"
 git add -A

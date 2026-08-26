@@ -27,6 +27,7 @@
 | — | **Modelo de sensibilidad** del objetivo | [`docs/modelo/`](docs/modelo/README.md) | — |
 | — | **Preparación de la sesión de cierre** (recorrido + preguntas difíciles) | [`docs/07-sesion-de-cierre.md`](docs/07-sesion-de-cierre.md) | — |
 | — | **Export tipo Mobbin** (pantallas, flujos y patrones) | [`export/`](export/) | — |
+| — | **Anexos**: tokens extraídos del producto y registro de uso | [`docs/anexos/`](docs/anexos/) | — |
 
 ---
 
