@@ -292,10 +292,30 @@
     {
       "id": "f4-comodin",
       "name": "Faltar noches · el perdón del sistema",
-      "intent": "Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.",
+      "intent": "Un usuario de 2.3 días por semana no puede sostener 7 de 7. El flujo abre con el momento en que el usuario vuelve —el acuse le dice qué se acumuló mientras no estaba— y sigue con los tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se detienen en dos. Las dos primeras pantallas salen de un solo recorrido: el toast en el player, y el muro al que llega ese mismo usuario al darle a siguiente.",
       "screens": [
         {
-          "id": "01-comodin-usado",
+          "id": "01-acuse-de-la-vuelta",
+          "name": "Vuelves tras faltar · entran los dos",
+          "screenType": "Media player",
+          "patterns": [
+            "Silent accrual",
+            "Toast",
+            "Anti-FOMO"
+          ],
+          "elements": [
+            "Video",
+            "Toast",
+            "Wallet chip",
+            "Progress bar"
+          ],
+          "note": "El único momento en que la regla anti-FOMO se le hace visible al usuario como recompensa y no como estado: *«Tu comodín te cubrió · Noche 4 · +2 pases»*. El pase se emite por reloj aunque nadie abra la app, así que al volver entra lo que se acumuló mientras no estabas. Si entrara uno solo, faltar costaría el pase de esa noche — el «úsalo o piérdelo» de Webtoon, que es justo lo que esta mecánica existe para no repetir.",
+          "stateKey": "player-free",
+          "image": "flows/f4-comodin/01-acuse-de-la-vuelta.png",
+          "preview": "flows/f4-comodin/01-acuse-de-la-vuelta.webp"
+        },
+        {
+          "id": "02-comodin-usado",
           "name": "El comodín te cubrió",
           "screenType": "Paywall",
           "patterns": [
@@ -310,11 +330,11 @@
           ],
           "note": "Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.",
           "stateKey": "wall-passes-capped",
-          "image": "flows/f4-comodin/01-comodin-usado.png",
-          "preview": "flows/f4-comodin/01-comodin-usado.webp"
+          "image": "flows/f4-comodin/02-comodin-usado.png",
+          "preview": "flows/f4-comodin/02-comodin-usado.webp"
         },
         {
-          "id": "02-racha-rota",
+          "id": "03-racha-rota",
           "name": "Se cortó la racha",
           "screenType": "Paywall",
           "patterns": [
@@ -329,11 +349,11 @@
           ],
           "note": "Sin rojo, sin alarma, sin oferta para \"recuperar tu racha\" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.",
           "stateKey": "wall-streak-broken",
-          "image": "flows/f4-comodin/02-racha-rota.png",
-          "preview": "flows/f4-comodin/02-racha-rota.webp"
+          "image": "flows/f4-comodin/03-racha-rota.png",
+          "preview": "flows/f4-comodin/03-racha-rota.webp"
         },
         {
-          "id": "03-dos-pases",
+          "id": "04-dos-pases",
           "name": "Dos pases acumulados · el tope",
           "screenType": "Paywall",
           "patterns": [
@@ -348,8 +368,8 @@
           ],
           "note": "Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.",
           "stateKey": "wall-passes-capped",
-          "image": "flows/f4-comodin/03-dos-pases.png",
-          "preview": "flows/f4-comodin/03-dos-pases.webp"
+          "image": "flows/f4-comodin/04-dos-pases.png",
+          "preview": "flows/f4-comodin/04-dos-pases.webp"
         }
       ]
     },
@@ -436,7 +456,7 @@
         },
         {
           "id": "02-la-cita",
-          "name": "La cita · faltan 17 h",
+          "name": "La cita · hoy a las 21:30",
           "screenType": "Paywall",
           "patterns": [
             "Countdown",
@@ -479,7 +499,7 @@
   ],
   "summary": {
     "flows": 8,
-    "screens": 20,
+    "screens": 21,
     "screenTypes": [
       "Account / Wallet",
       "Confirmation",

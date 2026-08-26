@@ -1,7 +1,7 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-20 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+21 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
@@ -74,13 +74,16 @@ La tienda deja de vender monedas y pasa a vender episodios.
 
 ## Flujo 5 · Faltar noches · el perdón del sistema
 
-Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.
+Un usuario de 2.3 días por semana no puede sostener 7 de 7. El flujo abre con el momento en que el usuario vuelve —el acuse le dice qué se acumuló mientras no estaba— y sigue con los tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se detienen en dos. Las dos primeras pantallas salen de un solo recorrido: el toast en el player, y el muro al que llega ese mismo usuario al darle a siguiente.
 
 | # | Pantalla | Tipo | Patrones |
 |---|---|---|---|
-| 1 | [El comodín te cubrió](flows/f4-comodin/01-comodin-usado.png) | Paywall | Streak protection, Forgiveness mechanic |
-| 2 | [Se cortó la racha](flows/f4-comodin/02-racha-rota.png) | Paywall | Streak reset, Non-punitive feedback |
-| 3 | [Dos pases acumulados · el tope](flows/f4-comodin/03-dos-pases.png) | Paywall | Resource cap, Anti-FOMO |
+| 1 | [Vuelves tras faltar · entran los dos](flows/f4-comodin/01-acuse-de-la-vuelta.png) | Media player | Silent accrual, Toast, Anti-FOMO |
+| 2 | [El comodín te cubrió](flows/f4-comodin/02-comodin-usado.png) | Paywall | Streak protection, Forgiveness mechanic |
+| 3 | [Se cortó la racha](flows/f4-comodin/03-racha-rota.png) | Paywall | Streak reset, Non-punitive feedback |
+| 4 | [Dos pases acumulados · el tope](flows/f4-comodin/04-dos-pases.png) | Paywall | Resource cap, Anti-FOMO |
+
+**Vuelves tras faltar · entran los dos** — El único momento en que la regla anti-FOMO se le hace visible al usuario como recompensa y no como estado: *«Tu comodín te cubrió · Noche 4 · +2 pases»*. El pase se emite por reloj aunque nadie abra la app, así que al volver entra lo que se acumuló mientras no estabas. Si entrara uno solo, faltar costaría el pase de esa noche — el «úsalo o piérdelo» de Webtoon, que es justo lo que esta mecánica existe para no repetir.
 
 **El comodín te cubrió** — Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.
 
@@ -115,12 +118,12 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 | # | Pantalla | Tipo | Patrones |
 |---|---|---|---|
 | 1 | [Muro · el Pase está listo](flows/f7-stack-real/01-muro-pase-listo.png) | Paywall | Server-rendered state, Reward claim, Streak |
-| 2 | [La cita · faltan 17 h](flows/f7-stack-real/02-la-cita.png) | Paywall | Countdown, Appointment, Opt-in notification |
+| 2 | [La cita · hoy a las 21:30](flows/f7-stack-real/02-la-cita.png) | Paywall | Countdown, Appointment, Opt-in notification |
 | 3 | [Faltan 42 minutos](flows/f7-stack-real/03-cuenta-regresiva-corta.png) | Paywall | Countdown, Balance spend |
 
 **Muro · el Pase está listo** — Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.
 
-**La cita · faltan 17 h** — El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.
+**La cita · hoy a las 21:30** — El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.
 
 **Faltan 42 minutos** — Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.
 

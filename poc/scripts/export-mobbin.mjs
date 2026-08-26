@@ -166,24 +166,42 @@ const FLOWS = [
   {
     id: 'f4-comodin',
     name: 'Faltar noches · el perdón del sistema',
-    intent: 'Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.',
+    intent: 'Un usuario de 2.3 días por semana no puede sostener 7 de 7. El flujo abre con el momento en que el usuario vuelve —el acuse le dice qué se acumuló mientras no estaba— y sigue con los tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se detienen en dos. Las dos primeras pantallas salen de un solo recorrido: el toast en el player, y el muro al que llega ese mismo usuario al darle a siguiente.',
     screens: [
       {
-        id: '01-comodin-usado', name: 'El comodín te cubrió',
+        id: '01-acuse-de-la-vuelta', name: 'Vuelves tras faltar · entran los dos',
+        estado: 'player-free',
+        type: 'Media player', patterns: ['Silent accrual', 'Toast', 'Anti-FOMO'],
+        elements: ['Video', 'Toast', 'Wallet chip', 'Progress bar'],
+        note: 'El único momento en que la regla anti-FOMO se le hace visible al usuario como recompensa y no como estado: *«Tu comodín te cubrió · Noche 4 · +2 pases»*. El pase se emite por reloj aunque nadie abra la app, así que al volver entra lo que se acumuló mientras no estabas. Si entrara uno solo, faltar costaría el pase de esa noche — el «úsalo o piérdelo» de Webtoon, que es justo lo que esta mecánica existe para no repetir.',
+        act: async (p) => {
+          await click(p, '5 · El muro')       // termina su noche con el pase gastado
+          await click(p, 'Falté una noche')   // pasa una noche entera sin abrir la app
+          await p.locator('.sheet-close').click()
+          await p.waitForTimeout(150)
+          // El `estado:` de arriba no alcanza acá: player-free también sería
+          // cierto con un toast que dijera «+1 pase», que es exactamente la
+          // regresión que esta pantalla existe para documentar.
+          const t = await p.locator('.toast').first().innerText()
+          if (!t.includes('+2 pases')) throw new Error(`el acuse decía «${t.replace(/\n/g, ' ')}», no «+2 pases»`)
+        },
+      },
+      {
+        id: '02-comodin-usado', name: 'El comodín te cubrió',
         estado: 'wall-passes-capped',
         type: 'Paywall', patterns: ['Streak protection', 'Forgiveness mechanic'],
         elements: ['Bottom sheet', 'Streak strip', 'Status row', 'Reward card'],
         note: 'Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.',
+        // Sigue al acuse sin resetear nada: el mismo usuario que acaba de ver el
+        // toast le da a "siguiente" y choca con el muro. Las dos pantallas salen
+        // de un recorrido, no de dos saltos independientes.
         act: async (p) => {
-          // El comodín se gana en la noche 3, y las noches se acreditan al VER,
-          // no al usar el pase. Así que hay que llegar hasta la 3 viendo.
-          await click(p, 'Es mañana y volví')
-          await dismissIfAccount(p)
-          await click(p, 'Falté una noche')
+          await p.locator('[aria-label^="Siguiente episodio"]').click()
+          await p.waitForTimeout(400)
         },
       },
       {
-        id: '02-racha-rota', name: 'Se cortó la racha',
+        id: '03-racha-rota', name: 'Se cortó la racha',
         estado: 'wall-streak-broken',
         type: 'Paywall', patterns: ['Streak reset', 'Non-punitive feedback'],
         elements: ['Bottom sheet', 'Notice', 'Streak strip', 'Reward card'],
@@ -191,7 +209,7 @@ const FLOWS = [
         act: async (p) => { await click(p, '10 · Racha rota') },
       },
       {
-        id: '03-dos-pases', name: 'Dos pases acumulados · el tope',
+        id: '04-dos-pases', name: 'Dos pases acumulados · el tope',
         estado: 'wall-passes-capped',
         type: 'Paywall', patterns: ['Resource cap', 'Anti-FOMO'],
         elements: ['Bottom sheet', 'Reward card', 'Primary button', 'Streak strip'],
