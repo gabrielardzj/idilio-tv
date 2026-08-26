@@ -46,7 +46,7 @@ Son dos cosas distintas y mezclarlas fue el error de mi primera versión:
 
 Es la corrección directa al **19% de reclamo** de la recompensa diaria. Ese 19% no es un problema de diseño de pantalla — es la consecuencia de haber puesto un botón entre el usuario y algo que ya se ganó. Quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
 
-> Esta regla no estaba en mi primera versión: la acreditación colgaba de un reloj de 24 h. La tomé de la versión paralela de este mismo reto, donde está mejor resuelta. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
+> Esta regla no estaba en mi primera versión: la acreditación colgaba de un reloj de 24 h. La tomé de la versión paralela de este mismo reto, donde está mejor resuelta.
 
 **R1b · Lo pendiente se acumula hasta dos, y ahí se detiene.**
 El techo de emisión es duro y por usuario, no por serie. El de acumulación es otro: **el saldo pendiente no pasa de 2**, y lo que se emite por encima de 2 mientras el usuario no aparece se pierde. Ese es el gradiente entero de la mecánica, y es fino a propósito: faltar una noche no cuesta nada —al volver hay dos esperando—, faltar dos seguidas ya deja un pase en el camino. Nadie recibe un castigo; el que vuelve seguido simplemente recoge todo lo que se emitió. El tope cubre además el caso de quien ve episodios gratis, recibe el pase y cierra la app sin llegar al muro. Se explica en §3.4bis.

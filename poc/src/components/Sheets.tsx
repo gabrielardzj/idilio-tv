@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Coin, Pass, Shield, X } from './Icons'
-import { StreakStrip } from './bits'
+import { StreakStrip, citaTexto } from './bits'
 import { frameStyle } from '../lib/frame'
 import { EPISODE_COST, MAX_PASSES, PACKS, STREAK, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
 import { desbloqueadoDe, enCurso, serieDe, type State } from '../lib/state'
@@ -127,7 +127,12 @@ export function Celebrate({
         <h2>Episodio {ep} desbloqueado</h2>
         <p>
           {via === 'pass'
-            ? <>Usaste tu Pase de la Noche. El próximo llega en 24 horas.</>
+            ? state.passes > 0
+              ? <>Usaste uno de tus Pases de la Noche. Te {state.passes === 1 ? 'queda otro' : `quedan ${state.passes}`}.</>
+              /* Decía «El próximo llega en 24 horas», que es la mecánica vieja:
+                 `proximaCita` devuelve la hora de siempre del usuario, así que
+                 nunca son 24 h exactas. El muro ya lo decía bien; esto no. */
+              : <>Usaste tu Pase de la Noche. El próximo te espera {state.passNextAt ? citaTexto(state.passNextAt, state.now) : 'mañana'}.</>
             : <>Pagaste {EPISODE_COST} monedas. Te quedan {state.balance} · {episodesLabel(state.balance)}.</>}
         </p>
 

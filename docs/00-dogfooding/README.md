@@ -40,7 +40,7 @@ Rango de IAP en Google Play: **$0.09 – $299.99**.
 
 La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99** y uno **mensual a $14.99**. O sea que Idilio ya es un modelo híbrido — monedas y suscripción conviviendo — y el muro no ofrece ninguno de los dos: solo dice que hay que descargar la app.
 
-### Chasis de la app nativa
+### La app nativa, tal como es hoy
 - Barra superior: logo + **chip de saldo** (ej. 2543) + búsqueda.
 - Rieles home: círculos "Volver por tu próxima novela" → Estrenos → Seguir viendo → Lo más visto → Última Hora → Nuestra selección para ti.
 - Tab bar de 3: **Inicio · Recompensas · Perfil** (Perfil con punto rojo de notificación).

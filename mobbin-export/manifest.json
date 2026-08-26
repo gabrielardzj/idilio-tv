@@ -29,7 +29,7 @@
             "Progress bar",
             "Tab bar"
           ],
-          "note": "El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.",
+          "note": "La estructura del producto real tal como es hoy, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.",
           "stateKey": "home",
           "image": "flows/f0-llegar-al-muro/01-home.png",
           "preview": "flows/f0-llegar-al-muro/01-home.webp"
@@ -54,7 +54,7 @@
             "Lock",
             "Fine print"
           ],
-          "note": "El chasis es el de la app nativa, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.",
+          "note": "La pantalla es la de la app nativa tal como es hoy, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.",
           "stateKey": "serie-detalle",
           "image": "flows/f0-llegar-al-muro/02-serie.png",
           "preview": "flows/f0-llegar-al-muro/02-serie.webp"

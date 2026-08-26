@@ -26,7 +26,8 @@ const PAGINAS = [
   { slug: 'poc', src: 'docs/04-poc/README.md', titulo: 'El POC', n: '4', peso: '25%' },
   { slug: 'dogfooding', src: 'docs/00-dogfooding/README.md', titulo: 'Dogfooding y censo', n: '0', peso: 'anexo' },
   { slug: 'benchmark', src: 'docs/05-benchmark/README.md', titulo: 'Benchmark competitivo', n: '5', peso: 'anexo' },
-  { slug: 'reconciliacion', src: 'docs/RECONCILIACION.md', titulo: 'Las dos versiones', n: '·', peso: 'anexo' },
+  // `docs/RECONCILIACION.md` sigue en el repo pero ya no se publica: es una nota
+  // de trabajo entre las dos versiones paralelas del reto, no un entregable.
 ]
 
 /** Reescribe los enlaces del repo a los del sitio publicado. */

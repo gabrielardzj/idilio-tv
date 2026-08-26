@@ -49,7 +49,7 @@ const FLOWS = [
         estado: 'home',
         type: 'Home / Browse', patterns: ['Content rails', 'Continue watching', 'Currency balance'],
         elements: ['Top bar', 'Wallet chip', 'Horizontal rail', 'Poster', 'Progress bar', 'Tab bar'],
-        note: 'El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
+        note: 'La estructura del producto real tal como es hoy, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
         act: async () => {},
       },
       {
@@ -57,11 +57,11 @@ const FLOWS = [
         estado: 'serie-detalle',
         type: 'Detail', patterns: ['Chapter list', 'Progress indicator', 'Unlock cost'],
         elements: ['Top bar', 'Poster', 'Synopsis', 'Progress bar', 'Reward card', 'Chapter list', 'Badge', 'Lock', 'Fine print'],
-        note: 'El chasis es el de la app nativa, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.',
+        note: 'La pantalla es la de la app nativa tal como es hoy, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.',
         // Esta serie y no la primera del riel: es de la que hay capturas de la
         // app nativa, así que esta pantalla se puede poner al lado de la del
         // producto y compararse tarjeta por tarjeta. También es la única con
-        // capítulos «Interactiva» medidos, que es un elemento del chasis real.
+        // capítulos «Interactiva» medidos, que es un elemento de la pantalla real.
         act: async (p) => {
           await p.locator('.poster[aria-label*="Apasionada"]').first().click()
           await p.waitForTimeout(500)
@@ -75,7 +75,7 @@ const FLOWS = [
         // La ficha no cabe en una pantalla —en el producto real tampoco: el
         // resumen se come la primera—, así que la lista va en su propia
         // captura. Es la mitad donde vive la propuesta, y recortarla dejaría el
-        // entregable mostrando solo el chasis copiado.
+        // entregable mostrando solo la parte copiada del producto.
         note: 'La misma ficha, bajando. Las tarjetas son las del producto —«Capítulo N», el número como título, «Interactiva» y el candado—; lo que el producto no tiene son las tres marcas de la propuesta: el visto de los que ya viste, el «Seguir viendo» de dónde te quedaste, y el precio en la tarjeta del capítulo 11, que es donde está el muro. Del 12 en adelante la tarjeta se apaga, igual que en la app.',
         act: async (p) => {
           await p.locator('.ep.cerrado').first().scrollIntoViewIfNeeded()

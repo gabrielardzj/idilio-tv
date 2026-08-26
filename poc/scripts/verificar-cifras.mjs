@@ -122,7 +122,7 @@ const DOCS = [
 // Un documento publicado que nadie vigila es por donde se cuela la próxima cifra
 // vieja. Si mañana se agrega una página al sitio y no a esta lista, esto avisa.
 const PUBLICADOS = ['docs/01-diagnostico', 'docs/02-estrategia', 'docs/03-diseno',
-  'docs/04-poc', 'docs/05-benchmark', 'docs/00-dogfooding', 'docs/RECONCILIACION']
+  'docs/04-poc', 'docs/05-benchmark', 'docs/00-dogfooding']
 const sinVigilar = PUBLICADOS.filter(p => !DOCS.some(d => d.startsWith(p)))
 if (sinVigilar.length) {
   console.log(`✗ documentos publicados fuera de la lista de vigilados: ${sinVigilar.join(', ')}`)

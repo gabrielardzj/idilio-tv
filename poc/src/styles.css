@@ -68,7 +68,7 @@ body {
 
 button { font: inherit; color: inherit; border: none; background: none; cursor: pointer; }
 
-/* ── Chasis: el teléfono ───────────────────────────────────── */
+/* ── El marco: el teléfono ─────────────────────────────────── */
 .stage {
   min-height: 100%;
   display: grid;
