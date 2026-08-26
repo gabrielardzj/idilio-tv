@@ -49,6 +49,28 @@ function reescribirEnlaces(html, desdeSrc) {
   })
 }
 
+/**
+ * Los títulos llevan el mismo id que les pone GitHub. Los documentos se citan entre
+ * ellos por sección —«ver §5.7»— y sin id ningún enlace con ancla aterriza en ningún
+ * lado: el navegador se queda arriba de la página.
+ */
+function anclasEnTitulos(html) {
+  const vistos = new Map()
+  return html.replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (_, nivel, contenido) => {
+    const base = contenido
+      .replace(/<[^>]+>/g, '')
+      .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+      .toLowerCase().trim()
+      .replace(/[^\p{L}\p{N}\s_-]/gu, '')
+      .replace(/ /g, '-')
+    const n = vistos.get(base) ?? 0
+    vistos.set(base, n + 1)
+    const id = n ? `${base}-${n}` : base
+    return `<h${nivel} id="${id}">${contenido}</h${nivel}>`
+  })
+}
+
 /** Las imágenes de los documentos se copian al sitio y se reapuntan. */
 function reescribirImagenes(html, desdeSrc, activos) {
   return html.replace(/src="([^"]+)"/g, (todo, src) => {
@@ -172,6 +194,9 @@ line-height:1.6;margin:0 0 20px;white-space:pre}
 pre.mermaid:has(svg){padding:24px 16px;white-space:normal;text-align:center;line-height:1.4}
 pre.mermaid svg{display:block;margin:0 auto;max-width:100%;height:auto}
 pre.mermaid svg .edgeLabel,pre.mermaid svg .label{font-family:Outfit,system-ui,sans-serif}
+/* En una columna de 330 px el diagrama entra al 21% y no se lee nada.
+   Ahí conviene que conserve tamaño y se desplace en horizontal. */
+@media(max-width:760px){pre.mermaid:has(svg) svg{width:700px;max-width:none}}
 </style></head><body>
 <div class="shell">
 <nav>
@@ -200,6 +225,7 @@ for (const p of PAGINAS) {
   // los bloques mermaid se dibujan en la página; el fuente queda adentro como respaldo
   html = html.replace(/<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
     (_, cod) => `<pre class="mermaid">${cod}</pre>`)
+  html = anclasEnTitulos(html)
   html = reescribirEnlaces(html, p.src)
   html = reescribirImagenes(html, p.src, activos)
   html = imagenesAmpliables(html)
