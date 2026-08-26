@@ -39,11 +39,11 @@ donde los segundos vuelven a ser el héroe.
 
 **El recorrido completo se verifica solo.** `npm run recorrer` maneja el prototipo como una persona —home → una serie sin empezar → ver los gratis → chocar con el muro— y comprueba once cosas, entre ellas que el muro abra con la historia antes que con el precio. Corre en el pipeline.
 
-Esa comprobación ya encontró un bug que el panel escondía: **el episodio 1 de cualquier serie sin empezar abría el muro en vez del player**, porque la condición miraba los episodios vistos y no los gratis. Saltar a un estado con el panel demuestra que el estado existe, no que se pueda llegar a él.
+La distinción con el panel de revisión importa: saltar a un estado demuestra que el estado existe, no que se pueda llegar a él. Un fallo tan básico como que **el episodio 1 de una serie sin empezar abra el muro en vez del player** —la condición mira los episodios vistos y no los gratis— es invisible para el panel y evidente para el recorrido.
 
 **Es un prototipo funcional, no un clickable.** El estado vive en un reducer real (`src/lib/state.ts`), el countdown corre contra un reloj, el saldo se descuenta, la racha avanza, el comodín se consume solo y la emisión está topada en un pase por noche. Se puede llegar a cualquier estado jugando, sin usar el panel lateral.
 
-En `src/lib/economy.ts` el `PASS_COOLDOWN_MS` es el **techo de emisión** —no se genera más de un pase por noche—, no como el reloj que acredita: eso pasa al terminar un episodio, y la cita de mañana la ancla `HORA_HABITUAL`.
+En `src/lib/economy.ts`, `PASS_COOLDOWN_MS` es el **techo de emisión** —no se genera más de un pase por noche— y no el reloj que acredita: la acreditación ocurre al terminar un episodio, y la cita de mañana la ancla `HORA_HABITUAL`.
 
 ## 4.2 Cómo correrlo
 
@@ -112,7 +112,7 @@ Cinco reglas del diseño no salieron de escribirlo sino de construirlo y de medi
 
 ## 4.5 Qué queda fuera, a propósito
 
-Navegación general, home, catálogo, búsqueda, perfil, reproducción de video real, compra real por IAP (in-app purchase: la compra dentro de la app) y persistencia entre sesiones. El brief lo excluye explícitamente y agregarlo diluiría la profundidad del único momento que sí importa evaluar.
+Navegación general, home, catálogo, búsqueda, perfil, reproducción de video real, compra real por IAP (in-app purchase: la compra dentro de la app) y persistencia entre sesiones. El brief lo excluye explícitamente, y agregarlo diluiría la profundidad del único momento que importa evaluar.
 
 ## 4.6 Accesibilidad y contexto de uso
 
@@ -122,4 +122,4 @@ Navegación general, home, catálogo, búsqueda, perfil, reproducción de video 
 - Blanco máximo `#F2EBF7` en lugar de `#FFFFFF`, pensado para brillo bajo en la franja de 11 p.m. a 2 a.m. — pero **ningún** token de texto por debajo de 4.5:1, y el ratio se calcula en el pipeline.
 - Ningún estado depende solo del color: la racha combina color, icono y etiqueta de texto.
 
-Los dos árboles auditados con **axe-core** (`wcag2a`, `wcag2aa`, `wcag21aa`, `best-practice`): **0 violaciones** en las tres superficies desplegadas — prototipo, galería de flujos y versión sobre el stack. La primera pasada del prototipo encontró cuatro — `maximum-scale` bloqueando el zoom, falta de landmark `main`, contenido fuera de landmarks y orden de encabezados — y están corregidas.
+Los dos árboles auditados con **axe-core** (`wcag2a`, `wcag2aa`, `wcag21aa`, `best-practice`): **0 violaciones** en las tres superficies desplegadas — prototipo, galería de flujos y versión sobre el stack. La auditoría cubre las cuatro fallas que más se cuelan en un prototipo de este tipo: `maximum-scale` bloqueando el zoom, ausencia de landmark `main`, contenido fuera de landmarks y orden de encabezados.

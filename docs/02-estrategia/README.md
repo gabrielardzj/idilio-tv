@@ -1,14 +1,28 @@
 # 2. Estrategia
 
+## Resumen
+
+Ocho intervenciones en tres olas, sobre un trimestre. La compuerta que las ordena es una sola: **si el usuario tiene que navegar a una pestaña para encontrarla, no sirve**, porque el 82% nunca abre el perfil y el 81% no reclama la recompensa que ya existe.
+
+| Ola | Semanas | Qué hace | Intervenciones |
+|---|---|---|---|
+| **1** | 1–4 | Hacer legible y accesible lo que el producto ya tiene | I1 la moneda habla en episodios · I2 la fuente se muda al muro · I3 la escalera de precios vuelve a subir · I4 continuidad web→app |
+| **2** | 4–9 | Cambiar la unidad del regreso — **es la que se lleva a diseño y POC** | I5 el Pase de la Noche y la Racha de Noches · I6 progreso de serie visible |
+| **3** | 9–13 | Convertir el hábito en cuenta y en catálogo | I7 la cuenta se pide cuando hay algo que perder · I8 el pase como puente entre series |
+
+La Ola 1 va primero pese a mover menos: hace legible la economía sobre la que después se mide I5. Y I5 es la apuesta principal pero no abre el trimestre, porque cuesta 4–5 semanas y empezar por ahí significa llegar a la semana 9 sin haber aprendido nada.
+
+---
+
 ## 2.1 La tesis
 
 > El metajuego de Idilio existe, pero vive en una pestaña. El core loop (lo que el usuario hace una y otra vez) vive en el player. **La estrategia entera consiste en mudar el metajuego al lugar donde el usuario ya está**, y en cambiar la unidad de todo — de monedas a episodios, de días calendario a noches — para que hable el idioma del producto.
 
-No propongo agregar mecánicas. Propongo **re-situar y re-denominar** las que ya existen, y recién después agregar.
+La estrategia no agrega mecánicas: **re-sitúa y re-denomina** las que ya existen, y solo después agrega.
 
 ## 2.2 Criterio de priorización
 
-Ordeno con tres preguntas, en este orden. La primera es una compuerta, no un factor.
+El orden sale de tres preguntas, aplicadas en esta secuencia. La primera es una compuerta, no un factor.
 
 **① ¿Ocurre dentro del core loop?**
 Si la intervención requiere que el usuario navegue a una pestaña, baja al último lugar sin importar qué tan buena sea. El 82% que nunca abre perfil y el 81% que no reclama la recompensa son la misma persona diciendo lo mismo: *no voy a ir a buscarlo*.
@@ -17,11 +31,11 @@ Si la intervención requiere que el usuario navegue a una pestaña, baja al últ
 Alcance = fracción de DAU que la ve sin buscarla. Efecto = magnitud esperada sobre DAU/MAU. Costo = semanas de equipo.
 
 **③ ¿Se puede medir en 4 semanas?**
-Prefiero una intervención con lectura rápida sobre una con efecto mayor y lectura a 90 días. En un trimestre necesito dos ciclos de aprendizaje, no uno.
+Una intervención con lectura rápida vale más que una de mayor efecto y lectura a 90 días: en un trimestre hacen falta dos ciclos de aprendizaje, no uno.
 
 ## 2.3 El portafolio
 
-Ocho intervenciones, tres olas. Cada una: hipótesis → qué mueve → cómo lo sé.
+Ocho intervenciones en tres olas. Cada una se describe con cuatro campos: hipótesis, qué mueve, cómo se sabe si funcionó y cuánto cuesta.
 
 ---
 
@@ -106,7 +120,7 @@ Ninguna de las tres mueve la métrica. Las tres se notan si faltan.
 | **Hipótesis** | El muro es hoy un final. Convertido en una cita con hora — *"tu próximo episodio se abre hoy a las 21:30, tu hora de siempre"* — deja de ser el final de la relación y pasa a ser el motivo del próximo regreso. Y como la unidad es la noche, los pases se acumulan hasta dos y hay comodín, un usuario de 2.3 días/semana puede sostener una racha sin cambiar de conducta. |
 | **Mueve** | **DAU/MAU** (objetivo primario). Racha de 3+: 6% → objetivo 20%. Reclamo diario: 19% → 55%+. |
 | **Cómo lo sé** | *Leading (semana 1):* % de muros que terminan en pase usado en vez de cierre. *Leading (semana 2):* % que vuelve dentro de las 36 h de haber usado el pase. *Lagging (semana 4):* DAU/MAU de la celda tratada vs. holdout. *Guardrail:* ARPDAU, leído como ingreso por DAU y no como mix de productos: si el mensual en el muro solo canibaliza packs, el mix se mueve y el ingreso no, y eso no es una ganancia. **Criterio de kill:** si ARPDAU cae >8% relativo sostenido 2 semanas, se revierte. |
-| **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y digo por qué en vez de dejarlo implícito: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Ola 3: de los cuatro cambios es el que menos mueve el objetivo. Las cuatro piezas de perfil y de lanzamiento del párrafo anterior entran dentro de esas semanas: ninguna pasa de un día, y las cuento acá para que no aparezcan después como alcance no presupuestado. |
+| **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y la razón conviene explicitarla: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Ola 3: de los cuatro cambios es el que menos mueve el objetivo. Las cuatro piezas de perfil y de lanzamiento del párrafo anterior entran dentro de esas semanas: ninguna pasa de un día, y las cuento acá para que no aparezcan después como alcance no presupuestado. |
 | **Compuerta ①** | ✅ ocurre exactamente en el muro. |
 
 #### I6 · Progreso de serie visible
@@ -165,9 +179,9 @@ I8                                ██████
      └── Ola 1 ──┘└──── Ola 2 ────┘└─ Ola 3 ─┘
 ```
 
-**Por qué la Ola 1 va primero aunque su efecto sobre DAU/MAU sea menor.** I1 e I2 son precondiciones del experimento de I5. Si el Pase de la Noche se lanza sobre una economía cuya moneda el usuario no sabe leer, no voy a poder distinguir "el pase no funciona" de "el usuario no entendió qué le dieron". Primero hago legible el sistema; después mido la mecánica dentro de él.
+**Por qué la Ola 1 va primero aunque su efecto sobre DAU/MAU sea menor.** I1 e I2 son precondiciones del experimento de I5. Si el Pase de la Noche se lanza sobre una economía cuya moneda el usuario no sabe leer, no hay forma de distinguir "el pase no funciona" de "el usuario no entendió qué le dieron". Primero se hace legible el sistema; después se mide la mecánica dentro de él.
 
-**Por qué I5 no va primero pese a ser la apuesta principal.** Cuesta 4–5 semanas y toca timers server-authoritative con estado de invitado. Arrancar el trimestre con lo más caro y lo más lento significa llegar a la semana 9 sin haber aprendido nada. Con la Ola 1 en producción, llego a I5 con la economía legible, con el reclamo diario ya subido, y con una línea base limpia.
+**Por qué I5 no va primero pese a ser la apuesta principal.** Cuesta 4–5 semanas y toca timers server-authoritative con estado de invitado. Arrancar el trimestre con lo más caro y lo más lento significa llegar a la semana 9 sin haber aprendido nada. Con la Ola 1 en producción, I5 arranca con la economía legible, con el reclamo diario ya subido y con una línea base limpia.
 
 **Por qué I7 va al final.** Pedir cuenta antes de que exista racha es pedirla sin argumento. La cuenta es la consecuencia de I5, no su requisito — por eso I5 tiene que funcionar para invitados.
 
@@ -181,11 +195,11 @@ I8                                ██████
 | I7 | Ajustado | Alto: el merge invitado→cuenta sin perder saldo es la parte que históricamente rompe. Si aprieta, se corre al Q siguiente. |
 | I8 | Solo si I5 salió limpio | Depende de I5. |
 
-**Los tres riesgos reales de I5, dichos ahora y no después:**
+**Los tres riesgos de I5, declarados por adelantado:**
 
 1. **El reloj no puede vivir en el dispositivo.** Un countdown en cliente se vulnera cambiando la hora del teléfono. Necesita ser server-authoritative, con el cliente mostrando un delta contra `server_time`. Presupuestado dentro de las 4–5 semanas.
 2. **La ventana de 5 a.m. necesita zona horaria del usuario, no del servidor.** MX, CO y US-Hispano cruzan cuatro husos. Si el corte se calcula en UTC, a un usuario de Los Ángeles se le rompe la racha a las 10 p.m. Esto es una decisión de producto disfrazada de detalle técnico y hay que resolverla antes de escribir el primer endpoint.
-3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** Ese 40% es una estimación mía y no un dato medido: no hay medición de push en este producto y no la voy a inventar. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
+3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** Ese 40% es una estimación y no un dato medido: no hay medición de push en este producto. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
 
 ## 2.6 Qué queda deliberadamente afuera
 
@@ -194,6 +208,6 @@ I8                                ██████
 | Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo — y el argumento más fuerte no es ese 82% sino el 81%: la pestaña de Recompensas **regala monedas** y cuatro de cada cinco usuarios no van. Si no navegan por dinero gratis, tampoco van a navegar por unas estadísticas. El 82% no es síntoma de un perfil vacío, es síntoma de que en esta sesión —entrar de madrugada, tocar «seguir viendo», cerrar— no hay ningún momento de navegación. *Descarto el rediseño, no la sección:* I5 e I7 sí tocan el perfil, con cuatro piezas chicas que no son engagement sino consecuencia —interruptor de avisos, la línea de la noche, el espejo de «Tu economía» y restaurar compras—. Van listadas dentro de cada intervención, y no como una novena, porque darles entidad propia contradiría la compuerta ① de [§2.2](#22-criterio-de-priorización). |
 | Rankings, tablas, comparación social | 11 p.m.–2 a.m., consumo solitario, vertical con pudor, 88% sin identidad. No es motivación, es exposición. |
 | Insignias y coleccionables como apuesta principal | Vínculo indirecto con DAU/MAU, carga cognitiva alta, sin evidencia de motivación de coleccionista. Candidatos a capa posterior. |
-| Anuncios recompensados como fuente | Es la fuente obvia y ya es estándar de la categoría: DramaBox permite hasta 15 anuncios diarios ≈ 30 monedas, y ReelShort también los ofrece. Pero cambia la naturaleza del producto (de corto-premium a ad-supported) y ese es un llamado de negocio, no de diseño. Lo señalo, no lo decido. La cifra de DramaBox es de fuente secundaria —una guía de terceros, no la app— y queda por verificar; la uso porque es la mejor que encontré. Sin precio por episodio de DramaBox en ninguna de las fuentes que junté, la cifra no se puede convertir a episodios por día: queda en monedas. |
-| Suscripción **como mecánica de retención** | Ya existe en el producto —pase semanal a $7.99, mensual a $14.99— y es una respuesta de monetización a un problema de retención: no mueve DAU/MAU del no-pagador, que es el 95%+ de la base. Por eso no la propongo como palanca del objetivo del trimestre. Lo que sí propongo, y no es lo mismo, es ofrecerla **como superficie**: que el mensual aparezca en el muro, debajo del pase, porque hoy el producto de mayor valor de la economía no está en el momento de máxima intención ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)). Descartarla como motor de regreso no obliga a esconderla como opción de compra: son dos decisiones distintas y las tomo distinto. |
-| **Recortar los episodios gratis del catálogo** | Es la palanca más pesada de toda la economía —500 episodios gratis, casi cuatro meses de colchón— y está a una decisión de distancia. Pero es una palanca de **conversión**, no de stickiness: recortarla no hace que el usuario vuelva mañana, hace que se vaya antes. Y toca directamente el motor de adquisición. La señalo en el [diagnóstico §1.4](../01-diagnostico/#14-una-tensión-que-señalo-y-no-resuelvo) porque quien lea esto debe saber que existe. No la acciono porque el objetivo del ejercicio es DAU/MAU. |
+| Anuncios recompensados como fuente | Es la fuente obvia y ya es estándar de la categoría: DramaBox permite hasta 15 anuncios diarios ≈ 30 monedas, y ReelShort también los ofrece. Pero cambia la naturaleza del producto (de corto-premium a ad-supported) y ese es un llamado de negocio, no de diseño: queda señalado y no decidido acá. La cifra de DramaBox es de fuente secundaria —una guía de terceros, no la app— y queda por verificar; la uso porque es la mejor que encontré. Sin precio por episodio de DramaBox en ninguna de las fuentes que junté, la cifra no se puede convertir a episodios por día: queda en monedas. |
+| Suscripción **como mecánica de retención** | Ya existe en el producto —pase semanal a $7.99, mensual a $14.99— y es una respuesta de monetización a un problema de retención: no mueve DAU/MAU del no-pagador, que es el 95%+ de la base. Por eso queda fuera como palanca del objetivo del trimestre. Lo que sí entra, y no es lo mismo, es ofrecerla **como superficie**: que el mensual aparezca en el muro, debajo del pase, porque hoy el producto de mayor valor de la economía no está en el momento de máxima intención ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)). Descartarla como motor de regreso no obliga a esconderla como opción de compra: son dos decisiones distintas y se resuelven distinto. |
+| **Recortar los episodios gratis del catálogo** | Es la palanca más pesada de toda la economía —500 episodios gratis, casi cuatro meses de colchón— y está a una decisión de distancia. Pero es una palanca de **conversión**, no de stickiness: recortarla no hace que el usuario vuelva mañana, hace que se vaya antes. Y toca directamente el motor de adquisición. Queda señalada en el [diagnóstico §1.4](../01-diagnostico/#14-una-palanca-fuera-del-alcance-de-este-objetivo) porque quien lea esto debe saber que existe, y queda sin accionar porque el objetivo del ejercicio es DAU/MAU. |

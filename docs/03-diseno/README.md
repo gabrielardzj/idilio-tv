@@ -5,7 +5,7 @@
 > **Una frase:** el muro de desbloqueo deja de ser el final de la sesión y pasa a ser una cita con hora, en la historia que el usuario ya está viendo.
 
 **En este apartado:** la justificación de la elección · la mecánica · el diagrama de flujo · nueve decisiones de diseño · la revisión crítica del precedente · el modelo económico · los riesgos técnicos.
-**Además:** [el archivo de diseño](pencil/) (6 pantallas + hoja de sistema), [el sistema visual](sistema.md) (42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio—, 7 componentes, y cómo llevarlo a Figma) y [`tokens.json`](tokens.json).
+**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) —10 pantallas, 4 componentes y las variables enlazadas, construido de forma nativa; la guía de lectura está en [`pen/`](pen/)—, [el sistema visual](sistema.md) (42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio—, 7 componentes) y [`tokens.json`](tokens.json).
 
 ---
 
@@ -30,7 +30,7 @@ El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus su
 **4. Funciona para el 88% que es invitado, desde el día uno.**
 Sin cuenta, sin onboarding (la seguidilla de pantallas de bienvenida), sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
 
-**Lo que descarté con más pena:** el rediseño de la recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Ola 1 y como el reclamo inline del pase.
+**La alternativa más seria que quedó fuera:** el rediseño de la recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Ola 1 y como el reclamo inline del pase.
 
 ---
 
@@ -146,7 +146,7 @@ No es adorno narrativo. Es que el usuario llegó ahí por la historia, y el muro
 
 ### D2 · Lo gratis siempre va arriba de lo pago
 
-El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisión con costo de ingreso a corto plazo y la defiendo por dos razones:
+El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisión con costo de ingreso a corto plazo, y se sostiene en dos razones:
 
 1. El 95%+ de la base no paga. Para ellos, un muro que solo vende es un muro sin salida, y el resultado es abandono, no conversión.
 2. El usuario que sí iba a pagar sigue pagando: la salida de compra está **siempre**, y lo que cambia es su peso. El muro del prototipo decide primero por el saldo y recién después mira el pase:
@@ -184,7 +184,7 @@ En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 | Tienda · oferta de bienvenida | `180 monedas · $0.99` | **12 episodios** · 180 monedas · **$0.08 por episodio** |
 | Paquete grande | `375 monedas · $3.99` | **44 episodios** · *Termina esta serie* · $4.99 |
 
-El caso de *«Termina esta serie»* es el que más me gusta, y el que obliga a calcular en vez de rotular.
+El caso de *«Termina esta serie»* es el que obliga a calcular en vez de rotular.
 
 La forma fácil es dejar esa etiqueta fija sobre el paquete de 660 monedas, porque *Pasión a Domicilio* cuesta exactamente eso. El censo de las 50 series lo desarma: van de **150 a 960 monedas**. La lectura que importa no es cuántas veces el número no coincide —eso pasa en 40 de las 41 series con muro y es trivial—, sino cuántas veces **el badge promete algo que la compra no cumple**: en **19 de esas 41 series, el 46%, el paquete de 660 no alcanza para terminar la serie**. Un badge que promete de más en casi la mitad de las compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
 
@@ -205,7 +205,7 @@ Propuesta, medida en la unidad que el usuario entiende:
 
 Fuera de la oferta de bienvenida, el precio por episodio baja en cada escalón.
 
-Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puestas una al lado de la otra, $0.99 por 12 episodios y $1.99 por 13 son un dólar más por un episodio más — la misma lectura de *«error o trampa»* que le señalo al producto en [F3](../01-diagnostico/#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie). No es el mismo caso, y por eso no digo «exactamente»: en F3 dos precios distintos entregan **las mismas** 180 monedas, y acá el escalón sí entrega un episodio más. Es la versión atenuada del mismo defecto, y en la pantalla se lee igual de mal. Por eso hace falta una **regla de producto, no una aclaración de copy: la bienvenida nunca comparte grilla con la escalera.** Se muestra sola, la primera vez que el usuario abre la tienda, como tarjeta única y con vencimiento declarado; la escalera completa recién aparece cuando la bienvenida se usó o se venció. Los dos precios no llegan a verse juntos nunca.
+Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puestas una al lado de la otra, $0.99 por 12 episodios y $1.99 por 13 son un dólar más por un episodio más — la misma lectura de *«error o trampa»* que F3 le señala al producto en [F3](../01-diagnostico/#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie). No es el mismo caso, y por eso no digo «exactamente»: en F3 dos precios distintos entregan **las mismas** 180 monedas, y acá el escalón sí entrega un episodio más. Es la versión atenuada del mismo defecto, y en la pantalla se lee igual de mal. Por eso hace falta una **regla de producto, no una aclaración de copy: la bienvenida nunca comparte grilla con la escalera.** Se muestra sola, la primera vez que el usuario abre la tienda, como tarjeta única y con vencimiento declarado; la escalera completa recién aparece cuando la bienvenida se usó o se venció. Los dos precios no llegan a verse juntos nunca.
 
 *(La tabla de acá arriba es la vista del diseñador —las cuatro opciones en fila para poder discutirlas—, no una pantalla del producto. En el producto esa primera fila no está cuando están las otras tres.)*
 
@@ -238,7 +238,7 @@ Solo correo. Sin contraseña, sin perfil, sin foto. Todo lo que se pida de más 
 | Tab de "Recompensas" rediseñado | Es exactamente el error que estamos corrigiendo: mover el metajuego a un destino. |
 | Barra de progreso semanal en el player | El player debe seguir siendo video. El único elemento de meta permitido ahí es el chip de saldo. |
 | Racha visible en el home | El usuario nocturno entra y toca "seguir viendo". Una racha en el home la ve tarde o no la ve. |
-| Anuncio recompensado para ganar un pase extra | Rompería el techo duro de 1 pase / 24 h, que es lo que hace sostenible la economía. Es, además, la fuente que ya usan ReelShort y DramaBox — DramaBox hasta 15 anuncios diarios ≈ 30 monedas. Que la categoría lo haga es argumento para probarlo, no para meterlo en esta intervención: cambia la naturaleza del producto y es una decisión de negocio. Lo señalo, no lo decido. |
+| Anuncio recompensado para ganar un pase extra | Rompería el techo duro de 1 pase / 24 h, que es lo que hace sostenible la economía. Es, además, la fuente que ya usan ReelShort y DramaBox — DramaBox hasta 15 anuncios diarios ≈ 30 monedas. Que la categoría lo haga es argumento para probarlo, no para meterlo en esta intervención: cambia la naturaleza del producto y es una decisión de negocio. Queda señalado y no decidido acá. |
 | Compartir la racha | 88% invitados, consumo solitario y nocturno, contenido con carga de pudor. No hay a quién mostrarle. |
 
 ---
@@ -257,7 +257,7 @@ El antecedente directo de esta mecánica es el **Daily Pass de Webtoon**, la ref
 
 La queja dominante de los lectores durante los cinco años de vida de la mecánica —hubo hasta una petición pública para eliminarla— fue siempre la misma: **convertía la lectura en una tarea diaria**. "La gracia del webtoon es maratonearlo; si no puedo, me voy a otro lado."
 
-*(Nota de rigor: la MAU (usuarios distintos en un mes) global de Webtoon cayó 7.1% en 2025. **No** atribuyo esa caída al retiro del Daily Pass — el retiro fue en mayo y la caída es del año completo. Sería exactamente el mismo error de causalidad que le señalo al 2.4x de D30 —cuántos siguen ahí a los 30 días—.)*
+*Nota de rigor: la MAU (usuarios distintos en un mes) global de Webtoon cayó 7.1% en 2025. Esa caída **no** se atribuye acá al retiro del Daily Pass — el retiro fue en mayo y la caída es del año completo. Atribuirla sería exactamente el mismo error de causalidad que §1.3 le señala al 2.4x de D30, cuántos siguen ahí a los 30 días.*
 
 ### Por qué la crítica no aplica igual aquí — y en qué sí aplica
 
@@ -291,7 +291,7 @@ La categoría directa —no cómics, microdramas— ya validó que la fuente gra
 
 Tres lecturas que salen de ahí:
 
-1. **Lo que propongo es conservador para la categoría.** Hasta 4 episodios gratis por semana para el usuario promedio, con techo duro de 7, contra una fuente que en DramaBox se puede cobrar *todos los días* (hasta 15 anuncios diarios ≈ 30 monedas). No paso esas monedas a episodios —ninguna fuente del anexo publica el precio por episodio de DramaBox, y esa conversión fue una cifra inventada que ya saqué del benchmark—, pero la comparación no la necesita: allá la fuente es diaria y acá tiene un tope semanal. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
+1. **La fuente propuesta es conservadora para la categoría.** Hasta 4 episodios gratis por semana para el usuario promedio, con techo duro de 7, contra una fuente que en DramaBox se puede cobrar *todos los días* (hasta 15 anuncios diarios ≈ 30 monedas). Esas monedas no se convierten a episodios, porque ninguna fuente del anexo publica el precio por episodio de DramaBox. La comparación no lo necesita: allá la fuente es diaria y acá tiene un tope semanal. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
 2. **DramaBox rompe la racha al faltar un día, igual que Idilio.** Es el estándar de la categoría, y es el estándar que este diseño decide no seguir. Que todos lo hagan no lo vuelve correcto para una base que entra 2.3 días por semana.
 3. **Idilio es entre 3.5 y 4.4 veces más barato por episodio que los líderes.** Hay que normalizarlo, porque las series no miden lo mismo, y hay que usar el mismo denominador de los dos lados: los $37–47 de ReelShort son por una serie de 80 episodios, o sea **$0.46–0.59 por episodio**; los $6.63 de la serie mediana de Idilio son por una serie de 50, o sea **$0.13**. Comparados en bruto la brecha parece de 5 a 7 veces; por episodio, que es la unidad que el usuario paga, va de 3.5 a 4.4. La normalización *por episodio bloqueado* sería mejor —es la que el usuario realmente paga— pero no la puedo hacer: no tengo cuántos episodios regala ReelShort, y ese dato no está verificado en ninguna de las fuentes del anexo. Si regala alguno, su precio por episodio bloqueado sube y la brecha se ensancha; nunca al revés. Si el dato se confirma con cifras propias, el margen para regalar episodios sigue siendo *menor* de lo que sugiere la comparación bruta: cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
 
@@ -325,7 +325,7 @@ Pero la sostenibilidad no cuelga de ninguna de esas comparaciones, y por eso no 
 **El gradiente que sostiene DAU/MAU:** entrar 2 noches rinde hasta 4 episodios; entrar 4 o más llega a los 7 que emite el sistema. Volver seguido sigue siendo estrictamente mejor. Si el tope fuera 7 en vez de 2, acumular la semana entera y entrar un solo día daría lo mismo que entrar todos los días — y la mecánica dejaría de mover la métrica que existe para mover.
 
 **Tercero: el riesgo de canibalización está concentrado y es medible.**
-Vive en la cola de asistencia perfecta —17 episodios por semana, que al peldaño regular de la tienda ($0.15) son **$2.55** de valor regalado, o $1.87 si esa persona los hubiera comprado en el paquete de 44, a $0.11—, que es justamente la población con más probabilidad de pagar. Es un riesgo real y lo digo antes de que aparezca en el dashboard.
+Vive en la cola de asistencia perfecta —17 episodios por semana, que al peldaño regular de la tienda ($0.15) son **$2.55** de valor regalado, o $1.87 si esa persona los hubiera comprado en el paquete de 44, a $0.11—, que es justamente la población con más probabilidad de pagar. Es un riesgo real, y queda declarado antes de que aparezca en el dashboard.
 
 Publico los dos precios porque el valor regalado depende de qué habría comprado esa persona, y el techo del riesgo es el número grande.
 
@@ -336,7 +336,7 @@ Tres palancas, en orden de uso si el guardrail se dispara:
 
 **Guardrail y criterio de kill:** ARPDAU medido contra holdout. Si cae más de **8% relativo sostenido durante 2 semanas**, se revierte y se prueba con la palanca 1.
 
-**Cuarto — el argumento que creo más fuerte, y que es una hipótesis, no un hecho:**
+**Cuarto — el argumento más fuerte, y que es una hipótesis y no un hecho:**
 un usuario frente a una cita que dice *«hoy a las 21:30, tu hora de siempre»* está **más cerca de pagar** que uno frente a una tienda sin alternativa. La espera hace el precio saliente: $0.15 contra esperar hasta esta noche es una comparación que se puede hacer; $0.15 contra nada, no.
 
 Es la hipótesis más importante del documento y **no está probada**. El precedente que parecía respaldarla —el Daily Pass de Webtoon— resultó ser un caso retirado, no un caso de éxito (§3.4bis). Lo que sí está documentado en la categoría es que la fuente gratuita recurrente convive con la monetización: ReelShort y DramaBox, que juntos concentran el grueso del mercado de microdramas, operan con check-in diario y anuncios recompensados mucho más generosos que este pase.
