@@ -261,13 +261,22 @@ const run = async () => {
       } else {
         await s.act(page)
       }
+      // Dos formatos a propósito: el PNG a 3x es el archivo —sirve para hacer
+      // zoom y para llevarlo a Figma— y el WebP es lo que carga la galería.
+      // Servir 17 PNG de 3x en la portada del entregable son 14 MB, y la
+      // portada es lo primero que abre quien lo revisa.
       const file = `${s.id}.png`
-      await page.locator(selector).first().screenshot({ path: join(dir, file) })
-      const stateKey = await page.locator(selector).first().getAttribute('data-state')
+      const preview = `${s.id}.webp`
+      const nodo = page.locator(selector).first()
+      await nodo.screenshot({ path: join(dir, file) })
+      await nodo.screenshot({ path: join(dir, preview), type: 'webp', quality: 80 })
+      const stateKey = await nodo.getAttribute('data-state')
       screens.push({
         id: s.id, name: s.name, screenType: s.type,
         patterns: s.patterns, elements: s.elements, note: s.note,
-        stateKey, image: `flows/${flow.id}/${file}`,
+        stateKey,
+        image: `flows/${flow.id}/${file}`,
+        preview: `flows/${flow.id}/${preview}`,
       })
       total++
       process.stdout.write(`  · ${flow.id}/${s.id}  [${stateKey}]\n`)
@@ -332,7 +341,7 @@ code{color:var(--c);font-size:11.5px}
 </style></head><body><div class="wrap">
 <header>
 <h1>${m.app} · ${m.release}</h1>
-<p class="sub">Export de flujos del POC funcional. ${m.summary.screens} pantallas en ${m.summary.flows} flujos, capturadas del prototipo — no son mockups.</p>
+<p class="sub">Export de flujos del POC funcional. ${m.summary.screens} pantallas en ${m.summary.flows} flujos, capturadas de los prototipos funcionales — no son mockups.</p>
 <div class="meta">
 <span class="tag">${m.platform}</span><span class="tag">${m.device}</span>
 <span class="tag">${m.theme}</span><span class="tag">${m.language}</span><span class="tag">${m.captured}</span>
@@ -342,7 +351,9 @@ ${m.flows.map((f, i) => `<section class="flow">
 <h2><i>Flujo ${i + 1}</i> ${f.name}</h2>
 <p class="intent">${f.intent}</p>
 <div class="row">${f.screens.map(s => `<article class="card">
-<img src="${s.image}" alt="${s.name}" loading="lazy">
+<a href="${s.image}" target="_blank" rel="noopener" title="Abrir a tamaño completo">
+<img src="${s.preview}" alt="${s.name}" width="390" height="844" loading="lazy" decoding="async">
+</a>
 <div class="type">${s.screenType}</div>
 <h3>${s.name}</h3>
 <p class="note">${s.note}</p>
@@ -354,8 +365,10 @@ ${m.flows.map((f, i) => `<section class="flow">
 <div><h4>Patrones</h4>${m.summary.patterns.map(t => `<span class="chip">${t}</span> `).join('')}</div>
 <div><h4>Elementos</h4>${m.summary.elements.map(t => `<span class="chip el">${t}</span> `).join('')}</div>
 </div></section>
-<footer>Capturado automáticamente del POC con <code>poc/scripts/export-mobbin.mjs</code>.<br>
-Datos económicos verificados en el producto en producción: 1 episodio = 15 monedas · 12 episodios gratis por serie · 56 episodios en <i>Pasión a Domicilio</i>.</footer>
+<footer>Capturado automáticamente de los prototipos con <code>poc/scripts/export-mobbin.mjs</code>.
+Cada tarjeta abre la captura a 3× al hacer clic.<br>
+Cifras medidas en las 43 series del catálogo el 25-ago-2026: 1 episodio = <b>15 monedas</b> sin
+excepción · <b>10 episodios gratis</b> por serie (la moda) · <b>428 gratis</b> de 1.885 en total.</footer>
 </div></body></html>`
 
 const readme = (m) => `# Export de flujos · ${m.app}

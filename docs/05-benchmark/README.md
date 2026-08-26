@@ -87,40 +87,128 @@ Contexto de mercado, para dimensionar el premio:
 
 ---
 
-## 5.3 · Quién está construyendo qué
+## 5.3 · El censo: qué mecánica de hábito usa cada app de series verticales
 
-### Los que compiten por el mismo usuario
+Amplié el barrido más allá de las cinco grandes. La categoría no tiene una mecánica: tiene
+**cinco familias**, y casi ninguna app usa una sola.
 
-| Plataforma | Modelo | Metajuego / mecánica de hábito |
+### Familia 1 · Check-in escalonado a 7 días (el estándar de facto)
+
+Presente en **ReelShort, DramaBox, ShortMax, GoodShort, FlexTV, NetShort, DramaWave, MoboReels,
+Kalos TV**. La forma es siempre la misma: monedas que crecen día a día, premio grande el día 7,
+y **fallar un día devuelve al día 1**.
+
+| App | Cómo lo hace |
+|---|---|
+| **ReelShort** | Hasta ~165 monedas por semana completa; el día 7 es el más jugoso. Las monedas bonus **caducan entre 7 y 30 días** |
+| **ShortMax** | 25–30 monedas diarias según el día del ciclo |
+| **GoodShort** | El check-in da **puntos que extienden el VIP**, no saldo |
+| **FlexTV** | Mismo patrón — y la queja registrada de sus usuarios es que **lo que da no alcanza** |
+| **Kalos TV** | Sección "Rewards" con tareas; hay reportes de que el check-in falla |
+
+**Lo que esto confirma:** la racha rota de Idilio no es un error de Idilio, es un calco del
+estándar. Y el estándar está calibrado para un usuario de 7 días/semana que, según los datos de
+retención de §5.2, prácticamente no existe en ninguna de estas apps.
+
+### Familia 2 · Anuncios recompensados con tope diario
+
+**DramaBox** (15 ads/día × 2 monedas), **ShortMax** (6 ads/día × 25), **ReelShort** (15–20 ads
+≈ 250 monedas/día), **Wattpad** (3–10/día), **Melolo** (progresión directamente gateada por ads).
+Es la fuente gratuita dominante de la categoría. Su costo está documentado en las reseñas:
+*"los anuncios duran más que el episodio que desbloquean"*.
+
+### Familia 3 · Tareas rotativas ("rewards center")
+
+**ReelShort** rota micro-encargos: ver episodios, compartir en redes, **activar notificaciones
+push**, invitar amigos. Es la familia más flexible y la que más se parece a un metajuego real,
+porque el diseñador elige qué conducta premiar cada semana.
+
+Detalle que importa: una de las tareas premiadas es **activar las notificaciones**. La categoría
+entera sabe que su motor de retorno no es la racha, es el push.
+
+### Familia 4 · Ver = ganar dinero (el extremo, y funciona)
+
+**Hongguo Short Drama** (ByteDance, China) es el caso más grande del mundo y no aparece en
+ninguna comparativa occidental: **300 M de MAU**, #1 en Entretenimiento del App Store chino,
+**1,38 h/día por usuario** — más que iQIYI. Su modelo es el opuesto exacto al de Idilio:
+
+- **Todo gratis, financiado por publicidad.** No hay muro de monedas.
+- El usuario **gana monedas de oro viendo** y las **convierte en dinero real** ("regístrate 7
+  días y retira hasta ¥4,79").
+- Onboarding con credenciales de Douyin, lo que le abarata la adquisición.
+
+Es el mismo mecanismo de "tarea → recompensa por tiempo de pantalla" que la Comisión Europea
+**prohibió permanentemente** en TikTok Lite (§5.4, D5). Opera a escala de 300 M de usuarios en
+una jurisdicción donde eso es legal. **La mecánica más eficaz de la categoría es, literalmente,
+la que no se puede exportar a Europa.**
+
+Y trae de regalo el mejor caso de estudio de la categoría sobre **cambiar las reglas de la
+economía**, que es exactamente lo que esta intervención propone hacer. En mayo de 2026 los
+usuarios descubrieron que una película exigía VIP de pago (¥8/semana, ¥30/mes, ¥260/año) y el
+tema estalló en Weibo. Hongguo respondió, con razón, que **el VIP existía desde el lanzamiento
+en agosto de 2023** y que solo cubría el mínimo contenido que exigían ciertos titulares de
+derechos. No sirvió de nada: la lectura pública fue que *"el personaje de gratis se derrumbó"*.
+El análisis de prensa lo resumió mejor de lo que yo podría:
+
+> El desafío real de Hongguo no es si cobrar, sino **cómo lograr que el usuario perciba y acepte
+> el cobro. No es un problema de precio: es un problema de reescritura de reglas.**
+
+A eso se suma, en febrero de 2026, que a numerosos usuarios en el exterior **se les pusieron en
+cero las monedas acumuladas y el saldo retirable, sin aviso y sin historial**. Es el mismo
+material del que están hechas las quejas por caducidad de monedas en DramaBox y ReelShort.
+
+### Familia 5 · Programación y eventos (hábito sin gamificación)
+
+La familia menos explorada y la más interesante para Idilio, porque **no requiere economía**:
+
+- **ShortMax** hace **"binge-hours"**: avisa cuándo cae la temporada completa y convoca a verla,
+  con visionado acompañado entre amigos. Convierte el estreno en cita.
+- **GoodShort** publica decenas de episodios nuevos **cada día** para que siempre haya movimiento
+  en el catálogo.
+- Toda la categoría corre **push de continuidad**: *"tu próximo episodio te está esperando"* a
+  las 24 h de inactividad con una serie a medias, y *"el final de [serie] acaba de estrenarse"*
+  para quienes llevan 3+ días sin abrir.
+
+Es la respuesta no-económica al mismo problema: darle al usuario una razón agendada para volver.
+Y es compatible con el Pase de la Noche, no alternativa a él.
+
+---
+
+### 5.3bis · La capa que se me había escapado: las teleseries verticales de los broadcasters
+
+Esta es la competencia real de Idilio en español, y **no juega con monedas**.
+
+| Quién | Qué lanzó | Escala |
 |---|---|---|
-| **ReelShort** (Crazy Maple) | Monedas IAP, muro agresivo | Check-in diario con premio grande al **día 7**; falla un día y **vuelve al día 1**. Monedas bonus **con vencimiento**. Optimiza ARPU por sesión; churnea más rápido |
-| **DramaBox** | Híbrido: suscripción + monedas | El check-in más generoso de la categoría. **Hasta 15 anuncios recompensados/día × 2 monedas = 30/día**, con episodios a ~5 monedas → ~6 episodios gratis diarios. Retiene más, extrae menos |
-| **ShortMax** | Híbrido, muy generoso en gratis | El de crecimiento más rápido de 2026. Es el único que hace **eventos programados** —"binge-hour", avisos de estreno de temporada completa, visionado con amigos— en vez de solo check-in |
-| **GoodShort** | Monedas + VIP | Check-in diario que acumula **puntos que extienden el VIP** (no monedas): la recompensa por volver es tiempo de suscripción, no saldo |
-| **Melolo** (ByteDance) | **Free-to-watch con ads** | Progresión desbloqueada por ver anuncios, tareas diarias de monedas o pase semanal. En SEA, el 68 % del público prefiere el modelo ad-supported |
-| **My Drama** (Holywater) | Híbrido | Publica su propia investigación de audiencia. Su dato más útil aquí: **el 70 % ve en la cama antes de dormir**; 59 % en el sofá; los heavy users acumulan **13,1 h semanales** |
-| **Kalos TV** | Monedas | Sección "Rewards" con tareas; hay reportes de usuarios de que el check-in falla |
+| **TelevisaUnivision** | **ViX Micro** (jul-2025) | **145 títulos** y **326 M de visualizaciones** en un año |
+| **TV Globo** (Brasil) | *Cinderela e o Segredo do Pobre Milionário* (fines de 2025) | — |
+| **Telefe** (Argentina) | *Triángulo amoroso* | — |
+| **Canal 13 / TVN** (Chile) | *Mi boda es una trampa*, *Amor sin culpas* | *Amor sin culpas*: **30 M de reproducciones** |
+| **César Opazo** (productor, Chile) | Seis series | **175 M de visualizaciones** |
 
-### Los adyacentes: contenido serializado con la misma física económica
+**El modelo de ViX Micro, que es el que hay que mirar de frente:**
 
-| Plataforma | Mecánica | Resultado |
-|---|---|---|
-| **Piccoma** (Kakao, Japón) | **"Espera y es gratis"**: un episodio se abre solo a las 24 h | **El caso de éxito**. ¥105.000 M en 2024, primera app de manga de Japón dos años seguidos, >50 % de cuota |
-| **Kakao Page** (Corea) | El "wait or pay" original | Se volvió estándar global: Piccoma, Tencent Dongman, Tapas |
-| **Piccoma Francia** | La misma mecánica, exportada | **Cerrada en septiembre de 2024** |
-| **Webtoon** | Daily Pass (2020) | **Retirado en mayo de 2025**, reemplazado por Ad Pass |
-| **Pocket FM** (audio) | Monedas + espera opcional + tareas | Micropagos = **~85 % de los ingresos**; ARPPU US ~$12; +68 % interanual. Segmenta con **RFM** para decidir a quién cobrar |
-| **Wattpad** | Monedas + bonus por ver ads | Hasta 3–10 ads/día; capítulo ~3 monedas. **Las monedas bonus caducan a 30 días** |
-| **Kindle Vella** (Amazon) | Tokens por episodio | **Cerrado en febrero de 2025**: "no prendió como esperábamos" |
+1. **El tráiler y los cinco primeros episodios se estrenan en Instagram, TikTok, Facebook y X.**
+   El resto, solo en la app. El muro no es de dinero: es de plataforma.
+2. **Los microdramas viven dentro de la suscripción existente** — ViX tiene tres niveles: gratis,
+   premium con anuncios y premium sin anuncios. No hay monedas ni desbloqueo por episodio.
+3. **Cadencia semanal declarada** (estreno cada viernes desde el 25 de julio de 2025), 40
+   originales en el primer año.
+4. Rafael Urbina, presidente de Streaming y Digital, describe el formato como **"puerta de entrada
+   a nuestro ecosistema de contenido más amplio"**: el microdrama es adquisición para el catálogo
+   grande, no un negocio por sí mismo.
 
-### Los grandes, que están llegando
+**Por qué esto es una amenaza distinta a ReelShort.** ReelShort compite con Idilio por el mismo
+usuario con la misma economía. ViX compite **cambiando la economía**: para alguien que ya paga
+ViX, el microdrama es gratis e ilimitado. Frente a eso, un muro que cobra 15 monedas por capítulo
+no se lee como precio justo — se lee como el precio de estar en la app equivocada.
 
-- **Netflix** lanzó **Clips**, su feed vertical estilo TikTok, en abril de 2026 — y por separado
-  **Netflix Star Daily Trivia**, un juego diario cuyo eje explícito es *construir la racha*.
-  El incumbente está haciendo las dos apuestas a la vez: formato vertical para descubrimiento y
-  **mecánica de racha para hábito diario**. En Latinoamérica su palanca de crecimiento es el
-  plan con anuncios.
-- **ByteDance** diversifica fuera de TikTok con Melolo (SEA) y Minishorts (US/EU).
+Y refuerza la intervención por un camino inesperado: si el diferencial de ViX es "todo incluido",
+lo que Idilio necesita no es abaratar el episodio, sino **que el usuario tenga una relación con
+una historia** — algo que ViX, con 145 títulos y distribución repartida en cuatro redes sociales,
+no está construyendo. La escala del formato confirma que la pelea vale: Variety proyecta
+**US$26.000 M anuales para 2030**, y una serie completa se produce en una semana y se explota
+durante un mes.
 
 ---
 
@@ -275,6 +363,20 @@ Eso sigue siendo original de este diagnóstico.
 5. **No monetizar el comodín.** Snapchat probó que da dinero y probó que cuesta reputación.
 6. **Hipótesis para la ola 2:** que la racha larga premie con **días de suscripción** en vez de
    más episodios (el patrón de GoodShort). Convierte al habitual en suscriptor probador.
+7. **Cambiar la unidad de la economía es una reescritura de reglas, y hay que tratarla como tal.**
+   Es la lección de Hongguo: tenían razón en los hechos —el VIP existía desde 2023— y aun así
+   perdieron el argumento, porque el usuario no juzga la regla, juzga el cambio de regla. Pasar de
+   monedas a episodios y meter un pase gratuito es un cambio favorable al usuario, pero **si se
+   despliega en silencio se lee como recorte**. El plan de lanzamiento necesita un momento
+   explícito de "esto cambió, y cambió a tu favor", no solo una UI nueva.
+8. **El competidor a vencer en español no cobra por episodio.** ViX Micro reparte los cinco
+   primeros capítulos en TikTok e Instagram y el resto entra en una suscripción que millones ya
+   pagan. Contra eso, el argumento de Idilio no puede ser el precio: tiene que ser el apego a una
+   historia. Es exactamente lo que persigue el Pase de la Noche, y conviene que el documento de
+   estrategia lo diga con ese competidor por nombre.
+9. **La programación es la palanca gratuita que nadie en LatAm está usando.** Los "binge-hours"
+   de ShortMax y el push de continuidad de toda la categoría producen hábito sin tocar la
+   economía. Es más barato que cualquier rediseño del muro y es complementario a la intervención.
 
 ---
 
@@ -289,10 +391,17 @@ Eso sigue siendo original de este diagnóstico.
   producto. Los cito como reclamo comercial, no como dato independiente.
 - **La mecánica exacta de "retos" y video recompensado dentro de Idilio.** Sigue apoyada solo en
   reseñas públicas de Google Play, igual que en el diagnóstico.
-- **Ninguna app de microdrama con un pase gratuito diario por serie tipo Piccoma.** Busqué
-  específicamente y no encontré ninguna: la categoría usa check-in, ads y suscripción, no espera.
-  Si es cierto, el Pase de la Noche sería el primero del sector — lo cual es a la vez la
-  oportunidad y el motivo de que no haya precedente que lo respalde.
+- **Ninguna app de series verticales con un pase gratuito diario asignable por serie.**
+  Amplié la búsqueda a quince apps (§5.3) y la conclusión se sostiene: la categoría usa check-in,
+  anuncios, tareas rotativas, suscripción y programación — **ninguna usa espera**. Lo más cercano
+  es el "episodio gratis diario" que reparten DramaBox, ReelShort y ShortMax, pero es una
+  asignación que hace el sistema, no un recurso que el usuario dirige. La espera vive en el
+  vecindario de al lado (Piccoma, Pocket FM), no en este. Es a la vez la oportunidad y el motivo
+  de que no haya precedente directo que lo respalde.
+- **Si ViX Micro tiene alguna mecánica de hábito propia dentro de la app.** Verifiqué su modelo de
+  distribución y monetización, no su capa de retención. Es la verificación que más falta hace.
+- **Las cifras de Hongguo** (300 M MAU, 1,38 h/día) vienen de prensa china y de análisis de
+  terceros, no de reportes auditados.
 
 ---
 
@@ -312,13 +421,27 @@ Eso sigue siendo original de este diagnóstico.
 - [Business of Apps · Bite-sized bingeing](https://www.businessofapps.com/insights/bite-sized-bingeing-inside-the-explosion-of-short-drama-apps) — modelos híbridos
 - [RevenueCat / Adapty · State of App Monetization 2026 (resumen)](https://chuvak-pavel.medium.com/state-of-app-monetization-2026-key-trends-from-revenuecat-and-adapty-8bdc23a4bb6f) — ARPU LatAm, suscripción semanal
 
+**La capa latinoamericana**
+- [TelevisaUnivision · ViX's microdramas premiere](https://corporate.televisaunivision.com/press/2025/07/21/microdramas/) — niveles de suscripción, estreno en redes, cadencia semanal, cita de Rafael Urbina
+- [CNN en Español · De la televisión al celular: el auge de las teleseries verticales en América Latina](https://abc17news.com/cnn-spanish/2026/07/22/de-la-television-al-celular-el-auge-de-las-teleseries-verticales-en-america-latina/) — ViX, Globo, Telefe, Canal 13, TVN, César Opazo, proyección de US$26.000 M para 2030
+- [PRODU · TelevisaUnivisión presenta ViX microdramas](https://www.produ.com/television/noticias/televisaunivision-presenta-vix-micro-contenido-corto-y-serializado-para-consumo-movil/)
+- [Stream TV Insider · A look at TelevisaUnivision's foray into microdramas](https://www.streamtvinsider.com/content/look-televisaunivisions-foray-microdramas-vix)
+
 **Mecánicas de la categoría**
 - [Unstar · ReelShort vs DramaBox: 5 short drama apps ranked 2026](https://unstar.app/blog/reelshort-dramabox-shortmax-goodshort-flextv-short-drama-apps-ranked-2026)
 - [Unstar · Is DramaBox legit & safe? What reviews say](https://unstar.app/blog/is-dramabox-legit-safe-short-drama-app-reviews-2026) — caducidad de monedas, doble monetización, reembolsos
-- [ReelShort Fandom · How to earn free coins](https://www.reelshort.com/fandom/how-to-earn-free-coins-on-reelshort-01-25-3faa2218/) — check-in de 7 días y reset
+- [ReelShort Fandom · How to earn free coins](https://www.reelshort.com/fandom/how-to-earn-free-coins-on-reelshort-01-25-3faa2218/) — check-in de 7 días con reset, rewards center, caducidad de monedas bonus 7–30 días
+- [Google Play · FlexTV](https://play.google.com/store/apps/details?id=com.aytech.flextv) y [Google Play · NetShort](https://play.google.com/store/apps/details?id=com.netshort.abroad) — check-in y quejas de usuarios
+- [Kanopy Labs · How to build a short-form drama streaming app like ReelShort](https://kanopylabs.com/blog/how-to-build-a-short-form-drama-streaming-app) — push de continuidad, check-in escalonado y su efecto declarado sobre D7/D30
+- [Filmustage · ReelShort vs DramaBox 2026](https://filmustage.com/blog/short-drama-apps-compared-reelshort-vs-dramabox-in-2026/) — episodios gratis diarios
 - [QWE · DramaBox guide: coins vs subscription](https://www.qwe.edu.pl/tutorial/dramabox-guide-coins-vs-subscription/) — 15 ads/día
 - [kr-asia · ByteDance takes short dramas global with Melolo](https://kr-asia.com/bytedance-takes-short-dramas-global-with-melolo-launch)
 - [Vodlix · Top short drama platforms and how they monetize in 2026](https://vodlix.com/blog/top-short-drama-platforms-and-how-they-monetize) — corte gratis-a-pago
+
+**Hongguo (ByteDance, China)**
+- [FoxData · Inside the meteoric rise of Hongguo Short Drama](https://foxdata.com/en/blogs/bytedances-next-global-hit-after-tiktok-inside-the-meteoric-rise-of-hongguo-short-drama-app/) — modelo gratuito, monedas de oro, integración con Douyin
+- [Baidu Baike · 红果短剧](https://baike.baidu.com/en/item/Hongguo%20Short%20Drama/12377) — MAU, 1,38 h/día, "regístrate 7 días y retira"
+- [北京商报 · 红果短剧收费VIP：de "olvidado" a "tema candente"](https://www.bbtnews.com.cn/2026/0505/592581.shtml) y [17173 · Respuesta oficial de Hongguo al VIP de pago](https://news.17173.com/content/05032026/200254425.shtml) — la crisis de mayo-2026 y la cita sobre reescribir las reglas
 
 **Precedentes de "espera y es gratis"**
 - [Wikipedia · Piccoma](https://en.wikipedia.org/wiki/Piccoma) y [Design Compass · Kakao's global entertainment strategy](https://designcompass.org/en/2025/08/27/kakaos-global-entertainment-strategy/) — ¥105.000 M, cuota japonesa

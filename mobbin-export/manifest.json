@@ -31,7 +31,8 @@
           ],
           "note": "El saldo nunca viaja solo: el chip lleva siempre la traducción a episodios. Es la única huella permanente del metajuego dentro del core loop.",
           "stateKey": "player-free",
-          "image": "flows/f1-pase-de-la-noche/01-player-libre.png"
+          "image": "flows/f1-pase-de-la-noche/01-player-libre.png",
+          "preview": "flows/f1-pase-de-la-noche/01-player-libre.webp"
         },
         {
           "id": "01b-acuse-de-la-noche",
@@ -50,7 +51,8 @@
           ],
           "note": "El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.",
           "stateKey": "player-free",
-          "image": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.png"
+          "image": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.png",
+          "preview": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.webp"
         },
         {
           "id": "02-muro-pase-listo",
@@ -74,7 +76,8 @@
           ],
           "note": "Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.",
           "stateKey": "wall-pass-ready",
-          "image": "flows/f1-pase-de-la-noche/02-muro-pase-listo.png"
+          "image": "flows/f1-pase-de-la-noche/02-muro-pase-listo.png",
+          "preview": "flows/f1-pase-de-la-noche/02-muro-pase-listo.webp"
         },
         {
           "id": "03-eleccion-de-pase",
@@ -94,7 +97,8 @@
           ],
           "note": "El corazón pedagógico: obligar a elegir con un recurso escaso enseña la economía por uso, no por explicación.",
           "stateKey": "pass-choice",
-          "image": "flows/f1-pase-de-la-noche/03-eleccion-de-pase.png"
+          "image": "flows/f1-pase-de-la-noche/03-eleccion-de-pase.png",
+          "preview": "flows/f1-pase-de-la-noche/03-eleccion-de-pase.webp"
         },
         {
           "id": "04-desbloqueo-celebracion",
@@ -114,7 +118,8 @@
           ],
           "note": "La recompensa se entrega en el mismo gesto que resuelve la necesidad. La noche 3 dispara el comodín.",
           "stateKey": "unlocked-via-pass",
-          "image": "flows/f1-pase-de-la-noche/04-desbloqueo-celebracion.png"
+          "image": "flows/f1-pase-de-la-noche/04-desbloqueo-celebracion.png",
+          "preview": "flows/f1-pase-de-la-noche/04-desbloqueo-celebracion.webp"
         },
         {
           "id": "05-player-desbloqueado",
@@ -131,7 +136,8 @@
           ],
           "note": "El regreso al loop es inmediato: un toque desde la celebración, sin pantallas intermedias.",
           "stateKey": "player-free",
-          "image": "flows/f1-pase-de-la-noche/05-player-desbloqueado.png"
+          "image": "flows/f1-pase-de-la-noche/05-player-desbloqueado.png",
+          "preview": "flows/f1-pase-de-la-noche/05-player-desbloqueado.webp"
         }
       ]
     },
@@ -159,7 +165,8 @@
           ],
           "note": "El countdown ocupa el lugar jerárquico que antes tenía el precio. La compra queda debajo, como atajo, no como única salida.",
           "stateKey": "wall-pass-spent",
-          "image": "flows/f2-la-cita/01-muro-pase-gastado.png"
+          "image": "flows/f2-la-cita/01-muro-pase-gastado.png",
+          "preview": "flows/f2-la-cita/01-muro-pase-gastado.webp"
         },
         {
           "id": "02-muro-con-saldo",
@@ -178,7 +185,8 @@
           ],
           "note": "Con saldo, la acción de pago sube a primaria — pero el saldo restante se declara en episodios, no en monedas.",
           "stateKey": "wall-with-balance",
-          "image": "flows/f2-la-cita/02-muro-con-saldo.png"
+          "image": "flows/f2-la-cita/02-muro-con-saldo.png",
+          "preview": "flows/f2-la-cita/02-muro-con-saldo.webp"
         }
       ]
     },
@@ -205,7 +213,8 @@
           ],
           "note": "Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.",
           "stateKey": "store",
-          "image": "flows/f3-tienda/01-tienda.png"
+          "image": "flows/f3-tienda/01-tienda.png",
+          "preview": "flows/f3-tienda/01-tienda.webp"
         }
       ]
     },
@@ -230,7 +239,8 @@
           ],
           "note": "Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.",
           "stateKey": "wall-passes-capped",
-          "image": "flows/f4-comodin/01-comodin-usado.png"
+          "image": "flows/f4-comodin/01-comodin-usado.png",
+          "preview": "flows/f4-comodin/01-comodin-usado.webp"
         },
         {
           "id": "02-racha-rota",
@@ -248,7 +258,8 @@
           ],
           "note": "Sin rojo, sin alarma, sin oferta para \"recuperar tu racha\" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.",
           "stateKey": "wall-streak-broken",
-          "image": "flows/f4-comodin/02-racha-rota.png"
+          "image": "flows/f4-comodin/02-racha-rota.png",
+          "preview": "flows/f4-comodin/02-racha-rota.webp"
         },
         {
           "id": "03-dos-pases",
@@ -266,7 +277,8 @@
           ],
           "note": "Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.",
           "stateKey": "wall-passes-capped",
-          "image": "flows/f4-comodin/03-dos-pases.png"
+          "image": "flows/f4-comodin/03-dos-pases.png",
+          "preview": "flows/f4-comodin/03-dos-pases.webp"
         }
       ]
     },
@@ -293,7 +305,8 @@
           ],
           "note": "No hay muro de registro. El argumento no es \"crea tu cuenta\" sino \"no pierdas estas 4 noches y estas 75 monedas\".",
           "stateKey": "account-prompt",
-          "image": "flows/f5-cuenta/01-guardar-racha.png"
+          "image": "flows/f5-cuenta/01-guardar-racha.png",
+          "preview": "flows/f5-cuenta/01-guardar-racha.webp"
         }
       ]
     },
@@ -320,7 +333,8 @@
           ],
           "note": "La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.",
           "stateKey": "streak-detail",
-          "image": "flows/f6-mi-economia/01-mi-economia.png"
+          "image": "flows/f6-mi-economia/01-mi-economia.png",
+          "preview": "flows/f6-mi-economia/01-mi-economia.webp"
         }
       ]
     },
@@ -346,7 +360,8 @@
           ],
           "note": "Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.",
           "stateKey": null,
-          "image": "flows/f7-stack-real/01-muro-pase-listo.png"
+          "image": "flows/f7-stack-real/01-muro-pase-listo.png",
+          "preview": "flows/f7-stack-real/01-muro-pase-listo.webp"
         },
         {
           "id": "02-la-cita",
@@ -366,7 +381,8 @@
           ],
           "note": "El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.",
           "stateKey": null,
-          "image": "flows/f7-stack-real/02-la-cita.png"
+          "image": "flows/f7-stack-real/02-la-cita.png",
+          "preview": "flows/f7-stack-real/02-la-cita.webp"
         },
         {
           "id": "03-cuenta-regresiva-corta",
@@ -384,7 +400,8 @@
           ],
           "note": "Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.",
           "stateKey": null,
-          "image": "flows/f7-stack-real/03-cuenta-regresiva-corta.png"
+          "image": "flows/f7-stack-real/03-cuenta-regresiva-corta.png",
+          "preview": "flows/f7-stack-real/03-cuenta-regresiva-corta.webp"
         }
       ]
     }

@@ -75,14 +75,23 @@ const DOCS = [
   'README.md', 'docs/00-dogfooding/README.md', 'docs/01-diagnostico/README.md',
   'docs/02-estrategia/README.md', 'docs/03-diseno/README.md', 'docs/03-diseno/sistema.md',
   'docs/03-diseno/pencil/README.md', 'docs/04-poc/README.md', 'web/README.md',
+  // No solo los documentos: el HTML de la galería y el script que lo genera
+  // también publican cifras, y ahí ya se me coló una vieja una vez.
+  'mobbin-export/README.md', 'mobbin-export/index.html', 'poc/scripts/export-mobbin.mjs',
 ]
 
 /** Cifras que se corrigieron en el camino. Si reaparecen fuera de la nota que
- *  explica la corrección, es una cifra vieja que sobrevivió a una edición. */
+ *  explica la corrección, es una cifra vieja que sobrevivió a una edición.
+ *
+ *  `salvo` tiene que ser ESTRECHO. La primera versión permitía cualquier línea
+ *  que dijera "moda" o "excepción", y una cifra vieja se coló por ahí: el pie de
+ *  la galería decía «12 episodios gratis por serie (la moda)» y el guardián la
+ *  dejó pasar porque contenía la palabra "moda". Se exime la narración de la
+ *  corrección —que siempre dice "decía" o "primera versión"—, nada más. */
 const OBSOLETOS = [
   { patron: /\b6 flujos\b/, salvo: null, porque: 'ahora son 7 flujos' },
   { patron: /\b(11|13) pantallas\b/, salvo: null, porque: 'ahora son 16 pantallas' },
-  { patron: /12 episodios gratis/, salvo: /moda|primera versión|excepci/i, porque: 'la moda medida es 10' },
+  { patron: /12 episodios gratis/, salvo: /dec[ií]a|primera versión/i, porque: 'la moda medida es 10' },
   { patron: /\$7\.29/, salvo: null, porque: 'la serie mediana cuesta $6.63' },
   { patron: /\$2\.49/, salvo: /hoy|producción|actual|paywall real|primera versión/i, porque: 'la propuesta no lleva precio tachado' },
 ]
