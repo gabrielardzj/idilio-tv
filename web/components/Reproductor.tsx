@@ -59,7 +59,13 @@ export function Reproductor({
       {/* Barra superior. El chip de saldo es la única huella permanente del
           metajuego dentro del core loop — y nunca muestra una cifra sin su
           traducción a episodios. */}
-      <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-3 px-4 pt-14">
+      {/* z-50, por encima del scrim del muro. Estaba en z-20 y el scrim lo
+          tapaba: con el episodio bloqueado no había forma de salir —ni de
+          cerrar el muro ni de volver al índice—, o sea la pantalla que el
+          diagnóstico critica por ser un final se convertía en uno de verdad.
+          El prototipo cierra el muro tocando fuera; acá la ruta ES el episodio
+          bloqueado, así que la salida correcta es «Volver». */}
+      <div className="absolute inset-x-0 top-0 z-50 flex items-center gap-3 px-4 pt-14">
         <Link
           href="/"
           aria-label="Volver"

@@ -27,8 +27,11 @@ export function Racha({ nights, shields }: { nights: number; shields: number }) 
               >
                 {r.shield ? <Escudo s={16} c={hecha ? '#3fc1c9' : '#6e6e78'} /> : r.night}
               </span>
+              {/* Todas las noches dan pase; el bono se SUMA. El ternario que
+                  había aquí ponía «+30» EN LUGAR de «pase», así que la tira
+                  leía como si la noche 3 diera bono en vez de pase. */}
               <span className={`text-[9.5px] font-semibold ${hecha ? 'text-brand-cyan' : 'text-ink-low'}`}>
-                {r.coins > 0 ? `+${r.coins}` : 'pase'}
+                pase{r.coins > 0 ? ` +${r.coins}` : ''}
               </span>
             </li>
           )
