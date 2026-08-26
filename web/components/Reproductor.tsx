@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { EPISODE_COST, STREAK, episodesLabel } from '@/lib/economy'
+import { EPISODE_COST, MAX_PASSES, episodesLabel } from '@/lib/economy'
 import type { VistaDelPase } from '@/lib/pase'
 import type { Serie } from '@/lib/supabase/queries'
 import { Moneda, Ticket } from './Moneda'
@@ -30,23 +30,30 @@ export function Reproductor({
   const [celebrar, setCelebrar] = useState(false)
 
   const usarPase = () => {
-    const nights = Math.min(pase.nights + 1, 7)
-    const premio = STREAK[nights - 1]
-    setPase({
-      ...pase,
-      passes: pase.passes - 1,
-      nights,
-      shields: Math.min(pase.shields + (premio.shield ? 1 : 0), 1),
-      balance: pase.balance + premio.coins,
-    })
+    // Gastar el pase NO avanza la racha: eso ya pasó al terminar el episodio,
+    // en credit_night(). Esta función hacía lo contrario —avanzaba la noche,
+    // daba el comodín y pagaba el bono—, o sea implementaba la mecánica vieja
+    // justo al lado de un use_pass() que dice esto mismo en un comentario.
+    setPase({ ...pase, passes: pase.passes - 1 })
     setAbierto(true)
     setCelebrar(true)
   }
 
   const pct = Math.round((episodio / serie.total) * 100)
 
+  // Mismo vocabulario que `stateName` del prototipo, y por el mismo motivo: el
+  // export compara este atributo contra el estado que dice documentar. Sin él,
+  // estas tres pantallas se capturaban sin ninguna red — y el export ya publicó
+  // tres veces la pantalla equivocada con la etiqueta correcta.
+  const estado = celebrar ? 'unlocked-via-pass'
+    : abierto ? 'player-free'
+    : pase.passes >= MAX_PASSES ? 'wall-passes-capped'
+    : pase.passes > 0 ? 'wall-pass-ready'
+    : pase.balance >= EPISODE_COST ? 'wall-with-balance'
+    : 'wall-pass-spent'
+
   return (
-    <main className="relative mx-auto h-dvh w-full max-w-[430px] overflow-hidden bg-surface-0">
+    <main data-state={estado} className="relative mx-auto h-dvh w-full max-w-[430px] overflow-hidden bg-surface-0">
       <Video serie={serie} episodio={episodio} />
 
       {/* Barra superior. El chip de saldo es la única huella permanente del
@@ -116,7 +123,6 @@ export function Reproductor({
 function Celebracion({
   pase, episodio, onCerrar,
 }: { pase: VistaDelPase; episodio: number; onCerrar: () => void }) {
-  const premio = STREAK[Math.max(0, pase.nights - 1)]
   return (
     <>
       <div className="absolute inset-0 z-40 bg-surface-0/62 backdrop-blur-[3px]" />
@@ -132,14 +138,17 @@ function Celebracion({
             <Ticket s={38} />
           </span>
           <h2 className="text-2xl font-bold tracking-tight">Episodio {episodio} desbloqueado</h2>
+          {/* Decía «El próximo llega en 24 horas» y debajo pagaba un bono de
+              racha. Las dos cosas eran de la mecánica vieja: el pase no paga
+              nada al gastarse, y la cita se ancla a la hora de siempre del
+              usuario, que es lo que `listoA` ya trae resuelto del servidor. */}
           <p className="mt-2 mb-5 text-sm leading-relaxed text-ink-mid">
-            Usaste tu Pase de la Noche. El próximo llega en 24 horas.
+            {pase.passes > 0
+              ? <>Usaste uno de tus Pases de la Noche. Te {pase.passes === 1 ? 'queda otro' : `quedan ${pase.passes}`}.</>
+              : pase.listoA
+                ? <>Usaste tu Pase de la Noche. El próximo te espera {pase.listoA.esHoy ? 'hoy' : 'mañana'} a las {pase.listoA.hora}.</>
+                : <>Usaste tu Pase de la Noche.</>}
           </p>
-          {premio.coins > 0 && (
-            <p className="mb-4 flex items-center justify-center gap-2 text-[13.5px] font-semibold text-pass-100">
-              <Moneda s={18} /> Noche {pase.nights}: +{premio.coins} monedas por la racha
-            </p>
-          )}
         </div>
         <div className="mb-4">
           <Racha nights={pase.nights} shields={pase.shields} />

@@ -126,8 +126,15 @@ export async function desbloqueadoHasta(slug: string): Promise<number> {
 const ZONA = 'America/Mexico_City'
 
 const ESTADOS: Record<string, Omit<EstadoPase, 'timezone' | 'hasAccount' | 'serverNow'>> = {
-  // Tiene el pase de esta noche sin usar.
-  'pasion-a-domicilio': { passes: 1, nextPassAt: null, nights: 2, shields: 0, balance: 0 },
+  // Tiene el pase de esta noche sin usar. `nextPassAt` va puesto a propósito:
+  // credit_night() solo lo deja en null cuando el usuario está EN EL TOPE de
+  // dos, y con uno todavía está acumulando. Estaba en null, así que al gastar
+  // el pase la celebración se quedaba sin poder decir cuándo llega el próximo
+  // —que es justo lo que D2b propone y lo que el muro sí dice—.
+  'pasion-a-domicilio': {
+    passes: 1, nights: 2, shields: 0, balance: 0,
+    nextPassAt: new Date(proximaCita(RELOJ_FIJO, ZONA)).toISOString(),
+  },
   // Ya lo usó y no tiene monedas: el muro se vuelve una cita con hora.
   'la-herencia-del-patriarca': {
     passes: 0, nights: 3, shields: 1, balance: 0,

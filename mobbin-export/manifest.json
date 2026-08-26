@@ -475,7 +475,7 @@
             "Streak strip"
           ],
           "note": "Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.",
-          "stateKey": null,
+          "stateKey": "wall-pass-ready",
           "image": "flows/f7-stack-real/01-muro-pase-listo.png",
           "preview": "flows/f7-stack-real/01-muro-pase-listo.webp"
         },
@@ -496,7 +496,7 @@
             "Streak strip"
           ],
           "note": "El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.",
-          "stateKey": null,
+          "stateKey": "wall-pass-spent",
           "image": "flows/f7-stack-real/02-la-cita.png",
           "preview": "flows/f7-stack-real/02-la-cita.webp"
         },
@@ -515,7 +515,7 @@
             "Balance caption"
           ],
           "note": "Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.",
-          "stateKey": null,
+          "stateKey": "wall-with-balance",
           "image": "flows/f7-stack-real/03-cuenta-regresiva-corta.png",
           "preview": "flows/f7-stack-real/03-cuenta-regresiva-corta.webp"
         }

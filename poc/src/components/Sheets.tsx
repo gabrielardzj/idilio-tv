@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Coin, Pass, Shield, X } from './Icons'
-import { StreakStrip, citaTexto } from './bits'
+import { StreakStrip } from './bits'
 import { frameStyle } from '../lib/frame'
 import { EPISODE_COST, MAX_PASSES, PACKS, STREAK, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
-import { desbloqueadoDe, enCurso, serieDe, type State } from '../lib/state'
+import { citaTexto, desbloqueadoDe, enCurso, serieDe, type State } from '../lib/state'
 
 /* ═══ Elección del pase ═══════════════════════════════════════
    Es el corazón pedagógico de la intervención. Al obligar a elegir

@@ -292,6 +292,7 @@ const FLOWS = [
         type: 'Paywall', patterns: ['Server-rendered state', 'Reward claim', 'Streak'],
         elements: ['Bottom sheet', 'Reward card', 'Primary button', 'Streak strip'],
         note: 'Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.',
+        estado: 'wall-pass-ready',
         goto: '/serie/pasion-a-domicilio/13',
       },
       {
@@ -299,6 +300,7 @@ const FLOWS = [
         type: 'Paywall', patterns: ['Countdown', 'Appointment', 'Opt-in notification'],
         elements: ['Bottom sheet', 'Clock time', 'Reminder toggle', 'Primary button', 'Streak strip'],
         note: 'El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.',
+        estado: 'wall-pass-spent',
         goto: '/serie/la-herencia-del-patriarca/19',
       },
       {
@@ -306,6 +308,7 @@ const FLOWS = [
         type: 'Paywall', patterns: ['Countdown', 'Balance spend'],
         elements: ['Bottom sheet', 'Countdown timer', 'Primary button', 'Balance caption'],
         note: 'Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.',
+        estado: 'wall-with-balance',
         goto: '/serie/la-enfermera-infiltrada/13',
       },
     ],

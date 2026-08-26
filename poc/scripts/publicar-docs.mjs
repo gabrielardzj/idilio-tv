@@ -21,18 +21,29 @@ const PAGINAS = [
   { slug: 'diagnostico', src: 'docs/01-diagnostico/README.md', titulo: 'Diagnóstico', n: '1', peso: '35% de la evaluación' },
   { slug: 'estrategia', src: 'docs/02-estrategia/README.md', titulo: 'Estrategia', n: '2', peso: 'con el diagnóstico' },
   { slug: 'intervencion', src: 'docs/03-diseno/README.md', titulo: 'La intervención', n: '3', peso: '20% craft' },
-  { slug: 'sistema', src: 'docs/03-diseno/sistema.md', titulo: 'Sistema visual', n: '3b', peso: '' },
-  { slug: 'diseno', src: 'docs/03-diseno/pen/README.md', titulo: 'Archivo de diseño', n: '3c', peso: '' },
   { slug: 'poc', src: 'docs/04-poc/README.md', titulo: 'El POC', n: '4', peso: '25%' },
-  { slug: 'dogfooding', src: 'docs/00-dogfooding/README.md', titulo: 'Dogfooding y censo', n: '0', peso: 'anexo' },
-  { slug: 'benchmark', src: 'docs/05-benchmark/README.md', titulo: 'Benchmark competitivo', n: '5', peso: 'anexo' },
-  // `docs/RECONCILIACION.md` sigue en el repo pero ya no se publica: es una nota
-  // de trabajo entre las dos versiones paralelas del reto, no un entregable.
+  // Una sola página con los dos documentos del craft, y va después del
+  // prototipo: se mira el diseño cuando ya se vio funcionando. `src` es una
+  // lista porque cada parte se procesa con su propia ruta —los enlaces y las
+  // imágenes de cada documento son relativas a su carpeta, no a la de la página.
+  { slug: 'diseno', src: ['docs/03-diseno/sistema.md', 'docs/03-diseno/pen/README.md'], titulo: 'Sistema y archivo de diseño', n: '3b', peso: '20% craft' },
+  // El sitio publica los cuatro entregables y nada más. Los anexos —el registro
+  // de dogfooding, el benchmark competitivo y la nota de reconciliación entre las
+  // dos versiones— siguen en el repo pero ya no son pestañas. Lo que los
+  // documentos publicados citan de ellos se sigue enlazando: `reescribirEnlaces`
+  // manda al repo lo que no está publicado, y el repo es público.
 ]
+
+/** Una página puede armarse con más de un documento. */
+const fuentes = (p) => (Array.isArray(p.src) ? p.src : [p.src])
+
+/** Baja los títulos un nivel, hasta h6. */
+const bajarUnNivel = (html) =>
+  html.replace(/<(\/?)h([1-5])>/g, (_, cierre, n) => `<${cierre}h${Number(n) + 1}>`)
 
 /** Reescribe los enlaces del repo a los del sitio publicado. */
 function reescribirEnlaces(html, desdeSrc) {
-  const mapa = Object.fromEntries(PAGINAS.map((p) => [p.src, `./${p.slug}.html`]))
+  const mapa = Object.fromEntries(PAGINAS.flatMap((p) => fuentes(p).map((src) => [src, `./${p.slug}.html`])))
   return html.replace(/href="([^"]+)"/g, (todo, href) => {
     if (/^(https?:|mailto:|#)/.test(href)) return todo
     const [ruta, ancla = ''] = href.split('#')
@@ -43,10 +54,17 @@ function reescribirEnlaces(html, desdeSrc) {
       else if (seg && seg !== '.') partes.push(seg)
     }
     let abs = partes.join('/')
-    if (!abs.endsWith('.md') && !abs.includes('.')) abs = `${abs}/README.md`
+    // Un enlace a una carpeta se lee como su README… si lo tiene. `mobbin-export/flows/`
+    // no lo tiene, y la regla lo mandaba a un README.md inexistente: un 404 en el
+    // entregable. Sin README, el enlace apunta a la carpeta, que GitHub sí renderiza.
+    const esCarpeta = !abs.endsWith('.md') && !abs.includes('.')
+    if (esCarpeta && existsSync(join(RAIZ, abs, 'README.md'))) abs = `${abs}/README.md`
+    else if (esCarpeta) return `href="https://github.com/gabrielardzj/idilio-tv/tree/main/${abs}"`
     if (mapa[abs]) return `href="${mapa[abs]}${ancla ? '#' + ancla : ''}"`
-    // lo que no es una página publicada apunta al repo
-    return `href="https://github.com/gabrielardzj/idilio-tv/blob/main/${abs}"`
+    // Lo que no es una página publicada apunta al repo, que es público. El ancla
+    // viaja también: GitHub usa los mismos ids que estas páginas, y sin ella una
+    // cita a una sección aterrizaba arriba del documento entero.
+    return `href="https://github.com/gabrielardzj/idilio-tv/blob/main/${abs}${ancla ? '#' + ancla : ''}"`
   })
 }
 
@@ -225,17 +243,30 @@ await mkdir(join(OUT, 'activos'), { recursive: true })
 const activos = new Set()
 
 for (const p of PAGINAS) {
-  const md = await readFile(join(RAIZ, p.src), 'utf8')
-  let html = marked.parse(md, { mangle: false, headerIds: false })
-  // los bloques mermaid se dibujan en la página; el fuente queda adentro como respaldo
-  html = html.replace(/<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-    (_, cod) => `<pre class="mermaid">${cod}</pre>`)
-  html = anclasEnTitulos(html)
-  html = reescribirEnlaces(html, p.src)
-  html = reescribirImagenes(html, p.src, activos)
+  const partes = []
+  for (const [i, src] of fuentes(p).entries()) {
+    const md = await readFile(join(RAIZ, src), 'utf8')
+    let html = marked.parse(md, { mangle: false, headerIds: false })
+    // los bloques mermaid se dibujan en la página; el fuente queda adentro como respaldo
+    html = html.replace(/<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+      (_, cod) => `<pre class="mermaid">${cod}</pre>`)
+    // El segundo documento de una página no puede traer su propio <h1>: dos h1
+    // en una página dejan a un lector de pantalla sin saber cuál es el título.
+    // Baja un nivel entero y queda como sección del primero.
+    if (i > 0) html = bajarUnNivel(html)
+    html = reescribirEnlaces(html, src)
+    html = reescribirImagenes(html, src, activos)
+    partes.push(html)
+  }
+  // Las anclas se ponen sobre la página ya armada: el contador de repetidos
+  // tiene que ver los títulos de las dos partes o dos secciones con el mismo
+  // nombre se llevarían el mismo id.
+  // Sin <hr> entre documentos: el h2 con el que arranca el segundo ya trae su
+  // propia línea superior, y las dos juntas se leían como un doble filete.
+  let html = anclasEnTitulos(partes.join('\n'))
   html = imagenesAmpliables(html)
   await writeFile(join(OUT, `${p.slug}.html`), plantilla(p, html))
-  process.stdout.write(`  · ${p.slug}.html\n`)
+  process.stdout.write(`  · ${p.slug}.html${partes.length > 1 ? ` (${partes.length} documentos)` : ''}\n`)
 }
 
 for (const [origen, destino] of activos) {

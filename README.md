@@ -16,8 +16,7 @@
 | **Prototipo** — home, catálogo, ficha de serie y el muro | **https://gabrielardzj.github.io/idilio-tv/** |
 | **Diagnóstico y estrategia** — los entregables de texto | **https://gabrielardzj.github.io/idilio-tv/docs/diagnostico.html** |
 | **Export de flujos** — 22 pantallas en 8 flujos | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
-| **Diseño** — las 10 pantallas del archivo de diseño | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
-| **Benchmark competitivo** — quién más lo intentó y contra qué chocó | **https://gabrielardzj.github.io/idilio-tv/docs/benchmark.html** |
+| **Diseño** — el sistema visual y las 10 pantallas del archivo de diseño | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
 
 > **El diseño es nativo de [Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X):** una
@@ -36,7 +35,7 @@
 | **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 22 pantallas en 8 flujos. |
 | **+** | **[Sobre el stack real](web/)** | La misma intervención implementada en Next.js App Router + Tailwind v4 + Supabase, el stack que Idilio corre hoy. Incluye la migración SQL completa. Es la respuesta a *«la viabilidad de implementación hace parte de la propuesta»*. |
 
-**Anexos ·** [Registro de dogfooding](docs/00-dogfooding/) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.
+**Anexos ·** No son páginas del sitio publicado; se leen acá, en el repo. · [Registro de dogfooding](docs/00-dogfooding/) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.
 
 ---
 

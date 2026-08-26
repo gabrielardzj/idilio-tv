@@ -276,6 +276,19 @@ export function nocheDe(ms: number): string {
 }
 
 /** La cita: mañana a la hora en que este usuario suele ver, no +24 h desde ahora. */
+/**
+ * «hoy a las 21:30» / «mañana a las 21:30».
+ *
+ * La cita se ancla a la hora de siempre del usuario (D2b), no a «+24 h desde
+ * que lo usaste». Por eso nunca son 24 horas exactas: gastarlo a las 00:30 deja
+ * el próximo a 21 h, y a las 22:00 a 23:30.
+ */
+export const citaTexto = (readyAt: number, now: number) => {
+  const d = new Date(readyAt)
+  const hora = `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`
+  return `${new Date(now).getDate() === d.getDate() ? 'hoy' : 'mañana'} a las ${hora}`
+}
+
 export function proximaCita(now: number): number {
   const d = new Date(now)
   const h = Math.floor(HORA_HABITUAL)

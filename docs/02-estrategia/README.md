@@ -89,12 +89,24 @@ Cuatro cambios acoplados:
 
 *Acá decía, en presente, que «el muro rediseñado muestra las tres». Estaba mal: no es cierto en ningún artefacto de este repo —ni el diseño de [§3](../03-diseno/) ni el POC tienen suscripción; tienen el pase y la compra de monedas—, así que era una propuesta escrita como un hecho que el evaluador desmentía con solo seguir el link. Es una propuesta. Y admitirlo obliga a contar cuatro cambios en I5, no tres.*
 
+**Y una consecuencia que conviene presupuestar en vez de descubrir: I5 toca el perfil.** No como rediseño —eso sigue descartado en [§2.6](#26-qué-queda-deliberadamente-afuera), y por la misma razón de siempre— sino porque hay tres piezas de esta intervención que no tienen ningún otro sitio donde vivir:
+
+| Pieza | Por qué cae dentro de I5 |
+|---|---|
+| **Interruptor del aviso del pase** | La cita manda una notificación. Si no hay dónde apagarla dentro de la app, el usuario la apaga desde los ajustes del sistema — y ahí las pierde todas, para siempre y sin vuelta atrás. Es la diferencia entre *«no me avises tanto»* y *«silenciado»*. |
+| **La línea que explica la noche** | *«Tu noche va de 5 a.m. a 5 a.m.»* Suena a detalle técnico y no lo es: con la base repartida en cuatro husos, alguien va a escribir «me entró el pase el martes y la app dice lunes». Una línea de texto responde eso; sin ella lo responde soporte. |
+| **Espejo de «Tu economía»** | El mismo componente que se abre desde el chip de saldo, con un segundo punto de entrada. Cuesta cero y sirve al 18% que sí entra al perfil, que es la parte más enganchada de la base. **Nunca como único camino:** la puerta principal sigue siendo el saldo, dentro del reproductor. |
+
+Ninguna de las tres mueve la métrica. Las tres se notan si faltan.
+
+**Y una cuarta, que no es del perfil sino del lanzamiento.** Esta intervención elimina la pestaña de Recompensas, y **el 19% que hoy sí la usa se va a encontrar con que no está.** Objetivamente reciben más que antes —el pase llega solo y no hay nada que reclamar—, pero que te quiten algo no se corrige con aritmética, y es justamente el segmento más enganchado de la base. Un aviso de una sola vez en el reproductor, la primera vez que se acredita una noche: *«Ya no hay que reclamar nada. Tu pase llega solo mientras ves.»* Es el único daño previsible de la migración y la parte más barata de todo I5.
+
 | | |
 |---|---|
 | **Hipótesis** | El muro es hoy un final. Convertido en una cita con hora — *"tu próximo episodio se abre hoy a las 21:30, tu hora de siempre"* — deja de ser el final de la relación y pasa a ser el motivo del próximo regreso. Y como la unidad es la noche, los pases se acumulan hasta dos y hay comodín, un usuario de 2.3 días/semana puede sostener una racha sin cambiar de conducta. |
 | **Mueve** | **DAU/MAU** (objetivo primario). Racha de 3+: 6% → objetivo 20%. Reclamo diario: 19% → 55%+. |
 | **Cómo lo sé** | *Leading (semana 1):* % de muros que terminan en pase usado en vez de cierre. *Leading (semana 2):* % que vuelve dentro de las 36 h de haber usado el pase. *Lagging (semana 4):* DAU/MAU de la celda tratada vs. holdout. *Guardrail:* ARPDAU, leído como ingreso por DAU y no como mix de productos: si el mensual en el muro solo canibaliza packs, el mix se mueve y el ingreso no, y eso no es una ganancia. **Criterio de kill:** si ARPDAU cae >8% relativo sostenido 2 semanas, se revierte. |
-| **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y digo por qué en vez de dejarlo implícito: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Ola 3: de los cuatro cambios es el que menos mueve el objetivo. |
+| **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y digo por qué en vez de dejarlo implícito: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Ola 3: de los cuatro cambios es el que menos mueve el objetivo. Las cuatro piezas de perfil y de lanzamiento del párrafo anterior entran dentro de esas semanas: ninguna pasa de un día, y las cuento acá para que no aparezcan después como alcance no presupuestado. |
 | **Compuerta ①** | ✅ ocurre exactamente en el muro. |
 
 #### I6 · Progreso de serie visible
@@ -114,6 +126,8 @@ Cuatro cambios acoplados:
 
 #### I7 · La cuenta se pide cuando hay algo que perder
 No hay muro de registro. La cuenta se ofrece en un solo momento: cuando el invitado tiene racha y saldo acumulados. *"Guarda tu racha de 4 noches y tus 45 monedas."*
+
+**Alcance en el perfil.** Pedir la cuenta en el muro obliga a que exista el camino de vuelta, y ese camino no cabe en el muro: **iniciar sesión** desde otro teléfono y **restaurar compras**. Lo segundo deja de ser opcional en cuanto el muro ofrece el mensual ([I5, cuarto cambio](#i5--el-pase-de-la-noche--la-racha-de-noches-)): las tiendas exigen un mecanismo de restauración para las suscripciones renovables. Es soporte, no producto — pero si falta no aparece en el dashboard, aparece en las reseñas de la tienda.
 
 | | |
 |---|---|
@@ -177,7 +191,7 @@ I8                                ██████
 
 | Descartado | Por qué |
 |---|---|
-| Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo. |
+| Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo — y el argumento más fuerte no es ese 82% sino el 81%: la pestaña de Recompensas **regala monedas** y cuatro de cada cinco usuarios no van. Si no navegan por dinero gratis, tampoco van a navegar por unas estadísticas. El 82% no es síntoma de un perfil vacío, es síntoma de que en esta sesión —entrar de madrugada, tocar «seguir viendo», cerrar— no hay ningún momento de navegación. *Descarto el rediseño, no la sección:* I5 e I7 sí tocan el perfil, con cuatro piezas chicas que no son engagement sino consecuencia —interruptor de avisos, la línea de la noche, el espejo de «Tu economía» y restaurar compras—. Van listadas dentro de cada intervención, y no como una novena, porque darles entidad propia contradiría la compuerta ① de [§2.2](#22-criterio-de-priorización). |
 | Rankings, tablas, comparación social | 11 p.m.–2 a.m., consumo solitario, vertical con pudor, 88% sin identidad. No es motivación, es exposición. |
 | Insignias y coleccionables como apuesta principal | Vínculo indirecto con DAU/MAU, carga cognitiva alta, sin evidencia de motivación de coleccionista. Candidatos a capa posterior. |
 | Anuncios recompensados como fuente | Es la fuente obvia y ya es estándar de la categoría: DramaBox permite hasta 15 anuncios diarios ≈ 30 monedas, y ReelShort también los ofrece. Pero cambia la naturaleza del producto (de corto-premium a ad-supported) y ese es un llamado de negocio, no de diseño. Lo señalo, no lo decido. La cifra de DramaBox es de fuente secundaria —una guía de terceros, no la app— y queda por verificar; la uso porque es la mejor que encontré. Acá decía además «unos 6 episodios gratis por día» y lo saqué: no hay precio por episodio de DramaBox en ninguna de las fuentes que junté, así que esa conversión no salía de ningún lado. |

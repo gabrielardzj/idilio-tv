@@ -109,10 +109,10 @@ const DOCS = [
   'README.md', 'docs/00-dogfooding/README.md', 'docs/01-diagnostico/README.md',
   'docs/02-estrategia/README.md', 'docs/03-diseno/README.md', 'docs/03-diseno/sistema.md',
   'docs/03-diseno/pencil/README.md', 'docs/04-poc/README.md', 'web/README.md',
-  // Estos dos faltaban, y son justamente los que pasan a ser páginas del sitio:
-  // el benchmark publicaba «428 episodios gratis repartidos en 43 títulos» y el
-  // guardián no lo veía porque no lo estaba mirando. Una lista de vigilados que
-  // no incluye un documento publicado es una lista incompleta.
+  // Estos dos ya no son páginas del sitio, pero se siguen vigilando: el benchmark
+  // publicaba «428 episodios gratis repartidos en 43 títulos» y el guardián no lo
+  // veía porque no lo estaba mirando. Dejar de publicar un documento no lo saca
+  // del repo, y una cifra vieja ahí sigue siendo una cifra vieja.
   'docs/05-benchmark/README.md', 'docs/RECONCILIACION.md',
   // No solo los documentos: el HTML de la galería y el script que lo genera
   // también publican cifras, y ahí ya se me coló una vieja una vez.
@@ -122,7 +122,7 @@ const DOCS = [
 // Un documento publicado que nadie vigila es por donde se cuela la próxima cifra
 // vieja. Si mañana se agrega una página al sitio y no a esta lista, esto avisa.
 const PUBLICADOS = ['docs/01-diagnostico', 'docs/02-estrategia', 'docs/03-diseno',
-  'docs/04-poc', 'docs/05-benchmark', 'docs/00-dogfooding']
+  'docs/04-poc']
 const sinVigilar = PUBLICADOS.filter(p => !DOCS.some(d => d.startsWith(p)))
 if (sinVigilar.length) {
   console.log(`✗ documentos publicados fuera de la lista de vigilados: ${sinVigilar.join(', ')}`)

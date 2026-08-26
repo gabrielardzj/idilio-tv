@@ -61,19 +61,6 @@ export function NextPass({ readyAt, now }: { readyAt: number; now: number }) {
 }
 
 /** La racha: 7 noches, hito visible, comodín explícito. */
-/**
- * «hoy a las 21:30» / «mañana a las 21:30».
- *
- * La cita se ancla a la hora de siempre del usuario (D2b), no a «+24 h desde
- * que lo usaste». Por eso nunca son 24 horas exactas: gastarlo a las 00:30 deja
- * el próximo a 21 h, y a las 22:00 a 23:30.
- */
-export const citaTexto = (readyAt: number, now: number) => {
-  const d = new Date(readyAt)
-  const hora = `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`
-  return `${new Date(now).getDate() === d.getDate() ? 'hoy' : 'mañana'} a las ${hora}`
-}
-
 export function StreakStrip({
   nights, shields, shieldJustUsed, justAdvanced,
 }: { nights: number; shields: number; shieldJustUsed: boolean; justAdvanced?: boolean }) {
