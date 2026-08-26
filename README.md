@@ -72,6 +72,7 @@ Las tres decisiones que la sostienen:
 | Densidad del sheet | Captura real a 430×932 | los **6 bloques caben sin scroll** |
 | Tokens de marca | Volcado de custom properties de `www.idilio.tv` en producción | 9 colores + 2 familias tipográficas |
 | Muro real del producto | Uso propio de la web con viewport móvil | eps **1–10 libres, 11–30 bloqueados** |
+| Coherencia de los objetivos | Modelo de sensibilidad reproducible (`docs/modelo/`) | **corrigió la estrategia** |
 | Precio del sumidero | Reseña verificada de Google Play (18-ago-2026) | **~15 monedas/episodio** |
 
 Los tests incluyen el caso que rompe rachas hoy: **23:30 y 01:00 de la noche siguiente son la misma noche.**
@@ -82,6 +83,25 @@ cd poc && npx vitest run                 # 22 tests
 ```
 
 En el prototipo, el botón **`Estados`** (borde derecho) abre el panel para saltar a cualquier estado y para **viajar entre noches** — así se puede vivir el crecimiento de la racha, el escudo y la ruptura sin esperar días reales.
+
+---
+
+## El modelo que corrigió a la estrategia
+
+Al escribir la tabla de objetivos puse *15% de día-3* y *DAU/MAU 0,38–0,40* en la misma fila,
+como si una implicara la otra. Hice la cuenta y **no se implican**:
+
+> **Aunque el 6% que hoy sostiene racha entrara los 30 días del mes y nadie más cambiara,
+> el DAU/MAU solo llegaría a 0,346.** El objetivo es 0,380. Ni en el caso imposible se alcanza.
+
+Un segmento del 6% no puede mover el agregado por bueno que sea. Para llegar a 0,380 hacen
+falta **dos cosas a la vez**: ensanchar el segmento del 6% al ~15% (lo que hace la intervención
+profunda) **y** subir ~0,4 días activos al mes a toda la base (lo que aportan las dos piezas
+baratas de la Ola 0 — el corte a las 4am y la migaja en el reproductor).
+
+**El modelo dice que el plan no funciona sin sus piezas menos vistosas.** Es la mejor razón que
+tengo para defender que la higiene de la economía va primero y no al final.
+Reproducible: `node docs/modelo/sensibilidad.mjs` · [`docs/modelo/`](docs/modelo/README.md)
 
 ---
 

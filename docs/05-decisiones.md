@@ -104,18 +104,26 @@ Los microdramas terminan en cliffhanger por construcción. Cada capítulo gratis
 
 ## 5.3 Lo que probablemente esté mal en este trabajo
 
-Cuatro puntos débiles, ordenados por probabilidad de estarlo:
+Cinco puntos débiles, ordenados por probabilidad de estarlo:
 
 **① El cálculo del 8,7× compara denominadores distintos.**
 19% es una tasa diaria sobre DAU; 6% es acumulada sobre usuarios. La comparación es **direccional, no exacta**. La defensa: el sesgo juega a favor de la conclusión (si el 6% se mide sobre una base más amplia que DAU, el exceso sobre la independencia es aún mayor). Pero si los denominadores fueran muy distintos de lo que asumo, el argumento se debilita. **Es el primer número que pediría verificar con datos reales.**
 
-**② La tabla de recompensas (1→2→3→3→3→3→5) es una hipótesis sin calibrar.**
+**② El objetivo de DAU/MAU 0,38 puede estar fuera del alcance de esta intervención sola.**
+Al construir el modelo de sensibilidad ([`docs/modelo/`](modelo/README.md)) descubrí que mi
+propia tabla de objetivos era **internamente inconsistente**: ponía 15% de día-3 y DAU/MAU
+0,38–0,40 juntos sin haber hecho la cuenta. En el escenario central el 15% da **0,369**. Y hay
+algo peor: **aunque el 6% de hoy entrara los 30 días del mes, el agregado solo llegaría a 0,346.**
+Corregido en §2.5. Lo dejo escrito porque el error es instructivo: *una tabla de objetivos que
+no se verifica aritméticamente es una lista de deseos.*
+
+**③ La tabla de recompensas (1→2→3→3→3→3→5) es una hipótesis sin calibrar.**
 Está construida para poner el premio grande en la noche 3, que es donde el dato dice que está el 2,4×. Pero los valores absolutos salen de un benchmark externo (DramaBox/ReelShort entregan ~250 monedas/día ≈ 4–5 episodios), no de la economía de Idilio. **La curva hay que calibrarla con datos propios; lo defendible aquí es la forma, no los números.**
 
-**③ El brief describe una economía más simple que la real.**
+**④ El brief describe una economía más simple que la real.**
 El brief dice 2 fuentes y 1 sumidero. Las reseñas públicas verificadas muestran que el producto real ya tiene **video recompensado, "retos" y membresía mensual**. Diseñé contra la economía del brief porque es el terreno que se evalúa, pero **la intervención tendría que reconciliarse con esas piezas** — sobre todo con el video recompensado, que es otra fuente ganada y compite directamente con el capítulo de la casa. Es la conversación número uno que tendría con el equipo.
 
-**④ La cita de regreso depende del permiso de notificaciones.**
+**⑤ La cita de regreso depende del permiso de notificaciones.**
 "Mañana a las 8:00 pm · Avísame" es el mecanismo de retorno más directo del diseño y **descansa sobre un recurso escaso**: en iOS el permiso de notificaciones probablemente ya está gastado en avisos de estreno. Si el equipo no está dispuesto a reasignarlo, ese bloque pierde la mitad de su fuerza y queda solo como promesa visual. **Hay que decidir a qué se renuncia, y no lo puedo decidir yo desde fuera.**
 
 ---

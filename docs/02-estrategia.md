@@ -137,11 +137,23 @@ El orden **no** es por impacto esperado: es por **dependencia y por costo de apr
 
 | Nivel | Métrica | Hoy | Objetivo a 1 trimestre |
 |---|---|---|---|
-| Negocio | **DAU/MAU** | 0,33 | 0,38–0,40 |
+| Negocio | **DAU/MAU** | 0,33 | **0,37 con la intervención sola · 0,38 con la Ola 0** |
 | Mecánica | % DAU con racha activa ≥1 | ~19% | 55% |
 | Mecánica | % que alcanza día 3 | 6% | 15% |
 | Experiencia | Comprensión de la economía (encuesta 1 pregunta in-app) | sin medir | **medirlo es parte del entregable** |
 | Guardarraíl | ARPDAU | — | **no cae** |
 | Guardarraíl | Episodios por sesión | ~14 | **no cae** |
+
+> **Corrección.** La primera versión de esta tabla ponía *15% de día-3* y *DAU/MAU 0,38–0,40*
+> en la misma fila, como si una implicara la otra. **No las verifiqué, y no se implican.**
+> Al hacer la cuenta ([`docs/modelo/`](modelo/README.md)), en el escenario central el 15% de
+> día-3 da **0,369**, no 0,38. Peor: **aunque el 6% de hoy entrara los 30 días del mes, el
+> DAU/MAU solo llegaría a 0,346** — un segmento del 6% no puede mover el agregado por bueno
+> que sea.
+>
+> Lo que cierra la brecha son **+0,4 días activos al mes en el resto de la base** (+4%), que es
+> justamente lo que deberían aportar las dos piezas baratas de la Ola 0. **El modelo dice que
+> el plan no funciona sin sus piezas menos vistosas** — y es la mejor razón que tengo para
+> defender que I0 va primero y no al final.
 
 Los dos guardarraíles son la parte más importante de esta tabla. Una intervención de gamificación que sube el DAU/MAU y baja el ingreso o el consumo no es un éxito: **es una redistribución disfrazada.**
