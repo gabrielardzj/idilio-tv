@@ -14,7 +14,7 @@ Debajo de esa falla hay otra mayor, que solo aparece al medir el catálogo compl
 |---|---|
 | **F1** | Lo que resolvería el muro —la recompensa diaria, el pase semanal, el mensual— vive en otra pantalla |
 | **F2** | Nada traduce monedas a episodios, así que el usuario no puede juzgar el precio |
-| **F3** | La escalera de paquetes no premia comprar más: dos escalones entregan lo mismo |
+| **F3** | Dos paquetes distintos dan **las mismas 180 monedas** —uno a US$ 0.99 y otro a US$ 1.99, uno debajo del otro— y subir al siguiente escalón mejora el valor un 3.9% |
 | **F4** | La racha pide 7 días de 7 a una base que entra 2.3, y corta a medianoche en un producto que se usa de madrugada |
 | **F5** | El usuario no ve su avance dentro de una serie ni su posición en el sistema |
 
@@ -149,13 +149,13 @@ Datos reales del paywall:
 
 | Paquete | Precio | Monedas | Episodios | Costo por episodio |
 |---|---|---|---|---|
-| Oferta de entrada | US$ 0.99 · ≈ $3.050 | 180 | 12 | **≈ $254** |
+| Primero · *«SUPER OFERTA 60%»* | US$ 0.99 · ≈ $3.050 | 180 | 12 | **≈ $254** |
 | Segundo | US$ 1.99 · ≈ $6.130 | 180 | 12 | ≈ $511 |
 | Tercero | US$ 3.99 · ≈ $12.300 | 375 | 25 | ≈ $492 |
 
 De ahí salen dos problemas:
 
-1. **El primer paquete y el segundo entregan exactamente las mismas 180 monedas** — ≈ $3.050 contra ≈ $6.130. Puestos uno al lado del otro, el de ≈ $6.130 se lee como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
+1. **Los dos primeros paquetes entregan exactamente las mismas 180 monedas a distinto precio:** US$ 0.99 y US$ 1.99, ≈ $3.050 contra ≈ $6.130. El doble de precio por la misma cantidad, y no en pantallas distintas — en la captura oficial del build 1.20.0 aparecen uno directamente debajo del otro. El de ≈ $6.130 solo se puede leer como un error de la app o como una trampa. Cualquiera de las dos lecturas rompe la confianza justo en el momento de pagar.
 2. **Subir del segundo al tercero mejora el valor apenas un 3.9%:** el episodio baja de ≈ $511 a ≈ $492. Una escalera de paquetes existe para que al usuario le convenga comprar el grande; esta no le da ninguna razón para hacerlo. El resultado es que todos se quedan en el de ≈ $6.130 y el escalón alto no se vende.
 
 Además, **los cuatro paquetes llevan badge de descuento** (60%, 20%, 20%, 30%). Un precio tachado solo persuade si hay algo sin descuento contra qué compararlo. Cuando todo está en oferta, nada lo está.
