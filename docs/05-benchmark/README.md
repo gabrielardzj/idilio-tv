@@ -207,7 +207,7 @@ usuarios descubrieron que una película exigía VIP de pago (¥8/semana, ¥30/me
 tema estalló en Weibo. Hongguo respondió, con razón, que **el VIP existía desde el lanzamiento
 en agosto de 2023** y que solo cubría el mínimo contenido que exigían ciertos titulares de
 derechos. No sirvió de nada: la lectura pública fue que *"el personaje de gratis se derrumbó"*.
-El análisis de prensa lo resumió mejor de lo que yo podría:
+El análisis de prensa lo resume con precisión:
 
 > El desafío real de Hongguo no es si cobrar, sino **cómo lograr que el usuario perciba y acepte
 > el cobro. No es un problema de precio: es un problema de reescritura de reglas.**
@@ -517,7 +517,7 @@ Eso sigue siendo original de este diagnóstico.
   frase sobre el push que se repite en §2.5 y §3.6.
 - **Buena parte del detalle operativo de la Familia 1 y la Familia 2** (las ~165 monedas semanales
   de ReelShort, la caducidad de las monedas bonus, los topes diarios de ShortMax). La fuente que
-  los agrupaba no los contiene; los dejé porque son el mejor dato disponible, marcados como lo que
+  los agrupaba no los contiene; quedan porque son el mejor dato disponible, marcados como lo que
   son. Lo único de ese bloque que sí tiene fuente de primera mano es el reset de la racha.
 - **Los ingresos de Snapchat por restaurar rachas.** La cifra de $4,2 M que circula en resúmenes de
   industria no aparece en el newsroom de Snap ni en ninguna fuente que haya podido abrir. La saqué
@@ -556,7 +556,7 @@ Eso sigue siendo original de este diagnóstico.
 > GrowthX, Value for Startups, 199IT (que replica la cifra de QuestMobile) y **Adjoe**, que además
 > vende a esta categoría el producto que sus propios números promocionan. Sostienen datos
 > operativos de apps de la competencia —topes de anuncios, escalones de check-in, caducidades— que
-> ninguna de esas apps publica y que no están en ningún otro lado. No los descarto por eso: los uso
+> ninguna de esas apps publica y que no están en ningún otro lado. No quedan descartados por eso: se usan
 > para describir mecánicas, no para afirmar cifras de negocio, y cada vez que un dato del anexo se
 > apoya solo en este nivel está dicho en el texto. La excepción incómoda es la tabla de retención
 > de §5.2, que es una cifra de negocio y cuelga de Adjoe: está anotado ahí y en §5.6.

@@ -8,7 +8,7 @@ El metajuego de Idilio no está mal diseñado: **llega en el momento equivocado*
 
 Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que el producto nunca traduce a episodios.
 
-Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese colchón corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. El muro tiene el anuncio y la suscripción, pero los ordena al revés: abre con lo más caro y deja la salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris.
+Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese contenido corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. El muro tiene el anuncio y la suscripción, pero los ordena al revés: abre con lo más caro y deja la salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris.
 
 Sin escasez, la moneda no significa nada y el metajuego no puede mover el regreso. Y la alternativa a pagar nunca es irse: es empezar otra serie gratis. Quien salta de historia en historia no se apega a ninguna, así que no hay ninguna serie esperándolo mañana — que es precisamente lo que mide un DAU/MAU de 0.33.
 
@@ -90,7 +90,7 @@ Este hallazgo solo aparece cuando se mide el catálogo entero.
 | **Episodios gratis** | **500** — el 22% del catálogo |
 
 **500 episodios gratis ÷ 14 por sesión = 36 sesiones sin gastar un centavo.**
-A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** La cuenta asume una sesión por día activo, que es el supuesto más generoso: a 1.5 sesiones por día el colchón baja a unas 10 semanas, y sigue siendo más de dos meses sin motivo para pagar.
+A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** La cuenta asume una sesión por día activo, que es el supuesto más generoso: a 1.5 sesiones por día ese margen baja a unas 10 semanas, y sigue siendo más de dos meses sin motivo para pagar.
 
 De ahí sale el hallazgo: **el muro no saca al usuario de la app, lo saca de la historia.** La alternativa gratis existe, está a un toque y tiene 500 episodios.
 
@@ -116,7 +116,7 @@ Eso cambia el significado de casi todas las demás señales:
 > entre **$ 208 y $ 540** según el paquete ([F3](#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie)),
 > varias veces por debajo de lo que cobran los líderes de la categoría
 > ([§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra)). Lo que está mal no es el
-> número: es dónde aparece y contra qué compite. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante los casi cuatro meses que le dura el colchón. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
+> número: es dónde aparece y contra qué compite. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante los casi cuatro meses que le dura el contenido gratuito. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
 
 **Por eso el objetivo de negocio es stickiness y no conversión.** Y por eso la respuesta correcta no es recortar los episodios gratis —eso frena la adquisición y ataca la métrica equivocada—, sino **darle al usuario una razón para quedarse en una historia en vez de saltar a la siguiente.** De ahí sale la intervención que se desarrolla en [§3](../03-diseno/).
 
@@ -228,7 +228,7 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 ---
 
-## 1.3 Qué señales pesaron y cuáles descarté
+## 1.3 Qué señales pesaron y cuáles se descartaron
 
 ### Pesaron
 
@@ -241,9 +241,13 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 | **DAU/MAU 0.33 frente a una racha diaria** | La mecánica le pide al usuario una frecuencia que no tiene. Explica el 6% sin necesidad de más datos. |
 | **88% son invitados, sin cuenta** | Cualquier cosa que exija registrarse arranca alcanzando apenas al 12%. Define el orden: primero el valor, después la cuenta. |
 
-### Descarté
+### Se descartaron
 
-**El 2.4x de retención a 30 días, leído como causa.** Es la señal más tentadora del conjunto y la más peligrosa. Quien sostiene tres días seguidos ya era un usuario enganchado antes de que existiera la racha. La racha no lo creó: lo *identificó*. Armar la estrategia sobre "llevemos a más gente al día 3 y tendremos 2.4x" es suponer que el termómetro calienta la habitación.
+**El 2.4x de retención a 30 días, leído como causa.** Es la señal más tentadora del conjunto y la más peligrosa, porque **confunde correlación con causalidad**.
+
+Lo que el dato muestra es que dos cosas ocurren juntas: quienes sostienen tres días seguidos retienen 2.4 veces mejor a 30 días. Lo que no muestra es cuál produce a cuál. La explicación alternativa es al menos igual de plausible: quien sostiene tres días seguidos **ya era un usuario enganchado antes de que existiera la racha**, y la racha no generó esa retención — la puso en evidencia. En términos de medición, la racha funciona como un indicador de un enganche preexistente, no como su causa.
+
+La distinción no es académica: cambia qué hacer. Si la relación es causal, llevar más gente al día 3 debería producir más retención. Si es de selección, llevar más gente al día 3 solo produce más gente en el día 3 — y el 2.4x se diluye, porque el grupo nuevo no comparte la característica que hacía retener al original.
 
 > **Cómo se resuelve:** un experimento con grupo de control — racha para la mitad de los usuarios nuevos, no para la otra mitad, y comparar la retención a 30 días. Si el 2.4x se sostiene, la racha causa retención; si cae a 1.1x, lo que medía era quién ya estaba enganchado. Hasta que exista ese número, la estrategia no se apoya en él.
 
@@ -251,7 +255,9 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 > **Cómo se resuelve:** dos consultas — cruzar *quién vuelve a ver* contra *cuántos episodios gratis del catálogo le quedan sin ver*, y contra *cuántas monedas tenía en ese momento*. Si quienes vuelven a ver todavía tienen cientos de episodios gratis por delante, la lectura correcta es la optimista y no esta.
 
-**El perfil como palanca de engagement.** 82% nunca entra. Rediseñarlo es amoblar un cuarto al que nadie va. Lo que hay que mover es *dónde vive* el metajuego, no cómo se ve el cuarto.
+**El perfil como palanca de engagement.** El 82% nunca lo abre, así que el alcance máximo de cualquier rediseño es el 18% restante — y ese 18% es, por definición, quien ya navega por su cuenta. **Una intervención cuyo techo de alcance es la quinta parte de la base no puede mover una métrica que se calcula sobre la base entera.**
+
+El problema tampoco es cómo está resuelta esa pantalla: es que haya piezas del metajuego que dependan de una pantalla a la que el usuario tiene que decidir ir. Lo que corresponde mover es **dónde ocurren**, no cómo se ven.
 
 **Mecánicas sociales (rankings, tablas de posiciones, comparación con amigos).** El contexto es de 11 p.m. a 2 a.m., consumo solitario, un género que carga cierto pudor, y 88% de invitados sin identidad. Una tabla de posiciones acá no motiva: expone. Descartado por el contexto, no por la calidad de la mecánica.
 
@@ -262,16 +268,23 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 ## 1.4 Una palanca fuera del alcance de este objetivo
 
-El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: los 500 episodios gratis del catálogo. Este documento la llama **el colchón** — todo lo que un usuario puede ver sin pagar nunca. Y el colchón es solo la mitad: encima corren las fuentes recurrentes de [F1](#f1--la-economía-está-a-la-vista-y-ordenada-al-revés), que con los anuncios dan hasta 70 episodios por semana. El stock se agota una vez; el flujo, no.
+El censo destapa una palanca mayor que cualquiera de las ocho intervenciones de la estrategia: **los 500 episodios gratis del catálogo**, es decir todo el contenido que un usuario puede ver sin pagar nunca.
 
-Qué haría con ella depende enteramente de cuál sea el objetivo:
+Y esos 500 son solo una parte. Conviene distinguir dos cosas que se comportan distinto:
+
+| | Qué es | Se agota |
+|---|---|---|
+| **Stock** | los 500 episodios gratis del catálogo | sí, una vez |
+| **Flujo** | las fuentes recurrentes de [F1](#f1--la-economía-está-a-la-vista-y-ordenada-al-revés) — hasta 70 episodios por semana en anuncios | no, se renueva cada día |
+
+Qué hacer con ella depende enteramente de cuál sea el objetivo:
 
 | Si el objetivo fuera… | La palanca diría… |
 |---|---|
-| **Convertir usuarios en pagadores** | Casi cuatro meses de contenido gratis es demasiado. Bajar el bloque gratis a 6 episodios por serie recortaría el colchón un 40% —de 500 episodios a 300— y pondría el muro donde todavía queda deseo. |
+| **Convertir usuarios en pagadores** | Casi cuatro meses de contenido gratis es demasiado. Bajar el bloque gratis a 6 episodios por serie recortaría el stock un 40% —de 500 episodios a 300— y pondría el muro donde todavía queda deseo. No tocaría el flujo, que es la parte mayor. |
 | **Adquirir usuarios y retenerlos el primer día** | Esos 10 episodios gratis son exactamente lo que engancha en la primera sesión. Tocarlos es tocar el motor de crecimiento. |
 | **Stickiness (el objetivo real acá)** | **Ninguna de las dos.** Recortar lo gratis no hace que el usuario vuelva mañana: hace que se vaya antes. Y dejarlo como está tampoco lo trae de vuelta. |
 
-Por eso el colchón queda intacto en esta propuesta. El objetivo del ejercicio es DAU/MAU, y el colchón no es una palanca de DAU/MAU sino de conversión. Pero es la variable más pesada de toda la economía y está a una sola decisión de distancia, así que quien lea este diagnóstico debe saber que existe.
+Por eso el stock queda intacto en esta propuesta. El objetivo del ejercicio es DAU/MAU, y recortar contenido gratuito no es una palanca de DAU/MAU sino de conversión. Pero es la variable más pesada de toda la economía y está a una sola decisión de distancia, así que quien lea este diagnóstico debe saber que existe.
 
 **Lo que sí cambia en la propuesta por saber esto:** el Pase de la Noche no compite contra pagar. Compite contra **empezar otra serie gratis**, que es lo que el usuario hace hoy y no le cuesta nada. Ahí está su mejor argumento: es lo único en todo el producto que permite seguir *donde estabas*.

@@ -11,7 +11,7 @@
 
 ## 3.1 Por qué esta intervención y no otra
 
-De las ocho intervenciones de la estrategia, elegí esta por cinco razones, en orden de peso.
+De las ocho intervenciones de la estrategia, la elegida es esta, por cinco razones en orden de peso.
 
 **1. Es la única que ataca el punto exacto donde la sesión se corta por precio.**
 El corte no es un accidente: es la estructura del catálogo. La moda son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin una sola excepción en el precio. Y no lo pone el aburrimiento: lo pone el precio. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
@@ -142,7 +142,7 @@ stateDiagram-v2
 
 ### D1 · El muro se ordena por la historia, no por el precio
 
-De arriba a abajo: **cliffhanger → dónde voy → lo gratis → lo pago → mi racha.**
+De arriba a abajo: **cliffhanger → dónde va el usuario → lo gratis → lo pago → su racha.**
 
 El paywall (el muro de pago) actual abre con `Costo del episodio: 15 / Tu balance: 0`. Eso enseña, en el primer segundo, que el sistema es una tienda y que el usuario no tiene con qué. La propuesta abre con *«Camila abre la puerta y el que está del otro lado no es Andrés»*.
 
@@ -190,7 +190,7 @@ En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 
 El caso de *«Termina esta serie»* es el que obliga a calcular en vez de rotular.
 
-La forma fácil es dejar esa etiqueta fija sobre el paquete de 750 monedas, porque *Pasión a Domicilio* cabe justo ahí. El censo de las 50 series lo desarma: van de **150 a 960 monedas**. La lectura que importa no es cuántas veces el número no coincide —eso pasa en 40 de las 41 series con muro y es trivial—, sino cuántas veces **el badge promete algo que la compra no cumple**: en **19 de esas 41 series, el 46%, el paquete de 660 no alcanza para terminar la serie**. Un badge que promete de más en casi la mitad de las compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
+La forma fácil es dejar esa etiqueta fija sobre el paquete de 750 monedas, porque *Pasión a Domicilio* cabe justo ahí. El censo de las 50 series lo desarma: van de **150 a 960 monedas**. La lectura que importa no es cuántas veces el número no coincide —eso pasa en 40 de las 41 series con muro y es trivial—, sino cuántas veces **el badge promete algo que la compra no cumple**: en **19 de esas 41 series, el 46%, el paquete de 660 no alcanza para terminar la serie**. Un badge que promete de más en casi la mitad de las compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le el diagnóstico le señala al paywall actual.
 
 Ahora se calcula. La tienda abre con la meta real de la serie que el usuario está viendo — *«Para terminar Pasión a Domicilio: 44 episodios · 660 monedas»* — y el badge cae sobre el paquete más chico que alcanza. O es cierto, o no aparece.
 
@@ -326,11 +326,11 @@ El usuario promedio de hoy — 2.3 noches por semana — recibe **hasta 4 episod
 
 *Promedio, no mediana: 2.3 sale de 0.33 × 7, que es una media. La precisión importa porque la primera fila de datos de la tabla —la de 2 noches, que es la que uso para todo lo que sigue— cuelga de ahí. Y juega a favor, porque con la cola pesada que tiene la asistencia la mediana real está por debajo de 2.3. El modelo se equivoca del lado seguro.*
 
-**Y hay que ponerlo en perspectiva, con cuidado:** el catálogo ya regala 500 episodios, pero ese colchón es un **stock** —se agota una vez y no vuelve— y el pase es un **flujo**: hasta unos 208 episodios al año para el usuario promedio, todos los años. Un porcentaje suelto entre los dos (208 sobre 500, un 42%) no dice nada, porque no están en la misma unidad: la única forma de compararlos es ponerle tiempo al flujo. Puesto así, **al pase le lleva 2.4 años igualar el colchón** — y a tres años ya entregó 624 episodios mientras el colchón sigue siendo 500. El otro stock, el que el usuario tiene por delante, son los **1.728 episodios bloqueados** del catálogo: al ritmo del pase, más de ocho años. Los dos son stocks y el pase es lo único que corre; por eso acá la unidad honesta es el año, no el porcentaje.
+**Y hay que ponerlo en perspectiva, con cuidado:** el catálogo ya regala 500 episodios, pero eso es un **stock** —se agota una vez y no vuelve— y el pase es un **flujo**: hasta unos 208 episodios al año para el usuario promedio, todos los años. Un porcentaje suelto entre los dos (208 sobre 500, un 42%) no dice nada, porque no están en la misma unidad: la única forma de compararlos es ponerle tiempo al flujo. Puesto así, **al pase le lleva 2.4 años igualar esos 500 episodios** — y a tres años ya entregó 624 mientras el stock del catálogo sigue siendo 500. El otro stock, el que el usuario tiene por delante, son los **1.728 episodios bloqueados** del catálogo: al ritmo del pase, más de ocho años. Los dos son stocks y el pase es lo único que corre; por eso acá la unidad honesta es el año, no el porcentaje.
 
-Y hay una comparación que pesa más que la del colchón: **el Pase agrega como mucho un 10% sobre lo que el producto ya regala.** Hasta 7 episodios semanales de pase contra los hasta 70 de anuncios. Quien mire la emisión total y vea al Pase como el riesgo está mirando el lugar equivocado de la economía.
+Y hay una comparación que pesa más que la del catálogo: **el Pase agrega como mucho un 10% sobre lo que el producto ya regala.** Hasta 7 episodios semanales de pase contra los hasta 70 de anuncios. Quien mire la emisión total y vea al Pase como el riesgo está mirando el lugar equivocado de la economía.
 
-Pero la sostenibilidad no cuelga de ninguna de esas comparaciones, y por eso no las uso para defenderla. Cuelga del **techo duro: 7 pases por semana y por usuario**, sin anuncios que lo levanten ni forma de comprar más. Ese techo vale sea grande o chico el colchón, y es lo único que hace falta para acotar la emisión. Lo que el colchón no tiene y el pase sí es dirección: estos episodios van a la historia que el usuario eligió, no a diez arranques distintos.
+Pero la sostenibilidad no cuelga de ninguna de esas comparaciones, y por eso no son las que la defienden. Cuelga del **techo duro: 7 pases por semana y por usuario**, sin anuncios que lo levanten ni forma de comprar más. Ese techo vale sea grande o chico el catálogo gratuito, y es lo único que hace falta para acotar la emisión. Lo que el catálogo gratuito no tiene y el pase sí es dirección: estos episodios van a la historia que el usuario eligió, no a diez arranques distintos.
 
 **El gradiente que sostiene DAU/MAU:** entrar 2 noches rinde hasta 4 episodios; entrar 4 o más llega a los 7 que emite el sistema. Volver seguido sigue siendo estrictamente mejor. Si el tope fuera 7 en vez de 2, acumular la semana entera y entrar un solo día daría lo mismo que entrar todos los días — y la mecánica dejaría de mover la métrica que existe para mover.
 
