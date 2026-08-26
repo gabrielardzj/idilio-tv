@@ -4,7 +4,11 @@ import {
   type EconomyState, type UnlockMethod,
 } from '../economy';
 import { episodeMeta } from '../data';
-import { Coin, Moon, Shield, Bell, Lock } from '../icons';
+import { useTween } from '../useTween';
+import { Coin, Moon, Shield, Bell, Lock, Check } from '../icons';
+
+/** Lo que dura la animación de gasto antes de entrar al episodio. */
+const SPEND_MS = 880;
 
 /**
  * El muro de desbloqueo — la intervención.
@@ -16,12 +20,14 @@ import { Coin, Moon, Shield, Bell, Lock } from '../icons';
  * El precio va DESPUÉS de que el usuario ya sabe que hay una vía sin pagar.
  */
 export function UnlockSheet({
-  ep, state, brokenFrom, onUnlock, onShop, onClose,
+  ep, state, brokenFrom, nightJustAdvanced, onUnlock, onShop, onClose,
 }: {
   ep: number;
   state: EconomyState;
   /** Si la racha se rompió al entrar esta noche, la noche anterior alcanzada. */
   brokenFrom: number | null;
+  /** La noche subió en esta sesión: la luna actual entra con animación. */
+  nightJustAdvanced: boolean;
   onUnlock: (m: UnlockMethod) => void;
   onShop: () => void;
   onClose: () => void;
@@ -30,12 +36,23 @@ export function UnlockSheet({
   const hasPass = state.passes > 0;
   const canPay = state.coins >= COINS_PER_EPISODE;
   const [reminder, setReminder] = useState(false);
+  const [spent, setSpent] = useState<UnlockMethod | null>(null);
+
+  // El saldo baja a la vista. Percibir el gasto es la mitad de entender la economía.
+  const coins = useTween(state.coins - (spent === 'coins' ? COINS_PER_EPISODE : 0));
+  const passes = useTween(state.passes - (spent === 'pass' ? 1 : 0), 420);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && !spent && onClose();
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  }, [onClose, spent]);
+
+  const spend = (m: UnlockMethod) => {
+    if (spent) return;
+    setSpent(m);
+    window.setTimeout(() => onUnlock(m), SPEND_MS);
+  };
 
   const cycleStart = Math.floor((state.night - 1) / CYCLE_LENGTH) * CYCLE_LENGTH;
   const posInCycle = state.night - cycleStart; // 1..7
@@ -44,8 +61,9 @@ export function UnlockSheet({
 
   return (
     <>
-      <div className="scrim" onClick={onClose} />
-      <section className="sheet" role="dialog" aria-modal="true" aria-label={`Episodio ${ep} bloqueado`}>
+      <div className="scrim" onClick={() => !spent && onClose()} />
+      <section className={`sheet ${spent ? 'is-leaving' : ''}`} role="dialog" aria-modal="true"
+               aria-label={`Episodio ${ep} bloqueado`}>
         <div className="grabber" />
 
         {/* ── 1 · DESEO ─────────────────────────────────────────────────── */}
@@ -61,7 +79,10 @@ export function UnlockSheet({
             <span className="lead">Vas {ep - 1} de 30</span>
             <span className="trail">quedan {30 - (ep - 1)} capítulos</span>
           </div>
-          <div className="bar"><i style={{ width: `${((ep - 1) / 30) * 100}%` }} /></div>
+          <div className="bar">
+            {/* Al desbloquear, la barra avanza un capítulo antes de salir del muro. */}
+            <i style={{ width: `${((ep - 1 + (spent ? 1 : 0)) / 30) * 100}%` }} />
+          </div>
         </div>
 
         {/* ── Estado F: racha rota. Se informa, no se regaña. ───────────── */}
@@ -75,11 +96,13 @@ export function UnlockSheet({
         {/* ── 3 · ACCIÓN ────────────────────────────────────────────────── */}
         {hasPass ? (
           <>
-            <button className="cta cta--primary" onClick={() => onUnlock('pass')}>
-              <Moon s={17} /> Ver gratis
+            <button className={`cta cta--primary ${spent ? 'is-spending' : ''}`}
+                    disabled={!!spent} onClick={() => spend('pass')}>
+              {spent ? <><Check s={19} /> Listo</> : <><Moon s={17} /> Ver gratis</>}
             </button>
             <p className="cta-note">
-              Capítulo de la casa · te quedan {state.passes} de {state.passesGranted} esta noche
+              Capítulo de la casa · te quedan{' '}
+              <span className={spent ? 'tick' : ''}>{Math.round(passes)}</span> de {state.passesGranted} esta noche
             </p>
           </>
         ) : (
@@ -88,8 +111,9 @@ export function UnlockSheet({
                 Un "Desbloquear por 15" deshabilitado es UI muerta: enseña un
                 precio y no ofrece camino. Si no alcanza, el camino es recargar. */}
             {canPay ? (
-              <button className="cta cta--coins" onClick={() => onUnlock('coins')}>
-                <Coin s={18} /> Desbloquear por {COINS_PER_EPISODE}
+              <button className={`cta cta--coins ${spent ? 'is-spending' : ''}`}
+                      disabled={!!spent} onClick={() => spend('coins')}>
+                {spent ? <><Check s={19} /> Listo</> : <><Coin s={18} /> Desbloquear por {COINS_PER_EPISODE}</>}
               </button>
             ) : (
               <button className="cta cta--coins" onClick={onShop}>
@@ -127,7 +151,8 @@ export function UnlockSheet({
               const isMilestone = n === 3 || n === CYCLE_LENGTH;
               const cls = n < posInCycle ? 'done' : n === posInCycle ? 'now'
                 : isMilestone ? 'milestone' : '';
-              return <span key={n} className={`moon ${cls}`}>{n}</span>;
+              const pop = n === posInCycle && nightJustAdvanced ? ' pop' : '';
+              return <span key={n} className={`moon ${cls}${pop}`}>{n}</span>;
             })}
           </div>
 
@@ -141,9 +166,10 @@ export function UnlockSheet({
         {/* ── 5 · SALDO Y FUENTE COMPRADA ───────────────────────────────── */}
         <div className="wallet">
           <span style={{ color: 'var(--home-amber)', display: 'flex' }}><Coin s={19} /></span>
-          <div>
-            <div className="amt">{state.coins}</div>
+          <div style={{ position: 'relative' }}>
+            <div className="amt">{Math.round(coins)}</div>
             <div className="lbl">monedas · cada capítulo cuesta {COINS_PER_EPISODE}</div>
+            {spent === 'coins' && <span className="spend-fly">−{COINS_PER_EPISODE}</span>}
           </div>
           <button className="go" onClick={onShop}>Recargar</button>
         </div>

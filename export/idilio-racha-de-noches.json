@@ -2,7 +2,7 @@
   "$schema": "./schema.md",
   "export": {
     "id": "idilio-tv-racha-de-noches",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "generated": "2026-08-25",
     "format": "mobbin-like/v1",
     "locale": "es-419",
@@ -12,8 +12,15 @@
     "name": "Idilio TV",
     "category": "Entertainment · Microdrama / Vertical short drama",
     "platform": "mobile-web (POC) · iOS + Android (producto)",
-    "markets": ["MX", "CO", "US-Hispanic"],
-    "package": { "ios": "id6749875422", "android": "com.stvrae.idilio" },
+    "markets": [
+      "MX",
+      "CO",
+      "US-Hispanic"
+    ],
+    "package": {
+      "ios": "id6749875422",
+      "android": "com.stvrae.idilio"
+    },
     "designSystem": {
       "source": "Tokens literales extraídos de www.idilio.tv en producción",
       "color": {
@@ -28,8 +35,16 @@
         "textBase": "#ecedee"
       },
       "type": {
-        "ui": { "product": "sofiaPro", "pocSubstitute": "Outfit", "reason": "sofiaPro es de licencia comercial; Outfit es el geométrico libre más cercano en eje y aperturas" },
-        "display": { "product": "newHero", "pocSubstitute": "Archivo", "reason": "newHero es de licencia comercial; Archivo es el neo-grotesco libre más cercano" }
+        "ui": {
+          "product": "sofiaPro",
+          "pocSubstitute": "Outfit",
+          "reason": "sofiaPro es de licencia comercial; Outfit es el geométrico libre más cercano en eje y aperturas"
+        },
+        "display": {
+          "product": "newHero",
+          "pocSubstitute": "Archivo",
+          "reason": "newHero es de licencia comercial; Archivo es el neo-grotesco libre más cercano"
+        }
       },
       "semantics": {
         "violet→magenta": "moneda GANADA (capítulo de la casa) y racha — es la moneda de la marca",
@@ -53,25 +68,42 @@
       "id": "core-loop",
       "name": "Consumo continuo con economía visible",
       "intent": "Ver episodios y encontrarse con la economía sin salir del reproductor",
-      "screens": ["01", "12"]
+      "screens": [
+        "01",
+        "12"
+      ]
     },
     {
       "id": "muro-desbloqueo",
       "name": "Muro de desbloqueo — la intervención",
       "intent": "Entender la economía completa en el momento del gasto",
-      "screens": ["02", "03", "04", "05", "07", "08", "09", "10"]
+      "screens": [
+        "02",
+        "03",
+        "04",
+        "05",
+        "07",
+        "08",
+        "09",
+        "10",
+        "13"
+      ]
     },
     {
       "id": "registro-por-perdida",
       "name": "Cuenta como seguro de la racha",
       "intent": "Convertir invitado a cuenta usando aversión a la pérdida, en la noche 3",
-      "screens": ["06"]
+      "screens": [
+        "06"
+      ]
     },
     {
       "id": "compra",
       "name": "Fuente comprada",
       "intent": "Recargar cuando el pase de la noche ya se gastó",
-      "screens": ["11"]
+      "screens": [
+        "11"
+      ]
     }
   ],
   "screens": [
@@ -81,8 +113,22 @@
       "flow": "core-loop",
       "name": "Reproductor · episodio libre",
       "state": "eps 1–10 · sin racha aún",
-      "patterns": ["vertical-video-player", "burned-in-subtitle", "action-rail", "swipe-navigation", "economy-chip"],
-      "elements": ["wordmark", "chip-monedas", "lista-episodios", "subtítulo quemado", "rail me gusta/comentarios/compartir", "metadatos de serie", "barra de progreso"],
+      "patterns": [
+        "vertical-video-player",
+        "burned-in-subtitle",
+        "action-rail",
+        "swipe-navigation",
+        "economy-chip"
+      ],
+      "elements": [
+        "wordmark",
+        "chip-monedas",
+        "lista-episodios",
+        "subtítulo quemado",
+        "rail me gusta/comentarios/compartir",
+        "metadatos de serie",
+        "barra de progreso"
+      ],
       "decision": "La migaja de economía en el HUD tiene techo estricto: 2 chips, sin fondo sólido, nunca sobre la cara. El reproductor es la superficie sagrada."
     },
     {
@@ -91,8 +137,15 @@
       "flow": "core-loop",
       "name": "Reproductor · confirmación de racha",
       "state": "Estado I · noche 2 acreditada",
-      "patterns": ["non-blocking-toast", "streak-confirmation"],
-      "elements": ["toast píldora", "contador de noche", "recuento de pases"],
+      "patterns": [
+        "non-blocking-toast",
+        "streak-confirmation"
+      ],
+      "elements": [
+        "toast píldora",
+        "contador de noche",
+        "recuento de pases"
+      ],
       "decision": "Es un toast, NO un modal. Confirmar una racha interrumpiendo el video le cobra al usuario el premio que le acabamos de dar."
     },
     {
@@ -101,8 +154,25 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · noche 1, invitado, sin monedas",
       "state": "Estado A · 1 pase disponible · 0 monedas",
-      "patterns": ["bottom-sheet-paywall", "progress-position", "earned-currency-cta", "streak-tracker", "wallet-row", "return-appointment"],
-      "elements": ["frame difuminado", "eyebrow bloqueado", "título de episodio", "línea de diálogo", "barra vas-10-de-30", "CTA Ver gratis", "lunas 1–7", "cartera", "cita mañana 8pm"],
+      "patterns": [
+        "bottom-sheet-paywall",
+        "progress-position",
+        "earned-currency-cta",
+        "streak-tracker",
+        "wallet-row",
+        "return-appointment"
+      ],
+      "elements": [
+        "frame difuminado",
+        "eyebrow bloqueado",
+        "título de episodio",
+        "línea de diálogo",
+        "barra vas-10-de-30",
+        "CTA Ver gratis",
+        "lunas 1–7",
+        "cartera",
+        "cita mañana 8pm"
+      ],
       "decision": "El orden vertical ES el argumento: deseo → posición → acción gratuita → promesa → precio → cita. El precio va después de que el usuario ya sabe que hay una vía sin pagar.",
       "verificado": "Los 6 bloques caben sin scroll en 430×932. La economía completa (2 fuentes + sumidero + saldo + posición) entra en una pantalla."
     },
@@ -112,8 +182,14 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · pase gastado, sin monedas",
       "state": "Estado B · 0 pases · 0 monedas — el estado que monetiza",
-      "patterns": ["bottom-sheet-paywall", "purchase-cta"],
-      "elements": ["CTA Conseguir monedas (ámbar)", "nota de pase gastado"],
+      "patterns": [
+        "bottom-sheet-paywall",
+        "purchase-cta"
+      ],
+      "elements": [
+        "CTA Conseguir monedas (ámbar)",
+        "nota de pase gastado"
+      ],
       "decision": "Corregido durante dogfooding: la primera versión mostraba «Desbloquear por 15» deshabilitado. Un CTA deshabilitado enseña un precio y no ofrece camino — es UI muerta. Si no alcanza, el camino es recargar."
     },
     {
@@ -122,8 +198,13 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · pase gastado, con saldo",
       "state": "Estado C · 0 pases · 90 monedas",
-      "patterns": ["bottom-sheet-paywall", "purchase-cta"],
-      "elements": ["CTA Desbloquear por 15"],
+      "patterns": [
+        "bottom-sheet-paywall",
+        "purchase-cta"
+      ],
+      "elements": [
+        "CTA Desbloquear por 15"
+      ],
       "decision": "El CTA nombra el precio exacto, no «Desbloquear». El usuario debe poder hacer la resta antes de tocar."
     },
     {
@@ -132,8 +213,14 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · noche 2",
       "state": "Estado D · 2 pases",
-      "patterns": ["streak-tracker", "escalating-reward"],
-      "elements": ["lunas 1–2 encendidas", "copy mañana son 3"],
+      "patterns": [
+        "streak-tracker",
+        "escalating-reward"
+      ],
+      "elements": [
+        "lunas 1–2 encendidas",
+        "copy mañana son 3"
+      ],
       "decision": "Duplicar de 1 a 2 es la progresión más legible que existe. No hace falta explicarla."
     },
     {
@@ -142,8 +229,15 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · noche 3 (hito)",
       "state": "Estado E · 3 pases · 1 escudo",
-      "patterns": ["milestone-reward", "streak-freeze-badge"],
-      "elements": ["insignia 1 escudo", "3 lunas encendidas", "toast de noche 3"],
+      "patterns": [
+        "milestone-reward",
+        "streak-freeze-badge"
+      ],
+      "elements": [
+        "insignia 1 escudo",
+        "3 lunas encendidas",
+        "toast de noche 3"
+      ],
       "decision": "El premio grande va en la noche 3 porque ahí es donde el dato dice que la retención D30 se multiplica por 2,4. Se premia donde el producto gana, no donde queda bonito."
     },
     {
@@ -152,8 +246,18 @@
       "flow": "registro-por-perdida",
       "name": "Cuenta · guarda tu racha",
       "state": "Estado E · noche 3, invitado",
-      "patterns": ["loss-framed-signup", "oauth-stack", "dismissible"],
-      "elements": ["cifra 3 noches", "titular de pérdida", "tarjeta de escudo", "Apple/Google/correo", "Ahora no"],
+      "patterns": [
+        "loss-framed-signup",
+        "oauth-stack",
+        "dismissible"
+      ],
+      "elements": [
+        "cifra 3 noches",
+        "titular de pérdida",
+        "tarjeta de escudo",
+        "Apple/Google/correo",
+        "Ahora no"
+      ],
       "decision": "No dice «crea tu cuenta para desbloquear beneficios». Dice qué se pierde. Y llega la única noche en que por primera vez hay algo real que perder. Guardarraíl: si caen los episodios por sesión, se retrasa a la noche 5."
     },
     {
@@ -162,8 +266,15 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · racha rota",
       "state": "Estado F · venía de 5 noches",
-      "patterns": ["streak-reset", "no-blame-copy"],
-      "elements": ["tarjeta tu racha de 5 noches terminó", "toast empezamos otra vez", "CTA Ver gratis ya disponible"],
+      "patterns": [
+        "streak-reset",
+        "no-blame-copy"
+      ],
+      "elements": [
+        "tarjeta tu racha de 5 noches terminó",
+        "toast empezamos otra vez",
+        "CTA Ver gratis ya disponible"
+      ],
       "decision": "El modo de fallo documentado de las rachas es el abstinence violation effect: al romperse, el usuario abandona. Por eso el copy no regaña y el capítulo gratis ya está ahí, en la misma pantalla."
     },
     {
@@ -172,8 +283,13 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · escudo consumido",
       "state": "Estado G · faltó 1 noche · racha intacta en 6",
-      "patterns": ["streak-freeze-consumed", "post-hoc-notification"],
-      "elements": ["toast Usamos tu escudo"],
+      "patterns": [
+        "streak-freeze-consumed",
+        "post-hoc-notification"
+      ],
+      "elements": [
+        "toast Usamos tu escudo"
+      ],
       "decision": "Se consume solo, sin preguntar, y se avisa DESPUÉS. Cada pregunta sobre la racha es una oportunidad de que el usuario piense en abandonarla."
     },
     {
@@ -182,8 +298,14 @@
       "flow": "muro-desbloqueo",
       "name": "Muro · noche 7, con cuenta",
       "state": "Estado H · 5 pases · 2 escudos · cuenta creada",
-      "patterns": ["cycle-completion", "max-faucet"],
-      "elements": ["7 lunas", "insignia 2 escudos"],
+      "patterns": [
+        "cycle-completion",
+        "max-faucet"
+      ],
+      "elements": [
+        "7 lunas",
+        "insignia 2 escudos"
+      ],
       "decision": "5 pases es el techo del regalo, contra un apetito observado de 14 episodios por sesión. Queda de pago el 64% del apetito: la fuente ganada no canibaliza, fabrica muros."
     },
     {
@@ -192,9 +314,38 @@
       "flow": "compra",
       "name": "Tienda de monedas",
       "state": "3 paquetes · 5 monedas de saldo",
-      "patterns": ["iap-packs", "value-in-outcome-units", "best-value-tag"],
-      "elements": ["60/300/990 monedas", "etiqueta MEJOR VALOR", "precios"],
+      "patterns": [
+        "iap-packs",
+        "value-in-outcome-units",
+        "best-value-tag"
+      ],
+      "elements": [
+        "60/300/990 monedas",
+        "etiqueta MEJOR VALOR",
+        "precios"
+      ],
       "decision": "Cada paquete se rotula en CAPÍTULOS, no en monedas («300 · 20 capítulos»). Nadie sabe cuánto vale una moneda; todo el mundo sabe cuánto vale un capítulo. Es la misma tesis de legibilidad aplicada a la tienda."
+    },
+    {
+      "id": "13",
+      "file": "screens/13-muro-momento-del-gasto.png",
+      "flow": "muro-desbloqueo",
+      "name": "Muro · el momento del gasto",
+      "state": "Animación de desbloqueo con monedas · 240 ms después del toque",
+      "patterns": [
+        "spend-receipt",
+        "optimistic-counter",
+        "confirm-in-place",
+        "hud-mute-on-sheet"
+      ],
+      "elements": [
+        "CTA convertido en ✓ Listo (cian)",
+        "recibo −15 que sube y se desvanece",
+        "saldo interpolado 90→75",
+        "barra de posición avanzada un capítulo",
+        "chips del HUD apagados"
+      ],
+      "decision": "Ninguna de estas animaciones es decorativa. Si el saldo simplemente cambia de número, el usuario no percibe que pagó — y percibir el gasto es la mitad de entender la economía. El CTA se confirma en el sitio en vez de desaparecer, para que el desbloqueo se sienta como una transacción y no como un salto."
     }
   ],
   "patternLibrary": {
@@ -205,6 +356,10 @@
     "non-blocking-toast": "Confirmación de progreso que no detiene el video. 2,5–3,4 s.",
     "loss-framed-signup": "Registro planteado como seguro sobre algo ya ganado, no como peaje de entrada.",
     "value-in-outcome-units": "Los precios se rotulan en la unidad que el usuario entiende (capítulos), no en la unidad interna (monedas).",
-    "no-blame-copy": "Al romperse una mecánica de constancia, el copy informa y reabre; nunca culpa."
+    "no-blame-copy": "Al romperse una mecánica de constancia, el copy informa y reabre; nunca culpa.",
+    "spend-receipt": "Un «−15» que sube y se desvanece sobre el saldo. Es el recibo: hace visible el gasto que el contador por sí solo esconde.",
+    "optimistic-counter": "El saldo se interpola hacia el valor nuevo en ~620 ms en vez de saltar. El usuario ve bajar su dinero.",
+    "confirm-in-place": "El CTA se convierte en confirmación (✓) durante ~880 ms antes de cerrar, en vez de desaparecer al instante.",
+    "hud-mute-on-sheet": "Con el sheet abierto, los chips de economía del HUD se apagan: la economía ya está completa abajo y duplicarla arriba genera ruido y desincronización durante la animación."
   }
 }

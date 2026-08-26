@@ -34,7 +34,14 @@ reutilizarse en el proyecto: cada entrada trae la decisión que la sostiene, no 
 | <img src="screens/08-muro-F-racha-rota.png" width="150"> | **F · Racha rota** | venía de 5 noches |
 | <img src="screens/09-muro-G-escudo-consumido.png" width="150"> | **G · Escudo consumido** | racha intacta en 6 |
 | <img src="screens/10-muro-H-noche7-ciclo-completo.png" width="150"> | **H · Noche 7, con cuenta** | 5 pases · 2 escudos |
+| <img src="screens/13-muro-momento-del-gasto.png" width="150"> | **El momento del gasto** | 240 ms después del toque |
 
+> **Sobre las animaciones.** Ninguna es decorativa. Si el saldo simplemente cambia de número,
+> el usuario no percibe que pagó — y **percibir el gasto es la mitad de entender la economía**.
+> Por eso: el saldo se interpola, sale un recibo `−15`, el CTA se confirma en el sitio durante
+> 880 ms antes de cerrar, la barra de posición avanza un capítulo, y la luna de la noche nueva
+> entra con un halo que se expande una sola vez. Todas respetan `prefers-reduced-motion`.
+>
 > **Decisión central.** El orden vertical **es** el argumento:
 > `deseo → posición → acción gratuita → promesa de regreso → precio → cita`.
 > El precio va **después** de que el usuario ya sabe que hay una vía sin pagar. Quien compra
@@ -75,6 +82,10 @@ reutilizarse en el proyecto: cada entrada trae la decisión que la sostiene, no 
 | `loss-framed-signup` | Registro como seguro sobre algo ya ganado, no como peaje de entrada. |
 | `value-in-outcome-units` | Precios en la unidad que el usuario entiende (capítulos), no en la interna (monedas). |
 | `no-blame-copy` | Al romperse una mecánica de constancia, informar y reabrir; nunca culpar. |
+| `spend-receipt` | Un «−15» que sube y se desvanece sobre el saldo. Hace visible el gasto que el contador por sí solo esconde. |
+| `optimistic-counter` | El saldo se interpola hacia el valor nuevo (~620 ms) en vez de saltar. El usuario ve bajar su dinero. |
+| `confirm-in-place` | El CTA se convierte en confirmación (✓) antes de cerrar, en vez de desaparecer al instante. |
+| `hud-mute-on-sheet` | Con el sheet abierto, los chips del HUD se apagan: la economía ya está completa abajo. |
 
 ---
 

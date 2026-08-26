@@ -30,7 +30,25 @@ npm run build
 | `src/components/AccountSheet.tsx` | La cuenta como seguro de la racha (noche 3). |
 | `src/components/CoinShop.tsx` | La fuente comprada. Precios rotulados en capítulos. |
 | `src/components/DevPanel.tsx` | Andamiaje del prototipo. **No es parte del producto.** |
+| `src/useTween.ts` | Interpolación de números: el saldo *baja a la vista* al gastarlo. |
 | `src/styles.css` | Tokens reales de Idilio + los derivados de esta intervención. |
+
+## Sobre las animaciones
+
+Ninguna es decorativa. Si el saldo simplemente cambia de número, el usuario no percibe que
+pagó — y **percibir el gasto es la mitad de entender la economía**.
+
+| Animación | Qué hace visible |
+|---|---|
+| Saldo interpolado (~620 ms) | que el dinero *bajó*, no que apareció otro número |
+| Recibo `−15` que sube y se desvanece | el precio exacto de lo que acaba de pasar |
+| CTA que se confirma en el sitio (`✓ Listo`, 880 ms) | que fue una transacción, no un salto |
+| Barra de posición que avanza un capítulo | el progreso que se acaba de comprar |
+| Frame que vuelve del desenfoque con un golpe de luz | que lo pagado se recibió |
+| Luna nueva con halo que se expande una vez | que la racha subió |
+| Chips del HUD que se apagan con el sheet abierto | evita dos cifras desincronizadas en pantalla |
+
+Todas respetan `prefers-reduced-motion`.
 
 ## Alcance declarado
 

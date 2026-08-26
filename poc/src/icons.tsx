@@ -59,3 +59,10 @@ export const Close = ({ s = 16 }) => (
 export const Play = ({ s = 15 }) => (
   <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M7 4.6v14.8L19.5 12z" /></svg>
 );
+
+export const Check = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" aria-hidden>
+    <path d="m5 12.6 4.4 4.4L19 7.4" stroke="currentColor" strokeWidth="2.4"
+          strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);

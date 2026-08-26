@@ -36,6 +36,8 @@ export default function App() {
   const [toast, setToast] = useState<StreakEvent | null>(null);
   const [brokenFrom, setBrokenFrom] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const [nightJustAdvanced, setNightJustAdvanced] = useState(false);
+  const [revealing, setRevealing] = useState(false);
   const [dev, setDev] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -49,6 +51,8 @@ export default function App() {
     setEco(state);
     if (event.kind === 'broken') setBrokenFrom(event.previousNight);
     else setBrokenFrom(null);
+    setNightJustAdvanced(true);
+    window.setTimeout(() => setNightJustAdvanced(false), 1800);
     setToast(event);
     window.setTimeout(() => setToast(null), 3400);
     // La cuenta se ofrece una sola vez, en la noche del hito.
@@ -123,6 +127,10 @@ export default function App() {
     if (!canUnlock(eco, m)) return;
     setEco((s) => unlock(s, ep, m));
     setOverlay(null);
+    // El frame vuelve del desenfoque con un pequeño golpe de luz: el usuario
+    // acaba de pagar algo y tiene que ver que lo recibió.
+    setRevealing(true);
+    window.setTimeout(() => setRevealing(false), 900);
   };
 
   /** Avanza el reloj N noches sin tocar el estado: así se prueban racha y escudo. */
@@ -143,6 +151,8 @@ export default function App() {
     setBrokenFrom(p.brokenFrom ?? null);
     setOverlay(p.overlay);
     setToast(p.toast ?? null);
+    setNightJustAdvanced(!!p.toast);
+    window.setTimeout(() => setNightJustAdvanced(false), 1800);
     setDev(false);
     // Los presets dejan el toast fijo a propósito, para poder inspeccionarlo.
     // En el flujo real dura 3,4 s y no bloquea (ver `credit`).
@@ -155,7 +165,7 @@ export default function App() {
       <div className="phone">
         {/* ── Reproductor ─────────────────────────────────────────────── */}
         <main className="player">
-          <div className={`frame ${overlay ? 'dimmed' : ''}`}>
+          <div className={`frame ${overlay ? 'dimmed' : ''} ${revealing ? 'revealing' : ''}`}>
             <div className="scene" style={{ background: sceneFor(ep) }}>
               <div className="scene-grain" />
               <div className="scene-label">frame de video · POC</div>
@@ -163,12 +173,16 @@ export default function App() {
             <p className="burned-sub">{meta.line}</p>
           </div>
 
-          <div className="hud-top">
+          {/* Con el sheet abierto, los chips se apagan: la economía ya está
+              completa dentro del sheet y duplicarla arriba solo genera ruido —
+              y, durante la animación de gasto, dos cifras que no coinciden. */}
+          <div className={`hud-top ${overlay ? 'is-muted' : ''}`}>
             <span className="wordmark">idilio</span>
             <span className="hud-spacer" />
             {/* I1b · migaja de economía: 2 chips, techo estricto de intrusión */}
             {eco.night > 0 && (
-              <span className="chip chip--streak" title={`Noche ${eco.night}`}>
+              <span className={`chip chip--streak ${nightJustAdvanced ? 'bump' : ''}`}
+                    title={`Noche ${eco.night}`}>
                 <Moon s={13} /> {eco.night}
               </span>
             )}
@@ -239,6 +253,7 @@ export default function App() {
         {overlay === 'unlock' && (
           <UnlockSheet
             ep={ep} state={eco} brokenFrom={brokenFrom}
+            nightJustAdvanced={nightJustAdvanced}
             onUnlock={doUnlock}
             onShop={() => setOverlay('shop')}
             onClose={() => { setEp((e) => Math.max(1, e - 1)); setOverlay(null); }}
