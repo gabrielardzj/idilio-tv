@@ -14,8 +14,8 @@ componentes reales, instancias y variables enlazadas. No son imágenes exportada
 
 | | Pantalla | Qué resuelve |
 |---|---|---|
-| ![Home](01-home.png) | **01 · Home** | El chasis del producto con el catálogo real. Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
-| ![Ficha](02-ficha-de-serie.png) | **02 · Ficha de serie** | El chasis de la app nativa —«Resumen» con el póster y la lista de «Capítulo N»— y encima lo que la ficha real no dice: dónde vas, qué ya viste y qué abre el siguiente capítulo. Si hay pase disponible, lo dice antes que el precio. |
+| ![Home](01-home.png) | **01 · Home** | La estructura del producto tal como es hoy, con el catálogo real. Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
+| ![Ficha](02-ficha-de-serie.png) | **02 · Ficha de serie** | La pantalla de la app nativa tal como es hoy —«Resumen» con el póster y la lista de «Capítulo N»— y encima lo que la ficha real no dice: dónde vas, qué ya viste y qué abre el siguiente capítulo. Si hay pase disponible, lo dice antes que el precio. |
 | ![Player](03-player.png) | **03 · Player** | El core loop. El muro aparece cuando el siguiente episodio está bloqueado, no antes. |
 | ![Acuse](04-acuse-de-la-noche.png) | **04 · El acuse de la noche** | El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Sin botón: la noche se acredita al ver. |
 | ![Pase listo](05-muro-pase-listo.png) | **05 · Muro · el Pase está listo** | El orden que sostiene toda la intervención: historia → posición → gratis → pago → racha. |

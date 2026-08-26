@@ -9,16 +9,16 @@ import { Back, Candado, Check, Chevron, Coin, Pass } from './Icons'
 /**
  * Ficha de serie.
  *
- * El chasis es el de la app nativa, copiado de las capturas del producto: barra
- * «Volver», bloque «Resumen» con el póster a la izquierda y la sinopsis real al
- * lado, y debajo la lista de «Capítulos» —tarjeta gris, «Capítulo N» en violeta,
- * el número como título, la píldora «Interactiva» donde corresponde, candado en
- * los bloqueados y galón a la derecha—. Los colores están muestreados de las
- * capturas: tarjeta #1A1A1A, violeta #6D1EED, píldora #8C3CFD, galón #757575, y
- * los capítulos lejanos atenuados al 44%, que es lo que da el #0A0A0A del
- * producto sobre negro.
+ * La pantalla está copiada de la app nativa tal como es hoy, de las capturas del
+ * producto: barra «Volver», bloque «Resumen» con el póster a la izquierda y la
+ * sinopsis real al lado, y debajo la lista de «Capítulos» —tarjeta gris, con
+ * «Capítulo N» en violeta, el número como título, la píldora «Interactiva»
+ * donde corresponde, candado en los bloqueados y galón a la derecha—. Los
+ * colores están muestreados de las capturas: tarjeta #1A1A1A, violeta #6D1EED,
+ * píldora #8C3CFD, galón #757575, y los capítulos lejanos atenuados al 44%, que
+ * es lo que da el #0A0A0A del producto sobre negro.
  *
- * Sobre ese chasis, y solo eso, va la propuesta. Son tres cosas, y las tres
+ * Sobre esa pantalla, y solo eso, va la propuesta. Son tres cosas, y las tres
  * responden a la misma pregunta que la ficha real deja sin contestar —cuánto
  * falta y cuánto cuesta—:
  *

@@ -434,7 +434,7 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .goal-n { color: var(--gold-300); font-weight: 700; white-space: nowrap; font-size: 12px; }
 
 /* ═══ Home ═════════════════════════════════════════════════════
-   Reproduce el chasis del producto —chip de saldo arriba, rieles,
+   Reproduce la estructura del producto —chip de saldo arriba, rieles,
    tab bar— con las dos diferencias que SON la propuesta: el saldo
    lleva su traducción a episodios, y no hay pestaña "Recompensas". */
 .home { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--ink-1000); }
@@ -507,7 +507,7 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .tab.on { color: var(--tx-hi); }
 
 /* ═══ Ficha de serie ═══════════════════════════════════════════
-   El chasis es el de la app nativa y los valores están muestreados de sus
+   La pantalla es la de la app nativa y los valores están muestreados de sus
    capturas, no elegidos: negro puro de fondo —no el --ink-1000 del resto del
    POC—, tarjeta #1A1A1A, «Capítulo N» en #6D1EED, píldora en #8C3CFD, galón
    en #757575. Por eso acá hay literales donde en el resto del archivo hay
@@ -584,7 +584,7 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .ep-cap { display: flex; align-items: center; gap: 9px; }
 /* El violeta del rótulo es el del producto y da 2.54:1 sobre la tarjeta —por
    debajo del 4.5:1 de WCAG AA—. Se copia igual porque esta pantalla existe para
-   reproducir el chasis real, y corregirlo acá escondería el defecto en vez de
+   reproducir la pantalla real, y corregirlo acá escondería el defecto en vez de
    mostrarlo. Lo que sí se evita es depender de él: el dato del capítulo —el
    número— va en blanco a 17:1, así que nada se lee solo en violeta. */
 .ep-cap b { font-size: 14.5px; font-weight: 700; color: #6D1EED; letter-spacing: -.1px; }

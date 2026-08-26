@@ -13,7 +13,7 @@ import { Coin, Logo } from './Icons'
  * llegar a él como se llega de verdad — eligiendo una serie, viendo un rato y
  * chocando— para que la propuesta se pueda evaluar.
  *
- * Reproduce el chasis del producto real: los pósters de verdad del catálogo
+ * Reproduce la estructura del producto real: los pósters de verdad del catálogo
  * —con su título y su sello quemados en el arte—, rieles de género con el mismo
  * orden que la app (Estrenos → Seguir viendo → Lo más visto → los géneros → la
  * selección) y la flecha de arrastre asomando en el borde derecho.
