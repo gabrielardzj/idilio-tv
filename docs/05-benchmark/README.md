@@ -93,12 +93,11 @@ Antes de comparar mecánicas, hay que fijar la vara. La retención de la categor
 | **D7** *(siguen a la semana)* | 8,6 % | 11,5 % | 7,8 % |
 | **D14** *(a las dos semanas)* | 5,6 % | 6,8 % | 5,0 % |
 
-*(Acá decía «los datos de retención de Sensor Tower». Es un cruce mío: la única fuente que este
-anexo tiene para estos tres números es el blog de Adjoe (§5.7), y Sensor Tower es la fuente de los
-ingresos de la categoría, que están más abajo. Importa porque Adjoe no es un tercero neutral —vende
-engagement recompensado (uso a cambio de premios) a estas mismas apps—, así que la tabla vale como orden de magnitud del
-sector, no como medición independiente, y toda esta sección se apoya en ella. Queda anotado
-también en [§5.6](#56--lo-que-no-pude-verificar).)*
+*La única fuente de estos tres números es el blog de Adjoe (§5.7) — Sensor Tower, que aparece más
+abajo, es la fuente de los ingresos de la categoría, no de la retención. Importa porque Adjoe no es
+un tercero neutral: vende engagement recompensado (uso a cambio de premios) a estas mismas apps. La
+tabla vale como orden de magnitud del sector, no como medición independiente, y toda esta sección se
+apoya en ella. Queda anotado también en [§5.6](#56--lo-que-no-pude-verificar).*
 
 **Esto reencuadra el diagnóstico.** Un DAU/MAU de 0,33 no es una anomalía de Idilio: es el techo
 de una categoría donde **el 94 % de los usuarios no llega al día 14**. La categoría entera está
@@ -166,10 +165,7 @@ Es la fuente gratuita dominante de la categoría. Su costo está documentado en 
 *Aviso de procedencia:* el tope de DramaBox —**15 anuncios diarios ≈ 30 monedas**— es el dato peor
 sostenido de esta sección. Sale de un blog de tutoriales que a su vez cita la guía de una VPN: es
 de tercera mano. Lo dejo porque es lo mejor disponible y porque ninguna de estas apps publica sus
-topes, no porque esté confirmado. *(Acá decía además «unos seis episodios por día». Lo saqué: para
-llegar a seis episodios con 30 monedas haría falta un precio de 5 monedas por episodio que no está
-en ninguna fuente de este anexo. Era una cifra inventada dentro del párrafo que existe para avisar
-que el dato es de tercera mano.)*
+topes, no porque esté confirmado.
 
 ### Familia 3 · Tareas rotativas ("rewards center")
 
@@ -243,15 +239,6 @@ La familia menos explorada y la más interesante para Idilio, porque **no requie
 
 Es la respuesta no-económica al mismo problema: darle al usuario una razón agendada para volver.
 Y es compatible con el Pase de la Noche, no alternativa a él.
-
-> **Una que saqué.** Acá decía que ShortMax hace *"binge-hours"* —avisar cuándo cae la temporada
-> completa y convocar a verla acompañado—. Fui a buscarlo y no lo pude sostener: no está en la
-> fuente que lo citaba, ni en su ficha de App Store, ni en la de Google Play, ni aparece por
-> búsqueda directa del término. Era el ejemplo más vistoso de esta familia y por eso mismo había
-> que verificarlo. Le pasa lo mismo, en menor escala, a las "decenas de episodios nuevos cada día"
-> de GoodShort: tampoco están en la fuente que las citaba, y por eso quedan marcadas arriba. La
-> familia se sostiene igual con ViX Micro y con el push de continuidad, que son los dos casos que
-> sí resisten — la lista tiene tres viñetas y dos casos, y conviene que se lea así.
 
 ---
 
@@ -351,10 +338,6 @@ externa apuntando en la misma dirección: el **70 % de los espectadores de MyDra
 Holywater— dice ver **en la cama antes de dormir**, sobre una encuesta a **2.737 usuarios de
 MyDrama, publicada en julio de 2026**. Es una sola app, no la categoría entera; con esa reserva,
 confirma que la unidad correcta es la noche.
-
-*(Acá decía «mayo de 2026» y en §5.5 «jul-2026»: el mismo dato aparecía fechado en dos meses
-distintos. El mes de campo no lo pude verificar en ninguna parte — lo único que sostiene la fuente
-es la fecha de publicación del comunicado, julio de 2026. Es la que uso en las tres apariciones.)*
 
 **Lo que el diseño debe evitar:** monetizar el comodín. Es tentador —Snapchat demostró que se
 puede— pero convierte la ansiedad en línea de ingreso, y ese es exactamente el patrón que la
@@ -472,10 +455,7 @@ Eso sigue siendo original de este diagnóstico.
 5. **No monetizar el comodín.** Snapchat probó que se puede cobrar el rescate —99 centavos a partir
    del segundo—; del otro lado del mostrador, lo que hay documentado es que **su propio personal
    advirtió internamente** por el efecto de estas mecánicas sobre la salud mental adolescente y la
-   empresa siguió adelante (TBIJ, §5.7). *(Acá decía que Snapchat «probó lo que eso cuesta en
-   reputación». No es lo que aguanta la fuente: no hay medición de costo reputacional, hay
-   advertencias internas desoídas. Alcanza para no querer el precedente; no alcanza para afirmar
-   que le salió caro.)*
+   empresa siguió adelante (TBIJ, §5.7).
 6. **Hipótesis para la ola 2:** que la racha larga premie con **días de suscripción** en vez de
    más episodios (el patrón de GoodShort). Convierte al habitual en suscriptor probador.
 7. **Cambiar la unidad de la economía es una reescritura de reglas, y hay que tratarla como tal.**

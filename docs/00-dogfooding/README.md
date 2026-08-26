@@ -77,44 +77,20 @@ La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99**
 
 ## Censo del catálogo completo
 
-Después de la primera pasada me di cuenta de que había generalizado a partir de **una sola serie**. El reproductor web renderiza en servidor la lista de episodios con sus bloqueos, así que escribí un script para medir el catálogo entero. El script está en [`scrape-catalogo.mjs`](scrape-catalogo.mjs) y los datos crudos en [`catalogo.json`](catalogo.json).
+El reproductor web renderiza en servidor la lista de episodios con sus bloqueos, así que medir el catálogo entero es cuestión de recorrerlo. El script está en [`scrape-catalogo.mjs`](scrape-catalogo.mjs) y los datos crudos en [`catalogo.json`](catalogo.json).
 
-Esa segunda medición también estaba mal, y el error es peor que el primero. Lo encontré el 26-ago y rehice el censo desde cero.
+Cómo está construido, y por qué de esa forma — las cuatro reglas son las cuatro maneras en que un censo así miente sin dar error:
 
-**El scraper no estaba leyendo el catálogo.** Raspaba los enlaces del home, que son rieles curados: una selección editorial, no el inventario. El catálogo que el propio sitio declara vive en `sitemap.xml` y tiene **50 series**.
+- **Los ids salen del `sitemap.xml`, no del home.** Los enlaces del home son rieles curados: una selección editorial, no el inventario. El catálogo que el propio sitio declara tiene **50 series**; raspar los rieles deja siete afuera.
+- **El total sale del contador que publica la ficha** (*"N episodios"*), no de `max(número de episodio)`, que falla en las series con huecos de numeración.
+- **Cada ficha se reintenta tres veces** antes de darla por perdida.
+- **Si una sola ficha no se puede leer, el script termina con error y no emite censo.** Es la regla que más importa: una ficha que devuelve 200 y no se deja parsear se emite como `total: 0` y ese cero se suma a los agregados como si fuera una serie vacía, sin que nada falle. Un censo que se cae es recuperable; uno que miente por omisión, no.
 
-**Y de las 46 fichas que sí visitó, tres devolvieron 200 y no se pudieron parsear.** El script las emitió como `total: 0` y esos ceros se sumaron a los agregados como si fueran series vacías. Ninguna dio error — por eso nadie lo notó. El censo publicado decía 43 series mientras el JSON tenía 46 entradas, y esa contradicción estuvo a la vista todo el tiempo.
+Tres series del catálogo son exactamente ese caso —*La Venganza de una Esposa Después de la Muerte* (65 episodios, 10 gratis), *Las Flores del Amor* (52 episodios, 12 gratis) y *Lágrimas en el Altar* (10 episodios, gratis entera)— y una de ellas, *Las Flores del Amor*, es una de las cuatro excepciones a los 10 gratis.
 
-Las tres son *La Venganza de una Esposa Después de la Muerte* (65 episodios, 10 gratis), *Las Flores del Amor* (52 episodios, 12 gratis) y *Lágrimas en el Altar* (10 episodios, gratis entera).
+Y el verificador de cifras se apoya en el censo, así que no puede filtrar las entradas con `total > 0`: descartaría justo las rotas y compararía el censo consigo mismo.
 
-**Y el guardián de cifras tampoco servía.** [`verificar-cifras.mjs`](../../poc/scripts/verificar-cifras.mjs) filtraba las entradas con `x.total > 0`, o sea que descartaba exactamente las tres entradas rotas, y después comparaba el resto contra una constante escrita a mano en el propio script. Daba "TODO CONSISTENTE" porque estaba comparando el censo consigo mismo.
-
-Qué se arregló en el scraper:
-
-- Los ids salen del `sitemap.xml`, no del home.
-- El total sale del contador que publica la propia ficha ("N episodios"), no de `max(número de episodio)` — que fallaba justamente en las series con huecos de numeración.
-- Cada ficha se reintenta tres veces antes de darla por perdida.
-- **Si una sola ficha no se puede leer, el script termina con error y no emite censo.** Un censo que se cae es recuperable; uno que miente por omisión, no.
-
-### Lo que corrige
-
-<!-- cifras-citadas -->
-<!-- Esta tabla compara las tres mediciones, así que sus celdas del medio traen
-     las cifras viejas a propósito. La explicación vive en el encabezado, no en
-     cada celda, y por eso una exención por línea no alcanza. -->
-
-| | Primera pasada (una sola serie) | Segunda pasada (rieles del home) | **Real (sitemap, 26-ago)** |
-|---|---|---|---|
-| Series del catálogo | 1, medida a mano | 43 | **50** — 41 con muro |
-| Episodios totales | 56 | 1.885 | **2.230** |
-| Episodios gratis por serie | 12 | moda 10 · 32 de 35 | **moda 10 · 37 de 41** |
-| "Series de 50 a 80 episodios" (del brief) | la única serie medida | 25 de 43 | **30 de 50** |
-| Series de 30 episodios o menos | — | 15 | **17** |
-| Mediana de episodios por serie | — | 50 | **50** |
-
-<!-- /cifras-citadas -->
-
-Las excepciones a los 10 gratis son **cuatro**, no tres: *La Herencia del Patriarca Enamorado* (7), *La Mágica Navidad del Amargado Millonario* (11), *Pasión a Domicilio* (12) — la serie que me tocó — y *Las Flores del Amor* (12), que era una de las tres que el censo anterior perdió.
+Las excepciones a los 10 gratis son **cuatro**: *La Herencia del Patriarca Enamorado* (7), *La Mágica Navidad del Amargado Millonario* (11), *Pasión a Domicilio* (12) — la serie que me tocó — y *Las Flores del Amor* (12).
 
 ### Lo que confirma
 

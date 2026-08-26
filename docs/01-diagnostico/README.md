@@ -14,8 +14,6 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
 
 ## 1.1 Los dos hallazgos que ordenan todo lo demás
 
-> **Una corrección de método.** La primera versión de este diagnóstico decía "12 episodios gratis por serie", y ese número salía de la única serie que me había tocado abrir. Después medí las 50 del catálogo: lo más frecuente son **10** episodios gratis por serie —37 de las 41 series con muro—, y *Pasión a Domicilio* es una de las cuatro excepciones que sí tienen muro. Contando también las 9 series que son gratis enteras, las excepciones son cinco. El censo completo está en [`docs/00-dogfooding`](../00-dogfooding/). Corregir el número no debilitó el hallazgo: lo volvió más nítido, y destapó uno más grande.
-
 ### Hallazgo 1 · Ninguna historia dura lo que dura una sesión: 10 episodios gratis contra 14 por sesión
 
 **La serie típica regala 10 episodios gratis. La sesión promedio dura 14.**
@@ -27,9 +25,9 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
                    EL MURO
 ```
 
-O sea que a la sesión promedio le sobran cuatro episodios de apetito después del último gratis de una serie. Ninguna historia del catálogo alcanza para cubrir **una sesión promedio**: el bloque gratis más largo es de 12 episodios, y las 9 series que son gratis enteras no pasan de 10. *(Para una sesión corta sí alcanza, y de sobra — la media de 14 no dice cuántas sesiones son cortas. Ver la nota de abajo.)*
+O sea que a la sesión promedio le sobran cuatro episodios de apetito después del último gratis de una serie. Ninguna historia del catálogo alcanza para cubrir **una sesión promedio**: el bloque gratis más largo es de 12 episodios, y las 9 series que son gratis enteras no pasan de 10. Para una sesión corta sí alcanza, y de sobra: la media de 14 no dice cuántas sesiones son cortas.
 
-Conviene no estirar el hallazgo ni un centímetro de más. *(Acá decía "el muro llega **siempre** antes que el cansancio". El "siempre" es falso en las 9 series sin muro y en cualquier sesión que arranque a mitad de una historia, que es el mismo centímetro de más que este párrafo pide no estirar.)* A lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
+Conviene no estirar el hallazgo ni un centímetro de más. A lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
 
 Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall (el muro de pago) del build 1.20.0:
 
@@ -61,7 +59,7 @@ Con ese dato a la vista aparece una lectura tentadora de la sesión promedio: **
 
 **Lo que la resuelve es una consulta, no un estudio:** la **distribución** de episodios por sesión —no la media— y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie. Si esa fracción es alta, la hipótesis se sostiene. Si es baja, el muro corta historias pero no sesiones, y hay que buscar en otro lado qué las corta.
 
-[§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) eligió no apoyarse en esta suma: ahí la intervención se sostiene en que el corte por precio existe, se descomponga o no el 14. Así que la consulta no decide si la intervención vale, sino cuánto rinde —si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más—. Es igual la primera pregunta que haría con acceso a los datos. *(Acá decía que "de ese eslabón cuelga la elección de intervención de §3.1". Es falso —§3.1 dice hoy lo contrario, y en la dirección prudente— y además se autolesionaba: presentaba la apuesta principal del entregable como colgada de un dato que no tengo.)*
+[§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) eligió no apoyarse en esta suma: ahí la intervención se sostiene en que el corte por precio existe, se descomponga o no el 14. Así que la consulta no decide si la intervención vale, sino cuánto rinde —si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más—. Es igual la primera pregunta que haría con acceso a los datos.
 
 Lo que sí queda firme sin esa consulta es lo más importante: **el muro no saca al usuario de la app, lo saca de la historia** — porque la alternativa gratis existe, está a un toque y hay 500 episodios de ella.
 

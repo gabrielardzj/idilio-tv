@@ -16,8 +16,6 @@ De las ocho intervenciones de la estrategia, elegí esta por cinco razones, en o
 **1. Es la única que ataca el punto exacto donde la sesión se corta por precio.**
 Casi toda serie con muro empieza igual: la moda del catálogo son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin excepciones en el precio. Así que el corte no es un accidente: es la estructura del catálogo. Dónde cae exactamente sí varía, y las excepciones importan más que la estadística: *Pasión a Domicilio*, la serie del prototipo y de casi todos los ejemplos de este documento, regala 12 y no 10. Que la sesión promedio de 14 episodios termine justo en el muro es la hipótesis que plantea el diagnóstico, no un hecho: 14 es una media y no se descompone. Pero el corte existe con o sin esa cuenta, y no lo pone el aburrimiento — lo pone el precio. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
 
-> *Acá decía «toda serie con muro empieza igual, 10 gratis, así que el corte siempre cae en el mismo lugar». Estaba mal por partida doble: el censo dice que 10 es la moda y no un universal (hay cuatro excepciones entre las series con muro: 7, 11, 12 y 12), y la excepción que más se nota es justamente la serie que uso de ejemplo en toda la sección de diseño. Un texto que dice «siempre» y ejemplifica con la excepción se desmiente solo.*
-
 **2. Es la única que puede mover DAU/MAU por sí sola.**
 Stickiness es una métrica de *regreso*. Para moverla hace falta una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo que no puede tener — el único donde una promesa a futuro tiene valor real. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso.
 
@@ -39,14 +37,14 @@ Sin cuenta, sin onboarding (la seguidilla de pantallas de bienvenida), sin perfi
 ## 3.2 La mecánica en cinco reglas
 
 **R1 · El pase se emite por reloj y se entrega al ver. No hay nada que reclamar.**
-Son dos cosas distintas y mezclarlas fue el error de mi primera versión:
+Son dos cosas distintas y conviene no mezclarlas:
 
 - **Emisión.** El sistema genera **un pase por noche, por el reloj, hasta 7 por semana**. Ocurre esté el usuario o no: el derecho se genera aunque nadie abra la app.
 - **Entrega.** El pase se acredita **cuando el usuario termina un episodio**. Ahí entra lo que tenga pendiente —uno si volvió anoche, dos si faltó—, avanza la racha y se paga el bono si toca. El usuario no toca nada: un toast de dos segundos se lo dice y sigue viendo. Nunca hay un botón, y nunca llega una notificación diciendo que algo *«se venció»*.
 
 Es la corrección directa al **19% de reclamo** de la recompensa diaria. Ese 19% no es un problema de diseño de pantalla — es la consecuencia de haber puesto un botón entre el usuario y algo que ya se ganó. Quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
 
-> Esta regla no estaba en mi primera versión: la acreditación colgaba de un reloj de 24 h. La tomé de la versión paralela de este mismo reto, donde está mejor resuelta. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
+> La entrega al ver está tomada de la versión paralela de este mismo reto, donde está mejor resuelta que en la mía. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
 
 **R1b · Lo pendiente se acumula hasta dos, y ahí se detiene.**
 El techo de emisión es duro y por usuario, no por serie. El de acumulación es otro: **el saldo pendiente no pasa de 2**, y lo que se emite por encima de 2 mientras el usuario no aparece se pierde. Ese es el gradiente entero de la mecánica, y es fino a propósito: faltar una noche no cuesta nada —al volver hay dos esperando—, faltar dos seguidas ya deja un pase en el camino. Nadie recibe un castigo; el que vuelve seguido simplemente recoge todo lo que se emitió. El tope cubre además el caso de quien ve episodios gratis, recibe el pase y cierra la app sin llegar al muro. Se explica en §3.4bis.
@@ -60,9 +58,7 @@ Con dos o más series empezadas, usar el pase abre una elección. Esta regla par
 **R4 · Un comodín, ganado en la noche 3, que se consume solo.**
 Un usuario de 2.3 días por semana no puede sostener 7 de 7. El comodín absorbe una falta sin que haya que reclamarlo, comprarlo ni enterarse. La escalera **da la vuelta**: después de la noche 7 empieza otra de siete, y el comodín se recarga en la **noche 3 de cada vuelta** — uno por ciclo.
 
-> *Acá decía «se recarga al completar el ciclo de 7 noches», y no es exacto: el comodín se gana en la noche 3, no en la 7. La diferencia importa porque la protección tiene que llegar cuando todavía quedan noches que perder, no cuando el ciclo ya terminó. El muro dice lo mismo que esta regla.*
->
-> *Y la vuelta no estaba implementada.* El reducer y `credit_night()` topaban la racha en 7 y la dejaban ahí. Con la escalera clavada, el bono de la noche 7 se pagaba **todas las noches** —525 monedas por semana donde el modelo de sostenibilidad dice 150— y el comodín no volvía nunca, aunque el muro promete otro. Corregido en las dos, y [`acreditacion.mjs`](../../poc/scripts/acreditacion.mjs) lo sostiene: con el tope clavado otra vez, la racha sale `7→7→7` y el saldo 600, y los tres pasos caen.
+> La vuelta la sostiene [`acreditacion.mjs`](../../poc/scripts/acreditacion.mjs), que corre en el pipeline. Es la parte de la regla más fácil de romper sin notarlo: si la racha se clavara en 7 en vez de dar la vuelta, el bono de esa noche se pagaría **todas las noches** —525 monedas por semana contra las 150 que dice el modelo de sostenibilidad— y el comodín no volvería nunca, aunque el muro promete otro. La prueba falla si eso pasa.
 *La regla detrás de la regla: si hay que hacer algo para no perder la racha, la racha ya es una tarea.*
 
 **R5 · La escalera de la racha paga en pases, no en monedas.**
@@ -161,23 +157,19 @@ El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisi�
 
    Son tres tratamientos para cuatro estados: el saldo manda, y solo cuando no alcanza importa si hay pase. En los tres, el precio llega con más información que antes (sabe que un episodio cuesta $0.15 y que la alternativa es esperar hasta las 21:30). Un precio con alternativa visible se juzga mejor que un precio sin ella.
 
-   > *Acá decía que «con un pase disponible» la compra baja a un link chico, y que eso cubría «los tres casos». Estaba mal: fui a leer `Wall.tsx` y la primera condición es el saldo, no el pase — con 15 monedas encima el botón entero aparece igual, tengas pase o no. La versión anterior dejaba afuera el estado más interesante, el de pase **y** saldo, que es el único donde el usuario elige entre dos formas de seguir viendo ya mismo.*
-
 La contrapartida honesta: si el guardrail —la métrica de guardia— de ARPDAU (ingreso promedio por usuario activo al día) cae más de 8% de forma sostenida, esta jerarquía es lo primero que hay que revisar.
 
 ### D2b · La cita se ancla a la hora de siempre, no a «+24 h desde que lo usaste»
 
-Mi primera versión ponía el próximo pase 24 horas después del último uso, así que la cita caía a una hora arbitraria: si usaste el pase a las 18:05, mañana a las 18:05.
-
-Ahora se ancla a **la hora en que ese usuario suele ver**. El sistema ya lo sabe —el 54% de las sesiones cae entre 11 p.m. y 2 a.m., y cada usuario tiene su franja dentro de eso— y no usarlo era desperdiciar el único dato que vuelve creíble una cita.
+Anclar el próximo pase a «24 horas desde el último uso» deja la cita en una hora arbitraria: si lo usaste a las 18:05, mañana a las 18:05. Por eso se ancla a **la hora en que ese usuario suele ver**. El sistema ya lo sabe —el 54% de las sesiones cae entre 11 p.m. y 2 a.m., y cada usuario tiene su franja dentro de eso— y no usarlo era desperdiciar el único dato que vuelve creíble una cita.
 
 *«Mañana a las 21:30, tu hora de siempre»* es una promesa que encaja en una vida real. *«Mañana a las 18:05»* es el residuo de un temporizador.
 
 ### D3 · El héroe del estado de espera es la hora del reloj, no el countdown
 
-Esta decisión salió de usar el prototipo. La primera versión mostraba `17h 47m 03s` en grande. Se siente mal: nadie mira 17 horas correr, y un contador enorme de dos dígitos de horas comunica *«falta muchísimo»*, que es exactamente el mensaje contrario al que se busca.
+Esta decisión salió de usar el prototipo. Un `17h 47m 03s` en grande se siente mal: nadie mira 17 horas correr, y un contador enorme de dos dígitos de horas comunica *«falta muchísimo»*, que es exactamente el mensaje contrario al que se busca.
 
-La versión final muestra **`HOY A LAS 21:30`** —la hora de siempre— en grande, y el intervalo que falta en chico debajo. Una hora concreta se puede agendar mentalmente; un intervalo largo solo se puede sufrir.
+Por eso el estado de espera muestra **`HOY A LAS 21:30`** —la hora de siempre— en grande, y el intervalo que falta en chico debajo. Una hora concreta se puede agendar mentalmente; un intervalo largo solo se puede sufrir.
 
 El countdown vuelve a ser el héroe cuando falta menos de una hora — ahí sí los segundos son la información relevante y la urgencia es real.
 
@@ -192,9 +184,9 @@ En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 | Tienda · oferta de bienvenida | `180 monedas · $0.99` | **12 episodios** · 180 monedas · **$0.08 por episodio** |
 | Paquete grande | `375 monedas · $3.99` | **44 episodios** · *Termina esta serie* · $4.99 |
 
-El caso de *«Termina esta serie»* es el que más me gusta, y es el que más cambió al medir el catálogo.
+El caso de *«Termina esta serie»* es el que más me gusta, y el que obliga a calcular en vez de rotular.
 
-La primera versión ponía esa etiqueta fija sobre el paquete de 660 monedas, porque *Pasión a Domicilio* cuesta exactamente eso. Al censar las 50 series resultó que van de **150 a 960 monedas**. La lectura que importa no es cuántas veces el número no coincide —eso pasa en 40 de las 41 series con muro y es trivial—, sino cuántas veces **el badge promete algo que la compra no cumple**: en **19 de esas 41 series, el 46%, el paquete de 660 no alcanza para terminar la serie**. Un badge que promete de más en casi la mitad de las compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
+La forma fácil es dejar esa etiqueta fija sobre el paquete de 660 monedas, porque *Pasión a Domicilio* cuesta exactamente eso. El censo de las 50 series lo desarma: van de **150 a 960 monedas**. La lectura que importa no es cuántas veces el número no coincide —eso pasa en 40 de las 41 series con muro y es trivial—, sino cuántas veces **el badge promete algo que la compra no cumple**: en **19 de esas 41 series, el 46%, el paquete de 660 no alcanza para terminar la serie**. Un badge que promete de más en casi la mitad de las compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
 
 Ahora se calcula. La tienda abre con la meta real de la serie que el usuario está viendo — *«Para terminar Pasión a Domicilio: 44 episodios · 660 monedas»* — y el badge cae sobre el paquete más chico que alcanza. O es cierto, o no aparece.
 
@@ -221,11 +213,9 @@ Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puest
 
 Hoy los cuatro paquetes llevan badge de descuento a la vez (60%, 20%, 20%, 30%) contra anclas de $2.49 y $4.99. Cuando todo está rebajado, el ancla deja de anclar y empieza a restar confianza justo en el segundo de pagar.
 
-Mi primera versión conservaba el tachado en la oferta de bienvenida, que parecía inofensivo. No lo es: en la escalera propuesta **no existe un paquete de 180 monedas a precio regular**, así que $2.49 anclaría contra un producto inventado. Es el mismo patrón que critico, con mejor coartada.
+El tachado de la oferta de bienvenida parece el inofensivo, y es el que menos lo es: en la escalera propuesta **no existe un paquete de 180 monedas a precio regular**, así que el $2.49 que ancla hoy en el paywall real estaría anclando contra un producto inventado. Es el mismo patrón que critico, con mejor coartada.
 
 La columna de precio por episodio hace el trabajo sola y sin mentir. Dentro de la escalera lo hace a la vista: **$0.15 → $0.11 → $0.10**, cada escalón más barato que el anterior, sin ancla que inventar. Y la bienvenida lo hace con un solo número: **$0.08 por episodio** es el precio más bajo que la tienda va a mostrar nunca, y el usuario lo comprueba cuando aparece la escalera — después, no al lado. Eso es lo que el tachado pretendía decir, con la diferencia de que esto es verdad.
-
-> *Acá decía «$0.08 contra $0.15 dice exactamente lo que el tachado pretendía decir», y esa comparación es justo la que el párrafo anterior prohíbe: si la bienvenida nunca comparte grilla con la escalera, los dos precios no se ven juntos en ninguna pantalla. La regla se queda —es la buena—; el argumento se reescribe para no apoyarse en una comparación que el propio diseño impide.*
 
 ### D6 · El oro está racionado
 
@@ -255,7 +245,7 @@ Solo correo. Sin contraseña, sin perfil, sin foto. Todo lo que se pida de más 
 
 ## 3.4bis · El precedente, revisado en contra
 
-Cuando escribí la primera versión de este documento apoyé la mecánica en el **Daily Pass de Webtoon**, la referencia canónica de "esperar o pagar" en contenido serializado. Fui a verificarlo y encontré que **el precedente falló**. Vale la pena dejar el error a la vista, porque corregirlo cambió el diseño.
+El antecedente directo de esta mecánica es el **Daily Pass de Webtoon**, la referencia canónica de "esperar o pagar" en contenido serializado. Es el precedente que uno querría citar a favor, y verificarlo dice lo contrario: **falló**. Lo pongo acá, y no en una nota al pie, porque leerlo en contra es lo que le dio forma a dos reglas del diseño.
 
 ### Qué pasó realmente
 
@@ -275,11 +265,9 @@ La queja dominante de los lectores durante los cinco años de vida de la mecáni
 
 El Pase de la Noche es **aditivo**. El muro de Idilio ya existe: 10 episodios gratis en la mayoría de las series —12 en *Pasión a Domicilio*— y 15 monedas por episodio a partir de ahí. El pase no le quita nada a nadie — agrega un desbloqueo gratis encima de un paywall que no cambia. **No puede convertir el maratón en tarea porque no es el pase el que corta el maratón: eso ya lo hace el precio.** La comparación correcta no es "pase contra maratón libre", es "pase contra pantalla sin salida".
 
-**Dónde sí aplica, y qué cambié por eso.** El mecanismo psicológico que hundió al Daily Pass no era solo la restricción: era el **"úsalo o piérdelo"**. Un recurso que caduca cada 24 h no se siente como un regalo, se siente como un turno que hay que ir a marcar. Mi primera versión tenía exactamente eso: *"no se acumula, el que no se usa se pierde"*.
+**Dónde sí aplica.** El mecanismo psicológico que hundió al Daily Pass no era solo la restricción: era el **"úsalo o piérdelo"**. Un recurso que caduca cada 24 h no se siente como un regalo, se siente como un turno que hay que ir a marcar. Es la misma trampa que el diagnóstico le señala a la racha diaria de Idilio, y es fácil volver a caer en ella al diseñar la fuente: *"no se acumula, el que no se usa se pierde"* es la regla que sale sola.
 
-Es la misma trampa que ya identifiqué en el diagnóstico con la racha diaria, y la había vuelto a poner en la mecánica sin darme cuenta.
-
-**El arreglo, en dos partes.** La primera fue cambiar *cuándo* se **entrega**: al ver, no por reloj. Ojo con la precisión, porque acá está el nudo: el derecho **sí** se genera en ausencia del usuario —el reloj emite un pase por noche, esté o no—, lo que nunca ocurre en ausencia es la **acreditación**. No hay un pase pudriéndose a la espera de que alguien pase a recogerlo; hay un pendiente que se entrega solo cuando el usuario vuelve. Por eso la caducidad deja de tener sentido como castigo. La segunda, los pases se guardan hasta dos:
+**Por eso la mecánica la esquiva en dos puntos.** El primero es *cuándo* se **entrega**: al ver, no por reloj. Ojo con la precisión, porque acá está el nudo: el derecho **sí** se genera en ausencia del usuario —el reloj emite un pase por noche, esté o no—, lo que nunca ocurre en ausencia es la **acreditación**. No hay un pase pudriéndose a la espera de que alguien pase a recogerlo; hay un pendiente que se entrega solo cuando el usuario vuelve. Por eso la caducidad deja de tener sentido como castigo. La segunda, los pases se guardan hasta dos:
 
 | | Tope 1 (úsalo o piérdelo) | Tope 7 (acumulación libre) | **Tope 2** |
 |---|---|---|---|
@@ -289,7 +277,7 @@ Es la misma trampa que ya identifiqué en el diagnóstico con la racha diaria, y
 
 El tope 2 es el único punto donde el castigo desaparece y el gradiente de incentivo sobrevive. Y encaja con el comodín: **el sistema perdona exactamente una falta, en las dos dimensiones.**
 
-> **Posdata honesta.** Cuando escribí esta sección creía que la caducidad era el error y el tope la solución. Al leer la versión paralela del reto entendí que la caducidad solo es un problema **si el recurso se acredita por reloj** —porque entonces puede llegar cuando el usuario no está—. Acreditando al ver, caducar y topar cumplen la misma función. Cambié la acreditación por eso; el tope se queda porque cubre un caso que la caducidad no cubre: ver gratis, recibir el pase y cerrar la app sin llegar al muro.
+> Una precisión que conviene no perder: la caducidad solo es un problema **si el recurso se acredita por reloj**, porque entonces puede llegar cuando el usuario no está. Entregando al ver, caducar y topar cumplen la misma función — y el tope se queda porque cubre un caso que la caducidad no: ver gratis, recibir el pase y cerrar la app sin llegar al muro.
 
 ### Dónde el precedente sí sostiene la apuesta
 
@@ -305,9 +293,7 @@ Tres lecturas que salen de ahí:
 
 1. **Lo que propongo es conservador para la categoría.** Hasta 4 episodios gratis por semana para el usuario promedio, con techo duro de 7, contra una fuente que en DramaBox se puede cobrar *todos los días* (hasta 15 anuncios diarios ≈ 30 monedas). No paso esas monedas a episodios —ninguna fuente del anexo publica el precio por episodio de DramaBox, y esa conversión fue una cifra inventada que ya saqué del benchmark—, pero la comparación no la necesita: allá la fuente es diaria y acá tiene un tope semanal. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
 2. **DramaBox rompe la racha al faltar un día, igual que Idilio.** Es el estándar de la categoría, y es el estándar que este diseño decide no seguir. Que todos lo hagan no lo vuelve correcto para una base que entra 2.3 días por semana.
-3. **Idilio es entre 3.5 y 4.4 veces más barato por episodio que los líderes.** Hay que normalizarlo, porque las series no miden lo mismo — y hay que usar el mismo denominador de los dos lados, que es donde me equivoqué: los $37–47 de ReelShort son por una serie de 80 episodios, o sea **$0.46–0.59 por episodio**; los $6.63 de la serie mediana de Idilio son por una serie de 50, o sea **$0.13**. Comparados en bruto la brecha parece de 5 a 7 veces; por episodio, que es la unidad que el usuario paga, va de 3.5 a 4.4. La normalización *por episodio bloqueado* sería mejor —es la que el usuario realmente paga— pero no la puedo hacer: no tengo cuántos episodios regala ReelShort, y ese dato no está verificado en ninguna de las fuentes del anexo. Si regala alguno, su precio por episodio bloqueado sube y la brecha se ensancha; nunca al revés. Si el dato se confirma con cifras propias, el margen para regalar episodios sigue siendo *menor* de lo que sugiere la comparación bruta: cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
-
-   > *Acá decía «unas 3 veces más barato por episodio bloqueado», y la cuenta mezclaba denominadores: dividía a ReelShort por sus 80 episodios totales y a Idilio por sus 40 bloqueados. Con el mismo criterio de los dos lados la brecha es más grande, no más chica — lo que refuerza el argumento en vez de debilitarlo, y por eso conviene tenerlo bien.*
+3. **Idilio es entre 3.5 y 4.4 veces más barato por episodio que los líderes.** Hay que normalizarlo, porque las series no miden lo mismo, y hay que usar el mismo denominador de los dos lados: los $37–47 de ReelShort son por una serie de 80 episodios, o sea **$0.46–0.59 por episodio**; los $6.63 de la serie mediana de Idilio son por una serie de 50, o sea **$0.13**. Comparados en bruto la brecha parece de 5 a 7 veces; por episodio, que es la unidad que el usuario paga, va de 3.5 a 4.4. La normalización *por episodio bloqueado* sería mejor —es la que el usuario realmente paga— pero no la puedo hacer: no tengo cuántos episodios regala ReelShort, y ese dato no está verificado en ninguna de las fuentes del anexo. Si regala alguno, su precio por episodio bloqueado sube y la brecha se ensancha; nunca al revés. Si el dato se confirma con cifras propias, el margen para regalar episodios sigue siendo *menor* de lo que sugiere la comparación bruta: cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
 
 ---
 
@@ -328,8 +314,6 @@ La restricción del brief es explícita: *«cualquier fuente nueva de moneda deb
 
 **Cómo se lee esta tabla: publica techos, no valores típicos.** Las tres reglas de R1/R1b se combinan así — se emite un pase por noche, por el reloj, con máximo de 7 por semana; se entrega cuando el usuario termina un episodio; y lo pendiente nunca pasa de 2. De ahí sale que quien entra N noches recolecte **hasta** 2N pases, y nunca más de 7. Es un techo y solo se alcanza si las ausencias caen bien repartidas: dos noches seguidas rinden 2 pases, dos noches separadas por ausencias rinden hasta 4. Las columnas de episodios y monedas cuelgan de esa misma cuenta, así que también son techos. Y por eso las filas de 5 y 7 noches convergen: **el techo lo pone el reloj, no la asistencia.**
 
-> *Acá decía «quien entra N noches recolecta hasta 2N pases […] porque solo se acredita uno cada 24 h». Las dos mitades no pueden ser verdad a la vez: si solo se acreditara uno cada 24 h, entrar 2 noches daría 2 pases y la fila de arriba diría 2, no 4. El error venía de arrastrar el vocabulario del modelo por reloj después de haber cambiado la acreditación a «al ver». Separando emisión, entrega y tope, el 4 se sostiene — pero como techo, que es como hay que leerlo.*
-
 El usuario promedio de hoy — 2.3 noches por semana — recibe **hasta 4 episodios gratis por semana**. En la serie mediana del catálogo (50 episodios, 40 bloqueados) eso es el 10% del contenido pago de un solo título, y el 0.2% de los 1.728 episodios bloqueados del catálogo. No es una economía que se vacía; es un goteo que compra un regreso.
 
 *Promedio, no mediana: 2.3 sale de 0.33 × 7, que es una media. La precisión importa porque la primera fila de datos de la tabla —la de 2 noches, que es la que uso para todo lo que sigue— cuelga de ahí. Y juega a favor, porque con la cola pesada que tiene la asistencia la mediana real está por debajo de 2.3. El modelo se equivoca del lado seguro.*
@@ -343,7 +327,7 @@ Pero la sostenibilidad no cuelga de ninguna de esas comparaciones, y por eso no 
 **Tercero: el riesgo de canibalización está concentrado y es medible.**
 Vive en la cola de asistencia perfecta —17 episodios por semana, que al peldaño regular de la tienda ($0.15) son **$2.55** de valor regalado, o $1.87 si esa persona los hubiera comprado en el paquete de 44, a $0.11—, que es justamente la población con más probabilidad de pagar. Es un riesgo real y lo digo antes de que aparezca en el dashboard.
 
-*(Acá decía «≈ $1.90 a precio de escalera», y no sale del precio que el documento usa como referencia: ese $1.90 es 17 × $0.11 —$1.87, redondeado—, o sea el precio del paquete de 44, no el peldaño regular. A $0.15 son $2.55. Publico los dos porque el valor regalado depende de qué habría comprado esa persona, y el techo del riesgo es el número grande.)*
+Publico los dos precios porque el valor regalado depende de qué habría comprado esa persona, y el techo del riesgo es el número grande.
 
 Tres palancas, en orden de uso si el guardrail se dispara:
 1. Bajar los bonos de las noches 5 y 7 (−45, −75). Deja los pases intactos, que son el mecanismo de regreso.

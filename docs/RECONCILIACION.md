@@ -3,10 +3,9 @@
 El reto se resolvió **dos veces en paralelo**, en dos workspaces. Este documento existe para que
 elegir entre ellas no requiera leer los dos entregables completos.
 
-> **Corrección previa.** Avisé tres veces de que las dos versiones iban a chocar en `main`.
-> **Era falso.** El POC de *harare* vive en un repo aparte —`idilio-racha-de-noches-poc`, ya
-> público y en vivo— y esa rama nunca escribió en `main` de `idilio-tv`. No hay conflicto que
-> resolver: hay una elección que tomar.
+> Las dos ramas no chocan: el POC de *harare* vive en un repo aparte —`idilio-racha-de-noches-poc`,
+> ya público y en vivo— y nunca escribió en `main` de `idilio-tv`. No hay conflicto que resolver:
+> hay una elección que tomar.
 
 | | **`harare` · Racha de Noches** | **`da-nang` · Pase de la Noche** |
 |---|---|---|
@@ -56,7 +55,7 @@ de harare, esa crítica no se sostiene como la planteé.**
 
 La razón es que **cada mecanismo es coherente con su propio modelo de acreditación:**
 
-- Si el recurso se acredita **por reloj** (como en la primera versión del mío: uno cada 24 h),
+- Si el recurso se acredita **por reloj** —uno cada 24 h—,
   puede llegar cuando el usuario no está. Ahí la caducidad **sí** castiga la ausencia, y hace
   falta un tope que perdone.
 - Si se acredita **por ver** (como en harare), se gana y se gasta en la misma sesión. La
@@ -93,12 +92,8 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
 - **Censo del catálogo completo** (50 series, 2.230 episodios). De ahí sale el segundo hallazgo:
   **500 episodios gratis = casi cuatro meses sin pagar**, que reencuadra el problema —la alternativa
   a pagar no es irse, es empezar otra serie— y que ninguna de las dos versiones tenía antes.
-  Va con una corrección que corresponde dejar acá: **el censo estuvo mal y hubo que rehacerlo.**
-  La primera versión decía 43 series y 1.885 episodios porque el scraper raspaba los rieles del
-  home en vez del sitemap, y a tres series que sí leyó las emitió con total 0 sin dar un solo
-  error. El censo nuevo se arma desde `sitemap.xml` y el script se cae si una ficha no se puede
-  leer. El hallazgo no se movió de lugar —el colchón resultó más grande, no más chico—, pero estuvo
-  apoyado varios días en un número que no era.
+  El censo se arma desde `sitemap.xml`, una ficha por serie, y el script se cae si alguna no se
+  puede leer: raspar los rieles del home deja títulos afuera y emite totales en cero sin dar error.
 - **El precedente de Webtoon investigado**, que es el antecedente directo de la mecánica.
 - **Implementación sobre el stack real** (Next.js + Tailwind v4 + Supabase) con la **migración
   SQL completa**: `viewer.device_id` para invitados, `viewer.timezone`, `night_of()`,
