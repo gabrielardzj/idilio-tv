@@ -111,7 +111,12 @@ Eso cambia el significado de casi todas las demás señales:
 
 **La conclusión que ordena la estrategia:**
 
-> El muro no falla por ser caro. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante los casi cuatro meses que le dura el colchón. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
+> El muro no falla por caro, y eso hay que decirlo porque bajar el precio es la primera palanca
+> que se toca cuando un muro no convierte. Acá es la que menos margen tiene: el episodio sale
+> entre **$ 208 y $ 540** según el paquete ([F3](#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie)),
+> varias veces por debajo de lo que cobran los líderes de la categoría
+> ([§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra)). Lo que está mal no es el
+> número: es dónde aparece y contra qué compite. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante los casi cuatro meses que le dura el colchón. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
 
 **Por eso el objetivo de negocio es stickiness y no conversión.** Y por eso la respuesta correcta no es recortar los episodios gratis —eso frena la adquisición y ataca la métrica equivocada—, sino **darle al usuario una razón para quedarse en una historia en vez de saltar a la siguiente.** De ahí sale la intervención que se desarrolla en [§3](../03-diseno/).
 
