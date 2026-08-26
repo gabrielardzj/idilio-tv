@@ -62,7 +62,7 @@ Por eso la respuesta no es recortar los gratis (eso ataca conversión, no sticki
 
 ## La propuesta, en cinco reglas
 
-1. **Un Pase de la Noche cada 24 h**, acumulable hasta dos. Abre un episodio gratis. Techo duro por usuario: 7 por semana.
+1. **No hay nada que reclamar.** El Pase se acredita al terminar un episodio, una vez por noche, y avanza la racha. Un toast de dos segundos lo dice y el usuario sigue viendo. Se guardan hasta dos.
 2. **El usuario elige a qué serie se lo da.** Un recurso que se asigna se entiende; uno que se recibe, no.
 3. **La noche corre de 5 a.m. a 5 a.m.**, no de medianoche a medianoche. 54% de las sesiones son entre 11 p.m. y 2 a.m.
 4. **Un comodín que se consume solo.** Si hay que hacer algo para no perder la racha, la racha ya es una tarea.

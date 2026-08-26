@@ -49,9 +49,16 @@ resuelve, y que en un prototipo no se ve:
 - **`night_of()`** — la definición de "noche" (5 a.m. a 5 a.m.) existe una sola vez, y el
   cliente usa la misma en `nocheDe()`. Si divergieran, el cliente y la base discreparían
   sobre si la racha sigue viva.
-- **`use_pass()`** — una transacción atómica: descuenta el pase, avanza la racha, consume el
-  comodín, paga el bono y registra el desbloqueo. `security definer`, porque el cliente no
-  escribe estas tablas.
+- **`credit_night()`** — la función con más peso del esquema. Se llama **al terminar un episodio**,
+  no con un cron: avanza la racha, entrega el pase, consume el comodín si hubo hueco, paga el bono
+  y fija la cita de mañana. Idempotente dentro de la misma noche, así que llamarla en cada episodio
+  es seguro. *Mientras la acreditación cuelgue de un botón —o de un reloj que puede sonar cuando el
+  usuario no está— la adopción de la fuente se queda en el 19% de hoy.*
+- **`use_pass()`** — descuenta el pase y registra el desbloqueo, y **nada más**: la racha ya avanzó
+  al ver. `security definer`, porque el cliente no escribe estas tablas.
+- **`viewer.habitual_hour`** — la hora en que ese usuario suele ver, derivada de su historial.
+  Es lo que ancla la cita. «+24 h desde el último uso» la deja caer a una hora arbitraria, y una
+  cita a una hora arbitraria no es una cita.
 - **`episode_unlock.source`** — separa `free` / `pass` / `coins`. Sin esa columna no se puede
   medir canibalización, que es el guardrail de toda la intervención.
 

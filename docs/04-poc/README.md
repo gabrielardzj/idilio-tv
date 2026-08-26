@@ -68,7 +68,9 @@ al entregable.
 
 Las tres series del POC son reales y están elegidas para cubrir las tres estructuras que existen en el catálogo: *La Enfermera Infiltrada* con 10 gratis (la moda), *Pasión a Domicilio* con 12 (la excepción por arriba) y *La Herencia del Patriarca Enamorado* con 7 (la excepción por abajo).
 
-## 4.4 Cuatro cosas que cambiaron por verificar y por usar el prototipo
+## 4.4 Cinco cosas que cambiaron por verificar y por usar el prototipo
+
+**El Pase dejó de colgar de un reloj.** Acreditaba uno cada 24 h. Al leer la versión paralela del reto vi que acreditar **al terminar un episodio** es mejor: la adopción de la fuente pasa a ~100% por construcción, en vez de depender de que el usuario llegue al muro. Es la corrección directa al 19% de reclamo. Y como acreditar en silencio dejaría el metajuego invisible —el defecto que este trabajo corrige—, el acuse es un toast de dos segundos: *«Noche 3 · +1 pase · +30 monedas»*.
 
 **El countdown gigante estaba mal.** La primera versión mostraba `17h 47m 03s` como héroe. Al usarlo, comunica *«falta muchísimo»* — el mensaje opuesto al buscado. Se reemplazó por la hora del reloj (`HOY A LAS 18:05`) con el intervalo debajo. El countdown vuelve a ser héroe solo cuando falta menos de una hora.
 

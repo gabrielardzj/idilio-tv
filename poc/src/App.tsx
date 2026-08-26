@@ -6,7 +6,7 @@ import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './comp
 import { Coin, Logo } from './components/Icons'
 import { SERIES, type SeriesId } from './lib/content'
 import { CATALOGO, EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
-import { initialState, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
+import { initialState, proximaCita, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
 
 const T0 = 1_756_099_020_000 // reloj fijo a las 00:17: el POC vive en la franja de las 11pm-2am
 
@@ -35,7 +35,7 @@ export default function App() {
 
   useEffect(() => {
     if (!state.toast) return
-    const id = setTimeout(() => dispatch({ t: 'toast', msg: null }), 2000)
+    const id = setTimeout(() => dispatch({ t: 'toast', msg: null }), 2600)
     return () => clearTimeout(id)
   }, [state.toast])
 
@@ -155,7 +155,7 @@ function Director({
           1 · Episodio gratis (ep. 12)
         </button>
         <button className={sheetKind === 'unlock' && state.passes === 1 ? 'on' : ''}
-          onClick={() => go({ passes: 1, passNextAt: state.now + PASS_COOLDOWN_MS, balance: 0, nights: 2, shields: 0, shieldJustUsed: false, streakJustBroke: false }, { kind: 'unlock' })}>
+          onClick={() => go({ passes: 1, passNextAt: null, balance: 0, nights: 2, shields: 0, shieldJustUsed: false, streakJustBroke: false }, { kind: 'unlock' })}>
           2 · El muro · un pase disponible
         </button>
         <button className={sheetKind === 'unlock' && state.passes === 2 ? 'on' : ''}
@@ -171,11 +171,11 @@ function Director({
           4 · Desbloqueo + racha (usa el botón dorado)
         </button>
         <button className={sheetKind === 'unlock' && state.passes === 0 && state.balance < EPISODE_COST && !state.streakJustBroke ? 'on' : ''}
-          onClick={() => go({ passes: 0, passNextAt: state.now + 17 * 3600_000 + 2_880_000, balance: 0, nights: 3, remind: false, streakJustBroke: false }, { kind: 'unlock' })}>
+          onClick={() => go({ passes: 0, passNextAt: proximaCita(state.now), balance: 0, nights: 3, shields: 1, remind: false, streakJustBroke: false }, { kind: 'unlock' })}>
           5 · El muro · pase gastado (la cita)
         </button>
         <button className={sheetKind === 'unlock' && state.balance >= EPISODE_COST ? 'on' : ''}
-          onClick={() => go({ passes: 0, passNextAt: state.now + 17 * 3600_000, balance: 45, nights: 3, streakJustBroke: false }, { kind: 'unlock' })}>
+          onClick={() => go({ passes: 0, passNextAt: proximaCita(state.now), balance: 45, nights: 3, shields: 1, streakJustBroke: false }, { kind: 'unlock' })}>
           6 · El muro · con saldo
         </button>
         <button className={sheetKind === 'store' ? 'on' : ''} onClick={() => go({ balance: 0 }, { kind: 'store' })}>
@@ -212,7 +212,7 @@ function Director({
         <h2>Estado</h2>
         <div className="note" style={{ lineHeight: 1.75 }}>
           Saldo <code>{state.balance}</code> · {episodesLabel(state.balance)}<br />
-          Racha <code>{state.nights}</code> noches · comodines <code>{state.shields}</code><br />
+          Racha <code>{state.nights}</code> noche{state.nights === 1 ? "" : "s"} · comodines <code>{state.shields}</code><br />
           Pases <code>{state.passes}/{MAX_PASSES}</code> · cuenta <code>{state.hasAccount ? 'sí' : 'invitado'}</code><br />
           <span style={{ opacity: .7 }}>estado: <code>{stateName(state, sheet)}</code></span>
         </div>

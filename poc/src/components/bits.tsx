@@ -42,7 +42,7 @@ export function NextPass({ readyAt, now }: { readyAt: number; now: number }) {
           <span className="n">{String(m).padStart(2, '0')}</span><span className="u">m</span>
           <span className="n">{String(sec).padStart(2, '0')}</span><span className="u">s</span>
         </div>
-        <p style={{ fontSize: 13, color: 'var(--tx-mid)', marginTop: -8 }}>Ya casi. Listo a las {time}.</p>
+        <p style={{ fontSize: 13, color: 'var(--tx-mid)', marginTop: -8 }}>Ya casi. A las {time}, tu hora de siempre.</p>
       </div>
     )
   }
@@ -53,8 +53,8 @@ export function NextPass({ readyAt, now }: { readyAt: number; now: number }) {
         <span className="when-day">{when} a las</span>
         <span className="when-time">{time}</span>
       </div>
-      <p style={{ fontSize: 12.5, color: 'var(--tx-lo)', marginTop: 4, fontVariantNumeric: 'tabular-nums' }}>
-        faltan {h} h {String(m).padStart(2, '0')} m
+      <p style={{ fontSize: 12.5, color: 'var(--tx-lo)', marginTop: 4 }}>
+        tu hora de siempre · faltan {h} h {String(m).padStart(2, '0')} m
       </p>
     </div>
   )

@@ -36,10 +36,15 @@ Sin cuenta, sin onboarding, sin perfil. El estado vive en el dispositivo y se of
 
 ## 3.2 La mecánica en cinco reglas
 
-**R1 · Un Pase de la Noche cada 24 horas, y se guardan hasta dos.**
-Abre un episodio, cualquiera, gratis. El techo de emisión es duro y por usuario, no por serie: 1 pase cada 24 h, máximo 7 por semana.
+**R1 · No hay nada que reclamar. El Pase se acredita al terminar un episodio.**
+Una vez por noche, al terminar el primer episodio, se acredita el Pase, avanza la racha y se paga el bono si toca. El usuario no toca nada: un toast de dos segundos se lo dice y sigue viendo.
 
-El tope de acumulación en **2** es una decisión importante y la explico aparte en §3.4bis, porque salió de revisar críticamente el precedente más citado de esta mecánica.
+Es la corrección directa al **19% de reclamo** de la recompensa diaria. Ese 19% no es un problema de diseño de pantalla — es la consecuencia de haber puesto un botón entre el usuario y algo que ya se ganó. Quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
+
+> Esta regla no estaba en mi primera versión: la acreditación colgaba de un reloj de 24 h. La tomé de la versión paralela de este mismo reto, donde está mejor resuelta. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
+
+**R1b · Los pases se guardan hasta dos.**
+El techo de emisión es duro y por usuario, no por serie: uno por noche, máximo 7 por semana. El tope de acumulación en **2** cubre el caso de quien ve episodios gratis, recibe el pase y cierra la app sin llegar al muro. Se explica en §3.4bis.
 
 **R2 · El usuario elige a qué serie se lo da.**
 Con dos o más series empezadas, usar el pase abre una elección. Esta regla parece un detalle y es el centro pedagógico de todo: obliga a razonar sobre un recurso escaso. Un recurso que se asigna se entiende; uno que se recibe, no.
@@ -52,6 +57,7 @@ Un usuario de 2.3 días por semana no puede sostener 7 de 7. El comodín absorbe
 *La regla detrás de la regla: si hay que hacer algo para no perder la racha, la racha ya es una tarea.*
 
 **R5 · La escalera de la racha paga en pases, no en monedas.**
+Todo se acredita solo, al ver. La tabla es lo que llega cada noche sin pedir nada:
 
 | Noche | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |---|---|---|---|---|---|---|---|
@@ -140,6 +146,14 @@ El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisi�
 2. El usuario que sí iba a pagar sigue pagando: el botón está ahí, dice *«No quiero esperar»*, y llega con más información que antes (sabe que un episodio cuesta $0.15 y que la alternativa es esperar hasta las 18:05). Un precio con alternativa visible se juzga mejor que un precio sin ella.
 
 La contrapartida honesta: si el guardrail de ARPDAU cae más de 8% de forma sostenida, esta jerarquía es lo primero que hay que revisar.
+
+### D2b · La cita se ancla a la hora de siempre, no a «+24 h desde que lo usaste»
+
+Mi primera versión ponía el próximo pase 24 horas después del último uso, así que la cita caía a una hora arbitraria: si usaste el pase a las 18:05, mañana a las 18:05.
+
+Ahora se ancla a **la hora en que ese usuario suele ver**. El sistema ya lo sabe —el 54% de las sesiones cae entre 11 p.m. y 2 a.m., y cada usuario tiene su franja dentro de eso— y no usarlo era desperdiciar el único dato que vuelve creíble una cita.
+
+*«Mañana a las 21:30, tu hora de siempre»* es una promesa que encaja en una vida real. *«Mañana a las 18:05»* es el residuo de un temporizador.
 
 ### D3 · El héroe del estado de espera es la hora del reloj, no el countdown
 
@@ -241,7 +255,7 @@ El Pase de la Noche es **aditivo**. El muro de Idilio ya existe: 10 gratis y 15 
 
 Es la misma trampa que ya identifiqué en el diagnóstico con la racha diaria, y la había vuelto a poner en la mecánica sin darme cuenta.
 
-**El arreglo: los pases se guardan hasta dos.**
+**El arreglo, en dos partes.** La primera fue cambiar *cuándo* se acredita: al ver, no por reloj — con lo que el recurso nunca llega en ausencia del usuario y la caducidad deja de tener sentido como castigo. La segunda, los pases se guardan hasta dos:
 
 | | Tope 1 (úsalo o piérdelo) | Tope 7 (acumulación libre) | **Tope 2** |
 |---|---|---|---|
@@ -250,6 +264,8 @@ Es la misma trampa que ya identifiqué en el diagnóstico con la racha diaria, y
 | Se siente como | Turno que marcar | Buzón que vaciar | Algo que te espera |
 
 El tope 2 es el único punto donde el castigo desaparece y el gradiente de incentivo sobrevive. Y encaja con el comodín: **el sistema perdona exactamente una falta, en las dos dimensiones.**
+
+> **Posdata honesta.** Cuando escribí esta sección creía que la caducidad era el error y el tope la solución. Al leer la versión paralela del reto entendí que la caducidad solo es un problema **si el recurso se acredita por reloj** —porque entonces puede llegar cuando el usuario no está—. Acreditando al ver, caducar y topar cumplen la misma función. Cambié la acreditación por eso; el tope se queda porque cubre un caso que la caducidad no cubre: ver gratis, recibir el pase y cerrar la app sin llegar al muro.
 
 ### Dónde el precedente sí sostiene la apuesta
 

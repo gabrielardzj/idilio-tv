@@ -1,4 +1,4 @@
-import { MAX_PASSES, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS } from '@/lib/economy'
+import { HORA_HABITUAL, NIGHT_BOUNDARY_HOUR } from '@/lib/economy'
 import type { EstadoPase } from '@/lib/supabase/queries'
 
 /**
@@ -25,18 +25,19 @@ export interface VistaDelPase {
 }
 
 /**
- * Acreditación perezosa: en vez de un cron por usuario, se calcula cuántos
- * pases le tocaban desde `nextPassAt` cada vez que se lee el estado.
- * Es lo mismo que hace accrue_passes() en Postgres, replicado para el fixture.
+ * Resuelve la vista del pase.
+ *
+ * Ojo con lo que NO hace: acreditar. El pase se acredita al terminar un
+ * episodio —`use_pass()` y el trigger de reproducción en schema.sql—, no con
+ * un reloj. La diferencia es la que lleva la adopción de la fuente de 19% a
+ * ~100%: no hay botón entre el usuario y algo que ya se ganó.
+ *
+ * `nextPassAt` sigue existiendo, pero solo como **la cita**: la hora de mañana
+ * en que este usuario suele ver. No es un temporizador que dispara nada.
  */
 export function resolverPase(estado: EstadoPase, ahora = estado.serverNow): VistaDelPase {
-  let passes = estado.passes
-  let next = estado.nextPassAt ? Date.parse(estado.nextPassAt) : null
-
-  while (next !== null && passes < MAX_PASSES && ahora >= next) {
-    passes += 1
-    next = passes < MAX_PASSES ? next + PASS_COOLDOWN_MS : null
-  }
+  const passes = estado.passes
+  const next = estado.nextPassAt ? Date.parse(estado.nextPassAt) : null
 
   return {
     passes,
@@ -86,4 +87,20 @@ export function nocheDe(ms: number, tz: string): string {
   const local = new Date(`${p.year}-${p.month}-${p.day}T00:00:00Z`)
   if (Number(p.hour) < NIGHT_BOUNDARY_HOUR) local.setUTCDate(local.getUTCDate() - 1)
   return local.toISOString().slice(0, 10)
+}
+
+
+/**
+ * La cita: mañana a la hora en que este usuario suele ver.
+ *
+ * En producción sale de su historial de reproducción; aquí es una constante.
+ * Anclar la cita a «+24 h desde el último uso» la deja caer a una hora
+ * arbitraria, y una cita a una hora arbitraria no es una cita.
+ */
+export function proximaCita(now: number): number {
+  const d = new Date(now)
+  const h = Math.floor(HORA_HABITUAL)
+  d.setHours(h, Math.round((HORA_HABITUAL - h) * 60), 0, 0)
+  if (d.getTime() <= now) d.setDate(d.getDate() + 1)
+  return d.getTime()
 }

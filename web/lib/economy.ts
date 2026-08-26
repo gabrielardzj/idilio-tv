@@ -67,9 +67,30 @@ export const STREAK: NightReward[] = [
   { night: 7, pass: true, coins: 75, shield: false },
 ]
 
-/** PROPUESTA · techo duro de emisión: un Pase cada 24 h por usuario,
- *  no por serie. Es la restricción que sostiene la economía. */
+/** PROPUESTA · techo duro de emisión: un Pase por noche por usuario, no por
+ *  serie. Es la restricción que sostiene la economía.
+ *
+ *  Se acredita **al terminar el primer episodio de la noche**, no con un reloj
+ *  de 24 h. La diferencia importa más de lo que parece:
+ *
+ *  - Por reloj, el pase puede llegar cuando el usuario no está, y hay que
+ *    decidir qué hacer con el pase que nadie recogió.
+ *  - Por ver, llega siempre con el usuario presente, y la adopción de la fuente
+ *    es del ~100% **por construcción**, no por diseño de pantalla. Es la
+ *    corrección directa al 19% de reclamo de la recompensa diaria: no se
+ *    reclama nada, se acredita solo.
+ *
+ *  El cooldown sigue existiendo como techo de emisión y como reloj de la cita,
+ *  pero ya no es lo que dispara la acreditación. */
 export const PASS_COOLDOWN_MS = 24 * 60 * 60 * 1000
+
+/** PROPUESTA · hora habitual del usuario, para anclar la cita.
+ *
+ *  «Tu próximo pase mañana a las 21:30» —a la hora en que suele ver— es una
+ *  cita mucho mejor que «dentro de 24 h desde que lo usaste», que cae a una
+ *  hora arbitraria. El 54% de las sesiones son entre 11pm y 2am: el sistema ya
+ *  sabe cuándo vuelve cada quien, y debería usarlo. */
+export const HORA_HABITUAL = 21.5
 
 /** PROPUESTA · máximo de comodines acumulables */
 export const MAX_SHIELDS = 1

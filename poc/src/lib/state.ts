@@ -1,4 +1,4 @@
-import { EPISODE_COST, MAX_PASSES, MAX_SHIELDS, PASS_COOLDOWN_MS, STREAK } from './economy'
+import { EPISODE_COST, HORA_HABITUAL, MAX_PASSES, MAX_SHIELDS, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS, STREAK } from './economy'
 import { SERIES, type SeriesId } from './content'
 
 export type Sheet =
@@ -17,6 +17,7 @@ export interface State {
   shieldJustUsed: boolean
   streakJustBroke: boolean
   passes: number                  // 0..MAX_PASSES — se acumulan, no se pierden
+  lastNight: string | null        // última noche en que se acreditó (YYYY-MM-DD)
   passNextAt: number | null       // epoch ms del próximo pase; null si está al tope
   now: number
   seriesId: SeriesId
@@ -35,7 +36,8 @@ export const initialState = (now: number): State => ({
   shieldJustUsed: false,
   streakJustBroke: false,
   passes: 1,
-  passNextAt: now + PASS_COOLDOWN_MS,
+  lastNight: nocheDe(now),
+  passNextAt: null,
   now,
   seriesId: 'pasion',
   unlocked: { pasion: 12, herencia: 18, enfermera: 12 },
@@ -68,21 +70,10 @@ export interface Ctx { state: State; sheet: Sheet }
 export function reduce(ctx: Ctx, a: Action): Ctx {
   const s = ctx.state
   switch (a.t) {
-    case 'tick': {
-      const now = a.now
-      // Los pases se acreditan solos, uno cada 24 h, hasta el tope.
-      if (s.passes < MAX_PASSES && s.passNextAt && now >= s.passNextAt) {
-        const passes = s.passes + 1
-        return {
-          ...ctx,
-          state: {
-            ...s, now, passes,
-            passNextAt: passes < MAX_PASSES ? s.passNextAt + PASS_COOLDOWN_MS : null,
-          },
-        }
-      }
-      return { ...ctx, state: { ...s, now } }
-    }
+    case 'tick':
+      // El reloj ya no acredita nada: solo mueve la hora. La acreditación
+      // ocurre al terminar un episodio, en 'nextEpisode'.
+      return { ...ctx, state: { ...s, now: a.now } }
 
     case 'open':
       return { ...ctx, sheet: a.sheet }
@@ -98,25 +89,19 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       }
 
     case 'claimPass': {
+      // Gastar el pase ya no avanza la racha: eso pasó al terminar el episodio.
+      // Aquí solo se descuenta el pase y se abre el episodio.
       if (s.passes < 1) return ctx
-      const nights = Math.min(s.nights + 1, 7)
-      const reward = STREAK[nights - 1]
-      const shields = Math.min(s.shields + (reward.shield ? 1 : 0), MAX_SHIELDS)
       const targetEp = s.unlocked[a.series] + 1
+      const passes = s.passes - 1
       return {
         state: {
           ...s,
-          passes: s.passes - 1,
-          // si estaba al tope, el reloj del siguiente pase arranca ahora
-          passNextAt: s.passNextAt ?? s.now + PASS_COOLDOWN_MS,
-          nights,
-          shields,
-          shieldJustUsed: false,
-          streakJustBroke: false,
-          balance: s.balance + reward.coins,
+          passes,
+          passNextAt: passes < MAX_PASSES ? proximaCita(s.now) : null,
           seriesId: a.series,
           episode: targetEp,
-          unlocked: { ...s.unlocked, [a.series]: targetEp }
+          unlocked: { ...s.unlocked, [a.series]: targetEp },
         },
         sheet: { kind: 'unlocked', via: 'pass', ep: targetEp },
       }
@@ -152,9 +137,15 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       return { state: { ...s, accountAsked: true }, sheet: { kind: 'none' } }
 
     case 'nextEpisode': {
-      const next = s.episode + 1
-      if (next > s.unlocked[s.seriesId]) return reduce(ctx, { t: 'hitWall', ep: next })
-      return { ...ctx, sheet: { kind: 'none' }, state: { ...s, episode: next } }
+      // Terminar un episodio es lo que acredita la noche. No hay nada que
+      // reclamar: la fuente deja de ser un destino y pasa a ser una consecuencia
+      // de lo que el usuario ya vino a hacer.
+      const acreditado = acreditarNoche(s)
+      const next = acreditado.episode + 1
+      if (next > acreditado.unlocked[acreditado.seriesId]) {
+        return reduce({ ...ctx, state: acreditado }, { t: 'hitWall', ep: next })
+      }
+      return { ...ctx, sheet: { kind: 'none' }, state: { ...acreditado, episode: next } }
     }
 
     case 'switchSeries':
@@ -164,17 +155,12 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       return { ...ctx, state: { ...s, ...a.patch } }
 
     case 'devNextNight': {
-      // Avanza el reloj 24 h. Si no volvió, se consume el comodín (o se rompe la racha).
+      // Avanza el reloj una noche. Si volvió, se acredita al ver; si no, la
+      // noche siguiente encuentra un hueco y se consume el comodín.
       const now = s.now + PASS_COOLDOWN_MS + 1000
-      const passes = Math.min(s.passes + 1, MAX_PASSES)
-      const clock = { now, passes, passNextAt: passes < MAX_PASSES ? now + PASS_COOLDOWN_MS : null }
-      if (a.attended) {
-        return { ...ctx, state: { ...s, ...clock, shieldJustUsed: false, streakJustBroke: false } }
-      }
-      if (s.shields > 0) {
-        return { ...ctx, state: { ...s, ...clock, shields: s.shields - 1, shieldJustUsed: true, streakJustBroke: false } }
-      }
-      return { ...ctx, state: { ...s, ...clock, nights: 0, shieldJustUsed: false, streakJustBroke: true } }
+      if (a.attended) return { ...ctx, state: acreditarNoche({ ...s, now }) }
+      const saltada = { ...s, now, lastNight: nocheDe(now - PASS_COOLDOWN_MS * 2) }
+      return { ...ctx, state: acreditarNoche(saltada) }
     }
 
     case 'toast':
@@ -198,6 +184,78 @@ export function stateName(s: State, sheet: Sheet): string {
     case 'account': return 'account-prompt'
     case 'unlocked': return `unlocked-via-${sheet.via}`
     default: return 'player-free'
+  }
+}
+
+/**
+ * La noche del usuario, en su zona horaria, con corte a las 5 a.m.
+ * El 54% de las sesiones caen entre 11pm y 2am: con corte a medianoche, ver el
+ * martes a las 23:40 y el miércoles a las 00:20 contaría como una sola visita.
+ */
+export function nocheDe(ms: number): string {
+  const d = new Date(ms)
+  if (d.getHours() < NIGHT_BOUNDARY_HOUR) d.setDate(d.getDate() - 1)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+/** La cita: mañana a la hora en que este usuario suele ver, no +24 h desde ahora. */
+export function proximaCita(now: number): number {
+  const d = new Date(now)
+  const h = Math.floor(HORA_HABITUAL)
+  const m = Math.round((HORA_HABITUAL - h) * 60)
+  d.setHours(h, m, 0, 0)
+  if (d.getTime() <= now) d.setDate(d.getDate() + 1)
+  return d.getTime()
+}
+
+/**
+ * Acredita la noche si es nueva: avanza la racha, entrega el pase y paga el
+ * bono. Si se saltó noches, consume el comodín; si no queda, la racha se corta.
+ * Es idempotente dentro de una misma noche.
+ */
+function acreditarNoche(s: State): State {
+  const noche = nocheDe(s.now)
+  if (s.lastNight === noche) return s
+
+  const consecutiva = s.lastNight === nocheDe(s.now - PASS_COOLDOWN_MS)
+  let nights = s.nights
+  let shields = s.shields
+  let shieldJustUsed = false
+  let streakJustBroke = false
+
+  if (consecutiva || s.lastNight === null) {
+    nights = Math.min(nights + 1, 7)
+  } else if (shields > 0) {
+    shields -= 1
+    shieldJustUsed = true
+    nights = Math.min(nights + 1, 7)
+  } else {
+    nights = 1
+    streakJustBroke = true
+  }
+
+  const reward = STREAK[nights - 1]
+  const passes = Math.min(s.passes + 1, MAX_PASSES)
+
+  // Acreditar en silencio dejaría el metajuego invisible — que es exactamente
+  // el defecto que este diseño corrige. El acuse es un toast de 2 s en el
+  // player: entera sin interrumpir y sin pedir nada.
+  const partes = [`Noche ${nights}`, passes > s.passes ? '+1 pase' : null,
+                  reward.coins ? `+${reward.coins} monedas` : null].filter(Boolean)
+
+  return {
+    ...s,
+    lastNight: noche,
+    toast: streakJustBroke ? `Empiezas de nuevo · ${partes.join(' · ')}`
+         : shieldJustUsed  ? `Tu comodín te cubrió · ${partes.join(' · ')}`
+         : partes.join(' · '),
+    nights,
+    shields: Math.min(shields + (reward.shield ? 1 : 0), MAX_SHIELDS),
+    shieldJustUsed,
+    streakJustBroke,
+    passes,
+    passNextAt: passes < MAX_PASSES ? proximaCita(s.now) : null,
+    balance: s.balance + reward.coins,
   }
 }
 

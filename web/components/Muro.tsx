@@ -162,7 +162,7 @@ function Cita({ pase, episodio }: { pase: VistaDelPase; episodio: number }) {
           <p className="text-[42px] leading-[1.05] font-bold tracking-tighter tabular-nums" role="timer">
             {formatMS(restante!)}
           </p>
-          <p className="mt-1 text-[12.5px] text-ink-low">Ya casi. Listo a las {pase.listoA?.hora}.</p>
+          <p className="mt-1 text-[12.5px] text-ink-low">Ya casi. A las {pase.listoA?.hora}, tu hora de siempre.</p>
         </div>
       ) : (
         <div className="text-center">
@@ -173,8 +173,8 @@ function Cita({ pase, episodio }: { pase: VistaDelPase; episodio: number }) {
             {pase.listoA?.hora}
           </p>
           {restante !== null && (
-            <p className="mt-1 text-[12.5px] tabular-nums text-ink-low">
-              faltan {Math.floor(restante / 3_600_000)} h{' '}
+            <p className="mt-1 text-[12.5px] text-ink-low">
+              tu hora de siempre · faltan {Math.floor(restante / 3_600_000)} h{' '}
               {String(Math.floor((restante % 3_600_000) / 60_000)).padStart(2, '0')} m
             </p>
           )}
@@ -182,7 +182,8 @@ function Cita({ pase, episodio }: { pase: VistaDelPase; episodio: number }) {
       )}
 
       <p className="mt-3.5 text-center text-[13.5px] leading-relaxed text-ink-mid">
-        Vuelve y el episodio {episodio} te espera abierto. Tu racha suma una noche más.
+        Con que veas un episodio, el pase se acredita solo y tu racha suma una noche.
+        No hay nada que reclamar.
       </p>
 
       {/* Sin aviso, la cita depende de que el usuario se acuerde — y ahí se

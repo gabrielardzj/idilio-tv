@@ -106,7 +106,6 @@ export function Store({
 export function Celebrate({
   state, via, ep, onWatch, justAdvanced,
 }: { state: State; via: 'pass' | 'coins'; ep: number; onWatch: () => void; justAdvanced: boolean }) {
-  const reward = STREAK[Math.max(0, state.nights - 1)]
   return (
     <div className="sheet" role="dialog" aria-label="Episodio desbloqueado">
       <div className="grab" />
@@ -119,11 +118,11 @@ export function Celebrate({
             : <>Pagaste {EPISODE_COST} monedas. Te quedan {state.balance} · {episodesLabel(state.balance)}.</>}
         </p>
 
-        {via === 'pass' && reward.coins > 0 && (
-          <div className="reward-line"><Coin s={18} /> Noche {state.nights}: +{reward.coins} monedas por la racha</div>
-        )}
-        {via === 'pass' && reward.shield && (
-          <div className="reward-line"><Shield s={17} c="#3FE0D0" /> Ganaste un comodín</div>
+        {via === 'pass' && (
+          <div className="reward-line">
+            <Shield s={17} c="#3FE0D0" /> Vas por la noche {state.nights}
+            {state.shields > 0 && ' · tienes 1 comodín'}
+          </div>
         )}
       </div>
 

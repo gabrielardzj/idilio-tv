@@ -88,29 +88,51 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
 
 ---
 
-## 4 · La recomendación
+## 4 · Lo que ya hice al respecto
 
-**No elegir: fusionar, con la mecánica de `harare` como base.**
+**Adopté la acreditación de `harare` en esta versión.** No tenía sentido documentar que su
+modelo es mejor y seguir enviando el mío.
 
-El motivo es concreto y va en contra de mi propio trabajo: **acreditar al terminar un episodio es
-mejor que acreditar por reloj.** Mide la conducta que la métrica objetivo persigue —volver— y
-lleva la adopción de la fuente a ~100% sin pedirle nada al usuario. Mi acreditación por reloj
-obliga a introducir el tope de 2 para no castigar ausencias; la de harare no necesita ese parche
-porque nunca crea el problema.
+| | Antes | Ahora |
+|---|---|---|
+| Cuándo llega el pase | un reloj de 24 h | **al terminar un episodio**, una vez por noche |
+| Qué hace el usuario | usarlo en el muro (y ahí avanzaba la racha) | nada: se acredita solo, con un toast de 2 s |
+| Adopción de la fuente | depende de llegar al muro | **~100% por construcción** |
+| La cita | «+24 h desde que lo usaste» → hora arbitraria | **su hora de siempre** |
+
+Con eso, la única diferencia de mecánica que queda entre las dos versiones es **caducar vs
+topar en 2** — y como argumento arriba, cumplen la misma función una vez que la acreditación
+es por ver. El tope se queda porque cubre un caso que la caducidad no: ver gratis, recibir el
+pase y cerrar la app sin llegar al muro.
+
+**La cita anclada a la hora habitual sí es aporte de esta versión**, y no está en la otra.
+
+---
+
+## 5 · La recomendación
+
+**Fusionar.** Ya no por la mecánica —que converge— sino por el material.
+
+El motivo es concreto y fue, en su momento, en contra de mi propio trabajo: **acreditar al
+terminar un episodio es mejor que acreditar por reloj.** Mide la conducta que la métrica objetivo
+persigue —volver— y lleva la adopción de la fuente a ~100% sin pedirle nada al usuario.
 
 La fusión mínima que yo entregaría:
 
 | Pieza | De dónde | Por qué |
 |---|---|---|
-| Mecánica y acreditación | **harare** | La adopción por construcción es superior |
+| Acreditación al ver | **harare** *(ya adoptada aquí)* | La adopción por construcción es superior |
+| Cita anclada a la hora habitual | **da-nang** | Una cita a una hora arbitraria no es una cita |
 | Diagnóstico y censo del catálogo | **da-nang** | El hallazgo de los 428 episodios es el más fuerte de los dos, y harare no lo tiene |
 | Precedente de Webtoon | **da-nang** | Es el antecedente directo; conviene tenerlo aunque refuerce a harare |
 | Esquema SQL y viabilidad | **da-nang** | El brief evalúa viabilidad de implementación de forma explícita |
 | Modelo de sensibilidad y sesión de cierre | **harare** | No tienen equivalente aquí |
 | Corte de la noche | cualquiera | 4:00 y 5:00 am son ambos defendibles. Lo que importa es que **no** sea medianoche |
 
-**Si hay que entregar una sola sin fusionar:** `harare`, por la acreditación — y llevándose de
-aquí el censo del catálogo, que cabe en un párrafo del diagnóstico y lo mejora bastante.
+**Si hay que entregar una sola sin fusionar:** cualquiera de las dos sirve ahora que la
+acreditación converge. Esta tiene el censo del catálogo, el precedente de Webtoon y la
+viabilidad técnica; la otra tiene el modelo de sensibilidad y la sesión de cierre preparada.
+Lo que ninguna de las dos debería entregar es la mitad del material de la otra pudiendo tenerlo.
 
 ---
 

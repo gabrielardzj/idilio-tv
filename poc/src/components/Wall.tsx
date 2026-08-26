@@ -61,8 +61,8 @@ export function Wall({
           <p>
             Abre un episodio gratis. Tú eliges de cuál serie.{' '}
             {atCap
-              ? 'Estás en el tope: el próximo pase empieza a acumularse cuando uses uno.'
-              : 'Llega uno cada noche y se guardan hasta dos.'}
+              ? 'Estás en el tope: el próximo empieza a acumularse cuando uses uno.'
+              : 'Se acredita solo al ver, una vez por noche. Se guardan hasta dos.'}
           </p>
           <button className="btn btn-gold" onClick={onClaim}>
             <Pass s={20} /> Usar {state.passes > 1 ? 'un pase' : 'el pase'} en este episodio
@@ -73,7 +73,8 @@ export function Wall({
           <div className="pass-h"><Pass s={24} /><b>Tu próximo Pase de la Noche</b></div>
           <NextPass readyAt={state.passNextAt ?? state.now} now={state.now} />
           <p style={{ textAlign: 'center', margin: '14px 0 0' }}>
-            Vuelve y el episodio {ep} te espera abierto. Tu racha suma una noche más.
+            Con que veas un episodio, el pase se acredita solo y tu racha suma
+            una noche. No hay nada que reclamar.
           </p>
           <button
             className={`remind ${state.remind ? 'on' : ''}`}

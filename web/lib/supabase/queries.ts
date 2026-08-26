@@ -1,4 +1,5 @@
 import { CATALOGO, EPISODE_COST } from '@/lib/economy'
+import { proximaCita } from '@/lib/pase'
 
 /**
  * Capa de datos.
@@ -121,12 +122,13 @@ const ESTADOS: Record<string, Omit<EstadoPase, 'timezone' | 'hasAccount' | 'serv
   // Ya lo usó y no tiene monedas: el muro se vuelve una cita con hora.
   'la-herencia-del-patriarca': {
     passes: 0, nights: 3, shields: 1, balance: 0,
-    nextPassAt: new Date(RELOJ_FIJO + 17 * 3_600_000 + 47 * 60_000).toISOString(),
+    nextPassAt: new Date(proximaCita(RELOJ_FIJO)).toISOString(),
   },
   // Ya lo usó pero tiene saldo, y el próximo pase llega en menos de una hora:
   // ahí el countdown vuelve a ser el héroe, porque los segundos sí importan.
   'la-enfermera-infiltrada': {
     passes: 0, nights: 5, shields: 1, balance: 45,
+    // A 42 minutos de su hora de siempre: ahí el countdown vuelve a ser el héroe.
     nextPassAt: new Date(RELOJ_FIJO + 42 * 60_000).toISOString(),
   },
 }
