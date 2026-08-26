@@ -36,12 +36,16 @@ jobs:
       # pueda llegar a él. Esta comprobación ya encontró un bug que el panel
       # escondía: el episodio 1 de una serie sin empezar abría el muro.
       - name: Recorrer el prototipo como una persona
+        working-directory: poc
         run: |
           npx playwright install chromium-headless-shell --only-shell
-          npx vite preview --port 5199 &
+          npx vite preview --port 5199 --strictPort &
+          SERVIDOR=$!
+          # el servidor se apaga pase lo que pase: si queda vivo, el runner lo
+          # mata como proceso huérfano y el job termina en un estado raro
+          trap 'kill $SERVIDOR 2>/dev/null || true' EXIT
           npx wait-on http://localhost:5199 -t 30000
           npm run recorrer
-        working-directory: poc
 
       # 2 · la implementación sobre el stack real (Next.js) va en /stack
       - name: Verificar que el modelo económico no divergió
