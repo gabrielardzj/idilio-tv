@@ -6,7 +6,7 @@
 
 El metajuego de Idilio no está mal diseñado: **llega en el momento equivocado**. Las monedas se regalan al abrir la app —un diálogo con un botón *Reclamar*, la primera vez que se entra cada día— y se necesitan horas después, en el reproductor, al chocar con el muro.
 
-Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que el producto nunca traduce a episodios.
+Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que ese diálogo nunca traduce a episodios.
 
 Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese contenido corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. El muro tiene el anuncio y la suscripción, pero los ordena al revés: abre con lo más caro y deja la salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris.
 
@@ -14,9 +14,9 @@ Sin escasez, la moneda no significa nada y el metajuego no puede mover el regres
 
 | Falla | En una línea |
 |---|---|
-| **F1** | Lo que resolvería el muro —la recompensa diaria, las tareas de la pestaña Recompensas, el pase semanal, el mensual— vive en otra pantalla |
-| **F2** | Nada traduce monedas a episodios, así que el usuario no puede juzgar el precio |
-| **F3** | Dos paquetes distintos dan **las mismas 180 monedas** —el segundo al doble de precio, uno debajo del otro— y subir al siguiente escalón mejora el valor un 3.9% |
+| **F1** | El muro enseña la economía entera y la ordena al revés: abre por lo más caro y deja la única salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris |
+| **F2** | La traducción a episodios está en los paquetes y falta justo donde se decide: el saldo, el tope del anuncio y lo que sale terminar la serie |
+| **F3** | El escalón barato es **2,6 veces mejor** que los dos grandes y lleva el badge más agresivo; subir de 375 a 725 monedas cuesta casi el doble y mejora el episodio un 1,7% |
 | **F4** | La racha pide 7 días de 7 a una base que entra 2.3, y corta a medianoche en un producto que se usa de madrugada |
 | **F5** | El usuario no ve su avance dentro de una serie ni su posición en el sistema |
 
@@ -150,7 +150,7 @@ Ese 19% es la señal más informativa del conjunto, precisamente porque el produ
 
 | Por qué se descarta | Evidencia |
 |---|---|
-| **No sabe qué está rechazando.** Nada en el producto traduce monedas a episodios, así que el regalo no se lee como regalo | [F2](#f2--nadie-le-dice-al-usuario-cuánto-vale-una-moneda) |
+| **No sabe qué está rechazando.** El diálogo ofrece monedas, y la recompensa diaria es uno de los renglones que el producto nunca traduce: el regalo no se lee como regalo | [F2](#f2--la-traducción-a-episodios-se-corta-justo-donde-hay-que-decidir) |
 | **No necesita monedas todavía.** El diálogo aparece antes de ver nada, con 10 episodios gratis por delante — y con 500 en el catálogo, esa necesidad tarda meses en aparecer | [Hallazgo 2](#hallazgo-2--pagar-no-es-la-única-salida-del-muro-empezar-otra-serie-es-gratis) |
 | **Está en el camino a lo que vino a hacer.** A la 1 a.m., con una mano, lo que se interpone entre abrir la app y ver se cierra por reflejo | 54% de las sesiones entre 11 p.m. y 2 a.m. |
 
@@ -162,20 +162,20 @@ Lo que queda en pie es un problema de número, no de ubicación: **terminar la s
 
 Y conviene separar dos cosas, porque la estrategia descarta una. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). Como superficie ya está resuelta por el producto.
 
-### F2 · Nadie le dice al usuario cuánto vale una moneda
+### F2 · La traducción a episodios se corta justo donde hay que decidir
 
-En ningún punto del sistema se explica cuánto rinde una moneda en la única cosa que al usuario le importa: episodios.
+El muro traduce lo que vende: cada paquete lleva su equivalente en episodios —*«Desbloquea 12 episodios»*, no *«180 monedas»*— y la hoja abre diciendo el saldo y el costo del episodio antes que ningún precio. Esa parte está resuelta, y conviene decirlo antes de señalar lo que falta.
 
-El paywall muestra `15`, `180`, `375`. Números sueltos, sin referencia. Para entenderlos hay que hacer una división mental a la 1 a.m.:
+Lo que falta son los cuatro renglones que el usuario mira para decidir. Los cuatro siguen en monedas, o sin decir su total:
 
-| Lo que ve el usuario | Lo que en realidad significa | ¿La app se lo dice? |
+| Lo que ve el usuario | Lo que significa | ¿La app se lo dice? |
 |---|---|---|
-| 15 | 1 episodio | ✗ |
-| 180 | 12 episodios | ✗ |
-| 375 | 25 episodios | ✗ |
-| 600 (serie mediana) | 40 episodios | ✗ |
+| *«Tu balance: 0 · Costo del episodio: 15»* | te falta 1 episodio | ✗ — la resta la hace él, a la 1 a.m. |
+| `0/10` en la tarjeta del anuncio | 10 episodios gratis por día | ✗ |
+| La recompensa diaria: `15 · 40 · 60 · 50 · 40 · 45 · 200` | 30 episodios en una semana perfecta | ✗ |
+| 600 monedas para terminar la serie mediana | 40 episodios · unos $ 21.000, contra $ 24.500 el mes entero | ✗ |
 
-Sin una unidad de valor no hay economía: hay una tarifa opaca. El usuario no puede juzgar si un paquete es caro o barato, porque no sabe qué está comprando.
+El patrón es el mismo en los cuatro: **el producto traduce lo que cobra y deja sin traducir lo que regala y lo que cuesta salir.** Los paquetes —la salida más cara— están dichos en episodios; la fuente gratuita más grande está dicha como una fracción gris; y el total de terminar la serie no está dicho en ninguna parte. Así el usuario puede juzgar si un paquete es caro comparado con otro paquete, que es la comparación que no lo saca del mostrador. Lo que no puede comparar es lo único que tiene alternativa: mirar un anuncio, esperar a mañana o pagar el mes entero.
 
 ### F3 · Comprar el paquete más grande no le conviene a nadie
 
