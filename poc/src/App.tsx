@@ -51,6 +51,47 @@ export default function App() {
     return () => clearTimeout(id)
   }, [state.toast])
 
+  // Las hojas se declaran role="dialog" y no se comportaban como una: al
+  // abrirlas el foco se quedaba donde estuviera —fuera de la hoja, en contenido
+  // que el scrim tapa y que el usuario no ve— y Escape no las cerraba. El
+  // ciclado de Tab que hay abajo es cinturón y tirantes: medido, el foco ya se
+  // quedaba dentro sin él. Se resuelve en un solo sitio, consultando
+  // el DOM en vez de envolver nada: la hoja está posicionada contra el teléfono
+  // y un contenedor nuevo sería una oportunidad de romper el encuadre.
+  useEffect(() => {
+    if (sheet.kind === 'none') return
+    const hoja = document.querySelector<HTMLElement>('.phone .sheet')
+    if (!hoja) return
+    const previo = document.activeElement as HTMLElement | null
+    const focusables = () =>
+      [...hoja.querySelectorAll<HTMLElement>('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+        .filter((e) => e.offsetParent !== null)
+
+    focusables()[0]?.focus()
+
+    const onKey = (e: KeyboardEvent) => {
+      // Escape cierra siempre, incluida la celebración. El scrim sí la exceptúa,
+      // porque un toque fuera puede ser accidental y Escape nunca lo es.
+      if (e.key === 'Escape') { e.preventDefault(); dispatch({ t: 'close' }); return }
+      if (e.key !== 'Tab') return
+      const f = focusables()
+      if (!f.length) return
+      const [primero] = f
+      const ultimo = f[f.length - 1]
+      if (!hoja.contains(document.activeElement)) { e.preventDefault(); primero.focus() }
+      else if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus() }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus() }
+    }
+
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      // Devolver el foco a donde estaba: si no, cerrar el muro deja al usuario
+      // de teclado al principio de la página.
+      previo?.focus?.()
+    }
+  }, [sheet.kind])
+
   const series = serieDe(state.seriesId)
   // Cuántas historias tiene empezadas de verdad. Con una sola, pedirle que
   // elija sería teatro: el pase va donde está.

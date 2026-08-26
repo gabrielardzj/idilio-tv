@@ -61,6 +61,53 @@ for (const [nombre, boton] of ESTADOS) {
   console.log(`${r.violations.length ? '✗' : '✓'} ${nombre.padEnd(20)} ${r.passes.length} reglas${detalle ? `\n      ${detalle}` : ''}`)
 }
 
+// ── El teclado, que axe no prueba ────────────────────────────────────────
+// Las hojas se declaran role="dialog" y no se comportaban como una: al abrirlas
+// el foco se quedaba donde estuviera —fuera de la hoja, en el contenido que el
+// scrim tapa— y Escape no cerraba nada. Ninguna regla automática lo marca: axe
+// mira el marcado, no lo que pasa al pulsar Tab.
+//
+// De las tres cosas que se comprueban abajo, dos cambiaron con el arreglo: que
+// el foco entre y que Escape cierre. La tercera —que no se salga tabulando— ya
+// se cumplía sola: desactivando la contención a propósito, el foco sigue
+// ciclando dentro. Se comprueba igual, porque es la propiedad que se quiere
+// sostener, pero no la produce el manejador.
+const donde = () => page.evaluate(() => {
+  const a = document.activeElement
+  if (!a || a === document.body) return 'body'
+  return a.closest('.sheet') ? 'hoja' : a.closest('.phone') ? 'telefono' : 'panel'
+})
+
+for (const [nombre, boton] of [['muro', '2 · El muro'], ['tienda', '7 · Tienda'], ['celebración', '4 · Desbloqueo']]) {
+  await page.goto(SITIO, { waitUntil: 'networkidle' })
+  await page.waitForTimeout(500)
+  await page.locator('.director button', { hasText: boton }).first().click()
+  await page.waitForTimeout(450)
+  const antes = await page.locator('.phone').getAttribute('data-state')
+
+  const entra = (await donde()) === 'hoja'
+
+  // Hay que tabular MÁS veces que elementos tiene la hoja: con un número fijo
+  // —diez— esta comprobación pasaba incluso desactivando la contención entera,
+  // porque el muro tiene once y nunca se llegaba al final. Una prueba que no
+  // llega al borde no prueba el borde.
+  const cuantos = await page.locator('.phone .sheet button:visible, .phone .sheet a[href]:visible').count()
+  const trazo = []
+  for (let i = 0; i < cuantos + 3; i++) {
+    await page.keyboard.press('Tab')
+    await page.waitForTimeout(45)
+    trazo.push(await donde())
+  }
+  const contenido = trazo.every((x) => x === 'hoja')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(350)
+  const cierra = (await page.locator('.phone').getAttribute('data-state')) !== antes
+
+  const fallos = [!entra && 'el foco no entra', !contenido && `tras ${trazo.findIndex((x) => x !== 'hoja') + 1} de ${trazo.length} tabs el foco se va a ${[...new Set(trazo)].filter((x) => x !== 'hoja').join(', ')}`, !cierra && 'Escape no cierra'].filter(Boolean)
+  total += fallos.length
+  console.log(`${fallos.length ? '✗' : '✓'} teclado · ${nombre.padEnd(11)} ${fallos.length ? fallos.join(' · ') : 'entra, se queda dentro y Escape cierra'}`)
+}
+
 console.log(`\n${total === 0 ? '✓ NINGÚN ESTADO TIENE VIOLACIONES WCAG A/AA' : `✗ ${total} VIOLACIONES`}`)
 
 await browser.close()
