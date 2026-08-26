@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/**
+ * Tokens de marca de Idilio TV.
+ *
+ * Los valores marcados PRODUCCIÓN se extrajeron del CSS de www.idilio.tv el
+ * 25-ago-2026, así que esta capa habla el mismo idioma que el producto real:
+ * Tailwind v4 con @theme, igual que el sitio.
+ *
+ * Los marcados PROPUESTA son de esta intervención y no existen hoy.
+ */
+@theme {
+  /* ── PRODUCCIÓN · marca ─────────────────────────────────── */
+  --color-primary: #a000f0;
+  --color-brand-magenta: #e256d6;
+  --color-brand-cyan: #3fc1c9;
+  --color-brand-amber: #f5a93f;
+  --color-ink: #eceded;
+
+  /* ── PRODUCCIÓN · superficies ───────────────────────────── */
+  --color-surface-0: #0a0a0a;
+  --color-surface-1: #141414;
+  --color-surface-2: #1a1a1a;
+
+  /* ── PROPUESTA · derivados de texto ──────────────────────── */
+  --color-ink-mid: #a0a0a8;
+  --color-ink-low: #6e6e78;
+
+  /* ── PROPUESTA · el oro del Pase ─────────────────────────
+     Se deriva del --color-brand-amber de producción (#f5a93f).
+     La regla del sistema: el ámbar queda RESERVADO a la moneda y al Pase.
+     A la 1am con brillo bajo, la atención va donde está la luz; si el ámbar
+     marcara también avisos y promociones, dejaría de significar algo. */
+  --color-pass-100: #ffe0a8;
+  --color-pass-300: #f8c46a;
+  --color-pass-500: #f5a93f;
+  --color-pass-700: #c97f16;
+
+  --font-display: var(--font-outfit), system-ui, sans-serif;
+
+  --radius-sheet: 1.75rem;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Contexto nocturno: 54% de las sesiones son entre 11pm y 2am.
+   Nada de blanco puro y nada de superficies claras. */
+html, body { background: var(--color-surface-0); color: var(--color-ink); }
+body { -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

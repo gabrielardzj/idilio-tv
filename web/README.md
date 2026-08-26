@@ -1,0 +1,86 @@
+# `web/` — la intervención sobre el stack real de Idilio
+
+El mismo momento de desbloqueo que resuelve [`/poc`](../poc/), pero implementado sobre
+**el stack que Idilio corre hoy en producción**, no sobre uno de conveniencia.
+
+> **Por qué existen los dos.** `poc/` es el prototipo: React + Vite, sin ataduras, para
+> iterar el diseño rápido. `web/` responde a otra pregunta, que el brief evalúa de forma
+> explícita — *«la viabilidad de implementación hace parte de la propuesta»*: qué hace
+> falta de verdad para construir esto, en la casa de ellos.
+
+## El stack, verificado en producción
+
+Todo lo de esta columna se comprobó inspeccionando headers y bundles de `www.idilio.tv`
+el 25-ago-2026 — no es una suposición.
+
+| | Idilio en producción | Aquí |
+|---|---|---|
+| Framework | Next.js **App Router / RSC**, Turbopack, React 19 | igual |
+| Estilos | **Tailwind v4** con tokens `@theme` | igual, con los tokens reales |
+| Fuentes | `next/font`, self-hosted (`sofia_pro`, `new_hero`) | `next/font` con Outfit — las del producto son de licencia comercial |
+| Video | **Mux** (`<mux-player>` + Mux Data) | el contrato del componente, sin la dependencia · [`components/Video.tsx`](components/Video.tsx) |
+| Datos | **Supabase** (Postgres + Storage + RLS) | firmas reales + fixture · [`lib/supabase/`](lib/supabase/) |
+| Hosting | **Vercel** | export estático para Pages; quitar `output` y corre en Vercel |
+
+## Lo que este árbol demuestra y el prototipo no puede
+
+### 1 · El reloj vive en el servidor
+
+Es el riesgo técnico nº 1 de la propuesta. Un countdown calculado en el navegador se
+vulnera cambiando la hora del teléfono, y con él la mecánica entera.
+
+Acá el estado económico se resuelve en un **Server Component**
+([`app/serie/[slug]/[ep]/page.tsx`](app/serie/[slug]/[ep]/page.tsx)) y el cliente solo
+pinta el delta contra `serverNow`. La acreditación de pases es **perezosa** —se calcula al
+leer el estado, no con un cron por usuario— tanto en [`lib/pase.ts`](lib/pase.ts) como en
+`accrue_passes()` de Postgres.
+
+### 2 · El esquema que hay que agregar a la base
+
+[`lib/supabase/schema.sql`](lib/supabase/schema.sql) es la migración completa. Lo que
+resuelve, y que en un prototipo no se ve:
+
+- **`viewer.device_id`** — el 88% de la base es invitado, así que el estado NO cuelga de
+  `auth.users`. Cuelga de la cookie `idl_did` que Idilio ya emite hoy, y `claim_guest()`
+  lo migra a una cuenta sin perder nada.
+- **`viewer.timezone`** — el corte de la noche se calcula en la zona del **usuario**. MX, CO
+  y US-hispano cruzan cuatro husos: calcularlo en UTC le rompe la racha a las 10 p.m. a
+  alguien en Los Ángeles.
+- **`night_of()`** — la definición de "noche" (5 a.m. a 5 a.m.) existe una sola vez, y el
+  cliente usa la misma en `nocheDe()`. Si divergieran, el cliente y la base discreparían
+  sobre si la racha sigue viva.
+- **`use_pass()`** — una transacción atómica: descuenta el pase, avanza la racha, consume el
+  comodín, paga el bono y registra el desbloqueo. `security definer`, porque el cliente no
+  escribe estas tablas.
+- **`episode_unlock.source`** — separa `free` / `pass` / `coins`. Sin esa columna no se puede
+  medir canibalización, que es el guardrail de toda la intervención.
+
+### 3 · La paleta real, no la mía
+
+[`app/globals.css`](app/globals.css) usa los tokens del CSS de producción
+(`--color-primary #a000f0`, magenta `#e256d6`, cian `#3fc1c9`, ámbar `#f5a93f`, superficies
+`#0a0a0a`/`#141414`/`#1a1a1a`).
+
+Comparar las dos versiones lado a lado deja ver algo que solo aparece así: **las superficies
+de Idilio son negro neutro, y las de mi prototipo tenían tinte violeta.** El producto real es
+más sobrio de lo que yo había asumido. La versión de esta carpeta es la fiel.
+
+## Correrlo
+
+```bash
+npm install
+npm run dev              # http://localhost:5301
+npm run build            # SSR, como en Vercel
+DEPLOY_TARGET=pages npm run build   # export estático, como en Pages
+npm run check-economy    # verifica que no divergió del modelo del prototipo
+```
+
+El modelo económico vive una sola vez, en `poc/src/lib/economy.ts`. `web/lib/economy.ts` es
+una copia verificada en CI: si divergen, el build falla. No puede pasar que el prototipo y la
+implementación digan precios distintos.
+
+## Lo que queda fuera
+
+Reproducción real (hace falta un `playbackId` de Mux), compra por IAP, y el resto de la
+navegación de la app. El brief lo excluye del alcance y agregarlo diluiría el único momento
+que sí importa evaluar.

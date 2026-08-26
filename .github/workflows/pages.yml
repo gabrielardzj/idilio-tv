@@ -20,16 +20,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm, cache-dependency-path: poc/package-lock.json }
-      - run: npm ci
+        with: { node-version: 22 }
+
+      # 1 · el prototipo (React + Vite) va en la raíz
+      - run: npm ci && npm run build
         working-directory: poc
+
+      # 2 · la implementación sobre el stack real (Next.js) va en /stack
+      - name: Verificar que el modelo económico no divergió
+        run: npm ci && npm run check-economy
+        working-directory: web
       - run: npm run build
-        working-directory: poc
-      # el sitio publicado lleva el POC en la raíz y el export de flujos en /flujos
-      - run: |
+        working-directory: web
+        env:
+          DEPLOY_TARGET: pages
+
+      - name: Armar el sitio
+        run: |
           mkdir -p _site
-          cp -r poc/dist/* _site/
-          cp -r mobbin-export _site/flujos
+          cp -r poc/dist/*      _site/
+          cp -r mobbin-export   _site/flujos
+          cp -r web/out         _site/stack
+
       - uses: actions/upload-pages-artifact@v3
         with: { path: _site }
 

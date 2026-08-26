@@ -9,6 +9,16 @@
 
 ---
 
+## Verlo en vivo
+
+| | |
+|---|---|
+| **Prototipo** | **https://gabrielardzj.github.io/idilio-tv/** |
+| **Export de flujos** | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
+| **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
+
+---
+
 ## Los cuatro entregables
 
 | | Entregable | Qué hay adentro |
@@ -17,8 +27,9 @@
 | **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres olas, con hipótesis, métricas, guardrails y criterio de priorización. Y qué no cabe en un trimestre. |
 | **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, ocho decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json). |
 | **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 13 pantallas en 6 flujos. |
+| **+** | **[Sobre el stack real](web/)** | La misma intervención implementada en Next.js App Router + Tailwind v4 + Supabase, el stack que Idilio corre hoy. Incluye la migración SQL completa. Es la respuesta a *«la viabilidad de implementación hace parte de la propuesta»*. |
 
-**Anexo ·** [Registro de dogfooding](docs/00-dogfooding/) — qué se pudo usar del producto real y qué se verificó ahí.
+**Anexos ·** [Registro de dogfooding](docs/00-dogfooding/) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.
 
 ---
 
@@ -61,10 +72,11 @@ Y el muro deja de decir *«tu balance: 0»* para decir **«Hoy a las 18:05»**.
 
 ---
 
-## Correr el POC
+## Correrlo local
 
 ```bash
-cd poc && npm install && npm run dev
+cd poc && npm install && npm run dev   # el prototipo — http://localhost:5173
+cd web && npm install && npm run dev   # sobre el stack real — http://localhost:5301
 ```
 
 O abrir [`mobbin-export/index.html`](mobbin-export/index.html) para ver los 6 flujos completos sin instalar nada.
