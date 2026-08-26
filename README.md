@@ -15,7 +15,7 @@
 |---|---|
 | **Prototipo** — home, catálogo, ficha de serie y el muro | **https://gabrielardzj.github.io/idilio-tv/** |
 | **Diagnóstico y estrategia** — los entregables de texto | **https://gabrielardzj.github.io/idilio-tv/docs/diagnostico.html** |
-| **Export de flujos** — 22 pantallas en 8 flujos | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
+| **Export de flujos** — 23 pantallas en 8 flujos | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
 | **Archivo de diseño** — 10 pantallas, 4 componentes y las variables, nativas de Figma | **https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X** |
 | **Diseño** — el sistema visual y cómo leer ese archivo | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
@@ -34,7 +34,7 @@
 | **1** | **[Diagnóstico](docs/01-diagnostico/)** | Qué falla hoy, a partir de usar la app y leer los datos. Qué señales pesaron y qué descarté — incluido por qué no construyo sobre el 2.4x de D30 (cuántos siguen ahí a los 30 días). |
 | **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres olas, con hipótesis, métricas, guardrails (las métricas de guardia: las que dicen cuándo parar) y criterio de priorización. Y qué no cabe en un trimestre. |
 | **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, nueve decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [archivo de diseño](docs/03-diseno/pen/), el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json) (los valores del sistema —colores, tipografías, espacios— con nombre propio). |
-| **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 22 pantallas en 8 flujos. |
+| **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 23 pantallas en 8 flujos. |
 | **+** | **[Sobre el stack real](web/)** | La misma intervención implementada en Next.js App Router + Tailwind v4 + Supabase, el stack que Idilio corre hoy. Incluye la migración SQL completa. Es la respuesta a *«la viabilidad de implementación hace parte de la propuesta»*. |
 
 **Anexos ·** No son páginas del sitio publicado; se leen acá, en el repo. · [Registro de dogfooding](docs/00-dogfooding/) (dogfooding: usar el propio producto como un usuario más) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.

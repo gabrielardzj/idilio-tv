@@ -1,7 +1,7 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-22 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+23 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
@@ -49,7 +49,7 @@ El invitado ve un episodio y la noche se acredita sola. Después llega al muro s
 
 **El acuse de la noche** — El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.
 
-**Muro · el Pase está listo** — Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.
+**Muro · el Pase está listo** — Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda. Lo gratuito tiene dos escalones y el orden entre ellos también es una decisión: el Pase arriba y el anuncio debajo, porque el Pase es lo mismo sin los 30 segundos ni el corte en el cliffhanger.
 
 **Elegir a qué serie va el pase** — El corazón pedagógico: obligar a elegir con un recurso escaso enseña la economía por uso, no por explicación.
 
@@ -64,9 +64,12 @@ El muro deja de ser un final y pasa a ser una hora. El countdown es el motivo de
 | # | Pantalla | Tipo | Patrones |
 |---|---|---|---|
 | 1 | [Muro · faltan horas para el próximo pase](flows/f2-la-cita/01-muro-pase-gastado.png) | Paywall | Countdown, Appointment, Streak, Bottom sheet |
-| 2 | [Muro · con saldo suficiente](flows/f2-la-cita/02-muro-con-saldo.png) | Paywall | Balance spend, Countdown, Streak |
+| 2 | [Después del anuncio · la economía encadena](flows/f2-la-cita/01b-tras-el-anuncio.png) | Paywall | Rewarded ad, Ad-gated unlock, Quota translated, Countdown |
+| 3 | [Muro · con saldo suficiente](flows/f2-la-cita/02-muro-con-saldo.png) | Paywall | Balance spend, Countdown, Streak |
 
 **Muro · faltan horas para el próximo pase** — El countdown ocupa el lugar jerárquico que antes tenía el precio. La compra queda debajo, como atajo, no como única salida.
+
+**Después del anuncio · la economía encadena** — La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta — el producto lo rotula «0/10» en gris, y eso son diez episodios gratis al día. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.
 
 **Muro · con saldo suficiente** — Con saldo, la acción de pago sube a primaria — pero el saldo restante se declara en episodios, no en monedas.
 
@@ -139,6 +142,6 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 
 **Tipos de pantalla:** Account / Wallet · Confirmation · Detail · Home / Browse · Media player · Paywall · Selection · Sign up · Store
 
-**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Chapter list · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
+**Patrones:** Ad-gated unlock · Anti-FOMO · Appointment · Balance spend · Bottom sheet · Chapter list · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Quota translated · Resource cap · Reward claim · Reward reveal · Rewarded ad · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
 
-**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Chapter list · Chevron · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Lock · Medal · Notice · Pack list · Poster · Price per unit · Price row · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Chapter list · Chevron · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Lock · Medal · Notice · Pack list · Poster · Price per unit · Price row · Primary button · Progress bar · Progress label · Quota caption · Radio list · Reminder toggle · Reward card · Reward lines · Reward row · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip

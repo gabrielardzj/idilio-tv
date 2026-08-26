@@ -123,7 +123,7 @@ const FLOWS = [
         estado: 'wall-pass-ready',
         type: 'Paywall', patterns: ['Bottom sheet', 'Reward claim', 'Streak', 'Progress indicator', 'Cliffhanger'],
         elements: ['Bottom sheet', 'Headline', 'Progress bar', 'Reward card', 'Primary button', 'Text button', 'Streak strip'],
-        note: 'Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.',
+        note: 'Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda. Lo gratuito tiene dos escalones y el orden entre ellos también es una decisión: el Pase arriba y el anuncio debajo, porque el Pase es lo mismo sin los 30 segundos ni el corte en el cliffhanger.',
         act: async (p) => { await p.waitForTimeout(2700); await click(p, '2 · El muro · un pase') },
       },
       {
@@ -164,6 +164,18 @@ const FLOWS = [
         elements: ['Bottom sheet', 'Countdown timer', 'Secondary card', 'Primary button', 'Streak strip'],
         note: 'El countdown ocupa el lugar jerárquico que antes tenía el precio. La compra queda debajo, como atajo, no como única salida.',
         act: async (p) => { await click(p, '5 · El muro') },
+      },
+      {
+        id: '01b-tras-el-anuncio', name: 'Después del anuncio · la economía encadena',
+        estado: 'wall-with-balance',
+        type: 'Paywall', patterns: ['Rewarded ad', 'Ad-gated unlock', 'Quota translated', 'Countdown'],
+        elements: ['Bottom sheet', 'Reward row', 'Quota caption', 'Primary button', 'Countdown timer'],
+        note: 'La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta — el producto lo rotula «0/10» en gris, y eso son diez episodios gratis al día. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.',
+        act: async (p) => {
+          await click(p, '5 · El muro')
+          await p.locator('.anuncio').click()
+          await p.waitForTimeout(450)
+        },
       },
       {
         id: '02-muro-con-saldo', name: 'Muro · con saldo suficiente',
