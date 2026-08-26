@@ -146,6 +146,7 @@ function PaseListo({ pase, onUsar }: { pase: VistaDelPase; onUsar: () => void })
  * Ver lib/pase.ts para el porqué.
  */
 function Cita({ pase, episodio }: { pase: VistaDelPase; episodio: number }) {
+  const [avisar, setAvisar] = useState(false)
   const restante = useCuentaRegresiva(pase.nextPassAt, pase.serverNow)
   const menosDeUnaHora = restante !== null && restante < 3_600_000
 
@@ -157,9 +158,12 @@ function Cita({ pase, episodio }: { pase: VistaDelPase; episodio: number }) {
       </div>
 
       {menosDeUnaHora ? (
-        <p className="text-center text-[40px] leading-none font-bold tracking-tighter tabular-nums" role="timer">
-          {formatMS(restante!)}
-        </p>
+        <div className="text-center">
+          <p className="text-[42px] leading-[1.05] font-bold tracking-tighter tabular-nums" role="timer">
+            {formatMS(restante!)}
+          </p>
+          <p className="mt-1 text-[12.5px] text-ink-low">Ya casi. Listo a las {pase.listoA?.hora}.</p>
+        </div>
       ) : (
         <div className="text-center">
           <p className="text-[12.5px] font-semibold tracking-wide text-ink-low uppercase">
@@ -180,7 +184,34 @@ function Cita({ pase, episodio }: { pase: VistaDelPase; episodio: number }) {
       <p className="mt-3.5 text-center text-[13.5px] leading-relaxed text-ink-mid">
         Vuelve y el episodio {episodio} te espera abierto. Tu racha suma una noche más.
       </p>
+
+      {/* Sin aviso, la cita depende de que el usuario se acuerde — y ahí se
+          pierde la mitad del efecto. iOS y Android permiten push por token de
+          dispositivo, así que esto funciona también para el 88% que es invitado. */}
+      <button
+        onClick={() => setAvisar((v) => !v)}
+        aria-pressed={avisar}
+        className={[
+          'mt-4 flex h-[42px] w-full items-center justify-center gap-2 rounded-full border',
+          'text-[13.5px] font-semibold transition active:scale-[.97]',
+          avisar
+            ? 'border-brand-cyan/34 bg-brand-cyan/10 text-brand-cyan'
+            : 'border-white/10 bg-white/[0.055] text-ink-mid',
+        ].join(' ')}
+      >
+        <Campana />
+        {avisar ? `Te avisamos a las ${pase.listoA?.hora ?? ''}` : 'Avísame cuando esté listo'}
+      </button>
     </div>
+  )
+}
+
+function Campana() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M18 9.4a6 6 0 1 0-12 0c0 5-2 6.4-2 6.4h16s-2-1.4-2-6.4Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M13.7 19.2a2 2 0 0 1-3.4 0" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
   )
 }
 

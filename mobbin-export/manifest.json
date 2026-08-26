@@ -304,11 +304,75 @@
           "image": "flows/f6-mi-economia/01-mi-economia.png"
         }
       ]
+    },
+    {
+      "id": "f7-stack-real",
+      "name": "Sobre el stack real de Idilio",
+      "intent": "La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, con los tokens de producción. El estado económico se resuelve en el servidor, que es el riesgo técnico nº 1 de la propuesta.",
+      "screens": [
+        {
+          "id": "01-muro-pase-listo",
+          "name": "Muro · el Pase está listo",
+          "screenType": "Paywall",
+          "patterns": [
+            "Server-rendered state",
+            "Reward claim",
+            "Streak"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Reward card",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.",
+          "stateKey": null,
+          "image": "flows/f7-stack-real/01-muro-pase-listo.png"
+        },
+        {
+          "id": "02-la-cita",
+          "name": "La cita · faltan 17 h",
+          "screenType": "Paywall",
+          "patterns": [
+            "Countdown",
+            "Appointment",
+            "Opt-in notification"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Clock time",
+            "Reminder toggle",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.",
+          "stateKey": null,
+          "image": "flows/f7-stack-real/02-la-cita.png"
+        },
+        {
+          "id": "03-cuenta-regresiva-corta",
+          "name": "Faltan 42 minutos",
+          "screenType": "Paywall",
+          "patterns": [
+            "Countdown",
+            "Balance spend"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Countdown timer",
+            "Primary button",
+            "Balance caption"
+          ],
+          "note": "Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.",
+          "stateKey": null,
+          "image": "flows/f7-stack-real/03-cuenta-regresiva-corta.png"
+        }
+      ]
     }
   ],
   "summary": {
-    "flows": 6,
-    "screens": 13,
+    "flows": 7,
+    "screens": 16,
     "screenTypes": [
       "Account / Wallet",
       "Confirmation",
@@ -335,11 +399,13 @@
       "Loss aversion",
       "Milestone unlock",
       "Non-punitive feedback",
+      "Opt-in notification",
       "Progress indicator",
       "Resource cap",
       "Reward claim",
       "Reward reveal",
       "Scarcity",
+      "Server-rendered state",
       "Single select",
       "Source-sink model",
       "Streak",
@@ -357,6 +423,7 @@
       "Balance headline",
       "Bottom sheet",
       "Breakdown list",
+      "Clock time",
       "Countdown timer",
       "Fine print",
       "Goal row",
@@ -369,6 +436,7 @@
       "Progress bar",
       "Progress label",
       "Radio list",
+      "Reminder toggle",
       "Reward card",
       "Reward lines",
       "Scrubber",

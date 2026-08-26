@@ -29,7 +29,7 @@ export interface VistaDelPase {
  * pases le tocaban desde `nextPassAt` cada vez que se lee el estado.
  * Es lo mismo que hace accrue_passes() en Postgres, replicado para el fixture.
  */
-export function resolverPase(estado: EstadoPase, ahora = Date.now()): VistaDelPase {
+export function resolverPase(estado: EstadoPase, ahora = estado.serverNow): VistaDelPase {
   let passes = estado.passes
   let next = estado.nextPassAt ? Date.parse(estado.nextPassAt) : null
 

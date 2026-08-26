@@ -12,6 +12,8 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const BASE = process.argv[2] || 'http://localhost:5199/'
+/** La implementación sobre el stack real. Si no está arriba, ese flujo se salta. */
+const STACK = process.env.STACK_URL || 'http://localhost:5301'
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
 const OUT = process.argv[3] || join(ROOT, '..', 'mobbin-export')
 
@@ -176,7 +178,40 @@ const FLOWS = [
       },
     ],
   },
+  {
+    id: 'f7-stack-real',
+    name: 'Sobre el stack real de Idilio',
+    intent: 'La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, con los tokens de producción. El estado económico se resuelve en el servidor, que es el riesgo técnico nº 1 de la propuesta.',
+    // Estas pantallas no se navegan con el panel: son rutas reales y prerrenderizadas.
+    base: STACK,
+    selector: 'main',
+    screens: [
+      {
+        id: '01-muro-pase-listo', name: 'Muro · el Pase está listo',
+        type: 'Paywall', patterns: ['Server-rendered state', 'Reward claim', 'Streak'],
+        elements: ['Bottom sheet', 'Reward card', 'Primary button', 'Streak strip'],
+        note: 'Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.',
+        goto: '/serie/pasion-a-domicilio/13',
+      },
+      {
+        id: '02-la-cita', name: 'La cita · faltan 17 h',
+        type: 'Paywall', patterns: ['Countdown', 'Appointment', 'Opt-in notification'],
+        elements: ['Bottom sheet', 'Clock time', 'Reminder toggle', 'Primary button', 'Streak strip'],
+        note: 'El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.',
+        goto: '/serie/la-herencia-del-patriarca/19',
+      },
+      {
+        id: '03-cuenta-regresiva-corta', name: 'Faltan 42 minutos',
+        type: 'Paywall', patterns: ['Countdown', 'Balance spend'],
+        elements: ['Bottom sheet', 'Countdown timer', 'Primary button', 'Balance caption'],
+        note: 'Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.',
+        goto: '/serie/la-enfermera-infiltrada/13',
+      },
+    ],
+  },
 ]
+
+const log = (m) => process.stdout.write(m + '\n')
 
 const run = async () => {
   await rm(OUT, { recursive: true, force: true })
@@ -194,18 +229,35 @@ const run = async () => {
       locale: 'es-MX',
     })
     const page = await ctx.newPage()
-    await page.goto(BASE, { waitUntil: 'networkidle' })
-    await page.waitForTimeout(900)
+    const raiz = flow.base || BASE
+    const selector = flow.selector || '.phone'
+
+    if (flow.base) {
+      const vivo = await page.goto(raiz, { waitUntil: 'networkidle' }).then(r => r?.ok()).catch(() => false)
+      if (!vivo) {
+        log(`  · ${flow.id} SALTADO — ${raiz} no responde`)
+        await ctx.close()
+        continue
+      }
+    } else {
+      await page.goto(raiz, { waitUntil: 'networkidle' })
+      await page.waitForTimeout(900)
+    }
 
     const dir = join(OUT, 'flows', flow.id)
     await mkdir(dir, { recursive: true })
 
     const screens = []
     for (const s of flow.screens) {
-      await s.act(page)
+      if (s.goto) {
+        await page.goto(raiz + s.goto, { waitUntil: 'networkidle' })
+        await page.waitForTimeout(600)
+      } else {
+        await s.act(page)
+      }
       const file = `${s.id}.png`
-      await page.locator('.phone').screenshot({ path: join(dir, file) })
-      const stateKey = await page.locator('.phone').getAttribute('data-state')
+      await page.locator(selector).first().screenshot({ path: join(dir, file) })
+      const stateKey = await page.locator(selector).first().getAttribute('data-state')
       screens.push({
         id: s.id, name: s.name, screenType: s.type,
         patterns: s.patterns, elements: s.elements, note: s.note,

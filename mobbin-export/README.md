@@ -1,7 +1,7 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-13 pantallas · 6 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+16 pantallas · 7 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
@@ -89,10 +89,26 @@ Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posici�
 
 **De dónde salen mis monedas** — La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.
 
+## Flujo 7 · Sobre el stack real de Idilio
+
+La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, con los tokens de producción. El estado económico se resuelve en el servidor, que es el riesgo técnico nº 1 de la propuesta.
+
+| # | Pantalla | Tipo | Patrones |
+|---|---|---|---|
+| 1 | [Muro · el Pase está listo](flows/f7-stack-real/01-muro-pase-listo.png) | Paywall | Server-rendered state, Reward claim, Streak |
+| 2 | [La cita · faltan 17 h](flows/f7-stack-real/02-la-cita.png) | Paywall | Countdown, Appointment, Opt-in notification |
+| 3 | [Faltan 42 minutos](flows/f7-stack-real/03-cuenta-regresiva-corta.png) | Paywall | Countdown, Balance spend |
+
+**Muro · el Pase está listo** — Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.
+
+**La cita · faltan 17 h** — El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.
+
+**Faltan 42 minutos** — Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.
+
 ## Taxonomía
 
 **Tipos de pantalla:** Account / Wallet · Confirmation · Media player · Paywall · Selection · Sign up · Store
 
-**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Contextual auth · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Unit-of-value translation · Value ladder · Vertical video
+**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Contextual auth · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Server-rendered state · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Unit-of-value translation · Value ladder · Vertical video
 
-**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Countdown timer · Fine print · Goal row · Headline · Medal · Notice · Pack list · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Clock time · Countdown timer · Fine print · Goal row · Headline · Medal · Notice · Pack list · Price per unit · Primary button · Progress bar · Progress label · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Top bar · Total row · Video · Wallet chip

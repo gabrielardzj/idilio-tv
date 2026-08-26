@@ -40,7 +40,7 @@ export default async function EpisodioPage({
   const serie = await obtenerSerie(slug)
   if (!serie || !Number.isInteger(n) || n < 1 || n > serie.total) notFound()
 
-  const [va, estado] = await Promise.all([desbloqueadoHasta(slug), estadoDelPase()])
+  const [va, estado] = await Promise.all([desbloqueadoHasta(slug), estadoDelPase(slug)])
   const bloqueado = n > va
   const episodio = await obtenerEpisodio(slug, bloqueado ? n - 1 : n)
   const pase = resolverPase(estado)

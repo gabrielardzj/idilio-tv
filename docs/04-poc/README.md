@@ -1,7 +1,7 @@
 # 4. El POC
 
 **`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens.
-**`/mobbin-export`** · 13 pantallas en 6 flujos, capturadas automáticamente del POC.
+**`/mobbin-export`** · 16 pantallas en 7 flujos, capturadas automáticamente de los dos prototipos.
 
 ---
 
@@ -24,6 +24,10 @@ El alcance que pide el brief es *"la pantalla o el momento donde ocurre la mecá
 | 11 | Dos pases acumulados (tope) | El anti-FOMO: faltar no cuesta, volver seguido sigue rindiendo más |
 | 12 | Guardar la racha | El prompt de cuenta con las tres cifras en juego |
 | 13 | Mi economía | Fuentes, sumidero y posición, en una sola vista |
+
+Y tres más en [`web/`](../../web/), sobre el stack real, que son **rutas prerrenderizadas** y no
+estados de un panel: el pase listo, la cita de 17 h con «Avísame», y el contador de 42 minutos
+donde los segundos vuelven a ser el héroe.
 
 **Es un prototipo funcional, no un clickable.** El estado vive en un reducer real (`src/lib/state.ts`), el countdown corre contra un reloj, el saldo se descuenta, la racha avanza, el comodín se consume solo y el pase entra en cooldown de 24 h. Se puede llegar a cualquier estado jugando, sin usar el panel lateral.
 
@@ -80,4 +84,4 @@ Navegación general, home, catálogo, búsqueda, perfil, reproducción de video 
 - Blanco máximo `#F2EBF7` en lugar de `#FFFFFF`, pensado para brillo bajo en la franja de 11 p.m. a 2 a.m.
 - Ningún estado depende solo del color: la racha combina color, icono y etiqueta de texto.
 
-Auditado con **axe-core** (`wcag2a`, `wcag2aa`, `wcag21aa`, `best-practice`): **0 violaciones**, 24 reglas aprobadas. La primera pasada encontró cuatro — `maximum-scale` bloqueando el zoom, falta de landmark `main`, contenido fuera de landmarks y orden de encabezados — y están corregidas.
+Los dos árboles auditados con **axe-core** (`wcag2a`, `wcag2aa`, `wcag21aa`, `best-practice`): **0 violaciones** en los dos (24 y 33 reglas aprobadas). La primera pasada del prototipo encontró cuatro — `maximum-scale` bloqueando el zoom, falta de landmark `main`, contenido fuera de landmarks y orden de encabezados — y están corregidas.

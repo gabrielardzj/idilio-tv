@@ -65,6 +65,22 @@ Comparar las dos versiones lado a lado deja ver algo que solo aparece así: **la
 de Idilio son negro neutro, y las de mi prototipo tenían tinte violeta.** El producto real es
 más sobrio de lo que yo había asumido. La versión de esta carpeta es la fiel.
 
+## Los tres estados son rutas, no ramas muertas
+
+En producción `pass_state` es una fila por espectador y no depende de la serie. En el fixture,
+en cambio, **cada serie devuelve un estado distinto** — es la forma de que las tres situaciones
+del muro sean rutas reales y prerrenderizadas en vez de ramas de código que nadie puede alcanzar.
+
+| Ruta | Estado | Qué demuestra |
+|---|---|---|
+| `/serie/pasion-a-domicilio/13` | 1 pase, racha 2, saldo 0 | El Pase disponible. Lo gratis arriba de lo pago. |
+| `/serie/la-herencia-del-patriarca/19` | 0 pases, racha 3, comodín 1 | La cita: la hora del reloj como héroe, y «Avísame». |
+| `/serie/la-enfermera-infiltrada/13` | 0 pases, racha 5, saldo 45 | Faltan 42 min → el countdown vuelve a ser el héroe. Y con saldo, el pago sube a primario. |
+
+El reloj está anclado a las **00:17 de Ciudad de México** (`RELOJ_FIJO`). No es capricho: el 54%
+de las sesiones de Idilio caen entre 11 p.m. y 2 a.m., que es la franja en la que hay que juzgar
+este diseño. En SSR se reemplaza por `now()` de Postgres.
+
 ## Correrlo
 
 ```bash

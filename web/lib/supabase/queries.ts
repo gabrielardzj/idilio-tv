@@ -38,7 +38,20 @@ export interface EstadoPase {
   /** el corte de la noche se calcula en la zona del usuario, no del servidor */
   timezone: string
   hasAccount: boolean
+  /** momento del servidor contra el que el cliente descuenta */
+  serverNow: number
 }
+
+/**
+ * Reloj fijo del POC: 00:17 en Ciudad de México.
+ *
+ * En producción esto es `now()` de Postgres. Aquí se ancla a propósito, por dos
+ * razones. Una, el export estático hornea el valor en el build y un reloj real
+ * quedaría congelado en una hora arbitraria. Dos, el 54% de las sesiones de
+ * Idilio caen entre 11 p.m. y 2 a.m.: la franja en la que hay que juzgar este
+ * diseño es esa, no las tres de la tarde.
+ */
+export const RELOJ_FIJO = Date.parse('2026-08-26T06:17:00.000Z')
 
 /* ── Fixture ─────────────────────────────────────────────────────────────
    Tres series reales del catálogo, elegidas para cubrir las tres estructuras
@@ -92,18 +105,49 @@ export async function desbloqueadoHasta(slug: string): Promise<number> {
     ?? serie?.gratis ?? 0
 }
 
-export async function estadoDelPase(): Promise<EstadoPase> {
-  // select accrue_passes(v); select * from pass_state where viewer_id = v
+/**
+ * Estado del metajuego.
+ *
+ * En producción es una fila por espectador y no depende de la serie:
+ * `select accrue_passes(v); select * from pass_state where viewer_id = v`.
+ *
+ * En el fixture, en cambio, cada serie devuelve un estado distinto — es la forma
+ * de que las tres situaciones del muro sean rutas reales y prerrenderizadas, en
+ * vez de ramas de código que nadie puede alcanzar.
+ */
+const ESTADOS: Record<string, Omit<EstadoPase, 'timezone' | 'hasAccount' | 'serverNow'>> = {
+  // Tiene el pase de esta noche sin usar.
+  'pasion-a-domicilio': { passes: 1, nextPassAt: null, nights: 2, shields: 0, balance: 0 },
+  // Ya lo usó y no tiene monedas: el muro se vuelve una cita con hora.
+  'la-herencia-del-patriarca': {
+    passes: 0, nights: 3, shields: 1, balance: 0,
+    nextPassAt: new Date(RELOJ_FIJO + 17 * 3_600_000 + 47 * 60_000).toISOString(),
+  },
+  // Ya lo usó pero tiene saldo, y el próximo pase llega en menos de una hora:
+  // ahí el countdown vuelve a ser el héroe, porque los segundos sí importan.
+  'la-enfermera-infiltrada': {
+    passes: 0, nights: 5, shields: 1, balance: 45,
+    nextPassAt: new Date(RELOJ_FIJO + 42 * 60_000).toISOString(),
+  },
+}
+
+export async function estadoDelPase(slug: string): Promise<EstadoPase> {
+  const base = ESTADOS[slug] ?? ESTADOS['pasion-a-domicilio']
   return {
-    passes: 1,
-    nextPassAt: null,
-    nights: 2,
-    shields: 0,
-    balance: 0,
+    ...base,
     timezone: 'America/Mexico_City',
     hasAccount: false,
+    serverNow: RELOJ_FIJO,
   }
 }
+
+/** Etiqueta legible del estado que demuestra cada serie. Solo para el índice del POC. */
+export const estadoQueDemuestra = (slug: string) =>
+  ({
+    'pasion-a-domicilio': 'El Pase de la Noche está listo',
+    'la-herencia-del-patriarca': 'Pase gastado · la cita de mañana',
+    'la-enfermera-infiltrada': 'Con saldo · y el pase llega en 42 min',
+  })[slug] ?? ''
 
 /** Lo que costaría terminar la serie desde donde va el usuario. */
 export const costoParaTerminar = (serie: Serie, desbloqueadoHasta: number) =>

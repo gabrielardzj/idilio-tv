@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { listarSeries, desbloqueadoHasta } from '@/lib/supabase/queries'
+import { desbloqueadoHasta, estadoQueDemuestra, listarSeries } from '@/lib/supabase/queries'
 import { CATALOGO, EPISODE_COST } from '@/lib/economy'
 
 /**
@@ -22,6 +22,10 @@ export default async function Home() {
         El Pase de la Noche, implementado en Next.js App Router + Tailwind v4 con los
         tokens reales del producto. El estado económico se resuelve en el servidor.
       </p>
+      <p className="mt-3 text-[13px] leading-relaxed text-ink-low">
+        Cada serie entra al muro en un estado distinto, para que las tres situaciones sean
+        rutas reales y prerrenderizadas y no ramas de código inalcanzables.
+      </p>
 
       <div className="mt-10 space-y-3">
         {series.map((s) => {
@@ -41,10 +45,10 @@ export default async function Home() {
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-bold tracking-tight">{s.titulo}</span>
                 <span className="mt-0.5 block text-[13px] text-pass-300">
-                  El episodio {siguiente} está bloqueado
+                  {estadoQueDemuestra(s.slug)}
                 </span>
                 <span className="mt-1 block text-xs text-ink-low">
-                  Vas {va} de {s.total} · {s.gratis} gratis · {EPISODE_COST} monedas por episodio
+                  Episodio {siguiente} bloqueado · vas {va} de {s.total} · {s.gratis} gratis
                 </span>
               </span>
             </Link>
