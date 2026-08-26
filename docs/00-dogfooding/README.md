@@ -46,7 +46,7 @@ Dogfooding —usar el propio producto como un usuario más— manual: 2026-08-25
 | **Semanal** | **$ 12.500 COP / semana** | Acceso ilimitado a episodios · sin anuncios |
 | **Mensual** | **$ 24.500 COP / mes** | Lo mismo, con badge *RECOMMENDED* y *«Save 55%»* |
 
-Vive en la pestaña **Recompensas**, encabezando la sección, con las dos opciones comparadas. El muro no lo ofrece.
+Vive en la pestaña **Recompensas** y **también en el muro**, donde encabeza la hoja bajo el título *«Desbloquea TODO Idilio»*: por encima de las monedas, con el mensual marcado *RECOMENDADO* y *«Ahorra 55%»*. [Capturado acá](evidencia/muro-nativo-real-1.png).
 
 **El número que hay que mirar:** terminar la serie mediana comprando monedas —40 episodios bloqueados × 15 = 600 monedas— sale unos **$ 21.000** al precio de los escalones grandes. El mensual, que abre **el catálogo entero**, cuesta **$ 24.500**. Una sola serie cuesta casi lo mismo que un mes de todo.
 
@@ -88,12 +88,14 @@ Hay una tensión de diseño encima: el Pase Idilio se vende con *«sin anuncios�
 
 | | |
 |---|---|
-| ![Paywall nativo](evidencia/paywall-nativo-1.20.0.jpg) | ![Home nativo](evidencia/home-nativo.jpg) |
-| **Paywall nativo, build 1.20.0.** `Costo del episodio: 15` · `Tu balance: 0` · solo opciones de compra. Dos paquetes distintos entregan las mismas 180 monedas. | **Home nativo.** Chip de saldo arriba a la derecha, tab bar de 3 con *Recompensas* y *Perfil*. La fuente gratuita vive aquí; el sumidero vive en el player. |
+| ![Muro real](evidencia/muro-nativo-real-1.png) | ![Muro real, monedas](evidencia/muro-nativo-real-2.png) |
+| **El muro real, dentro de la app.** Saldo y costo arriba · la suscripción encabezando · el anuncio recompensado y los tres paquetes, cada uno traducido a episodios. | **El bloque de monedas.** `15 · Desbloquea 1 episodio · Ver anuncio · 0/10`, y debajo los paquetes en pesos con sus badges. Cierra con *«¿Más opciones? Ir a Recompensas»*. |
+| ![Home nativo](evidencia/home-nativo.jpg) | ![Ficha de tienda](evidencia/paywall-nativo-1.20.0.jpg) |
+| **Home nativo.** Chip de saldo arriba a la derecha, tab bar de 3 con *Recompensas* y *Perfil*. | ⚠️ **Esto no es la app: es material promocional de la ficha de App Store** —logo, mockup de teléfono, precios en dólares y una versión anterior del muro—. Se conserva a propósito: varias afirmaciones de este trabajo salieron de tratarla como si fuera el producto, y saber cuál fue la fuente del error importa más que borrar la prueba. |
 | ![Muro web](evidencia/muro-web-ep13.png) | ![Player web](evidencia/player-web.png) |
 | **Muro del reproductor web.** *"Se desbloquea en la app con 15 monedas"* y una sola salida: descargar la app. El contexto de serie y episodio se pierde en el salto. | **Reproductor web.** Funciona bien, autoplay al siguiente episodio incluido — pero sin saldo, sin recompensas y sin ninguna huella de la economía. |
 
-**La pestaña Recompensas.** Ahí vive toda la economía menos el gasto: las cuatro fuentes gratuitas, los tres paquetes y la suscripción. Todo a un toque del usuario **si se le ocurre ir a buscarlo** — y nada de eso aparece en el muro, que es donde el usuario está cuando necesita monedas.
+**La pestaña Recompensas.** Ahí vive toda la economía menos el gasto: las cuatro fuentes gratuitas, los tres paquetes y la suscripción, con más detalle que en ninguna otra parte. El muro no la reemplaza pero tampoco la ignora: lleva la suscripción, el anuncio recompensado y los paquetes, y cierra con un enlace —*«¿Más opciones? Ir a Recompensas»*— para lo que no cabe.
 
 | | |
 |---|---|

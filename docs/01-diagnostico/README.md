@@ -54,18 +54,30 @@ Lo que la economía limita, entonces, es **cuánto se avanza dentro de una misma
 
 > **Límite.** El dato no sostiene que el muro sea lo que *termina la sesión*, que es una afirmación distinta y más fuerte. 14 es una media —en una sesión corta el bloque gratis sobra— y al chocar el usuario todavía tiene un catálogo entero de arranques gratis por delante. Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.
 
-Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall (el muro de pago) del build 1.20.0:
+Y esto es lo que el usuario encuentra en ese choque, [capturado dentro de la app](../00-dogfooding/evidencia/muro-nativo-real-1.png) con storefront de Colombia:
 
 ```
-Costo del episodio: 15        Tu balance: 0
-─────────────────────────────────────────
-       Obtén monedas para continuar
-  $0.99 → 180    $1.99 → 180    $3.99 → 375
+🔒 Episodio 16/56
+Tu balance: 0                    Costo del episodio: 15
+────────────────────────────────────────────────────────
+Desbloquea TODO Idilio
+  SEMANAL  $12.500 COP/sem   ·   MENSUAL  $24.500 COP/mes
+                                 RECOMENDADO · Ahorra 55%
+────────────────────────────────────────────────────────
+Obtén monedas para desbloquear episodios
+   15  Desbloquea 1 episodio        [Ver anuncio]   0/10
+  180  Desbloquea 12 episodios      $2.500 COP   SUPER OFERTA 69%
+  375  Desbloquea 25 episodios      $13.500 COP  −20% DTO
+  725  Completa la serie            $25.500 COP  −24% DTO
+
+  ¿Más opciones? Ir a Recompensas
 ```
 
-> **De dónde salen estos montos, y en qué moneda paga el usuario.** La captura es de la ficha de tienda, que Idilio publica en dólares — es el mismo material para todos los países. **A un usuario en Colombia la tienda le cobra en pesos:** la ficha de Google Play declara compras dentro de la app de **$1.900 a $59.900 por elemento**. Los montos por paquete en pesos no están en la evidencia que tengo, así que el análisis de abajo va sobre lo que sí está medido y no depende de la moneda: **las monedas que entrega cada paquete y la proporción entre ellos.**
+**El muro no esconde la economía: la enseña entera.** Dice el saldo y el costo del episodio antes que ningún precio, traduce cada paquete a episodios —*«Desbloquea 12 episodios»*, no *«180 monedas»*—, ofrece la suscripción, lleva un anuncio recompensado que abre un episodio gratis y enlaza a la pestaña de Recompensas. Cualquiera de esas cosas, por separado, sería una mejora razonable que proponer. Están todas.
 
-Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más**. Las maneras de conseguir monedas sin pagar —la recompensa diaria y una lista de tareas: compartir la app, seguir las cuentas de Facebook, Instagram, YouTube, TikTok y WhatsApp, calificar la app— viven todas en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
+Lo que sí se puede leer en esta pantalla es **su orden**: abre con *«Desbloquea TODO Idilio»* —lo más caro— y la única salida gratuita queda debajo, dentro de un bloque titulado *«Obtén monedas»*, en la tarjeta más apagada de las cuatro, mientras el paquete de pago lleva borde encendido y el badge más agresivo. Y su contador, `0/10`, no dice lo que vale: son **diez episodios gratis al día**, y ahí está escrito como una fracción gris en una esquina.
+
+> **De dónde salen estos montos.** De la app, con storefront de Colombia, no de la ficha de tienda —que publica precios en dólares y es el mismo material para todos los países—. Coinciden con lo que declara Google Play: compras dentro de la app de **$1.900 a $59.900 por elemento**.
 
 ### Hallazgo 2 · Pagar no es la única salida del muro: empezar otra serie es gratis
 
@@ -124,7 +136,7 @@ Y no es la única fuente. La pestaña **Recompensas** concentra cuatro, [captura
 
 **La más grande, por mucho, es el anuncio recompensado — y cambia el diagnóstico.** Diez anuncios diarios son 150 monedas: **70 episodios gratis por semana**. El usuario promedio entra 2.3 veces y ve 14 episodios por sesión, unos 32 a la semana. **La fuente gratuita recurrente más que duplica el consumo.** Quien sepa que ese botón existe no choca nunca con un muro.
 
-Ninguna de las cuatro aparece en el muro.
+**Y la mayor de las cuatro sí aparece en el muro** —[capturado dentro de la app](../00-dogfooding/evidencia/muro-nativo-real-2.png)—: el anuncio recompensado está dentro de la hoja, con su *«Desbloquea 1 episodio»* y su contador *0/10*. Lo que no está es lo que ese contador significa. Un `0/10` en gris, en la esquina de una tarjeta, no le dice a nadie que ahí hay **diez episodios gratis al día**, que es la cifra que cambia el diagnóstico. La fuente no está escondida: está sin traducir, que es el mismo defecto que este documento le señala a la moneda.
 
 - **19% de los usuarios activos reclama la recompensa diaria.** El diálogo no se puede no ver: se interpone entre el usuario y la app. Así que el 81% restante **no la deja pasar por no encontrarla: la descarta**.
 - **82% nunca abrió el perfil.** Lo que vive en una pestaña aparte, para este usuario, no existe — y eso sí aplica a todo lo demás del metajuego.
@@ -137,11 +149,13 @@ Ese 19% es la señal más informativa del conjunto, precisamente porque el produ
 | **No necesita monedas todavía.** El diálogo aparece antes de ver nada, con 10 episodios gratis por delante — y con 500 en el catálogo, esa necesidad tarda meses en aparecer | [Hallazgo 2](#hallazgo-2--pagar-no-es-la-única-salida-del-muro-empezar-otra-serie-es-gratis) |
 | **Está en el camino a lo que vino a hacer.** A la 1 a.m., con una mano, lo que se interpone entre abrir la app y ver se cierra por reflejo | 54% de las sesiones entre 11 p.m. y 2 a.m. |
 
-**La conclusión no es que la fuente esté escondida: es que el momento está mal elegido, y que hay un botón de por medio.** El único instante del día en que el usuario quiere monedas es cuando choca con el muro, y ahí la fuente gratuita no aparece.
+**La conclusión no es que la fuente esté escondida ni que falte del muro: es que llega sin traducir y en el peor renglón de la pantalla.** El único instante del día en que el usuario quiere monedas es cuando choca con el muro. La fuente está ahí — debajo de la suscripción, en la tarjeta más apagada, y con su tope escrito como `0/10` en vez de como los diez episodios diarios que son.
 
-**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal** y uno **mensual**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal cuesta más que terminar la serie mediana comprándola, que son 600 monedas. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
+**Y la suscripción tampoco vive afuera: encabeza el muro.** Idilio ya es un modelo híbrido —monedas y suscripción conviviendo— y el pase semanal ($12.500) y el mensual ($24.500) son lo primero que aparece al chocar, con el mensual marcado *RECOMENDADO*. El producto de mayor valor de la economía está exactamente donde tiene que estar.
 
-Conviene separar dos cosas, porque la estrategia descarta una y propone la otra. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). **Como superficie**, es otra cosa: el producto de mayor valor de la economía no aparece en el momento de máxima intención, y eso es una falla del muro, no de la suscripción.
+Lo que queda en pie es un problema de número, no de ubicación: **terminar la serie mediana comprando monedas —600— sale unos $21.000, y el mensual abre el catálogo entero por $24.500.** Una sola serie cuesta casi lo mismo que un mes de todo, y el muro pone las dos ofertas en la misma pantalla sin que nada haga esa comparación por el usuario. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).
+
+Y conviene separar dos cosas, porque la estrategia descarta una. **Como mecánica de retención**, la suscripción no sirve para este objetivo: no mueve el DAU/MAU del no-pagador, que es el 95%+ de la base, y por eso queda descartada en [§2.6](../02-estrategia/#26-qué-queda-deliberadamente-afuera). Como superficie ya está resuelta por el producto.
 
 ### F2 · Nadie le dice al usuario cuánto vale una moneda
 
@@ -172,9 +186,9 @@ De ahí salen tres problemas:
 
 1. **Los dos escalones grandes son el mismo precio.** Pasar de 375 a 725 monedas cuesta casi el doble de dinero y mejora el precio por episodio un **1,7%**: nueve pesos. Una escalera de paquetes existe para que al usuario le convenga subir; esta no le da ninguna razón.
 2. **El escalón barato es 2,6 veces mejor que los otros dos**, y lleva encima el badge más agresivo. Un usuario que compare una sola vez aprende que fuera de la oferta el episodio cuesta el triple, y esa es la lección que se lleva de la economía entera.
-3. **Los tres llevan badge de descuento a la vez** —69%, 20%, 24%—. Un precio tachado solo persuade si hay algo sin descuento contra qué compararlo. Cuando todo está en oferta, nada lo está.
+3. **Los tres llevan badge de descuento a la vez** —69%, 20%, 24%—. Un descuento solo persuade si hay algo sin descuento contra qué compararlo. Cuando los tres están en oferta, ninguno lo está: el badge deja de ser información y pasa a ser decoración.
 
-Y por encima de la escalera hay un número que la desarma: terminar la serie mediana comprando monedas —600— sale unos **$ 21.000**, y el **Pase Idilio mensual abre el catálogo entero por $ 24.500**. Comprar una serie cuesta casi lo mismo que un mes de todo, y el muro no menciona la suscripción.
+Y por encima de la escalera hay un número que la desarma: terminar la serie mediana comprando monedas —600— sale unos **$ 21.000**, y el **Pase Idilio mensual abre el catálogo entero por $ 24.500**. Comprar una serie cuesta casi lo mismo que un mes de todo, y el muro pone las dos ofertas en la misma pantalla: la suscripción arriba, los paquetes abajo. Nada hace la comparación por el usuario, y es la que decide si paga una vez o todos los meses.
 
 ### F4 · La racha le exige al usuario una frecuencia que no tiene
 
