@@ -80,12 +80,24 @@ export const SUBSCRIPTION = { semanal: 12500, mensual: 24500 } as const
  *  que obliga a que el Pase de la Noche NO se defienda por volumen. */
 export const FUENTES_HOY = {
   anuncio: { monedas: 15, topeDiario: 10 },
-  diaria: { monedas: 40 },
+  /** La recompensa diaria no es una cifra fija: es una escalera de 7 días que
+   *  se reinicia. Medida en el modal «IDILIO STREAK» de la app.
+   *  15 → 40 → 60 → 50 → 40 → 45 → 200, en total 450 monedas = 30 episodios.
+   *
+   *  La forma importa más que el total. La escalera **sube hasta el día 3 y
+   *  después baja dos días seguidos** antes del salto del día 7: quien llega al
+   *  día 3 —solo el 6%— se encuentra con que mañana rinde menos que hoy, justo
+   *  en el tramo donde la gente abandona. Es el mismo defecto que F3 le señala
+   *  a la escalera de paquetes, cometido en la economía gratuita. */
+  diaria: { escalera: [15, 40, 60, 50, 40, 45, 200] },
   tareasUnaVez: { monedas: 90 },
 } as const
 
 export const episodiosGratisPorSemanaHoy =
   Math.floor((FUENTES_HOY.anuncio.monedas * FUENTES_HOY.anuncio.topeDiario * 7) / EPISODE_COST)
+
+/** Lo que paga la racha diaria en una semana perfecta: 450 monedas, 30 episodios. */
+export const monedasRachaSemana = FUENTES_HOY.diaria.escalera.reduce((a, b) => a + b, 0)
 
 /** PROPUESTA · la ventana de la "noche" corre de 5am a 5am en la zona del usuario.
  *  54% de las sesiones son entre 11pm y 2am: cortar a medianoche parte esa

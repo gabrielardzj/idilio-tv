@@ -71,15 +71,16 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Episodios gratis en total | 500 (22% del catálogo) | Censo |
 | Precio de la serie mediana | 600 monedas ≈ $ 21.000 | 40 bloqueados × 15, al peldaño regular |
 | Paquetes actuales | 180/$ 2.500 · 375/$ 13.500 · 725/$ 25.500 | Pestaña Recompensas, app nativa, storefront CO |
-| Fuentes gratuitas | anuncio 15 monedas ×10 diarios · diaria 40 · tareas 90 | Pestaña Recompensas, app nativa |
+| Fuentes gratuitas | anuncio 15 ×10 diarios · racha diaria 15·40·60·50·40·45·200 · tareas 90 | Recompensas y modal de racha |
 | Pase Idilio | $ 12.500 semanal · $ 24.500 mensual | Pestaña Recompensas, app nativa |
 
-**Y las cifras se verifican solas.** `npm run verificar` corre 54 comprobaciones de los
-documentos contra el código y contra el censo del catálogo: 46 son cifras —episodios, monedas,
+**Y las cifras se verifican solas.** `npm run verificar` corre 57 comprobaciones de los
+documentos contra el código y contra el censo del catálogo: 48 son cifras —episodios, monedas,
 precios en pesos, porcentajes, los topes de las fuentes gratuitas y los conteos que anuncian los
-encabezados— y 8 son invariantes que ninguna cifra sola expresa: que cada serie cuadre, que la
-escalera propuesta baje en cada escalón, que la real **no** lo haga en el último, que la fuente
-gratuita de hoy supere el consumo semanal, que ningún paquete lleve precio tachado.
+encabezados— y 9 son invariantes que ninguna cifra sola expresa: que cada serie cuadre, que la
+escalera propuesta baje en cada escalón, que la real **no** lo haga en el último, que la de la
+racha diaria baje después del día 3, que la fuente gratuita de hoy supere el consumo semanal, que
+ningún paquete lleve precio tachado.
 Aparte, rastrea los textos buscando cifras que se corrigieron en el camino y podrían haber
 sobrevivido a una edición, y audita el contraste de los tokens de texto. Corre en el pipeline
 antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar al entregable.

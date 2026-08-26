@@ -135,7 +135,7 @@ Y no es la única fuente. La pestaña **Recompensas** concentra cuatro, [captura
 | Fuente | Cuánto da | En episodios |
 |---|---|---|
 | **Ver anuncios** | 15 monedas · tope **10 diarios** | **hasta 10 episodios por día** |
-| Recompensa diaria | 40 monedas al día | 2 episodios por día |
+| Recompensa diaria | escalera de 7 días: **15 · 40 · 60 · 50 · 40 · 45 · 200** | 30 episodios en una semana perfecta |
 | Tareas sociales (una sola vez) | 10 cada una · 30 por calificar | 6 en total |
 | Programa de referidos | sin cifra capturada | — |
 
@@ -200,7 +200,17 @@ Y por encima de la escalera hay un número que la desarma: terminar la serie med
 - Lo que el usuario realmente hace: **2.3 días activos por semana** (el DAU/MAU de 0.33).
 - Lo que la racha diaria exige: **7 días de 7**.
 
-Se le está pidiendo a alguien que entra dos o tres veces por semana que se comporte como si entrara todos los días. Que solo el **6% llegue al día 3** no es un problema de cómo se ve la pantalla de racha: es la consecuencia aritmética de haber elegido el día calendario como unidad de una conducta que no es diaria.
+Se le está pidiendo a alguien que entra dos o tres veces por semana que se comporte como si entrara todos los días.
+
+**Y la escalera de premios va hacia atrás justo donde la gente abandona.** Esto es lo que paga la racha, medido en el modal de la app ([captura](../00-dogfooding/#capturas-de-la-evidencia)):
+
+| Día | 1 | 2 | **3** | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|
+| Monedas | 15 | 40 | **60** | 50 | 40 | 45 | 200 |
+
+Sube hasta el día 3, y después **baja dos días seguidos**. Quien llega al día 3 —el 6%— se encuentra con que mañana rinde menos que hoy, y pasado menos todavía. La curva desinfla el esfuerzo exactamente en el tramo donde hay que sostenerlo, y guarda todo el premio para un día 7 al que casi nadie llega.
+
+Es el mismo defecto que [F3](#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie) le señala a la escalera de paquetes —una escalera que no sube no es una escalera— cometido esta vez en la economía gratuita. Que el pico caiga en el día 3 y el 6% se mida ahí no es coincidencia: el día 3 es donde el sistema deja de dar más. Que solo el **6% llegue al día 3** no es un problema de cómo se ve la pantalla de racha: es la consecuencia aritmética de haber elegido el día calendario como unidad de una conducta que no es diaria.
 
 El corte de día calendario agrava el problema, porque castiga el comportamiento más común del producto. **54% de las sesiones ocurren entre las 11 p.m. y las 2 a.m.** Alguien que ve el lunes a las 23:30 y otra vez a las 00:30 vivió "dos noches seguidas". Para un contador de días calendario fue un solo día —el martes—, y el lunes quedó vacío: racha rota. El usuario pierde por un detalle de calendario que nunca va a aceptar como justo.
 

@@ -485,7 +485,8 @@ Eso sigue siendo original de este diagnóstico.
   es la fuente más cargada de todo el anexo sosteniendo su sección más citada.
 - ~~**La mecánica exacta de "retos" y video recompensado dentro de Idilio.**~~ **Ya no es una
   incógnita: está medida.** La pestaña Recompensas da **15 monedas por anuncio con tope de 10
-  diarios** —hasta 10 episodios gratis por día—, 40 monedas por la recompensa diaria y 90 en tareas
+  diarios** —hasta 10 episodios gratis por día—, una racha diaria de 7 escalones que paga 450
+  monedas la semana completa y 90 en tareas
   sociales de una sola vez. Capturas en el [registro de dogfooding](../00-dogfooding/#las-cuatro-fuentes-gratuitas-de-monedas).
   Con eso, Idilio deja de ser el caso sin anuncios de la comparación de §5.3 y pasa a estar en el
   centro del estándar de la categoría.

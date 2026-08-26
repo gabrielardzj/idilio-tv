@@ -57,7 +57,7 @@ Medidas en la pestaña Recompensas de la app, con storefront de Colombia. **La m
 | Fuente | Cuánto da | Cadencia | En episodios |
 |---|---|---|---|
 | **Ver anuncios** | 15 monedas por anuncio · **tope 10 diarios** | recurrente, diaria | **hasta 10 episodios por día** |
-| **Recompensa diaria** | 40 monedas | recurrente, diaria | 2 episodios por día |
+| **Recompensa diaria** | escalera de 7 días · 450 monedas la semana completa | recurrente, se reinicia | 30 episodios por semana |
 | Tareas sociales | 10 monedas cada una · 30 por calificar la app | **una sola vez** | 6 episodios en total |
 | Programa de referidos | sin cifra capturada | por referido | — |
 
@@ -99,8 +99,10 @@ Hay una tensión de diseño encima: el Pase Idilio se vende con *«sin anuncios�
 
 | | |
 |---|---|
-| ![Recompensas · paquetes y anuncios](evidencia/recompensas-nativo-cop.png) | ![Pase Idilio](evidencia/pase-idilio-nativo-cop.png) |
-| **Los paquetes y los anuncios.** 180 a $ 2.500, 375 a $ 13.500 y 725 a $ 25.500, los tres con badge de descuento. Debajo, *«Ver anuncios · 0/10 vistos (límite diario) · 15 por anuncio»* — la fuente más grande del sistema. Y más abajo, el programa de referidos. | **El Pase Idilio y la recompensa diaria.** *«Claim your daily reward — Come back tomorrow and claim +40 coins»*, y debajo los dos planes: semanal $ 12.500 COP y mensual $ 24.500 COP con *«Save 55%»*. Las dos ventajas que vende son acceso ilimitado y **sin anuncios**. |
+| ![Modal de la racha diaria](evidencia/racha-diaria-modal.png) | ![Recompensas · paquetes y anuncios](evidencia/recompensas-nativo-cop.png) |
+| **La racha diaria, al abrir la app.** *«IDILIO STREAK · Day 1 of 7»*, el saldo y el costo del episodio, y los siete escalones a la vista: **15 · 40 · 60 · 50 · 40 · 45 · 200**. Sube hasta el día 3 y baja los dos siguientes. Botón **CLAIM**: si no se toca, no se acredita. | **Los paquetes y los anuncios.** 180 a $ 2.500, 375 a $ 13.500 y 725 a $ 25.500, los tres con badge de descuento. Debajo, *«Ver anuncios · 0/10 vistos (límite diario) · 15 por anuncio»* — la fuente más grande del sistema. |
+| ![Pase Idilio](evidencia/pase-idilio-nativo-cop.png) | |
+| **El Pase Idilio, en Recompensas.** Los dos planes: semanal $ 12.500 COP y mensual $ 24.500 COP con *«Save 55%»*. Las dos ventajas que vende son acceso ilimitado y **sin anuncios** — o sea que la suscripción cobra por quitar la fuente gratuita más grande del producto. | |
 
 | | |
 |---|---|

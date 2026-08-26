@@ -7,7 +7,7 @@
  */
 import { EPISODE_COST, FREE_EPISODES, MAX_PASSES, PACKS, CATALOGO, STREAK,
          weeklyIssuance, toEpisodes, pricePerEpisode, LIVE_LADDER, SUBSCRIPTION,
-         FUENTES_HOY, episodiosGratisPorSemanaHoy } from '../src/lib/economy.ts'
+         FUENTES_HOY, episodiosGratisPorSemanaHoy, monedasRachaSemana } from '../src/lib/economy.ts'
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -118,7 +118,11 @@ v('pase mensual (COP)', SUBSCRIPTION.mensual, 24500)
 console.log('\n── las fuentes gratuitas que el producto ya tiene ─────────────')
 v('monedas por anuncio', FUENTES_HOY.anuncio.monedas, 15)
 v('tope diario de anuncios', FUENTES_HOY.anuncio.topeDiario, 10)
-v('recompensa diaria', FUENTES_HOY.diaria.monedas, 40)
+v('escalera de la racha diaria', FUENTES_HOY.diaria.escalera.join('·'), '15·40·60·50·40·45·200')
+v('la racha diaria paga en una semana', monedasRachaSemana, 450)
+v('la racha diaria en episodios por semana', toEpisodes(monedasRachaSemana), 30)
+v('la escalera de la racha BAJA después del día 3',
+  FUENTES_HOY.diaria.escalera[3] < FUENTES_HOY.diaria.escalera[2], true)
 v('episodios gratis por semana solo en anuncios', episodiosGratisPorSemanaHoy, 70)
 v('la fuente gratuita supera el consumo semanal', episodiosGratisPorSemanaHoy > 14 * 2.3, true)
 

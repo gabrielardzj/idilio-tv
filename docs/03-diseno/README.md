@@ -74,6 +74,8 @@ Todo se acredita solo, al ver. La tabla es lo que llega cada noche sin pedir nad
 
 Las monedas solo aparecen en las noches 3, 5 y 7 — es decir, solo para quien ya volvió varias veces. El grueso del valor está en el pase, que tiene techo duro.
 
+**Y ninguna noche rinde menos que la anterior**, que es la diferencia con la escalera que el producto ya tiene. La racha diaria de Idilio paga **15 · 40 · 60 · 50 · 40 · 45 · 200**: sube hasta el día 3 y después baja dos días seguidos, justo en el tramo donde la gente abandona ([diagnóstico F4](../01-diagnostico/#f4--la-racha-le-exige-al-usuario-una-frecuencia-que-no-tiene)). Acá el pase llega todas las noches y las monedas solo suman, así que la línea nunca va hacia atrás. En total son 150 monedas contra las 450 de la escalera actual — **un tercio**, porque el valor se mudó de la moneda al pase, que es lo que crea la cita.
+
 ---
 
 ## 3.3 El flujo
