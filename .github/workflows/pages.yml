@@ -10,8 +10,14 @@ permissions:
   pages: write
   id-token: write
 
+# El grupo lleva la rama a propósito. Con `pages` a secas, cualquier workflow
+# del repositorio que declare ese mismo nombre cancela este —y eso es lo que
+# pasaba: el despliegue del workspace paralelo arranca unos segundos después,
+# mataba el de main y después fallaba él, así que no se publicaba nada. Con la
+# rama dentro, main sigue cancelando sus propios despliegues encadenados, que es
+# lo que este ajuste existe para hacer, y deja de ser cancelable desde fuera.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
