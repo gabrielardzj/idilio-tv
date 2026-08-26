@@ -22,7 +22,8 @@ Trabajando por separado, los dos llegaron a la misma conclusión con palabras di
 - *da-nang*: «el metajuego no está mal diseñado, **está en otro edificio**».
 
 Y los dos eligieron **el muro de desbloqueo** como la única superficie con alcance total, por el
-mismo argumento aritmético: la sesión promedio (14 episodios) supera los 10 gratis por serie.
+mismo argumento aritmético: la sesión promedio (14 episodios) supera los 10 gratis que regala la
+serie típica —37 de las 41 con muro—.
 
 Dos análisis independientes que convergen son mucha más evidencia que uno solo. **Eso hay que
 decirlo en la presentación, sea cual sea la versión que se entregue.**
@@ -31,16 +32,15 @@ decirlo en la presentación, sea cual sea la versión que se entregue.**
 
 ## 2 · La diferencia de mecánica, y por qué mi crítica era parcialmente injusta
 
-|  | harare | da-nang · **como lo entregué antes de este documento** |
+|  | harare | da-nang · **antes de adoptar la acreditación al ver** |
 |---|---|---|
 | **Cómo se gana** | al **terminar un episodio**, sin reclamar | al **usar el pase** en el muro |
 | **Qué se gana** | capítulos que **caducan esa noche** | pases que **se acumulan hasta 2** |
 | **Corte de la noche** | 4:00 am | 5:00 am |
 
-> **La columna de la derecha es la mecánica vieja, y está acá porque es la que da sentido a la
-> comparación que sigue.** Ya no es la vigente: en §4 cuento que adopté la acreditación de
-> `harare`. Hoy la regla de esta versión son **tres cosas distintas**, y confundirlas es lo que
-> hacía que la tabla se contradijera con §4:
+> **La columna de la derecha no es la regla vigente**, y está acá porque es la que da sentido a
+> la comparación que sigue: en §4 se adopta la acreditación de `harare`. Hoy la regla de esta
+> versión son **tres cosas distintas**, y conviene no confundirlas:
 >
 > 1. **Emisión** — se genera un pase por noche, por el reloj, hasta 7 por semana. Ocurre esté el
 >    usuario o no.
@@ -76,7 +76,7 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
 
 ## 3 · Qué tiene cada uno en exclusiva
 
-### Solo en `harare`
+### Lo que `harare` tenía y yo no
 
 - **Acreditación sin reclamar** *(era exclusiva; ya la adopté acá — §4)*. La racha avanza al
   terminar un episodio. La adopción de la fuente pasa de 19% a ~100% **por construcción**, no
@@ -87,7 +87,7 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
   considerado perfil vs muro. Reconoce que es un trade-off y no una obviedad.
 - **Preparación de la sesión de cierre** con las preguntas difíciles.
 
-### Solo en `da-nang`
+### Lo que tenía yo y `harare` no
 
 - **Censo del catálogo completo** (50 series, 2.230 episodios). De ahí sale el segundo hallazgo:
   **500 episodios gratis = casi cuatro meses sin pagar**, que reencuadra el problema —la alternativa

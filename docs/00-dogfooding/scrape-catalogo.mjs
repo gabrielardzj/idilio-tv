@@ -7,26 +7,23 @@
  *
  *   node scrape-catalogo.mjs > catalogo.json
  *
- * ── Tres cosas que la primera versión hacía mal, y por qué importan ─────────
+ * ── Tres decisiones, y las tres maneras de mentir que evitan ───────────────
  *
- * 1 · **De dónde salen las series.** Antes se raspaban los enlaces del home, y
- *     el home son rieles curados: no es el catálogo. Ahora la lista sale de
- *     `sitemap.xml`, que es lo que el propio sitio declara como su catálogo
- *     completo. La diferencia no era cosmética: el home dejaba fuera series.
+ * 1 · **De dónde salen las series.** Del `sitemap.xml`, que es lo que el propio
+ *     sitio declara como su catálogo completo — no de los enlaces del home, que
+ *     son rieles curados y dejan series afuera. La diferencia no es cosmética.
  *
- * 2 · **De dónde sale el total de episodios.** Antes era `max(nº de episodio)`
- *     visto en la lista. Si la numeración tiene huecos —y los tiene— el total
- *     queda mal y deja de cuadrar con gratis + bloqueados. Ahora se lee el
- *     contador que la propia ficha publica ("N episodios"), y `max` queda solo
- *     como control cruzado.
+ * 2 · **De dónde sale el total de episodios.** Del contador que la propia ficha
+ *     publica ("N episodios"), no de `max(nº de episodio)` visto en la lista: si
+ *     la numeración tiene huecos —y los tiene— el total queda mal y deja de
+ *     cuadrar con gratis + bloqueados. `max` queda solo como control cruzado.
  *
- * 3 · **Qué pasa cuando una ficha no se puede leer.** Antes devolvía
- *     `total: 0` y esa serie se sumaba como un cero: tres series reales
- *     desaparecieron del censo sin una sola línea de aviso, y los agregados
- *     publicados salieron de ahí. Ahora cada ficha se reintenta, y si igual no
- *     se puede leer el script **termina con error** en vez de emitir un censo
- *     incompleto que parece completo. Un censo que se cae es recuperable; uno
- *     que miente por omisión, no.
+ * 3 · **Qué pasa cuando una ficha no se puede leer.** Cada ficha se reintenta, y
+ *     si igual no se puede leer el script **termina con error** en vez de emitir
+ *     un censo incompleto que parece completo. Devolver `total: 0` haría que esa
+ *     serie se sume como un cero y desaparezca del censo sin una línea de aviso,
+ *     arrastrando los agregados. Un censo que se cae es recuperable; uno que
+ *     miente por omisión, no.
  */
 const SITIO = 'https://www.idilio.tv'
 const REINTENTOS = 3

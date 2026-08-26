@@ -89,8 +89,6 @@ Eso cambia el significado de casi todas las demás señales:
 
 ### F1 · Lo que resolvería el muro vive en otra pantalla
 
-*(Esta falla se llamaba "Las monedas se ganan en un lugar y se gastan en otro". Ensanché el título, no el contenido: el desajuste fuente↔sumidero es el primer caso, pero el segundo —la suscripción, que tampoco está en el muro— no es un problema de monedas y bajo el título viejo entraba de contrabando. Preferí ensanchar antes que abrir una F6: F2–F5 se citan por número en los otros documentos.)*
-
 El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan. La única fuente gratuita —la recompensa diaria y su racha— vive en la pestaña **Recompensas**. El gasto ocurre en el **player** —el reproductor—, al chocar con el muro. Son dos pantallas distintas, y cuando el usuario necesita monedas siempre está en la segunda.
 
 - **19% de los usuarios activos reclama la recompensa diaria.** El 81% restante no la rechaza: no sabe que existe, porque nunca aparece en el momento en que le haría falta.

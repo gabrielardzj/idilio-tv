@@ -30,10 +30,9 @@ export function Reproductor({
   const [celebrar, setCelebrar] = useState(false)
 
   const usarPase = () => {
-    // Gastar el pase NO avanza la racha: eso ya pasó al terminar el episodio,
-    // en credit_night(). Esta función hacía lo contrario —avanzaba la noche,
-    // daba el comodín y pagaba el bono—, o sea implementaba la mecánica vieja
-    // justo al lado de un use_pass() que dice esto mismo en un comentario.
+    // Gastar el pase NO avanza la racha ni paga bono ni da comodín: eso ya pasó
+    // al terminar el episodio, en credit_night(). Acá solo se descuenta el pase.
+    // `use_pass()` dice esto mismo en un comentario, del lado del servidor.
     setPase({ ...pase, passes: pase.passes - 1 })
     setAbierto(true)
     setCelebrar(true)
@@ -144,10 +143,9 @@ function Celebracion({
             <Ticket s={38} />
           </span>
           <h2 className="text-2xl font-bold tracking-tight">Episodio {episodio} desbloqueado</h2>
-          {/* Decía «El próximo llega en 24 horas» y debajo pagaba un bono de
-              racha. Las dos cosas eran de la mecánica vieja: el pase no paga
-              nada al gastarse, y la cita se ancla a la hora de siempre del
-              usuario, que es lo que `listoA` ya trae resuelto del servidor. */}
+          {/* Nada de «en 24 horas» ni de bono acá: el pase no paga nada al
+              gastarse, y la cita se ancla a la hora de siempre del usuario, que
+              es lo que `listoA` ya trae resuelto desde el servidor. */}
           <p className="mt-2 mb-5 text-sm leading-relaxed text-ink-mid">
             {pase.passes > 0
               ? <>Usaste uno de tus Pases de la Noche. Te {pase.passes === 1 ? 'queda otro' : `quedan ${pase.passes}`}.</>

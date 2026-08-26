@@ -112,16 +112,16 @@ function desfase(ms: number, tz: string): number {
 /**
  * La cita: mañana a la hora en que este usuario suele ver.
  *
- * **Se calcula en la zona del espectador, no en la del proceso.** Acá decía
- * `d.setHours(21, 30)`, que fija las 21:30 de la máquina que corre el código.
- * En mi portátil eso daba 21:30 de Bogotá y parecía correcto; en el runner de
- * CI, que corre en UTC, daba 21:30 UTC — o sea las 15:30 de Ciudad de México,
- * que es la zona con la que después se formatea. El sitio publicado anunciaba
- * una cita a una hora que el usuario no reconoce.
+ * **Se calcula en la zona del espectador, no en la del proceso.** Un
+ * `d.setHours(21, 30)` fija las 21:30 de la máquina que corre el código: en un
+ * portátil con la zona correcta da 21:30 y parece bien; en un runner de CI, que
+ * corre en UTC, da 21:30 UTC — o sea las 15:30 de Ciudad de México, que es la
+ * zona con la que después se formatea. El sitio publicaría una cita a una hora
+ * que el usuario no reconoce.
  *
  * Es exactamente el riesgo técnico nº 2 que la propuesta enumera —«la ventana
- * se calcula en la zona del usuario, nunca en UTC»— cometido en el código que
- * existe para demostrar que se puede evitar.
+ * se calcula en la zona del usuario, nunca en UTC»— en el código que existe
+ * para demostrar que se puede evitar.
  *
  * En producción sale de su historial de reproducción; aquí es una constante.
  * Anclar la cita a «+24 h desde el último uso» la deja caer a una hora

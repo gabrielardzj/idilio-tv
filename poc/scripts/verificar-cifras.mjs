@@ -14,11 +14,11 @@ import { fileURLToPath } from 'node:url'
 const RAIZ = dirname(dirname(dirname(fileURLToPath(import.meta.url))))
 
 const CENSO = JSON.parse(readFileSync(join(RAIZ, 'docs/00-dogfooding/catalogo.json'), 'utf8'))
-// Acá decía `.filter(x => !x.error && x.total > 0)`. Ese `total > 0` descartaba
-// en silencio las tres series que el scraper no supo parsear y emitió con
-// `total: 0`: los agregados cuadraban contra un CATALOGO igual de incompleto y
-// el guardián firmaba «TODO CONSISTENTE» sobre un censo al que le faltaban
-// series. Una entrada rota ya no se descarta: se denuncia (ver `rotas`).
+// El filtro es por `error` y nada más. Un `total > 0` acá descartaría en silencio
+// las series que el scraper no supo parsear y emitió con `total: 0`: los agregados
+// cuadrarían contra un CATALOGO igual de incompleto y el guardián firmaría «TODO
+// CONSISTENTE» sobre un censo al que le faltan series. Una entrada rota no se
+// descarta: se denuncia (ver `rotas`).
 const cat = CENSO.filter(x => !x.error)
 const con = cat.filter(x => x.bloqueados > 0)
 const suma = (a, f) => a.reduce((s, x) => s + f(x), 0)
@@ -31,7 +31,12 @@ const check = (etiqueta, real, doc) => {
 }
 
 let fallos = 0
-const v = (...a) => { if (!check(...a)) fallos++ }
+/** Cuántas comprobaciones corrió este script. Se cuenta sola porque los
+ *  documentos publican el número, y un número escrito a mano en un documento
+ *  que describe a este mismo script es exactamente la cifra que se queda vieja:
+ *  ya pasó con los conteos de pantallas y de flujos. */
+let corridas = 0
+const v = (...a) => { corridas++; if (!check(...a)) fallos++ }
 
 console.log('── catálogo ───────────────────────────────────────────────────')
 
@@ -143,13 +148,12 @@ const EXPORT = existsSync(rutaManifiesto)
 if (!EXPORT) console.log('· aviso: no hay mobbin-export/manifest.json — no se verifica el conteo de pantallas y flujos')
 else console.log(`· el export tiene ${EXPORT.pantallas} pantallas en ${EXPORT.flujos} flujos`)
 
-/** Exención de línea: la frase que narra la corrección.
+/** Exención de línea, para la prosa que cita una cifra vieja al explicarla.
  *
- *  Acá había también `antes`, y era el mismo error que este comentario advierte
- *  más abajo con otra ropa: `antes` aparece en prosa corriente, así que eximía
- *  líneas por accidente. Medí cuántas exenciones legítimas dependían de él:
- *  **ninguna**. Era riesgo puro. Las tres que quedan no pueden caer por azar en
- *  una frase que además traiga una cifra vieja. */
+ *  Los documentos ya no narran sus propias correcciones, así que esto casi nunca
+ *  dispara — y por eso mismo tiene que ser estrecho. Nada de `antes`: aparece en
+ *  prosa corriente y eximiría líneas por accidente. Los tres términos que quedan
+ *  no pueden caer por azar en una frase que además traiga una cifra vieja. */
 const NARRA = /dec[ií]a|primera versión|primera medición/i
 
 /** Exención de bloque, para lo que una regex de línea no puede ver.
@@ -174,11 +178,11 @@ const CIERRA_CITADA = /<!--\s*\/cifras-citadas\s*-->/
  *  y flujos no queda escrito dos veces, y cualquier conteo equivocado cae —no
  *  solo los dos o tres viejos que alguien se acordó de enumerar.
  *
- *  `salvo` tiene que ser ESTRECHO. La primera versión permitía cualquier línea
- *  que dijera "moda" o "excepción", y una cifra vieja se coló por ahí: el pie de
- *  la galería decía «12 episodios gratis por serie (la moda)» y el guardián la
- *  dejó pasar porque contenía la palabra "moda". Se exime la narración de la
- *  corrección —que siempre dice "decía", "primera versión" o "antes"—, nada más. */
+ *  `salvo` tiene que ser ESTRECHO, y la prueba de que importa es cómo se cuela una
+ *  cifra vieja: basta con eximir cualquier línea que diga "moda" o "excepción" para
+ *  que un pie de galería con «12 episodios gratis por serie (la moda)» pase el
+ *  guardián por contener esa palabra. Se exime la frase exacta que cita la cifra
+ *  vieja a propósito, nada más. */
 const OBSOLETOS = [
   ...(EXPORT ? [
     // El archivo de DISEÑO tiene su propio conteo, distinto al del export: son
@@ -186,16 +190,16 @@ const OBSOLETOS = [
     // frase exacta con la que cada documento nombra al archivo de diseño— para
     // que ningún conteo del export se escape por parecerse.
     { patron: /(\d+) pantallas/,
-      salvo: /dec[ií]a|primera versión|antes|hoja de sistema|archivo de diseño|con las mismas|y las\s*$|pantallas del diseño/i,
+      salvo: /hoja de sistema|archivo de diseño|con las mismas|y las\s*$|pantallas del diseño/i,
       ok: m => +m[1] === EXPORT.pantallas,
       porque: m => `el export tiene ${EXPORT.pantallas} pantallas, no ${m[1]}` },
     { patron: /(\d+) flujos/, salvo: NARRA,
       ok: m => +m[1] === EXPORT.flujos,
       porque: m => `el export tiene ${EXPORT.flujos} flujos, no ${m[1]}` },
   ] : []),
-  { patron: /12 episodios gratis/, salvo: /dec[ií]a|primera versión/i, porque: 'la moda medida es 10' },
+  { patron: /12 episodios gratis/, salvo: /Pasión a Domicilio|Las Flores del Amor/i, porque: 'la moda medida es 10' },
   { patron: /\$7\.29/, salvo: null, porque: 'la serie mediana cuesta $6.63' },
-  { patron: /\$2\.49/, salvo: /hoy|producción|actual|paywall real|primera versión/i, porque: 'la propuesta no lleva precio tachado' },
+  { patron: /\$2\.49/, salvo: /hoy|producción|actual|paywall real/i, porque: 'la propuesta no lleva precio tachado' },
 
   // El censo del 26-ago-2026 reemplazó al que se publicó incompleto. Cada una de
   // estas cifras tiene sucesora en `.context/HOJA-DE-DATOS.md`.
@@ -210,7 +214,7 @@ const OBSOLETOS = [
   // dato real y no se toca: acá solo cae el que mide el colchón.
   { patron: /23 ?% del catálogo/, salvo: NARRA, porque: 'los 500 gratis son el 22% del catálogo' },
   // «Tres Meses de Amor» es una serie del catálogo, no el colchón.
-  { patron: /tres meses/i, salvo: /dec[ií]a|primera versión|antes|Tres Meses de Amor/i, porque: 'el colchón es de casi cuatro meses' },
+  { patron: /tres meses/i, salvo: /Tres Meses de Amor/i, porque: 'el colchón es de casi cuatro meses' },
   { patron: /\$ ?241\b/, salvo: NARRA, porque: 'el catálogo completo cuesta $286' },
   { patron: /\b35 series\b/, salvo: NARRA, porque: 'son 41 series con muro' },
   { patron: /\b8 (series )?(completamente|enteramente) gratis/i, salvo: NARRA, porque: 'son 9 series enteramente gratis' },
@@ -305,6 +309,39 @@ for (const [etiqueta, color, fondos] of PARES) {
   const ok = peor >= 4.5
   if (!ok) fallos++
   console.log(`${ok ? '✓' : '✗'} ${etiqueta.padEnd(22)} ${color}  peor=${peor.toFixed(2)}:1`)
+}
+
+// Encabezados que anuncian un número y listas que traen otro. Es el defecto que
+// más veces reapareció en las revisiones —«ocho decisiones» sobre nueve bloques,
+// «dos lecturas» sobre tres ítems—, y es exactamente el que el entregable le
+// señala al producto. Contarlo del documento es la única forma de que no vuelva.
+console.log('\n── encabezados que anuncian un número ─────────────────────────')
+const PALABRAS = { seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10, once: 11, doce: 12 }
+const enPalabras = (n) => Object.keys(PALABRAS).find((p) => PALABRAS[p] === n) ?? String(n)
+
+const intervencion = readFileSync(join(RAIZ, 'docs/03-diseno/README.md'), 'utf8')
+// `D[0-9]` y no `D`: si no, «### Dónde el precedente sí sostiene la apuesta»
+// entra en el conteo y el guardián persigue un desajuste que no existe.
+const decisiones = (intervencion.match(/^### D[0-9]/gm) || []).length
+for (const ruta of ['README.md', 'docs/03-diseno/README.md']) {
+  const texto = readFileSync(join(RAIZ, ruta), 'utf8')
+  const dicho = texto.match(/(\w+) decisiones de diseño/)?.[1]
+  if (!dicho) continue
+  v(`${ruta} · decisiones de diseño`, enPalabras(decisiones), dicho)
+}
+
+// El propio conteo, verificado contra lo que publica docs/04-poc. Sin esto, el
+// documento que describe a este script es el único lugar del entregable donde
+// una cifra puede envejecer sin que nadie se entere — porque el guardián no se
+// estaba mirando a sí mismo.
+console.log(`\n── el guardián se cuenta a sí mismo ───────────────────────────`)
+const rutaPoc = join(RAIZ, 'docs/04-poc/README.md')
+const publicado = Number(readFileSync(rutaPoc, 'utf8').match(/corre (\d+) comprobaciones/)?.[1])
+if (!Number.isInteger(publicado)) {
+  console.log('✗ docs/04-poc/README.md ya no dice «corre N comprobaciones» — el guardián no puede verificarse')
+  fallos++
+} else {
+  v('comprobaciones que corre este script', corridas + 1, publicado)
 }
 
 console.log(fallos === 0 ? '\n✓ TODO CONSISTENTE' : `\n✗ ${fallos} DESAJUSTES`)

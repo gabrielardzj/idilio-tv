@@ -83,8 +83,9 @@ paso('el muro ofrece la vía gratuita antes que la de pago',
   muro.includes('Pase de la Noche'))
 paso('el muro habla de la serie que tocó', muro.includes(titulo))
 
-// El muro no puede contradecir la mecánica que la intervención propone: esta
-// hoja llegó a decir «el que no uses hoy no se acumula», que es la regla vieja.
+// El muro no puede contradecir la mecánica que la intervención propone. El texto
+// de la UI es lo único que el usuario lee, y un «el que no uses hoy no se acumula»
+// quemado en el componente promete lo contrario de lo que el sistema hace.
 await page.locator('.sheet button', { hasText: 'Usar el pase' }).click()
 await page.waitForTimeout(400)
 const eleccion = await page.locator('.sheet').innerText()

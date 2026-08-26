@@ -217,8 +217,8 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       // Entrar a un episodio es ver: si es noche nueva, se acredita acá también.
       const acreditado = acreditarNoche(s)
       // Un episodio está abierto si ya lo vio O si cae dentro de los gratis de
-      // la serie. Mirar solo lo visto mandaba al muro el episodio 1 de
-      // cualquier serie sin empezar, que es justo por donde entra todo el mundo.
+      // la serie. Las dos mitades hacen falta: mirando solo lo visto, el episodio 1
+      // de una serie sin empezar abriría el muro — que es por donde entra todo el mundo.
       const desbloqueado = desbloqueadoDe(acreditado, a.id)
       const libre = a.n <= desbloqueado
       return {

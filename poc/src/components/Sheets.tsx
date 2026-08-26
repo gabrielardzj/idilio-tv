@@ -29,10 +29,10 @@ export function PassChoice({
       <div className="cliff">
         <div className="kicker">Pase de la Noche</div>
         <h2>¿A cuál le das el pase?</h2>
-        {/* Esta línea decía «El que no uses hoy no se acumula», que es la regla
-            vieja — el "úsalo o piérdelo" que §3.4bis documenta como el error de
-            Webtoon y que esta mecánica corrigió. Sobrevivió a la corrección
-            porque el texto de la UI no lo probaba nadie. Ahora sale del estado. */}
+        {/* Este texto sale del estado y nunca es literal: un «el que no uses hoy
+            no se acumula» quemado acá sería el "úsalo o piérdelo" que §3.4bis
+            documenta como el error de Webtoon, contradiciendo a la mecánica en
+            la pantalla central de la intervención. El recorrido lo comprueba. */}
         <p>
           {state.passes >= MAX_PASSES
             ? `Tienes ${state.passes} pases: estás en el tope. El próximo empieza a acumularse cuando uses uno.`
@@ -129,9 +129,9 @@ export function Celebrate({
           {via === 'pass'
             ? state.passes > 0
               ? <>Usaste uno de tus Pases de la Noche. Te {state.passes === 1 ? 'queda otro' : `quedan ${state.passes}`}.</>
-              /* Decía «El próximo llega en 24 horas», que es la mecánica vieja:
-                 `proximaCita` devuelve la hora de siempre del usuario, así que
-                 nunca son 24 h exactas. El muro ya lo decía bien; esto no. */
+              /* Nunca «en 24 horas»: `proximaCita` devuelve la hora de siempre
+                 del usuario, así que el intervalo real nunca son 24 h exactas.
+                 El texto de la cita se arma en un solo sitio, `citaTexto`. */
               : <>Usaste tu Pase de la Noche. El próximo te espera {state.passNextAt ? citaTexto(state.passNextAt, state.now) : 'mañana'}.</>
             : <>Pagaste {EPISODE_COST} monedas. Te quedan {state.balance} · {episodesLabel(state.balance)}.</>}
         </p>

@@ -37,12 +37,11 @@ La entrega del pase **no cuelga de ningún reloj que dispare solo**: `credit_nig
 ([`lib/supabase/schema.sql`](lib/supabase/schema.sql)) se llama al terminar un episodio, y es
 idempotente dentro de la misma noche, así que llamarla en cada episodio es seguro. No hay cron
 por usuario ni job que corra de madrugada — que es lo que hace que no haga falta ningún botón, y
-lo que lleva la adopción de la fuente del 19% de hoy a ~100% por construcción.
+lo que lleva la adopción de la fuente del 19% de hoy a ~100% por construcción. El esquema expone
+cuatro funciones y nada más: `night_of()`, `use_pass()`, `credit_night()` y `claim_guest()`.
 
-> **Acá decía `accrue_passes()`, y esa función no existe.** El esquema tiene `night_of()`,
-> `use_pass()`, `credit_night()` y `claim_guest()`, nada más. La frase describía además una
-> acreditación «perezosa, al leer el estado», que es justo el modelo que el diseño abandonó:
-> si el pase se acreditara al leer, volvería a poder llegar sin el usuario delante.
+Tampoco es una acreditación perezosa *al leer el estado*: si el pase se acreditara al leer,
+volvería a poder llegar sin el usuario delante, que es justo lo que el diseño evita.
 
 **Con una salvedad que conviene decir acá, porque se ve al abrir el link.** El sitio publicado
 cuenta contra un **ancla de tiempo fija**, y eso no lo causa el export estático: `estadoDelPase`
@@ -58,21 +57,16 @@ servidor, el cliente recibe `serverNow` ya decidido y pinta el delta contra él,
 reloj del teléfono. En producción, con Postgres detrás, ese mismo campo sale de `now()` y el
 ancla deja de ser una constante.
 
-> **Acá decía otra cosa, y estaba mal.** La versión anterior explicaba el reloj fijo como un
-> efecto del export estático —«en Pages no hay request, así que `serverNow` queda horneado»— y
-> prometía que el reloj corre de verdad «en Vercel con SSR, donde este Server Component se
-> resuelve por request». Las dos mitades son falsas contra este árbol: `RELOJ_FIJO` no mira
-> `DEPLOY_TARGET`, y la ruta declara `dynamicParams = false` con `generateStaticParams`, así que
-> se prerrenderiza en tiempo de build en los dos destinos. Lo que cambia en producción no es el
-> modo de render: es que el estado deja de salir de un fixture.
+> **Lo que el reloj fijo no significa.** No es un efecto del export estático. `RELOJ_FIJO` no mira
+> `DEPLOY_TARGET`, y la ruta declara `dynamicParams = false` con `generateStaticParams`, así que se
+> prerrenderiza en tiempo de build en los dos destinos. Lo que cambia en producción no es el modo
+> de render: es que el estado deja de salir de un fixture.
 >
-> Y debajo de esa explicación había un bug de verdad. `proximaCita` fijaba la cita con
-> `d.setHours(21, 30)`, o sea a las 21:30 **de la máquina que construye el sitio**: en mi
-> portátil daba la hora correcta y en el runner de CI, que corre en UTC, el link publicaba una
-> cita a las 15:30 de Ciudad de México, que es la zona con la que después se formatea. Es
-> exactamente el riesgo técnico nº 2 de la propuesta —«la ventana se calcula en la zona del
-> usuario, nunca en UTC»— cometido en el código que existe para demostrar que se puede evitar.
-> Está corregido en [`lib/pase.ts`](lib/pase.ts): la cita se resuelve en la zona del espectador.
+> **Y la cita se resuelve en la zona del espectador**, en [`lib/pase.ts`](lib/pase.ts) — nunca con
+> un `setHours` sobre la máquina que construye el sitio. Es el riesgo técnico nº 2 de la propuesta
+> —«la ventana se calcula en la zona del usuario, nunca en UTC»— y es de los que no se ven al
+> probar: en un portátil con la zona correcta el resultado sale bien, y el mismo código en un
+> runner de CI que corre en UTC publica la cita a las 15:30 en vez de las 21:30.
 
 ### 2 · El esquema que hay que agregar a la base
 

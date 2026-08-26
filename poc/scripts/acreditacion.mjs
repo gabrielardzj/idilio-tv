@@ -82,9 +82,9 @@ for (let i = 0; i < 8 && vuelta.at(-1) !== 1; i++) vuelta.push(await noche())
 caso('la escalera vuelve a 1 después de la 7',
   vuelta.at(-1) === 1 && vuelta.at(-2) === 7, vuelta.join('→'))
 
-// Y acá está el punto: gastar el comodín YA en la vuelta nueva y comprobar que
-// vuelve. La versión anterior de esta comprobación pasaba con la noche 3 de la
-// PRIMERA vuelta, así que no probaba nada de lo que decía probar.
+// El punto de la comprobación: gastar el comodín YA en la vuelta nueva y ver que
+// vuelve. Tiene que ser la noche 3 de la SEGUNDA vuelta — hacerlo sobre la primera
+// pasa sin probar nada, porque ahí el comodín todavía es el original.
 await btn('Falté una noche').click()
 await page.waitForTimeout(250)
 await cerrar()

@@ -70,15 +70,21 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Series del catálogo | 50 · 2.230 episodios | Censo |
 | Episodios gratis en total | 500 (22% del catálogo) | Censo |
 | Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
-| Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 | Captura oficial del paywall (build 1.20.0) |
+| Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 · y un cuarto del que solo se lee el badge | Captura oficial del paywall (build 1.20.0) |
 
-**Y las cifras se verifican solas.** `npm run verificar` corre 41 comprobaciones de los
-documentos contra el código y contra el censo del catálogo: 35 son cifras (episodios, monedas,
-precios, porcentajes) y 6 son invariantes que ninguna cifra sola expresa —que cada serie cuadre,
-que la escalera de precios baje en cada escalón, que ningún paquete lleve precio tachado—.
+**Y las cifras se verifican solas.** `npm run verificar` corre 44 comprobaciones de los
+documentos contra el código y contra el censo del catálogo: 38 son cifras —episodios, monedas,
+precios, porcentajes, y los conteos que anuncian los encabezados— y 6 son invariantes que ninguna
+cifra sola expresa: que cada serie cuadre, que la escalera de precios baje en cada escalón, que
+ningún paquete lleve precio tachado.
 Aparte, rastrea los textos buscando cifras que se corrigieron en el camino y podrían haber
 sobrevivido a una edición, y audita el contraste de los tokens de texto. Corre en el pipeline
 antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar al entregable.
+
+La número 44 es el guardián contándose a sí mismo: compara las comprobaciones que corrió contra
+las que este párrafo publica, y falla si no coinciden. Era el único lugar del entregable donde una
+cifra podía envejecer sin que nadie se enterara, porque el guardián miraba todos los documentos
+menos el que lo describe a él.
 
 `src/lib/economy.ts` marca cada constante como **REAL** o **PROPUESTA**. Es, a la vez, el modelo del POC y la especificación de la economía.
 

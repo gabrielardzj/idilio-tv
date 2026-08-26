@@ -68,12 +68,7 @@ es que la comparación está al alcance del usuario, en la única pantalla donde
 precios, y que ninguna forma de armarla favorece al pase semanal. No es un problema de cadencia —en Latinoamérica el plan semanal se lleva el **29 % de los
 ingresos de suscripción de la región**, según RevenueCat—: es un problema del número.
 
-*(Dos correcciones acá. La primera: esto cerraba en «$6,63» a secas, y la tabla de IAP (in-app purchase: las compras dentro de la app) de arriba le
-daba al lector con qué desarmarlo —en el escalón de 75 monedas la cuenta empata—. El $6,63 no es un
-precio, es una conversión, y hay que decir con qué tasa se hace. La segunda: decía que el 29 % es
-«la proporción más alta de cualquier región». La ficha de ese reporte, en §5.7, trae el 29 % de
-Latinoamérica y no un ranking de regiones por plan semanal: el superlativo era mío, y el argumento
-no lo necesitaba. Lo saqué también de la §5.5, que lo repetía con otras palabras.)*
+*El $6,63 no es un precio: es una conversión, y por eso va siempre con la tasa que la produce. Al escalón más barato de la escalera la misma serie sale ≈ $7,92, y ahí el empate con el pase semanal es técnico. Y el 29 % es la proporción de Latinoamérica, no un ranking de regiones: la ficha del reporte, en §5.7, no trae ese ranking.*
 
 *(Nota: la ficha registra 4.9★ con 36 valoraciones en App Store US; el dogfooding había medido
 4.7★ / 28 K en Google Play. Son tiendas y bases distintas; ambos números son correctos, y ambos se
@@ -402,7 +397,9 @@ Tres precedentes, en tres jurisdicciones, todos posteriores a 2024:
 Idilio opera en 120 países, España incluida. La distinción que salva el diseño es fina pero
 sustantiva: **TikTok premiaba tiempo de pantalla; el Pase de la Noche premia terminar un
 episodio.** Uno recompensa la permanencia, el otro la finalización de una unidad narrativa —y
-tiene techo duro (1/24 h, 7/semana). Vale la pena que esa distinción esté escrita en el
+tiene techo duro: **se emite un pase por noche y no más de 7 por semana**, sin anuncios que lo
+levanten ni forma de comprar más. Que la entrega ocurra al ver no afloja ese techo: lo que el
+usuario puede recibir lo fija el reloj, no cuánto tiempo pase en la app. Vale la pena que esa distinción esté escrita en el
 documento de producto **antes** de que la pregunte alguien de fuera. La misma lógica refuerza
 F2: declarar el precio en episodios en vez de en monedas desnudas no es solo mejor UX, es alinearse
 con la dirección en que se mueve la regulación — la obligación de informar el cobro con claridad.
@@ -432,7 +429,7 @@ Eso sigue siendo original de este diagnóstico.
 | Rollover a las 5 a.m., no a medianoche | Duolingo permite configurar el "day start" precisamente por esto |
 | Bajar la barra: la racha se acredita al **terminar un episodio** | Duolingo: casi el **40 %** de quienes entraban dos días seguidos sin racha tenía la meta diaria más alta. Separar racha y meta subió **+40 %** las rachas de 7+ días |
 | El comodín que se consume solo | El *streak freeze* como red de seguridad, no como castigo |
-| Pases que se acumulan hasta 2 | La queja que mató al Daily Pass fue el "úsalo o piérdelo" |
+| Pases que se acumulan hasta 2 | La queja documentada contra el Daily Pass fue que **convertía leer en una tarea diaria** —§5.4, D1—, y un recurso que caduca cada 24 h es justamente lo que obliga a aparecer todos los días. El tope de 2 rompe esa obligación sin permitir acumular la semana entera |
 | Declarar todo en episodios | El artículo 40 de las Medidas de la NRTA china —en vigor desde el 1-sep-2026— obliga a informar el cobro con claridad; el 37 prohíbe los algoritmos que inducen al consumo excesivo |
 | Que el pase sea **aditivo** (abre el ep. 11+), no restrictivo | Es la diferencia exacta entre Piccoma Japón y Webtoon Daily Pass |
 
@@ -523,11 +520,10 @@ Eso sigue siendo original de este diagnóstico.
   industria no aparece en el newsroom de Snap ni en ninguna fuente que haya podido abrir. La saqué
   del anexo. El precio (99 centavos a partir del segundo rescate) sí está en el soporte de Snapchat
   y se queda.
-- **El ARPU (ingreso promedio por usuario) de apps en Latinoamérica.** El $11,30 mensual que citaba la versión anterior de este
-  anexo no está en el *State of Subscription Apps 2026* de RevenueCat, y la única fuente que lo
-  publica es un resumen de tercero que no abre. Lo reemplacé por lo que el reporte sí trae
+- **El ARPU (ingreso promedio por usuario) de apps en Latinoamérica.** El $11,30 mensual que circula para esta métrica no está en el *State of Subscription Apps 2026* de RevenueCat, y la única fuente que lo
+  publica es un resumen de tercero que no abre. El anexo usa en su lugar lo que el reporte sí trae
   (MRR mediano +17,2 %, ~$0,10 de ingreso por instalación a D14, 29 % de ingresos en plan semanal),
-  y rehice con eso el argumento de precio de §5.1.
+  que es lo que sostiene el argumento de precio de §5.1.
 - **El tope de anuncios de DramaBox** (15/día × 2 monedas). La cadena de fuentes es de tercera mano:
   un blog de tutoriales que cita la guía de una VPN. Ninguna app de la categoría publica sus topes,
   así que lo dejo señalado en §5.3 en vez de borrarlo.
@@ -563,16 +559,12 @@ Eso sigue siendo original de este diagnóstico.
 > de §5.2, que es una cifra de negocio y cuelga de Adjoe: está anotado ahí y en §5.6.
 >
 > **Nivel 4 — enciclopedias colaborativas: Wikipedia y Baidu Baike.** Las uso para hitos y fechas,
-> nunca para cifras de uso. *(Acá tenía una vara doble: descalificaba a Baidu Baike por mezclar un
-> MAU de marzo de 2025 con un tiempo de uso de marzo de 2024, y al mismo tiempo apoyaba el cierre
-> de Piccoma Francia en Wikipedia sin decir que era el mismo tipo de fuente. Lo es. El cierre
-> además está en Design Compass, en Kcomicsbeat y en The Asia Business Daily, así que no cuelga
-> de la enciclopedia.)*
+> nunca para cifras de uso. La vara es la misma para las dos: Baidu Baike mezcla un MAU de marzo
+> de 2025 con un tiempo de uso de marzo de 2024, y el cierre de Piccoma Francia lo sostiene
+> Wikipedia, que es el mismo tipo de fuente — solo que ese además está en Design Compass, en
+> Kcomicsbeat y en The Asia Business Daily, así que no cuelga de la enciclopedia.
 >
-> Decir de qué nivel es cada cosa es lo que hace utilizable este anexo. *(La versión anterior de
-> este bloque nombraba doce fuentes en el nivel 1 y seis en el nivel 2 sobre una lista de medio
-> centenar de entradas: prometía un orden que no daba. Adjoe, que sostiene toda la §5.2, era una
-> de las que quedaban sin clasificar.)*
+> Decir de qué nivel es cada cosa es lo que hace utilizable este anexo.
 
 **Idilio TV**
 - [C21Media · Colombia's Idilio raises US$5m](https://www.c21media.net/news/colombias-idilio-raises-us5m-to-scale-microdrama-platform/) — ronda, inversores, fundadora, GammaTime

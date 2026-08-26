@@ -137,12 +137,12 @@ export const pricePerEpisode = (coins: number, usd: number) =>
 /**
  * Cuál paquete termina la serie en la que está el usuario.
  *
- * La primera versión etiquetaba el paquete de 660 monedas como "Una serie
- * completa" de forma fija. Al medir el catálogo resultó que las series van de
- * 150 a 960 monedas: de las 41 series con muro, una sola cuesta exactamente
- * 660, así que la etiqueta habría sido falsa en las otras 40.
- * Ahora se calcula contra la serie que el usuario está viendo, así que o es
- * cierta o no aparece.
+ * La etiqueta "Una serie completa" no puede ser fija. El censo dice que las
+ * series van de 150 a 960 monedas: de las 41 con muro, una sola cuesta
+ * exactamente 660, así que fijarla sobre ese paquete la haría falsa en las
+ * otras 40 — y en 19 de ellas el paquete ni siquiera alcanza.
+ * Se calcula contra la serie que el usuario está viendo: o es cierta, o no
+ * aparece.
  */
 export const packThatCompletes = (coinsNeeded: number) =>
   PACKS.filter((p) => !p.intro).find((p) => p.coins >= coinsNeeded)?.id ?? null
