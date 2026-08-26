@@ -305,7 +305,12 @@ function acreditarNoche(s: State): State {
   // emitió mientras el usuario no estaba, no un solo pase: si solo entrara uno,
   // faltar una noche costaría el pase de esa noche —el "use it or lose it" que
   // esta mecánica existe para no repetir—. El tope lo corta en MAX_PASSES.
-  const pendientes = s.lastNight === null ? 1 : nochesEntre(s.lastNight, noche)
+  // El piso de 1 no es decorativo: `nocheDe` sale del reloj del dispositivo, y
+  // si retrocede —cambiar de zona horaria, algo normal en una app que se ve de
+  // noche y de viaje— la diferencia es negativa y esto le RESTARÍA pases a
+  // alguien que no hizo nada malo. `credit_night()` ya tenía el greatest(1,…);
+  // esto es la misma decisión de este lado.
+  const pendientes = s.lastNight === null ? 1 : Math.max(1, nochesEntre(s.lastNight, noche))
   const passes = Math.min(s.passes + pendientes, MAX_PASSES)
   const entregados = passes - s.passes
 
