@@ -47,6 +47,7 @@ La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99**
 - Player: overlay (la capa de botones encima del video) tipo TikTok (corazón, comentario, compartir), chip de saldo abajo-izquierda, "ver más" para sinopsis.
 - **Ficha de serie:** barra «Volver» y nada más arriba —el título no se repite, va quemado en el arte del póster—, bloque **«Resumen»** con la miniatura a la izquierda y la sinopsis del catálogo al lado, y después **«Capítulos»**: una lista de tarjetas, no una grilla. Cada tarjeta lleva `Capítulo N` en violeta, el número del episodio como título, un galón a la derecha y —en algunos— la píldora **«Interactiva»**. Los bloqueados llevan candado: el primero en violeta encendido, los siguientes atenuados. **En ninguna tarjeta aparece el precio.**
 - **La recompensa diaria se ofrece al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que exige tocar **Reclamar**. No es solo un contenido de la pestaña Recompensas —donde también vive—: es un interstitial ineludible entre el usuario y la app. *Dato aportado por el equipo de Idilio, no observado en el dogfooting: el build al que tuve acceso no lo mostró. Es el hecho que sostiene [F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta), así que conviene que su procedencia esté declarada.*
+- **La pestaña Recompensas no es solo la recompensa diaria.** Lleva además una lista de tareas de una sola vez: **compartir la app** y seguir las cuentas de **Facebook, Instagram, YouTube, TikTok y WhatsApp** a **10 monedas** cada una, y **calificar la app** a **30**. Son 90 monedas —seis episodios exactos— y se agotan: a nadie se le paga dos veces por seguir la misma cuenta. La captura está abajo.
 - Release notes 1.20.0 (2026-08-21): *"Downloads for suscriptions / New daily streak UI"* —«nueva interfaz de la racha diaria»— → la racha se está iterando ahora mismo.
 
 ## Fricciones observadas de primera mano (web)
@@ -66,6 +67,12 @@ La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99**
 | **Paywall nativo, build 1.20.0.** `Costo del episodio: 15` · `Tu balance: 0` · solo opciones de compra. Dos paquetes distintos entregan las mismas 180 monedas. | **Home nativo.** Chip de saldo arriba a la derecha, tab bar de 3 con *Recompensas* y *Perfil*. La fuente gratuita vive aquí; el sumidero vive en el player. |
 | ![Muro web](evidencia/muro-web-ep13.png) | ![Player web](evidencia/player-web.png) |
 | **Muro del reproductor web.** *"Se desbloquea en la app con 15 monedas"* y una sola salida: descargar la app. El contexto de serie y episodio se pierde en el salto. | **Reproductor web.** Funciona bien, autoplay al siguiente episodio incluido — pero sin saldo, sin recompensas y sin ninguna huella de la economía. |
+
+**La pestaña Recompensas.** La otra mitad de la fuente gratuita, y la que el muro tampoco menciona: siete tareas a la vista —la lista sigue hacia abajo—, todas de una sola vez, todas a un toque de distancia del usuario **si se le ocurre ir a buscarlas**.
+
+| | |
+|---|---|
+| ![Pestaña Recompensas](evidencia/recompensas-nativo.png) | **Recompensas, app nativa.** Compartir la app, seguir Facebook, Instagram, YouTube, TikTok y el canal de WhatsApp: **10 monedas** cada una. Calificar la app: **30**. Noventa monedas en total, que son **seis episodios** — y después de eso, la única fuente que queda es la diaria. El saldo de la captura, `45`, son tres episodios: menos de lo que dura media sesión. |
 
 **La ficha de serie en la app nativa.** Es la pantalla que el prototipo reproduce, y estas tres capturas son la fuente: de acá salen la estructura, los colores y hasta la píldora «Interactiva».
 

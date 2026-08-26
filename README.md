@@ -58,7 +58,7 @@ Costo del episodio: 15        Tu balance: 0
   $0.99 → 180    $1.99 → 180    $3.99 → 375
 ```
 
-Un usuario que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, recibe una tienda y ninguna otra salida. La recompensa diaria — la única fuente gratuita — vive en otra pestaña. Y la ficha de App Store del mismo build lista un **pase semanal a $7.99** y uno **mensual a $14.99**: la suscripción existe, pero el muro tampoco la ofrece.
+Un usuario que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, recibe una tienda y ninguna otra salida. Las fuentes gratuitas —la recompensa diaria, y una lista de tareas de una sola vez por seguir las redes o calificar la app— viven todas en otra pestaña. Y la ficha de App Store del mismo build lista un **pase semanal a $7.99** y uno **mensual a $14.99**: la suscripción existe, pero el muro tampoco la ofrece.
 
 **No es que el metajuego esté mal diseñado. Está en otro edificio.**
 

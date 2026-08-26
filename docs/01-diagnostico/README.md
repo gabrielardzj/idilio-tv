@@ -12,7 +12,7 @@ Debajo de esa falla hay otra mayor, que solo aparece al medir el catálogo compl
 
 | Falla | En una línea |
 |---|---|
-| **F1** | Lo que resolvería el muro —la recompensa diaria, el pase semanal, el mensual— vive en otra pantalla |
+| **F1** | Lo que resolvería el muro —la recompensa diaria, las tareas de la pestaña Recompensas, el pase semanal, el mensual— vive en otra pantalla |
 | **F2** | Nada traduce monedas a episodios, así que el usuario no puede juzgar el precio |
 | **F3** | Dos paquetes distintos dan **las mismas 180 monedas** —uno a US$ 0.99 y otro a US$ 1.99, uno debajo del otro— y subir al siguiente escalón mejora el valor un 3.9% |
 | **F4** | La racha pide 7 días de 7 a una base que entra 2.3, y corta a medianoche en un producto que se usa de madrugada |
@@ -63,7 +63,7 @@ Costo del episodio: 15        Tu balance: 0
 
 > La tienda cobra en dólares —la captura dice `USD`—. Las conversiones a pesos de este documento usan la **TRM del 26-ago-2026: $3.081,67 por dólar** ([Superintendencia Financiera](https://www.datos.gov.co/resource/32sa-8pi3.json)).
 
-Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más**. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
+Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más**. Las maneras de conseguir monedas sin pagar —la recompensa diaria y una lista de tareas: compartir la app, seguir las cuentas de Facebook, Instagram, YouTube, TikTok y WhatsApp, calificar la app— viven todas en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
 
 ### Hallazgo 2 · Pagar no es la única salida del muro: empezar otra serie es gratis
 
@@ -109,7 +109,9 @@ Eso cambia el significado de casi todas las demás señales:
 
 El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan **en el tiempo**.
 
-La fuente gratuita se ofrece **al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que hay que reclamar con un botón. La misma recompensa vive además en la pestaña **Recompensas**. El gasto ocurre horas después, en el **player** —el reproductor—, al chocar con el muro.
+La fuente gratuita **recurrente** se ofrece **al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que hay que reclamar con un botón. La misma recompensa vive además en la pestaña **Recompensas**. El gasto ocurre horas después, en el **player** —el reproductor—, al chocar con el muro.
+
+No es la única fuente gratuita, y conviene decirlo con precisión: la pestaña **Recompensas** lleva además una lista de tareas —compartir la app, seguir las cuentas de Facebook, Instagram, YouTube, TikTok y WhatsApp a 10 monedas cada una, calificar la app a 30— [capturada acá](../00-dogfooding/#capturas-de-la-evidencia). Son otra cosa que la recompensa diaria: por su naturaleza se cobran **una sola vez** —a nadie se le paga dos veces por seguir la misma cuenta—, así que suman 90 monedas, **seis episodios exactos**, y se acaban. Sirven para el arranque, no para volver cada noche. Lo que sigue vale para las dos: ninguna aparece en el muro.
 
 - **19% de los usuarios activos reclama la recompensa diaria.** El diálogo no se puede no ver: se interpone entre el usuario y la app. Así que el 81% restante **no la deja pasar por no encontrarla: la descarta**.
 - **82% nunca abrió el perfil.** Lo que vive en una pestaña aparte, para este usuario, no existe — y eso sí aplica a todo lo demás del metajuego.
