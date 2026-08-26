@@ -14,7 +14,9 @@
 De las ocho intervenciones de la estrategia, elegí esta por cinco razones, en orden de peso.
 
 **1. Es la única que ataca el punto exacto donde la sesión se corta por precio.**
-Casi toda serie con muro empieza igual: la moda del catálogo son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin excepciones en el precio. Así que el corte no es un accidente: es la estructura del catálogo. Dónde cae exactamente sí varía, y las excepciones importan más que la estadística: *Pasión a Domicilio*, la serie del prototipo y de casi todos los ejemplos de este documento, regala 12 y no 10. Que la sesión promedio de 14 episodios termine justo en el muro es la hipótesis que plantea el diagnóstico, no un hecho: 14 es una media y no se descompone. Pero el corte existe con o sin esa cuenta, y no lo pone el aburrimiento — lo pone el precio. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
+El corte no es un accidente: es la estructura del catálogo. La moda son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin una sola excepción en el precio. Y no lo pone el aburrimiento: lo pone el precio. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
+
+> **Dos precisiones.** Dónde cae el corte varía: *Pasión a Domicilio*, la serie del prototipo y de casi todos los ejemplos de este documento, regala 12 y no 10. Y que la sesión promedio de 14 episodios termine justo en el muro es la hipótesis del [diagnóstico §1.1](../01-diagnostico/#11-los-dos-hallazgos-que-ordenan-todo-lo-demás), no un hecho. Ninguna de las dos afecta el argumento: el corte por precio existe igual.
 
 **2. Es la única que puede mover DAU/MAU por sí sola.**
 Stickiness es una métrica de *regreso*. Para moverla hace falta una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo que no puede tener — el único donde una promesa a futuro tiene valor real. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso.
@@ -336,12 +338,12 @@ Tres palancas, en orden de uso si el guardrail se dispara:
 
 **Guardrail y criterio de kill:** ARPDAU medido contra holdout. Si cae más de **8% relativo sostenido durante 2 semanas**, se revierte y se prueba con la palanca 1.
 
-**Cuarto — el argumento más fuerte, y que es una hipótesis y no un hecho:**
-un usuario frente a una cita que dice *«hoy a las 21:30, tu hora de siempre»* está **más cerca de pagar** que uno frente a una tienda sin alternativa. La espera hace el precio saliente: $0.15 contra esperar hasta esta noche es una comparación que se puede hacer; $0.15 contra nada, no.
+**Cuarto: la espera hace el precio saliente.**
+Un usuario frente a una cita que dice *«hoy a las 21:30, tu hora de siempre»* está **más cerca de pagar** que uno frente a una tienda sin alternativa. $0.15 contra esperar hasta esta noche es una comparación que se puede hacer; $0.15 contra nada, no.
 
-Es la hipótesis más importante del documento y **no está probada**. El precedente que parecía respaldarla —el Daily Pass de Webtoon— resultó ser un caso retirado, no un caso de éxito (§3.4bis). Lo que sí está documentado en la categoría es que la fuente gratuita recurrente convive con la monetización: ReelShort y DramaBox, que juntos concentran el grueso del mercado de microdramas, operan con check-in diario y anuncios recompensados mucho más generosos que este pase.
-
-Esto es exactamente lo que mide el experimento de I5. Si el countdown no acerca a pagar, el guardrail de ARPDAU lo va a mostrar en dos semanas.
+> **Hipótesis, y la más importante del documento — no está probada.** El precedente que parecería respaldarla, el Daily Pass de Webtoon, es un caso retirado y no uno de éxito (§3.4bis). Lo que sí está documentado en la categoría es que la fuente gratuita recurrente convive con la monetización: ReelShort y DramaBox, que concentran el grueso del mercado de microdramas, operan con check-in diario y anuncios recompensados mucho más generosos que este pase.
+>
+> **Cómo se resuelve:** es lo que mide el experimento de I5. Si la cita no acerca a pagar, el guardrail de ARPDAU lo muestra en dos semanas.
 
 ---
 

@@ -46,7 +46,9 @@ Tres términos se usan a lo largo del documento:
 
 Y no se arregla eligiendo otra serie: **ninguna del catálogo regala 14 episodios**. El bloque gratis más largo es de 12, y las 9 series que son gratis de punta a punta tienen 10 episodios o menos en total.
 
-**Alcance del dato.** Lo que la economía limita es **cuánto se avanza dentro de una misma historia**: 10 episodios seguidos, en 37 de las 41 series con muro. Eso es lo que la cifra sostiene por sí sola, y con dos salvedades. La primera, que 14 es una media: en una sesión corta el bloque gratis sobra, y la media no dice cuántas sesiones son cortas. La segunda, que afirmar que **el muro es lo que corta la sesión** es una afirmación distinta y más fuerte — el Hallazgo 2 da razones para dudarla, porque al chocar le queda al usuario un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
+Lo que la economía limita, entonces, es **cuánto se avanza dentro de una misma historia**: 10 episodios seguidos, en 37 de las 41 series con muro.
+
+> **Límite.** El dato no sostiene que el muro sea lo que *termina la sesión*, que es una afirmación distinta y más fuerte. 14 es una media —en una sesión corta el bloque gratis sobra— y al chocar el usuario todavía tiene un catálogo entero de arranques gratis por delante. Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.
 
 Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall (el muro de pago) del build 1.20.0:
 
@@ -72,17 +74,15 @@ Este hallazgo solo aparece cuando se mide el catálogo entero.
 | **Episodios gratis** | **500** — el 22% del catálogo |
 
 **500 episodios gratis ÷ 14 por sesión = 36 sesiones sin gastar un centavo.**
-A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** (La cuenta asume una sesión por día activo, que es el supuesto más generoso: DAU/MAU mide días, no sesiones. A 1.5 sesiones por día activo el colchón baja de unas 15 semanas a unas 10 — sigue siendo más de dos meses sin motivo para pagar.)
+A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** La cuenta asume una sesión por día activo, que es el supuesto más generoso: a 1.5 sesiones por día el colchón baja a unas 10 semanas, y sigue siendo más de dos meses sin motivo para pagar.
 
-Con ese dato a la vista aparece una lectura tentadora de la sesión promedio: **14 = 10 + 4**. La sesión típica no sería "veo 14 episodios de una historia" sino **"termino los 10 gratis de una serie, choco con el muro y me voy a empezar otra"**.
+De ahí sale el hallazgo: **el muro no saca al usuario de la app, lo saca de la historia.** La alternativa gratis existe, está a un toque y tiene 500 episodios.
 
-**Es una hipótesis, no una conclusión.** Una media no se descompone: el mismo 14 sale de muchas sesiones de 2 episodios con unas pocas de 40, y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10. Aplica el mismo criterio que descarta el 2.4x de retención a 30 días en [§1.3](#13-qué-señales-pesaron-y-cuáles-descarté): una cifra que encaja con la tesis todavía no la demuestra.
-
-**Lo que la resuelve es una consulta, no un estudio:** la **distribución** de episodios por sesión —no la media— y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie. Si esa fracción es alta, la hipótesis se sostiene. Si es baja, el muro corta historias pero no sesiones, y hay que buscar en otro lado qué las corta.
-
-La intervención de [§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) no se apoya en esta suma: se sostiene en que el corte por precio existe, se descomponga o no el 14. La consulta no decide entonces si la intervención vale, sino cuánto rinde — si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más. Es, aun así, la primera pregunta a hacer con acceso a los datos.
-
-Lo que sí queda firme sin esa consulta es lo más importante: **el muro no saca al usuario de la app, lo saca de la historia** — porque la alternativa gratis existe, está a un toque y hay 500 episodios de ella.
+> **Hipótesis derivada, no confirmada.** La sesión promedio podría descomponerse en **14 = 10 + 4**: terminar los 10 gratis de una serie, chocar con el muro y empezar otra. Encaja con todo lo anterior, y eso no la demuestra — una media no se descompone, y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10.
+>
+> **Cómo se resuelve:** con una consulta, no con un estudio. La *distribución* de episodios por sesión, y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie.
+>
+> **Qué cambia si es falsa:** el tamaño del efecto, no la intervención. [§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) se apoya en que el corte por precio existe, se descomponga o no el 14. Si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más.
 
 Eso cambia el significado de casi todas las demás señales:
 
@@ -188,11 +188,11 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 **El 2.4x de retención a 30 días, leído como causa.** Es la señal más tentadora del conjunto y la más peligrosa. Quien sostiene tres días seguidos ya era un usuario enganchado antes de que existiera la racha. La racha no lo creó: lo *identificó*. Armar la estrategia sobre "llevemos a más gente al día 3 y tendremos 2.4x" es suponer que el termómetro calienta la habitación.
 
-Sigue siendo un dato útil, pero como **hipótesis a testear**, no como cimiento. La forma de comprobarlo es un experimento con grupo de control: darle racha a la mitad de los usuarios nuevos, no dársela a la otra mitad, y comparar la retención a 30 días entre los dos grupos. Si el 2.4x se sostiene, la racha causa retención. Si cae a 1.1x, lo que se estaba midiendo era que la racha distingue a los que ya estaban enganchados. Hasta que exista ese número, la estrategia no se apoya en él.
+> **Cómo se resuelve:** un experimento con grupo de control — racha para la mitad de los usuarios nuevos, no para la otra mitad, y comparar la retención a 30 días. Si el 2.4x se sostiene, la racha causa retención; si cae a 1.1x, lo que medía era quién ya estaba enganchado. Hasta que exista ese número, la estrategia no se apoya en él.
 
 **El 23% que vuelve a ver series terminadas, leído como amor al contenido.** La lectura optimista es "les gusta tanto que lo ven de nuevo". La que sale del censo del catálogo es menos halagadora: con 500 episodios gratis disponibles, **volver a ver algo solo tiene sentido cuando ya se acabó lo gratis** —o cuando ninguna de las 50 series nuevas enganchó lo suficiente como para empezarla. Las dos lecturas apuntan a lo mismo: falta apego, no sobra.
 
-Ninguna de las dos está confirmada. Se contrastan con dos consultas: cruzar *quién vuelve a ver* contra *cuántos episodios gratis del catálogo le quedan sin ver*, y contra *cuántas monedas tenía en ese momento*. Si quienes vuelven a ver todavía tienen cientos de episodios gratis por delante, esta lectura es incorrecta y la optimista es la buena.
+> **Cómo se resuelve:** dos consultas — cruzar *quién vuelve a ver* contra *cuántos episodios gratis del catálogo le quedan sin ver*, y contra *cuántas monedas tenía en ese momento*. Si quienes vuelven a ver todavía tienen cientos de episodios gratis por delante, la lectura correcta es la optimista y no esta.
 
 **El perfil como palanca de engagement.** 82% nunca entra. Rediseñarlo es amoblar un cuarto al que nadie va. Lo que hay que mover es *dónde vive* el metajuego, no cómo se ve el cuarto.
 

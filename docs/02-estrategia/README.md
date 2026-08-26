@@ -199,7 +199,7 @@ I8                                ██████
 
 1. **El reloj no puede vivir en el dispositivo.** Un countdown en cliente se vulnera cambiando la hora del teléfono. Necesita ser server-authoritative, con el cliente mostrando un delta contra `server_time`. Presupuestado dentro de las 4–5 semanas.
 2. **La ventana de 5 a.m. necesita zona horaria del usuario, no del servidor.** MX, CO y US-Hispano cruzan cuatro husos. Si el corte se calcula en UTC, a un usuario de Los Ángeles se le rompe la racha a las 10 p.m. Esto es una decisión de producto disfrazada de detalle técnico y hay que resolverla antes de escribir el primer endpoint.
-3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** Ese 40% es una estimación y no un dato medido: no hay medición de push en este producto. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
+3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** **Ese 40% es una estimación, no un dato medido:** no hay medición de push en este producto, y la cifra sale del argumento, no de una fuente. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
 
 ## 2.6 Qué queda deliberadamente afuera
 
