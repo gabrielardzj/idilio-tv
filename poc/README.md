@@ -1,32 +1,21 @@
-# React + TypeScript + Vite
+# POC · «Continuará» — el Pase de la Noche
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Prototipo funcional del momento de desbloqueo de Idilio TV.
+La documentación del entregable está en [`../docs/04-poc`](../docs/04-poc/).
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev        # prototipo
+npm run build      # dist/ — rutas relativas, funciona en cualquier subdirectorio
+npm run export     # regenera ../mobbin-export desde el prototipo (dev server arriba)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+| Archivo | Qué es |
+|---|---|
+| `src/lib/economy.ts` | El modelo económico. Cada constante marcada REAL (verificada en producción) o PROPUESTA. |
+| `src/lib/state.ts` | La máquina de estados: pase, cooldown de 24 h, racha, comodín, saldo, cuenta. |
+| `src/lib/content.ts` | Series y cliffhangers. Cifras reales del catálogo. |
+| `src/components/Wall.tsx` | El muro. La pantalla donde ocurre todo. |
+| `src/components/Sheets.tsx` | Elección de pase, tienda, celebración, cuenta, mi economía. |
+| `src/styles.css` | Tokens y componentes. Sin librería de UI. |
+| `scripts/export-mobbin.mjs` | Recorre el POC y genera el export de flujos. |
