@@ -41,7 +41,7 @@ const FLOWS = [
   {
     id: 'f1-pase-de-la-noche',
     name: 'Desbloqueo con el Pase de la Noche',
-    intent: 'El invitado llega al muro sin monedas y sale con el episodio abierto, una racha más larga y un comodín.',
+    intent: 'El invitado ve un episodio y la noche se acredita sola. Después llega al muro sin monedas y sale con el episodio abierto. En ningún momento reclama nada.',
     screens: [
       {
         id: '01-player-libre', name: 'Player · episodio gratis',
@@ -51,11 +51,18 @@ const FLOWS = [
         act: async (p) => { await click(p, '1 · Episodio gratis') },
       },
       {
+        id: '01b-acuse-de-la-noche', name: 'El acuse de la noche',
+        type: 'Media player', patterns: ['Silent accrual', 'Toast', 'Currency balance'],
+        elements: ['Video', 'Toast', 'Wallet chip', 'Progress bar'],
+        note: 'El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.',
+        act: async (p) => { await click(p, 'Es mañana y volví'); await p.waitForTimeout(150) },
+      },
+      {
         id: '02-muro-pase-listo', name: 'Muro · el Pase está listo',
         type: 'Paywall', patterns: ['Bottom sheet', 'Reward claim', 'Streak', 'Progress indicator', 'Cliffhanger'],
         elements: ['Bottom sheet', 'Headline', 'Progress bar', 'Reward card', 'Primary button', 'Text button', 'Streak strip'],
         note: 'Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.',
-        act: async (p) => { await click(p, '2 · El muro · un pase') },
+        act: async (p) => { await p.waitForTimeout(2700); await click(p, '2 · El muro · un pase') },
       },
       {
         id: '03-eleccion-de-pase', name: 'Elegir a qué serie va el pase',
