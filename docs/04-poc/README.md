@@ -7,7 +7,15 @@
 
 ## 4.1 Qué está construido
 
-El alcance que pide el brief es *"la pantalla o el momento donde ocurre la mecánica"*. El momento es **el muro de desbloqueo**, y está resuelto con sus trece estados:
+El brief acota el alcance a *"la pantalla o el momento donde ocurre la mecánica"*. El momento es **el muro de desbloqueo** — pero un muro no se puede juzgar en el vacío, así que el prototipo tiene también el camino que lleva hasta él:
+
+| Pantalla | Para qué está |
+|---|---|
+| **Home** | Las 35 series reales con muro, con sus cifras medidas. Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
+| **Ficha de serie** | Donde hoy hay 40 números grises, la grilla dice dónde vas, qué está abierto y qué cuesta terminar. |
+| **Player** | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
+
+Y el muro, con sus trece estados:
 
 | # | Estado | Qué demuestra |
 |---|---|---|
@@ -28,6 +36,10 @@ El alcance que pide el brief es *"la pantalla o el momento donde ocurre la mecá
 Y tres más en [`web/`](../../web/), sobre el stack real, que son **rutas prerrenderizadas** y no
 estados de un panel: el pase listo, la cita de 17 h con «Avísame», y el contador de 42 minutos
 donde los segundos vuelven a ser el héroe.
+
+**El recorrido completo se verifica solo.** `npm run recorrer` maneja el prototipo como una persona —home → una serie sin empezar → ver los gratis → chocar con el muro— y comprueba once cosas, entre ellas que el muro abra con la historia antes que con el precio. Corre en el pipeline.
+
+Esa comprobación ya encontró un bug que el panel escondía: **el episodio 1 de cualquier serie sin empezar abría el muro en vez del player**, porque la condición miraba los episodios vistos y no los gratis. Saltar a un estado con el panel demuestra que el estado existe, no que se pueda llegar a él.
 
 **Es un prototipo funcional, no un clickable.** El estado vive en un reducer real (`src/lib/state.ts`), el countdown corre contra un reloj, el saldo se descuenta, la racha avanza, el comodín se consume solo y el pase entra en cooldown de 24 h. Se puede llegar a cualquier estado jugando, sin usar el panel lateral.
 

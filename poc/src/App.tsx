@@ -83,15 +83,21 @@ export default function App() {
           <span className="sb-r">▪▪▪ ⌁ <b style={{ fontSize: 12 }}>38</b></span>
         </div>
 
+        {/* La pantalla se remonta con `key`, así la animación de entrada corre
+            en cada navegación. Sin transición, cambiar de pantalla se siente
+            como recargar; con ella, se siente como una app. */}
         {state.pantalla.en === 'home' && (
+          <div className="pantalla" key="home">
           <Home
             state={state}
             onSerie={(id) => dispatch({ t: 'verSerie', id })}
             onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
           />
+          </div>
         )}
 
         {state.pantalla.en === 'serie' && (
+          <div className="pantalla entra-derecha" key={`serie-${state.pantalla.id}`}>
           <Serie
             id={state.pantalla.id}
             state={state}
@@ -99,9 +105,11 @@ export default function App() {
             onEpisodio={(n) => dispatch({ t: 'abrirEpisodio', id: (state.pantalla as { id: string }).id, n })}
             onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
           />
+          </div>
         )}
 
         {state.pantalla.en === 'player' && (
+          <div className="pantalla entra-abajo" key="player">
           <Player
             series={series} ep={state.episode} balance={state.balance} walletPulse={pulse}
             onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
@@ -109,6 +117,7 @@ export default function App() {
             onPrev={() => dispatch({ t: 'devSetState', patch: { episode: Math.max(1, state.episode - 1) } })}
             onVolver={() => dispatch({ t: 'verSerie', id: SERIE_A_ID[state.seriesId] })}
           />
+          </div>
         )}
 
         {/* El acuse es del player. Si hay una hoja abierta —el caso real: terminas

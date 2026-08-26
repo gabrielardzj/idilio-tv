@@ -31,6 +31,18 @@ jobs:
       - run: npm run build
         working-directory: poc
 
+      # El recorrido completo, no estados sueltos: home → serie → ver → muro.
+      # Saltar a un estado con el panel prueba que el estado existe, no que se
+      # pueda llegar a él. Esta comprobación ya encontró un bug que el panel
+      # escondía: el episodio 1 de una serie sin empezar abría el muro.
+      - name: Recorrer el prototipo como una persona
+        run: |
+          npx playwright install chromium-headless-shell --only-shell
+          npx vite preview --port 5199 &
+          npx wait-on http://localhost:5199 -t 30000
+          npm run recorrer
+        working-directory: poc
+
       # 2 · la implementación sobre el stack real (Next.js) va en /stack
       - name: Verificar que el modelo económico no divergió
         run: npm ci && npm run check-economy

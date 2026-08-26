@@ -64,6 +64,12 @@ function reescribirImagenes(html, desdeSrc, activos) {
   })
 }
 
+/** Cada imagen se puede abrir a tamaño completo: a 268 px no se juzga el craft. */
+function imagenesAmpliables(html) {
+  return html.replace(/<img src="\.\/(activos\/[^"]+)"([^>]*)>/g,
+    (_, ruta, resto) => `<a class="zoom" href="./${ruta}" target="_blank" rel="noopener"><img src="./${ruta}"${resto}></a>`)
+}
+
 const nav = (activo) => PAGINAS.map((p) =>
   `<a class="${p.slug === activo ? 'on' : ''}" href="./${p.slug}.html"><b>${p.n}</b> ${p.titulo}</a>`).join('')
 
@@ -114,7 +120,12 @@ th{text-align:left;font-weight:700;color:var(--tx);padding:10px 12px;border-bott
 td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:var(--mid);vertical-align:top}
 tr:last-child td{border-bottom:none}
 img{max-width:100%;height:auto;border-radius:14px;border:1px solid rgba(255,255,255,.1);display:block}
-td img{max-width:150px}
+/* En las tablas de pantallas, 150px no alcanza para juzgar nada. */
+td img{max-width:268px;transition:transform .18s cubic-bezier(.22,1,.36,1),border-color .18s}
+td a:hover img{transform:scale(1.02);border-color:rgba(168,85,247,.5)}
+td:has(img){width:284px;padding-right:22px}
+a.zoom{display:block;text-decoration:none}
+a.zoom::after{content:'ampliar ↗';display:block;font-size:10.5px;color:var(--lo);margin-top:7px;letter-spacing:.3px}
 hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:40px 0}
 .mermaid-src{background:var(--s1);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px;
 overflow-x:auto;font-family:ui-monospace,monospace;font-size:12px;color:var(--lo);line-height:1.6;margin:0 0 20px;white-space:pre}
@@ -147,6 +158,7 @@ for (const p of PAGINAS) {
     (_, cod) => `<div class="mermaid-src">${cod}</div>`)
   html = reescribirEnlaces(html, p.src)
   html = reescribirImagenes(html, p.src, activos)
+  html = imagenesAmpliables(html)
   await writeFile(join(OUT, `${p.slug}.html`), plantilla(p, html))
   process.stdout.write(`  · ${p.slug}.html\n`)
 }

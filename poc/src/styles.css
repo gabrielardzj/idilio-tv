@@ -526,3 +526,12 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .ep.abierto { background: rgba(63,224,208,.11); border-color: rgba(63,224,208,.3); color: var(--cyan); }
 .ep.visto { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.14); color: var(--tx-mid); }
 .serie-pie { font-size: 11.5px; color: var(--tx-lo); line-height: 1.5; margin-top: var(--sp-4); text-align: center; }
+
+/* Transiciones de pantalla. El contenedor se remonta con `key`, así que basta
+   una animación de entrada: no hace falta orquestar salidas. */
+.pantalla { position: absolute; inset: 0; animation: entraSuave .3s var(--ease); }
+.pantalla.entra-derecha { animation: entraDerecha .34s var(--ease); }
+.pantalla.entra-abajo { animation: entraAbajo .32s var(--ease); }
+@keyframes entraSuave { from { opacity: 0; transform: scale(1.015) } }
+@keyframes entraDerecha { from { opacity: 0; transform: translateX(22px) } }
+@keyframes entraAbajo { from { opacity: 0; transform: translateY(18px) scale(.99) } }

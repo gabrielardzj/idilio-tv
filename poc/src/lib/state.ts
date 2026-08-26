@@ -1,6 +1,6 @@
 import { EPISODE_COST, HORA_HABITUAL, MAX_PASSES, MAX_SHIELDS, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS, STREAK } from './economy'
 import { SERIES, type SeriesId } from './content'
-import { CATALOGO_SERIES } from './catalogo'
+import { CATALOGO_SERIES, porId } from './catalogo'
 
 export type Sheet =
   | { kind: 'none' }
@@ -199,13 +199,21 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
     case 'abrirEpisodio': {
       // Entrar a un episodio es ver: si es noche nueva, se acredita acá también.
       const acreditado = acreditarNoche(s)
-      const libre = a.n <= (acreditado.vistos[a.id] ?? 0)
+      // Un episodio está abierto si ya lo vio O si cae dentro de los gratis de
+      // la serie. Mirar solo lo visto mandaba al muro el episodio 1 de
+      // cualquier serie sin empezar, que es justo por donde entra todo el mundo.
+      const desbloqueado = Math.max(acreditado.vistos[a.id] ?? 0, porId(a.id)?.gratis ?? 0)
+      const libre = a.n <= desbloqueado
       const conocida = ID_A_SERIE[a.id]
       return {
         state: {
           ...acreditado,
           pantalla: { en: 'player' },
           episode: a.n,
+          // Ver un episodio nuevo mueve el progreso de esa serie.
+          vistos: libre
+            ? { ...acreditado.vistos, [a.id]: Math.max(acreditado.vistos[a.id] ?? 0, a.n) }
+            : acreditado.vistos,
           ...(conocida ? { seriesId: conocida } : {}),
         },
         sheet: libre ? { kind: 'none' } : { kind: 'unlock' },
