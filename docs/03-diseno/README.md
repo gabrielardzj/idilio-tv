@@ -207,7 +207,7 @@ Propuesta, medida en la unidad que el usuario entiende:
 
 Fuera de la oferta de bienvenida, el precio por episodio baja en cada escalón.
 
-Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puestas una al lado de la otra, $ 2.500 por 12 episodios y $ 13.500 por 25 — $ 208 contra $ 540 el episodio — son la misma lectura de $0.99 por 12 episodios y $1.99 por 13 son un dólar más por un episodio más — la misma lectura de *«error o trampa»* que F3 le señala al producto en [F3](../01-diagnostico/#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie). No es el mismo caso, y por eso no digo «exactamente»: en F3 dos precios distintos entregan **las mismas** 180 monedas, y acá el escalón sí entrega un episodio más. Es la versión atenuada del mismo defecto, y en la pantalla se lee igual de mal. Por eso hace falta una **regla de producto, no una aclaración de copy: la bienvenida nunca comparte grilla con la escalera.** Se muestra sola, la primera vez que el usuario abre la tienda, como tarjeta única y con vencimiento declarado; la escalera completa recién aparece cuando la bienvenida se usó o se venció. Los dos precios no llegan a verse juntos nunca.
+Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puestas una al lado de la otra, **$ 2.500 por 12 episodios y $ 13.500 por 25** —$ 208 contra $ 540 el episodio— se leen como *«error o trampa»*, que es exactamente lo que [F3](../01-diagnostico/#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie) le señala al producto. Por eso hace falta una **regla de producto, no una aclaración de copy: la bienvenida nunca comparte grilla con la escalera.**
 
 *(La tabla de acá arriba es la vista del diseñador —las cuatro opciones en fila para poder discutirlas—, no una pantalla del producto. En el producto esa primera fila no está cuando están las otras tres.)*
 
@@ -215,9 +215,9 @@ Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puest
 
 Hoy los tres paquetes llevan badge de descuento a la vez: 69%, 20% y 24%. Cuando todo está rebajado, el ancla deja de anclar y empieza a restar confianza justo en el segundo de pagar.
 
-El tachado de la oferta de bienvenida parece el inofensivo, y es el que menos lo es: en la escalera propuesta **no existe un paquete de 180 monedas a precio regular**, así que el $2.49 que ancla hoy en el paywall real estaría anclando contra un producto inventado. Es el mismo patrón que critico, con mejor coartada.
+El tachado de la oferta de bienvenida parece el inofensivo, y es el que menos lo es: en la escalera propuesta **no existe un paquete de 180 monedas a precio regular**, así que el precio tachado que la acompaña estaría anclando contra un producto que no existe. Es el mismo patrón que critico, con mejor coartada.
 
-La columna de precio por episodio hace el trabajo sola y sin mentir. Dentro de la escalera lo hace a la vista: **$ 540 → $ 510 → $ 499**, cada escalón más barato que el anterior, sin ancla que inventar. Y la bienvenida lo hace con un solo número: **$0.08 por episodio** es el precio más bajo que la tienda va a mostrar nunca, y el usuario lo comprueba cuando aparece la escalera — después, no al lado. Eso es lo que el tachado pretendía decir, con la diferencia de que esto es verdad.
+La columna de precio por episodio hace el trabajo sola y sin mentir. Dentro de la escalera lo hace a la vista: **$ 540 → $ 510 → $ 499**, cada escalón más barato que el anterior, sin ancla que inventar. Y la bienvenida lo hace con un solo número: **$ 208 por episodio** es el precio más bajo que la tienda va a mostrar nunca, y el usuario lo comprueba cuando aparece la escalera — después, no al lado. Eso es lo que el tachado pretendía decir, con la diferencia de que esto es verdad.
 
 ### D6 · El oro está racionado
 

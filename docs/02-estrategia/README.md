@@ -70,11 +70,11 @@ La intervención es reordenar y renombrar, no mover: **el anuncio arriba**, y el
 > **Y ojo con el conflicto que esto destapa:** el Pase Idilio vende *«sin anuncios»* como una de sus dos ventajas. O sea que la suscripción cobra por quitar la fuente gratuita más generosa del producto. Poner el anuncio en el muro hace ese conflicto más visible, y es una decisión de negocio que hay que tomar a la vista y no por omisión.
 
 #### I3 · La escalera de precios vuelve a ser una escalera
-Diferenciar los dos paquetes de 180 monedas (hoy $0.99 y $1.99 dan lo mismo). Dar mejora real de valor por escalón. Reservar el badge de descuento para descuentos reales.
+Hoy la escalera se aplana y en el último escalón empeora: **$ 540 el episodio en el paquete de 375, $ 531 en el de 725 y $ 599 en el de 1500**. Dar mejora real por escalón, y reservar el badge de descuento para descuentos reales — hoy los tres paquetes lo llevan a la vez.
 
 | | |
 |---|---|
-| **Hipótesis** | Dos paquetes idénticos a distinto precio se leen como error o como trampa; y sin mejora por volumen no hay razón para subir de escalón. Arreglar la escalera sube el ticket promedio sin tocar el tráfico. |
+| **Hipótesis** | Una escalera que no baja —y que en el último escalón sube— no le da al usuario ninguna razón para comprar el paquete grande, y un descuento en los tres a la vez no persuade en ninguno. Arreglar la escalera sube el ticket promedio sin tocar el tráfico. |
 | **Mueve** | Valor de la primera compra, ARPPU. No mueve DAU/MAU — entra igual porque cuesta poco y protege el resto. |
 | **Cómo lo sé** | *Leading:* mix de paquetes comprados. *Lagging:* ARPPU. |
 | **Costo** | ~1 semana + config de store. |
