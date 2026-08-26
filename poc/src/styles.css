@@ -272,6 +272,24 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .streak-h b { font-size: 14px; font-weight: 700; }
 .streak-h .sub { font-size: 11.5px; color: var(--tx-lo); }
 
+/* El anuncio recompensado. Deliberadamente sobrio: es gratis y real, pero
+   cuesta 30 segundos y corta la historia, así que no compite en atención con
+   el Pase —que es lo mismo sin el corte— ni se disfraza de oferta. */
+.anuncio {
+  display: flex; align-items: center; gap: 11px; width: 100%; margin-top: 12px;
+  padding: 11px 13px; border-radius: var(--r-md); text-align: left;
+  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09);
+  transition: all .16s var(--ease);
+}
+.anuncio:hover { background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.16); }
+.anuncio-i {
+  display: grid; place-items: center; width: 32px; height: 32px; flex: none;
+  border-radius: 999px; background: rgba(63,224,208,.12); color: var(--cyan);
+}
+.anuncio-t { display: grid; gap: 2px; }
+.anuncio-t b { font-size: 13.5px; font-weight: 600; color: var(--tx-hi); }
+.anuncio-t small { font-size: 11.5px; color: var(--tx-lo); }
+
 .nights { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; list-style: none; margin: 0; padding: 0; }
 .night { display: grid; place-items: center; gap: 6px; }
 .night .dot {

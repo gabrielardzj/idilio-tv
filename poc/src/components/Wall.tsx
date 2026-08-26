@@ -1,6 +1,6 @@
-import { Bell, Coin, Lock, Pass, X } from './Icons'
+import { Bell, Coin, Lock, Pass, Play, X } from './Icons'
 import { NextPass, StreakStrip } from './bits'
-import { EPISODE_COST, MAX_PASSES, episodesLabel } from '../lib/economy'
+import { EPISODE_COST, FUENTES_HOY, MAX_PASSES, episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
 import { desbloqueadoDe, type State } from '../lib/state'
 
@@ -18,16 +18,18 @@ import { desbloqueadoDe, type State } from '../lib/state'
  * Un muro que abre con el pase enseña que el sistema es un juego que se puede jugar.
  */
 export function Wall({
-  state, series, onClaim, onCoins, onStore, onClose, onRemind, justAdvanced,
+  state, series, onClaim, onCoins, onStore, onClose, onRemind, onAnuncio, justAdvanced,
 }: {
   state: State; series: Series; justAdvanced?: boolean
-  onClaim: () => void; onCoins: () => void; onStore: () => void; onClose: () => void; onRemind: () => void
+  onClaim: () => void; onCoins: () => void; onStore: () => void; onClose: () => void
+  onRemind: () => void; onAnuncio: () => void
 }) {
   const abierto = desbloqueadoDe(state, series.id)
   const ep = abierto + 1
   const prev = series.episodes[abierto]
   const canPayNow = state.balance >= EPISODE_COST
   const atCap = state.passes >= MAX_PASSES
+  const anunciosQuedan = FUENTES_HOY.anuncio.topeDiario - state.anunciosHoy
   const missing = EPISODE_COST - state.balance
   const pct = Math.round((abierto / series.total) * 100)
 
@@ -85,6 +87,21 @@ export function Wall({
             <Bell s={16} /> {state.remind ? 'Te aviso a las ' + new Date(state.passNextAt ?? state.now).getHours() + ':' + String(new Date(state.passNextAt ?? state.now).getMinutes()).padStart(2, '0') : 'Avísame cuando esté listo'}
           </button>
         </div>
+      )}
+
+      {/* El anuncio recompensado: la fuente gratuita que el producto YA tiene.
+          Va aquí, entre el pase y lo pago, por la regla de D2 —lo gratis antes
+          que lo pago— y porque el muro real lo entierra bajo la suscripción. Y
+          va traducido: el producto lo rotula «0/10», que no le dice nada a
+          nadie; son diez episodios gratis al día, y esa es la cifra. */}
+      {anunciosQuedan > 0 && (
+        <button className="anuncio" onClick={onAnuncio}>
+          <span className="anuncio-i"><Play s={17} /></span>
+          <span className="anuncio-t">
+            <b>Ver un anuncio y abrir este episodio</b>
+            <small>Te quedan {anunciosQuedan} episodios gratis hoy · 30 s cada uno</small>
+          </span>
+        </button>
       )}
 
       {/* La alternativa de pago va SIEMPRE debajo del pase, nunca arriba */}

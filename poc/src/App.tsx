@@ -184,6 +184,7 @@ export default function App() {
                 onCoins={() => dispatch({ t: 'unlockWithCoins' })}
                 onStore={() => dispatch({ t: 'open', sheet: { kind: 'store' } })}
                 onRemind={() => dispatch({ t: 'toggleRemind' })}
+                onAnuncio={() => dispatch({ t: 'verAnuncio' })}
                 onClose={() => dispatch({ t: 'close' })}
               />
             )}

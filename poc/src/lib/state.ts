@@ -1,4 +1,4 @@
-import { EPISODE_COST, HORA_HABITUAL, MAX_PASSES, MAX_SHIELDS, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS, STREAK } from './economy'
+import { EPISODE_COST, FUENTES_HOY, HORA_HABITUAL, MAX_PASSES, MAX_SHIELDS, NIGHT_BOUNDARY_HOUR, PASS_COOLDOWN_MS, STREAK } from './economy'
 import { SERIES, type Series, type SeriesId } from './content'
 import { CATALOGO_SERIES, porId } from './catalogo'
 
@@ -27,6 +27,11 @@ export interface State {
   shieldJustUsed: boolean
   streakJustBroke: boolean
   passes: number                  // 0..MAX_PASSES — se acumulan, no se pierden
+  /** anuncios recompensados vistos esta noche. El producto REAL ya los tiene
+   *  —15 monedas, tope 10 al día— y son la fuente gratuita grande: 70 episodios
+   *  por semana. El muro los muestra porque quitarlos sería proponer un
+   *  retroceso, y los traduce porque «0/10» no le dice nada a nadie. */
+  anunciosHoy: number
   /** pases gastados en esta vuelta de 7 noches. La pantalla «Tu economía» lo
    *  reportaba desde `nights`, o sea contaba noches asistidas y las llamaba
    *  pases usados: en la pantalla que existe para explicar la economía, un
@@ -69,6 +74,7 @@ export const initialState = (now: number): State => ({
   streakJustBroke: false,
   passes: 1,
   passesUsed: 0,
+  anunciosHoy: 0,
   lastNight: nocheDe(now),
   passNextAt: null,
   now,
@@ -90,6 +96,7 @@ export type Action =
   | { t: 'open'; sheet: Sheet }
   | { t: 'close' }
   | { t: 'hitWall'; ep: number }
+  | { t: 'verAnuncio' }
   | { t: 'claimPass'; series: string }
   | { t: 'unlockWithCoins' }
   | { t: 'buy'; coins: number; cop: number }
@@ -127,6 +134,20 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
         sheet: { kind: 'unlock' },
         state: { ...s, episode: a.ep },
       }
+
+    case 'verAnuncio': {
+      // Igual que en el producto: un anuncio da 15 monedas, con tope diario.
+      if (s.anunciosHoy >= FUENTES_HOY.anuncio.topeDiario) return ctx
+      return {
+        ...ctx,
+        state: {
+          ...s,
+          balance: s.balance + FUENTES_HOY.anuncio.monedas,
+          anunciosHoy: s.anunciosHoy + 1,
+          toast: `+${FUENTES_HOY.anuncio.monedas} monedas · 1 episodio`,
+        },
+      }
+    }
 
     case 'claimPass': {
       // Gastar el pase ya no avanza la racha: eso pasó al terminar el episodio.
@@ -366,6 +387,8 @@ function acreditarNoche(s: State): State {
     lastNight: noche,
     // La cuenta de pases gastados vive dentro de la vuelta, como la escalera.
     passesUsed: nights === 1 ? 0 : s.passesUsed,
+    // El tope de anuncios es diario: cada noche nueva lo devuelve a cero.
+    anunciosHoy: 0,
     toast: streakJustBroke ? `Empiezas de nuevo · ${partes.join(' · ')}`
          : shieldJustUsed  ? `Tu comodín te cubrió · ${partes.join(' · ')}`
          : partes.join(' · '),
