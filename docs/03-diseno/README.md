@@ -32,7 +32,7 @@ El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus su
 **4. Funciona para el 88% que es invitado, desde el día uno.**
 Sin cuenta, sin onboarding (la seguidilla de pantallas de bienvenida), sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
 
-**La alternativa más seria que quedó fuera:** el rediseño de la recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Ola 1 y como el reclamo inline del pase.
+**La alternativa más seria que quedó fuera:** el rediseño del diálogo de recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Ola 1 y como el reclamo inline del pase.
 
 ---
 
@@ -44,7 +44,7 @@ Son dos cosas distintas y conviene no mezclarlas:
 - **Emisión.** El sistema genera **un pase por noche, por el reloj, hasta 7 por semana**. Ocurre esté el usuario o no: el derecho se genera aunque nadie abra la app.
 - **Entrega.** El pase se acredita **cuando el usuario termina un episodio**. Ahí entra lo que tenga pendiente —uno si volvió anoche, dos si faltó—, avanza la racha y se paga el bono si toca. El usuario no toca nada: un toast de dos segundos se lo dice y sigue viendo. Nunca hay un botón, y nunca llega una notificación diciendo que algo *«se venció»*.
 
-Es la corrección directa al **19% de reclamo** de la recompensa diaria. Ese 19% no es un problema de diseño de pantalla — es la consecuencia de haber puesto un botón entre el usuario y algo que ya se ganó. Quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
+Es la corrección directa al **19% de reclamo** de la recompensa diaria, y la evidencia detrás es más fuerte de lo que parece. Hoy esa recompensa se ofrece en un diálogo al abrir la app: es ineludible, la ve todo el mundo, y aun así cuatro de cada cinco la cierran ([F1](../01-diagnostico/#f1--la-fuente-llega-cuando-no-hace-falta-y-falta-cuando-hace-falta)). O sea que la visibilidad ya está resuelta y el 19% no la explica. Lo que queda es el momento y el botón. Cambiando el momento —al muro, cuando el usuario quiere el episodio— y quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
 
 > La entrega al ver está tomada de la versión paralela de este mismo reto, donde está mejor resuelta que en la mía. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
 
@@ -287,7 +287,7 @@ La categoría directa —no cómics, microdramas— ya validó que la fuente gra
 
 | | ReelShort | DramaBox | **Idilio (hoy)** | **Idilio (propuesta)** |
 |---|---|---|---|---|
-| Check-in diario | ~10 monedas | Sí, y **la racha se rompe al faltar** | Sí, lo reclama el 19% | Pase de la Noche, en el muro |
+| Check-in diario | ~10 monedas | Sí, y **la racha se rompe al faltar** | Diálogo al abrir la app · lo reclama el 19% | Pase de la Noche, en el muro |
 | Anuncios recompensados | Sí | Hasta **15 anuncios diarios ≈ 30 monedas** | No | No (fuera de alcance) |
 | Costo de una serie | $37–47 (80 eps) | — | **~$6.63** (serie mediana, 50 eps) | igual |
 
@@ -303,7 +303,7 @@ Tres lecturas que salen de ahí:
 
 La restricción del brief es explícita: *«cualquier fuente nueva de moneda debe equilibrarse con la sostenibilidad de la economía y con la conversión a pagador»*.
 
-**Primero: no es una fuente nueva.** La recompensa diaria ya existe. Lo que cambia es dónde se reclama y en qué unidad se entrega. Que suba el reclamo del 19% a algo mucho mayor sí aumenta la emisión total — eso es real y hay que medirlo. Pero el diseño de fuente no se amplía, se relocaliza.
+**Primero: no es una fuente nueva.** La recompensa diaria ya existe. Lo que cambia es *cuándo* llega, en qué unidad se entrega y que deja de haber un botón. Que suba el reclamo del 19% a algo mucho mayor sí aumenta la emisión total — eso es real y hay que medirlo. Pero el diseño de fuente no se amplía, se relocaliza.
 
 **Segundo: el techo es duro y es por usuario.**
 

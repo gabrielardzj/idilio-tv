@@ -2,7 +2,7 @@
 
 ## Resumen
 
-Ocho intervenciones en tres olas, sobre un trimestre. La compuerta que las ordena es una sola: **si el usuario tiene que navegar a una pestaña para encontrarla, no sirve**, porque el 82% nunca abre el perfil y el 81% no reclama la recompensa que ya existe.
+Ocho intervenciones en tres olas, sobre un trimestre. La compuerta que las ordena es una sola: **si no ocurre en el momento en que el usuario quiere lo que se le ofrece, no sirve** — sea porque vive en una pestaña que no visita (82% nunca abre el perfil) o porque llega antes de que la necesidad exista (81% descarta la recompensa diaria que se le pone delante al abrir la app).
 
 | Ola | Semanas | Qué hace | Intervenciones |
 |---|---|---|---|
@@ -24,8 +24,8 @@ La estrategia no agrega mecánicas: **re-sitúa y re-denomina** las que ya exist
 
 El orden sale de tres preguntas, aplicadas en esta secuencia. La primera es una compuerta, no un factor.
 
-**① ¿Ocurre dentro del core loop?**
-Si la intervención requiere que el usuario navegue a una pestaña, baja al último lugar sin importar qué tan buena sea. El 82% que nunca abre perfil y el 81% que no reclama la recompensa son la misma persona diciendo lo mismo: *no voy a ir a buscarlo*.
+**① ¿Ocurre dentro del core loop, en el momento de la necesidad?**
+Dos formas de fallar esta compuerta, y las dos bajan la intervención al último lugar por buena que sea. La primera es pedirle al usuario que navegue: el 82% nunca abre el perfil. La segunda es llegar antes de que exista la necesidad, y es la menos evidente — el 81% que no reclama la recompensa diaria **sí la tiene delante**, en un diálogo al abrir la app, y la cierra igual. Estar a la vista no alcanza si el usuario todavía no quiere lo que se le ofrece.
 
 **② Alcance × Efecto ÷ Costo.**
 Alcance = fracción de DAU que la ve sin buscarla. Efecto = magnitud esperada sobre DAU/MAU. Costo = semanas de equipo.
@@ -55,11 +55,11 @@ Cada cifra de monedas del producto lleva su traducción a episodios. `180` pasa 
 | **Compuerta ①** | ✅ ocurre en el muro, dentro del loop. |
 
 #### I2 · El sumidero es también la fuente
-La recompensa diaria se reclama **dentro del muro de desbloqueo**. Deja de ser un destino y pasa a ser una opción en el momento de necesidad.
+La recompensa diaria se reclama **dentro del muro de desbloqueo**. Deja de ser un trámite de bienvenida y pasa a ser una opción en el momento de necesidad.
 
 | | |
 |---|---|
-| **Hipótesis** | El 81% que no reclama no la rechaza: no la encuentra. Ofrecida en el segundo en que le faltan 15 monedas, la tasa de reclamo se multiplica. |
+| **Hipótesis** | El 81% que no reclama sí ve la oferta —el diálogo de bienvenida es ineludible— y la descarta porque llega antes de necesitarla y en una unidad que no sabe leer. Ofrecida en el segundo en que le faltan 15 monedas para el episodio que quiere, y traducida a episodios por I1, la tasa de reclamo se multiplica. |
 | **Mueve** | Reclamo diario 19% → objetivo 55%+. Vía reclamo, DAU/MAU. |
 | **Cómo lo sé** | *Leading:* % de DAU que reclama. *Lagging:* DAU/MAU. *Guardrail:* ARPDAU y % de pagadores no caen más de 5% relativo. |
 | **Costo** | ~2 semanas. |

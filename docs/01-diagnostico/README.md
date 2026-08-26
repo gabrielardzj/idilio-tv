@@ -4,7 +4,9 @@
 
 ## Resumen
 
-El metajuego de Idilio no está mal diseñado: **está en la pantalla equivocada**. Las monedas se regalan en la pestaña Recompensas y se necesitan en el reproductor, al chocar con el muro. El usuario no visita la primera —el 19% reclama la recompensa diaria y el 82% nunca ha abierto el perfil—, así que la única salida gratuita del sistema es invisible justo en el momento en que haría falta.
+El metajuego de Idilio no está mal diseñado: **llega en el momento equivocado**. Las monedas se regalan al abrir la app —un diálogo con un botón *Reclamar*, la primera vez que se entra cada día— y se necesitan horas después, en el reproductor, al chocar con el muro.
+
+Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que el producto nunca traduce a episodios.
 
 Debajo de esa falla hay otra mayor, que solo aparece al medir el catálogo completo: **la alternativa a pagar no es irse de la app, es empezar otra serie gratis.** Hay 500 episodios gratis repartidos en 50 títulos, casi cuatro meses de consumo sin pagar, de modo que la economía no ejerce ninguna presión sobre el usuario. Y quien salta de historia en historia no se apega a ninguna: no hay ninguna serie esperándolo mañana, que es precisamente lo que mide un DAU/MAU de 0.33.
 
@@ -91,7 +93,7 @@ Eso cambia el significado de casi todas las demás señales:
 | Sesión de 22 min / 14 eps | Buen engagement (que la gente usa mucho la app) | Al menos una serie agotada — y, si la hipótesis de arriba se sostiene, otra recién empezada |
 | 23% vuelve a ver series que ya terminó | Aman el contenido | Ya vieron lo que era gratis y no tienen a dónde ir |
 | DAU/MAU 0.33 | Les falta hábito | **Ninguna historia en particular los está esperando** |
-| 19% reclama la recompensa diaria | La pantalla de recompensas está mal resuelta | Todavía nadie necesita monedas |
+| 19% reclama la recompensa diaria | El diálogo de recompensa está mal resuelto | Todavía nadie necesita monedas: no es un problema de diseño de la pantalla |
 
 **La conclusión que ordena la estrategia:**
 
@@ -103,14 +105,24 @@ Eso cambia el significado de casi todas las demás señales:
 
 ## 1.2 Las cinco fallas
 
-### F1 · Lo que resolvería el muro vive en otra pantalla
+### F1 · La fuente llega cuando no hace falta, y falta cuando hace falta
 
-El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan. La única fuente gratuita —la recompensa diaria y su racha— vive en la pestaña **Recompensas**. El gasto ocurre en el **player** —el reproductor—, al chocar con el muro. Son dos pantallas distintas, y cuando el usuario necesita monedas siempre está en la segunda.
+El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan **en el tiempo**.
 
-- **19% de los usuarios activos reclama la recompensa diaria.** El 81% restante no la rechaza: no sabe que existe, porque nunca aparece en el momento en que le haría falta.
-- **82% nunca abrió el perfil.** El patrón se repite: para este usuario, lo que vive en una pestaña aparte no existe.
+La fuente gratuita se ofrece **al abrir la app**, en un diálogo que aparece la primera vez que se entra cada día y que hay que reclamar con un botón. La misma recompensa vive además en la pestaña **Recompensas**. El gasto ocurre horas después, en el **player** —el reproductor—, al chocar con el muro.
 
-La pestaña Recompensas ya está en la barra inferior. Que exista no alcanza. **Un metajuego alojado en un destino que el usuario no visita no puede mover DAU/MAU, por bien diseñado que esté.**
+- **19% de los usuarios activos reclama la recompensa diaria.** El diálogo no se puede no ver: se interpone entre el usuario y la app. Así que el 81% restante **no la deja pasar por no encontrarla: la descarta**.
+- **82% nunca abrió el perfil.** Lo que vive en una pestaña aparte, para este usuario, no existe — y eso sí aplica a todo lo demás del metajuego.
+
+Ese 19% es la señal más informativa del conjunto, precisamente porque el producto ya hizo lo máximo que se puede hacer con la visibilidad. Cuatro de cada cinco personas cierran un regalo gratis que tienen delante de los ojos, y hay tres razones que lo explican, las tres sostenidas por el resto de este diagnóstico:
+
+| Por qué se descarta | Evidencia |
+|---|---|
+| **No sabe qué está rechazando.** Nada en el producto traduce monedas a episodios, así que el regalo no se lee como regalo | [F2](#f2--nadie-le-dice-al-usuario-cuánto-vale-una-moneda) |
+| **No necesita monedas todavía.** El diálogo aparece antes de ver nada, con 10 episodios gratis por delante — y con 500 en el catálogo, esa necesidad tarda meses en aparecer | [Hallazgo 2](#hallazgo-2--pagar-no-es-la-única-salida-del-muro-empezar-otra-serie-es-gratis) |
+| **Está en el camino a lo que vino a hacer.** A la 1 a.m., con una mano, lo que se interpone entre abrir la app y ver se cierra por reflejo | 54% de las sesiones entre 11 p.m. y 2 a.m. |
+
+**La conclusión no es que la fuente esté escondida: es que el momento está mal elegido, y que hay un botón de por medio.** El único instante del día en que el usuario quiere monedas es cuando choca con el muro, y ahí la fuente gratuita no aparece.
 
 **Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a ≈ $24.620** (US$ 7.99) y uno **mensual a ≈ $46.190** (US$ 14.99): Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal sale más caro que terminar la serie mediana comprándola —600 monedas, entre ≈ $20.430 y ≈ $24.410 según el paquete con que se armen—. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
 
@@ -179,7 +191,7 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 |---|---|
 | **10 eps gratis + 14 eps por sesión** | Lo gratis se acaba antes que la sesión: la serie típica se queda sin episodios gratis a los 10 y la sesión promedio sigue hasta 14. Dónde cae el muro *dentro* de la sesión es hipótesis, no dato ([§1.1](#11-los-dos-hallazgos-que-ordenan-todo-lo-demás)). |
 | **500 episodios gratis en el catálogo** | Son casi cuatro meses de contenido sin pagar. Explica por qué el 19% de reclamo de la recompensa no es un problema de pantalla: todavía nadie necesita monedas. |
-| **19% reclama la recompensa diaria** | Mide directamente la distancia entre donde se ganan las monedas y donde se gastan. Es la fuga más grande y la más barata de tapar. |
+| **19% reclama la recompensa diaria** | Mide la distancia entre *cuándo* se ofrecen las monedas y *cuándo* se necesitan. Pesa el doble por ser un diálogo ineludible: descarta la visibilidad como causa y deja el momento y la unidad. |
 | **82% nunca abre el perfil** | Es la restricción de diseño más dura: descarta de entrada cualquier solución que viva en una pestaña. |
 | **DAU/MAU 0.33 frente a una racha diaria** | La mecánica le pide al usuario una frecuencia que no tiene. Explica el 6% sin necesidad de más datos. |
 | **88% son invitados, sin cuenta** | Cualquier cosa que exija registrarse arranca alcanzando apenas al 12%. Define el orden: primero el valor, después la cuenta. |
