@@ -14,20 +14,25 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
 
 ## 1.1 Los dos hallazgos que ordenan todo lo demás
 
-### Hallazgo 1 · Ninguna historia dura lo que dura una sesión: 10 episodios gratis contra 14 por sesión
+### Hallazgo 1 · Lo gratis se acaba antes que la sesión: 10 episodios contra 14
 
-**La serie típica regala 10 episodios gratis. La sesión promedio dura 14.**
+**La serie típica regala 10 episodios gratis. La sesión promedio dura 14.** Los últimos cuatro caen del otro lado del muro.
 
 ```
-      ← 10 gratis →  ┃  ← 4 más de apetito →
+   una sesión promedio: 14 episodios
+      ← 10 gratis →  ┃  ← 4 de pago →
    ●●●●●●●●●●        ┃  ○○○○
                      ┃
                    EL MURO
 ```
 
-O sea que a la sesión promedio le sobran cuatro episodios de apetito después del último gratis de una serie. Ninguna historia del catálogo alcanza para cubrir **una sesión promedio**: el bloque gratis más largo es de 12 episodios, y las 9 series que son gratis enteras no pasan de 10. Para una sesión corta sí alcanza, y de sobra: la media de 14 no dice cuántas sesiones son cortas.
+Y no se arregla eligiendo otra serie: **ninguna del catálogo regala 14 episodios**. El bloque gratis más largo es de 12, y las 9 series que son gratis de punta a punta tienen 10 episodios o menos en total.
 
-Conviene no estirar el hallazgo ni un centímetro de más. A lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
+Eso vale para la sesión promedio. En una sesión corta el bloque gratis sobra — y 14 es una media, que no dice cuántas sesiones son cortas.
+
+**Hasta ahí llega el dato, y ni un centímetro más.** Lo que la economía limita es **cuánto se avanza dentro de una misma historia**: 10 episodios seguidos, en 37 de las 41 series con muro. Eso es lo único que la cifra sostiene por sí sola.
+
+Decir además que **el muro es lo que corta la sesión** ya es otra afirmación, y el Hallazgo 2 da razones para dudarla: al chocar, al usuario le queda un catálogo entero de arranques gratis, así que podría seguir viendo sin pagar nada. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
 
 Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall (el muro de pago) del build 1.20.0:
 
@@ -55,7 +60,7 @@ A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** (La c
 
 Con ese dato a la vista aparece una lectura tentadora de la sesión promedio: **14 = 10 + 4**. La sesión típica no sería "veo 14 episodios de una historia" sino **"termino los 10 gratis de una serie, choco con el muro y me voy a empezar otra"**.
 
-**La anoto como hipótesis, no como conclusión, y quiero que se lea así.** 14 es una media, y una media no se descompone: sale igual de muchas sesiones de 2 episodios con unas pocas de 40, y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10. Descartar el 2.4x de retención a 30 días por confundir selección con causa ([§1.3](#13-qué-señales-pesaron-y-cuáles-descarté)) y quedarme con esta suma porque me conviene sería la misma falta, cometida en mi favor.
+**Es una hipótesis, no una conclusión.** Una media no se descompone: el mismo 14 sale de muchas sesiones de 2 episodios con unas pocas de 40. Y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10. Vale acá el mismo criterio con el que descarto el 2.4x de retención a 30 días en [§1.3](#13-qué-señales-pesaron-y-cuáles-descarté): una cifra que encaja con la tesis todavía no la demuestra.
 
 **Lo que la resuelve es una consulta, no un estudio:** la **distribución** de episodios por sesión —no la media— y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie. Si esa fracción es alta, la hipótesis se sostiene. Si es baja, el muro corta historias pero no sesiones, y hay que buscar en otro lado qué las corta.
 
@@ -161,7 +166,7 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 | Señal | Por qué pesó |
 |---|---|
-| **10 eps gratis + 14 eps por sesión** | Ninguna historia dura lo que dura una sesión: la serie típica se queda sin gratis a los 10 y la sesión promedio sigue hasta 14. Dónde cae el muro *dentro* de la sesión es hipótesis, no dato ([§1.1](#11-los-dos-hallazgos-que-ordenan-todo-lo-demás)). |
+| **10 eps gratis + 14 eps por sesión** | Lo gratis se acaba antes que la sesión: la serie típica se queda sin episodios gratis a los 10 y la sesión promedio sigue hasta 14. Dónde cae el muro *dentro* de la sesión es hipótesis, no dato ([§1.1](#11-los-dos-hallazgos-que-ordenan-todo-lo-demás)). |
 | **500 episodios gratis en el catálogo** | Son casi cuatro meses de contenido sin pagar. Explica por qué el 19% de reclamo de la recompensa no es un problema de pantalla: todavía nadie necesita monedas. |
 | **19% reclama la recompensa diaria** | Mide directamente la distancia entre donde se ganan las monedas y donde se gastan. Es la fuga más grande y la más barata de tapar. |
 | **82% nunca abre el perfil** | Es la restricción de diseño más dura: descarta de entrada cualquier solución que viva en una pestaña. |
