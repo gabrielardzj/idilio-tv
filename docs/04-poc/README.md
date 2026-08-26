@@ -1,7 +1,7 @@
 # 4. El POC
 
 **`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens.
-**`/mobbin-export`** · 16 pantallas en 7 flujos, capturadas automáticamente de los dos prototipos.
+**`/mobbin-export`** · 17 pantallas en 7 flujos, capturadas automáticamente de los dos prototipos.
 
 ---
 

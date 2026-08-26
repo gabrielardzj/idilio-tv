@@ -1,0 +1,477 @@
+{
+  "app": "Idilio TV",
+  "release": "Continuará · Pase de la Noche (propuesta)",
+  "platform": "iOS · vertical · una mano",
+  "captured": "2026-08-25",
+  "device": "iPhone 14 Pro · 390×844 @3x",
+  "theme": "Dark",
+  "language": "es-419",
+  "flows": [
+    {
+      "id": "f1-pase-de-la-noche",
+      "name": "Desbloqueo con el Pase de la Noche",
+      "intent": "El invitado ve un episodio y la noche se acredita sola. Después llega al muro sin monedas y sale con el episodio abierto. En ningún momento reclama nada.",
+      "screens": [
+        {
+          "id": "01-player-libre",
+          "name": "Player · episodio gratis",
+          "screenType": "Media player",
+          "patterns": [
+            "Vertical video",
+            "Progress indicator",
+            "Currency balance"
+          ],
+          "elements": [
+            "Video",
+            "Top bar",
+            "Wallet chip",
+            "Action rail",
+            "Progress bar",
+            "Scrubber"
+          ],
+          "note": "El saldo nunca viaja solo: el chip lleva siempre la traducción a episodios. Es la única huella permanente del metajuego dentro del core loop.",
+          "stateKey": "player-free",
+          "image": "flows/f1-pase-de-la-noche/01-player-libre.png"
+        },
+        {
+          "id": "01b-acuse-de-la-noche",
+          "name": "El acuse de la noche",
+          "screenType": "Media player",
+          "patterns": [
+            "Silent accrual",
+            "Toast",
+            "Currency balance"
+          ],
+          "elements": [
+            "Video",
+            "Toast",
+            "Wallet chip",
+            "Progress bar"
+          ],
+          "note": "El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.",
+          "stateKey": "player-free",
+          "image": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.png"
+        },
+        {
+          "id": "02-muro-pase-listo",
+          "name": "Muro · el Pase está listo",
+          "screenType": "Paywall",
+          "patterns": [
+            "Bottom sheet",
+            "Reward claim",
+            "Streak",
+            "Progress indicator",
+            "Cliffhanger"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Headline",
+            "Progress bar",
+            "Reward card",
+            "Primary button",
+            "Text button",
+            "Streak strip"
+          ],
+          "note": "Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.",
+          "stateKey": "wall-pass-ready",
+          "image": "flows/f1-pase-de-la-noche/02-muro-pase-listo.png"
+        },
+        {
+          "id": "03-eleccion-de-pase",
+          "name": "Elegir a qué serie va el pase",
+          "screenType": "Selection",
+          "patterns": [
+            "Single select",
+            "Scarcity",
+            "Cross-content discovery"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Radio list",
+            "Thumbnail",
+            "Progress label",
+            "Primary button"
+          ],
+          "note": "El corazón pedagógico: obligar a elegir con un recurso escaso enseña la economía por uso, no por explicación.",
+          "stateKey": "pass-choice",
+          "image": "flows/f1-pase-de-la-noche/03-eleccion-de-pase.png"
+        },
+        {
+          "id": "04-desbloqueo-celebracion",
+          "name": "Desbloqueado · la racha avanza",
+          "screenType": "Confirmation",
+          "patterns": [
+            "Reward reveal",
+            "Streak advance",
+            "Milestone unlock"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Medal",
+            "Reward lines",
+            "Streak strip",
+            "Primary button"
+          ],
+          "note": "La recompensa se entrega en el mismo gesto que resuelve la necesidad. La noche 3 dispara el comodín.",
+          "stateKey": "unlocked-via-pass",
+          "image": "flows/f1-pase-de-la-noche/04-desbloqueo-celebracion.png"
+        },
+        {
+          "id": "05-player-desbloqueado",
+          "name": "Player · episodio 13 abierto",
+          "screenType": "Media player",
+          "patterns": [
+            "Vertical video",
+            "Progress indicator"
+          ],
+          "elements": [
+            "Video",
+            "Wallet chip",
+            "Progress bar"
+          ],
+          "note": "El regreso al loop es inmediato: un toque desde la celebración, sin pantallas intermedias.",
+          "stateKey": "player-free",
+          "image": "flows/f1-pase-de-la-noche/05-player-desbloqueado.png"
+        }
+      ]
+    },
+    {
+      "id": "f2-la-cita",
+      "name": "El pase ya se usó · la cita de mañana",
+      "intent": "El muro deja de ser un final y pasa a ser una hora. El countdown es el motivo del próximo regreso.",
+      "screens": [
+        {
+          "id": "01-muro-pase-gastado",
+          "name": "Muro · faltan horas para el próximo pase",
+          "screenType": "Paywall",
+          "patterns": [
+            "Countdown",
+            "Appointment",
+            "Streak",
+            "Bottom sheet"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Countdown timer",
+            "Secondary card",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "El countdown ocupa el lugar jerárquico que antes tenía el precio. La compra queda debajo, como atajo, no como única salida.",
+          "stateKey": "wall-pass-spent",
+          "image": "flows/f2-la-cita/01-muro-pase-gastado.png"
+        },
+        {
+          "id": "02-muro-con-saldo",
+          "name": "Muro · con saldo suficiente",
+          "screenType": "Paywall",
+          "patterns": [
+            "Balance spend",
+            "Countdown",
+            "Streak"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Countdown timer",
+            "Primary button",
+            "Balance caption"
+          ],
+          "note": "Con saldo, la acción de pago sube a primaria — pero el saldo restante se declara en episodios, no en monedas.",
+          "stateKey": "wall-with-balance",
+          "image": "flows/f2-la-cita/02-muro-con-saldo.png"
+        }
+      ]
+    },
+    {
+      "id": "f3-tienda",
+      "name": "Conseguir monedas",
+      "intent": "La tienda deja de vender monedas y pasa a vender episodios.",
+      "screens": [
+        {
+          "id": "01-tienda",
+          "name": "Tienda · el precio en episodios",
+          "screenType": "Store",
+          "patterns": [
+            "IAP packs",
+            "Value ladder",
+            "Unit-of-value translation"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Goal row",
+            "Pack list",
+            "Badge",
+            "Price per unit"
+          ],
+          "note": "Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.",
+          "stateKey": "store",
+          "image": "flows/f3-tienda/01-tienda.png"
+        }
+      ]
+    },
+    {
+      "id": "f4-comodin",
+      "name": "Faltar noches · el perdón del sistema",
+      "intent": "Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.",
+      "screens": [
+        {
+          "id": "01-comodin-usado",
+          "name": "El comodín te cubrió",
+          "screenType": "Paywall",
+          "patterns": [
+            "Streak protection",
+            "Forgiveness mechanic"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Streak strip",
+            "Status row",
+            "Reward card"
+          ],
+          "note": "Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.",
+          "stateKey": "wall-passes-capped",
+          "image": "flows/f4-comodin/01-comodin-usado.png"
+        },
+        {
+          "id": "02-racha-rota",
+          "name": "Se cortó la racha",
+          "screenType": "Paywall",
+          "patterns": [
+            "Streak reset",
+            "Non-punitive feedback"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Notice",
+            "Streak strip",
+            "Reward card"
+          ],
+          "note": "Sin rojo, sin alarma, sin oferta para \"recuperar tu racha\" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.",
+          "stateKey": "wall-streak-broken",
+          "image": "flows/f4-comodin/02-racha-rota.png"
+        },
+        {
+          "id": "03-dos-pases",
+          "name": "Dos pases acumulados · el tope",
+          "screenType": "Paywall",
+          "patterns": [
+            "Resource cap",
+            "Anti-FOMO"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Reward card",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.",
+          "stateKey": "wall-passes-capped",
+          "image": "flows/f4-comodin/03-dos-pases.png"
+        }
+      ]
+    },
+    {
+      "id": "f5-cuenta",
+      "name": "Guardar la racha · de invitado a cuenta",
+      "intent": "88% consume como invitado. La cuenta se pide una sola vez y solo cuando ya hay algo que perder.",
+      "screens": [
+        {
+          "id": "01-guardar-racha",
+          "name": "Tienes algo que guardar",
+          "screenType": "Sign up",
+          "patterns": [
+            "Contextual auth",
+            "Loss aversion",
+            "Guest-first"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Stat tiles",
+            "Primary button",
+            "Text button",
+            "Fine print"
+          ],
+          "note": "No hay muro de registro. El argumento no es \"crea tu cuenta\" sino \"no pierdas estas 4 noches y estas 75 monedas\".",
+          "stateKey": "account-prompt",
+          "image": "flows/f5-cuenta/01-guardar-racha.png"
+        }
+      ]
+    },
+    {
+      "id": "f6-mi-economia",
+      "name": "Mi economía",
+      "intent": "Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posición. Se abre desde el chip de saldo, dentro del player.",
+      "screens": [
+        {
+          "id": "01-mi-economia",
+          "name": "De dónde salen mis monedas",
+          "screenType": "Account / Wallet",
+          "patterns": [
+            "Ledger",
+            "Source-sink model",
+            "Streak"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Balance headline",
+            "Streak strip",
+            "Breakdown list",
+            "Total row"
+          ],
+          "note": "La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.",
+          "stateKey": "streak-detail",
+          "image": "flows/f6-mi-economia/01-mi-economia.png"
+        }
+      ]
+    },
+    {
+      "id": "f7-stack-real",
+      "name": "Sobre el stack real de Idilio",
+      "intent": "La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, con los tokens de producción. El estado económico se resuelve en el servidor, que es el riesgo técnico nº 1 de la propuesta.",
+      "screens": [
+        {
+          "id": "01-muro-pase-listo",
+          "name": "Muro · el Pase está listo",
+          "screenType": "Paywall",
+          "patterns": [
+            "Server-rendered state",
+            "Reward claim",
+            "Streak"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Reward card",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "Mismo muro, tokens reales: el violeta es #a000f0 y las superficies son negro neutro. Comparado con el prototipo se ve que mis superficies tenían tinte violeta — el producto real es más sobrio.",
+          "stateKey": null,
+          "image": "flows/f7-stack-real/01-muro-pase-listo.png"
+        },
+        {
+          "id": "02-la-cita",
+          "name": "La cita · faltan 17 h",
+          "screenType": "Paywall",
+          "patterns": [
+            "Countdown",
+            "Appointment",
+            "Opt-in notification"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Clock time",
+            "Reminder toggle",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "El héroe es la hora del reloj. El botón «Avísame» es el que cierra el ciclo: sin push, la cita depende de que el usuario se acuerde — y ahí se pierde la mitad del efecto.",
+          "stateKey": null,
+          "image": "flows/f7-stack-real/02-la-cita.png"
+        },
+        {
+          "id": "03-cuenta-regresiva-corta",
+          "name": "Faltan 42 minutos",
+          "screenType": "Paywall",
+          "patterns": [
+            "Countdown",
+            "Balance spend"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Countdown timer",
+            "Primary button",
+            "Balance caption"
+          ],
+          "note": "Debajo de una hora el countdown vuelve a ser el héroe: ahí los segundos sí son la información relevante. Y con saldo, el pago sube a primario — pero el resto se declara en episodios, no en monedas.",
+          "stateKey": null,
+          "image": "flows/f7-stack-real/03-cuenta-regresiva-corta.png"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "flows": 7,
+    "screens": 17,
+    "screenTypes": [
+      "Account / Wallet",
+      "Confirmation",
+      "Media player",
+      "Paywall",
+      "Selection",
+      "Sign up",
+      "Store"
+    ],
+    "patterns": [
+      "Anti-FOMO",
+      "Appointment",
+      "Balance spend",
+      "Bottom sheet",
+      "Cliffhanger",
+      "Contextual auth",
+      "Countdown",
+      "Cross-content discovery",
+      "Currency balance",
+      "Forgiveness mechanic",
+      "Guest-first",
+      "IAP packs",
+      "Ledger",
+      "Loss aversion",
+      "Milestone unlock",
+      "Non-punitive feedback",
+      "Opt-in notification",
+      "Progress indicator",
+      "Resource cap",
+      "Reward claim",
+      "Reward reveal",
+      "Scarcity",
+      "Server-rendered state",
+      "Silent accrual",
+      "Single select",
+      "Source-sink model",
+      "Streak",
+      "Streak advance",
+      "Streak protection",
+      "Streak reset",
+      "Toast",
+      "Unit-of-value translation",
+      "Value ladder",
+      "Vertical video"
+    ],
+    "elements": [
+      "Action rail",
+      "Badge",
+      "Balance caption",
+      "Balance headline",
+      "Bottom sheet",
+      "Breakdown list",
+      "Clock time",
+      "Countdown timer",
+      "Fine print",
+      "Goal row",
+      "Headline",
+      "Medal",
+      "Notice",
+      "Pack list",
+      "Price per unit",
+      "Primary button",
+      "Progress bar",
+      "Progress label",
+      "Radio list",
+      "Reminder toggle",
+      "Reward card",
+      "Reward lines",
+      "Scrubber",
+      "Secondary card",
+      "Stat tiles",
+      "Status row",
+      "Streak strip",
+      "Text button",
+      "Thumbnail",
+      "Toast",
+      "Top bar",
+      "Total row",
+      "Video",
+      "Wallet chip"
+    ]
+  }
+}

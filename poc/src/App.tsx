@@ -81,7 +81,13 @@ export default function App() {
           onNext={() => dispatch({ t: 'nextEpisode' })}
         />
 
-        {state.toast && <div className="toast"><Coin s={16} /> {state.toast}</div>}
+        {/* El acuse es del player. Si hay una hoja abierta —el caso real: terminas
+            el episodio, se acredita la noche y acto seguido se abre el muro— el
+            toast taparía el encabezado, y además sobra: la tira de racha de la
+            hoja ya dice lo mismo, y con más detalle. */}
+        {state.toast && sheet.kind === 'none' && (
+          <div className="toast"><Coin s={16} /> {state.toast}</div>
+        )}
 
         {sheet.kind !== 'none' && (
           <>

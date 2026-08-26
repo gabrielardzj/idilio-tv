@@ -133,10 +133,9 @@ const FLOWS = [
         elements: ['Bottom sheet', 'Streak strip', 'Status row', 'Reward card'],
         note: 'Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.',
         act: async (p) => {
-          await click(p, '2 · El muro · un pase')
-          await click(p, 'Usar el pase en este episodio')
-          await click(p, 'Usar el pase aquí')
-          await click(p, 'Ver el episodio')
+          // El comodín se gana en la noche 3, y las noches se acreditan al VER,
+          // no al usar el pase. Así que hay que llegar hasta la 3 viendo.
+          await click(p, 'Es mañana y volví')
           await dismissIfAccount(p)
           await click(p, 'Falté una noche')
         },
