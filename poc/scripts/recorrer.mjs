@@ -101,6 +101,34 @@ await page.waitForTimeout(500)
 paso('vuelve al player con el episodio abierto', (await estado()) === 'player-free')
 paso('sigue siendo la misma serie', (await enPantalla()) === titulo, `«${await enPantalla()}»`)
 
+// ── «Tu economía»: la pantalla que responde al objetivo del brief ────────
+// Se llega tocando el saldo, que es lo natural. Y lo que dice tiene que ser
+// verdad y tiene que cuadrar: es la pantalla que existe para que el usuario
+// entienda de dónde salen sus monedas, así que un número que él pueda desmentir
+// —o una resta que no dé— cuesta más acá que en ninguna otra parte.
+await page.locator('.wallet').first().click()
+await page.waitForTimeout(500)
+paso('el saldo abre «Tu economía»', (await estado()) === 'streak-detail')
+
+const eco = (await page.locator('.streak').last().innerText()).replace(/\n/g, ' ')
+const usados = Number(eco.match(/Pases usados en esta vuelta (\d+)/)?.[1] ?? -1)
+paso('cuenta los pases que el usuario gastó de verdad', usados === 1, `dice ${usados}, gastó 1`)
+
+const valor = Number(eco.match(/· (\d+) monedas de valor/)?.[1] ?? -1)
+const bonos = Number(eco.match(/Bonos de esta vuelta \+(\d+)/)?.[1] ?? -1)
+const total = Number(eco.match(/Total ganado sin pagar (\d+)/)?.[1] ?? -1)
+paso('el total es la suma de lo que lista', valor + bonos === total,
+  `${valor} + ${bonos} = ${total}`)
+
+// Todas las noches dan pase; el bono se suma. Si la etiqueta pone «+30» EN LUGAR
+// de «pase», la tira enseña lo contrario de lo que la mecánica hace.
+const tira = await page.locator('.streak small').allInnerTexts()
+paso('la escalera no esconde el pase en las noches con bono',
+  tira.length === 7 && tira.every((t) => t.startsWith('pase')), tira.join(' | '))
+
+await page.locator('.sheet-close').click()
+await page.waitForTimeout(300)
+
 // ── La otra mitad de la economía: el camino de pago ──────────────────────
 // El pase ya se gastó, así que este es el muro de quien no tiene la vía gratis.
 // Nadie había recorrido esto: la tienda es donde aterriza toda la pedagogía de

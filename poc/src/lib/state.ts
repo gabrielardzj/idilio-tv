@@ -27,6 +27,11 @@ export interface State {
   shieldJustUsed: boolean
   streakJustBroke: boolean
   passes: number                  // 0..MAX_PASSES — se acumulan, no se pierden
+  /** pases gastados en esta vuelta de 7 noches. La pantalla «Tu economía» lo
+   *  reportaba desde `nights`, o sea contaba noches asistidas y las llamaba
+   *  pases usados: en la pantalla que existe para explicar la economía, un
+   *  número que el usuario puede desmentir de memoria. */
+  passesUsed: number
   lastNight: string | null        // última noche en que se acreditó (YYYY-MM-DD)
   passNextAt: number | null       // epoch ms del próximo pase; null si está al tope
   now: number
@@ -63,6 +68,7 @@ export const initialState = (now: number): State => ({
   shieldJustUsed: false,
   streakJustBroke: false,
   passes: 1,
+  passesUsed: 0,
   lastNight: nocheDe(now),
   passNextAt: null,
   now,
@@ -132,6 +138,7 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
         state: {
           ...s,
           passes,
+          passesUsed: s.passesUsed + 1,
           passNextAt: passes < MAX_PASSES ? proximaCita(s.now) : null,
           seriesId: a.series,
           episode: targetEp,
@@ -344,6 +351,8 @@ function acreditarNoche(s: State): State {
   return {
     ...s,
     lastNight: noche,
+    // La cuenta de pases gastados vive dentro de la vuelta, como la escalera.
+    passesUsed: nights === 1 ? 0 : s.passesUsed,
     toast: streakJustBroke ? `Empiezas de nuevo · ${partes.join(' · ')}`
          : shieldJustUsed  ? `Tu comodín te cubrió · ${partes.join(' · ')}`
          : partes.join(' · '),

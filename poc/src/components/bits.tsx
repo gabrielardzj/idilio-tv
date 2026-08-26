@@ -80,7 +80,11 @@ export function StreakStrip({
               <div className="dot" aria-label={`Noche ${r.night}`}>
                 {r.shield ? <Shield s={16} c={today ? '#2A1A02' : done ? '#3FE0D0' : '#7C6E8B'} /> : r.night}
               </div>
-              <small>{r.coins > 0 ? `+${r.coins}` : 'pase'}</small>
+              {/* Todas las noches dan pase; el bono se SUMA. El ternario que había
+                  aquí ponía «+30» en lugar de «pase», así que la tira leía como
+                  si la noche 3 diera bono en vez de pase — justo el malentendido
+                  que esta pantalla existe para deshacer. */}
+              <small>pase{r.coins > 0 ? <em> +{r.coins}</em> : null}</small>
             </div>
           )
         })}

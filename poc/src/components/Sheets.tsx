@@ -191,8 +191,15 @@ export function AccountPrompt({
 
 /* ═══ Detalle de racha (desde el chip de saldo) ═══════════════ */
 export function StreakSheet({ state, onClose }: { state: State; onClose: () => void }) {
+  // Todo lo de esta pantalla se cuenta dentro de la vuelta de 7 noches, que es
+  // el ciclo de la escalera. Y el total es la SUMA DE LO QUE LISTA: antes valía
+  // los pases por `nights` mientras la línea de arriba decía otra cosa, así que
+  // los dos sumandos daban 0 y el total 30. En la pantalla que existe para
+  // explicar la economía, un usuario puede hacer esa resta.
   const week = STREAK.slice(0, Math.max(state.nights, 1))
-  const earned = week.reduce((a, n) => a + n.coins, 0) + state.nights * EPISODE_COST
+  const bonos = week.reduce((a, n) => a + n.coins, 0)
+  const valorPases = state.passesUsed * EPISODE_COST
+  const earned = bonos + valorPases
   return (
     <div className="sheet" role="dialog" aria-label="Tu economía">
       <div className="grab" />
@@ -206,12 +213,12 @@ export function StreakSheet({ state, onClose }: { state: State; onClose: () => v
       <div className="sect-label">De dónde salen tus monedas</div>
       <div className="streak">
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 9 }}>
-          <span style={{ color: 'var(--tx-mid)' }}>Pases usados esta semana</span>
-          <b>{state.nights} · {state.nights * EPISODE_COST} monedas de valor</b>
+          <span style={{ color: 'var(--tx-mid)' }}>Pases usados en esta vuelta</span>
+          <b>{state.passesUsed} · {valorPases} monedas de valor</b>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 9 }}>
-          <span style={{ color: 'var(--tx-mid)' }}>Bonos de racha</span>
-          <b>+{week.reduce((a, n) => a + n.coins, 0)} monedas</b>
+          <span style={{ color: 'var(--tx-mid)' }}>Bonos de esta vuelta</span>
+          <b>+{bonos} monedas</b>
         </div>
         <div style={{ height: 1, background: 'rgba(255,255,255,.08)', margin: '11px 0' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13.5 }}>
