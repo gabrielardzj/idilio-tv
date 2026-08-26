@@ -81,6 +81,11 @@ Los tests incluyen el caso que rompe rachas hoy: **23:30 y 01:00 de la noche sig
 
 **▶ [gabrielardzj.github.io/idilio-racha-de-noches-poc](https://gabrielardzj.github.io/idilio-racha-de-noches-poc/)** — ábrelo en el móvil.
 
+<sub>El repo principal es privado y Pages en repos privados requiere plan de pago, así que el POC
+se publica desde un repo público que contiene **solo el prototipo**. Para actualizarlo:
+`./scripts/publicar-poc.sh "mensaje"`. El workflow corre los 22 tests antes de desplegar: si la
+economía se rompe, no se publica.</sub>
+
 ```bash
 cd poc && npm install && npm run dev     # http://localhost:5173
 cd poc && npx vitest run                 # 22 tests
