@@ -1,19 +1,12 @@
 # El archivo de diseño
 
-El diseño existe en **dos herramientas**, construido de forma nativa en las dos — frames con
-auto-layout, componentes reales, instancias y variables enlazadas. No son imágenes exportadas
-de otra parte.
+Las diez pantallas viven en **Figma**, construidas de forma nativa —frames con auto-layout,
+componentes reales, instancias y variables enlazadas. No son imágenes exportadas de otra parte.
 
-| | Dónde | Qué tiene |
-|---|---|---|
-| **Figma** | [`CCI8plwuWvfTV8VBpowN5X`](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) | Una página con tres secciones: 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4 componentes y **las 10 pantallas** |
-| **Pen** | `.pen` compartido | Las mismas 10 pantallas, con el chip de saldo como componente reusable |
-
-> **Por qué las dos.** Empecé en Pen porque el conector de Figma no estaba autorizado. Cuando el
-> usuario lo autorizó, reconstruí todo en Figma —que es lo que pide el brief— y después él pidió
-> tenerlo también en Pen. Las dos versiones están completas y dicen lo mismo; la de Figma es la
-> que lleva las variables con *code syntax* apuntando a los tokens reales del prototipo, así que
-> es la que sirve para Dev Mode.
+> **[`CCI8plwuWvfTV8VBpowN5X`](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X)** — una página
+> con tres secciones: 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4 componentes
+> y **las 10 pantallas**. Las variables llevan el *code syntax* apuntando a los tokens reales del
+> prototipo, así que el archivo sirve para Dev Mode.
 
 ---
 
@@ -31,34 +24,3 @@ de otra parte.
 | ![La cita](08-la-cita.png) | **08 · Muro · la cita** | El héroe es la hora del reloj, anclada a **su hora de siempre**, no a «+24 h». Y el «Avísame», que es lo que cierra el ciclo. |
 | ![Tienda](09-tienda.png) | **09 · Tienda** | Episodios grande, monedas de subtítulo, precio por episodio. La meta calculada de la serie que el usuario está viendo. |
 | ![Racha rota](10-racha-rota.png) | **10 · Se cortó la racha** | El fallo sin castigo: sin rojo, sin alarma y sin oferta para «recuperarla» pagando. |
-
-> **La ficha de serie se rehízo contra la app nativa.** La primera versión dibujaba una grilla de
-> episodios: eso es el reproductor **web**. La app —[capturas](../../00-dogfooding/#capturas-de-la-evidencia)—
-> muestra «Resumen» con el póster y la sinopsis, y después una **lista de capítulos**. El chasis de
-> la pantalla es ahora el de la app, con sus colores muestreados de las capturas, y encima va la
-> propuesta. Es la única pantalla del archivo que no cabe en 390×844: la ficha real tampoco cabe
-> —el resumen se come la primera pantalla—, así que el frame va con el scroll desplegado.
->
-> **Está actualizada en Figma y todavía no en Pen.** Las otras nueve dicen lo mismo en las dos
-> herramientas; esta, por ahora, solo en Figma.
-
----
-
-## Dos cosas que aprendí construyéndolo dos veces
-
-**Los hijos de un componente reusable no son direccionables desde el clon.** En Pen intenté
-cambiar el saldo del chip dentro de las copias y falló: hay que usar `descendants` en el `Copy`,
-o quedarse con el valor del componente.
-
-**Una propiedad de texto enlazada en Figma comparte un solo valor entre todas las variantes.** Le
-puse a cada variante del botón su etiqueta representativa y el resultado fue que **las cuatro
-dijeron lo mismo**. La propiedad vale más que la demo, así que la etiqueta quedó neutra y el uso
-típico de cada nivel se escribió en la descripción de su variante, que es donde un diseñador lo
-lee de verdad.
-
-> **Una corrección.** Una versión anterior de este documento decía que faltaba la pantalla del
-> acuse porque el renderizador de Pen dejaba de dibujar los subárboles recién insertados. Al
-> reconstruir en un documento nuevo, **el problema no se repitió**: era de aquel documento, no de
-> la herramienta. La pantalla está, y es la número 04.
-
-Regenerar los PNG: exportar los nodos del `.pen` a esta carpeta a escala 2×.

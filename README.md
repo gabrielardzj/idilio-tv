@@ -16,14 +16,13 @@
 | **Prototipo** — home, catálogo, ficha de serie y el muro | **https://gabrielardzj.github.io/idilio-tv/** |
 | **Diagnóstico y estrategia** — los entregables de texto | **https://gabrielardzj.github.io/idilio-tv/docs/diagnostico.html** |
 | **Export de flujos** — 22 pantallas en 8 flujos | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
-| **Diseño** — 6 pantallas + hoja de sistema | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
+| **Diseño** — las 10 pantallas del archivo de diseño | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
 | **Benchmark competitivo** — quién más lo intentó y contra qué chocó | **https://gabrielardzj.github.io/idilio-tv/docs/benchmark.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
 
-> **El diseño existe en dos herramientas, nativo en las dos:**
-> **[Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X)** — una página con tres
-> secciones: 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4 componentes y las
-> 10 pantallas — y **Pen**, con las mismas 10. Detalle en [el archivo de diseño](docs/03-diseno/pen/).
+> **El diseño es nativo de [Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X):** una
+> página con tres secciones — 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4
+> componentes y las 10 pantallas. Detalle en [el archivo de diseño](docs/03-diseno/pen/).
 
 ---
 
