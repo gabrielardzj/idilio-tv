@@ -57,8 +57,11 @@ export default async function Home() {
       </div>
 
       <p className="mt-10 text-xs leading-relaxed text-ink-low">
-        Cifras medidas en las {CATALOGO.series} series del catálogo el 25-ago-2026:
-        {' '}{CATALOGO.gratis} episodios gratis de {CATALOGO.episodios.toLocaleString('es-MX')} totales,
+        Cifras medidas en las {CATALOGO.series} series del catálogo el 26-ago-2026:
+        {/* es-CO y no es-MX: México separa los miles con coma y el resto de los
+            entregables escribe «2.230». Publicar «2,230» en una sola página era
+            la única cifra del proyecto con formato inglés. */}
+        {' '}{CATALOGO.gratis} episodios gratis de {CATALOGO.episodios.toLocaleString('es-CO')} totales,
         y {EPISODE_COST} monedas por desbloqueo sin una sola excepción.
       </p>
     </main>

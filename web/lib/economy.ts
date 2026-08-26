@@ -10,17 +10,21 @@
 export const EPISODE_COST = 15
 
 /** REAL · episodios gratis al inicio de una serie.
- *  Medido en las 43 series del catálogo: la moda es 10 (32 de 35 series con
- *  muro). Hay tres excepciones — Pasión a Domicilio 12, La Mágica Navidad 11,
- *  La Herencia del Patriarca 7 — y 8 series de ≤10 episodios sin muro alguno.
+ *  Medido en las 50 series del catálogo: la moda es 10 (37 de 41 series con
+ *  muro). Hay cuatro excepciones — Pasión a Domicilio 12, Las Flores del Amor
+ *  12, La Mágica Navidad 11, La Herencia del Patriarca 7 — y 9 series de ≤10
+ *  episodios sin muro alguno.
  *  Censo completo en docs/00-dogfooding/catalogo.json */
 export const FREE_EPISODES = 10
 
-/** REAL · el catálogo entero, medido el 25-ago-2026.
- *  428 episodios gratis a 14 por sesión son 31 sesiones sin pagar; a 2.3
- *  sesiones por semana, tres meses. Es el dato que explica por qué el muro
- *  no convierte: la alternativa a pagar no es irse, es empezar otra serie. */
-export const CATALOGO = { series: 43, episodios: 1885, gratis: 428, bloqueados: 1455 } as const
+/** REAL · el catálogo entero, censado el 26-ago-2026 recorriendo el sitemap.xml
+ *  de idilio.tv, una ficha por serie.
+ *  500 episodios gratis a 14 por sesión son 36 sesiones sin pagar; a 2.3
+ *  sesiones por semana, casi cuatro meses. Es el dato que explica por qué el
+ *  muro no convierte: la alternativa a pagar no es irse, es empezar otra serie.
+ *  (500 + 1.728 = 2.228, dos menos que 2.230: dos series tienen huecos en la
+ *  numeración de episodios. No es un error de suma.) */
+export const CATALOGO = { series: 50, episodios: 2230, gratis: 500, bloqueados: 1728 } as const
 
 /** Paquetes.
  *  `live` = lo que entrega hoy el producto (verificado en el paywall nativo).
@@ -135,7 +139,8 @@ export const pricePerEpisode = (coins: number, usd: number) =>
  *
  * La primera versión etiquetaba el paquete de 660 monedas como "Una serie
  * completa" de forma fija. Al medir el catálogo resultó que las series van de
- * 150 a 960 monedas: la etiqueta habría sido falsa en el 40% de los casos.
+ * 150 a 960 monedas: de las 41 series con muro, una sola cuesta exactamente
+ * 660, así que la etiqueta habría sido falsa en las otras 40.
  * Ahora se calcula contra la serie que el usuario está viendo, así que o es
  * cierta o no aparece.
  */

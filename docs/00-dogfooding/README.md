@@ -1,5 +1,5 @@
 # Registro de dogfooding — Idilio TV
-Fecha: 2026-08-25 · Superficies usadas: web player (idilio.tv) + App Store MX (build 1.20.0, 2026-08-21)
+Dogfooding manual: 2026-08-25 · Censo del catálogo, rehecho y corregido: 2026-08-26 · Superficies usadas: web player (idilio.tv) + App Store MX (build 1.20.0, 2026-08-21)
 
 ## Qué se pudo usar y qué no
 - **idilio.tv es un reproductor web funcional**, no solo un landing. Reproduce episodios, tiene lista de episodios, autoplay al siguiente y muro de bloqueo. No tiene economía (ni saldo, ni recompensas, ni perfil).
@@ -22,6 +22,11 @@ Fecha: 2026-08-25 · Superficies usadas: web player (idilio.tv) + App Store MX (
 | Costo de completar la serie | **660 monedas** | 44 × 15 |
 
 ### Paquetes de monedas (paywall nativo, captura oficial)
+
+<!-- cifras-citadas -->
+<!-- Los precios tachados de acá abajo son los del producto REAL, no los de la
+     propuesta. El guardián de cifras persigue "$2.49" porque la escalera que
+     proponemos no lleva ancla tachada; acá es evidencia, no una recaída. -->
 | Precio ancla | Precio | Monedas | Badge | Monedas por USD |
 |---|---|---|---|---|
 | $2.49 | **$0.99** | 180 | SUPER OFERTA 60% | 181.8 |
@@ -29,7 +34,11 @@ Fecha: 2026-08-25 · Superficies usadas: web player (idilio.tv) + App Store MX (
 | $4.99 | **$3.99** | 375 | −20% DTO | 94.0 |
 | — | (4º paquete) | — | −30% DTO | — |
 
+<!-- /cifras-citadas -->
+
 Rango de IAP en Google Play: **$0.09 – $299.99**.
+
+La ficha de App Store del build 1.20.0 lista además un **pase semanal a $7.99** y uno **mensual a $14.99**. O sea que Idilio ya es un modelo híbrido — monedas y suscripción conviviendo — y el muro no ofrece ninguno de los dos: solo dice que hay que descargar la app.
 
 ### Chasis de la app nativa
 - Barra superior: logo + **chip de saldo** (ej. 2543) + búsqueda.
@@ -60,34 +69,66 @@ Rango de IAP en Google Play: **$0.09 – $299.99**.
 
 ## Censo del catálogo completo
 
-Después de la primera pasada me di cuenta de que había generalizado a partir de **una sola serie**. El reproductor web renderiza en servidor la lista de episodios con sus bloqueos, así que medí las 43 series del catálogo. El script está en [`scrape-catalogo.mjs`](scrape-catalogo.mjs) y los datos crudos en [`catalogo.json`](catalogo.json).
+Después de la primera pasada me di cuenta de que había generalizado a partir de **una sola serie**. El reproductor web renderiza en servidor la lista de episodios con sus bloqueos, así que escribí un script para medir el catálogo entero. El script está en [`scrape-catalogo.mjs`](scrape-catalogo.mjs) y los datos crudos en [`catalogo.json`](catalogo.json).
+
+Esa segunda medición también estaba mal, y el error es peor que el primero. Lo encontré el 26-ago y rehice el censo desde cero.
+
+**El scraper no estaba leyendo el catálogo.** Raspaba los enlaces del home, que son rieles curados: una selección editorial, no el inventario. El catálogo que el propio sitio declara vive en `sitemap.xml` y tiene **50 series**.
+
+**Y de las 46 fichas que sí visitó, tres devolvieron 200 y no se pudieron parsear.** El script las emitió como `total: 0` y esos ceros se sumaron a los agregados como si fueran series vacías. Ninguna dio error — por eso nadie lo notó. El censo publicado decía 43 series mientras el JSON tenía 46 entradas, y esa contradicción estuvo a la vista todo el tiempo.
+
+Las tres son *La Venganza de una Esposa Después de la Muerte* (65 episodios, 10 gratis), *Las Flores del Amor* (52 episodios, 12 gratis) y *Lágrimas en el Altar* (10 episodios, gratis entera).
+
+**Y el guardián de cifras tampoco servía.** [`verificar-cifras.mjs`](../../poc/scripts/verificar-cifras.mjs) filtraba las entradas con `x.total > 0`, o sea que descartaba exactamente las tres entradas rotas, y después comparaba el resto contra una constante escrita a mano en el propio script. Daba "TODO CONSISTENTE" porque estaba comparando el censo consigo mismo.
+
+Qué se arregló en el scraper:
+
+- Los ids salen del `sitemap.xml`, no del home.
+- El total sale del contador que publica la propia ficha ("N episodios"), no de `max(número de episodio)` — que fallaba justamente en las series con huecos de numeración.
+- Cada ficha se reintenta tres veces antes de darla por perdida.
+- **Si una sola ficha no se puede leer, el script termina con error y no emite censo.** Un censo que se cae es recuperable; uno que miente por omisión, no.
 
 ### Lo que corrige
 
-| Afirmación de la primera pasada | Realidad medida |
-|---|---|
-| "12 episodios gratis por serie" | **La moda es 10** (32 de 35 series con muro). *Pasión a Domicilio* — la serie que me tocó — es una de las tres excepciones. |
-| "Series de 50 a 80 episodios" (del brief) | Solo **25 de 43**. Hay 15 series de 30 episodios o menos. Mediana real: 50. |
+<!-- cifras-citadas -->
+<!-- Esta tabla compara las tres mediciones, así que sus celdas del medio traen
+     las cifras viejas a propósito. La explicación vive en el encabezado, no en
+     cada celda, y por eso una exención por línea no alcanza. -->
+
+| | Primera pasada (una sola serie) | Segunda pasada (rieles del home) | **Real (sitemap, 26-ago)** |
+|---|---|---|---|
+| Series del catálogo | 1, medida a mano | 43 | **50** — 41 con muro |
+| Episodios totales | 56 | 1.885 | **2.230** |
+| Episodios gratis por serie | 12 | moda 10 · 32 de 35 | **moda 10 · 37 de 41** |
+| "Series de 50 a 80 episodios" (del brief) | la única serie medida | 25 de 43 | **30 de 50** |
+| Series de 30 episodios o menos | — | 15 | **17** |
+| Mediana de episodios por serie | — | 50 | **50** |
+
+<!-- /cifras-citadas -->
+
+Las excepciones a los 10 gratis son **cuatro**, no tres: *La Herencia del Patriarca Enamorado* (7), *La Mágica Navidad del Amargado Millonario* (11), *Pasión a Domicilio* (12) — la serie que me tocó — y *Las Flores del Amor* (12), que era una de las tres que el censo anterior perdió.
 
 ### Lo que confirma
 
 | | |
 |---|---|
-| Costo de desbloqueo | **15 monedas, sin excepción** en las 35 series con muro |
+| Costo de desbloqueo | **15 monedas, sin una sola excepción** en las 41 series con muro |
 | Estructura | Bloque gratis al inicio, todo lo demás bloqueado. Ninguna serie mezcla |
 
 ### El agregado
 
 | | |
 |---|---|
-| Series | **43** (35 con muro · 8 completamente gratis, todas de ≤10 episodios) |
-| Episodios totales | **1.885** |
-| Episodios gratis | **428** — el 23% del catálogo |
-| Episodios bloqueados | **1.455** — el 77% |
-| Costo de la serie mediana | 600 monedas ≈ **$6.63** |
-| Costo del catálogo completo | 21.825 monedas ≈ **$241** |
+| Series | **50** (41 con muro · 9 enteramente gratis, todas de ≤10 episodios) |
+| Episodios totales | **2.230** |
+| Episodios gratis | **500** — el 22% del catálogo |
+| Episodios bloqueados | **1.728** — el 78% |
+| Costo de la serie mediana | 600 monedas ≈ **$6,63** |
+| Costo del catálogo completo | 25.920 monedas ≈ **$286** |
 
 *(Dólares calculados al precio de escalera vigente: $1.99 → 180 monedas = 90.5 monedas por dólar.)*
+
+500 + 1.728 son 2.228, dos menos que 2.230. No es un error de suma: dos series tienen un hueco en la numeración de episodios — *Apasionada por el Padre de mi Hijo que no es mi Esposo* y *Pasión Frente a los Colmillos del Conde*, uno cada una — así que el contador que publica la ficha declara un episodio más de los que la lista efectivamente enumera. El JSON lo registra en el campo `huecoDeNumeracion`. En el censo anterior la misma diferencia de dos existía y no estaba explicada en ninguna parte.
 
 ### El catálogo, serie por serie
 
@@ -99,16 +140,21 @@ Después de la primera pasada me di cuenta de que había generalizado a partir d
 | Esposa del Playboy Billonario | 70 | 10 | 60 | 15 | 900 |
 | Había una Vez un Divorcio: La Doble Vida de Lady Diana | 70 | 10 | 60 | 15 | 900 |
 | Rico Padre Pobre Madre | 69 | 10 | 59 | 15 | 885 |
+| Esposo Fugitivo Ámame Otra vez | 68 | 10 | 58 | 15 | 870 |
 | La Herencia del Patriarca Enamorado | 66 | 7 | 59 | 15 | 885 |
 | La Enfermera Infiltrada | 65 | 10 | 55 | 15 | 825 |
+| La Venganza de una Esposa Después de la Muerte | 65 | 10 | 55 | 15 | 825 |
 | Enamorándome de mi Guardián Prohibido | 64 | 10 | 54 | 15 | 810 |
 | Abrázame Fuerte Señor Bombero | 62 | 10 | 52 | 15 | 780 |
 | Mi Amante Secreto | 62 | 10 | 52 | 15 | 780 |
 | La Venganza de la Abogada | 61 | 10 | 51 | 15 | 765 |
 | Creo que mi esposa quiere matarme | 60 | 10 | 50 | 15 | 750 |
 | Enamorada de la Voz del Lobo | 60 | 10 | 50 | 15 | 750 |
+| La Mesera Millonaria | 60 | 10 | 50 | 15 | 750 |
+| La Venganza de la Hija del Esmeraldero | 60 | 10 | 50 | 15 | 750 |
 | Quiero a mi Ex Fuera de mi Vida | 60 | 10 | 50 | 15 | 750 |
 | Pasión a Domicilio | 56 | 12 | 44 | 15 | 660 |
+| Las Flores del Amor | 52 | 12 | 40 | 15 | 600 |
 | La Mágica Navidad del Amargado Millonario | 51 | 11 | 40 | 15 | 600 |
 | Apasionada por el Padre de mi Hijo que no es mi Esposo | 50 | 10 | 39 | 15 | 585 |
 | Aún Eres Tú | 50 | 10 | 40 | 15 | 600 |
@@ -124,6 +170,7 @@ Después de la primera pasada me di cuenta de que había generalizado a partir d
 | La Bandida que me Amó | 30 | 10 | 20 | 15 | 300 |
 | Mi Final Feliz | 30 | 10 | 20 | 15 | 300 |
 | Mi Mejor Pasajera | 30 | 10 | 20 | 15 | 300 |
+| Sangre Enemiga | 30 | 10 | 20 | 15 | 300 |
 | Simona la Libertadora Enamorada | 30 | 10 | 20 | 15 | 300 |
 | Tres Meses de Amor | 30 | 10 | 20 | 15 | 300 |
 | Somos Cuatro | 24 | 10 | 14 | 15 | 210 |
@@ -133,6 +180,7 @@ Después de la primera pasada me di cuenta de que había generalizado a partir d
 | La Mujer en el Bar | 10 | 10 | 0 | — | — |
 | La Prometida del Enemigo | 10 | 10 | 0 | — | — |
 | La Secretaria Heredera | 10 | 10 | 0 | — | — |
+| Lágrimas en el Altar | 10 | 10 | 0 | — | — |
 | Sesiones Prohibidas | 10 | 10 | 0 | — | — |
 | Última Hora | 10 | 10 | 0 | — | — |
 | Amor a Muerte | 8 | 8 | 0 | — | — |

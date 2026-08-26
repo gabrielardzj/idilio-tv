@@ -47,7 +47,7 @@ const FLOWS = [
         id: '01-home', name: 'Home · el catálogo',
         type: 'Home / Browse', patterns: ['Content rails', 'Continue watching', 'Currency balance'],
         elements: ['Top bar', 'Wallet chip', 'Horizontal rail', 'Poster', 'Progress bar', 'Tab bar'],
-        note: 'El chasis del producto real con las 35 series y sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
+        note: 'El chasis del producto real: portadas con el título quemado en el arte y el sello «idilio original», los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
         act: async () => {},
       },
       {
@@ -336,6 +336,10 @@ const run = async () => {
 const gallery = (m) => `<!doctype html><html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${m.app} · ${m.release} — export de flujos</title>
+<!-- Sin esto el navegador pide /favicon.ico en la raíz del dominio y se lleva un
+     404 en la consola de la primera página que abre quien revisa. El icono vive
+     en la raíz del sitio publicado, un nivel arriba de /flujos/. -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -401,8 +405,8 @@ ${m.flows.map((f, i) => `<section class="flow">
 </main>
 <footer>Capturado automáticamente de los prototipos con <code>poc/scripts/export-mobbin.mjs</code>.
 Cada tarjeta abre la captura a 3× al hacer clic.<br>
-Cifras medidas en las 43 series del catálogo el 25-ago-2026: 1 episodio = <b>15 monedas</b> sin
-excepción · <b>10 episodios gratis</b> por serie (la moda) · <b>428 gratis</b> de 1.885 en total.</footer>
+Cifras medidas en las 50 series del catálogo el 26-ago-2026: 1 episodio = <b>15 monedas</b> sin
+excepción · <b>10 episodios gratis</b> por serie (la moda) · <b>500 gratis</b> de 2.230 en total.</footer>
 </div></body></html>`
 
 const readme = (m) => `# Export de flujos · ${m.app}

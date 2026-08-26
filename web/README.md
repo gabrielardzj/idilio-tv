@@ -35,6 +35,15 @@ pinta el delta contra `serverNow`. La acreditación de pases es **perezosa** —
 leer el estado, no con un cron por usuario— tanto en [`lib/pase.ts`](lib/pase.ts) como en
 `accrue_passes()` de Postgres.
 
+**Con una salvedad que conviene decir acá, porque se ve al abrir el link.** En el export
+estático para Pages (`DEPLOY_TARGET=pages`) no hay request: cada ruta se renderiza **en
+tiempo de build**, así que `serverNow` queda horneado en el HTML y el countdown publicado
+es necesariamente una constante — la de `RELOJ_FIJO`, que está explicada más abajo. Anclarlo
+es preferible a dejar la hora real del build, que sería arbitraria y además envejecería sola.
+Lo que el link demuestra es la **forma**: el estado se arma en el servidor y el cliente no
+puede tocarlo. El reloj que corre de verdad se ve en Vercel con SSR, donde este mismo Server
+Component se resuelve por request.
+
 ### 2 · El esquema que hay que agregar a la base
 
 [`lib/supabase/schema.sql`](lib/supabase/schema.sql) es la migración completa. Lo que

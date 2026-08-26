@@ -29,7 +29,7 @@
             "Progress bar",
             "Tab bar"
           ],
-          "note": "El chasis del producto real con las 35 series y sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.",
+          "note": "El chasis del producto real: portadas con el título quemado en el arte y el sello «idilio original», los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.",
           "stateKey": "home",
           "image": "flows/f0-llegar-al-muro/01-home.png",
           "preview": "flows/f0-llegar-al-muro/01-home.webp"
@@ -101,7 +101,7 @@
             "Scrubber"
           ],
           "note": "El saldo nunca viaja solo: el chip lleva siempre la traducción a episodios. Es la única huella permanente del metajuego dentro del core loop.",
-          "stateKey": "home",
+          "stateKey": "player-free",
           "image": "flows/f1-pase-de-la-noche/01-player-libre.png",
           "preview": "flows/f1-pase-de-la-noche/01-player-libre.webp"
         },
@@ -121,7 +121,7 @@
             "Progress bar"
           ],
           "note": "El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.",
-          "stateKey": "home",
+          "stateKey": "player-free",
           "image": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.png",
           "preview": "flows/f1-pase-de-la-noche/01b-acuse-de-la-noche.webp"
         },
@@ -206,7 +206,7 @@
             "Progress bar"
           ],
           "note": "El regreso al loop es inmediato: un toque desde la celebración, sin pantallas intermedias.",
-          "stateKey": "home",
+          "stateKey": "player-free",
           "image": "flows/f1-pase-de-la-noche/05-player-desbloqueado.png",
           "preview": "flows/f1-pase-de-la-noche/05-player-desbloqueado.webp"
         }

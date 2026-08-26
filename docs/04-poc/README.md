@@ -1,7 +1,7 @@
 # 4. El POC
 
 **`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens.
-**`/mobbin-export`** · 17 pantallas en 7 flujos, capturadas automáticamente de los dos prototipos.
+**`/mobbin-export`** · 20 pantallas en 8 flujos, capturadas automáticamente de los dos prototipos.
 
 ---
 
@@ -11,7 +11,7 @@ El brief acota el alcance a *"la pantalla o el momento donde ocurre la mecánica
 
 | Pantalla | Para qué está |
 |---|---|
-| **Home** | Las 35 series reales con muro, con sus cifras medidas. Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
+| **Home** | Las 41 series reales con muro, con sus cifras medidas, en el chasis de la app: portadas con el título quemado en el arte y los rieles en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
 | **Ficha de serie** | Donde hoy hay 40 números grises, la grilla dice dónde vas, qué está abierto y qué cuesta terminar. |
 | **Player** | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
 
@@ -24,7 +24,7 @@ Y el muro, con sus trece estados:
 | 3 | Elección de serie | El recurso escaso que hay que asignar |
 | 4 | Desbloqueo + racha avanza | Recompensa, bono de noche 3, comodín ganado |
 | 5 | Player · episodio abierto | El regreso al loop en un toque |
-| 6 | Muro · pase gastado (la cita) | «Hoy a las 18:05» + faltan 17 h 47 m + avísame |
+| 6 | Muro · pase gastado (la cita) | «Hoy a las 21:30 · tu hora de siempre», el intervalo debajo, y avísame |
 | 7 | Muro · con saldo | El pago sube a primario, el saldo se declara en episodios |
 | 8 | Tienda | Episodios grandes, monedas de subtítulo, precio por episodio |
 | 9 | El comodín te cubrió | La mecánica de perdón, sin nada que reclamar |
@@ -64,13 +64,13 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Constante | Valor | Dónde se verificó |
 |---|---|---|
 | Costo de episodio | 15 monedas | Muro de idilio.tv + paywall nativo |
-| Episodios gratis por serie | **10** (moda de 35 series) | Censo de las 43 series del catálogo |
-| Series del catálogo | 43 · 1.885 episodios | Censo |
-| Episodios gratis en total | 428 (23% del catálogo) | Censo |
+| Episodios gratis por serie | **10** (moda: 37 de las 41 series con muro) | Censo de las 50 series del catálogo |
+| Series del catálogo | 50 · 2.230 episodios | Censo |
+| Episodios gratis en total | 500 (22% del catálogo) | Censo |
 | Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
 | Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 | Captura oficial del paywall (build 1.20.0) |
 
-**Y las cifras se verifican solas.** `npm run verificar` comprueba 36 afirmaciones numéricas de
+**Y las cifras se verifican solas.** `npm run verificar` comprueba 41 afirmaciones numéricas de
 los documentos contra el código y contra el censo del catálogo, y además rastrea los textos
 buscando cifras que se corrigieron en el camino y podrían haber sobrevivido a una edición. Corre
 en el pipeline antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar
@@ -84,11 +84,11 @@ Las tres series del POC son reales y están elegidas para cubrir las tres estruc
 
 **El Pase dejó de colgar de un reloj.** Acreditaba uno cada 24 h. Al leer la versión paralela del reto vi que acreditar **al terminar un episodio** es mejor: la adopción de la fuente pasa a ~100% por construcción, en vez de depender de que el usuario llegue al muro. Es la corrección directa al 19% de reclamo. Y como acreditar en silencio dejaría el metajuego invisible —el defecto que este trabajo corrige—, el acuse es un toast de dos segundos: *«Noche 3 · +1 pase · +30 monedas»*.
 
-**El countdown gigante estaba mal.** La primera versión mostraba `17h 47m 03s` como héroe. Al usarlo, comunica *«falta muchísimo»* — el mensaje opuesto al buscado. Se reemplazó por la hora del reloj (`HOY A LAS 18:05`) con el intervalo debajo. El countdown vuelve a ser héroe solo cuando falta menos de una hora.
+**El countdown gigante estaba mal.** La primera versión mostraba `17h 47m 03s` como héroe. Al usarlo, comunica *«falta muchísimo»* — el mensaje opuesto al buscado. Se reemplazó por la hora del reloj (`HOY A LAS 21:30`, la hora de siempre del usuario) con el intervalo debajo. El countdown vuelve a ser héroe solo cuando falta menos de una hora.
 
 **El pase caducaba, y eso era el error de Webtoon otra vez.** La primera versión decía *"no se acumula, el que no se usa se pierde"*. Al verificar el precedente — el Daily Pass de Webtoon, retirado en mayo de 2025 — resultó que la queja dominante de sus lectores durante cinco años fue justamente el "úsalo o piérdelo": convertía leer en una tarea. Era la misma trampa que el diagnóstico le señala a la racha diaria de Idilio, reintroducida sin darme cuenta. Los pases ahora se acumulan hasta 2: faltar una noche no cuesta nada y volver seguido sigue rindiendo más. Detalle completo en [§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra).
 
-**El badge «Una serie completa» habría mentido en el 40% de las compras.** Estaba fijo sobre el paquete de 660 monedas porque *Pasión a Domicilio* cuesta eso. El censo mostró que las series van de 150 a 960 monedas. Ahora la tienda abre con la meta calculada de la serie que el usuario está viendo y el badge cae sobre el paquete que de verdad alcanza.
+**El badge «Una serie completa» habría prometido de más en el 46% de las compras.** Estaba fijo sobre el paquete de 660 monedas porque *Pasión a Domicilio* cuesta eso. El censo mostró que las series van de 150 a 960 monedas: en 19 de las 41 series con muro, ese paquete no alcanza para terminarla. Ahora la tienda abre con la meta calculada de la serie que el usuario está viendo y el badge cae sobre el paquete que de verdad alcanza.
 
 **La tienda se contradecía a sí misma.** La primera versión mostraba «monedas por dólar» y el pie decía *«cada paquete rinde más por dólar que el anterior»* — pero los números daban 182, 151, 165, 180. Es exactamente el defecto que el diagnóstico le señala al producto real, reproducido por descuido. Se corrigió a **precio por episodio**, que además es la unidad legible, y la escalera quedó monótona de verdad: $0.15 → $0.11 → $0.10.
 

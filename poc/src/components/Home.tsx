@@ -1,7 +1,8 @@
-import { CATALOGO_SERIES, type SerieCatalogo } from '../lib/catalogo'
+import { CATALOGO_SERIES, RIELES_GENERO, type SerieCatalogo } from '../lib/catalogo'
 import { EPISODE_COST, episodesLabel } from '../lib/economy'
 import { enCurso, type State } from '../lib/state'
 import { posterStyle } from '../lib/frame'
+import { portada, semilla } from '../lib/portada'
 import { Coin, Logo } from './Icons'
 
 /**
@@ -11,18 +12,23 @@ import { Coin, Logo } from './Icons'
  * llegar a él como se llega de verdad — eligiendo una serie, viendo un rato y
  * chocando— para que la propuesta se pueda evaluar.
  *
- * Reproduce el chasis del producto real (chip de saldo arriba, rieles
- * horizontales, tab bar de tres) con dos diferencias que SON la propuesta:
- * el chip de saldo lleva su traducción a episodios, y la pestaña "Recompensas"
- * ya no existe — su contenido se mudó al muro.
+ * Reproduce el chasis del producto real: portadas con el título quemado en el
+ * arte y el sello «idilio original», rieles de género con el mismo orden que la
+ * app (Estrenos → Seguir viendo → Lo más visto → los géneros → la selección) y
+ * la flecha de arrastre asomando en el borde derecho.
+ *
+ * Dos cosas se apartan de la app, y SON la propuesta: el chip de saldo lleva su
+ * traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido
+ * se mudó al muro.
  */
 export function Home({
   state, onSerie, onWallet,
 }: { state: State; onSerie: (id: string) => void; onWallet: () => void }) {
   const siguiendo = enCurso(state)
-  const idsEnCurso = new Set(siguiendo.map((s) => s.id))
-  const estrenos = CATALOGO_SERIES.filter((s) => !idsEnCurso.has(s.id)).slice(0, 8)
-  const masVisto = CATALOGO_SERIES.filter((s) => !idsEnCurso.has(s.id)).slice(8, 16)
+  // Estrenos y Lo más visto repiten series que ya están en curso, igual que en
+  // la app: un riel es una vitrina, no una partición del catálogo.
+  const estrenos = CATALOGO_SERIES.slice(0, 8)
+  const masVisto = CATALOGO_SERIES.slice(8, 16)
 
   return (
     <div className="home">
@@ -40,14 +46,17 @@ export function Home({
       </header>
 
       <div className="home-scroll">
+        <Riel titulo="Estrenos" series={estrenos} state={state} onSerie={onSerie} />
         {siguiendo.length > 0 && (
           <Riel titulo="Seguir viendo" series={siguiendo} state={state} onSerie={onSerie} continuar />
         )}
-        <Riel titulo="Estrenos" series={estrenos} state={state} onSerie={onSerie} />
         <Riel titulo="Lo más visto" series={masVisto} state={state} onSerie={onSerie} />
+        {RIELES_GENERO.map((r) => (
+          <Riel key={r.titulo} titulo={r.titulo} series={r.series} state={state} onSerie={onSerie} />
+        ))}
 
         <p className="home-nota">
-          {CATALOGO_SERIES.length} series reales del catálogo de Idilio, con sus cifras medidas.
+          Las {CATALOGO_SERIES.length} series con muro del catálogo real de Idilio, con sus cifras medidas.
         </p>
       </div>
 
@@ -77,28 +86,57 @@ function Riel({
   return (
     <section className="riel">
       <h2>{titulo}</h2>
-      <div className="riel-row">
-        {series.map((s) => {
-          const va = state.vistos[s.id] ?? 0
-          const pct = Math.round((va / s.total) * 100)
-          return (
-            <button key={s.id} className="poster" onClick={() => onSerie(s.id)}>
-              <span className="poster-art" style={posterStyle(s.tono, s.total)}>
-                <span className="poster-tag">{s.total} eps</span>
-              </span>
-              <span className="poster-t">{s.titulo}</span>
-              {continuar ? (
-                <>
-                  <span className="poster-sub">Ep. {va} de {s.total}</span>
-                  <span className="poster-bar"><i style={{ width: `${pct}%` }} /></span>
-                </>
-              ) : (
-                <span className="poster-sub">{s.gratis} episodios gratis</span>
-              )}
-            </button>
-          )
-        })}
+      <div className="riel-body">
+        <div className="riel-row">
+          {series.map((s) => (
+            <Poster key={s.id} s={s} state={state} onSerie={onSerie} continuar={continuar} />
+          ))}
+        </div>
+        {/* La flecha del borde: en la app no es un botón, es el aviso de que
+            el riel sigue. Por eso no recibe clics ni foco. */}
+        <span className="riel-mas" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="m9.5 5.5 7 6.5-7 6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </div>
     </section>
+  )
+}
+
+/** Una portada del riel: arte, sello, título quemado y —si la serie está
+ *  empezada— la barra de avance pegada al borde inferior. */
+function Poster({
+  s, state, onSerie, continuar,
+}: { s: SerieCatalogo; state: State; onSerie: (id: string) => void; continuar?: boolean }) {
+  const va = state.vistos[s.id] ?? 0
+  const pct = Math.round((va / s.total) * 100)
+  const sem = semilla(s.id)
+  const p = portada(s.titulo, sem)
+
+  return (
+    <button
+      className="poster"
+      onClick={() => onSerie(s.id)}
+      aria-label={continuar
+        ? `${s.titulo}. Episodio ${va} de ${s.total}`
+        : `${s.titulo}. ${s.gratis} episodios gratis de ${s.total}`}
+    >
+      <span className="poster-art" style={posterStyle(s.tono, sem)}>
+        <span className="poster-brand" aria-hidden="true"><Logo s={6} /><b>idilio</b><i>original</i></span>
+        <span
+          className="poster-tit" data-serif={p.serif || undefined}
+          style={{ fontSize: p.tam }} aria-hidden="true"
+        >
+          {p.lineas.map((l, i) => (
+            <span key={i} style={p.acento && i === p.lineas.length - 1 ? { color: p.acento } : undefined}>{l}</span>
+          ))}
+        </span>
+        {/* La barra sale en cualquier riel donde aparezca una serie empezada,
+            no solo en «Seguir viendo»: es la misma portada, y el avance viaja
+            con ella. */}
+        {va > 0 && <span className="poster-bar"><i style={{ width: `${pct}%` }} /></span>}
+      </span>
+    </button>
   )
 }

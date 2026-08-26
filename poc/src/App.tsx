@@ -13,6 +13,11 @@ import { initialState, proximaCita, reduce, stateName, type Action, type Ctx, ty
 
 const T0 = 1_756_099_020_000 // reloj fijo a las 00:17: el POC vive en la franja de las 11pm-2am
 
+/** Miles con punto, como se escriben en es-419. A mano y no con
+ *  `toLocaleString`: ese método separa según el locale que le pasen —es-MX usa
+ *  coma— y el número terminaría escrito distinto que en los documentos. */
+const miles = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
 export default function App() {
   const [ctx, dispatch] = useReducer(reduce, { state: initialState(T0), sheet: { kind: 'none' } } as Ctx)
   const { state, sheet } = ctx
@@ -22,7 +27,7 @@ export default function App() {
   const prevBalance = useRef(state.balance)
 
   // El reloj solo corre cuando hay una cuenta regresiva a la vista. Tickear
-  // siempre re-renderizaba la app entera cada segundo — con 35 pósters en el
+  // siempre re-renderizaba la app entera cada segundo — con 62 miniaturas en el
   // home eso es trabajo tirado, y además impedía que la pantalla llegara nunca
   // a estar quieta.
   const relojVisible = sheet.kind === 'unlock' && state.passes === 0 && state.passNextAt !== null
@@ -178,8 +183,12 @@ function Director({
   speed: number; setSpeed: (n: number) => void
 }) {
   const sheetKind = sheet.kind
+  // Todos los pasos del recorrido ocurren dentro del loop: el muro, el pase y
+  // la tienda aparecen sobre el episodio que se estaba viendo. Sin fijar la
+  // pantalla, las hojas se abrían sobre el home —que es donde arranca la app— y
+  // el fondo contaba una historia que no pasa nunca.
   const go = (patch: Partial<State>, next: Sheet) => {
-    dispatch({ t: 'devSetState', patch })
+    dispatch({ t: 'devSetState', patch: { pantalla: { en: 'player' }, ...patch } })
     dispatch({ t: 'open', sheet: next })
   }
   const iss = weeklyIssuance(state.nights)
@@ -196,7 +205,7 @@ function Director({
 
       <div className="grp">
         <h2>Recorrido</h2>
-        <button className={sheetKind === 'none' ? 'on' : ''} onClick={() => { dispatch({ t: 'devSetState', patch: { episode: 12 } }); dispatch({ t: 'close' }) }}>
+        <button className={sheetKind === 'none' ? 'on' : ''} onClick={() => { dispatch({ t: 'devSetState', patch: { episode: 12, pantalla: { en: 'player' } } }); dispatch({ t: 'close' }) }}>
           1 · Episodio gratis (ep. 12)
         </button>
         <button className={sheetKind === 'unlock' && state.passes === 1 ? 'on' : ''}
@@ -276,7 +285,7 @@ function Director({
 
       <div className="note" style={{ paddingTop: 6, borderTop: '1px solid rgba(255,255,255,.07)' }}>
         Datos medidos en las {CATALOGO.series} series del catálogo: 1 episodio = {EPISODE_COST} monedas
-        sin excepción, {CATALOGO.gratis} episodios gratis de {CATALOGO.episodios} totales.
+        sin excepción, {miles(CATALOGO.gratis)} episodios gratis de {miles(CATALOGO.episodios)} totales.
         El cooldown del pase es de {PASS_COOLDOWN_MS / 3600_000} h reales.
       </div>
     </aside>

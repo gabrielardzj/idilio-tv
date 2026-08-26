@@ -25,6 +25,7 @@ const PAGINAS = [
   { slug: 'diseno', src: 'docs/03-diseno/pencil/README.md', titulo: 'Archivo de diseño', n: '3c', peso: '' },
   { slug: 'poc', src: 'docs/04-poc/README.md', titulo: 'El POC', n: '4', peso: '25%' },
   { slug: 'dogfooding', src: 'docs/00-dogfooding/README.md', titulo: 'Dogfooding y censo', n: '0', peso: 'anexo' },
+  { slug: 'benchmark', src: 'docs/05-benchmark/README.md', titulo: 'Benchmark competitivo', n: '5', peso: 'anexo' },
   { slug: 'reconciliacion', src: 'docs/RECONCILIACION.md', titulo: 'Las dos versiones', n: '·', peso: 'anexo' },
 ]
 
@@ -72,6 +73,42 @@ function imagenesAmpliables(html) {
 
 const nav = (activo) => PAGINAS.map((p) =>
   `<a class="${p.slug === activo ? 'on' : ''}" href="./${p.slug}.html"><b>${p.n}</b> ${p.titulo}</a>`).join('')
+
+/**
+ * Mermaid, con la paleta del sitio. Solo lo cargan las páginas que tienen diagrama.
+ * Si el import falla —sin red, o un CSP que bloquee el CDN— el catch deja el bloque
+ * como está: el código fuente, que es lo que se ve hoy. Nunca se queda vacío.
+ */
+const scriptMermaid = `<script type="module">
+try {
+  const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')
+  mermaid.initialize({
+    startOnLoad: false,
+    suppressErrorRendering: true,
+    theme: 'base',
+    fontFamily: 'Outfit, system-ui, sans-serif',
+    state: { useMaxWidth: true },
+    flowchart: { useMaxWidth: true },
+    themeVariables: {
+      darkMode: true, background: '#120C1A', fontSize: '14px',
+      primaryColor: '#1E1430', primaryTextColor: '#F2EBF7', primaryBorderColor: '#A855F7',
+      secondaryColor: '#181022', tertiaryColor: '#120C1A',
+      lineColor: '#8F8896', textColor: '#B7A9C4',
+      mainBkg: '#1E1430', nodeBorder: '#A855F7', nodeTextColor: '#F2EBF7',
+      stateBkg: '#1E1430', stateLabelColor: '#F2EBF7', labelColor: '#F2EBF7',
+      transitionColor: '#8F8896', transitionLabelColor: '#B7A9C4',
+      labelBackgroundColor: '#120C1A', edgeLabelBackground: '#120C1A',
+      compositeBackground: '#0F0A17', compositeTitleBackground: '#120C1A', compositeBorder: '#2A1E3C',
+      altBackground: '#0F0A17', clusterBkg: '#0F0A17', clusterBorder: '#2A1E3C',
+      specialStateColor: '#A855F7', innerEndBackground: '#A855F7',
+      noteBkgColor: '#1E1430', noteTextColor: '#F2EBF7', noteBorderColor: '#3FE0D0',
+    },
+  })
+  await mermaid.run({ querySelector: 'pre.mermaid' })
+} catch (e) {
+  console.warn('mermaid no cargó; queda el código fuente del diagrama', e)
+}
+</` + `script>`
 
 const plantilla = (p, cuerpo) => `<!doctype html><html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -127,8 +164,14 @@ td:has(img){width:284px;padding-right:22px}
 a.zoom{display:block;text-decoration:none}
 a.zoom::after{content:'ampliar ↗';display:block;font-size:10.5px;color:var(--lo);margin-top:7px;letter-spacing:.3px}
 hr{border:none;border-top:1px solid rgba(255,255,255,.08);margin:40px 0}
-.mermaid-src{background:var(--s1);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px;
-overflow-x:auto;font-family:ui-monospace,monospace;font-size:12px;color:var(--lo);line-height:1.6;margin:0 0 20px;white-space:pre}
+/* El diagrama. Sin JS —o si el CDN de mermaid no carga— queda el código fuente,
+   legible; con JS, mermaid reemplaza el contenido por el SVG y manda :has(svg). */
+pre.mermaid{background:var(--s1);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px;
+overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--lo);
+line-height:1.6;margin:0 0 20px;white-space:pre}
+pre.mermaid:has(svg){padding:24px 16px;white-space:normal;text-align:center;line-height:1.4}
+pre.mermaid svg{display:block;margin:0 auto;max-width:100%;height:auto}
+pre.mermaid svg .edgeLabel,pre.mermaid svg .label{font-family:Outfit,system-ui,sans-serif}
 </style></head><body>
 <div class="shell">
 <nav>
@@ -145,7 +188,8 @@ ${nav(p.slug)}
 <p class="kicker">Entregable ${p.n}${p.peso ? ` · ${p.peso}` : ''}</p>
 ${cuerpo}
 </main>
-</div></body></html>`
+</div>${cuerpo.includes('<pre class="mermaid">') ? `\n${scriptMermaid}` : ''}
+</body></html>`
 
 await mkdir(join(OUT, 'activos'), { recursive: true })
 const activos = new Set()
@@ -153,9 +197,9 @@ const activos = new Set()
 for (const p of PAGINAS) {
   const md = await readFile(join(RAIZ, p.src), 'utf8')
   let html = marked.parse(md, { mangle: false, headerIds: false })
-  // los bloques mermaid se muestran como fuente: el diagrama vive en el repo
+  // los bloques mermaid se dibujan en la página; el fuente queda adentro como respaldo
   html = html.replace(/<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-    (_, cod) => `<div class="mermaid-src">${cod}</div>`)
+    (_, cod) => `<pre class="mermaid">${cod}</pre>`)
   html = reescribirEnlaces(html, p.src)
   html = reescribirImagenes(html, p.src, activos)
   html = imagenesAmpliables(html)

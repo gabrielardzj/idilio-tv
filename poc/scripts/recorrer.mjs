@@ -33,8 +33,10 @@ paso('el home trae el catálogo real', (await page.locator('.poster').count()) >
   `${await page.locator('.poster').count()} pósters`)
 
 // Una serie que NO empezó: el viaje de alguien nuevo en esa historia
-const nuevas = page.locator('.riel', { hasText: 'Estrenos' }).locator('.poster')
-const titulo = (await nuevas.first().locator('.poster-t').innerText()).trim()
+// El título ya no cuelga debajo de la miniatura: va quemado en la portada,
+// y la barra de avance marca las empezadas. Así se pide una sin empezar.
+const nuevas = page.locator('.riel', { hasText: 'Estrenos' }).locator('.poster:not(:has(.poster-bar))')
+const titulo = ((await nuevas.first().getAttribute('aria-label')) ?? '').split('.')[0].trim()
 await nuevas.first().click()
 await page.waitForTimeout(500)
 paso('entra a una serie sin empezar', (await estado()) === 'serie-detalle', `«${titulo}»`)

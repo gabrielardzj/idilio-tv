@@ -13,19 +13,19 @@
 
 De las ocho intervenciones de la estrategia, elegí esta por cuatro razones, en orden de peso.
 
-**1. Es la única que ataca el punto exacto donde muere la sesión.**
-10 episodios gratis + 14 de sesión promedio = la sesión termina en el muro, con hambre para cuatro más. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
+**1. Es la única que ataca el punto exacto donde la sesión se corta por precio.**
+Toda serie con muro empieza igual —10 episodios gratis, 15 monedas por episodio después—, así que el corte no es un accidente: es la estructura del catálogo y siempre cae en el mismo lugar. Que la sesión promedio de 14 episodios termine justo ahí es la hipótesis que plantea el diagnóstico, no un hecho: 14 es una media y no se descompone. Pero el corte existe con o sin esa cuenta, y no lo pone el aburrimiento — lo pone el precio. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
 
 **2. Es la única que puede mover DAU/MAU por sí sola.**
 Stickiness es una métrica de *regreso*. Para moverla hace falta una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo que no puede tener — el único donde una promesa a futuro tiene valor real. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso.
 
 **2bis. Y es la única que compite contra lo que el usuario realmente hace.**
-El censo del catálogo mostró que la alternativa a pagar no es irse: es **empezar otra de las 43 series y comerse sus 10 episodios gratis**. Eso es lo que gana hoy, y sale gratis. El Pase de la Noche es lo único en todo el producto que ofrece algo que ese camino no puede dar: **seguir donde estabas**. Empezar otra serie te devuelve al episodio 1 de una historia que todavía no te importa; el pase te devuelve al episodio 11 de la que sí.
+El censo del catálogo mostró que la alternativa a pagar no es irse: es **empezar otra de las 50 series y comerse sus 10 episodios gratis**. Eso es lo que gana hoy, y sale gratis. El Pase de la Noche es lo único en todo el producto que ofrece algo que ese camino no puede dar: **seguir donde estabas**. Empezar otra serie te devuelve al episodio 1 de una historia que todavía no te importa; el pase te devuelve al episodio 11 de la que sí.
 
 Por eso la elección entre series (R2) no es solo pedagógica. Es el momento en que el usuario **declara cuál historia le importa** — que es exactamente el apego que hoy no existe y que la métrica de stickiness necesita.
 
 **3. Resuelve el objetivo de experiencia como efecto secundario, no como pantalla aparte.**
-El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus sumideros y su posición. La tentación es una pantalla que lo explique. Nadie lee esa pantalla. Aquí el usuario aprende el sistema porque tiene que **operarlo**: recibe un recurso escaso (un pase), decide dónde gastarlo (qué serie), ve el efecto (episodio abierto, racha +1) y ve el precio de la alternativa ($0.15 por episodio). Es aprendizaje por uso.
+El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus sumideros y su posición. La tentación es una pantalla que lo explique. Nadie lee esa pantalla. Aquí el usuario aprende el sistema porque tiene que **operarlo**: recibe un recurso escaso (un pase), decide dónde gastarlo (qué serie), ve el efecto (episodio abierto, racha +1) y ve el precio de la alternativa ($0.15 por episodio, el peldaño regular de la tienda). Es aprendizaje por uso.
 
 **4. Funciona para el 88% que es invitado, desde el día uno.**
 Sin cuenta, sin onboarding, sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
@@ -91,7 +91,7 @@ stateDiagram-v2
 
     PaseListo: Pase de la Noche listo
     PaseListo --> Eleccion: usar el pase
-    PaseListo --> Tienda: no quiero esperar
+    PaseListo --> Tienda: conseguir monedas
 
     Eleccion: ¿A cuál serie le doy el pase?
     Eleccion --> Desbloqueo: elegir serie
@@ -143,7 +143,7 @@ No es adorno narrativo. Es que el usuario llegó ahí por la historia, y el muro
 El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisión con costo de ingreso a corto plazo y la defiendo por dos razones:
 
 1. El 95%+ de la base no paga. Para ellos, un muro que solo vende es un muro sin salida, y el resultado es abandono, no conversión.
-2. El usuario que sí iba a pagar sigue pagando: el botón está ahí, dice *«No quiero esperar»*, y llega con más información que antes (sabe que un episodio cuesta $0.15 y que la alternativa es esperar hasta las 18:05). Un precio con alternativa visible se juzga mejor que un precio sin ella.
+2. El usuario que sí iba a pagar sigue pagando: la salida de compra está siempre, y lo que cambia es su peso según el estado del muro. Sin pase y sin saldo es un botón entero, *«No quiero esperar»*. Con saldo suficiente es *«Abrirlo ahora por 15 monedas»*. Y con un pase disponible baja a un link chico debajo del pase, *«o consigue monedas para no esperar»* — porque ahí estaría compitiendo contra algo gratis que el usuario ya tiene en la mano. En los tres casos el precio llega con más información que antes (sabe que un episodio cuesta $0.15 y que la alternativa es esperar hasta las 18:05). Un precio con alternativa visible se juzga mejor que un precio sin ella.
 
 La contrapartida honesta: si el guardrail de ARPDAU cae más de 8% de forma sostenida, esta jerarquía es lo primero que hay que revisar.
 
@@ -171,12 +171,12 @@ En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 |---|---|---|
 | Chip de saldo | `2543` | `90` · *6 episodios* |
 | Muro | `Tu balance: 0` | *Te faltan 15 monedas para este episodio* |
-| Tienda | `180 monedas · $0.99` | **12 episodios** · 180 monedas · **$0.08 por episodio** |
+| Tienda · oferta de bienvenida | `180 monedas · $0.99` | **12 episodios** · 180 monedas · **$0.08 por episodio** |
 | Paquete grande | `375 monedas · $3.99` | **44 episodios** · *Termina esta serie* · $4.99 |
 
 El caso de *«Termina esta serie»* es el que más me gusta, y es el que más cambió al medir el catálogo.
 
-La primera versión ponía esa etiqueta fija sobre el paquete de 660 monedas, porque *Pasión a Domicilio* cuesta exactamente eso. Al censar las 43 series resultó que van de **150 a 960 monedas**: la etiqueta habría sido **falsa en el 40% de los casos**. Un badge que miente en dos de cada cinco compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
+La primera versión ponía esa etiqueta fija sobre el paquete de 660 monedas, porque *Pasión a Domicilio* cuesta exactamente eso. Al censar las 50 series resultó que van de **150 a 960 monedas**. La lectura que importa no es cuántas veces el número no coincide —eso pasa en 40 de las 41 series con muro y es trivial—, sino cuántas veces **el badge promete algo que la compra no cumple**: en **19 de esas 41 series, el 46%, el paquete de 660 no alcanza para terminar la serie**. Un badge que promete de más en casi la mitad de las compras no es un badge, es un problema de confianza en el momento de pagar — justo el defecto que le señalo al paywall actual.
 
 Ahora se calcula. La tienda abre con la meta real de la serie que el usuario está viendo — *«Para terminar Pasión a Domicilio: 44 episodios · 660 monedas»* — y el badge cae sobre el paquete más chico que alcanza. O es cierto, o no aparece.
 
@@ -193,7 +193,9 @@ Propuesta, medida en la unidad que el usuario entiende:
 | Termina esta serie *(calculado)* | 44 | $4.99 | $0.11 |
 | — | 100 | $9.99 | $0.10 |
 
-Fuera de la oferta de bienvenida, el precio por episodio baja en cada escalón. La oferta de bienvenida queda declarada como tal y no rompe la lógica de la escalera: es una oferta de adquisición, no un peldaño.
+Fuera de la oferta de bienvenida, el precio por episodio baja en cada escalón.
+
+Que la bienvenida no rompa esa lógica no puede quedar en la declaración: puestas una al lado de la otra, $0.99 por 12 episodios y $1.99 por 13 son un dólar más por un episodio más, exactamente la lectura de *«error o trampa»* que le señalo al producto en F3. Por eso hace falta una **regla de producto, no una aclaración de copy: la bienvenida nunca comparte grilla con la escalera.** Se muestra sola, la primera vez que el usuario abre la tienda, como tarjeta única y con vencimiento declarado; la escalera completa recién aparece cuando la bienvenida se usó o se venció. Los dos precios no llegan a verse juntos nunca.
 
 **Y se van todos los precios tachados, incluido el de la oferta de bienvenida.**
 
@@ -279,9 +281,9 @@ La categoría directa —no cómics, microdramas— ya validó que la fuente gra
 
 Dos lecturas que salen de ahí:
 
-1. **Lo que propongo es conservador para la categoría.** 4 episodios gratis por semana para el usuario mediano, contra los ~6 *diarios* que DramaBox regala por ver anuncios. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
+1. **Lo que propongo es conservador para la categoría.** 4 episodios gratis por semana para el usuario promedio, contra los ~6 *diarios* que DramaBox regala por ver anuncios. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
 2. **DramaBox rompe la racha al faltar un día, igual que Idilio.** Es el estándar de la categoría, y es el estándar que este diseño decide no seguir. Que todos lo hagan no lo vuelve correcto para una base que entra 2.3 días por semana.
-3. **Idilio es entre 5 y 7 veces más barato por serie que los líderes.** La serie mediana del catálogo cuesta $6.63 contra los $37–47 que reportan de ReelShort. Si el dato se confirma con cifras propias, el margen para regalar episodios es *menor* de lo que sugiere la comparación bruta: cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
+3. **Idilio es unas 3 veces más barato por episodio bloqueado que los líderes.** Hay que normalizarlo, porque las series no miden lo mismo: los $37–47 de ReelShort son por una serie de 80 episodios, o sea **~$0.46–0.59 por episodio**; los $6.63 de la serie mediana de Idilio son por 40 episodios bloqueados, o sea **~$0.17**. Comparados en bruto la brecha parece de 5 a 7 veces; por episodio, que es la unidad que el usuario paga, son unas 3. Si el dato se confirma con cifras propias, el margen para regalar episodios sigue siendo *menor* de lo que sugiere la comparación bruta: cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
 
 ---
 
@@ -295,16 +297,20 @@ La restricción del brief es explícita: *«cualquier fuente nueva de moneda deb
 
 | Noches que entra | Pases recolectados | Bonos | Episodios gratis / semana | Monedas emitidas |
 |---|---|---|---|---|
-| 2 (mediana real, DAU/MAU 0.33) | 4 | 0 | **4** | 60 |
+| 2 (promedio real, DAU/MAU 0.33) | 4 | 0 | **4** | 60 |
 | 3 | 6 | 30 | **8** | 120 |
 | 5 | 7 *(tope de emisión)* | 75 | **12** | 180 |
 | 7 (asistencia perfecta) | 7 *(tope de emisión)* | 150 | **17** | 255 |
 
 Con acumulación hasta 2, quien entra N noches recolecta hasta 2N pases — pero la emisión nunca pasa de 7 por semana, porque solo se acredita uno cada 24 h. Por eso las filas de 5 y 7 noches convergen: **el techo lo pone el reloj, no la asistencia.**
 
-El usuario mediano de hoy — 2.3 noches por semana — recibe **4 episodios gratis por semana**. En la serie mediana del catálogo (50 episodios, 40 bloqueados) eso es el 10% del contenido pago de un solo título, y el 0.3% de los 1.455 episodios bloqueados del catálogo. No es una economía que se vacía; es un goteo que compra un regreso.
+El usuario promedio de hoy — 2.3 noches por semana — recibe **4 episodios gratis por semana**. En la serie mediana del catálogo (50 episodios, 40 bloqueados) eso es el 10% del contenido pago de un solo título, y el 0.2% de los 1.728 episodios bloqueados del catálogo. No es una economía que se vacía; es un goteo que compra un regreso.
 
-**Y hay que ponerlo en perspectiva:** el catálogo ya regala 428 episodios. El pase agrega, para el usuario mediano, unos 200 más al año. Es un 47% sobre un colchón que ya existe — pero a diferencia del colchón, estos 200 episodios están dirigidos: van a la historia que el usuario eligió, no a diez arranques distintos.
+*Promedio, no mediana: 2.3 sale de 0.33 × 7, que es una media. La precisión importa porque toda la fila de cabecera de la tabla cuelga de ahí — y juega a favor, porque con la cola pesada que tiene la asistencia la mediana real está por debajo de 2.3. El modelo se equivoca del lado seguro.*
+
+**Y hay que ponerlo en perspectiva, con cuidado:** el catálogo ya regala 500 episodios, pero ese colchón es un **stock** —se agota una vez y no vuelve— y el pase es un **flujo**: unos 208 episodios al año para el usuario promedio, todos los años. Dividir uno por otro (208 sobre 500, un 42%) queda prolijo y no dice nada: a tres años el pase entregó 600 y el colchón sigue siendo 500. La comparación honesta es contra el flujo que sí corresponde — los **1.728 episodios bloqueados** que el usuario tiene por delante, que al ritmo del pase tarda más de ocho años en abrir. Solo igualar el colchón le lleva **2.4 años**.
+
+Pero la sostenibilidad no cuelga de ninguna de esas comparaciones, y por eso no las uso para defenderla. Cuelga del **techo duro: 7 pases por semana y por usuario**, sin anuncios que lo levanten ni forma de comprar más. Ese techo vale sea grande o chico el colchón, y es lo único que hace falta para acotar la emisión. Lo que el colchón no tiene y el pase sí es dirección: estos episodios van a la historia que el usuario eligió, no a diez arranques distintos.
 
 **El gradiente que sostiene DAU/MAU:** entrar 2 noches rinde 4 episodios; entrar 4 o más rinde 7. Volver seguido sigue siendo estrictamente mejor. Si el tope fuera 7 en vez de 2, acumular la semana entera y entrar un solo día daría lo mismo que entrar todos los días — y la mecánica dejaría de mover la métrica que existe para mover.
 

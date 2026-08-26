@@ -13,8 +13,13 @@ import { fileURLToPath } from 'node:url'
 
 const RAIZ = dirname(dirname(dirname(fileURLToPath(import.meta.url))))
 
-const cat = JSON.parse(readFileSync(join(RAIZ, 'docs/00-dogfooding/catalogo.json'), 'utf8'))
-  .filter(x => !x.error && x.total > 0)
+const CENSO = JSON.parse(readFileSync(join(RAIZ, 'docs/00-dogfooding/catalogo.json'), 'utf8'))
+// Acá decía `.filter(x => !x.error && x.total > 0)`. Ese `total > 0` descartaba
+// en silencio las tres series que el scraper no supo parsear y emitió con
+// `total: 0`: los agregados cuadraban contra un CATALOGO igual de incompleto y
+// el guardián firmaba «TODO CONSISTENTE» sobre un censo al que le faltaban
+// series. Una entrada rota ya no se descarta: se denuncia (ver `rotas`).
+const cat = CENSO.filter(x => !x.error)
 const con = cat.filter(x => x.bloqueados > 0)
 const suma = (a, f) => a.reduce((s, x) => s + f(x), 0)
 const mediana = a => { const s = [...a].sort((x, y) => x - y); return s[Math.floor(s.length / 2)] }
@@ -29,21 +34,50 @@ let fallos = 0
 const v = (...a) => { if (!check(...a)) fallos++ }
 
 console.log('── catálogo ───────────────────────────────────────────────────')
+
+// Integridad del censo, antes de creerle a ningún agregado. Una entrada rota no
+// es una serie menos: es un agujero. Ya pasó una vez —tres fichas devolvieron
+// 200, no se pudieron parsear, salieron con `total: 0` y ninguna dio error—, y
+// el censo publicó 43 series mientras el JSON tenía 46 entradas.
+const rotas = CENSO.filter(x => x.error || !x.titulo || !(x.total > 0))
+v('ninguna entrada rota (error · sin título · total 0)',
+  rotas.length ? rotas.map(x => x.titulo || x.id).join(', ') : 'ninguna', 'ninguna')
+v('entradas en catalogo.json', CENSO.length, CATALOGO.series)
+
 v('series', cat.length, CATALOGO.series)
 v('episodios totales', suma(cat, x => x.total), CATALOGO.episodios)
 v('episodios gratis', suma(cat, x => x.gratis), CATALOGO.gratis)
 v('episodios bloqueados', suma(cat, x => x.bloqueados), CATALOGO.bloqueados)
+
+// Gratis + bloqueados da dos episodios menos que el total, y eso está explicado:
+// dos series tienen huecos en la numeración. El scraper los registra uno por uno
+// en `huecoDeNumeracion`, así que el descuadre tiene que cuadrar serie por serie
+// y su suma tiene que ser exactamente la diferencia del catálogo. Antes ese −2
+// aparecía sin explicación y no había forma de distinguirlo de un error.
+v('todas las series traen huecoDeNumeracion', cat.every(x => Number.isInteger(x.huecoDeNumeracion)), true)
+const descuadradas = cat.filter(x => x.total !== x.gratis + x.bloqueados + x.huecoDeNumeracion)
+v('cada serie cuadra (total = gratis + bloq. + hueco)',
+  descuadradas.length ? descuadradas.map(x => x.titulo).join(', ') : 'todas', 'todas')
+v('los huecos explican el descuadre del catálogo', suma(cat, x => x.huecoDeNumeracion),
+  CATALOGO.episodios - CATALOGO.gratis - CATALOGO.bloqueados)
+
 v('gratis por serie (moda)', 10, FREE_EPISODES)
 v('costo por episodio', 15, EPISODE_COST)
 v('series sin excepción a las 15 monedas', con.every(x => x.costo === 15), true)
 v('serie mediana en monedas', mediana(con.map(x => x.costoSerie)), 600)
-v('Pasión a Domicilio · bloqueados', con.find(x => x.titulo.startsWith('Pasión')).bloqueados, 44)
-v('Pasión a Domicilio · costo', con.find(x => x.titulo.startsWith('Pasión')).costoSerie, 660)
+// Por título exacto: el censo completo trae también «Pasión Frente a los
+// Colmillos del Conde», y el startsWith('Pasión') que había acá se quedaba con
+// esa —10 bloqueados, 150 monedas— y reportaba un desajuste que no existía.
+const pasion = con.find(x => x.titulo === 'Pasión a Domicilio')
+v('Pasión a Domicilio · bloqueados', pasion?.bloqueados, 44)
+v('Pasión a Domicilio · costo', pasion?.costoSerie, 660)
 
 console.log('\n── el colchón gratis ──────────────────────────────────────────')
-v('sesiones sin pagar (428 / 14)', Math.round(CATALOGO.gratis / 14), 31)
-v('semanas (a 2.3 sesiones)', Math.round(CATALOGO.gratis / 14 / 2.3), 13)
-v('gratis como % del catálogo', Math.round(CATALOGO.gratis / CATALOGO.episodios * 100) + '%', '23%')
+v('sesiones sin pagar (500 / 14)', Math.round(CATALOGO.gratis / 14), 36)
+// 35,7 sesiones a 2,3 por semana son 15,5 semanas. Los documentos publican las
+// semanas cumplidas —«15 semanas, casi cuatro meses»—, así que acá se trunca.
+v('semanas (a 2.3 sesiones)', Math.floor(CATALOGO.gratis / 14 / 2.3), 15)
+v('gratis como % del catálogo', Math.round(CATALOGO.gratis / CATALOGO.episodios * 100) + '%', '22%')
 
 console.log('\n── emisión semanal (tabla de docs/03) ─────────────────────────')
 for (const [noches, eps, monedas] of [[2, 4, 60], [3, 8, 120], [5, 12, 180], [7, 17, 255]]) {
@@ -75,33 +109,118 @@ const DOCS = [
   'README.md', 'docs/00-dogfooding/README.md', 'docs/01-diagnostico/README.md',
   'docs/02-estrategia/README.md', 'docs/03-diseno/README.md', 'docs/03-diseno/sistema.md',
   'docs/03-diseno/pencil/README.md', 'docs/04-poc/README.md', 'web/README.md',
+  // Estos dos faltaban, y son justamente los que pasan a ser páginas del sitio:
+  // el benchmark publicaba «428 episodios gratis repartidos en 43 títulos» y el
+  // guardián no lo veía porque no lo estaba mirando. Una lista de vigilados que
+  // no incluye un documento publicado es una lista incompleta.
+  'docs/05-benchmark/README.md', 'docs/RECONCILIACION.md',
   // No solo los documentos: el HTML de la galería y el script que lo genera
   // también publican cifras, y ahí ya se me coló una vieja una vez.
   'mobbin-export/README.md', 'mobbin-export/index.html', 'poc/scripts/export-mobbin.mjs',
 ]
 
+// Un documento publicado que nadie vigila es por donde se cuela la próxima cifra
+// vieja. Si mañana se agrega una página al sitio y no a esta lista, esto avisa.
+const PUBLICADOS = ['docs/01-diagnostico', 'docs/02-estrategia', 'docs/03-diseno',
+  'docs/04-poc', 'docs/05-benchmark', 'docs/00-dogfooding', 'docs/RECONCILIACION']
+const sinVigilar = PUBLICADOS.filter(p => !DOCS.some(d => d.startsWith(p)))
+if (sinVigilar.length) {
+  console.log(`✗ documentos publicados fuera de la lista de vigilados: ${sinVigilar.join(', ')}`)
+  fallos++
+}
+
+/** Cuántas pantallas y cuántos flujos tiene el export HOY. Se cuentan del
+ *  manifiesto y no se escriben acá: el número vivía hardcodeado en el guardián,
+ *  el export creció y el guardián siguió persiguiendo los conteos viejos
+ *  mientras los documentos publicaban otro. El manifiesto lo borra y lo rehace
+ *  el propio export, así que puede no estar: en ese caso se avisa y se saltea,
+ *  que es preferible a caerse. */
+const rutaManifiesto = join(RAIZ, 'mobbin-export/manifest.json')
+const EXPORT = existsSync(rutaManifiesto)
+  ? (m => ({ flujos: m.flows.length, pantallas: suma(m.flows, f => f.screens.length) }))(
+      JSON.parse(readFileSync(rutaManifiesto, 'utf8')))
+  : null
+if (!EXPORT) console.log('· aviso: no hay mobbin-export/manifest.json — no se verifica el conteo de pantallas y flujos')
+else console.log(`· el export tiene ${EXPORT.pantallas} pantallas en ${EXPORT.flujos} flujos`)
+
+/** Exención de línea: la frase que narra la corrección.
+ *
+ *  Acá había también `antes`, y era el mismo error que este comentario advierte
+ *  más abajo con otra ropa: `antes` aparece en prosa corriente, así que eximía
+ *  líneas por accidente. Medí cuántas exenciones legítimas dependían de él:
+ *  **ninguna**. Era riesgo puro. Las tres que quedan no pueden caer por azar en
+ *  una frase que además traiga una cifra vieja. */
+const NARRA = /dec[ií]a|primera versión|primera medición/i
+
+/** Exención de bloque, para lo que una regex de línea no puede ver.
+ *
+ *  Una tabla que compara «primera pasada / segunda pasada / real» tiene cifras
+ *  viejas en sus celdas a propósito, y ninguna celda contiene la frase que lo
+ *  explica: la explicación está en el encabezado, tres líneas más arriba.
+ *
+ *  Antes esto se resolvía metiendo el archivo entero en una lista de exentos, y
+ *  eso es lo mismo que apagar el guardián para ese archivo: es exactamente la
+ *  clase de exención total que dejó pasar el censo incompleto. Con un marcador
+ *  se exime **la región**, no el documento, y hay que escribirlo a mano — no se
+ *  activa porque una palabra apareció por casualidad. En Markdown no se ve. */
+const ABRE_CITADA = /<!--\s*cifras-citadas\s*-->/
+const CIERRA_CITADA = /<!--\s*\/cifras-citadas\s*-->/
+
 /** Cifras que se corrigieron en el camino. Si reaparecen fuera de la nota que
  *  explica la corrección, es una cifra vieja que sobrevivió a una edición.
+ *
+ *  `patron` puede capturar un número: si la entrada trae `ok`, la línea solo
+ *  falla cuando el número capturado no es el vigente. Así el conteo de pantallas
+ *  y flujos no queda escrito dos veces, y cualquier conteo equivocado cae —no
+ *  solo los dos o tres viejos que alguien se acordó de enumerar.
  *
  *  `salvo` tiene que ser ESTRECHO. La primera versión permitía cualquier línea
  *  que dijera "moda" o "excepción", y una cifra vieja se coló por ahí: el pie de
  *  la galería decía «12 episodios gratis por serie (la moda)» y el guardián la
  *  dejó pasar porque contenía la palabra "moda". Se exime la narración de la
- *  corrección —que siempre dice "decía" o "primera versión"—, nada más. */
+ *  corrección —que siempre dice "decía", "primera versión" o "antes"—, nada más. */
 const OBSOLETOS = [
-  { patron: /\b6 flujos\b/, salvo: null, porque: 'ahora son 7 flujos' },
-  { patron: /\b(11|13) pantallas\b/, salvo: null, porque: 'ahora son 16 pantallas' },
+  ...(EXPORT ? [
+    // «6 pantallas + hoja de sistema» son las del archivo de diseño, no las del
+    // export: esa frase es la única exención, y es literal.
+    { patron: /(\d+) pantallas/, salvo: /dec[ií]a|primera versión|antes|hoja de sistema/i,
+      ok: m => +m[1] === EXPORT.pantallas,
+      porque: m => `el export tiene ${EXPORT.pantallas} pantallas, no ${m[1]}` },
+    { patron: /(\d+) flujos/, salvo: NARRA,
+      ok: m => +m[1] === EXPORT.flujos,
+      porque: m => `el export tiene ${EXPORT.flujos} flujos, no ${m[1]}` },
+  ] : []),
   { patron: /12 episodios gratis/, salvo: /dec[ií]a|primera versión/i, porque: 'la moda medida es 10' },
   { patron: /\$7\.29/, salvo: null, porque: 'la serie mediana cuesta $6.63' },
   { patron: /\$2\.49/, salvo: /hoy|producción|actual|paywall real|primera versión/i, porque: 'la propuesta no lleva precio tachado' },
+
+  // El censo del 26-ago-2026 reemplazó al que se publicó incompleto. Cada una de
+  // estas cifras tiene sucesora en `.context/HOJA-DE-DATOS.md`.
+  { patron: /\b43\b/, salvo: NARRA, porque: 'el censo tiene 50 series' },
+  // Con y sin separador de miles: el número viejo también se escribió «1885».
+  { patron: /\b1[.,]?885\b/, salvo: NARRA, porque: 'ahora son 2.230 episodios' },
+  { patron: /\b428\b/, salvo: NARRA, porque: 'ahora son 500 episodios gratis' },
+  { patron: /\b1[.,]?455\b/, salvo: NARRA, porque: 'ahora son 1.728 bloqueados' },
+  { patron: /\b31 sesiones\b/, salvo: NARRA, porque: 'ahora son 36 sesiones sin pagar' },
+  { patron: /\b13 semanas\b/, salvo: NARRA, porque: 'ahora son 15 semanas' },
+  // El otro 23% de los documentos —el de las series que se vuelven a ver— es un
+  // dato real y no se toca: acá solo cae el que mide el colchón.
+  { patron: /23 ?% del catálogo/, salvo: NARRA, porque: 'los 500 gratis son el 22% del catálogo' },
+  // «Tres Meses de Amor» es una serie del catálogo, no el colchón.
+  { patron: /tres meses/i, salvo: /dec[ií]a|primera versión|antes|Tres Meses de Amor/i, porque: 'el colchón es de casi cuatro meses' },
+  { patron: /\$ ?241\b/, salvo: NARRA, porque: 'el catálogo completo cuesta $286' },
+  { patron: /\b35 series\b/, salvo: NARRA, porque: 'son 41 series con muro' },
+  { patron: /\b8 (series )?(completamente|enteramente) gratis/i, salvo: NARRA, porque: 'son 9 series enteramente gratis' },
+  { patron: /una de tres excepciones/i, salvo: NARRA, porque: 'son cuatro las excepciones a los 10 gratis' },
+
+  // Miles con coma es notación inglesa. El sitio llegó a publicar «1,885
+  // totales» en una página mientras el resto del entregable escribía «1.885».
+  { patron: /(?<![\d.,])[0-9]{1,3},\d{3}(?![\d,])/, salvo: null, porque: 'miles con coma inglesa: acá se escriben con punto (2.230)' },
 ]
 
-/** El registro de dogfooding documenta el producto TAL COMO ESTÁ HOY.
- *  Ahí las cifras del paywall actual no son obsoletas: son la evidencia. */
-const SIN_REVISAR = new Set(['docs/00-dogfooding/README.md'])
+let eximidas = 0
 
 for (const ruta of DOCS) {
-  if (SIN_REVISAR.has(ruta)) continue
   // Algunos de estos archivos son generados (la galería) y el export los borra
   // y rehace. Si el guardián se cae ahí, deja de guardar nada: reporta y sigue.
   if (!existsSync(join(RAIZ, ruta))) {
@@ -110,15 +229,39 @@ for (const ruta of DOCS) {
     continue
   }
   const texto = readFileSync(join(RAIZ, ruta), 'utf8')
-  for (const { patron, salvo, porque } of OBSOLETOS) {
-    for (const linea of texto.split('\n')) {
-      if (!patron.test(linea)) continue
-      if (salvo && salvo.test(linea)) continue
-      console.log(`✗ ${ruta}: «${linea.trim().slice(0, 70)}…» → ${porque}`)
-      fallos++
-    }
+
+  // Qué líneas caen dentro de una región de cifras citadas. Se calcula una
+  // sola vez por archivo, no una por patrón.
+  const citada = new Set()
+  let dentro = false
+  texto.split('\n').forEach((linea, i) => {
+    if (ABRE_CITADA.test(linea)) dentro = true
+    if (dentro) citada.add(i)
+    if (CIERRA_CITADA.test(linea)) dentro = false
+  })
+  if (dentro) {
+    console.log(`✗ ${ruta}: una región <!-- cifras-citadas --> quedó sin cerrar`)
+    fallos++
+  }
+
+  for (const { patron, salvo, porque, ok } of OBSOLETOS) {
+    // matchAll y no test(): las entradas que capturan un número necesitan el
+    // número, y una misma línea puede traer más de una cifra equivocada.
+    const global = new RegExp(patron.source, patron.flags.includes('g') ? patron.flags : patron.flags + 'g')
+    texto.split('\n').forEach((linea, i) => {
+      if (salvo && salvo.test(linea)) return
+      for (const m of linea.matchAll(global)) {
+        if (ok && ok(m)) continue
+        if (citada.has(i)) { eximidas++; continue }
+        const motivo = typeof porque === 'function' ? porque(m) : porque
+        console.log(`✗ ${ruta}: «${linea.trim().slice(0, 70)}…» → ${motivo}`)
+        fallos++
+      }
+    })
   }
 }
+// Una exención silenciosa es una exención que nadie vuelve a mirar.
+if (eximidas) console.log(`· ${eximidas} cifra(s) vieja(s) eximidas por estar en una región de cifras citadas`)
 if (!fallos) console.log('✓ ninguna cifra obsoleta sobrevivió a las ediciones')
 
 console.log('\n── contraste de los tokens de texto (WCAG AA, 4.5:1) ─────────')

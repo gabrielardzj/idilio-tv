@@ -446,34 +446,57 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .home-scroll::-webkit-scrollbar { width: 0 }
 .home-nota { font-size: 11px; color: var(--tx-lo); text-align: center; padding: var(--sp-5) var(--sp-6) 0; line-height: 1.5; }
 
-.riel { margin-bottom: var(--sp-5); }
-.riel h2 { font-size: 14.5px; font-weight: 700; letter-spacing: -.2px; padding: 0 var(--sp-4) var(--sp-3); }
-.riel-row { display: flex; gap: 11px; overflow-x: auto; padding: 0 var(--sp-4) 2px; scroll-snap-type: x mandatory; }
+.riel { margin-bottom: 15px; }
+.riel h2 { font-size: 17px; font-weight: 700; letter-spacing: -.35px; padding: 0 var(--sp-4) 8px; }
+.riel-body { position: relative; }
+.riel-row { display: flex; gap: 12px; overflow-x: auto; padding: 0 var(--sp-4) 2px; scroll-snap-type: x mandatory; }
 .riel-row::-webkit-scrollbar { height: 0 }
+/* La flecha del borde derecho: aviso de que el riel sigue, no un control. */
+.riel-mas {
+  position: absolute; right: 0; top: 0; bottom: 2px; width: 34px; z-index: 2;
+  display: grid; place-items: center; pointer-events: none;
+  color: rgba(255,255,255,.82);
+  background: linear-gradient(90deg, transparent, rgba(6,3,9,.5) 62%);
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.8));
+}
 
-.poster { flex: 0 0 104px; text-align: left; scroll-snap-align: start; transition: transform .16s var(--ease); }
+/* La portada: el título va quemado en el arte, como en la app. Debajo de la
+   miniatura no cuelga nada — un riel se lee de un golpe de vista o no se lee. */
+.poster { flex: 0 0 102px; scroll-snap-align: start; transition: transform .16s var(--ease); }
 .poster:active { transform: scale(.96); }
 .poster-art {
-  display: block; position: relative; width: 104px; height: 148px; border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.07); overflow: hidden;
+  display: block; position: relative; width: 102px; height: 132px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.06); overflow: hidden;
 }
-.poster-tag {
-  position: absolute; right: 6px; bottom: 6px; font-size: 9.5px; font-weight: 700;
-  padding: 2px 6px; border-radius: 5px; background: rgba(6,3,9,.72); color: var(--tx-mid);
-  backdrop-filter: blur(6px);
+.poster-art::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(6,3,9,.42) 0%, transparent 30%, rgba(6,3,9,.66) 100%);
 }
-.poster-t {
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-  font-size: 12px; font-weight: 600; line-height: 1.3; margin-top: 8px; color: var(--tx-hi);
+.poster-brand {
+  position: absolute; left: 6px; top: 6px; z-index: 2;
+  display: flex; align-items: center; gap: 3px;
+  font-size: 6px; color: rgba(255,255,255,.86);
+  text-shadow: 0 1px 3px rgba(0,0,0,.8);
 }
-.poster-sub { display: block; font-size: 10.5px; color: var(--tx-lo); margin-top: 3px; }
-.poster-bar { display: block; height: 2px; border-radius: 2px; background: rgba(255,255,255,.13); margin-top: 5px; overflow: hidden; }
+.poster-brand b { font-size: 6.5px; font-weight: 700; letter-spacing: -.1px; }
+.poster-brand i { font-style: normal; font-size: 4.5px; font-weight: 500; letter-spacing: .1px; opacity: .8; align-self: flex-start; margin-top: 1px; }
+.poster-tit {
+  position: absolute; left: 6px; right: 6px; bottom: 9px; z-index: 2;
+  display: grid; text-align: center; line-height: 1.04;
+  font-weight: 800; text-transform: uppercase; letter-spacing: -.2px; color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.75), 0 1px 2px rgba(0,0,0,.9);
+}
+.poster-tit[data-serif] {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: .1px;
+}
+.poster-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 3; background: rgba(255,255,255,.2); }
 .poster-bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--violet)); }
 
 .tabbar {
   position: absolute; left: 0; right: 0; bottom: 0; height: 66px; z-index: 30;
   display: flex; align-items: center; justify-content: space-around;
-  background: rgba(11,7,16,.92); backdrop-filter: blur(18px);
+  background: linear-gradient(180deg, rgba(28,19,39,.9), rgba(11,7,16,.97));
+  backdrop-filter: blur(18px);
   border-top: 1px solid rgba(255,255,255,.07); padding-bottom: 10px;
 }
 .tab { display: grid; justify-items: center; gap: 3px; font-size: 10.5px; font-weight: 600; color: var(--tx-lo); }

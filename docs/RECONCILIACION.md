@@ -77,9 +77,15 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
 
 ### Solo en `da-nang`
 
-- **Censo del catálogo completo** (43 series, 1.885 episodios). De ahí sale el segundo hallazgo:
-  **428 episodios gratis = tres meses sin pagar**, que reencuadra el problema —la alternativa a
-  pagar no es irse, es empezar otra serie— y que ninguna de las dos versiones tenía antes.
+- **Censo del catálogo completo** (50 series, 2.230 episodios). De ahí sale el segundo hallazgo:
+  **500 episodios gratis = casi cuatro meses sin pagar**, que reencuadra el problema —la alternativa
+  a pagar no es irse, es empezar otra serie— y que ninguna de las dos versiones tenía antes.
+  Con una corrección que corresponde dejar acá: **el censo estuvo mal y hubo que rehacerlo.** La
+  primera versión decía 43 series y 1.885 episodios porque el scraper raspaba los rieles del home
+  en vez del sitemap, y tres series que sí leyó las emitió con total 0 sin dar un solo error. El
+  censo nuevo se arma desde `sitemap.xml` y el script se cae si una ficha no se puede leer. El
+  hallazgo no se movió de lugar —el colchón resultó más grande, no más chico—, pero estuvo
+  apoyado varios días en un número que no era.
 - **El precedente de Webtoon investigado**, que es el antecedente directo de la mecánica.
 - **Implementación sobre el stack real** (Next.js + Tailwind v4 + Supabase) con la **migración
   SQL completa**: `viewer.device_id` para invitados, `viewer.timezone`, `night_of()`,
@@ -123,7 +129,7 @@ La fusión mínima que yo entregaría:
 |---|---|---|
 | Acreditación al ver | **harare** *(ya adoptada aquí)* | La adopción por construcción es superior |
 | Cita anclada a la hora habitual | **da-nang** | Una cita a una hora arbitraria no es una cita |
-| Diagnóstico y censo del catálogo | **da-nang** | El hallazgo de los 428 episodios es el más fuerte de los dos, y harare no lo tiene |
+| Diagnóstico y censo del catálogo | **da-nang** | El hallazgo de los 500 episodios es el más fuerte de los dos, y harare no lo tiene |
 | Precedente de Webtoon | **da-nang** | Es el antecedente directo; conviene tenerlo aunque refuerce a harare |
 | Esquema SQL y viabilidad | **da-nang** | El brief evalúa viabilidad de implementación de forma explícita |
 | Modelo de sensibilidad y sesión de cierre | **harare** | No tienen equivalente aquí |
