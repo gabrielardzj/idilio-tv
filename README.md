@@ -49,18 +49,30 @@ Medí las **50 series del catálogo** ([censo completo](docs/00-dogfooding/)). L
 
 **Primero: la sesión no termina cuando el usuario se sacia. Termina cuando choca.** El bloque gratis típico son 10 episodios —37 de las 41 series con muro— y la sesión promedio llega a 14. No es una demostración: 14 es una media, y una media no se descompone en 10 + 4. Pero es la lectura más simple de esa diferencia, y si es la correcta, los 22 minutos no son salud: son el techo que impone la economía, y el usuario se va con hambre para cuatro episodios más.
 
-Y lo que hay en ese choque, verificado en el paywall (el muro de pago) real del build 1.20.0:
+Y lo que hay en ese choque, [capturado dentro de la app](docs/00-dogfooding/evidencia/muro-nativo-real-1.png) con storefront de Colombia:
 
 ```
-Costo del episodio: 15        Tu balance: 0
-─────────────────────────────────────────
-       Obtén monedas para continuar
-  $0.99 → 180    $1.99 → 180    $3.99 → 375
+🔒 Episodio 16/56
+Tu balance: 0                    Costo del episodio: 15
+────────────────────────────────────────────────────────
+Desbloquea TODO Idilio
+  SEMANAL  $12.500 COP/sem   ·   MENSUAL  $24.500 COP/mes
+                                 RECOMENDADO · Ahorra 55%
+────────────────────────────────────────────────────────
+Obtén monedas para desbloquear episodios
+   15  Desbloquea 1 episodio        [Ver anuncio]   0/10
+  180  Desbloquea 12 episodios      $2.500 COP   SUPER OFERTA 69%
+  375  Desbloquea 25 episodios      $13.500 COP  −20% DTO
+  725  Completa la serie            $25.500 COP  −24% DTO
+
+  ¿Más opciones? Ir a Recompensas
 ```
 
-Un usuario que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, recibe una tienda y ninguna otra salida. Las fuentes gratuitas —la recompensa diaria, y una lista de tareas de una sola vez por seguir las redes o calificar la app— viven todas en otra pestaña. Y la ficha de App Store del mismo build lista un **pase semanal a $7.99** y uno **mensual a $14.99**: la suscripción existe, pero el muro tampoco la ofrece.
+**El muro no esconde la economía: la enseña entera.** Dice el saldo y el costo, traduce cada paquete a episodios, ofrece la suscripción, lleva un anuncio recompensado que da un episodio gratis —hasta diez al día— y enlaza a la pestaña de Recompensas. Cualquiera de esas cosas, sola, sería una mejora que proponer; están todas.
 
-**No es que el metajuego esté mal diseñado. Está en otro edificio.**
+Lo que no hay, y es lo que este trabajo persigue, es **una razón para volver mañana**. Con diez episodios diarios por anuncio y 500 gratis repartidos por el catálogo, a esta economía no le falta legibilidad: le falta escasez, y sin escasez la moneda no significa nada y el metajuego no puede mover el regreso.
+
+> **La corrección más grande de este trabajo.** Este párrafo decía que el muro era «una tienda y ninguna otra salida», que las fuentes gratuitas «viven todas en otra pestaña» y que la suscripción no se ofrecía ahí. Las tres cosas son falsas, y la culpa es de la evidencia: lo que yo trataba como captura del producto era `paywall-nativo-1.20.0.jpg`, una **imagen promocional de la ficha de App Store** —con logo, mockup de teléfono y una versión anterior del muro, en dólares y con precios tachados—. No es la app. Las capturas reales están en [`docs/00-dogfooding/evidencia`](docs/00-dogfooding/evidencia/) y el diagnóstico se reescribe sobre ellas.
 
 **Segundo, y más grande: hay una salida más barata que pagar.** El catálogo tiene **500 episodios gratis** repartidos en 50 series — el 22% de sus 2.230 episodios. A 14 por sesión son **36 sesiones sin pagar un peso: casi cuatro meses**.
 
