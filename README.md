@@ -15,8 +15,8 @@
 |---|---|---|
 | **1** | **[Diagnóstico](docs/01-diagnostico/)** | Qué falla hoy, a partir de usar la app y leer los datos. Qué señales pesaron y qué descarté — incluido por qué no construyo sobre el 2.4x de D30. |
 | **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres olas, con hipótesis, métricas, guardrails y criterio de priorización. Y qué no cabe en un trimestre. |
-| **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, ocho decisiones de diseño con su porqué, modelo económico y riesgos técnicos. |
-| **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 11 pantallas en 6 flujos. |
+| **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, ocho decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json). |
+| **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 13 pantallas en 6 flujos. |
 
 **Anexo ·** [Registro de dogfooding](docs/00-dogfooding/) — qué se pudo usar del producto real y qué se verificó ahí.
 
@@ -47,7 +47,7 @@ Un usuario que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, rec
 
 ## La propuesta, en cinco reglas
 
-1. **Un Pase de la Noche cada 24 h.** Abre un episodio gratis. No se acumula. Techo duro por usuario.
+1. **Un Pase de la Noche cada 24 h**, acumulable hasta dos. Abre un episodio gratis. Techo duro por usuario: 7 por semana.
 2. **El usuario elige a qué serie se lo da.** Un recurso que se asigna se entiende; uno que se recibe, no.
 3. **La noche corre de 5 a.m. a 5 a.m.**, no de medianoche a medianoche. 54% de las sesiones son entre 11 p.m. y 2 a.m.
 4. **Un comodín que se consume solo.** Si hay que hacer algo para no perder la racha, la racha ya es una tarea.

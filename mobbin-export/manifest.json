@@ -246,7 +246,7 @@
             "Streak strip"
           ],
           "note": "Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.",
-          "stateKey": "wall-pass-ready",
+          "stateKey": "wall-passes-capped",
           "image": "flows/f4-comodin/03-dos-pases.png"
         }
       ]

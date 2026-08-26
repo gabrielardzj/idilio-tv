@@ -26,8 +26,6 @@ export interface State {
   hasAccount: boolean
   accountAsked: boolean
   toast: string | null
-  /** para el export tipo Mobbin: nombre legible del estado actual */
-  stateName: string
 }
 
 export const initialState = (now: number): State => ({
@@ -46,7 +44,6 @@ export const initialState = (now: number): State => ({
   hasAccount: false,
   accountAsked: false,
   toast: null,
-  stateName: 'player-free',
 })
 
 export type Action =
@@ -88,16 +85,16 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
     }
 
     case 'open':
-      return { ...ctx, sheet: a.sheet, state: { ...s, stateName: sheetName(a.sheet, s) } }
+      return { ...ctx, sheet: a.sheet }
 
     case 'close':
-      return { ...ctx, sheet: { kind: 'none' }, state: { ...s, stateName: 'player-free' } }
+      return { ...ctx, sheet: { kind: 'none' } }
 
     case 'hitWall':
       return {
         ...ctx,
         sheet: { kind: 'unlock' },
-        state: { ...s, episode: a.ep, stateName: sheetName({ kind: 'unlock' }, s) },
+        state: { ...s, episode: a.ep },
       }
 
     case 'claimPass': {
@@ -119,23 +116,21 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
           balance: s.balance + reward.coins,
           seriesId: a.series,
           episode: targetEp,
-          unlocked: { ...s.unlocked, [a.series]: targetEp },
-          stateName: 'unlocked-via-pass',
+          unlocked: { ...s.unlocked, [a.series]: targetEp }
         },
         sheet: { kind: 'unlocked', via: 'pass', ep: targetEp },
       }
     }
 
     case 'unlockWithCoins': {
-      if (s.balance < EPISODE_COST) return { ...ctx, sheet: { kind: 'store' }, state: { ...s, stateName: 'store-insufficient' } }
+      if (s.balance < EPISODE_COST) return { ...ctx, sheet: { kind: 'store' }, state: { ...s } }
       const ep = s.unlocked[s.seriesId] + 1
       return {
         state: {
           ...s,
           balance: s.balance - EPISODE_COST,
           episode: ep,
-          unlocked: { ...s.unlocked, [s.seriesId]: ep },
-          stateName: 'unlocked-via-coins',
+          unlocked: { ...s.unlocked, [s.seriesId]: ep }
         },
         sheet: { kind: 'unlocked', via: 'coins', ep },
       }
@@ -143,7 +138,7 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
 
     case 'buy':
       return {
-        state: { ...s, balance: s.balance + a.coins, toast: `+${a.coins} monedas`, stateName: 'unlock-with-balance' },
+        state: { ...s, balance: s.balance + a.coins, toast: `+${a.coins} monedas` },
         sheet: { kind: 'unlock' },
       }
 
@@ -151,19 +146,19 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       return { ...ctx, state: { ...s, remind: !s.remind, toast: s.remind ? null : 'Te avisamos cuando llegue' } }
 
     case 'createAccount':
-      return { state: { ...s, hasAccount: true, accountAsked: true, toast: 'Racha y monedas guardadas', stateName: 'player-free' }, sheet: { kind: 'none' } }
+      return { state: { ...s, hasAccount: true, accountAsked: true, toast: 'Racha y monedas guardadas' }, sheet: { kind: 'none' } }
 
     case 'dismissAccount':
-      return { state: { ...s, accountAsked: true, stateName: 'player-free' }, sheet: { kind: 'none' } }
+      return { state: { ...s, accountAsked: true }, sheet: { kind: 'none' } }
 
     case 'nextEpisode': {
       const next = s.episode + 1
       if (next > s.unlocked[s.seriesId]) return reduce(ctx, { t: 'hitWall', ep: next })
-      return { ...ctx, sheet: { kind: 'none' }, state: { ...s, episode: next, stateName: 'player-free' } }
+      return { ...ctx, sheet: { kind: 'none' }, state: { ...s, episode: next } }
     }
 
     case 'switchSeries':
-      return { ...ctx, state: { ...s, seriesId: a.series, episode: s.unlocked[a.series], stateName: 'player-free' } }
+      return { ...ctx, state: { ...s, seriesId: a.series, episode: s.unlocked[a.series] } }
 
     case 'devSetState':
       return { ...ctx, state: { ...s, ...a.patch } }
@@ -177,9 +172,9 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
         return { ...ctx, state: { ...s, ...clock, shieldJustUsed: false, streakJustBroke: false } }
       }
       if (s.shields > 0) {
-        return { ...ctx, state: { ...s, ...clock, shields: s.shields - 1, shieldJustUsed: true, streakJustBroke: false, stateName: 'streak-shield-used' } }
+        return { ...ctx, state: { ...s, ...clock, shields: s.shields - 1, shieldJustUsed: true, streakJustBroke: false } }
       }
-      return { ...ctx, state: { ...s, ...clock, nights: 0, shieldJustUsed: false, streakJustBroke: true, stateName: 'streak-broken' } }
+      return { ...ctx, state: { ...s, ...clock, nights: 0, shieldJustUsed: false, streakJustBroke: true } }
     }
 
     case 'toast':
@@ -187,10 +182,13 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
   }
 }
 
-function sheetName(sheet: Sheet, s: State): string {
+/** Nombre legible del estado actual. Derivado, no almacenado: si fuera estado
+ *  se desincronizaría cada vez que el reloj acredita un pase por su cuenta. */
+export function stateName(s: State, sheet: Sheet): string {
   switch (sheet.kind) {
     case 'unlock':
       if (s.streakJustBroke) return 'wall-streak-broken'
+      if (s.passes >= MAX_PASSES) return 'wall-passes-capped'
       if (s.passes > 0) return 'wall-pass-ready'
       if (s.balance >= EPISODE_COST) return 'wall-with-balance'
       return 'wall-pass-spent'

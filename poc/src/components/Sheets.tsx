@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Coin, Pass, Shield, X } from './Icons'
-import { frameStyle, StreakStrip } from './bits'
+import { StreakStrip } from './bits'
+import { frameStyle } from '../lib/frame'
 import { EPISODE_COST, PACKS, STREAK, episodesLabel, pricePerEpisode, toEpisodes } from '../lib/economy'
 import { SERIES, type SeriesId } from '../lib/content'
 import type { State } from '../lib/state'

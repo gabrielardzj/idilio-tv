@@ -1,5 +1,5 @@
 import { Back, Chat, Heart, Logo, Share, Coin } from './Icons'
-import { frameStyle } from './bits'
+import { frameStyle } from '../lib/frame'
 import { episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
 

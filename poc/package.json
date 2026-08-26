@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "export": "node scripts/export-mobbin.mjs"
+    "export": "node scripts/export-mobbin.mjs",
+    "tokens": "node scripts/export-tokens.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

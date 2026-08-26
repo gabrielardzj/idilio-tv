@@ -6,7 +6,7 @@ import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './comp
 import { Coin, Logo } from './components/Icons'
 import { SERIES, type SeriesId } from './lib/content'
 import { EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
-import { initialState, reduce, type Ctx, type State } from './lib/state'
+import { initialState, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
 
 const T0 = 1_756_099_020_000 // reloj fijo a las 00:17: el POC vive en la franja de las 11pm-2am
 
@@ -69,7 +69,7 @@ export default function App() {
 
   return (
     <div className="stage">
-      <main className="phone" data-state={state.stateName} aria-label="Idilio TV — prototipo">
+      <main className="phone" data-state={stateName(state, sheet)} aria-label="Idilio TV — prototipo">
         <div className="statusbar">
           <span>{clock}</span>
           <span className="sb-r">▪▪▪ ⌁ <b style={{ fontSize: 12 }}>38</b></span>
@@ -117,7 +117,7 @@ export default function App() {
         )}
       </main>
 
-      <Director state={state} sheetKind={sheet.kind} dispatch={dispatch} speed={speed} setSpeed={setSpeed} />
+      <Director state={state} sheet={sheet} dispatch={dispatch} speed={speed} setSpeed={setSpeed} />
     </div>
   )
 }
@@ -127,14 +127,15 @@ export default function App() {
    parte del producto, es el andamio para revisar los estados.
    ───────────────────────────────────────────────────────────── */
 function Director({
-  state, sheetKind, dispatch, speed, setSpeed,
+  state, sheet, dispatch, speed, setSpeed,
 }: {
-  state: State; sheetKind: string; dispatch: React.Dispatch<any>
+  state: State; sheet: Sheet; dispatch: React.Dispatch<Action>
   speed: number; setSpeed: (n: number) => void
 }) {
-  const go = (patch: Partial<State>, sheet: any) => {
+  const sheetKind = sheet.kind
+  const go = (patch: Partial<State>, next: Sheet) => {
     dispatch({ t: 'devSetState', patch })
-    dispatch({ t: 'open', sheet })
+    dispatch({ t: 'open', sheet: next })
   }
   const iss = weeklyIssuance(state.nights)
 
@@ -213,7 +214,7 @@ function Director({
           Saldo <code>{state.balance}</code> · {episodesLabel(state.balance)}<br />
           Racha <code>{state.nights}</code> noches · comodines <code>{state.shields}</code><br />
           Pases <code>{state.passes}/{MAX_PASSES}</code> · cuenta <code>{state.hasAccount ? 'sí' : 'invitado'}</code><br />
-          <span style={{ opacity: .7 }}>estado: <code>{state.stateName}</code></span>
+          <span style={{ opacity: .7 }}>estado: <code>{stateName(state, sheet)}</code></span>
         </div>
       </div>
 

@@ -4,6 +4,9 @@
 
 > **Una frase:** el muro de desbloqueo deja de ser el final de la sesión y pasa a ser una cita con hora, en la historia que el usuario ya está viendo.
 
+**En este apartado:** la justificación de la elección · la mecánica · el diagrama de flujo · ocho decisiones de diseño · la revisión crítica del precedente · el modelo económico · los riesgos técnicos.
+**Además:** [el sistema visual](sistema.md) (42 tokens, 7 componentes, y cómo llevarlo a Figma) y [`tokens.json`](tokens.json).
+
 ---
 
 ## 3.1 Por qué esta intervención y no otra
