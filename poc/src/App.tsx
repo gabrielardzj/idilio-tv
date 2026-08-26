@@ -203,6 +203,23 @@ function Director({
         </div>
       </div>
 
+      {/* El brief pide los cuatro entregables en un solo link, y este es el
+          link. Sin esto, quien entra ve el prototipo y nada más: el
+          diagnóstico —35% de la evaluación—, la estrategia y el archivo de
+          diseño existían publicados y no había forma de llegar a ellos desde
+          la puerta de entrada. Va primero a propósito: lo que hay que saber
+          antes de tocar nada es que hay más. */}
+      <div className="grp entregable">
+        <h2>El entregable</h2>
+        <a href="./docs/diagnostico.html"><b>1 · Diagnóstico</b><span>35%</span></a>
+        <a href="./docs/estrategia.html"><b>2 · Estrategia</b><span>con el diagnóstico</span></a>
+        <a href="./docs/intervencion.html"><b>3 · La intervención</b><span>20% craft</span></a>
+        <a href="./docs/poc.html"><b>4 · Este POC, explicado</b><span>25%</span></a>
+        <a href="./docs/diseno.html"><b>Sistema y archivo de diseño</b><span>Figma · Pen</span></a>
+        <a href="./flujos/"><b>Los flujos, pantalla a pantalla</b><span>export</span></a>
+        <a href="./stack/"><b>Sobre el stack real de Idilio</b><span>Next.js</span></a>
+      </div>
+
       <div className="grp">
         <h2>Recorrido</h2>
         <button className={sheetKind === 'none' ? 'on' : ''} onClick={() => { dispatch({ t: 'devSetState', patch: { episode: 12, pantalla: { en: 'player' } } }); dispatch({ t: 'close' }) }}>

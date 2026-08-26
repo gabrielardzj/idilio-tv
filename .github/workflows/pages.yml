@@ -68,6 +68,12 @@ jobs:
           cp -r mobbin-export   _site/flujos
           cp -r web/out         _site/stack
 
+      # El brief pide los cuatro entregables en un link. Esto comprueba que ese
+      # link los alcance de verdad, y que ningún enlace interno del sitio caiga.
+      - name: Verificar que el entregable se pueda recorrer entero
+        run: node scripts/verificar-enlaces.mjs ../_site
+        working-directory: poc
+
       - uses: actions/upload-pages-artifact@v3
         with: { path: _site }
 

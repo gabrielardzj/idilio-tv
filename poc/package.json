@@ -13,7 +13,8 @@
     "verificar": "node --experimental-strip-types scripts/verificar-cifras.mjs",
     "docs": "node scripts/publicar-docs.mjs",
     "recorrer": "node scripts/recorrer.mjs",
-    "acreditacion": "node scripts/acreditacion.mjs"
+    "acreditacion": "node scripts/acreditacion.mjs",
+    "enlaces": "node scripts/verificar-enlaces.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",

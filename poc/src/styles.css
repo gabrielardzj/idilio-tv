@@ -79,6 +79,7 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
     radial-gradient(700px 500px at 100% 100%, #10202B 0%, transparent 55%),
     #05030A;
 }
+@media (max-width: 899px) { .stage { align-content: start; } }
 @media (min-width: 900px) { .stage { padding: 28px; grid-template-columns: auto auto; gap: 28px; align-items: center; } }
 
 .phone {
@@ -377,6 +378,18 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   color: var(--tx-mid); display: none;
 }
 @media (min-width: 900px) { .director { display: block; } }
+
+/* En el teléfono el panel de dirección no tiene sentido —el prototipo se usa,
+   no se dirige— pero los enlaces al resto del entregable sí: sin ellos, quien
+   abre el link desde el móvil ve el prototipo y no se entera de que existen el
+   diagnóstico, la estrategia ni el archivo de diseño. Así que en móvil se
+   muestra el panel, pero solo ese grupo, debajo del teléfono. */
+@media (max-width: 899px) {
+  .director { display: block; width: 100%; max-width: 430px; padding: 26px 20px 40px; }
+  /* La cabecera se queda: en móvil estos enlaces caen debajo del teléfono y sin
+     ella serían una lista sin dueño. Lo que se va es el resto del panel. */
+  .director > .grp:not(.entregable), .director > .note { display: none; }
+}
 .director h3 { font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--tx-lo); margin-bottom: var(--sp-3); font-weight: 700; }
 .director .grp { margin-bottom: var(--sp-5); }
 .director button {
@@ -386,6 +399,21 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 }
 .director button:hover { background: rgba(168,85,247,.14); border-color: rgba(168,85,247,.34); color: var(--tx-hi); }
 .director button.on { background: rgba(168,85,247,.2); border-color: var(--violet); color: var(--tx-hi); }
+/* Los enlaces al resto del entregable. Se parecen a los botones del panel
+   —es el mismo tipo de elemento en el mismo sitio— pero llevan el peso de la
+   evaluación a la derecha, que es lo que le dice al evaluador qué está
+   mirando y cuánto pesa. */
+.director .entregable a {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  padding: 9px 13px; margin-bottom: 6px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.07);
+  font-size: 12.5px; color: var(--tx-mid); text-decoration: none;
+  transition: all .16s var(--ease);
+}
+.director .entregable a:hover { background: rgba(63,224,208,.12); border-color: rgba(63,224,208,.34); color: var(--tx-hi); }
+.director .entregable a b { font-weight: 600; }
+.director .entregable a span { font-size: 10.5px; color: var(--tx-lo); white-space: nowrap; }
+
 .director .note { font-size: 11.5px; line-height: 1.55; color: var(--tx-lo); }
 .director code { font-size: 11px; color: var(--cyan); background: rgba(63,224,208,.08); padding: 1px 5px; border-radius: 4px; }
 
