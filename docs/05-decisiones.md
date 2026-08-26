@@ -119,6 +119,22 @@ primer fallo, se corta.
 
 2. **Cerrar la hoja de cuenta dejaba al usuario dentro de un episodio bloqueado.** Corregido: si el episodio sigue bloqueado, se vuelve al muro.
 
+3. **En iPhone SE, el estado de racha rota empujaba la cita de regreso por debajo del pliegue.**
+   Esto no se ve mirando: se ve **midiendo**. Al instrumentar el `scrollHeight` de la hoja en los
+   ocho estados a 375×667, el estado F daba **679 px** contra 613 disponibles — y lo que quedaba
+   cortado era justamente **el bloque cuya única función es asegurar que el usuario vuelva**, en el
+   único estado donde el usuario acaba de perder su racha. El peor recorte posible, en el peor
+   momento posible.
+
+   *Corrección:* el aviso pasó de ser una tarjeta propia a **ocupar el sitio de la línea de
+   diálogo**. Dos mensajes seguidos competían de todos modos, y ahora los ocho estados miden entre
+   **565 y 585 px** —un rango de 20 px— y ninguno scrollea, ni en 430×932 ni en iPhone SE.
+   La consistencia de altura entre estados es parte del craft, no un detalle técnico.
+
+   *Y una lección de método:* diseñé y revisé todo el muro en 430×932. **El caso duro no estaba en
+   la pantalla que yo miraba.** Si algo hay que llevarse de esto, es que las afirmaciones sobre
+   densidad hay que medirlas en el dispositivo pequeño, no en el bonito.
+
 ---
 
 ## 5.3 Lo que probablemente esté mal en este trabajo

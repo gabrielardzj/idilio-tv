@@ -71,7 +71,19 @@ export function UnlockSheet({
           <Lock s={12} /> Episodio {ep} · bloqueado
         </p>
         <h2 className="sheet-title">{meta.title}</h2>
-        <p className="sheet-lede">{meta.line}</p>
+        {/* En el estado roto el aviso SUSTITUYE a la línea de diálogo en vez de
+            sumarse: dos mensajes seguidos compiten, y así todos los estados del
+            muro miden lo mismo. La consistencia de altura es parte del craft. */}
+        {brokenFrom !== null ? (
+          <p className="sheet-lede broken">
+            <Moon s={13} />
+            <span>
+              <b>Tu racha de {brokenFrom} noches terminó.</b> Esta noche empiezas de nuevo.
+            </span>
+          </p>
+        ) : (
+          <p className="sheet-lede">{meta.line}</p>
+        )}
 
         {/* ── 2 · POSICIÓN ──────────────────────────────────────────────── */}
         <div className="position">
@@ -84,14 +96,6 @@ export function UnlockSheet({
             <i style={{ width: `${((ep - 1 + (spent ? 1 : 0)) / 30) * 100}%` }} />
           </div>
         </div>
-
-        {/* ── Estado F: racha rota. Se informa, no se regaña. ───────────── */}
-        {brokenFrom !== null && (
-          <div className="broken">
-            <h3>Tu racha de {brokenFrom} noches terminó</h3>
-            <p>Pasa. Esta noche empiezas de nuevo — y el capítulo de la casa ya está aquí.</p>
-          </div>
-        )}
 
         {/* ── 3 · ACCIÓN ────────────────────────────────────────────────── */}
         {hasPass ? (

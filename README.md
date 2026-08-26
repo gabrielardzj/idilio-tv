@@ -71,7 +71,7 @@ Las tres decisiones que la sostienen:
 |---|---|---|
 | Reglas de la economía | 22 tests automatizados sobre el motor puro (`poc/src/economy.test.ts`) | **22/22 ✓** |
 | Accesibilidad | axe-core · `wcag2a` `wcag2aa` `wcag21a` `wcag21aa` `best-practice` | **0 violaciones · 23 reglas ✓** |
-| Densidad del sheet | Captura real a 430×932 | los **6 bloques caben sin scroll** |
+| Densidad del sheet | Medición en DOM de los 8 estados, a 430×932 **y a 375×667 (iPhone SE)** | **ningún estado scrollea**; 565–585 px |
 | Tokens de marca | Volcado de custom properties de `www.idilio.tv` en producción | 9 colores + 2 familias tipográficas |
 | Muro real del producto | Uso propio de la web con viewport móvil | eps **1–10 libres, 11–30 bloqueados** |
 | Coherencia de los objetivos | Modelo de sensibilidad reproducible (`docs/modelo/`) | **corrigió la estrategia** |

@@ -148,7 +148,7 @@ Orden vertical, y el orden **es** el argumento:
 | **C** | Pase usado · con saldo suficiente | Usuario con monedas | CTA primario = `Desbloquear por 15 🪙`. Saldo se descuenta con animación. |
 | **D** | Noche 2 | Vuelve al día siguiente | Contador ●●○○○○○, `2 de 2` pases, copy *"y mañana son 3"*. |
 | **E** | Noche 3 — hito | Tercera noche | 3 pases + 🛡️ escudo + **prompt de cuenta**. Celebración contenida. |
-| **F** | Racha rota | >1 noche sin ver, sin escudo | *"Tu racha de 5 noches terminó."* Reencuadre a `Noche 1`, sin culpa. |
+| **F** | Racha rota | >1 noche sin ver, sin escudo | *"Tu racha de 5 noches terminó."* El aviso **ocupa el sitio de la línea de diálogo**, no uno propio: el fallo no puede pesar más que la recuperación, y así todos los estados miden lo mismo. Reencuadre a `Noche 1`, sin culpa. |
 | **G** | Escudo consumido | Falta 1 noche, con escudo | *"Usamos tu escudo. Sigues en 5 noches."* Informativo, no interruptivo. |
 | **H** | Con cuenta | Post-registro | Desaparece el prompt; aparece la racha respaldada. |
 | **I** | Confirmación en reproductor | Termina 1er episodio de la noche | **Toast, no modal.** `Noche 2 🔥 · 2 capítulos listos`. 2,5s, no bloquea. |

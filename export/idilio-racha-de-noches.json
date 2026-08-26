@@ -57,9 +57,15 @@
         "result": "0 violaciones · 23 reglas aprobadas",
         "notas": [
           "El gradiente del CTA se corta en #9b2fe0 y no llega al magenta de marca: blanco sobre #d25af0 da 3,25:1 y no pasa AA. Sobre #9b2fe0 da 5,42:1.",
-          "El token de texto tenue subió de 0.38 a 0.52 de alfa: 0.38 daba 3,3:1 sobre --home-surface-2.",
+          "El token de texto tenue subió de 0.38 a 0.52 de alfa: 0.38 daba 3,20:1 sobre --home-surface-2, por debajo del 4,5:1 de AA; 0.52 da 4,97:1.",
           "Se quitó maximum-scale=1 del viewport para no bloquear el zoom."
-        ]
+        ],
+        "verificacion": "Los ratios están calculados con docs/modelo/contraste.mjs (fórmula WCAG 2.x sobre sRGB linearizado), no estimados."
+      },
+      "densidad": {
+        "medicion": "scrollHeight de la hoja en los 8 estados, medido en el DOM",
+        "resultado": "565–585 px · ningún estado scrollea en 430×932 ni en 375×667 (iPhone SE)",
+        "nota": "El estado F medía 679 px en la primera versión y en iPhone SE empujaba la cita de regreso por debajo del pliegue — justo el bloque que ese estado más necesita. Se detectó midiendo, no mirando."
       }
     }
   },
@@ -271,11 +277,12 @@
         "no-blame-copy"
       ],
       "elements": [
-        "tarjeta tu racha de 5 noches terminó",
-        "toast empezamos otra vez",
-        "CTA Ver gratis ya disponible"
+        "aviso en el sitio de la línea de diálogo",
+        "toast «empezamos otra vez»",
+        "CTA Ver gratis ya disponible",
+        "lunas reiniciadas"
       ],
-      "decision": "El modo de fallo documentado de las rachas es el abstinence violation effect: al romperse, el usuario abandona. Por eso el copy no regaña y el capítulo gratis ya está ahí, en la misma pantalla."
+      "decision": "El modo de fallo documentado de las rachas es el abstinence violation effect: al romperse, el usuario no reintenta, abandona. Por eso el copy no regaña y el capítulo gratis ya está ahí. El aviso ocupa el sitio de la línea de diálogo en vez de sumar un bloque propio: dos mensajes seguidos compiten, y así este estado mide lo mismo que los demás (585 px frente a 565–584)."
     },
     {
       "id": "09",
@@ -360,6 +367,27 @@
     "spend-receipt": "Un «−15» que sube y se desvanece sobre el saldo. Es el recibo: hace visible el gasto que el contador por sí solo esconde.",
     "optimistic-counter": "El saldo se interpola hacia el valor nuevo en ~620 ms en vez de saltar. El usuario ve bajar su dinero.",
     "confirm-in-place": "El CTA se convierte en confirmación (✓) durante ~880 ms antes de cerrar, en vez de desaparecer al instante.",
-    "hud-mute-on-sheet": "Con el sheet abierto, los chips de economía del HUD se apagan: la economía ya está completa abajo y duplicarla arriba genera ruido y desincronización durante la animación."
+    "hud-mute-on-sheet": "Con el sheet abierto, los chips de economía del HUD se apagan: la economía ya está completa abajo y duplicarla arriba genera ruido y desincronización durante la animación.",
+    "vertical-video-player": "Reproductor a pantalla completa 9:16 con controles mínimos: pausa por tap, barra de progreso de 2,5 px al borde inferior y sin cronómetro. En microdrama el episodio dura 60–90 s: mostrar el tiempo restante invita a calcular en vez de a seguir.",
+    "burned-in-subtitle": "Línea de diálogo quemada sobre el vídeo, centrada, display bold con sombra dura. Es la convención del formato y resuelve un caso observado en el producto real: el reproductor de idilio.tv arranca en mute (hay un botón «Activar sonido»), así que el primer contacto con la escena es solo visual.",
+    "action-rail": "Columna vertical de acciones (me gusta / comentarios / compartir) en el borde derecho, al alcance del pulgar. Nunca se solapa con el subtítulo quemado ni con los metadatos.",
+    "swipe-navigation": "Deslizar arriba/abajo cambia de episodio. Es el gesto que el usuario ya trae aprendido de TikTok; cualquier botón de «siguiente» compite con él en vez de reemplazarlo.",
+    "economy-chip": "Píldora de 28 px con icono y cifra en el HUD superior, fondo translúcido y sin relleno sólido. Techo estricto: como máximo dos, y nunca sobre la cara del actor.",
+    "streak-confirmation": "Acuse de recibo de que la noche se acreditó, entregado sin pedir nada a cambio. La acreditación ya ocurrió: esto solo la hace visible.",
+    "progress-position": "Barra de 5 px con «vas N de M» y capítulos restantes. Responde «¿dónde estoy?» antes de que la pantalla pregunte «¿cuánto pagas?».",
+    "purchase-cta": "CTA de compra que nombra el precio exacto en el propio botón («Desbloquear por 15»), no un genérico «Desbloquear». El usuario tiene que poder hacer la resta antes de tocar.",
+    "escalating-reward": "La recompensa crece con la constancia (1→2→3). Duplicar es la progresión más legible que existe y no necesita explicación.",
+    "milestone-reward": "Salto de recompensa en la noche donde el dato dice que el producto más gana (aquí la 3, con el 2,4× de D30). Se premia donde el negocio gana, no donde queda bonito.",
+    "streak-freeze-badge": "Insignia de escudo disponible, en cian para no confundirse con moneda ganada (marca) ni comprada (ámbar).",
+    "streak-freeze-consumed": "El escudo se gasta solo, sin diálogo de confirmación. Cada pregunta al usuario sobre su racha es una oportunidad de que piense en abandonarla.",
+    "post-hoc-notification": "Se informa de lo que ya pasó, no se pide permiso para que pase. Aplica a todo lo que el sistema puede decidir sin ambigüedad.",
+    "streak-reset": "Al romperse la racha: se informa, no se regaña, y la recompensa de la noche nueva ya está visible en la misma pantalla. El modo de fallo documentado de las rachas es que al romperse el usuario abandona.",
+    "cycle-completion": "Cierre del ciclo de 7 con la recompensa máxima y reposición del escudo. El contador de noches no se reinicia; lo que se repite es el ciclo.",
+    "max-faucet": "Techo explícito de la fuente gratuita, calibrado contra el apetito observado de la sesión. Aquí 5 episodios frente a 14: queda de pago el 64% del apetito.",
+    "wallet-row": "Fila compacta con saldo, unidad y precio unitario en la misma línea, más un acceso a recargar. El precio vive junto al saldo, nunca suelto.",
+    "oauth-stack": "Proveedores de acceso apilados verticalmente y con el mismo peso visual, sin uno destacado. Destacar uno adivina el ecosistema del usuario y penaliza al resto.",
+    "dismissible": "Toda hoja que pide algo se puede cerrar sin coste y sin repetirse. Si la mecánica necesita insistir, la mecánica está mal puesta.",
+    "iap-packs": "Tres paquetes, uno marcado como mejor valor. Tres es el mínimo para que exista un punto medio y el máximo antes de que la elección pese.",
+    "best-value-tag": "Etiqueta que ancla la comparación entre paquetes. Su trabajo es dar un punto de referencia, no presionar: sin un ancla, tres precios sueltos obligan al usuario a construir la comparación él mismo. Qué paquete la lleva es una decisión de negocio, no de diseño."
   }
 }
