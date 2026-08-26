@@ -404,3 +404,13 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 
 .pack.intro { border-style: dashed; border-color: rgba(255,197,61,.34); }
 .pack.intro .pack-tag { background: linear-gradient(90deg, var(--gold-400), var(--gold-500)); color: #2A1A02; }
+
+.director h2 { font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--tx-lo); margin-bottom: var(--sp-3); font-weight: 700; }
+
+/* Racha rota: un aviso, no un castigo. Sin rojo, sin alarma. */
+.broke {
+  padding: 12px 14px; border-radius: var(--r-sm); margin-bottom: var(--sp-3);
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+}
+.broke p { font-size: 12.5px; color: var(--tx-mid); line-height: 1.5; }
+.broke p b { color: var(--tx-hi); font-weight: 700; }

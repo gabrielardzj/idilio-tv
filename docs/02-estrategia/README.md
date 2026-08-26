@@ -82,13 +82,13 @@ El link compartido de idilio.tv abre la app **en ese episodio de esa serie**, no
 
 Tres cambios acoplados:
 
-1. **Pase de la Noche.** Un desbloqueo gratis cada 24 h. *El usuario elige a qué serie se lo da.* Se reclama dentro del muro.
+1. **Pase de la Noche.** Un desbloqueo gratis cada 24 h, acumulable hasta dos. *El usuario elige a qué serie se lo da.* Se reclama dentro del muro.
 2. **La unidad es la noche, no el día.** La ventana corre de 5 a.m. a 5 a.m. Ver a las 00:30 y a las 23:30 del mismo martes cuenta como dos noches, no como una.
 3. **Comodín.** Al llegar a la noche 3 se gana un escudo que se consume solo cuando se pierde una noche. Uno por semana.
 
 | | |
 |---|---|
-| **Hipótesis** | El muro es hoy un final. Convertido en una cita con hora — *"tu próximo episodio se abre en 6 h 12 m"* — deja de ser el final de la relación y pasa a ser el motivo del próximo regreso. Y como la unidad es la noche y hay comodín, un usuario de 2.3 días/semana puede sostener una racha sin cambiar de conducta. |
+| **Hipótesis** | El muro es hoy un final. Convertido en una cita con hora — *"tu próximo episodio se abre hoy a las 18:05"* — deja de ser el final de la relación y pasa a ser el motivo del próximo regreso. Y como la unidad es la noche, los pases se acumulan hasta dos y hay comodín, un usuario de 2.3 días/semana puede sostener una racha sin cambiar de conducta. |
 | **Mueve** | **DAU/MAU** (objetivo primario). Racha de 3+: 6% → objetivo 20%. Reclamo diario: 19% → 55%+. |
 | **Cómo lo sé** | *Leading (semana 1):* % de muros que terminan en pase reclamado en vez de cierre. *Leading (semana 2):* % que vuelve dentro de las 36 h de haber usado el pase. *Lagging (semana 4):* DAU/MAU de la celda tratada vs. holdout. *Guardrail:* ARPDAU. **Criterio de kill:** si ARPDAU cae >8% relativo sostenido 2 semanas, se revierte. |
 | **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). |
@@ -177,5 +177,5 @@ I8                                ██████
 | Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo. |
 | Rankings, tablas, comparación social | 11 p.m.–2 a.m., consumo solitario, vertical con pudor, 88% sin identidad. No es motivación, es exposición. |
 | Insignias y coleccionables como apuesta principal | Vínculo indirecto con DAU/MAU, carga cognitiva alta, sin evidencia de motivación de coleccionista. Candidatos a capa posterior. |
-| Anuncios recompensados como fuente | Es la fuente obvia y probablemente entre en algún momento, pero cambia la naturaleza del producto (de premium-corto a ad-supported) y ese es un llamado de negocio, no de diseño. Lo señalo, no lo decido. |
+| Anuncios recompensados como fuente | Es la fuente obvia y ya es estándar de la categoría: DramaBox permite hasta 15 anuncios diarios, unos 6 episodios gratis por día, y ReelShort también los ofrece. Pero cambia la naturaleza del producto (de corto-premium a ad-supported) y ese es un llamado de negocio, no de diseño. Lo señalo, no lo decido. |
 | Suscripción como respuesta al muro | Ya existe en el producto. Es una respuesta de monetización a un problema de retención. No mueve DAU/MAU del no-pagador, que es el 95%+ de la base. |

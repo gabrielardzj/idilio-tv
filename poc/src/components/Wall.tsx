@@ -1,6 +1,6 @@
 import { Bell, Coin, Lock, Pass, X } from './Icons'
 import { NextPass, StreakStrip } from './bits'
-import { EPISODE_COST, episodesLabel } from '../lib/economy'
+import { EPISODE_COST, MAX_PASSES, episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
 import type { State } from '../lib/state'
 
@@ -26,6 +26,7 @@ export function Wall({
   const ep = state.unlocked[series.id] + 1
   const prev = series.episodes[state.unlocked[series.id]]
   const canPayNow = state.balance >= EPISODE_COST
+  const atCap = state.passes >= MAX_PASSES
   const missing = EPISODE_COST - state.balance
   const pct = Math.round((state.unlocked[series.id] / series.total) * 100)
 
@@ -51,12 +52,20 @@ export function Wall({
       </div>
 
       {/* 3 · la decisión */}
-      {state.passReady ? (
+      {state.passes > 0 ? (
         <div className="pass">
-          <div className="pass-h"><Pass s={26} /><b>Tu Pase de la Noche está listo</b></div>
-          <p>Abre un episodio gratis. Tú eliges de cuál serie — tienes uno por noche.</p>
+          <div className="pass-h">
+            <Pass s={26} />
+            <b>{state.passes === 1 ? 'Tu Pase de la Noche está listo' : `Tienes ${state.passes} Pases de la Noche`}</b>
+          </div>
+          <p>
+            Abre un episodio gratis. Tú eliges de cuál serie.{' '}
+            {atCap
+              ? 'Estás en el tope: el próximo pase empieza a acumularse cuando uses uno.'
+              : 'Llega uno cada noche y se guardan hasta dos.'}
+          </p>
           <button className="btn btn-gold" onClick={onClaim}>
-            <Pass s={20} /> Usar el pase en este episodio
+            <Pass s={20} /> Usar {state.passes > 1 ? 'un pase' : 'el pase'} en este episodio
           </button>
         </div>
       ) : (
@@ -87,7 +96,7 @@ export function Wall({
               Te quedan <b style={{ color: 'var(--gold-300)' }}>{state.balance}</b> monedas · {episodesLabel(state.balance)}
             </p>
           </>
-        ) : state.passReady ? (
+        ) : state.passes > 0 ? (
           <button className="btn btn-text" onClick={onStore}>o consigue monedas para no esperar</button>
         ) : (
           <>
@@ -103,6 +112,11 @@ export function Wall({
 
       {/* 4 · la racha, como consecuencia */}
       <div className="sect-label">Tu racha</div>
+      {state.streakJustBroke && (
+        <div className="broke">
+          <p><b>Se cortó tu racha.</b> Pasó una noche sin que volvieras y ya no te quedaba comodín. Empieza de nuevo: en la noche 3 vuelves a ganar uno.</p>
+        </div>
+      )}
       <StreakStrip
         nights={state.nights} shields={state.shields}
         shieldJustUsed={state.shieldJustUsed} justAdvanced={justAdvanced}

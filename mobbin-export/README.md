@@ -1,7 +1,7 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-11 pantallas · 6 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+13 pantallas · 6 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
@@ -53,15 +53,21 @@ La tienda deja de vender monedas y pasa a vender episodios.
 
 **Tienda · el precio en episodios** — Jerarquía invertida: EPISODIOS grande, monedas como subtítulo, precio a la derecha. Y la escalera sube de verdad — hoy $1.99 y $3.99 rinden casi lo mismo por dólar.
 
-## Flujo 4 · Faltar una noche · el comodín
+## Flujo 4 · Faltar noches · el perdón del sistema
 
-Un usuario de 2.3 días por semana no puede sostener una racha de 7 de 7. El comodín absorbe la falta sin pedirle nada.
+Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.
 
 | # | Pantalla | Tipo | Patrones |
 |---|---|---|---|
 | 1 | [El comodín te cubrió](flows/f4-comodin/01-comodin-usado.png) | Paywall | Streak protection, Forgiveness mechanic |
+| 2 | [Se cortó la racha](flows/f4-comodin/02-racha-rota.png) | Paywall | Streak reset, Non-punitive feedback |
+| 3 | [Dos pases acumulados · el tope](flows/f4-comodin/03-dos-pases.png) | Paywall | Resource cap, Anti-FOMO |
 
 **El comodín te cubrió** — Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.
+
+**Se cortó la racha** — Sin rojo, sin alarma, sin oferta para "recuperar tu racha" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.
+
+**Dos pases acumulados · el tope** — Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.
 
 ## Flujo 5 · Guardar la racha · de invitado a cuenta
 
@@ -87,6 +93,6 @@ Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posici�
 
 **Tipos de pantalla:** Account / Wallet · Confirmation · Media player · Paywall · Selection · Sign up · Store
 
-**Patrones:** Appointment · Balance spend · Bottom sheet · Cliffhanger · Contextual auth · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Progress indicator · Reward claim · Reward reveal · Scarcity · Single select · Source-sink model · Streak · Streak advance · Streak protection · Unit-of-value translation · Value ladder · Vertical video
+**Patrones:** Anti-FOMO · Appointment · Balance spend · Bottom sheet · Cliffhanger · Contextual auth · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Progress indicator · Resource cap · Reward claim · Reward reveal · Scarcity · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Unit-of-value translation · Value ladder · Vertical video
 
-**Elementos:** Action rail · Anchor price · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Countdown timer · Fine print · Headline · Medal · Pack list · Price · Primary button · Progress bar · Progress label · Radio list · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Top bar · Total row · Video · Wallet chip
+**Elementos:** Action rail · Anchor price · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Countdown timer · Fine print · Headline · Medal · Notice · Pack list · Price · Primary button · Progress bar · Progress label · Radio list · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Text button · Thumbnail · Top bar · Total row · Video · Wallet chip

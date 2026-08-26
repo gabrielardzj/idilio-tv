@@ -5,7 +5,7 @@ import { Wall } from './components/Wall'
 import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './components/Sheets'
 import { Coin, Logo } from './components/Icons'
 import { SERIES, type SeriesId } from './lib/content'
-import { EPISODE_COST, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
+import { EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
 import { initialState, reduce, type Ctx, type State } from './lib/state'
 
 const T0 = 1_756_099_020_000 // reloj fijo a las 00:17: el POC vive en la franja de las 11pm-2am
@@ -69,7 +69,7 @@ export default function App() {
 
   return (
     <div className="stage">
-      <div className="phone" data-state={state.stateName}>
+      <main className="phone" data-state={state.stateName} aria-label="Idilio TV — prototipo">
         <div className="statusbar">
           <span>{clock}</span>
           <span className="sb-r">▪▪▪ ⌁ <b style={{ fontSize: 12 }}>38</b></span>
@@ -115,7 +115,7 @@ export default function App() {
             {sheet.kind === 'streak' && <StreakSheet state={state} onClose={() => dispatch({ t: 'close' })} />}
           </>
         )}
-      </div>
+      </main>
 
       <Director state={state} sheetKind={sheet.kind} dispatch={dispatch} speed={speed} setSpeed={setSpeed} />
     </div>
@@ -139,7 +139,7 @@ function Director({
   const iss = weeklyIssuance(state.nights)
 
   return (
-    <aside className="director">
+    <aside className="director" aria-label="Panel de recorrido del prototipo">
       <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 20 }}>
         <Logo s={20} />
         <div>
@@ -149,28 +149,32 @@ function Director({
       </div>
 
       <div className="grp">
-        <h3>Recorrido</h3>
+        <h2>Recorrido</h2>
         <button className={sheetKind === 'none' ? 'on' : ''} onClick={() => { dispatch({ t: 'devSetState', patch: { episode: 12 } }); dispatch({ t: 'close' }) }}>
           1 · Episodio gratis (ep. 12)
         </button>
-        <button className={sheetKind === 'unlock' && state.passReady ? 'on' : ''}
-          onClick={() => go({ passReady: true, balance: 0, nights: 2, shields: 0, shieldJustUsed: false }, { kind: 'unlock' })}>
-          2 · El muro · pase disponible
+        <button className={sheetKind === 'unlock' && state.passes === 1 ? 'on' : ''}
+          onClick={() => go({ passes: 1, passNextAt: state.now + PASS_COOLDOWN_MS, balance: 0, nights: 2, shields: 0, shieldJustUsed: false, streakJustBroke: false }, { kind: 'unlock' })}>
+          2 · El muro · un pase disponible
+        </button>
+        <button className={sheetKind === 'unlock' && state.passes === 2 ? 'on' : ''}
+          onClick={() => go({ passes: MAX_PASSES, passNextAt: null, balance: 0, nights: 2, shields: 0, shieldJustUsed: false, streakJustBroke: false }, { kind: 'unlock' })}>
+          2b · El muro · dos pases acumulados (tope)
         </button>
         <button className={sheetKind === 'pass-choice' ? 'on' : ''}
-          onClick={() => go({ passReady: true }, { kind: 'pass-choice' })}>
+          onClick={() => go({ passes: Math.max(1, state.passes) }, { kind: 'pass-choice' })}>
           3 · ¿A cuál serie le doy el pase?
         </button>
         <button className={sheetKind === 'unlocked' ? 'on' : ''}
-          onClick={() => go({ passReady: true, nights: 2, balance: 0 }, { kind: 'unlock' })}>
+          onClick={() => go({ passes: 1, nights: 2, balance: 0, streakJustBroke: false }, { kind: 'unlock' })}>
           4 · Desbloqueo + racha (usa el botón dorado)
         </button>
-        <button className={sheetKind === 'unlock' && !state.passReady && state.balance < EPISODE_COST ? 'on' : ''}
-          onClick={() => go({ passReady: false, passNextAt: state.now + 17 * 3600_000 + 2_880_000, balance: 0, nights: 3, remind: false }, { kind: 'unlock' })}>
+        <button className={sheetKind === 'unlock' && state.passes === 0 && state.balance < EPISODE_COST && !state.streakJustBroke ? 'on' : ''}
+          onClick={() => go({ passes: 0, passNextAt: state.now + 17 * 3600_000 + 2_880_000, balance: 0, nights: 3, remind: false, streakJustBroke: false }, { kind: 'unlock' })}>
           5 · El muro · pase gastado (la cita)
         </button>
         <button className={sheetKind === 'unlock' && state.balance >= EPISODE_COST ? 'on' : ''}
-          onClick={() => go({ passReady: false, passNextAt: state.now + 17 * 3600_000, balance: 45, nights: 3 }, { kind: 'unlock' })}>
+          onClick={() => go({ passes: 0, passNextAt: state.now + 17 * 3600_000, balance: 45, nights: 3, streakJustBroke: false }, { kind: 'unlock' })}>
           6 · El muro · con saldo
         </button>
         <button className={sheetKind === 'store' ? 'on' : ''} onClick={() => go({ balance: 0 }, { kind: 'store' })}>
@@ -184,10 +188,14 @@ function Director({
           onClick={() => go({ nights: 5, balance: 90, shields: 1 }, { kind: 'streak' })}>
           9 · Mi economía (desde el saldo)
         </button>
+        <button className={state.streakJustBroke ? 'on' : ''}
+          onClick={() => go({ nights: 0, shields: 0, shieldJustUsed: false, streakJustBroke: true, passes: 1, balance: 0 }, { kind: 'unlock' })}>
+          10 · Racha rota (sin comodín)
+        </button>
       </div>
 
       <div className="grp">
-        <h3>Pasar el tiempo</h3>
+        <h2>Pasar el tiempo</h2>
         <button onClick={() => dispatch({ t: 'devNextNight', attended: true })}>
           Es mañana y volví → pase listo
         </button>
@@ -200,17 +208,17 @@ function Director({
       </div>
 
       <div className="grp">
-        <h3>Estado</h3>
+        <h2>Estado</h2>
         <div className="note" style={{ lineHeight: 1.75 }}>
           Saldo <code>{state.balance}</code> · {episodesLabel(state.balance)}<br />
           Racha <code>{state.nights}</code> noches · comodines <code>{state.shields}</code><br />
-          Pase <code>{state.passReady ? 'listo' : 'gastado'}</code> · cuenta <code>{state.hasAccount ? 'sí' : 'invitado'}</code><br />
+          Pases <code>{state.passes}/{MAX_PASSES}</code> · cuenta <code>{state.hasAccount ? 'sí' : 'invitado'}</code><br />
           <span style={{ opacity: .7 }}>estado: <code>{state.stateName}</code></span>
         </div>
       </div>
 
       <div className="grp">
-        <h3>Emisión de esta semana</h3>
+        <h2>Emisión de esta semana</h2>
         <div className="note" style={{ lineHeight: 1.75 }}>
           {iss.passes} pases + {iss.coins} monedas de bono<br />
           = <code>{iss.episodeValue} episodios</code> gratis<br />

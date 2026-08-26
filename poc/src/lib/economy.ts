@@ -55,6 +55,23 @@ export const PASS_COOLDOWN_MS = 24 * 60 * 60 * 1000
 /** PROPUESTA · máximo de comodines acumulables */
 export const MAX_SHIELDS = 1
 
+/** PROPUESTA · los pases se acumulan hasta 2, y ahí se detiene la acumulación.
+ *
+ *  Esta constante es la respuesta a la crítica más seria que se le puede hacer
+ *  a la mecánica. El Daily Pass de Webtoon (2020-2025, retirado) funcionaba con
+ *  "úsalo o piérdelo" y la queja dominante de sus lectores fue que convertía la
+ *  lectura en una tarea diaria. Un pase que se pierde es una obligación disfrazada
+ *  de regalo.
+ *
+ *  Con tope 2: faltar una noche no se siente como pérdida (el pase sigue ahí),
+ *  pero volver seguido sigue siendo estrictamente mejor — quien entra 2 noches
+ *  por semana recolecta 4 pases; quien entra 4 o más recolecta los 7 que emite
+ *  el sistema. El gradiente de incentivo se conserva; el castigo, no.
+ *
+ *  Si el tope fuera 7, acumular la semana entera y entrar un solo día daría lo
+ *  mismo que entrar todos los días, y la mecánica dejaría de mover DAU/MAU. */
+export const MAX_PASSES = 2
+
 // ─────────────────────────────────────────────────────────────
 // Traducción: la moneda siempre habla en episodios (I1)
 // ─────────────────────────────────────────────────────────────
@@ -77,10 +94,13 @@ export const pricePerEpisode = (coins: number, usd: number) =>
 export function weeklyIssuance(nightsAttended: number) {
   const nights = Math.min(nightsAttended, 7)
   const coins = STREAK.slice(0, nights).reduce((a, n) => a + n.coins, 0)
+  // Con acumulación hasta MAX_PASSES, quien entra N noches recolecta hasta
+  // N × MAX_PASSES pases — siempre limitado por la emisión de 1 cada 24 h.
+  const passes = Math.min(nights * MAX_PASSES, 7)
   return {
-    passes: nights,
+    passes,
     coins,
-    episodeValue: nights + toEpisodes(coins),
-    coinValue: nights * EPISODE_COST + coins,
+    episodeValue: passes + toEpisodes(coins),
+    coinValue: passes * EPISODE_COST + coins,
   }
 }

@@ -28,8 +28,10 @@ Sin cuenta, sin onboarding, sin perfil. El estado vive en el dispositivo y se of
 
 ## 3.2 La mecánica en cinco reglas
 
-**R1 · Un Pase de la Noche cada 24 horas.**
-Abre un episodio, cualquiera, gratis. No se acumula: el que no se usa se pierde. El techo es duro y por usuario, no por serie — la emisión máxima del sistema es 1 episodio gratis por noche por persona.
+**R1 · Un Pase de la Noche cada 24 horas, y se guardan hasta dos.**
+Abre un episodio, cualquiera, gratis. El techo de emisión es duro y por usuario, no por serie: 1 pase cada 24 h, máximo 7 por semana.
+
+El tope de acumulación en **2** es una decisión importante y la explico aparte en §3.4bis, porque salió de revisar críticamente el precedente más citado de esta mecánica.
 
 **R2 · El usuario elige a qué serie se lo da.**
 Con dos o más series empezadas, usar el pase abre una elección. Esta regla parece un detalle y es el centro pedagógico de todo: obliga a razonar sobre un recurso escaso. Un recurso que se asigna se entiende; uno que se recibe, no.
@@ -190,8 +192,62 @@ Solo correo. Sin contraseña, sin perfil, sin foto. Todo lo que se pida de más 
 | Tab de "Recompensas" rediseñado | Es exactamente el error que estamos corrigiendo: mover el metajuego a un destino. |
 | Barra de progreso semanal en el player | El player debe seguir siendo video. El único elemento de meta permitido ahí es el chip de saldo. |
 | Racha visible en el home | El usuario nocturno entra y toca "seguir viendo". Una racha en el home la ve tarde o no la ve. |
-| Anuncio recompensado para ganar un pase extra | Rompería el techo duro de 1 pase / 24 h, que es lo que hace sostenible la economía. Además cambia la naturaleza del producto. Se puede probar después, con el guardrail de ARPDAU vigilando. |
+| Anuncio recompensado para ganar un pase extra | Rompería el techo duro de 1 pase / 24 h, que es lo que hace sostenible la economía. Es, además, la fuente que ya usan ReelShort y DramaBox — DramaBox hasta 15 anuncios diarios ≈ 6 episodios gratis por día. Que la categoría lo haga es argumento para probarlo, no para meterlo en esta intervención: cambia la naturaleza del producto y es una decisión de negocio. Lo señalo, no lo decido. |
 | Compartir la racha | 88% invitados, consumo solitario y nocturno, contenido con carga de pudor. No hay a quién mostrarle. |
+
+---
+
+## 3.4bis · El precedente, revisado en contra
+
+Cuando escribí la primera versión de este documento apoyé la mecánica en el **Daily Pass de Webtoon**, la referencia canónica de "esperar o pagar" en contenido serializado. Fui a verificarlo y encontré que **el precedente falló**. Vale la pena dejar el error a la vista, porque corregirlo cambió el diseño.
+
+### Qué pasó realmente
+
+| | |
+|---|---|
+| **2020** | Webtoon lanza Daily Pass: 1 episodio gratis por día de series **ya terminadas**, con acceso de 14 días. |
+| **2022** | Se extiende a algunos títulos en emisión. |
+| **Mayo 2025** | Webtoon **retira** Daily Pass sin explicación detallada. Lo reemplaza con Ad Pass (ver anuncio para desbloquear, expira a los 3 días) y compra con monedas. |
+
+La queja dominante de los lectores durante los cinco años de vida de la mecánica —hubo hasta una petición pública para eliminarla— fue siempre la misma: **convertía la lectura en una tarea diaria**. "La gracia del webtoon es maratonearlo; si no puedo, me voy a otro lado."
+
+*(Nota de rigor: la MAU global de Webtoon cayó 7.1% en 2025. **No** atribuyo esa caída al retiro del Daily Pass — el retiro fue en mayo y la caída es del año completo. Sería exactamente el mismo error de causalidad que le señalo al 2.4x de D30.)*
+
+### Por qué la crítica no aplica igual aquí — y en qué sí aplica
+
+**Dónde no aplica.** El Daily Pass de Webtoon era **restrictivo**: tomaba contenido que el lector podía consumir de corrido y lo racionaba a uno por día. La mecánica *era* el techo de consumo, y por eso se sentía como un peaje.
+
+El Pase de la Noche es **aditivo**. El muro de Idilio ya existe: 12 gratis y 15 monedas por episodio a partir de ahí. El pase no le quita nada a nadie — agrega un desbloqueo gratis encima de un paywall que no cambia. **No puede convertir el maratón en tarea porque no es el pase el que corta el maratón: eso ya lo hace el precio.** La comparación correcta no es "pase contra maratón libre", es "pase contra pantalla sin salida".
+
+**Dónde sí aplica, y qué cambié por eso.** El mecanismo psicológico que hundió al Daily Pass no era solo la restricción: era el **"úsalo o piérdelo"**. Un recurso que caduca cada 24 h no se siente como un regalo, se siente como un turno que hay que ir a marcar. Mi primera versión tenía exactamente eso: *"no se acumula, el que no se usa se pierde"*.
+
+Es la misma trampa que ya identifiqué en el diagnóstico con la racha diaria, y la había vuelto a poner en la mecánica sin darme cuenta.
+
+**El arreglo: los pases se guardan hasta dos.**
+
+| | Tope 1 (úsalo o piérdelo) | Tope 7 (acumulación libre) | **Tope 2** |
+|---|---|---|---|
+| Faltar una noche | Cuesta un episodio | No cuesta nada | **No cuesta nada** |
+| Volver seguido rinde más | Sí | **No** — da igual entrar 1 vez que 7 | **Sí** — 2 noches → 4 eps; 4+ noches → 7 |
+| Se siente como | Turno que marcar | Buzón que vaciar | Algo que te espera |
+
+El tope 2 es el único punto donde el castigo desaparece y el gradiente de incentivo sobrevive. Y encaja con el comodín: **el sistema perdona exactamente una falta, en las dos dimensiones.**
+
+### Dónde el precedente sí sostiene la apuesta
+
+La categoría directa —no cómics, microdramas— ya validó que la fuente gratuita recurrente convive con la monetización. Según fuentes secundarias del sector (**a verificar contra datos propios antes de usarlas para calibrar**):
+
+| | ReelShort | DramaBox | **Idilio (hoy)** | **Idilio (propuesta)** |
+|---|---|---|---|---|
+| Check-in diario | ~10 monedas | Sí, y **la racha se rompe al faltar** | Sí, lo reclama el 19% | Pase de la Noche, en el muro |
+| Anuncios recompensados | Sí | Hasta 15/día ≈ **6 episodios diarios** | No | No (fuera de alcance) |
+| Costo de una serie | $37–47 (80 eps) | — | **~$7.29** (56 eps) | igual |
+
+Dos lecturas que salen de ahí:
+
+1. **Lo que propongo es conservador para la categoría.** 4 episodios gratis por semana para el usuario mediano, contra los ~6 *diarios* que DramaBox regala por ver anuncios. El riesgo de vaciar la economía es bajo en términos relativos al mercado.
+2. **DramaBox rompe la racha al faltar un día, igual que Idilio.** Es el estándar de la categoría, y es el estándar que este diseño decide no seguir. Que todos lo hagan no lo vuelve correcto para una base que entra 2.3 días por semana.
+3. **Idilio es ~5 veces más barato por serie que los líderes.** Si el dato se confirma con cifras propias, el margen para regalar episodios es menor de lo que sugiere la comparación bruta — cada episodio regalado pesa más sobre un ARPU más bajo. Es un argumento para mantener el tope en 2 y no subirlo.
 
 ---
 
@@ -203,14 +259,18 @@ La restricción del brief es explícita: *«cualquier fuente nueva de moneda deb
 
 **Segundo: el techo es duro y es por usuario.**
 
-| Noches que asiste | Pases | Bonos | Episodios gratis / semana | Monedas emitidas |
+| Noches que entra | Pases recolectados | Bonos | Episodios gratis / semana | Monedas emitidas |
 |---|---|---|---|---|
-| 2 (mediana real, DAU/MAU 0.33) | 2 | 0 | **2** | 30 |
-| 3 | 3 | 30 | **5** | 75 |
-| 5 | 5 | 75 | **10** | 150 |
-| 7 (asistencia perfecta) | 7 | 150 | **17** | 255 |
+| 2 (mediana real, DAU/MAU 0.33) | 4 | 0 | **4** | 60 |
+| 3 | 6 | 30 | **8** | 120 |
+| 5 | 7 *(tope de emisión)* | 75 | **12** | 180 |
+| 7 (asistencia perfecta) | 7 *(tope de emisión)* | 150 | **17** | 255 |
 
-El usuario mediano de hoy — 2.3 días por semana — recibe **2 episodios gratis por semana**. En una serie de 56 episodios con 44 bloqueados, eso es el 4.5% del contenido pago de una sola serie. No es una economía que se vacía; es un goteo que compra un regreso.
+Con acumulación hasta 2, quien entra N noches recolecta hasta 2N pases — pero la emisión nunca pasa de 7 por semana, porque solo se acredita uno cada 24 h. Por eso las filas de 5 y 7 noches convergen: **el techo lo pone el reloj, no la asistencia.**
+
+El usuario mediano de hoy — 2.3 noches por semana — recibe **4 episodios gratis por semana**. En una serie de 56 episodios con 44 bloqueados, eso es el 9% del contenido pago de una sola serie. No es una economía que se vacía; es un goteo que compra un regreso.
+
+**El gradiente que sostiene DAU/MAU:** entrar 2 noches rinde 4 episodios; entrar 4 o más rinde 7. Volver seguido sigue siendo estrictamente mejor. Si el tope fuera 7 en vez de 2, acumular la semana entera y entrar un solo día daría lo mismo que entrar todos los días — y la mecánica dejaría de mover la métrica que existe para mover.
 
 **Tercero: el riesgo de canibalización está concentrado y es medible.**
 Vive en la cola de asistencia perfecta (17 eps/semana ≈ $1.90 de valor a precio de escalera), que es justamente la población con más probabilidad de pagar. Es un riesgo real y lo digo antes de que aparezca en el dashboard.
@@ -223,8 +283,11 @@ Tres palancas, en orden de uso si el guardrail se dispara:
 **Guardrail y criterio de kill:** ARPDAU medido contra holdout. Si cae más de **8% relativo sostenido durante 2 semanas**, se revierte y se prueba con la palanca 1.
 
 **Cuarto — el argumento que creo más fuerte, y que es una hipótesis, no un hecho:**
-un usuario frente a un countdown que dice *«a las 18:05»* está **más cerca de pagar** que uno frente a una tienda sin alternativa. La espera hace el precio saliente: $0.15 contra 17 horas es una comparación que se puede hacer; $0.15 contra nada, no. Es el mismo mecanismo del Daily Pass de Webtoon en cómics serializados.
-No lo doy por probado. Es exactamente lo que mide el experimento de I5.
+un usuario frente a un countdown que dice *«a las 18:05»* está **más cerca de pagar** que uno frente a una tienda sin alternativa. La espera hace el precio saliente: $0.15 contra 17 horas es una comparación que se puede hacer; $0.15 contra nada, no.
+
+Es la hipótesis más importante del documento y **no está probada**. El precedente que parecía respaldarla —el Daily Pass de Webtoon— resultó ser un caso retirado, no un caso de éxito (§3.4bis). Lo que sí está documentado en la categoría es que la fuente gratuita recurrente convive con la monetización: ReelShort y DramaBox, que juntos concentran el grueso del mercado de microdramas, operan con check-in diario y anuncios recompensados mucho más generosos que este pase.
+
+Esto es exactamente lo que mide el experimento de I5. Si el countdown no acerca a pagar, el guardrail de ARPDAU lo va a mostrar en dos semanas.
 
 ---
 
@@ -240,3 +303,26 @@ México, Colombia y el público hispano de EE. UU. cruzan cuatro husos horarios.
 El botón *«Avísame cuando esté listo»* es lo que cierra el ciclo: sin él, la cita depende de que el usuario se acuerde. iOS y Android permiten push anónimo por token de dispositivo, así que se puede lanzar sin cuenta — pero el valor completo (cross-device, recuperación de racha, segmentación) llega con I7.
 
 **Fuera del trimestre:** si el análisis dice que el pase funciona pero que la elección entre series confunde, la versión simplificada — un pase que se aplica automáticamente a la última serie vista — es un fallback de una semana. Pero pierde la parte pedagógica, que es media intervención.
+
+
+---
+
+## 3.7 Fuentes
+
+**Producto real (primarias, verificadas por mí):**
+- Reproductor web de [idilio.tv](https://www.idilio.tv) — catálogo, panel de episodios, muro de bloqueo, autoplay.
+- [App Store · idilio tv](https://apps.apple.com/us/app/idilio-tv/id6749875422) — build 1.20.0 (21-ago-2026), capturas oficiales del paywall y del home, release notes.
+- [Google Play · Idilio Tv](https://play.google.com/store/apps/details?id=com.stvrae.idilio) — rango de compras dentro de la app.
+
+**Sobre el precedente (secundarias, y las trato como tales):**
+- [Comics Beat · WEBTOON removes Daily Pass](https://www.comicsbeat.com/no-youre-not-losing-it-webtoon-got-rid-of-daily-pass-2/) — retiro de mayo 2025 y reacción de lectores.
+- [Anime News Network · Webtoon Service Ends Daily Pass Feature](https://www.animenewsnetwork.com/news/2025-06-05/webtoon-service-ends-daily-pass-feature/.225053) — historia de la mecánica desde 2020.
+- [The Magic Rain · Webtoon says goodbye to Daily Pass](https://themagicrain.com/2025/06/webtoon-says-goodbye-to-daily-pass-hello-to-new-ways-to-read/) — qué la reemplazó.
+- [ipetitions · Remove the Daily Pass feature](https://www.ipetitions.com/petition/remove-webtoon-daily-pass/) — la queja de los lectores, en sus términos.
+- [WEBTOON (WBTN) Q4 2025 earnings call](https://www.aol.com/articles/webtoon-wbtn-q4-2025-earnings-232039689.html) — MAU 2025, citado sin atribuirle causa.
+
+**Sobre la categoría (secundarias, de calidad desigual — marcadas como "a verificar" donde se usan):**
+- [Filmustage · ReelShort vs DramaBox 2026](https://filmustage.com/blog/short-drama-apps-compared-reelshort-vs-dramabox-in-2026/)
+- [Unstar · 5 short drama apps ranked 2026](https://unstar.app/blog/reelshort-dramabox-shortmax-goodshort-flextv-short-drama-apps-ranked-2026)
+- [QWE · DramaBox guide: coins vs subscription](https://www.qwe.edu.pl/tutorial/dramabox-guide-coins-vs-subscription/)
+- [TopMediai · Ways to earn ReelShort free coins](https://www.topmediai.com/ai-tips/how-to-watch-reelshort-for-free/)

@@ -53,7 +53,7 @@ const FLOWS = [
         type: 'Paywall', patterns: ['Bottom sheet', 'Reward claim', 'Streak', 'Progress indicator', 'Cliffhanger'],
         elements: ['Bottom sheet', 'Headline', 'Progress bar', 'Reward card', 'Primary button', 'Text button', 'Streak strip'],
         note: 'Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.',
-        act: async (p) => { await click(p, '2 · El muro') },
+        act: async (p) => { await click(p, '2 · El muro · un pase') },
       },
       {
         id: '03-eleccion-de-pase', name: 'Elegir a qué serie va el pase',
@@ -115,8 +115,8 @@ const FLOWS = [
   },
   {
     id: 'f4-comodin',
-    name: 'Faltar una noche · el comodín',
-    intent: 'Un usuario de 2.3 días por semana no puede sostener una racha de 7 de 7. El comodín absorbe la falta sin pedirle nada.',
+    name: 'Faltar noches · el perdón del sistema',
+    intent: 'Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.',
     screens: [
       {
         id: '01-comodin-usado', name: 'El comodín te cubrió',
@@ -124,13 +124,27 @@ const FLOWS = [
         elements: ['Bottom sheet', 'Streak strip', 'Status row', 'Reward card'],
         note: 'Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.',
         act: async (p) => {
-          await click(p, '2 · El muro')
+          await click(p, '2 · El muro · un pase')
           await click(p, 'Usar el pase en este episodio')
           await click(p, 'Usar el pase aquí')
           await click(p, 'Ver el episodio')
           await dismissIfAccount(p)
           await click(p, 'Falté una noche')
         },
+      },
+      {
+        id: '02-racha-rota', name: 'Se cortó la racha',
+        type: 'Paywall', patterns: ['Streak reset', 'Non-punitive feedback'],
+        elements: ['Bottom sheet', 'Notice', 'Streak strip', 'Reward card'],
+        note: 'Sin rojo, sin alarma, sin oferta para "recuperar tu racha" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.',
+        act: async (p) => { await click(p, '10 · Racha rota') },
+      },
+      {
+        id: '03-dos-pases', name: 'Dos pases acumulados · el tope',
+        type: 'Paywall', patterns: ['Resource cap', 'Anti-FOMO'],
+        elements: ['Bottom sheet', 'Reward card', 'Primary button', 'Streak strip'],
+        note: 'Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.',
+        act: async (p) => { await click(p, '2b · El muro') },
       },
     ],
   },

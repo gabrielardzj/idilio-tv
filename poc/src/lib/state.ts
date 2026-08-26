@@ -1,4 +1,4 @@
-import { EPISODE_COST, MAX_SHIELDS, PASS_COOLDOWN_MS, STREAK } from './economy'
+import { EPISODE_COST, MAX_PASSES, MAX_SHIELDS, PASS_COOLDOWN_MS, STREAK } from './economy'
 import { SERIES, type SeriesId } from './content'
 
 export type Sheet =
@@ -15,8 +15,9 @@ export interface State {
   nights: number                  // noches consecutivas
   shields: number                 // comodines
   shieldJustUsed: boolean
-  passReady: boolean
-  passNextAt: number | null       // epoch ms
+  streakJustBroke: boolean
+  passes: number                  // 0..MAX_PASSES — se acumulan, no se pierden
+  passNextAt: number | null       // epoch ms del próximo pase; null si está al tope
   now: number
   seriesId: SeriesId
   unlocked: Record<SeriesId, number>
@@ -34,8 +35,9 @@ export const initialState = (now: number): State => ({
   nights: 2,
   shields: 0,
   shieldJustUsed: false,
-  passReady: true,
-  passNextAt: null,
+  streakJustBroke: false,
+  passes: 1,
+  passNextAt: now + PASS_COOLDOWN_MS,
   now,
   seriesId: 'pasion',
   unlocked: { pasion: 12, herencia: 18, enfermera: 12 },
@@ -71,9 +73,16 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
   switch (a.t) {
     case 'tick': {
       const now = a.now
-      // el pase se rehabilita solo cuando vence el cooldown
-      if (!s.passReady && s.passNextAt && now >= s.passNextAt) {
-        return { ...ctx, state: { ...s, now, passReady: true, passNextAt: null } }
+      // Los pases se acreditan solos, uno cada 24 h, hasta el tope.
+      if (s.passes < MAX_PASSES && s.passNextAt && now >= s.passNextAt) {
+        const passes = s.passes + 1
+        return {
+          ...ctx,
+          state: {
+            ...s, now, passes,
+            passNextAt: passes < MAX_PASSES ? s.passNextAt + PASS_COOLDOWN_MS : null,
+          },
+        }
       }
       return { ...ctx, state: { ...s, now } }
     }
@@ -92,7 +101,7 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       }
 
     case 'claimPass': {
-      if (!s.passReady) return ctx
+      if (s.passes < 1) return ctx
       const nights = Math.min(s.nights + 1, 7)
       const reward = STREAK[nights - 1]
       const shields = Math.min(s.shields + (reward.shield ? 1 : 0), MAX_SHIELDS)
@@ -100,11 +109,13 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       return {
         state: {
           ...s,
-          passReady: false,
-          passNextAt: s.now + PASS_COOLDOWN_MS,
+          passes: s.passes - 1,
+          // si estaba al tope, el reloj del siguiente pase arranca ahora
+          passNextAt: s.passNextAt ?? s.now + PASS_COOLDOWN_MS,
           nights,
           shields,
           shieldJustUsed: false,
+          streakJustBroke: false,
           balance: s.balance + reward.coins,
           seriesId: a.series,
           episode: targetEp,
@@ -158,13 +169,17 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       return { ...ctx, state: { ...s, ...a.patch } }
 
     case 'devNextNight': {
-      // avanza el reloj 24 h. Si no volvió, se consume el comodín (o se rompe la racha).
+      // Avanza el reloj 24 h. Si no volvió, se consume el comodín (o se rompe la racha).
       const now = s.now + PASS_COOLDOWN_MS + 1000
-      if (a.attended) return { ...ctx, state: { ...s, now, passReady: true, passNextAt: null, shieldJustUsed: false } }
-      if (s.shields > 0) {
-        return { ...ctx, state: { ...s, now, passReady: true, passNextAt: null, shields: s.shields - 1, shieldJustUsed: true, stateName: 'streak-shield-used' } }
+      const passes = Math.min(s.passes + 1, MAX_PASSES)
+      const clock = { now, passes, passNextAt: passes < MAX_PASSES ? now + PASS_COOLDOWN_MS : null }
+      if (a.attended) {
+        return { ...ctx, state: { ...s, ...clock, shieldJustUsed: false, streakJustBroke: false } }
       }
-      return { ...ctx, state: { ...s, now, passReady: true, passNextAt: null, nights: 0, shieldJustUsed: false, stateName: 'streak-broken' } }
+      if (s.shields > 0) {
+        return { ...ctx, state: { ...s, ...clock, shields: s.shields - 1, shieldJustUsed: true, streakJustBroke: false, stateName: 'streak-shield-used' } }
+      }
+      return { ...ctx, state: { ...s, ...clock, nights: 0, shieldJustUsed: false, streakJustBroke: true, stateName: 'streak-broken' } }
     }
 
     case 'toast':
@@ -175,7 +190,8 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
 function sheetName(sheet: Sheet, s: State): string {
   switch (sheet.kind) {
     case 'unlock':
-      if (s.passReady) return 'wall-pass-ready'
+      if (s.streakJustBroke) return 'wall-streak-broken'
+      if (s.passes > 0) return 'wall-pass-ready'
       if (s.balance >= EPISODE_COST) return 'wall-with-balance'
       return 'wall-pass-spent'
     case 'pass-choice': return 'pass-choice'

@@ -192,8 +192,8 @@
     },
     {
       "id": "f4-comodin",
-      "name": "Faltar una noche · el comodín",
-      "intent": "Un usuario de 2.3 días por semana no puede sostener una racha de 7 de 7. El comodín absorbe la falta sin pedirle nada.",
+      "name": "Faltar noches · el perdón del sistema",
+      "intent": "Un usuario de 2.3 días por semana no puede sostener 7 de 7. Tres estados de perdón: el comodín que absorbe la falta, la racha que se corta sin drama, y los pases que se acumulan para que faltar no cueste nada.",
       "screens": [
         {
           "id": "01-comodin-usado",
@@ -212,6 +212,42 @@
           "note": "Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.",
           "stateKey": "wall-pass-ready",
           "image": "flows/f4-comodin/01-comodin-usado.png"
+        },
+        {
+          "id": "02-racha-rota",
+          "name": "Se cortó la racha",
+          "screenType": "Paywall",
+          "patterns": [
+            "Streak reset",
+            "Non-punitive feedback"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Notice",
+            "Streak strip",
+            "Reward card"
+          ],
+          "note": "Sin rojo, sin alarma, sin oferta para \"recuperar tu racha\" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.",
+          "stateKey": "wall-streak-broken",
+          "image": "flows/f4-comodin/02-racha-rota.png"
+        },
+        {
+          "id": "03-dos-pases",
+          "name": "Dos pases acumulados · el tope",
+          "screenType": "Paywall",
+          "patterns": [
+            "Resource cap",
+            "Anti-FOMO"
+          ],
+          "elements": [
+            "Bottom sheet",
+            "Reward card",
+            "Primary button",
+            "Streak strip"
+          ],
+          "note": "Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.",
+          "stateKey": "wall-pass-ready",
+          "image": "flows/f4-comodin/03-dos-pases.png"
         }
       ]
     },
@@ -272,7 +308,7 @@
   ],
   "summary": {
     "flows": 6,
-    "screens": 11,
+    "screens": 13,
     "screenTypes": [
       "Account / Wallet",
       "Confirmation",
@@ -283,6 +319,7 @@
       "Store"
     ],
     "patterns": [
+      "Anti-FOMO",
       "Appointment",
       "Balance spend",
       "Bottom sheet",
@@ -297,7 +334,9 @@
       "Ledger",
       "Loss aversion",
       "Milestone unlock",
+      "Non-punitive feedback",
       "Progress indicator",
+      "Resource cap",
       "Reward claim",
       "Reward reveal",
       "Scarcity",
@@ -306,6 +345,7 @@
       "Streak",
       "Streak advance",
       "Streak protection",
+      "Streak reset",
       "Unit-of-value translation",
       "Value ladder",
       "Vertical video"
@@ -322,6 +362,7 @@
       "Fine print",
       "Headline",
       "Medal",
+      "Notice",
       "Pack list",
       "Price",
       "Primary button",
