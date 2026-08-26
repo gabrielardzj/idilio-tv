@@ -22,13 +22,11 @@ const PAGINAS = [
   { slug: 'estrategia', src: 'docs/02-estrategia/README.md', titulo: 'Estrategia', n: '2', peso: 'con el diagnóstico' },
   { slug: 'intervencion', src: 'docs/03-diseno/README.md', titulo: 'La intervención', n: '3', peso: '20% craft' },
   { slug: 'poc', src: 'docs/04-poc/README.md', titulo: 'El POC', n: '4', peso: '25%' },
-  // Una sola página con los dos documentos del craft. No va en la lista
-  // numerada sino con el prototipo, los flujos y el repositorio: como ellos, es
-  // un artefacto que se mira, no un entregable de texto que se lee en orden.
+  // Una sola página con los dos documentos del craft, al final de la lista.
   // `src` es una lista porque cada parte se procesa con su propia ruta —los
   // enlaces y las imágenes de cada documento son relativos a su carpeta, no a
   // la de la página.
-  { slug: 'diseno', src: ['docs/03-diseno/sistema.md', 'docs/03-diseno/pen/README.md'], titulo: 'Sistema y archivo de diseño', n: '3b', peso: '20% craft', alPie: true },
+  { slug: 'diseno', src: ['docs/03-diseno/sistema.md', 'docs/03-diseno/pen/README.md'], titulo: 'Sistema y archivo de diseño', n: '5', peso: '20% craft' },
   // El sitio publica los cuatro entregables y nada más. Los anexos —el registro
   // de dogfooding, el benchmark competitivo y la nota de reconciliación entre las
   // dos versiones— siguen en el repo pero ya no son pestañas. Lo que los
@@ -114,13 +112,8 @@ function imagenesAmpliables(html) {
     (_, ruta, resto) => `<a class="zoom" href="./${ruta}" target="_blank" rel="noopener"><img src="./${ruta}"${resto}></a>`)
 }
 
-const nav = (activo) => PAGINAS.filter((p) => !p.alPie).map((p) =>
+const nav = (activo) => PAGINAS.map((p) =>
   `<a class="${p.slug === activo ? 'on' : ''}" href="./${p.slug}.html"><b>${p.n}</b> ${p.titulo}</a>`).join('')
-
-/** Las que no van en el índice, entre los enlaces de abajo. Sin la flecha de
- *  volver: son páginas de este mismo sitio, no una salida. */
-const navPie = (activo) => PAGINAS.filter((p) => p.alPie).map((p) =>
-  `<a class="${p.slug === activo ? 'on' : ''}" href="./${p.slug}.html">${p.titulo}</a>`).join('\n')
 
 /**
  * Mermaid, con la paleta del sitio. Solo lo cargan las páginas que tienen diagrama.
@@ -235,7 +228,6 @@ pre.mermaid svg .edgeLabel,pre.mermaid svg .label{font-family:Outfit,system-ui,s
 ${nav(p.slug)}
 <div class="volver">
 <a href="../">← El prototipo</a>
-${navPie(p.slug)}
 <a href="../flujos/">← Los flujos</a>
 <a href="https://github.com/gabrielardzj/idilio-tv">← El repositorio</a>
 </div>
