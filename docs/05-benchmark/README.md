@@ -357,7 +357,7 @@ caduca** y no moneda ya evita la canibalización directa (no acumula hacia una c
 usuario habría hecho). Pero la opción 3 sugiere una variante no explorada: que la racha larga
 premie con **días de pase semanal**, no con más episodios. Convierte al usuario habitual en
 suscriptor probador en vez de en free-rider eficiente. Lo dejo señalado como hipótesis para la
-ola 2, no como cambio a esta intervención.
+etapa 2, no como cambio a esta intervención.
 
 ### D4 · La doble monetización quema la confianza — y es la queja #1 de la categoría
 
@@ -451,7 +451,7 @@ Eso sigue siendo original de este diagnóstico.
    del segundo—; del otro lado del mostrador, lo que hay documentado es que **su propio personal
    advirtió internamente** por el efecto de estas mecánicas sobre la salud mental adolescente y la
    empresa siguió adelante (TBIJ, §5.7).
-6. **Hipótesis para la ola 2:** que la racha larga premie con **días de suscripción** en vez de
+6. **Hipótesis para la etapa 2:** que la racha larga premie con **días de suscripción** en vez de
    más episodios (el patrón de GoodShort). Convierte al habitual en suscriptor probador.
 7. **Cambiar la unidad de la economía es una reescritura de reglas, y hay que tratarla como tal.**
    Es la lección de Hongguo: tenían razón en los hechos —el VIP existía desde 2023— y aun así

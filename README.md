@@ -32,7 +32,7 @@
 | | Entregable | Qué hay adentro |
 |---|---|---|
 | **1** | **[Diagnóstico](docs/01-diagnostico/)** | Qué falla hoy, a partir de usar la app y leer los datos. Qué señales pesaron y qué descarté — incluido por qué no construyo sobre el 2.4x de D30 (cuántos siguen ahí a los 30 días). |
-| **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres olas, con hipótesis, métricas, guardrails (las métricas de guardia: las que dicen cuándo parar) y criterio de priorización. Y qué no cabe en un trimestre. |
+| **2** | **[Estrategia](docs/02-estrategia/)** | Ocho intervenciones en tres etapas, con hipótesis, métricas, guardrails (las métricas de guardia: las que dicen cuándo parar) y criterio de priorización. Y qué no cabe en un trimestre. |
 | **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, nueve decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [archivo de diseño](docs/03-diseno/pen/), el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json) (los valores del sistema —colores, tipografías, espacios— con nombre propio). |
 | **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 23 pantallas en 8 flujos. |
 | **+** | **[Sobre el stack real](web/)** | La misma intervención implementada en Next.js App Router + Tailwind v4 + Supabase, el stack que Idilio corre hoy. Incluye la migración SQL completa. Es la respuesta a *«la viabilidad de implementación hace parte de la propuesta»*. |

@@ -2,17 +2,19 @@
 
 ## Resumen
 
-Ocho intervenciones en tres olas, sobre un trimestre. La compuerta que las ordena es una sola: **si no ocurre en el momento en que el usuario quiere lo que se le ofrece, no sirve** — y hay tres maneras de fallarla: vivir en una pestaña que el usuario no visita (82% nunca abre el perfil), llegar antes de que la necesidad exista (81% descarta la recompensa diaria que se le pone delante al abrir la app), o **estar en el momento correcto y no decir lo que vale**, que es lo que le pasa hoy al anuncio recompensado del muro con su tope escrito como un `0/10` gris.
+Ocho intervenciones en tres etapas, sobre un trimestre. La compuerta que las ordena es una sola: **si no ocurre en el momento en que el usuario quiere lo que se le ofrece, no sirve** — y hay tres maneras de fallarla: vivir en una pestaña que el usuario no visita (82% nunca abre el perfil), llegar antes de que la necesidad exista (81% descarta la recompensa diaria que se le pone delante al abrir la app), o **estar en el momento correcto y no decir lo que vale**, que es lo que le pasa hoy al anuncio recompensado del muro con su tope escrito como un `0/10` gris.
 
-El muro real cambia el peso entre esas tres. **La economía de Idilio no vive en otra pantalla: está entera en el muro** —saldo, costo, suscripción, anuncio gratuito, paquetes y enlace a Recompensas ([diagnóstico §1.1](../01-diagnostico/#hallazgo-1--lo-gratis-se-acaba-antes-que-la-sesión-10-episodios-contra-14))—. Lo que falla es el **orden** en que se ofrece y **lo que no traduce**. Así que la Ola 1 casi no mueve piezas de sitio: las reordena y las nombra.
+El muro real cambia el peso entre esas tres. **La economía de Idilio no vive en otra pantalla: está entera en el muro** —saldo, costo, suscripción, anuncio gratuito, paquetes y enlace a Recompensas ([diagnóstico §1.1](../01-diagnostico/#hallazgo-1--lo-gratis-se-acaba-antes-que-la-sesión-10-episodios-contra-14))—. Lo que falla es el **orden** en que se ofrece y **lo que no traduce**. Así que la Etapa 1 casi no mueve piezas de sitio: las reordena y las nombra.
 
-| Ola | Semanas | Qué hace | Intervenciones |
-|---|---|---|---|
-| **1** | 1–4 | Reordenar y terminar de traducir lo que el producto ya tiene | I1 la moneda habla en episodios donde todavía no lo hace · I2 el muro pone arriba la salida gratuita que ya tiene · I3 la escalera de precios vuelve a subir · I4 continuidad web→app |
-| **2** | 4–9 | Cambiar la unidad del regreso — **es la que se lleva a diseño y POC** | I5 el Pase de la Noche y la Racha de Noches · I6 progreso de serie visible |
-| **3** | 9–13 | Convertir el hábito en cuenta y en catálogo | I7 la cuenta se pide cuando hay algo que perder · I8 el pase como puente entre series |
+**Las etapas no están ordenadas por costo sino por dependencia: cada una necesita la anterior en producción para poder construirse o medirse.**
 
-La Ola 1 va primero pese a mover menos: hace legible la economía sobre la que después se mide I5. Y I5 es la apuesta principal pero no abre el trimestre, porque cuesta 4–5 semanas y empezar por ahí significa llegar a la semana 9 sin haber aprendido nada.
+| Etapa | Semanas | Qué hace | No puede ir antes porque… | Intervenciones |
+|---|---|---|---|---|
+| **1** | 1–4 | Reordenar y terminar de traducir lo que el producto ya tiene | — | I1 la moneda habla en episodios donde todavía no lo hace · I2 el muro pone arriba la salida gratuita que ya tiene · I3 la escalera de precios vuelve a subir · I4 continuidad web→app |
+| **2** | 4–9 | Cambiar la unidad del regreso — **es la que se lleva a diseño y POC** | sin la Etapa 1, la línea base se mide contra un usuario que no sabe que ya tiene diez episodios gratis al día | I5 el Pase de la Noche y la Racha de Noches · I6 progreso de serie visible |
+| **3** | 9–13 | Convertir el hábito en cuenta y en catálogo | pedir cuenta antes de que exista una racha es pedirla sin argumento | I7 la cuenta se pide cuando hay algo que perder · I8 el pase como puente entre series |
+
+La Etapa 1 va primero pese a mover menos: hace legible la economía sobre la que después se mide I5. Y I5 es la apuesta principal pero no abre el trimestre, porque cuesta 4–5 semanas y empezar por ahí significa llegar a la semana 9 sin haber aprendido nada.
 
 ---
 
@@ -20,7 +22,7 @@ La Ola 1 va primero pese a mover menos: hace legible la economía sobre la que d
 
 > El metajuego de Idilio ya está donde tiene que estar: el muro le muestra al usuario la economía entera en el momento de máxima intención. Lo que falla es **cómo la ordena y qué deja sin traducir** — abre por lo más caro y escribe la única salida gratuita como un `0/10` gris. Y le falta lo único que ninguna de sus salidas tiene: **una fecha**. La estrategia consiste en **reordenar y re-denominar** lo que ya existe —de monedas a episodios, de días calendario a noches— y en agregar una sola mecánica: la que convierte el muro en una cita.
 
-Que la mudanza ya esté hecha abarata el trimestre y afina el argumento: lo que queda por construir es orden, etiqueta y una mecánica, no un traslado. Por eso la Ola 1 no agrega mecánicas y casi no mueve piezas: **reordena y re-denomina** las que ya existen. La única mecánica nueva de todo el portafolio es el Pase de la Noche ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)), y entra recién en la Ola 2.
+Que la mudanza ya esté hecha abarata el trimestre y afina el argumento: lo que queda por construir es orden, etiqueta y una mecánica, no un traslado. Por eso la Etapa 1 no agrega mecánicas y casi no mueve piezas: **reordena y re-denomina** las que ya existen. La única mecánica nueva de todo el portafolio es el Pase de la Noche ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)), y entra recién en la Etapa 2.
 
 ## 2.2 Criterio de priorización
 
@@ -43,13 +45,13 @@ Una intervención con lectura rápida vale más que una de mayor efecto y lectur
 
 ## 2.3 El portafolio
 
-Ocho intervenciones en tres olas. Cada una se describe con cuatro campos: hipótesis, qué mueve, cómo se sabe si funcionó y cuánto cuesta.
+Ocho intervenciones en tres etapas, ordenadas por dependencia y no por costo. Cada una se describe con cuatro campos: hipótesis, qué mueve, cómo se sabe si funcionó y cuánto cuesta.
 
 ---
 
-### Ola 1 — Reordenar y terminar de traducir lo que ya existe (semanas 1–4)
+### Etapa 1 — Reordenar y terminar de traducir lo que ya existe (semanas 1–4)
 
-Nada de esto inventa economía y nada la muda de pantalla: el muro ya tiene las tres salidas. Todo es **reordenar y re-denominar**. Es la ola más barata y la de mayor alcance.
+Nada de esto inventa economía y nada la muda de pantalla: el muro ya tiene las tres salidas. Todo es **reordenar y re-denominar**. Es la etapa más barata y la de mayor alcance.
 
 #### I1 · La moneda habla en episodios
 **La mitad de esto el producto ya lo hace, y por eso la intervención es chica.** El muro traduce cada paquete a episodios —*«Desbloquea 12 episodios»*, no *«180 monedas»*— y dice el saldo y el costo antes que ningún precio. Lo que falta es la traducción en los cuatro renglones donde todavía no está, que son justamente los que deciden:
@@ -108,7 +110,7 @@ El link compartido de idilio.tv abre la app **en ese episodio de esa serie**, no
 
 ---
 
-### Ola 2 — Cambiar la unidad del regreso (semanas 4–9) ← **la intervención profunda**
+### Etapa 2 — Cambiar la unidad del regreso (semanas 4–9) ← **la intervención profunda**
 
 #### I5 · El Pase de la Noche + la Racha de Noches ⭐
 **Es la intervención que se lleva a diseño y POC.** Detalle completo en [`docs/03-diseno`](../03-diseno/).
@@ -144,7 +146,7 @@ Aun así hay un daño previsible, y es el 19% que hoy sí reclama la recompensa 
 | **Y por qué no lo resuelve el anuncio** | Porque no compiten en lo mismo, y hay que decirlo con los números en contra: el anuncio da **70 episodios por semana** y el Pase, **7**. Como fuente, el Pase es el 10% de lo que ya existe y no hace falta. Lo que el anuncio no da es **una razón para volver un día concreto** —se puede agotar hoy— ni un desbloqueo **sin cortar la historia**: 30 segundos de publicidad a mitad de un cliffhanger es justo lo que la suscripción vende evitar. El Pase no compite por dar más episodios. Compite por dar el de mañana. |
 | **Mueve** | **DAU/MAU** (objetivo primario). Racha de 3+: 6% → objetivo 20%. Y la adopción de la fuente gratuita, que hoy es del 19% porque hay un botón de por medio: acreditar al terminar un episodio la lleva a **~100% por construcción**, no por diseño de pantalla. Esa cifra deja de ser una meta y pasa a ser un guardrail — si no llega ahí, la acreditación está rota. |
 | **Cómo lo sé** | *Leading (semana 1):* % de muros que terminan en pase usado en vez de cierre. *Leading (semana 2):* % que vuelve dentro de las 36 h de haber usado el pase. *Lagging (semana 4):* DAU/MAU de la celda tratada vs. holdout. *Guardrail:* ARPDAU, leído como ingreso por DAU y no como mix de productos: si el mensual en el muro solo canibaliza packs, el mix se mueve y el ingreso no, y eso no es una ganancia. **Criterio de kill:** si ARPDAU cae >8% relativo sostenido 2 semanas, se revierte. |
-| **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y la razón conviene explicitarla: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Ola 3: de los cuatro cambios es el que menos mueve el objetivo. Las cuatro piezas de perfil y de lanzamiento del párrafo anterior entran dentro de esas semanas: ninguna pasa de un día, y quedan contadas acá para que no aparezcan después como alcance no presupuestado. |
+| **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y la razón conviene explicitarla: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Etapa 3: de los cuatro cambios es el que menos mueve el objetivo. Las cuatro piezas de perfil y de lanzamiento del párrafo anterior entran dentro de esas semanas: ninguna pasa de un día, y quedan contadas acá para que no aparezcan después como alcance no presupuestado. |
 | **Compuerta ①** | ✅ ocurre exactamente en el muro. |
 
 #### I6 · Progreso de serie visible
@@ -160,7 +162,7 @@ Aun así hay un daño previsible, y es el 19% que hoy sí reclama la recompensa 
 
 ---
 
-### Ola 3 — Convertir el hábito en cuenta y en catálogo (semanas 9–13)
+### Etapa 3 — Convertir el hábito en cuenta y en catálogo (semanas 9–13)
 
 #### I7 · La cuenta se pide cuando hay algo que perder
 No hay muro de registro. La cuenta se ofrece en un solo momento: cuando el invitado tiene racha y saldo acumulados. *"Guarda tu racha de 4 noches y tus 45 monedas."*
@@ -200,12 +202,12 @@ I5           ████████████████
 I6                    ██████
 I7                          █████████
 I8                                ██████
-     └── Ola 1 ──┘└──── Ola 2 ────┘└─ Ola 3 ─┘
+     └ Etapa 1 ┘└── Etapa 2 ──┘└─ Etapa 3 ──┘
 ```
 
-**Por qué la Ola 1 va primero aunque su efecto sobre DAU/MAU sea menor.** I1 e I2 son precondiciones del experimento de I5, y por una razón que el muro real hace más urgente, no menos: **la salida gratuita ya está en la pantalla**, así que si el Pase se lanza sin reordenarla antes, la línea base se mide contra un muro donde el usuario no sabe que tiene diez episodios gratis por día. No habría forma de distinguir "el pase no funciona" de "el usuario nunca leyó lo que ya tenía". Primero se ordena y se traduce el sistema; después se mide la mecánica dentro de él.
+**Por qué la Etapa 1 va primero aunque su efecto sobre DAU/MAU sea menor.** I1 e I2 son precondiciones del experimento de I5, y por una razón que el muro real hace más urgente, no menos: **la salida gratuita ya está en la pantalla**, así que si el Pase se lanza sin reordenarla antes, la línea base se mide contra un muro donde el usuario no sabe que tiene diez episodios gratis por día. No habría forma de distinguir "el pase no funciona" de "el usuario nunca leyó lo que ya tenía". Primero se ordena y se traduce el sistema; después se mide la mecánica dentro de él.
 
-**Por qué I5 no va primero pese a ser la apuesta principal.** Cuesta 4–5 semanas y toca timers server-authoritative con estado de invitado. Arrancar el trimestre con lo más caro y lo más lento significa llegar a la semana 9 sin haber aprendido nada. Con la Ola 1 en producción, I5 arranca con la economía traducida, con la salida gratuita del muro ya visible y medida, y con una línea base limpia.
+**Por qué I5 no va primero pese a ser la apuesta principal.** Cuesta 4–5 semanas y toca timers server-authoritative con estado de invitado. Arrancar el trimestre con lo más caro y lo más lento significa llegar a la semana 9 sin haber aprendido nada. Con la Etapa 1 en producción, I5 arranca con la economía traducida, con la salida gratuita del muro ya visible y medida, y con una línea base limpia.
 
 **Por qué I7 va al final.** Pedir cuenta antes de que exista racha es pedirla sin argumento. La cuenta es la consecuencia de I5, no su requisito — por eso I5 tiene que funcionar para invitados.
 
@@ -223,7 +225,7 @@ I8                                ██████
 
 1. **El reloj no puede vivir en el dispositivo.** Un countdown en cliente se vulnera cambiando la hora del teléfono. Necesita ser server-authoritative, con el cliente mostrando un delta contra `server_time`. Presupuestado dentro de las 4–5 semanas.
 2. **La ventana de 5 a.m. necesita zona horaria del usuario, no del servidor.** MX, CO y US-Hispano cruzan cuatro husos. Si el corte se calcula en UTC, a un usuario de Los Ángeles se le rompe la racha a las 10 p.m. Esto es una decisión de producto disfrazada de detalle técnico y hay que resolverla antes de escribir el primer endpoint.
-3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** **Ese 40% es una estimación, no un dato medido:** no hay medición de push en este producto, y la cifra sale del argumento, no de una fuente. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Ola 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
+3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** **Ese 40% es una estimación, no un dato medido:** no hay medición de push en este producto, y la cifra sale del argumento, no de una fuente. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Etapa 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
 
 ## 2.6 Qué queda deliberadamente afuera
 

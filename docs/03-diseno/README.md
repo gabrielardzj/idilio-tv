@@ -32,7 +32,7 @@ El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus su
 **4. Funciona para el 88% que es invitado, desde el día uno.**
 Sin cuenta, sin onboarding (la seguidilla de pantallas de bienvenida), sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
 
-**La alternativa más seria que quedó fuera:** el rediseño del diálogo de recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Ola 1 y como el reclamo inline del pase.
+**La alternativa más seria que quedó fuera:** el rediseño del diálogo de recompensa diaria como intervención independiente. Es más barato (2 semanas contra 5) y probablemente sube el reclamo del 19% a algo mucho mayor. Pero deja intacto el hecho de que la razón para volver sigue siendo una moneda abstracta y un calendario, no la historia. Sube una métrica intermedia sin cambiar el mecanismo. Terminó absorbido como I2 dentro de la Etapa 1 y como el reclamo inline del pase.
 
 ---
 
