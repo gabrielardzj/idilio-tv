@@ -7,7 +7,7 @@
  */
 import { EPISODE_COST, FREE_EPISODES, MAX_PASSES, PACKS, CATALOGO, STREAK,
          weeklyIssuance, toEpisodes, pricePerEpisode, coinsPerDollar } from '../src/lib/economy.ts'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -102,6 +102,13 @@ const SIN_REVISAR = new Set(['docs/00-dogfooding/README.md'])
 
 for (const ruta of DOCS) {
   if (SIN_REVISAR.has(ruta)) continue
+  // Algunos de estos archivos son generados (la galería) y el export los borra
+  // y rehace. Si el guardián se cae ahí, deja de guardar nada: reporta y sigue.
+  if (!existsSync(join(RAIZ, ruta))) {
+    console.log(`✗ ${ruta}: no existe — ¿el export quedó a medias?`)
+    fallos++
+    continue
+  }
   const texto = readFileSync(join(RAIZ, ruta), 'utf8')
   for (const { patron, salvo, porque } of OBSOLETOS) {
     for (const linea of texto.split('\n')) {
