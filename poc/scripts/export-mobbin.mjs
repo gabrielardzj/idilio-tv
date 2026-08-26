@@ -7,9 +7,10 @@
  *   node scripts/export-mobbin.mjs [baseUrl] [outDir]
  */
 import { chromium } from 'playwright-core'
-import { mkdir, writeFile, rm } from 'node:fs/promises'
+import { mkdir, writeFile, readFile, rm } from 'node:fs/promises'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createHash } from 'node:crypto'
 
 const BASE = process.argv[2] || 'http://localhost:5199/'
 /** La implementación sobre el stack real. Si no está arriba, ese flujo se salta. */
@@ -45,6 +46,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-home', name: 'Home · el catálogo',
+        estado: 'home',
         type: 'Home / Browse', patterns: ['Content rails', 'Continue watching', 'Currency balance'],
         elements: ['Top bar', 'Wallet chip', 'Horizontal rail', 'Poster', 'Progress bar', 'Tab bar'],
         note: 'El chasis del producto real, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
@@ -52,6 +54,7 @@ const FLOWS = [
       },
       {
         id: '02-serie', name: 'Ficha de serie · la progresión visible',
+        estado: 'serie-detalle',
         type: 'Detail', patterns: ['Episode grid', 'Progress indicator', 'Unlock cost'],
         elements: ['Hero', 'Progress bar', 'Reward card', 'Episode grid', 'Fine print'],
         note: 'Donde hoy hay una grilla de números grises, la grilla dice tres cosas: dónde vas, qué está abierto y qué cuesta terminar. Y si hay un pase disponible, lo dice antes que el precio.',
@@ -59,6 +62,7 @@ const FLOWS = [
       },
       {
         id: '03-player', name: 'Player · el core loop',
+        estado: 'player-free',
         type: 'Media player', patterns: ['Vertical video', 'Swipe navigation', 'Progress indicator'],
         elements: ['Video', 'Top bar', 'Wallet chip', 'Action rail', 'Progress bar'],
         note: 'Se desliza hacia arriba para el siguiente episodio y hacia abajo para el anterior, como en el producto. El muro aparece cuando el siguiente está bloqueado — no antes.',
@@ -73,6 +77,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-player-libre', name: 'Player · episodio gratis',
+        estado: 'player-free',
         type: 'Media player', patterns: ['Vertical video', 'Progress indicator', 'Currency balance'],
         elements: ['Video', 'Top bar', 'Wallet chip', 'Action rail', 'Progress bar', 'Scrubber'],
         note: 'El saldo nunca viaja solo: el chip lleva siempre la traducción a episodios. Es la única huella permanente del metajuego dentro del core loop.',
@@ -80,6 +85,7 @@ const FLOWS = [
       },
       {
         id: '01b-acuse-de-la-noche', name: 'El acuse de la noche',
+        estado: 'player-free',
         type: 'Media player', patterns: ['Silent accrual', 'Toast', 'Currency balance'],
         elements: ['Video', 'Toast', 'Wallet chip', 'Progress bar'],
         note: 'El único momento en que el metajuego aparece dentro del video, y dura dos segundos. Al terminar el episodio se acredita la noche, el pase y el bono — sin botón. Acreditar en silencio habría dejado el metajuego invisible otra vez, que es el defecto que este trabajo corrige.',
@@ -87,6 +93,7 @@ const FLOWS = [
       },
       {
         id: '02-muro-pase-listo', name: 'Muro · el Pase está listo',
+        estado: 'wall-pass-ready',
         type: 'Paywall', patterns: ['Bottom sheet', 'Reward claim', 'Streak', 'Progress indicator', 'Cliffhanger'],
         elements: ['Bottom sheet', 'Headline', 'Progress bar', 'Reward card', 'Primary button', 'Text button', 'Streak strip'],
         note: 'Orden deliberado: la historia, dónde estoy, lo gratis, lo pago, la racha. Un muro que abre con precios enseña que el sistema es una tienda.',
@@ -94,6 +101,7 @@ const FLOWS = [
       },
       {
         id: '03-eleccion-de-pase', name: 'Elegir a qué serie va el pase',
+        estado: 'pass-choice',
         type: 'Selection', patterns: ['Single select', 'Scarcity', 'Cross-content discovery'],
         elements: ['Bottom sheet', 'Radio list', 'Thumbnail', 'Progress label', 'Primary button'],
         note: 'El corazón pedagógico: obligar a elegir con un recurso escaso enseña la economía por uso, no por explicación.',
@@ -101,6 +109,7 @@ const FLOWS = [
       },
       {
         id: '04-desbloqueo-celebracion', name: 'Desbloqueado · la racha avanza',
+        estado: 'unlocked-via-pass',
         type: 'Confirmation', patterns: ['Reward reveal', 'Streak advance', 'Milestone unlock'],
         elements: ['Bottom sheet', 'Medal', 'Reward lines', 'Streak strip', 'Primary button'],
         note: 'La recompensa se entrega en el mismo gesto que resuelve la necesidad. La noche 3 dispara el comodín.',
@@ -108,6 +117,7 @@ const FLOWS = [
       },
       {
         id: '05-player-desbloqueado', name: 'Player · episodio 13 abierto',
+        estado: 'player-free',
         type: 'Media player', patterns: ['Vertical video', 'Progress indicator'],
         elements: ['Video', 'Wallet chip', 'Progress bar'],
         note: 'El regreso al loop es inmediato: un toque desde la celebración, sin pantallas intermedias.',
@@ -122,6 +132,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-muro-pase-gastado', name: 'Muro · faltan horas para el próximo pase',
+        estado: 'wall-pass-spent',
         type: 'Paywall', patterns: ['Countdown', 'Appointment', 'Streak', 'Bottom sheet'],
         elements: ['Bottom sheet', 'Countdown timer', 'Secondary card', 'Primary button', 'Streak strip'],
         note: 'El countdown ocupa el lugar jerárquico que antes tenía el precio. La compra queda debajo, como atajo, no como única salida.',
@@ -129,6 +140,7 @@ const FLOWS = [
       },
       {
         id: '02-muro-con-saldo', name: 'Muro · con saldo suficiente',
+        estado: 'wall-with-balance',
         type: 'Paywall', patterns: ['Balance spend', 'Countdown', 'Streak'],
         elements: ['Bottom sheet', 'Countdown timer', 'Primary button', 'Balance caption'],
         note: 'Con saldo, la acción de pago sube a primaria — pero el saldo restante se declara en episodios, no en monedas.',
@@ -143,6 +155,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-tienda', name: 'Tienda · el precio en episodios',
+        estado: 'store',
         type: 'Store', patterns: ['IAP packs', 'Value ladder', 'Unit-of-value translation'],
         elements: ['Bottom sheet', 'Goal row', 'Pack list', 'Badge', 'Price per unit'],
         note: 'Jerarquía invertida: EPISODIOS grande, monedas de subtítulo, precio a la derecha. La escalera baja el precio por episodio en cada escalón — hoy $1.99 y $3.99 rinden casi lo mismo. Y no hay ni un precio tachado: la fila superior calcula la meta real de la serie que el usuario está viendo, y el badge cae sobre el paquete que de verdad la termina.',
@@ -157,6 +170,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-comodin-usado', name: 'El comodín te cubrió',
+        estado: 'wall-passes-capped',
         type: 'Paywall', patterns: ['Streak protection', 'Forgiveness mechanic'],
         elements: ['Bottom sheet', 'Streak strip', 'Status row', 'Reward card'],
         note: 'Se consume solo. No hay nada que reclamar ni que comprar: si hay que hacer algo para no perder la racha, la racha ya es una tarea.',
@@ -170,6 +184,7 @@ const FLOWS = [
       },
       {
         id: '02-racha-rota', name: 'Se cortó la racha',
+        estado: 'wall-streak-broken',
         type: 'Paywall', patterns: ['Streak reset', 'Non-punitive feedback'],
         elements: ['Bottom sheet', 'Notice', 'Streak strip', 'Reward card'],
         note: 'Sin rojo, sin alarma, sin oferta para "recuperar tu racha" por monedas. Se explica qué pasó, se dice cuándo vuelve el comodín, y el pase sigue estando ahí. Monetizar la culpa habría sido fácil y habría enseñado que el sistema es adversario.',
@@ -177,6 +192,7 @@ const FLOWS = [
       },
       {
         id: '03-dos-pases', name: 'Dos pases acumulados · el tope',
+        estado: 'wall-passes-capped',
         type: 'Paywall', patterns: ['Resource cap', 'Anti-FOMO'],
         elements: ['Bottom sheet', 'Reward card', 'Primary button', 'Streak strip'],
         note: 'Los pases se guardan hasta dos. Es la respuesta directa a la crítica que hundió al Daily Pass de Webtoon: un pase que se pierde es una obligación disfrazada de regalo. Con tope 2 faltar una noche no cuesta nada, y volver seguido sigue rindiendo más.',
@@ -191,6 +207,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-guardar-racha', name: 'Tienes algo que guardar',
+        estado: 'account-prompt',
         type: 'Sign up', patterns: ['Contextual auth', 'Loss aversion', 'Guest-first'],
         elements: ['Bottom sheet', 'Stat tiles', 'Primary button', 'Text button', 'Fine print'],
         note: 'No hay muro de registro. El argumento no es "crea tu cuenta" sino "no pierdas estas 4 noches y estas 75 monedas".',
@@ -205,6 +222,7 @@ const FLOWS = [
     screens: [
       {
         id: '01-mi-economia', name: 'De dónde salen mis monedas',
+        estado: 'streak-detail',
         type: 'Account / Wallet', patterns: ['Ledger', 'Source-sink model', 'Streak'],
         elements: ['Bottom sheet', 'Balance headline', 'Streak strip', 'Breakdown list', 'Total row'],
         note: 'La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.',
@@ -257,6 +275,8 @@ const run = async () => {
   const browser = await chromium.launch()
   const manifest = { ...APP, flows: [] }
   let total = 0
+  /** huella del PNG → qué pantalla la produjo. Ver la comprobación de duplicados. */
+  const huellas = new Map()
 
   for (const flow of FLOWS) {
     const ctx = await browser.newContext({
@@ -300,9 +320,39 @@ const run = async () => {
       const file = `${s.id}.png`
       const preview = `${s.id}.webp`
       const nodo = page.locator(selector).first()
+
+      // Comprobar ANTES de capturar. Este script llegó a publicar tres veces el
+      // home con las etiquetas «Player · episodio gratis», «El acuse de la
+      // noche» y «Player · episodio 13 abierto»: los `act` no habían llegado al
+      // estado, el script lo anotó fielmente como stateKey "home" en el
+      // manifiesto y siguió. El dato para detectarlo estaba ahí desde siempre;
+      // lo que faltaba era compararlo contra algo.
+      const stateKey = await nodo.getAttribute('data-state')
+      if (s.estado && stateKey !== s.estado) {
+        throw new Error(
+          `${flow.id}/${s.id}: esperaba data-state="${s.estado}" y encontré "${stateKey}". ` +
+          'El recorrido no llegó al estado, así que la captura sería de otra pantalla.',
+        )
+      }
+
       await nodo.screenshot({ path: join(dir, file) })
       await nodo.screenshot({ path: join(dir, preview), type: 'webp', quality: 80 })
-      const stateKey = await nodo.getAttribute('data-state')
+
+      // Y una red debajo de la red. `data-state` es grueso a propósito: dos
+      // pantallas legítimamente distintas comparten estado (las dos de f4 son
+      // `wall-passes-capped` y difieren en la racha). Así que además: dos
+      // capturas nunca pueden ser el mismo archivo. Es la comprobación que
+      // habría cazado el bug de f1 sin depender de que alguien se acordara de
+      // escribir el `estado:` correcto.
+      const huella = createHash('md5').update(await readFile(join(dir, file))).digest('hex')
+      if (huellas.has(huella)) {
+        throw new Error(
+          `${flow.id}/${s.id} salió idéntica a ${huellas.get(huella)}. ` +
+          'Son la misma pantalla con dos nombres: una de las dos está mal.',
+        )
+      }
+      huellas.set(huella, `${flow.id}/${s.id}`)
+
       screens.push({
         id: s.id, name: s.name, screenType: s.type,
         patterns: s.patterns, elements: s.elements, note: s.note,

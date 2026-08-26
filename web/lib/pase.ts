@@ -91,16 +91,57 @@ export function nocheDe(ms: number, tz: string): string {
 
 
 /**
+ * Desfase de `tz` respecto de UTC, en ms, en el instante `ms`.
+ *
+ * Existe porque `Date` no sabe operar en otra zona que la del proceso, y este
+ * archivo entero se apoya en que la zona que manda es la **del espectador**.
+ * `formatToParts` en 'en-CA' devuelve el reloj de pared de esa zona; leerlo
+ * como si fuera UTC y restar da el desfase.
+ */
+function desfase(ms: number, tz: string): number {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
+    }).formatToParts(ms).map((x) => [x.type, x.value]),
+  )
+  const pared = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second)
+  return pared - Math.floor(ms / 1000) * 1000
+}
+
+/**
  * La cita: mañana a la hora en que este usuario suele ver.
+ *
+ * **Se calcula en la zona del espectador, no en la del proceso.** Acá decía
+ * `d.setHours(21, 30)`, que fija las 21:30 de la máquina que corre el código.
+ * En mi portátil eso daba 21:30 de Bogotá y parecía correcto; en el runner de
+ * CI, que corre en UTC, daba 21:30 UTC — o sea las 15:30 de Ciudad de México,
+ * que es la zona con la que después se formatea. El sitio publicado anunciaba
+ * una cita a una hora que el usuario no reconoce.
+ *
+ * Es exactamente el riesgo técnico nº 2 que la propuesta enumera —«la ventana
+ * se calcula en la zona del usuario, nunca en UTC»— cometido en el código que
+ * existe para demostrar que se puede evitar.
  *
  * En producción sale de su historial de reproducción; aquí es una constante.
  * Anclar la cita a «+24 h desde el último uso» la deja caer a una hora
  * arbitraria, y una cita a una hora arbitraria no es una cita.
  */
-export function proximaCita(now: number): number {
-  const d = new Date(now)
+export function proximaCita(now: number, tz: string): number {
   const h = Math.floor(HORA_HABITUAL)
-  d.setHours(h, Math.round((HORA_HABITUAL - h) * 60), 0, 0)
-  if (d.getTime() <= now) d.setDate(d.getDate() + 1)
-  return d.getTime()
+  const m = Math.round((HORA_HABITUAL - h) * 60)
+
+  const enLaZona = (ms: number) => {
+    const d = new Date(ms + desfase(ms, tz))
+    let objetivo = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), h, m, 0, 0)
+    if (objetivo <= ms + desfase(ms, tz)) objetivo += 24 * 60 * 60 * 1000
+    return objetivo
+  }
+
+  // Dos pasadas por el cambio de hora: si entre `now` y la cita hay salto de
+  // horario de verano, el desfase con el que se calculó el objetivo no es el
+  // que rige cuando la cita llega. Se recalcula con el desfase del destino.
+  const paredObjetivo = enLaZona(now)
+  const primera = paredObjetivo - desfase(now, tz)
+  return paredObjetivo - desfase(primera, tz)
 }

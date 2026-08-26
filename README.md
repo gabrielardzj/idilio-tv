@@ -20,10 +20,10 @@
 | **Benchmark competitivo** — quién más lo intentó y contra qué chocó | **https://gabrielardzj.github.io/idilio-tv/docs/benchmark.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
 
-> **Sobre Figma:** no hay archivo de Figma. El conector necesita una autorización
-> OAuth que esta sesión no puede hacer, así que el diseño se hizo en **Pencil**.
-> Los detalles y el camino para llevarlo a Figma están en
-> [el archivo de diseño](docs/03-diseno/pencil/) y en [el sistema visual](docs/03-diseno/sistema.md#del-prototipo-a-figma).
+> **El diseño existe en dos herramientas, nativo en las dos:**
+> **[Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X)** — una página con tres
+> secciones: 31 variables con *scope* y *code syntax*, 9 estilos de texto, 4 componentes y las
+> 10 pantallas — y **Pen**, con las mismas 10. Detalle en [el archivo de diseño](docs/03-diseno/pen/).
 
 ---
 
@@ -45,7 +45,9 @@
 
 Medí las **50 series del catálogo** ([censo completo](docs/00-dogfooding/)). La moda es **10 episodios gratis** por serie y el desbloqueo cuesta **15 monedas**, sin excepción. La sesión promedio dura **22 minutos ≈ 14 episodios**.
 
-**Primero: cada serie regala 10 episodios y la sesión promedio dura 14.** No es una demostración —14 es una media, y una media no se descompone en 10 + 4— pero es la lectura más simple de esa diferencia: la sesión no termina cuando el usuario se sacia, termina cuando choca, con hambre para cuatro episodios más. Si es así, los 22 minutos no son salud: son el techo que impone la economía.
+> **Una corrección que dejo a la vista.** Esta portada decía «cada serie regala 10 episodios». Es falso para cinco de las 50: hay una de 7, una de 8, una de 11 y dos de 12 — y una de esas dos es *Pasión a Domicilio*, la serie de casi todos mis ejemplos. El hallazgo aguanta la corrección; lo que no aguanta es enunciarse como regla.
+
+**Primero: la sesión no termina cuando el usuario se sacia. Termina cuando choca.** El bloque gratis típico son 10 episodios —37 de las 41 series con muro— y la sesión promedio llega a 14. No es una demostración: 14 es una media, y una media no se descompone en 10 + 4. Pero es la lectura más simple de esa diferencia, y si es la correcta, los 22 minutos no son salud: son el techo que impone la economía, y el usuario se va con hambre para cuatro episodios más.
 
 Y lo que hay en ese choque, verificado en el paywall real del build 1.20.0:
 
@@ -62,7 +64,7 @@ Un usuario que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, rec
 
 **Segundo, y más grande: hay una salida más barata que pagar.** El catálogo tiene **500 episodios gratis** repartidos en 50 series — el 22% de sus 2.230 episodios. A 14 por sesión son **36 sesiones sin pagar un peso: casi cuatro meses**.
 
-Y ahí el 10 + 4 toma su forma completa: la sesión típica sería *"agoto los 10 gratis de una serie, choco, y me voy a empezar otra"*. **El muro no expulsa al usuario de la app. Lo expulsa de la historia.** Y alguien que rota entre 50 títulos sin apegarse a ninguno no tiene motivo para volver mañana — tiene relación con el catálogo, no con una serie.
+Y ahí la lectura del 10 + 4, si es la correcta, cierra: la sesión típica sería *"agoto los gratis de una serie, choco, y me voy a empezar otra"*. **El muro no expulsa al usuario de la app. Lo expulsa de la historia.** Eso último no depende de la hipótesis: con 500 episodios gratis en el catálogo, saltar es la salida barata, se agote el bloque a los 10 o a los 12. Y alguien que rota entre 50 títulos sin apegarse a ninguno no tiene motivo para volver mañana — tiene relación con el catálogo, no con una serie.
 
 Por eso la respuesta no es recortar los gratis (eso ataca conversión, no stickiness). Es **darle una razón para quedarse en una historia en vez de saltar a la siguiente**.
 

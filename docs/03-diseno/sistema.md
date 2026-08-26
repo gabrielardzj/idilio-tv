@@ -122,6 +122,12 @@ El prototipo es la fuente de verdad y hay dos caminos para llevarlo a Figma, seg
 > superficies declaradas de cada árbol. Corre en el pipeline: un token que baje de 4.5:1 rompe
 > el despliegue.
 
+> **Ya construido.** Los 31 tokens están creados como variables en
+> [el archivo de Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X), cada uno con su
+> *scope* explícito y su **code syntax** apuntando al token CSS real del prototipo
+> (`var(--gold-400)`, `var(--sp-4)`). Dev Mode devuelve el token que **existe** en el código,
+> no uno inventado. Lo de abajo queda como referencia para reimportarlos en otro archivo.
+
 **Para los tokens** — importar [`tokens.json`](tokens.json) con **Tokens Studio**. Quedan como variables de Figma, agrupadas por superficie / texto / marca / moneda / estado / radio / espaciado / movimiento / tipografía.
 
 **Para las pantallas** — dos opciones:

@@ -35,14 +35,35 @@ pinta el delta contra `serverNow`. La acreditación de pases es **perezosa** —
 leer el estado, no con un cron por usuario— tanto en [`lib/pase.ts`](lib/pase.ts) como en
 `accrue_passes()` de Postgres.
 
-**Con una salvedad que conviene decir acá, porque se ve al abrir el link.** En el export
-estático para Pages (`DEPLOY_TARGET=pages`) no hay request: cada ruta se renderiza **en
-tiempo de build**, así que `serverNow` queda horneado en el HTML y el countdown publicado
-es necesariamente una constante — la de `RELOJ_FIJO`, que está explicada más abajo. Anclarlo
-es preferible a dejar la hora real del build, que sería arbitraria y además envejecería sola.
-Lo que el link demuestra es la **forma**: el estado se arma en el servidor y el cliente no
-puede tocarlo. El reloj que corre de verdad se ve en Vercel con SSR, donde este mismo Server
-Component se resuelve por request.
+**Con una salvedad que conviene decir acá, porque se ve al abrir el link.** El sitio publicado
+cuenta contra un **ancla de tiempo fija**, y eso no lo causa el export estático: `estadoDelPase`
+([`lib/supabase/queries.ts`](lib/supabase/queries.ts)) devuelve `serverNow: RELOJ_FIJO`
+siempre, con `DEPLOY_TARGET=pages` y sin él. Lo que fija el reloj es el **fixture**, no el
+hosting, y lo fija a propósito a una hora elegida —las 00:17 de Ciudad de México, por el motivo
+que está más abajo— para poder juzgar el diseño en la franja en que de verdad se usa. El
+contador sí corre: `useCuentaRegresiva` en [`components/Muro.tsx`](components/Muro.tsx) tiene un
+`setInterval` de un segundo, y lo único congelado es el punto de partida.
+
+Lo que el link demuestra es la **forma**, que es lo que estaba en duda: el estado se arma en el
+servidor, el cliente recibe `serverNow` ya decidido y pinta el delta contra él, nunca contra el
+reloj del teléfono. En producción, con Postgres detrás, ese mismo campo sale de `now()` y el
+ancla deja de ser una constante.
+
+> **Acá decía otra cosa, y estaba mal.** La versión anterior explicaba el reloj fijo como un
+> efecto del export estático —«en Pages no hay request, así que `serverNow` queda horneado»— y
+> prometía que el reloj corre de verdad «en Vercel con SSR, donde este Server Component se
+> resuelve por request». Las dos mitades son falsas contra este árbol: `RELOJ_FIJO` no mira
+> `DEPLOY_TARGET`, y la ruta declara `dynamicParams = false` con `generateStaticParams`, así que
+> se prerrenderiza en tiempo de build en los dos destinos. Lo que cambia en producción no es el
+> modo de render: es que el estado deja de salir de un fixture.
+>
+> Y debajo de esa explicación había un bug de verdad. `proximaCita` fijaba la cita con
+> `d.setHours(21, 30)`, o sea a las 21:30 **de la máquina que construye el sitio**: en mi
+> portátil daba la hora correcta y en el runner de CI, que corre en UTC, el link publicaba una
+> cita a las 15:30 de Ciudad de México, que es la zona con la que después se formatea. Es
+> exactamente el riesgo técnico nº 2 de la propuesta —«la ventana se calcula en la zona del
+> usuario, nunca en UTC»— cometido en el código que existe para demostrar que se puede evitar.
+> Está corregido en [`lib/pase.ts`](lib/pase.ts): la cita se resuelve en la zona del espectador.
 
 ### 2 · El esquema que hay que agregar a la base
 
@@ -95,14 +116,14 @@ del muro sean rutas reales y prerrenderizadas en vez de ramas de código que nad
 
 El reloj está anclado a las **00:17 de Ciudad de México** (`RELOJ_FIJO`). No es capricho: el 54%
 de las sesiones de Idilio caen entre 11 p.m. y 2 a.m., que es la franja en la que hay que juzgar
-este diseño. En SSR se reemplaza por `now()` de Postgres.
+este diseño. En producción, con Postgres detrás, se reemplaza por `now()`.
 
 ## Correrlo
 
 ```bash
 npm install
 npm run dev              # http://localhost:5301
-npm run build            # SSR, como en Vercel
+npm run build            # build de Vercel (sin `output: 'export'`)
 DEPLOY_TARGET=pages npm run build   # export estático, como en Pages
 npm run check-economy    # verifica que no divergió del modelo del prototipo
 ```

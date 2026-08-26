@@ -181,9 +181,12 @@ const CIERRA_CITADA = /<!--\s*\/cifras-citadas\s*-->/
  *  corrección —que siempre dice "decía", "primera versión" o "antes"—, nada más. */
 const OBSOLETOS = [
   ...(EXPORT ? [
-    // «6 pantallas + hoja de sistema» son las del archivo de diseño, no las del
-    // export: esa frase es la única exención, y es literal.
-    { patron: /(\d+) pantallas/, salvo: /dec[ií]a|primera versión|antes|hoja de sistema/i,
+    // El archivo de DISEÑO tiene su propio conteo, distinto al del export: son
+    // dos cosas que se cuentan por separado. Las exenciones son literales —la
+    // frase exacta con la que cada documento nombra al archivo de diseño— para
+    // que ningún conteo del export se escape por parecerse.
+    { patron: /(\d+) pantallas/,
+      salvo: /dec[ií]a|primera versión|antes|hoja de sistema|archivo de diseño|con las mismas|y las\s*$|pantallas del diseño/i,
       ok: m => +m[1] === EXPORT.pantallas,
       porque: m => `el export tiene ${EXPORT.pantallas} pantallas, no ${m[1]}` },
     { patron: /(\d+) flujos/, salvo: NARRA,

@@ -28,9 +28,9 @@
 
 **Un detalle de catálogo que el diagnóstico no tenía.** En esa categoría Idilio colocó **tres de los
 seis títulos prenominados** —*Chamado na Madrugada*, *Dulce Destino* y *Pasión a Domicilio*—, dos de
-los cuatro nominados finales, y se llevó el premio. Y las dos que llegaron a la terna son, según el
-censo, **series enteramente gratis**: dos de las nueve que no tienen muro. La muestra gratuita de la
-app incluye su original premiado. Es una decisión de catálogo deliberada, no un descuido, y conviene
+los cuatro finalistas, y se llevó el premio. Y esas dos que llegaron a la instancia final son, según
+el censo, **series enteramente gratis**: dos de las nueve que no tienen muro. La muestra gratuita
+de la app incluye su original premiado. Es una decisión de catálogo deliberada, no un descuido, y conviene
 leerla así cuando se discuta qué se regala.
 
 **El dato que cambia el diagnóstico.** La ficha de App Store del build 1.20.0 lista las compras
@@ -51,11 +51,23 @@ el producto de mayor valor de la economía también.
 
 Y hay un segundo problema, de precio, que no hace falta salir del catálogo para verlo. El pase
 semanal cuesta **$7.99**. La serie mediana de Idilio —40 episodios bloqueados a 15 monedas— cuesta
-**600 monedas ≈ $6,63**. Es decir: **una semana de suscripción sale más cara que terminar una serie
-entera comprándola.** El propio muro publica un precio más bajo para el mismo resultado, y lo hace
-en la única pantalla donde el usuario está mirando el precio. No es un problema de cadencia —en
-Latinoamérica el plan semanal se lleva el 29 % de los ingresos de suscripción, la proporción más
-alta de cualquier región según RevenueCat—: es un problema del número.
+**600 monedas**, y cuántos dólares son esas 600 monedas depende del escalón que compre el usuario.
+El censo convierte al escalón de 180 monedas por $1.99 —el que muestra el paywall nativo del build
+1.20.0, y el que usa el anexo de dogfooding—: con esa tasa la serie mediana sale **≈ $6,63** y el
+pase semanal queda **un 20 % más caro que terminar la serie entera comprándola**. En el peor
+escalón de la tabla de acá arriba —el de 75 monedas, ocho paquetes para juntar 600— la misma serie
+sale **≈ $7,92**, y ahí es un empate técnico. En ningún punto de la escalera la semana de
+suscripción sale más barata que la serie completa. El propio muro publica un precio igual o más
+bajo para el mismo resultado, y lo hace en la única pantalla donde el usuario está mirando el
+precio. No es un problema de cadencia —en Latinoamérica el plan semanal se lleva el **29 % de los
+ingresos de suscripción de la región**, según RevenueCat—: es un problema del número.
+
+*(Dos correcciones acá. La primera: esto cerraba en «$6,63» a secas, y la tabla de IAP de arriba le
+daba al lector con qué desarmarlo —en el escalón de 75 monedas la cuenta empata—. El $6,63 no es un
+precio, es una conversión, y hay que decir con qué tasa se hace. La segunda: decía que el 29 % es
+«la proporción más alta de cualquier región». La ficha de ese reporte, en §5.7, trae el 29 % de
+Latinoamérica y no un ranking de regiones por plan semanal: el superlativo era mío, y el argumento
+no lo necesitaba. Lo saqué también de la §5.5, que lo repetía con otras palabras.)*
 
 *(Nota: la ficha registra 4.9★ con 36 valoraciones en App Store US; el dogfooding había medido
 4.7★ / 28 K en Google Play. Son tiendas y bases distintas; ambos números son correctos, y ambos se
@@ -66,14 +78,21 @@ cientos de miles de usuarios activos mensuales", sin dar un número.)*
 
 ## 5.2 · La escala de la categoría: el problema de Idilio es el problema de todos
 
-Antes de comparar mecánicas, hay que fijar la vara. Los datos de retención de Sensor Tower para
-la categoría de short drama (12 meses a abril-2026):
+Antes de comparar mecánicas, hay que fijar la vara. La retención de la categoría de short drama
+(12 meses a abril-2026), tal como la publica **Adjoe**:
 
 | | Categoría global | China | DramaBox |
 |---|---|---|---|
 | **D1** | 26,9 % | 28,8 % | 27,5 % |
 | **D7** | 8,6 % | 11,5 % | 7,8 % |
 | **D14** | 5,6 % | 6,8 % | 5,0 % |
+
+*(Acá decía «los datos de retención de Sensor Tower». Es un cruce mío: la única fuente que este
+anexo tiene para estos tres números es el blog de Adjoe (§5.7), y Sensor Tower es la fuente de los
+ingresos de la categoría, que están más abajo. Importa porque Adjoe no es un tercero neutral —vende
+engagement recompensado a estas mismas apps—, así que la tabla vale como orden de magnitud del
+sector, no como medición independiente, y toda esta sección se apoya en ella. Queda anotado
+también en [§5.6](#56--lo-que-no-pude-verificar).)*
 
 **Esto reencuadra el diagnóstico.** Un DAU/MAU de 0,33 no es una anomalía de Idilio: es el techo
 de una categoría donde **el 94 % de los usuarios no llega al día 14**. La categoría entera está
@@ -138,19 +157,22 @@ retención de §5.2, prácticamente no existe en ninguna de estas apps.
 Es la fuente gratuita dominante de la categoría. Su costo está documentado en las reseñas:
 *"los anuncios duran más que el episodio que desbloquean"*.
 
-*Aviso de procedencia:* el tope de DramaBox —15 anuncios diarios × 2 monedas, unos seis episodios
-por día— es el dato peor sostenido de esta sección. Sale de un blog de tutoriales que a su vez cita
-la guía de una VPN: es de tercera mano. Lo dejo porque es lo mejor disponible y porque ninguna de
-estas apps publica sus topes, no porque esté confirmado.
+*Aviso de procedencia:* el tope de DramaBox —**15 anuncios diarios ≈ 30 monedas**— es el dato peor
+sostenido de esta sección. Sale de un blog de tutoriales que a su vez cita la guía de una VPN: es
+de tercera mano. Lo dejo porque es lo mejor disponible y porque ninguna de estas apps publica sus
+topes, no porque esté confirmado. *(Acá decía además «unos seis episodios por día». Lo saqué: para
+llegar a seis episodios con 30 monedas haría falta un precio de 5 monedas por episodio que no está
+en ninguna fuente de este anexo. Era una cifra inventada dentro del párrafo que existe para avisar
+que el dato es de tercera mano.)*
 
 ### Familia 3 · Tareas rotativas ("rewards center")
 
-**ReelShort** rota micro-encargos: ver episodios, compartir en redes, **activar notificaciones
-push**, invitar amigos. Es la familia más flexible y la que más se parece a un metajuego real,
-porque el diseñador elige qué conducta premiar cada semana.
+Las fuentes secundarias describen a **ReelShort** rotando micro-encargos: ver episodios, compartir
+en redes, **activar notificaciones push**, invitar amigos. Sería la familia más flexible y la que
+más se parece a un metajuego real, porque el diseñador elige qué conducta premiar cada semana.
 
-Detalle que importa: una de las tareas premiadas es **activar las notificaciones**. Si es así, la
-categoría entera sabe que su motor de retorno no es la racha, es el push.
+El detalle que importaría es que una de las tareas premiadas fuera **activar las notificaciones**:
+de ser así, la categoría entera sabría que su motor de retorno no es la racha, es el push.
 
 > **Hasta dónde llega la evidencia.** Fui a la fuente de primera mano —la propia ReelShort, en su
 > página de cómo conseguir monedas gratis— y sostiene dos cosas de este apartado con sus palabras:
@@ -168,9 +190,11 @@ categoría entera sabe que su motor de retorno no es la racha, es el push.
 **Hongguo Short Drama** (ByteDance, China) es el caso más grande del mundo y no aparece en
 ninguna comparativa occidental: **304 M de MAU en febrero de 2026** (QuestMobile), #1 en
 Entretenimiento del App Store chino, y **unos 125 minutos diarios por usuario** — más que iQIYI.
-Las fichas enciclopédicas todavía repiten **1,38 h/día**, pero ese número es de marzo de 2024 y no
-es contemporáneo del de usuarios: leídos juntos, cuentan un año que no existió. Su modelo es el
-opuesto exacto al de Idilio:
+Las fichas enciclopédicas todavía repiten **1,38 h/día**, pero ese número es de marzo de 2024 y el
+de usuarios es de febrero de 2026: entre los dos hay **casi dos años**, y la misma ficha mezcla
+además un MAU de marzo de 2025 (173 M) sin decir que no es contemporáneo de nada de lo anterior.
+Puestos en la misma frase, describen una app que nunca existió así. Su modelo es el opuesto exacto
+al de Idilio:
 
 - **Todo gratis, financiado por publicidad.** No hay muro de monedas.
 - El usuario **gana monedas de oro viendo** y las **convierte en dinero real** ("regístrate 7
@@ -178,7 +202,7 @@ opuesto exacto al de Idilio:
 - Onboarding con credenciales de Douyin, lo que le abarata la adquisición.
 
 Es el mismo mecanismo de "tarea → recompensa por tiempo de pantalla" que la Comisión Europea
-**prohibió permanentemente** en TikTok Lite (§5.4, D5). Opera a escala de 300 M de usuarios en
+**prohibió permanentemente** en TikTok Lite (§5.4, D5). Opera a escala de esos **304 M de MAU** en
 una jurisdicción donde eso es legal. **La mecánica más eficaz de la categoría es, literalmente,
 la que no se puede exportar a Europa.**
 
@@ -205,7 +229,8 @@ La familia menos explorada y la más interesante para Idilio, porque **no requie
   ejemplo más sólido de la familia, porque sale del comunicado oficial de TelevisaUnivisión y no
   de una reseña. Convierte el estreno en cita sin tocar la economía.
 - **GoodShort** publica decenas de episodios nuevos **cada día** para que siempre haya movimiento
-  en el catálogo.
+  en el catálogo. **Sin fuente que lo sostenga:** no está en la que lo citaba, así que va acá
+  como descripción, no como caso.
 - Toda la categoría corre **push de continuidad**: *"tu próximo episodio te está esperando"* a
   las 24 h de inactividad con una serie a medias, y *"el final de [serie] acaba de estrenarse"*
   para quienes llevan 3+ días sin abrir.
@@ -217,8 +242,10 @@ Y es compatible con el Pase de la Noche, no alternativa a él.
 > completa y convocar a verla acompañado—. Fui a buscarlo y no lo pude sostener: no está en la
 > fuente que lo citaba, ni en su ficha de App Store, ni en la de Google Play, ni aparece por
 > búsqueda directa del término. Era el ejemplo más vistoso de esta familia y por eso mismo había
-> que verificarlo. La familia se sostiene igual con ViX Micro y con el push de continuidad, que
-> son los dos casos que sí resisten.
+> que verificarlo. Le pasa lo mismo, en menor escala, a las "decenas de episodios nuevos cada día"
+> de GoodShort: tampoco están en la fuente que las citaba, y por eso quedan marcadas arriba. La
+> familia se sostiene igual con ViX Micro y con el push de continuidad, que son los dos casos que
+> sí resisten — la lista tiene tres viñetas y dos casos, y conviene que se lea así.
 
 ---
 
@@ -254,9 +281,13 @@ no se lee como precio justo — se lee como el precio de estar en la app equivoc
 Y refuerza la intervención por un camino inesperado: si el diferencial de ViX es "todo incluido",
 lo que Idilio necesita no es abaratar el episodio, sino **que el usuario tenga una relación con
 una historia** — algo que ViX, con 145 títulos y distribución repartida en cuatro redes sociales,
-no está construyendo. La escala del formato confirma que la pelea vale: Variety proyecta
-**US$26.000 M anuales para 2030**, y una serie completa se produce en una semana y se explota
-durante un mes.
+no está construyendo. La escala del formato confirma que la pelea vale: **US$26.000 M anuales para
+2030** —una proyección de Variety, vía CNN en Español, que es la nota que la reproduce y la que
+está en §5.7—, y una serie completa se produce en una semana y se explota durante un mes.
+
+*(Acá la proyección colgaba de Variety a secas mientras la lista de fuentes la tenía bajo CNN: el
+cuerpo y §5.7 se atribuían la misma cifra a dos medios distintos. Es de Variety, y llegué a ella
+por CNN; se dice así.)*
 
 ---
 
@@ -311,9 +342,13 @@ vuelves a cero (ReelShort lo hace explícito). Fuera de la categoría hay dos co
 "day start" configurable de Duolingo — la diferencia es que aquí no se le pide al usuario que lo
 configure, se infiere del comportamiento (54 % de sesiones entre 11 p.m. y 2 a.m.). Y hay evidencia
 externa apuntando en la misma dirección: el **70 % de los espectadores de MyDrama** —la app de
-Holywater— dice ver **en la cama antes de dormir**, sobre una encuesta a **2.737 usuarios** de esa
-app (mayo de 2026). Es una sola app, no la categoría entera; con esa reserva, confirma que la
-unidad correcta es la noche.
+Holywater— dice ver **en la cama antes de dormir**, sobre una encuesta a **2.737 usuarios de
+MyDrama, publicada en julio de 2026**. Es una sola app, no la categoría entera; con esa reserva,
+confirma que la unidad correcta es la noche.
+
+*(Acá decía «mayo de 2026» y en §5.5 «jul-2026»: el mismo dato aparecía fechado en dos meses
+distintos. El mes de campo no lo pude verificar en ninguna parte — lo único que sostiene la fuente
+es la fecha de publicación del comunicado, julio de 2026. Es la que uso en las tres apariciones.)*
 
 **Lo que el diseño debe evitar:** monetizar el comodín. Es tentador —Snapchat demostró que se
 puede— pero convierte la ansiedad en línea de ingreso, y ese es exactamente el patrón que la
@@ -367,8 +402,8 @@ Tres precedentes, en tres jurisdicciones, todos posteriores a 2024:
   virtual dispara escrutinio regulatorio**.
 - **China, 2026: ya no es un borrador.** La NRTA publicó a consulta las *Medidas para el desarrollo
   de microdramas* el 24-jun-2026 y las **aprobó el 27 de julio** (orden n.º 16); **entran en vigor
-  el 1 de septiembre de 2026**, cinco días después de la fecha de este documento. El regulador
-  chino entró a normar el formato entero —clasificación de contenidos, revisión, aprobación de la
+  el 1 de septiembre de 2026**, seis días después de la fecha del censo con el que cierra este
+  entregable (26-ago-2026). El regulador chino entró a normar el formato entero —clasificación de contenidos, revisión, aprobación de la
   distribución— y de paso tocó la economía: el **artículo 37 prohíbe "usar modelos algorítmicos que
   induzcan al usuario a la adicción o al consumo excesivo"**, y el **artículo 40 obliga a quien
   ofrezca contenido de pago a "informar con claridad la información relativa al cobro"**. Es, casi
@@ -404,7 +439,7 @@ Eso sigue siendo original de este diagnóstico.
 
 | Decisión del diseño | Evidencia externa que la sostiene |
 |---|---|
-| Contar noches, no días | El **70 % de los espectadores de MyDrama** ve **en la cama antes de dormir** — encuesta de Holywater/Owl & Co a 2.737 usuarios de esa app (jul-2026). Una sola app, pero medida |
+| Contar noches, no días | El **70 % de los espectadores de MyDrama** ve **en la cama antes de dormir** — encuesta de Holywater/Owl & Co a 2.737 usuarios de MyDrama, publicada en julio de 2026. Una sola app, pero medida |
 | Rollover a las 5 a.m., no a medianoche | Duolingo permite configurar el "day start" precisamente por esto |
 | Bajar la barra: la racha se acredita al **terminar un episodio** | Duolingo: casi el **40 %** de quienes entraban dos días seguidos sin racha tenía la meta diaria más alta. Separar racha y meta subió **+40 %** las rachas de 7+ días |
 | El comodín que se consume solo | El *streak freeze* como red de seguridad, no como castigo |
@@ -417,18 +452,24 @@ Eso sigue siendo original de este diagnóstico.
 1. **El muro debe ofrecer la suscripción.** El producto ya tiene pase semanal ($7.99) y mensual
    ($14.99) y no los muestra en el momento de máxima intención. Esto entra en el diagnóstico
    como falla, y en el rediseño del muro como tercera salida junto al pase y al pack.
-2. **El pase semanal está mal calibrado contra el propio catálogo.** $7.99 la semana contra $6,63
-   que cuesta terminar la serie mediana comprando sus episodios: la suscripción sale más cara que
-   el resultado que promete. La cadencia no es el problema —Latinoamérica es la región que más
-   compra plan semanal, 29 % de sus ingresos de suscripción—; el número sí. No es materia de esta
-   intervención, pero es un hallazgo de pricing que el equipo debería mirar.
+2. **El pase semanal está mal calibrado contra el propio catálogo.** $7.99 la semana contra los
+   ≈ $6,63 que cuesta terminar la serie mediana comprando sus episodios al escalón de 180 monedas:
+   la suscripción sale un 20 % más cara que el resultado que promete, y en el peor escalón de la
+   escalera empata (§5.1). La cadencia no es el problema —el plan semanal se lleva el 29 % de los
+   ingresos de suscripción de Latinoamérica—; el número sí. No es materia de esta intervención,
+   pero es un hallazgo de pricing que el equipo debería mirar.
 3. **La barra de éxito baja y se vuelve relativa.** Con D7 de categoría en 8,6 %, la promesa
    honesta es mover D7 unos puntos, no duplicar D30. Nadie en el sector lo ha logrado.
 4. **Hay que escribir la distinción anti-DSA.** Una línea en el documento de producto: se premia
    la finalización de una unidad narrativa, no el tiempo de pantalla; con techo duro y sin venta
    de rescates.
 5. **No monetizar el comodín.** Snapchat probó que se puede cobrar el rescate —99 centavos a partir
-   del segundo— y probó también lo que eso cuesta en reputación.
+   del segundo—; del otro lado del mostrador, lo que hay documentado es que **su propio personal
+   advirtió internamente** por el efecto de estas mecánicas sobre la salud mental adolescente y la
+   empresa siguió adelante (TBIJ, §5.7). *(Acá decía que Snapchat «probó lo que eso cuesta en
+   reputación». No es lo que aguanta la fuente: no hay medición de costo reputacional, hay
+   advertencias internas desoídas. Alcanza para no querer el precedente; no alcanza para afirmar
+   que le salió caro.)*
 6. **Hipótesis para la ola 2:** que la racha larga premie con **días de suscripción** en vez de
    más episodios (el patrón de GoodShort). Convierte al habitual en suscriptor probador.
 7. **Cambiar la unidad de la economía es una reescritura de reglas, y hay que tratarla como tal.**
@@ -452,20 +493,23 @@ Eso sigue siendo original de este diagnóstico.
 
 ## 5.6 · Lo que no pude verificar
 
-- **La retención propia de Idilio** contra los benchmarks de Sensor Tower. Los números de
+- **La retención propia de Idilio** contra los benchmarks de categoría. Los números de
   categoría son públicos; los de Idilio, no. La comparación de §5.2 es indicativa.
 - **Si el pase semanal/mensual aparece en algún punto del flujo nativo.** La ficha de App Store
   lo lista como IAP; el muro del build 1.20.0 no lo mostró en el dogfooding. Puede estar en otra
   superficie que no recorrí.
 - **Los números de Adjoe Playtime** (16,3 vs 5,0 días de retorno) vienen del proveedor del
-  producto. Los cito como reclamo comercial, no como dato independiente.
+  producto. Los cito como reclamo comercial, no como dato independiente. **Y la tabla D1/D7/D14
+  de §5.2 sale del mismo blog**, aunque el cuerpo la atribuía a Sensor Tower hasta esta pasada:
+  es la fuente más cargada de todo el anexo sosteniendo su sección más citada.
 - **La mecánica exacta de "retos" y video recompensado dentro de Idilio.** Sigue apoyada solo en
   reseñas públicas de Google Play, igual que en el diagnóstico.
 - **Ninguna app de series verticales con un pase gratuito diario asignable por serie.**
-  Amplié la búsqueda a quince apps (§5.3) y la conclusión se sostiene: la categoría usa check-in,
-  anuncios, tareas rotativas, suscripción y programación — **ninguna usa espera**. Lo más cercano
-  es el "episodio gratis diario" que reparten DramaBox, ReelShort y ShortMax, pero es una
-  asignación que hace el sistema, no un recurso que el usuario dirige. La espera vive en el
+  Amplié la búsqueda a las trece apps que nombra §5.3 y la conclusión se sostiene: la categoría usa
+  check-in, anuncios, tareas rotativas, ver-para-ganar y programación —las cinco familias del
+  censo— pero **ninguna usa espera**. Lo más cercano es el "episodio gratis diario" que reparten
+  DramaBox, ReelShort y ShortMax, pero es una asignación que hace el sistema, no un recurso que el
+  usuario dirige. La espera vive en el
   vecindario de al lado (Piccoma, Pocket FM), no en este. Es a la vez la oportunidad y el motivo
   de que no haya precedente directo que lo respalde.
 - **Si ViX Micro tiene alguna mecánica de hábito propia dentro de la app.** Verifiqué su modelo de
@@ -477,6 +521,9 @@ Eso sigue siendo original de este diagnóstico.
   App Store, ni en la de Google Play, ni aparecen por búsqueda directa. Los saqué de §5.3 y de la
   recomendación 9. Era el ejemplo más vistoso de la Familia 5, y por eso mismo había que
   verificarlo.
+- **Las "decenas de episodios nuevos cada día" de GoodShort.** Tampoco están en la fuente que las
+  citaba. Quedan en §5.3 marcadas como lo que son, porque la Familia 5 se sostiene con los otros
+  dos casos y borrarlas ocultaría que la lista tiene tres viñetas y dos casos verificados.
 - **El *rewards center* de ReelShort con tareas rotativas**, y en particular que activar las
   notificaciones sea una de las premiadas. La página de primera mano de ReelShort no lo menciona
   —sí menciona, con sus palabras, que fallar un día devuelve la racha al día 1, y los 15–20
@@ -504,15 +551,42 @@ Eso sigue siendo original de este diagnóstico.
 ## 5.7 · Fuentes
 
 > **Cómo leer esta lista.** No todas las fuentes pesan lo mismo y conviene saber cuál se está
-> pisando. **Nivel 1 — reguladores, empresas y prensa de industria:** Comisión Europea, NRTA,
-> Global Times, Variety, C21, TechCrunch, KED Global, QuestMobile, RevenueCat, Sensor Tower (vía
-> Marketing Dive), los blogs de producto de Duolingo y Snapchat, las fichas de las tiendas.
-> **Nivel 2 — blogs de SEO y content marketing** (unstar, filmustage, qwe.edu.pl, vodlix,
-> kanopylabs, foxdata): sostienen datos operativos de apps de la competencia —topes de anuncios,
-> escalones de check-in, caducidades— que ninguna de esas apps publica y que no están en ningún
-> otro lado. No los descarto por eso: los uso para describir mecánicas, no para afirmar cifras de
-> negocio, y cada vez que un dato del anexo se apoya solo en el nivel 2 está dicho en el texto.
-> Decir de qué nivel es cada cosa es lo que hace utilizable este anexo.
+> pisando. Cada entrada de abajo cae en uno de estos cuatro niveles, sin excepción:
+>
+> **Nivel 1 — quien hizo, midió o reguló la cosa, hablando de ella.** NRTA, Comisión Europea,
+> QuestMobile, RevenueCat, Sensor Tower (vía Marketing Dive), Mintegral/Insightrackr (vía Advanced
+> Television y MARKETECH APAC), el comunicado de TelevisaUnivisión, el de Premios India Catalina,
+> el de Holywater/Owl & Co en GlobeNewswire —y la landing de su reporte, que pide formulario y no
+> publica los datos—, el blog de producto de Duolingo, el newsroom y el centro de ayuda de
+> Snapchat, la página de monedas gratis de ReelShort, el centro de ayuda de Wattpad, y las fichas
+> de App Store y Google Play (Idilio, FlexTV, NetShort).
+>
+> **Nivel 2 — prensa reportando sobre terceros.** Variety, C21, TechCrunch, KED Global, Global
+> Times, CNN en Español, Infobae, Rio Times, PRODU, Stream TV Insider, Business of Apps, The Asia
+> Business Daily, 北京商报, 17173, kr-asia, Comics Beat, Kcomicsbeat, GeekWire, What's on Netflix.
+> Y TBIJ, que es investigación sobre documentos internos y pesa más que el resto de esta fila.
+>
+> **Nivel 3 — blogs de SEO y content marketing, agregadores y material de proveedor:** unstar,
+> filmustage, qwe.edu.pl, vodlix, kanopylabs, foxdata, Apptitude, EngageFabric, Design Compass,
+> GrowthX, Value for Startups, 199IT (que replica la cifra de QuestMobile) y **Adjoe**, que además
+> vende a esta categoría el producto que sus propios números promocionan. Sostienen datos
+> operativos de apps de la competencia —topes de anuncios, escalones de check-in, caducidades— que
+> ninguna de esas apps publica y que no están en ningún otro lado. No los descarto por eso: los uso
+> para describir mecánicas, no para afirmar cifras de negocio, y cada vez que un dato del anexo se
+> apoya solo en este nivel está dicho en el texto. La excepción incómoda es la tabla de retención
+> de §5.2, que es una cifra de negocio y cuelga de Adjoe: está anotado ahí y en §5.6.
+>
+> **Nivel 4 — enciclopedias colaborativas: Wikipedia y Baidu Baike.** Las uso para hitos y fechas,
+> nunca para cifras de uso. *(Acá tenía una vara doble: descalificaba a Baidu Baike por mezclar un
+> MAU de marzo de 2025 con un tiempo de uso de marzo de 2024, y al mismo tiempo apoyaba el cierre
+> de Piccoma Francia en Wikipedia sin decir que era el mismo tipo de fuente. Lo es. El cierre
+> además está en Design Compass, en Kcomicsbeat y en The Asia Business Daily, así que no cuelga
+> de la enciclopedia.)*
+>
+> Decir de qué nivel es cada cosa es lo que hace utilizable este anexo. *(La versión anterior de
+> este bloque nombraba doce fuentes en el nivel 1 y seis en el nivel 2 sobre una lista de medio
+> centenar de entradas: prometía un orden que no daba. Adjoe, que sostiene toda la §5.2, era una
+> de las que quedaban sin clasificar.)*
 
 **Idilio TV**
 - [C21Media · Colombia's Idilio raises US$5m](https://www.c21media.net/news/colombias-idilio-raises-us5m-to-scale-microdrama-platform/) — ronda, inversores, fundadora, GammaTime
@@ -520,13 +594,13 @@ Eso sigue siendo original de este diagnóstico.
 - [Google Play · Idilio Tv: Microdramas Virales](https://play.google.com/store/apps/details?id=com.stvrae.idilio) — descargas, reseñas
 - [Rio Times · Colombia app raises $5M for microdramas](https://www.riotimesonline.com/colombia-idilio-microdrama-app-5-million-seed-round-june-2026/) — países, lanzamiento; los MAU los da como "unos pocos cientos de miles", sin cifra
 - [Infobae · Ganadores de la edición 42 de los Premios India Catalina](https://www.infobae.com/colombia/2026/04/19/edicion-42-de-los-premios-india-catalina-en-cartagena-esta-es-la-lista-completa-de-los-ganadores-2026/) — *Chamado na Madrugada* gana Mejor Serie de Ficción Vertical (Cartagena, 18-abr-2026)
-- [Infobae · Nominados de la edición 42](https://www.infobae.com/colombia/2026/03/25/premios-india-catalina-2026-conozca-la-lista-completa-de-nominados-en-la-edicion-42/) — la terna vertical: dos de los cuatro nominados finales son de Idilio (*Chamado na Madrugada* y *Dulce Destino*)
+- [Infobae · Nominados de la edición 42](https://www.infobae.com/colombia/2026/03/25/premios-india-catalina-2026-conozca-la-lista-completa-de-nominados-en-la-edicion-42/) — los cuatro finalistas de ficción vertical: dos son de Idilio (*Chamado na Madrugada* y *Dulce Destino*)
 - [Premios India Catalina · Comunicado oficial de prenominados, edición 42](https://premiosindiacatalina.com/comunicado-oficial-prenominados-42-premios-india-catalina-de-la-industria-audiovisual/) — los seis prenominados de ficción vertical, tres de ellos de Idilio (se suma *Pasión a Domicilio*)
 
 **Datos de categoría**
 - [Marketing Dive · Microdrama apps stand out on mobile (Sensor Tower, State of Mobile 2026)](https://www.marketingdive.com/news/microdrama-apps-stand-out-on-mobile-heres-what-the-numbers-say/812610/) — $2.980 M, +115 %, y el ranking por crecimiento frente al ranking por ingresos absolutos
 - [Adjoe · Short drama apps' hyper-growth problems](https://adjoe.io/blog/short-drama-apps-rewarded-engagement/) — retención D1/D7/D14, concentración 68,8 %, Playtime
-- [GlobeNewswire · Holywater Tech y Owl & Co publican el primer reporte de audiencia de series verticales](https://www.globenewswire.com/news-release/2026/07/23/3332522/0/en/HOLYWATER-TECH-and-Owl-Co-Publish-First-Industry-Report-on-the-Vertical-Series-Audience.html) — **el 70 % es de espectadores de MyDrama**, sobre una encuesta de mayo-2026 a 2.737 usuarios de esa app; 13,1 h/semana
+- [GlobeNewswire · Holywater Tech y Owl & Co publican el primer reporte de audiencia de series verticales](https://www.globenewswire.com/news-release/2026/07/23/3332522/0/en/HOLYWATER-TECH-and-Owl-Co-Publish-First-Industry-Report-on-the-Vertical-Series-Audience.html) — **el 70 % es de espectadores de MyDrama**, sobre una encuesta a 2.737 usuarios de MyDrama, publicada en julio de 2026; 13,1 h/semana. **El comunicado no da mes de campo**
 - [Variety · Men flock to microdramas (Owl & Co study)](https://variety.com/2026/tv/news/microdramas-men-romance-sunday-holywater-my-drama-my-muse-1236819953/) — la misma encuesta, en prensa de industria
 - [Holywater Tech + Owl & Co · The State of Microdrama 2026](https://www.holywater.tech/report) — la landing del reporte: pide formulario, **los datos no están en la página**
 - [Business of Apps · Bite-sized bingeing](https://www.businessofapps.com/insights/bite-sized-bingeing-inside-the-explosion-of-short-drama-apps) — panorama de la categoría
@@ -535,7 +609,7 @@ Eso sigue siendo original de este diagnóstico.
 
 **La capa latinoamericana**
 - [TelevisaUnivision · ViX's microdramas premiere](https://corporate.televisaunivision.com/press/2025/07/21/microdramas/) — niveles de suscripción, estreno en redes, cadencia semanal, cita de Rafael Urbina
-- [CNN en Español · De la televisión al celular: el auge de las teleseries verticales en América Latina](https://abc17news.com/cnn-spanish/2026/07/22/de-la-television-al-celular-el-auge-de-las-teleseries-verticales-en-america-latina/) — ViX, Globo, Telefe, Canal 13, TVN, César Opazo, proyección de US$26.000 M para 2030
+- [CNN en Español · De la televisión al celular: el auge de las teleseries verticales en América Latina](https://abc17news.com/cnn-spanish/2026/07/22/de-la-television-al-celular-el-auge-de-las-teleseries-verticales-en-america-latina/) — ViX, Globo, Telefe, Canal 13, TVN, César Opazo, y la proyección de US$26.000 M para 2030 que CNN atribuye a Variety: es por acá que entra al anexo
 - [PRODU · TelevisaUnivisión presenta ViX microdramas](https://www.produ.com/television/noticias/televisaunivision-presenta-vix-micro-contenido-corto-y-serializado-para-consumo-movil/)
 - [Stream TV Insider · A look at TelevisaUnivision's foray into microdramas](https://www.streamtvinsider.com/content/look-televisaunivisions-foray-microdramas-vix)
 

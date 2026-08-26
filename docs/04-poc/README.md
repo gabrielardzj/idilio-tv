@@ -34,14 +34,16 @@ Y el muro, con sus trece estados:
 | 13 | Mi economía | Fuentes, sumidero y posición, en una sola vista |
 
 Y tres más en [`web/`](../../web/), sobre el stack real, que son **rutas prerrenderizadas** y no
-estados de un panel: el pase listo, la cita de 17 h con «Avísame», y el contador de 42 minutos
+estados de un panel: el pase listo, la cita de mañana con «Avísame», y el contador de 42 minutos
 donde los segundos vuelven a ser el héroe.
 
 **El recorrido completo se verifica solo.** `npm run recorrer` maneja el prototipo como una persona —home → una serie sin empezar → ver los gratis → chocar con el muro— y comprueba once cosas, entre ellas que el muro abra con la historia antes que con el precio. Corre en el pipeline.
 
 Esa comprobación ya encontró un bug que el panel escondía: **el episodio 1 de cualquier serie sin empezar abría el muro en vez del player**, porque la condición miraba los episodios vistos y no los gratis. Saltar a un estado con el panel demuestra que el estado existe, no que se pueda llegar a él.
 
-**Es un prototipo funcional, no un clickable.** El estado vive en un reducer real (`src/lib/state.ts`), el countdown corre contra un reloj, el saldo se descuenta, la racha avanza, el comodín se consume solo y el pase entra en cooldown de 24 h. Se puede llegar a cualquier estado jugando, sin usar el panel lateral.
+**Es un prototipo funcional, no un clickable.** El estado vive en un reducer real (`src/lib/state.ts`), el countdown corre contra un reloj, el saldo se descuenta, la racha avanza, el comodín se consume solo y la emisión está topada en un pase por noche. Se puede llegar a cualquier estado jugando, sin usar el panel lateral.
+
+*Acá decía «y el pase entra en cooldown de 24 h», que describía la mecánica vieja tres párrafos antes de que [§4.4](#44-cinco-cosas-que-cambiaron-por-verificar-y-por-usar-el-prototipo) anuncie que se cambió.* En `src/lib/economy.ts` el `PASS_COOLDOWN_MS` sobrevive como **techo de emisión** —no se genera más de un pase por noche—, no como el reloj que acredita: eso pasa al terminar un episodio, y la cita de mañana la ancla `HORA_HABITUAL`.
 
 ## 4.2 Cómo correrlo
 
@@ -70,15 +72,19 @@ Todo lo económico está verificado en el producto en producción, no inventado:
 | Precio de la serie mediana | 600 monedas ≈ $6.63 | 40 bloqueados × 15 |
 | Paquetes actuales | $0.99/180 · $1.99/180 · $3.99/375 | Captura oficial del paywall (build 1.20.0) |
 
-**Y las cifras se verifican solas.** `npm run verificar` comprueba 41 afirmaciones numéricas de
-los documentos contra el código y contra el censo del catálogo, y además rastrea los textos
-buscando cifras que se corrigieron en el camino y podrían haber sobrevivido a una edición. Corre
-en el pipeline antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar
-al entregable.
+**Y las cifras se verifican solas.** `npm run verificar` corre 41 comprobaciones de los
+documentos contra el código y contra el censo del catálogo: 35 son cifras (episodios, monedas,
+precios, porcentajes) y 6 son invariantes que ninguna cifra sola expresa —que cada serie cuadre,
+que la escalera de precios baje en cada escalón, que ningún paquete lleve precio tachado—.
+Aparte, rastrea los textos buscando cifras que se corrigieron en el camino y podrían haber
+sobrevivido a una edición, y audita el contraste de los tokens de texto. Corre en el pipeline
+antes de cada build, así que una cifra vieja rompe el despliegue en vez de llegar al entregable.
 
 `src/lib/economy.ts` marca cada constante como **REAL** o **PROPUESTA**. Es, a la vez, el modelo del POC y la especificación de la economía.
 
-Las tres series del POC son reales y están elegidas para cubrir las tres estructuras que existen en el catálogo: *La Enfermera Infiltrada* con 10 gratis (la moda), *Pasión a Domicilio* con 12 (la excepción por arriba) y *La Herencia del Patriarca Enamorado* con 7 (la excepción por abajo).
+Las tres series del POC son reales y están elegidas para cubrir la moda y los dos extremos del censo: *La Enfermera Infiltrada* con 10 gratis (la moda: 37 de las 41 series con muro), *Pasión a Domicilio* con 12 (una de las dos que más regalan, junto con *Las Flores del Amor*) y *La Herencia del Patriarca Enamorado* con 7 (la que menos regala).
+
+*Acá decía «las tres estructuras que existen en el catálogo». Son cuatro.* Entre las 41 series con muro la distribución de gratis tiene cuatro valores: una con 7, 37 con 10, una con 11 y dos con 12. Así que las tres del POC dejan sin representar a *La Mágica Navidad del Amargado Millonario*, la única con 11. No cambié la selección —los extremos son lo que hay que poder juzgar en el muro—, pero decir «las tres» era contar mal el propio censo.
 
 ## 4.4 Cinco cosas que cambiaron por verificar y por usar el prototipo
 
@@ -88,7 +94,9 @@ Las tres series del POC son reales y están elegidas para cubrir las tres estruc
 
 **El pase caducaba, y eso era el error de Webtoon otra vez.** La primera versión decía *"no se acumula, el que no se usa se pierde"*. Al verificar el precedente — el Daily Pass de Webtoon, retirado en mayo de 2025 — resultó que la queja dominante de sus lectores durante cinco años fue justamente el "úsalo o piérdelo": convertía leer en una tarea. Era la misma trampa que el diagnóstico le señala a la racha diaria de Idilio, reintroducida sin darme cuenta. Los pases ahora se acumulan hasta 2: faltar una noche no cuesta nada y volver seguido sigue rindiendo más. Detalle completo en [§3.4bis](../03-diseno/#34bis--el-precedente-revisado-en-contra).
 
-**El badge «Una serie completa» habría prometido de más en el 46% de las compras.** Estaba fijo sobre el paquete de 660 monedas porque *Pasión a Domicilio* cuesta eso. El censo mostró que las series van de 150 a 960 monedas: en 19 de las 41 series con muro, ese paquete no alcanza para terminarla. Ahora la tienda abre con la meta calculada de la serie que el usuario está viendo y el badge cae sobre el paquete que de verdad alcanza.
+**El badge «Una serie completa» era falso en 40 de las 41 series con muro.** Estaba fijo sobre el paquete de 660 monedas porque *Pasión a Domicilio* cuesta exactamente eso — y es la única que cuesta exactamente eso. El censo mostró que las series van de 150 a 960 monedas, y los dos números que salen de ahí dicen cosas distintas: el badge es literalmente inexacto en 40 de 41, y en **19 de las 41 (el 46%)** el paquete directamente no alcanza para terminar la serie. Ese segundo caso es el que cuesta confianza, porque el usuario paga creyendo el badge y sigue frente al muro. Ahora la tienda abre con la meta calculada de la serie que el usuario está viendo y el badge cae sobre el paquete que de verdad alcanza.
+
+*Acá decía «en el 46% de las compras».* El 46% son 19 de las 41 series con muro, no una fracción de las compras: ponderar por compras exigiría volumen de ventas, que el censo del catálogo no tiene.
 
 **La tienda se contradecía a sí misma.** La primera versión mostraba «monedas por dólar» y el pie decía *«cada paquete rinde más por dólar que el anterior»* — pero los números daban 182, 151, 165, 180. Es exactamente el defecto que el diagnóstico le señala al producto real, reproducido por descuido. Se corrigió a **precio por episodio**, que además es la unidad legible, y la escalera quedó monótona de verdad: $0.15 → $0.11 → $0.10.
 

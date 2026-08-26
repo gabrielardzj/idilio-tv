@@ -116,13 +116,21 @@ export async function desbloqueadoHasta(slug: string): Promise<number> {
  * de que las tres situaciones del muro sean rutas reales y prerrenderizadas, en
  * vez de ramas de código que nadie puede alcanzar.
  */
+/**
+ * La zona del espectador. En producción sale de `viewer.timezone`; acá es una
+ * constante, y tiene que estar declarada **antes** de calcular ninguna cita:
+ * `proximaCita` la necesita para no resolver la hora en la zona de la máquina
+ * que construye el sitio.
+ */
+const ZONA = 'America/Mexico_City'
+
 const ESTADOS: Record<string, Omit<EstadoPase, 'timezone' | 'hasAccount' | 'serverNow'>> = {
   // Tiene el pase de esta noche sin usar.
   'pasion-a-domicilio': { passes: 1, nextPassAt: null, nights: 2, shields: 0, balance: 0 },
   // Ya lo usó y no tiene monedas: el muro se vuelve una cita con hora.
   'la-herencia-del-patriarca': {
     passes: 0, nights: 3, shields: 1, balance: 0,
-    nextPassAt: new Date(proximaCita(RELOJ_FIJO)).toISOString(),
+    nextPassAt: new Date(proximaCita(RELOJ_FIJO, ZONA)).toISOString(),
   },
   // Ya lo usó pero tiene saldo, y el próximo pase llega en menos de una hora:
   // ahí el countdown vuelve a ser el héroe, porque los segundos sí importan.
@@ -137,7 +145,7 @@ export async function estadoDelPase(slug: string): Promise<EstadoPase> {
   const base = ESTADOS[slug] ?? ESTADOS['pasion-a-domicilio']
   return {
     ...base,
-    timezone: 'America/Mexico_City',
+    timezone: ZONA,
     hasAccount: false,
     serverNow: RELOJ_FIJO,
   }

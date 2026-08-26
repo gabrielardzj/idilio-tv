@@ -22,7 +22,7 @@ const PAGINAS = [
   { slug: 'estrategia', src: 'docs/02-estrategia/README.md', titulo: 'Estrategia', n: '2', peso: 'con el diagnóstico' },
   { slug: 'intervencion', src: 'docs/03-diseno/README.md', titulo: 'La intervención', n: '3', peso: '20% craft' },
   { slug: 'sistema', src: 'docs/03-diseno/sistema.md', titulo: 'Sistema visual', n: '3b', peso: '' },
-  { slug: 'diseno', src: 'docs/03-diseno/pencil/README.md', titulo: 'Archivo de diseño', n: '3c', peso: '' },
+  { slug: 'diseno', src: 'docs/03-diseno/pen/README.md', titulo: 'Archivo de diseño', n: '3c', peso: '' },
   { slug: 'poc', src: 'docs/04-poc/README.md', titulo: 'El POC', n: '4', peso: '25%' },
   { slug: 'dogfooding', src: 'docs/00-dogfooding/README.md', titulo: 'Dogfooding y censo', n: '0', peso: 'anexo' },
   { slug: 'benchmark', src: 'docs/05-benchmark/README.md', titulo: 'Benchmark competitivo', n: '5', peso: 'anexo' },
@@ -135,6 +135,10 @@ try {
 const plantilla = (p, cuerpo) => `<!doctype html><html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${p.titulo} · Idilio TV — Continuará</title>
+<!-- El prototipo y la galería ya lo declaran; estas páginas no, y el navegador
+     terminaba pidiendo /favicon.ico a la raíz del dominio —que no es la del
+     proyecto— y anotando un 404 en la consola de quien abre el entregable. -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>

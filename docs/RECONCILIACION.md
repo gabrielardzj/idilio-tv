@@ -32,11 +32,23 @@ decirlo en la presentación, sea cual sea la versión que se entregue.**
 
 ## 2 · La diferencia de mecánica, y por qué mi crítica era parcialmente injusta
 
-|  | harare | da-nang |
+|  | harare | da-nang · **como lo entregué antes de este documento** |
 |---|---|---|
 | **Cómo se gana** | al **terminar un episodio**, sin reclamar | al **usar el pase** en el muro |
 | **Qué se gana** | capítulos que **caducan esa noche** | pases que **se acumulan hasta 2** |
 | **Corte de la noche** | 4:00 am | 5:00 am |
+
+> **La columna de la derecha es la mecánica vieja, y está acá porque es la que da sentido a la
+> comparación que sigue.** Ya no es la vigente: en §4 cuento que adopté la acreditación de
+> `harare`. Hoy la regla de esta versión son **tres cosas distintas**, y confundirlas es lo que
+> hacía que la tabla se contradijera con §4:
+>
+> 1. **Emisión** — se genera un pase por noche, por el reloj, hasta 7 por semana. Ocurre esté el
+>    usuario o no.
+> 2. **Entrega** — el pase se acredita cuando el usuario **termina un episodio**. Nunca hay un
+>    botón que reclamar ni una notificación de que algo se venció.
+> 3. **Acumulación** — el saldo pendiente topa en **2**. Lo que se emite por encima de 2 se
+>    pierde, y ese es el gradiente que hace que volver seguido rinda más.
 
 Sostuve que la caducidad repetía el error del Daily Pass de Webtoon —retirado en 2025 tras cinco
 años de la queja de que el «úsalo o piérdelo» volvía leer una tarea—. **Al leer el razonamiento
@@ -44,8 +56,9 @@ de harare, esa crítica no se sostiene como la planteé.**
 
 La razón es que **cada mecanismo es coherente con su propio modelo de acreditación:**
 
-- Si el recurso se acredita **por reloj** (como en el mío: uno cada 24 h), puede llegar cuando el
-  usuario no está. Ahí la caducidad **sí** castiga la ausencia, y hace falta un tope que perdone.
+- Si el recurso se acredita **por reloj** (como en la primera versión del mío: uno cada 24 h),
+  puede llegar cuando el usuario no está. Ahí la caducidad **sí** castiga la ausencia, y hace
+  falta un tope que perdone.
 - Si se acredita **por ver** (como en harare), se gana y se gasta en la misma sesión. La
   caducidad entonces no castiga ausencias: solo **impide acumular**, que es exactamente la misma
   función que cumple mi tope de 2.
@@ -66,9 +79,9 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
 
 ### Solo en `harare`
 
-- **Acreditación sin reclamar.** La racha avanza al terminar un episodio. La adopción de la
-  fuente pasa de 19% a ~100% **por construcción**, no por diseño de pantalla. Es, a mi juicio,
-  la mejor decisión aislada de las dos versiones.
+- **Acreditación sin reclamar** *(era exclusiva; ya la adopté acá — §4)*. La racha avanza al
+  terminar un episodio. La adopción de la fuente pasa de 19% a ~100% **por construcción**, no
+  por diseño de pantalla. Es, a mi juicio, la mejor decisión aislada de las dos versiones.
 - **Modelo de sensibilidad** del objetivo, con test automatizado de la economía.
 - **Revisión adversarial** propia, con cinco defectos encontrados y corregidos.
 - **D4b — la tercera ubicación**: el prompt al abrir la app, que usa ReelShort. Yo solo había
@@ -80,11 +93,11 @@ Y hay un argumento de harare que yo no tenía, y que invierte la objeción de ca
 - **Censo del catálogo completo** (50 series, 2.230 episodios). De ahí sale el segundo hallazgo:
   **500 episodios gratis = casi cuatro meses sin pagar**, que reencuadra el problema —la alternativa
   a pagar no es irse, es empezar otra serie— y que ninguna de las dos versiones tenía antes.
-  Con una corrección que corresponde dejar acá: **el censo estuvo mal y hubo que rehacerlo.** La
-  primera versión decía 43 series y 1.885 episodios porque el scraper raspaba los rieles del home
-  en vez del sitemap, y tres series que sí leyó las emitió con total 0 sin dar un solo error. El
-  censo nuevo se arma desde `sitemap.xml` y el script se cae si una ficha no se puede leer. El
-  hallazgo no se movió de lugar —el colchón resultó más grande, no más chico—, pero estuvo
+  Va con una corrección que corresponde dejar acá: **el censo estuvo mal y hubo que rehacerlo.**
+  La primera versión decía 43 series y 1.885 episodios porque el scraper raspaba los rieles del
+  home en vez del sitemap, y a tres series que sí leyó las emitió con total 0 sin dar un solo
+  error. El censo nuevo se arma desde `sitemap.xml` y el script se cae si una ficha no se puede
+  leer. El hallazgo no se movió de lugar —el colchón resultó más grande, no más chico—, pero estuvo
   apoyado varios días en un número que no era.
 - **El precedente de Webtoon investigado**, que es el antecedente directo de la mecánica.
 - **Implementación sobre el stack real** (Next.js + Tailwind v4 + Supabase) con la **migración
@@ -101,7 +114,7 @@ modelo es mejor y seguir enviando el mío.
 
 | | Antes | Ahora |
 |---|---|---|
-| Cuándo llega el pase | un reloj de 24 h | **al terminar un episodio**, una vez por noche |
+| Cuándo llega el pase | un reloj de 24 h | se **emite** uno por noche y se **acredita al terminar un episodio** |
 | Qué hace el usuario | usarlo en el muro (y ahí avanzaba la racha) | nada: se acredita solo, con un toast de 2 s |
 | Adopción de la fuente | depende de llegar al muro | **~100% por construcción** |
 | La cita | «+24 h desde que lo usaste» → hora arbitraria | **su hora de siempre** |

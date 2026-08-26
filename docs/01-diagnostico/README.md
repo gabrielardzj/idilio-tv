@@ -16,9 +16,9 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
 
 > **Una corrección de método.** La primera versión de este diagnóstico decía "12 episodios gratis por serie", y ese número salía de la única serie que me había tocado abrir. Después medí las 50 del catálogo: lo más frecuente son **10** episodios gratis por serie, y *Pasión a Domicilio* es una de cuatro excepciones. El censo completo está en [`docs/00-dogfooding`](../00-dogfooding/). Corregir el número no debilitó el hallazgo: lo volvió más nítido, y destapó uno más grande.
 
-### Hallazgo 1 · Ninguna historia dura lo que dura una sesión: el muro llega en el episodio 10 de 14
+### Hallazgo 1 · Ninguna historia dura lo que dura una sesión: 10 episodios gratis contra 14 por sesión
 
-**Cada serie regala 10 episodios. La sesión promedio dura 14.**
+**La serie típica regala 10 episodios gratis. La sesión promedio dura 14.**
 
 ```
       ← 10 gratis →  ┃  ← 4 más de apetito →
@@ -27,9 +27,9 @@ Tres términos aparecen en todo el documento. Los dejo definidos acá para no re
                    EL MURO
 ```
 
-O sea que el usuario promedio se queda con hambre de cuatro episodios más. Ninguna historia le alcanza para una sesión entera: el muro llega siempre antes que el cansancio.
+O sea que el usuario promedio se queda con hambre de cuatro episodios más. Ninguna historia le alcanza para una sesión entera —el bloque gratis más largo del catálogo es de 12 episodios—: en las 41 series con muro se acaba lo gratis, y en las 9 que son gratis enteras se acaba la serie, que ninguna pasa de 10 episodios.
 
-Conviene no estirar el hallazgo ni un centímetro de más. Lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
+Conviene no estirar el hallazgo ni un centímetro de más. *(Acá decía "el muro llega **siempre** antes que el cansancio". El "siempre" es falso en las 9 series sin muro y en cualquier sesión que arranque a mitad de una historia, que es el mismo centímetro de más que este párrafo pide no estirar.)* A lo que la economía le pone techo es a **la racha dentro de una historia** —10 episodios, en 37 de las 41 series con muro—, y eso es todo lo que la cifra sostiene por sí sola. Que el muro sea además lo que corta la **sesión** es una afirmación distinta, y el Hallazgo 2 da razones para dudar de ella: al chocar, al usuario le queda un catálogo entero de arranques gratis. **Por qué la sesión se detiene a los 14 y no a los 20, los datos disponibles no lo dicen.**
 
 Y esto es lo que el usuario encuentra en ese choque, verificado en el paywall del build 1.20.0:
 
@@ -40,7 +40,7 @@ Costo del episodio: 15        Tu balance: 0
   $0.99 → 180    $1.99 → 180    $3.99 → 375
 ```
 
-Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **tres packs de monedas y nada más**. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
+Alguien que nunca vio una moneda, a la 1 a.m., a mitad de un cliffhanger, se encuentra con **cuatro packs de monedas y nada más** —la captura de arriba llega hasta el tercero; el cuarto lleva badge de −30% y está en el [registro del dogfooding](../00-dogfooding/), y F3 los cuenta a los cuatro—. La recompensa diaria —la única manera de conseguir monedas sin pagar— vive en otra pestaña de la app. Y el pase semanal y el mensual, que el producto ya vende, tampoco aparecen acá (F1). El muro no le muestra al usuario la economía: le muestra un mostrador.
 
 ### Hallazgo 2 · Pagar no es la única salida del muro: empezar otra serie es gratis
 
@@ -53,13 +53,15 @@ Este hallazgo solo aparece cuando se mide el catálogo entero.
 | **Episodios gratis** | **500** — el 22% del catálogo |
 
 **500 episodios gratis ÷ 14 por sesión = 36 sesiones sin gastar un centavo.**
-A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** (La cuenta asume una sesión por día activo, que es el supuesto más generoso: DAU/MAU mide días, no sesiones. A 1,5 sesiones por día activo el colchón baja de unas 15 semanas a unas 10 — sigue siendo más de dos meses sin motivo para pagar.)
+A 2.3 días activos por semana, eso son **15 semanas: casi cuatro meses.** (La cuenta asume una sesión por día activo, que es el supuesto más generoso: DAU/MAU mide días, no sesiones. A 1.5 sesiones por día activo el colchón baja de unas 15 semanas a unas 10 — sigue siendo más de dos meses sin motivo para pagar.)
 
 Con ese dato a la vista aparece una lectura tentadora de la sesión promedio: **14 = 10 + 4**. La sesión típica no sería "veo 14 episodios de una historia" sino **"termino los 10 gratis de una serie, choco con el muro y me voy a empezar otra"**.
 
 **La anoto como hipótesis, no como conclusión, y quiero que se lea así.** 14 es una media, y una media no se descompone: sale igual de muchas sesiones de 2 episodios con unas pocas de 40, y una sesión que arranca en el episodio 11 de anoche no choca con ningún muro a los 10. Descartar el 2.4x de retención a 30 días por confundir selección con causa ([§1.3](#13-qué-señales-pesaron-y-cuáles-descarté)) y quedarme con esta suma porque me conviene sería la misma falta, cometida en mi favor.
 
-**Lo que la resuelve es una consulta, no un estudio:** la **distribución** de episodios por sesión —no la media— y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie. Si esa fracción es alta, la hipótesis se sostiene. Si es baja, el muro corta historias pero no sesiones, y hay que buscar en otro lado qué las corta. De ese eslabón cuelga la elección de intervención de [§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra), así que es la primera pregunta que haría con acceso a los datos.
+**Lo que la resuelve es una consulta, no un estudio:** la **distribución** de episodios por sesión —no la media— y qué fracción de las sesiones termina exactamente en el último episodio gratis de una serie. Si esa fracción es alta, la hipótesis se sostiene. Si es baja, el muro corta historias pero no sesiones, y hay que buscar en otro lado qué las corta.
+
+[§3.1](../03-diseno/#31-por-qué-esta-intervención-y-no-otra) eligió no apoyarse en esta suma: ahí la intervención se sostiene en que el corte por precio existe, se descomponga o no el 14. Así que la consulta no decide si la intervención vale, sino cuánto rinde —si el muro corta sesiones y no solo historias, el mismo pase recupera bastante más—. Es igual la primera pregunta que haría con acceso a los datos. *(Acá decía que "de ese eslabón cuelga la elección de intervención de §3.1". Es falso —§3.1 dice hoy lo contrario, y en la dirección prudente— y además se autolesionaba: presentaba la apuesta principal del entregable como colgada de un dato que no tengo.)*
 
 Lo que sí queda firme sin esa consulta es lo más importante: **el muro no saca al usuario de la app, lo saca de la historia** — porque la alternativa gratis existe, está a un toque y hay 500 episodios de ella.
 
@@ -74,7 +76,7 @@ Eso cambia el significado de casi todas las demás señales:
 
 **La conclusión que ordena la estrategia:**
 
-> El muro no falla por ser caro. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante sus primeros cuatro meses. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
+> El muro no falla por ser caro. Falla porque **la alternativa a pagar no es irse de la app: es empezar otra serie, gratis**. Con 500 episodios gratis repartidos en 50 títulos, la economía no le pone ninguna presión al usuario durante los casi cuatro meses que le dura el colchón. Y alguien que salta de historia en historia sin apegarse a ninguna no tiene motivo para volver mañana: su relación es con el catálogo, no con una serie.
 
 **Por eso el objetivo de negocio es stickiness y no conversión.** Y por eso la respuesta correcta no es recortar los episodios gratis —eso frena la adquisición y ataca la métrica equivocada—, sino **darle al usuario una razón para quedarse en una historia en vez de saltar a la siguiente.** De ahí sale la intervención que elegí.
 
@@ -82,7 +84,9 @@ Eso cambia el significado de casi todas las demás señales:
 
 ## 1.2 Las cinco fallas
 
-### F1 · Las monedas se ganan en un lugar y se gastan en otro
+### F1 · Lo que resolvería el muro vive en otra pantalla
+
+*(Esta falla se llamaba "Las monedas se ganan en un lugar y se gastan en otro". Ensanché el título, no el contenido: el desajuste fuente↔sumidero es el primer caso, pero el segundo —la suscripción, que tampoco está en el muro— no es un problema de monedas y bajo el título viejo entraba de contrabando. Preferí ensanchar antes que abrir una F6: F2–F5 se citan por número en los otros documentos.)*
 
 El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué se van. En esta app nunca se cruzan. La única fuente gratuita —la recompensa diaria y su racha— vive en la pestaña **Recompensas**. El gasto ocurre en el **player**, al chocar con el muro. Son dos pantallas distintas, y cuando el usuario necesita monedas siempre está en la segunda.
 
@@ -91,7 +95,7 @@ El brief habla de *fuentes* y *sumideros*: de dónde salen las monedas y en qué
 
 La pestaña Recompensas ya está en la barra inferior. Que exista no alcanza. **Un metajuego alojado en un destino que el usuario no visita no puede mover DAU/MAU, por bien diseñado que esté.**
 
-**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a $7.99** y uno **mensual a $14.99**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de calibración regional para LatAm; se analiza en el [benchmark §5.1](../05-benchmark/).)*
+**Y no es solo la fuente gratuita la que vive afuera.** La ficha de App Store del build 1.20.0 lista, además de los packs de monedas, un **pase semanal a $7.99** y uno **mensual a $14.99**: Idilio ya es un modelo híbrido, monedas y suscripción conviviendo. El muro no ofrece ninguno de los dos. El producto de mayor valor de toda la economía tampoco aparece en el único momento del día en que el usuario quiere algo que no puede tener — así que esta falla no es solo del metajuego: **lo que vive en otro edificio es también el techo del negocio.** *(El pase tiene además un problema propio, de número: el semanal a $7.99 sale más caro que terminar la serie mediana comprándola —600 monedas ≈ $6.63—, así que el propio muro publica un precio más bajo para el mismo resultado. Se analiza en el [benchmark §5.1](../05-benchmark/#51--qué-es-idilio-tv-con-los-datos-que-el-brief-no-traía).)*
 
 ### F2 · Nadie le dice al usuario cuánto vale una moneda
 
@@ -154,7 +158,7 @@ Y como **82% nunca abre el perfil**, tampoco hay otro lugar donde vea su posici�
 
 | Señal | Por qué pesó |
 |---|---|
-| **10 eps gratis + 14 eps por sesión** | Ninguna historia dura lo que dura una sesión: el muro llega en el episodio 10 de 14. Qué pasa con los otros 4 es hipótesis, no dato ([§1.1](#11-los-dos-hallazgos-que-ordenan-todo-lo-demás)). |
+| **10 eps gratis + 14 eps por sesión** | Ninguna historia dura lo que dura una sesión: la serie típica se queda sin gratis a los 10 y la sesión promedio sigue hasta 14. Dónde cae el muro *dentro* de la sesión es hipótesis, no dato ([§1.1](#11-los-dos-hallazgos-que-ordenan-todo-lo-demás)). |
 | **500 episodios gratis en el catálogo** | Son casi cuatro meses de contenido sin pagar. Explica por qué el 19% de reclamo de la recompensa no es un problema de pantalla: todavía nadie necesita monedas. |
 | **19% reclama la recompensa diaria** | Mide directamente la distancia entre donde se ganan las monedas y donde se gastan. Es la fuga más grande y la más barata de tapar. |
 | **82% nunca abre el perfil** | Es la restricción de diseño más dura: descarta de entrada cualquier solución que viva en una pestaña. |
@@ -186,9 +190,11 @@ El censo destapa una palanca más grande que cualquiera de mis intervenciones, y
 
 | Si el objetivo fuera… | La palanca diría… |
 |---|---|
-| **Convertir usuarios en pagadores** | Casi cuatro meses de contenido gratis es muchísimo. Bajar de 10 a 6 episodios gratis por serie recortaría un 40% el bloque gratis de cada serie y pondría el muro donde todavía queda deseo. |
+| **Convertir usuarios en pagadores** | Casi cuatro meses de contenido gratis es muchísimo. Bajar el bloque gratis a 6 episodios por serie recortaría el colchón un 40% —200 de los 500— y pondría el muro donde todavía queda deseo. |
 | **Adquirir usuarios y retenerlos el primer día** | Esos 10 episodios gratis son exactamente lo que engancha en la primera sesión. Tocarlos es tocar el motor de crecimiento. |
 | **Stickiness (el objetivo real acá)** | **Ninguna de las dos.** Recortar lo gratis no hace que el usuario vuelva mañana: hace que se vaya antes. Y dejarlo como está tampoco lo trae de vuelta. |
+
+*(Una corrección sobre esa primera fila: una pasada anterior la cambió por "recortaría un 40% el bloque gratis de cada serie", creyendo que el 40% no cerraba. Cierra, pero es del colchón, no de cada serie: con un tope de 6, las 50 series pasan de 500 episodios gratis a 300 —exactamente 200 menos, el 40.0%—. Por serie el recorte no es 40% en las cinco que no empiezan en 10, y el número que importa acá es cuánto se achica el colchón, que es lo que sostiene los "casi cuatro meses".)*
 
 Por eso no propongo tocar el colchón. El objetivo del ejercicio es DAU/MAU, y el colchón no es una palanca de DAU/MAU: es una de conversión. Pero es la variable más pesada de toda la economía, está a una sola decisión de distancia, y quien lea este diagnóstico debería saber que está ahí.
 
