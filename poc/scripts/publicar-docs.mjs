@@ -92,6 +92,36 @@ function indice(html) {
   return `<nav class="indice" aria-label="Índice de la página"><b>En esta página</b><ol>${items}</ol></nav>`
 }
 
+/**
+ * Las fichas de intervención se escriben con una cabecera vacía —`| | |`— porque
+ * visualmente no hace falta: la primera columna ya dice qué es cada fila. Para
+ * un lector de pantalla eso es otra cosa: anuncia una tabla de dos columnas sin
+ * nombre y luego lee celdas sueltas, así que «Costo · ~4–5 semanas» llega como
+ * dos textos sin relación.
+ *
+ * Se corrige donde nace: si la cabecera está vacía se quita, y la primera celda
+ * de cada fila pasa a ser su encabezado de fila. Entonces se anuncia «Costo,
+ * ~4–5 semanas», que es como se lee con los ojos.
+ */
+function cabecerasDeFila(html) {
+  return html.replace(/<table>\s*<thead>\s*<tr>((?:\s*<th[^>]*><\/th>)+)\s*<\/tr>\s*<\/thead>([\s\S]*?)<\/table>/g,
+    (todo, _vacias, cuerpo) =>
+      `<table class="ficha">${cuerpo.replace(/<tr>\s*<td([^>]*)>/g, '<tr><th scope="row"$1>').replace(/(<th scope="row"[^>]*>(?:(?!<\/td>)[\s\S])*?)<\/td>/g, '$1</th>')}</table>`)
+}
+
+/**
+ * El otro caso: tablas de comparación cuya primera columna son etiquetas de fila
+ * y cuya esquina está vacía con razón —«| | ReelShort | DramaBox |»—. Una `<th>`
+ * sin texto no es una cabecera, es un hueco: la esquina pasa a `<td>` y la
+ * etiqueta de cada fila a encabezado, que es lo que de verdad es.
+ */
+function esquinaVacia(html) {
+  return html.replace(/<table>\s*<thead>\s*<tr>\s*<th[^>]*><\/th>((?:\s*<th[^>]*>(?:(?!<\/th>)[\s\S])+<\/th>)+)\s*<\/tr>\s*<\/thead>([\s\S]*?)<\/table>/g,
+    (todo, resto, cuerpo) =>
+      `<table class="comparativa"><thead><tr><td></td>${resto}</tr></thead>` +
+      `${cuerpo.replace(/<tr>\s*<td([^>]*)>((?:(?!<\/td>)[\s\S])*)<\/td>/g, '<tr><th scope="row"$1>$2</th>')}</table>`)
+}
+
 function anclasEnTitulos(html) {
   const vistos = new Map()
   return html.replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (_, nivel, contenido) => {
@@ -305,6 +335,8 @@ for (const p of PAGINAS) {
   // Sin <hr> entre documentos: el h2 con el que arranca el segundo ya trae su
   // propia línea superior, y las dos juntas se leían como un doble filete.
   let html = anclasEnTitulos(partes.join('\n'))
+  html = cabecerasDeFila(html)
+  html = esquinaVacia(html)
   html = imagenesAmpliables(html)
   // El índice va después del primer bloque de texto, no antes: lo primero que
   // el lector debe ver es de qué va el documento, no su tabla de contenidos.
