@@ -120,31 +120,18 @@ Hoy la escalera se aplana y en el último escalón empeora. Los tres paquetes qu
 
 #### I4 · Continuidad web → app
 
-**El recorrido, tal como ocurre hoy.** Alguien comparte un episodio. Su amigo abre el link en el teléfono y cae en **idilio.tv**, que no es un landing sino un reproductor de verdad: reproduce, trae la lista de capítulos y encadena al siguiente solo. Ve unos cuantos, se engancha, y en el episodio 13 de *Pasión a Domicilio* aparece el muro web ([capturado acá](../00-dogfooding/evidencia/muro-web-ep13.png)).
+**Lo que se rompe.** Alguien comparte un episodio; su amigo abre el link y cae en **idilio.tv**, un reproductor web que funciona pero no tiene economía: ni saldo, ni anuncio, ni paquetes. Al chocar dice *«se desbloquea en la app con 15 monedas»* y ofrece instalar. Y la app lo recibe **en el home**, con 50 series: la historia y el episodio se perdieron en el salto.
 
-Ese muro no se parece al de la app. **No tiene economía:** ni saldo, ni anuncio, ni paquetes. Dice *«Se desbloquea en la app con 15 monedas»* y ofrece una sola salida — **«Descargar la app»**. Así que toca, va a la tienda, instala, abre…
+**Qué se tira ahí.** No es tráfico, es la señal de intención más específica que este producto recibe: esa persona no quería *una* serie, quería **ese** episodio. Llega y hay que buscarlo.
 
-**…y la app lo recibe en el home.** Un catálogo de 50 series. La serie que venía viendo y el episodio donde se quedó se perdieron en el salto: ahora tiene que acordarse del nombre, encontrarlo entre los rieles y acordarse de en qué capítulo iba.
-
-**Qué se tira ahí.** No es tráfico: es la señal de intención más específica que este producto puede recibir. Esa persona no llegó queriendo *«una app de microdramas»* — llegó queriendo **el episodio 13 de una serie concreta**, a la que ya le dedicó doce. El producto convierte esa intención en la de un visitante cualquiera, y le cobra el trabajo de reconstruirla a mano, a la 1 a.m., en una app que abrió por primera vez.
-
-**Qué hace la intervención.** El link compartido abre la app **en ese episodio de esa serie**, esté la app instalada o no. Son dos piezas distintas y conviene no confundirlas, porque cuestan y fallan distinto:
-
-| Caso | Qué hace falta | Qué resuelve |
-|---|---|---|
-| **App ya instalada** | *Universal Links* (iOS) y *App Links* (Android): el sistema operativo reconoce el dominio y abre la app en vez del navegador | Que quien ya tiene la app no termine viendo en web, sin saldo, sin racha y contra un muro que no ofrece nada |
-| **App sin instalar** | Un *deferred deep link*, porque el viaje a la tienda borra el rastro y la app arranca sin saber de dónde vino nadie | Que la primera pantalla después de instalar sea el episodio que vino a ver, y no el home |
-
-*Deep link* es el enlace que abre una pantalla **adentro** de la app y no la portada. *Deferred* —diferido— es la mitad que aguanta el paso por la tienda: el clic queda registrado antes de instalar, y la app lo cobra en su primer arranque.
-
-**Y el muro web deja de ser un callejón.** Hoy pide instalar sin decir qué pasa después. Con el aterrizaje resuelto puede prometer lo que de verdad va a cumplir —*«seguí el episodio 13 en la app»*— y, con [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen) en producción, decir además que ahí adentro ese episodio se abre gratis con un anuncio.
+**La intervención.** Que el link abra la app en ese episodio de esa serie, esté instalada o no. Con la app puesta lo resuelve el sistema operativo; sin ella hace falta que el destino sobreviva al paso por la tienda, que es la mitad que hoy no existe. Con el aterrizaje resuelto, el muro web puede además prometer lo que de verdad va a pasar en vez de pedir una instalación a ciegas.
 
 | | |
 |---|---|
 | **Hipótesis** | El compartir ya existe y funciona; lo que se rompe es el aterrizaje. Y no está a medias: el porcentaje de instalaciones que llegan al episodio correcto no es bajo, es **cero**, porque el camino no existe. Esto no persuade a nadie de nada — solo deja de tirar una intención que el usuario ya traía puesta. |
 | **Mueve** | Instalaciones activadas, y cuál es el primer episodio que se ve después de instalar. Sobre DAU/MAU actúa indirecto, vía [I5](#i5--el-pase-de-la-noche--la-racha-de-noches-): el Pase solo tiene sentido para alguien que está **dentro de una historia**, y quien aterriza en el home vuelve a estar eligiendo entre 50 arranques gratis, que es la conducta que el diagnóstico señala como el problema. |
 | **Cómo lo sé** | *Leading:* % de instalaciones desde link que llegan al episodio correcto (hoy 0%). *Lagging:* D1 —cuántos vuelven al día siguiente— de la cohorte (el grupo que entró por ahí) de link compartido, contra la que entró por otro lado. *Guardrail:* la tasa de instalación desde el muro web no cae; si el copy nuevo promete de más, se ve ahí. |
-| **Costo** | ~1 semana. Con proveedor (Branch, AppsFlyer) es integrar un SDK. Sin proveedor son Universal Links y App Links propios, que exigen publicar un archivo de asociación en el dominio y **no cubren el caso diferido**, que es justamente el del usuario nuevo. Es plomería, no una mecánica: no compite por el presupuesto de I5. |
+| **Costo** | ~1 semana. Es plomería, no mecánica: no compite por el presupuesto de diseño de [I5](#i5--el-pase-de-la-noche--la-racha-de-noches-). El caso caro no es el usuario con la app puesta sino el que la instala en ese momento, que es justo el que más importa. |
 | **¿Pasa la pregunta ①?** | ✅ ocurre en el salto entre las dos superficies, que es exactamente el segundo en que el usuario quiere seguir viendo. |
 
 > **Es de las que menos mueven el objetivo, y entra igual.** No hace que nadie vuelva mañana, y eso la deja al lado de [I3](#i3--la-escalera-de-precios-vuelve-a-ser-una-escalera) en el fondo del portafolio por efecto. Entra por tres razones: cuesta una semana, arregla algo que hoy vale cero y no un poco, y le entrega a I5 gente que ya está adentro de una historia en vez de parada frente a un catálogo.
@@ -154,32 +141,14 @@ Ese muro no se parece al de la app. **No tiene economía:** ni saldo, ni anuncio
 ### Etapa 2 — Cambiar la unidad del regreso (semanas 4–9) ← **la intervención profunda**
 
 #### I5 · El Pase de la Noche + la Racha de Noches ⭐
-**Es la intervención que se lleva a diseño y POC.** Detalle completo en [`docs/03-diseno`](../03-diseno/).
 
-Cuatro cambios acoplados:
+**Es la intervención que se lleva a diseño y POC**, y la mecánica completa —la ventana de la noche, el comodín, la escalera, el tope de acumulación— está en [`docs/03-diseno`](../03-diseno/). Acá va lo que decide si entra al trimestre: qué es, qué mueve, qué cuesta y qué arrastra.
 
-1. **Pase de la Noche.** Se emite uno por noche —tope de 7 por semana—, se entrega solo al terminar un episodio y se acumula hasta dos. *El usuario elige a qué serie se lo da*, y esa elección ocurre dentro del muro. **No hay nada que reclamar:** el botón entre el usuario y algo que ya se ganó es justamente lo que deja el reclamo diario en 19%.
-2. **La unidad es la noche, no el día.** La ventana corre de 5 a.m. a 5 a.m. Ver a las 00:30 y a las 23:30 del mismo martes cuenta como dos noches, no como una.
-3. **Comodín, y una escalera que no va hacia atrás.** Al llegar a la noche 3 se gana un escudo que se consume solo cuando se pierde una noche, uno por semana. Y el premio de cada noche nunca es menor que el de la anterior — que es el defecto exacto de la racha que el producto ya tiene: paga `15 · 40 · 60 · 50 · 40 · 45 · 200`, sube hasta el día 3 y después **baja dos días seguidos**, justo en el tramo donde la gente abandona ([diagnóstico F4](../01-diagnostico/#f4--la-racha-le-exige-al-usuario-una-frecuencia-que-no-tiene)). Es el mismo defecto que [I3](#i3--la-escalera-de-precios-vuelve-a-ser-una-escalera) corrige en la economía de pago: una escalera que no sube no es una escalera, y acá está cometido en la gratuita.
-4. **Una corrección al muro, que es donde ocurren los otros tres.** El muro real ya tiene las tres salidas —suscripción, anuncio gratuito y paquetes de monedas—, así que la única salida nueva es el propio pase: lo demás es **reordenar**. Hoy abre con *«Desbloquea TODO Idilio»* y los dos planes del Pase Idilio ($ 12.500 COP semanal, $ 24.500 COP mensual, el mensual marcado *RECOMENDADO*), y deja el anuncio gratuito debajo, en la tarjeta más apagada, con su valor escrito como un `0/10` gris. La propuesta invierte ese orden y es la [D2 del diseño](../03-diseno/): **lo gratis arriba de lo pago**, con el Pase de la Noche primero, el anuncio después y la compra debajo. La suscripción se queda en la pantalla —el producto la vende y esconderla no ayuda a nadie— pero deja de ser lo primero que ve alguien a quien le faltan quince monedas.
+**Qué es, en una línea.** El muro emite un pase por noche que se entrega al terminar un episodio —sin botón, sin caducidad, acumulable hasta dos— y el usuario elige a qué serie se lo da. El muro deja de ser una pantalla que se cierra y pasa a ser una hora del día.
 
-   Y hay un número que el muro pone a la vista sin comentarlo: terminar la serie mediana comprando monedas —600— sale unos **$ 21.000**, y el mensual abre **el catálogo entero por $ 24.500**. Una serie cuesta casi lo mismo que un mes de todo. Eso no es un problema de qué mostrar sino de cómo está tarifada la escalera de monedas, y lo corrige [I3](#i3--la-escalera-de-precios-vuelve-a-ser-una-escalera).
+**Y una corrección al muro, que es donde ocurre todo lo demás.** El muro real ya tiene sus tres salidas —suscripción, anuncio y paquetes— y lo que falla es el orden: abre por lo más caro. Propongo el orden de [D2](../03-diseno/#d2--lo-gratis-siempre-va-arriba-de-lo-pago), lo gratis antes que lo pago, y que la comparación que hoy el muro deja sin comentar quede dicha: terminar la serie mediana comprando monedas —600— sale unos **$ 21.000**, y el mensual abre **el catálogo entero por $ 24.500**. *Es propuesta, no hecho: ni [§3](../03-diseno/) ni el POC tienen suscripción.*
 
-*Es una propuesta y no un hecho: ni el diseño de [§3](../03-diseno/) ni el POC tienen suscripción — tienen el pase y la compra de monedas. Está escrita acá porque es donde corresponde decidirla, no donde corresponde mostrarla.*
-
-**Y una consecuencia que conviene presupuestar en vez de descubrir: I5 toca el perfil.** No como rediseño —eso sigue descartado en [§2.6](#26-qué-queda-deliberadamente-afuera), y por la misma razón de siempre— sino porque hay tres piezas de esta intervención que no tienen ningún otro sitio donde vivir:
-
-| Pieza | Por qué cae dentro de I5 |
-|---|---|
-| **Interruptor del aviso del pase** | La cita manda una notificación. Si no hay dónde apagarla dentro de la app, el usuario la apaga desde los ajustes del sistema — y ahí las pierde todas, para siempre y sin vuelta atrás. Es la diferencia entre *«no me avises tanto»* y *«silenciado»*. |
-| **La línea que explica la noche** | *«Tu noche va de 5 a.m. a 5 a.m.»* Suena a detalle técnico y no lo es: con la base repartida en cuatro husos horarios, alguien va a escribir «me entró el pase el martes y la app dice lunes». Una línea de texto responde eso; sin ella lo responde soporte. |
-| **Espejo de «Tu economía»** | El mismo componente que se abre desde el chip de saldo, con un segundo punto de entrada. Cuesta cero y sirve al 18% que sí entra al perfil, que es la parte más enganchada de la base. **Nunca como único camino:** la puerta principal sigue siendo el saldo, dentro del reproductor. |
-
-Ninguna de las tres mueve la métrica. Las tres se notan si faltan.
-
-**Y una cuarta, que no es del perfil sino del lanzamiento.** Esta intervención **elimina la pestaña de Recompensas**, y conviene ser preciso sobre qué desaparece y qué no: el anuncio recompensado y su tope de diez diarios **no se tocan** —ya están en el muro, y [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen) los sube al primer renglón—; lo que se retira es **el destino**, con su diálogo de reclamo y su escalera de 450 monedas por semana, que el diseño reemplaza por una de 150 monedas más un pase por noche ([§3](../03-diseno/)). El valor se muda de la moneda al pase, que es lo que crea la cita.
-
-Aun así hay un daño previsible, y es el 19% que hoy sí reclama la recompensa diaria: **se va a encontrar con que ya no hay nada que reclamar.** Objetivamente reciben más que antes —el pase llega solo, sin botón—, pero que te quiten algo no se corrige con aritmética, y es justamente el segmento más enganchado de la base. Un aviso de una sola vez en el reproductor, la primera vez que se acredita una noche: *«Ya no hay que reclamar nada. Tu pase llega solo mientras ves.»* Es el único daño previsible de la migración y la parte más barata de todo I5.
+**Lo que arrastra, y conviene presupuestar en vez de descubrir.** I5 toca el perfil en tres piezas menores —el interruptor del aviso, la línea que explica la ventana de 5 a.m. a 5 a.m. y un segundo acceso a «Tu economía»—: ninguna mueve la métrica y las tres se notan si faltan. Y **elimina la pestaña de Recompensas**, cuyo contenido se reparte entre el muro y el chip de saldo. El daño previsible es el 19% que hoy sí reclama la recompensa diaria: reciben más que antes, pero pierden el gesto: hay que migrarlos, no sorprenderlos.
 
 | | |
 |---|---|

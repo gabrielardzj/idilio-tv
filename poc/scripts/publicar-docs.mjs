@@ -73,6 +73,25 @@ function reescribirEnlaces(html, desdeSrc) {
  * ellos por sección —«ver §5.7»— y sin id ningún enlace con ancla aterriza en ningún
  * lado: el navegador se queda arriba de la página.
  */
+/**
+ * Índice de la página, con los `<h2>`.
+ *
+ * Solo en las páginas largas, y por eso lleva umbral: un índice sobre un
+ * documento de tres secciones es ruido. La estrategia son ~73 pantallas de
+ * scroll y la intervención más; sin índice no se puede volver a buscar nada,
+ * que es lo que un evaluador hace todo el rato — leer, saltar a otro documento,
+ * volver. El umbral mira secciones y no palabras porque lo que cuesta es
+ * orientarse, no leer.
+ */
+function indice(html) {
+  const h2 = [...html.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)]
+  if (h2.length < 5) return ''
+  const items = h2
+    .map(([, id, txt]) => `<li><a href="#${id}">${txt.replace(/<[^>]+>/g, '')}</a></li>`)
+    .join('')
+  return `<nav class="indice" aria-label="Índice de la página"><b>En esta página</b><ol>${items}</ol></nav>`
+}
+
 function anclasEnTitulos(html) {
   const vistos = new Map()
   return html.replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (_, nivel, contenido) => {
@@ -182,6 +201,13 @@ nav .volver a{padding:6px 11px}
 main{min-width:0;font-size:15.5px}
 main>.kicker{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--lo);margin-bottom:10px}
 h1{font-size:38px;font-weight:800;letter-spacing:-1.3px;line-height:1.1;margin:0 0 24px}
+.indice{margin:34px 0 8px;padding:16px 20px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)}
+.indice b{display:block;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-low);margin-bottom:10px;font-weight:700}
+.indice ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.indice li{margin:0 0 5px;font-size:14px}
+.indice a{color:var(--ink-mid);text-decoration:none;border:0}
+.indice a:hover{color:var(--ink);text-decoration:underline}
+@media(max-width:640px){.indice ol{columns:1}}
 h2{font-size:24px;font-weight:700;letter-spacing:-.6px;margin:52px 0 16px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
 h3{font-size:18px;font-weight:700;letter-spacing:-.3px;margin:34px 0 12px;color:#E6D9F5}
 h4{font-size:15px;font-weight:700;margin:22px 0 8px}
@@ -265,6 +291,10 @@ for (const p of PAGINAS) {
   // propia línea superior, y las dos juntas se leían como un doble filete.
   let html = anclasEnTitulos(partes.join('\n'))
   html = imagenesAmpliables(html)
+  // El índice va después del primer bloque de texto, no antes: lo primero que
+  // el lector debe ver es de qué va el documento, no su tabla de contenidos.
+  const tras = html.indexOf('<h2 id=')
+  html = tras > 0 ? html.slice(0, tras) + indice(html) + html.slice(tras) : indice(html) + html
   await writeFile(join(OUT, `${p.slug}.html`), plantilla(p, html))
   process.stdout.write(`  · ${p.slug}.html${partes.length > 1 ? ` (${partes.length} documentos)` : ''}\n`)
 }
