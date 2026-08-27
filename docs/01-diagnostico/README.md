@@ -31,6 +31,7 @@ Tres términos se usan a lo largo del documento:
 | **DAU/MAU** | Los usuarios que abren la app un día cualquiera, divididos por los que la abren en todo el mes. Hoy es 0.33: el usuario entra 1 de cada 3 días, es decir unos **2.3 días por semana en promedio**. Es una media, no una mediana —con una cola de usuarios muy activos, el usuario del medio entra menos que eso—, y cuenta **días**, no sesiones. |
 | **Stickiness** | Que el usuario vuelva mañana. Es justamente lo que mide DAU/MAU, y es el objetivo de este ejercicio. |
 | **El muro** | La pantalla de pago que aparece cuando se acaban los episodios gratis de una serie. |
+| **Metajuego** | Todo lo que rodea al acto de ver: las monedas, la racha, las recompensas, la suscripción. Es el sistema que decide cuánto contenido se abre y cuándo. El *core loop* es ver episodios; el metajuego es la economía alrededor. |
 
 ---
 

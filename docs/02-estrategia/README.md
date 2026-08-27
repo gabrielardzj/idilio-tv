@@ -2,7 +2,7 @@
 
 ## Resumen
 
-Ocho intervenciones en tres etapas, sobre un trimestre. La compuerta que las ordena es una sola: **si no ocurre en el momento en que el usuario quiere lo que se le ofrece, no sirve** — y hay tres maneras de fallarla: vivir en una pestaña que el usuario no visita (82% nunca abre el perfil), llegar antes de que la necesidad exista (81% descarta la recompensa diaria que se le pone delante al abrir la app), o **estar en el momento correcto y no decir lo que vale**, que es lo que le pasa hoy al anuncio recompensado del muro con su tope escrito como un `0/10` gris.
+Ocho intervenciones en tres etapas, sobre un trimestre. El criterio que las elimina es uno solo: **si no ocurre en el momento en que el usuario quiere lo que se le ofrece, no sirve** — y hay tres maneras de fallarla: vivir en una pestaña que el usuario no visita (82% nunca abre el perfil), llegar antes de que la necesidad exista (81% descarta la recompensa diaria que se le pone delante al abrir la app), o **estar en el momento correcto y no decir lo que vale**, que es lo que le pasa hoy al anuncio recompensado del muro con su tope escrito como un `0/10` gris.
 
 El muro real cambia el peso entre esas tres. **La economía de Idilio no vive en otra pantalla: está entera en el muro** —saldo, costo, suscripción, anuncio gratuito, paquetes y enlace a Recompensas ([diagnóstico §1.1](../01-diagnostico/#hallazgo-1--lo-gratis-se-acaba-antes-que-la-sesión-10-episodios-contra-14))—. Lo que falla es el **orden** en que se ofrece y **lo que no traduce**. Así que la Etapa 1 casi no mueve piezas de sitio: las reordena y las nombra.
 
@@ -20,28 +20,31 @@ La Etapa 1 va primero pese a mover menos: hace legible la economía sobre la que
 
 ## 2.1 La tesis
 
-> El metajuego de Idilio ya está donde tiene que estar: el muro le muestra al usuario la economía entera en el momento de máxima intención. Lo que falla es **cómo la ordena y qué deja sin traducir** — abre por lo más caro y escribe la única salida gratuita como un `0/10` gris. Y le falta lo único que ninguna de sus salidas tiene: **una fecha**. La estrategia consiste en **reordenar y re-denominar** lo que ya existe —de monedas a episodios, de días calendario a noches— y en agregar una sola mecánica: la que convierte el muro en una cita.
+> El metajuego —la economía que rodea al acto de ver: monedas, racha, recompensas, suscripción— ya está donde tiene que estar: el muro le muestra al usuario la economía entera en el momento de máxima intención. Lo que falla es **cómo la ordena y qué deja sin traducir** — abre por lo más caro y escribe la única salida gratuita como un `0/10` gris. Y le falta lo único que ninguna de sus salidas tiene: **una fecha**. La estrategia consiste en **reordenar esa pantalla y cambiar la unidad en que habla** —de monedas a episodios, de días calendario a noches— y en agregar una sola mecánica: la que convierte el muro en una cita.
 
-Que la mudanza ya esté hecha abarata el trimestre y afina el argumento: lo que queda por construir es orden, etiqueta y una mecánica, no un traslado. Por eso la Etapa 1 no agrega mecánicas y casi no mueve piezas: **reordena y re-denomina** las que ya existen. La única mecánica nueva de todo el portafolio es el Pase de la Noche ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)), y entra recién en la Etapa 2.
+Conviene decir qué queda descartado con eso, porque era la intervención obvia. **Si la economía viviera en otra pantalla, el trabajo grande del trimestre sería llevarla al muro.** El muro ya la tiene, así que ese traslado no hay que hacerlo — y eso abarata el trimestre y vuelve más preciso el resto: lo que queda por construir es orden, etiqueta y una mecánica.
+
+Por eso la Etapa 1 no agrega mecánicas ni mueve piezas de sitio: **reordena las que ya existen y cambia la unidad en que se expresan.** La única mecánica nueva de todo el portafolio es el Pase de la Noche ([I5](#i5--el-pase-de-la-noche--la-racha-de-noches-)), y entra recién en la Etapa 2.
 
 ## 2.2 Criterio de priorización
 
-El orden sale de tres preguntas, aplicadas en esta secuencia. La primera es una compuerta, no un factor.
+El orden sale de tres preguntas. La primera funciona distinto de las otras dos: **no suma ni resta, elimina.** Una intervención que no la pasa se va al final de la lista por buena que sea en todo lo demás, y las otras dos preguntas ni siquiera llegan a aplicársele. Las que sí la pasan se ordenan entre sí con la segunda y la tercera.
 
-**① ¿Ocurre dentro del core loop, en el momento de la necesidad, y se entiende ahí?**
-Tres formas de fallar esta compuerta, y las tres bajan la intervención al último lugar por buena que sea.
+**① ¿Ocurre donde el usuario ya está, cuando le hace falta, y se entiende ahí?** *(la que elimina)*
+
+Hay tres formas de fallarla, y las tres mandan la intervención al final de la lista:
 
 1. **Pedirle al usuario que navegue.** El 82% nunca abre el perfil.
 2. **Llegar antes de que exista la necesidad.** Es la menos evidente: el 81% que no reclama la recompensa diaria **sí la tiene delante**, en un diálogo al abrir la app, y la cierra igual. Estar a la vista no alcanza si el usuario todavía no quiere lo que se le ofrece.
-3. **Estar en el momento correcto sin decir lo que vale.** Es la que el muro real destapa: el anuncio recompensado ocurre exactamente donde tiene que ocurrir, y su tope —diez episodios gratis por día— está escrito como un `0/10` gris en la esquina de la tarjeta más apagada de la hoja ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Pasa la compuerta por ubicación y la falla por legibilidad, y el resultado para el usuario es el mismo.
+3. **Estar en el momento correcto sin decir lo que vale.** Es la que el muro real destapa: el anuncio recompensado ocurre exactamente donde tiene que ocurrir, y su tope —diez episodios gratis por día— está escrito como un `0/10` gris en la esquina de la tarjeta más apagada de la hoja ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Está en el sitio correcto y aun así falla, porque no se entiende, y el resultado para el usuario es el mismo.
 
-La tercera es la que reordena el portafolio: hace que la intervención más barata de todas —[I2](#i2--el-muro-muestra-las-salidas-que-ya-existen)— sea también la de mayor alcance, porque no hay nada que construir.
+La tercera forma es la que reordena el portafolio: hace que la intervención más barata de todas —[I2](#i2--el-muro-muestra-las-salidas-que-ya-existen)— sea también la de mayor alcance, porque no hay nada que construir.
 
-**② Alcance × Efecto ÷ Costo.**
-Alcance = fracción de DAU que la ve sin buscarla. Efecto = magnitud esperada sobre DAU/MAU. Costo = semanas de equipo.
+**② Alcance × Efecto ÷ Costo.** *(la que ordena)*
+Alcance = qué fracción de los usuarios activos la ve sin tener que buscarla. Efecto = cuánto se espera que mueva el DAU/MAU. Costo = semanas de equipo.
 
-**③ ¿Se puede medir en 4 semanas?**
-Una intervención con lectura rápida vale más que una de mayor efecto y lectura a 90 días: en un trimestre hacen falta dos ciclos de aprendizaje, no uno.
+**③ ¿Se puede medir en 4 semanas?** *(la que desempata)*
+Entre dos intervenciones parecidas, gana la que se puede leer rápido: en un trimestre hacen falta dos ciclos de aprendizaje, no uno. Una de mayor efecto pero con lectura a 90 días deja el trimestre sin margen para corregir.
 
 ## 2.3 El portafolio
 
@@ -51,7 +54,7 @@ Ocho intervenciones en tres etapas, ordenadas por dependencia y no por costo. Ca
 
 ### Etapa 1 — Reordenar y terminar de traducir lo que ya existe (semanas 1–4)
 
-Nada de esto inventa economía y nada la muda de pantalla: el muro ya tiene las tres salidas. Todo es **reordenar y re-denominar**. Es la etapa más barata y la de mayor alcance.
+Nada de esto inventa economía ni la cambia de pantalla: el muro ya tiene las tres salidas. Todo es **reordenarlas y decir lo que valen**. Es la etapa más barata y la de mayor alcance.
 
 #### I1 · La moneda habla en episodios
 **La mitad de esto el producto ya lo hace, y por eso la intervención es chica.** El muro traduce cada paquete a episodios —*«Desbloquea 12 episodios»*, no *«180 monedas»*— y dice el saldo y el costo antes que ningún precio. Lo que falta es la traducción en los cuatro renglones donde todavía no está, que son justamente los que deciden:
@@ -69,7 +72,7 @@ Nada de esto inventa economía y nada la muda de pantalla: el muro ya tiene las 
 | **Mueve** | Comprensión de la economía (objetivo de experiencia). Secundariamente conversión a pagador. |
 | **Cómo lo sé** | *Leading* —la señal temprana, la que se mueve en días—: tasa de interacción con el muro (hoy: cuántos tocan algo vs. cuántos cierran). *Lagging* —la señal tardía, la que confirma—: conversión a primera compra. *Guardrail* —la métrica de guardia, la que dice cuándo parar—: ARPDAU (ingreso promedio por usuario activo al día) no cae. |
 | **Costo** | ~1 semana. Es copy y un componente. |
-| **Compuerta ①** | ✅ ocurre en el muro, dentro del loop. |
+| **¿Pasa la pregunta ①?** | ✅ ocurre en el muro, dentro del loop. |
 
 #### I2 · El muro muestra las salidas que ya existen
 El muro ya tiene la salida gratuita: el anuncio recompensado está ahí, con su *«Desbloquea 1 episodio»* y su contador `0/10`. Lo que está mal es **el orden y la etiqueta**. La hoja abre con *«Desbloquea TODO Idilio»* —lo más caro— y deja el anuncio debajo, en la tarjeta más apagada, con su valor escrito como una fracción gris en una esquina.
@@ -81,8 +84,8 @@ La intervención es reordenar y renombrar, no mover: **el anuncio arriba**, y el
 | **Hipótesis** | El usuario no lee el `0/10` como diez episodios gratis, y lo que sí lee primero es una suscripción de $ 24.500. Con el anuncio arriba y su contador traducido a episodios (I1), el muro deja de leerse como un callejón de pago y el usuario aprende que la economía tiene fuentes. |
 | **Mueve** | % de muros que terminan en desbloqueo y no en cierre. Anuncios vistos por DAU. Vía ambas, DAU/MAU. |
 | **Cómo lo sé** | *Leading:* % de muros que terminan en algo distinto de cerrar. *Lagging:* DAU/MAU. *Guardrail:* ARPDAU y % de pagadores no caen más de 5% relativo — si el anuncio en el muro caniboliza la compra, se ve acá. |
-| **Costo** | ~2 semanas. El SDK de anuncios y el ledger ya existen; es superficie. |
-| **Compuerta ①** | ✅ |
+| **Costo** | ~2 semanas. El SDK de anuncios y el registro de saldos ya existen; es superficie. |
+| **¿Pasa la pregunta ①?** | ✅ |
 
 > **Y ojo con el conflicto que esto destapa:** el Pase Idilio vende *«sin anuncios»* como una de sus dos ventajas. O sea que la suscripción cobra por quitar la fuente gratuita más generosa del producto. Poner el anuncio en el muro hace ese conflicto más visible, y es una decisión de negocio que hay que tomar a la vista y no por omisión.
 
@@ -92,10 +95,10 @@ Hoy la escalera se aplana y en el último escalón empeora. Los tres paquetes qu
 | | |
 |---|---|
 | **Hipótesis** | Una escalera que no baja —y que en el último escalón sube— no le da al usuario ninguna razón para comprar el paquete grande, y un descuento en los tres a la vez no persuade en ninguno. Peor: el escalón barato es **2,6 veces mejor** que los otros dos y lleva el badge más agresivo, así que quien compara una sola vez aprende que fuera de la oferta el episodio cuesta el triple. Arreglar la escalera sube el ticket promedio sin tocar el tráfico. |
-| **Mueve** | Valor de la primera compra, ARPPU. No mueve DAU/MAU — entra igual porque cuesta poco y protege el resto. |
+| **Mueve** | Valor de la primera compra, o sea el ingreso promedio por usuario que sí paga. No mueve DAU/MAU — entra igual porque cuesta poco y protege el resto. |
 | **Cómo lo sé** | *Leading:* mix de paquetes comprados. *Lagging:* ARPPU. |
 | **Costo** | ~1 semana + config de store. |
-| **Compuerta ①** | ✅ |
+| **¿Pasa la pregunta ①?** | ✅ |
 
 #### I4 · Continuidad web → app
 El link compartido de idilio.tv abre la app **en ese episodio de esa serie**, no en el home. Hoy el muro web solo ofrece "Descargar la app" y el contexto se pierde.
@@ -106,7 +109,7 @@ El link compartido de idilio.tv abre la app **en ese episodio de esa serie**, no
 | **Mueve** | Instalaciones activadas, y el primer episodio visto post-install. |
 | **Cómo lo sé** | *Leading:* % de installs desde link que llegan al episodio correcto. *Lagging:* D1 (cuántos vuelven al día siguiente) de la cohorte (el grupo que entró por ahí) de link compartido. |
 | **Costo** | ~1 semana (Branch/AppsFlyer o Universal Links propios). |
-| **Compuerta ①** | ✅ |
+| **¿Pasa la pregunta ①?** | ✅ |
 
 ---
 
@@ -145,9 +148,9 @@ Aun así hay un daño previsible, y es el 19% que hoy sí reclama la recompensa 
 | **Hipótesis** | El muro no es un final —el anuncio recompensado ya lo abre— pero **ninguna de sus salidas tiene fecha**: el anuncio se puede ver diez veces hoy, la suscripción abre todo, el paquete se compra una vez. Nada obliga a volver mañana, y por eso la economía no mueve el regreso por más monedas que reparta. Convertido en una cita con hora — *"tu próximo episodio se abre hoy a las 21:30, tu hora de siempre"* — el muro pasa a ser el motivo del próximo regreso. Y como la unidad es la noche, los pases se acumulan hasta dos y hay comodín, un usuario de 2.3 días/semana puede sostener una racha sin cambiar de conducta. |
 | **Y por qué no lo resuelve el anuncio** | Porque no compiten en lo mismo, y hay que decirlo con los números en contra: el anuncio da **70 episodios por semana** y el Pase, **7**. Como fuente, el Pase es el 10% de lo que ya existe y no hace falta. Lo que el anuncio no da es **una razón para volver un día concreto** —se puede agotar hoy— ni un desbloqueo **sin cortar la historia**: 30 segundos de publicidad a mitad de un cliffhanger es justo lo que la suscripción vende evitar. El Pase no compite por dar más episodios. Compite por dar el de mañana. |
 | **Mueve** | **DAU/MAU** (objetivo primario). Racha de 3+: 6% → objetivo 20%. Y la adopción de la fuente gratuita, que hoy es del 19% porque hay un botón de por medio: acreditar al terminar un episodio la lleva a **~100% por construcción**, no por diseño de pantalla. Esa cifra deja de ser una meta y pasa a ser un guardrail — si no llega ahí, la acreditación está rota. |
-| **Cómo lo sé** | *Leading (semana 1):* % de muros que terminan en pase usado en vez de cierre. *Leading (semana 2):* % que vuelve dentro de las 36 h de haber usado el pase. *Lagging (semana 4):* DAU/MAU de la celda tratada vs. holdout. *Guardrail:* ARPDAU, leído como ingreso por DAU y no como mix de productos: si el mensual en el muro solo canibaliza packs, el mix se mueve y el ingreso no, y eso no es una ganancia. **Criterio de kill:** si ARPDAU cae >8% relativo sostenido 2 semanas, se revierte. |
+| **Cómo lo sé** | *Leading (semana 1):* % de muros que terminan en pase usado en vez de cierre. *Leading (semana 2):* % que vuelve dentro de las 36 h de haber usado el pase. *Lagging (semana 4):* DAU/MAU del grupo que recibe el cambio contra un grupo de control que no lo recibe. *Guardrail:* ARPDAU, leído como ingreso por DAU y no como mix de productos: si el mensual en el muro solo canibaliza packs, el mix se mueve y el ingreso no, y eso no es una ganancia. **Criterio de kill:** si ARPDAU cae >8% relativo sostenido 2 semanas, se revierte. |
 | **Costo** | ~4–5 semanas (server-authoritative timers, estado de invitado, migración a cuenta). El cuarto cambio no las mueve, y la razón conviene explicitarla: los dos pases ya son productos vivos de la ficha del build 1.20.0, así que no hay config de store que presupuestar —eso sí lo cuesta I3, que redefine qué trae cada pack—, y lo que suma es una opción más dentro de un muro que en esta intervención se reconstruye entero igual. Si enganchar la compra de la suscripción resulta más caro que eso, sale de I5 y se va a la Etapa 3: de los cuatro cambios es el que menos mueve el objetivo. Las cuatro piezas de perfil y de lanzamiento del párrafo anterior entran dentro de esas semanas: ninguna pasa de un día, y quedan contadas acá para que no aparezcan después como alcance no presupuestado. |
-| **Compuerta ①** | ✅ ocurre exactamente en el muro. |
+| **¿Pasa la pregunta ①?** | ✅ ocurre exactamente en el muro. |
 
 #### I6 · Progreso de serie visible
 "Vas 12 de 56". Barra de progreso en el header de la serie y en el muro. Hito visible: *"En el episodio 20 se destraba el resumen de la temporada"*.
@@ -158,7 +161,7 @@ Aun así hay un daño previsible, y es el 19% que hoy sí reclama la recompensa 
 | **Mueve** | Episodios por sesión; secundariamente, intención de volver. |
 | **Cómo lo sé** | *Leading:* episodios/sesión. *Lagging:* % de usuarios que completan una serie. |
 | **Costo** | ~2 semanas. |
-| **Compuerta ①** | ✅ |
+| **¿Pasa la pregunta ①?** | ✅ |
 
 ---
 
@@ -175,7 +178,7 @@ No hay muro de registro. La cuenta se ofrece en un solo momento: cuando el invit
 | **Mueve** | Cuentas creadas 12% → objetivo 30%. Habilita push (el aviso que llega al teléfono), cross-device (seguir en otro aparato) y medición real de retención. |
 | **Cómo lo sé** | *Leading:* conversión del prompt contextual vs. el registro actual. *Lagging:* % con cuenta; D30 (cuántos siguen ahí a los 30 días) de la cohorte que se registró tras el prompt. *Guardrail:* abandono en el momento del prompt no sube. |
 | **Costo** | ~3 semanas (merge de estado invitado→cuenta es lo caro). |
-| **Compuerta ①** | ✅ el prompt aparece en el muro, no en un onboarding (la seguidilla de pantallas de bienvenida). |
+| **¿Pasa la pregunta ①?** | ✅ el prompt aparece en el muro, no en un onboarding (la seguidilla de pantallas de bienvenida). |
 
 #### I8 · El pase como puente entre series
 Cuando el usuario termina una serie o se queda sin pase, se le ofrece dirigir el pase de mañana a una serie nueva del catálogo. El metajuego pasa a ser también descubrimiento.
@@ -186,7 +189,7 @@ Cuando el usuario termina una serie o se queda sin pase, se le ofrece dirigir el
 | **Mueve** | Series iniciadas por usuario; DAU/MAU vía más series activas por persona. |
 | **Cómo lo sé** | *Leading:* series distintas iniciadas/usuario/semana. *Lagging:* DAU/MAU. |
 | **Costo** | ~2 semanas (encima de I5). |
-| **Compuerta ①** | ✅ |
+| **¿Pasa la pregunta ①?** | ✅ |
 
 ---
 
@@ -231,7 +234,7 @@ I8                                ██████
 
 | Descartado | Por qué |
 |---|---|
-| Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo — y el argumento más fuerte no es ese 82% sino el 81%, que dice algo peor: la recompensa diaria **se le pone delante** al usuario, en un diálogo ineludible al abrir la app, y cuatro de cada cinco la cierran igual ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Si descartan dinero gratis que tienen en la cara, unas estadísticas que hay que ir a buscar no tienen ninguna chance. El 82% no es síntoma de un perfil vacío, es síntoma de que en esta sesión —entrar de madrugada, tocar «seguir viendo», cerrar— no hay ningún momento de navegación. *Queda descartado el rediseño, no la sección:* I5 e I7 sí tocan el perfil, con cuatro piezas chicas que no son engagement sino consecuencia —interruptor de avisos, la línea de la noche, el espejo de «Tu economía» y restaurar compras—. Van listadas dentro de cada intervención, y no como una novena, porque darles entidad propia contradiría la compuerta ① de [§2.2](#22-criterio-de-priorización). |
+| Rediseño de la sección de perfil | 82% nunca entra. No se arregla un cuarto amoblándolo — y el argumento más fuerte no es ese 82% sino el 81%, que dice algo peor: la recompensa diaria **se le pone delante** al usuario, en un diálogo ineludible al abrir la app, y cuatro de cada cinco la cierran igual ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Si descartan dinero gratis que tienen en la cara, unas estadísticas que hay que ir a buscar no tienen ninguna chance. El 82% no es síntoma de un perfil vacío, es síntoma de que en esta sesión —entrar de madrugada, tocar «seguir viendo», cerrar— no hay ningún momento de navegación. *Queda descartado el rediseño, no la sección:* I5 e I7 sí tocan el perfil, con cuatro piezas chicas que no son engagement sino consecuencia —interruptor de avisos, la línea de la noche, el espejo de «Tu economía» y restaurar compras—. Van listadas dentro de cada intervención, y no como una novena, porque darles entidad propia contradiría la pregunta ① de [§2.2](#22-criterio-de-priorización). |
 | Rankings, tablas, comparación social | 11 p.m.–2 a.m., consumo solitario, vertical con pudor, 88% sin identidad. No es motivación, es exposición. |
 | Insignias y coleccionables como apuesta principal | Vínculo indirecto con DAU/MAU, carga cognitiva alta, sin evidencia de motivación de coleccionista. Candidatos a capa posterior. |
 | Anuncios recompensados **como fuente nueva** | No hay nada que introducir: **el producto ya los tiene** — 15 monedas por anuncio, tope de 10 diarios, o sea hasta 70 episodios gratis por semana ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). La pregunta deja de ser si adoptarlos y pasa a ser dónde se ofrecen, que es lo que hace [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen). Lo que sí queda afuera es **subir el tope diario**: con la fuente ya duplicando el consumo, más volumen no compra más regreso — compra menos motivo para pagar. |
