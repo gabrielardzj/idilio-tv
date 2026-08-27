@@ -47,14 +47,22 @@ export const CATALOGO = { series: 50, episodios: 2230, gratis: 500, bloqueados: 
  *  La oferta de bienvenida queda fuera de la escalera y se declara como tal.
  */
 export const PACKS = [
-  // Sin precio tachado: en esta escalera no existe un paquete de 180 monedas a
-  // precio regular, así que anclar contra $2.49 sería anclar contra un producto
-  // inventado. El "$0.08 por episodio" frente al "$0.15" del siguiente escalón
-  // ya dice todo lo que el ancla pretendía decir, y es verdad.
+  // Sin badge de descuento: en esta escalera no existe el mismo paquete a precio
+  // regular contra el que comparar, así que un "−69%" sería descontar sobre un
+  // producto inventado. El "$208 por episodio" frente al "$540" del siguiente
+  // escalón dice lo mismo que el badge pretendía, y es verdad.
+  //
+  // `live` y `liveCop` son lo que el producto cobra HOY, medido en la app con
+  // storefront de Colombia. Solo hay tres paquetes: el cuarto escalón es
+  // propuesta nuestra y por eso va con `live: null`. Decía 1500 monedas a
+  // $59.900, y ese número salía del rango que declara Google Play —"$1.900 a
+  // $59.900 por elemento"—, que es el techo de TODAS las compras de la app y no
+  // un paquete observado. Es el mismo error que costó el diagnóstico entero:
+  // tomar un material de tienda por una medición del producto.
   { id: 'intro', cop: 2500, coins: 180, live: 180, liveCop: 2500, tag: 'Bienvenida · una sola vez', best: false, intro: true },
   { id: 'p1', cop: 13500, coins: 375, live: 375, liveCop: 13500, tag: null, best: false, intro: false },
   { id: 'p2', cop: 25500, coins: 750, live: 725, liveCop: 25500, tag: null, best: true, intro: false },
-  { id: 'p3', cop: 49900, coins: 1500, live: 1500, liveCop: 59900, tag: null, best: false, intro: false },
+  { id: 'p3', cop: 49900, coins: 1500, live: null, liveCop: null, tag: null, best: false, intro: false },
 ] as const
 
 /** La escalera REAL de hoy, para el diagnóstico. Precio por episodio:
