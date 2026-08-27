@@ -13,21 +13,25 @@
 
 De las ocho intervenciones de la estrategia, la elegida es esta, por cinco razones en orden de peso.
 
-**1. Es la única que ataca el punto exacto donde la sesión se corta por precio.**
-El corte no es un accidente: es la estructura del catálogo. La moda son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin una sola excepción en el precio. Y no lo pone el aburrimiento: lo pone el precio. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
+**1. Es la única que ataca el punto exacto donde la historia se corta.**
+El corte no es un accidente: es la estructura del catálogo. La moda son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin una sola excepción en el precio. Y no lo pone el aburrimiento.
+
+Lo que sí conviene decir con precisión, porque el muro real lo cambia: **ese corte no es infranqueable.** Ahí mismo hay un anuncio de treinta segundos que abre el episodio gratis, hasta diez veces al día ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Así que lo que corta la historia no es el precio: es que la salida gratuita está rotulada `0/10` en la tarjeta más apagada de la pantalla. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
 
 > **Dos precisiones.** Dónde cae el corte varía: *Pasión a Domicilio*, la serie del prototipo y de casi todos los ejemplos de este documento, regala 12 y no 10. Y que la sesión promedio de 14 episodios termine justo en el muro es la hipótesis del [diagnóstico §1.1](../01-diagnostico/#11-los-dos-hallazgos-que-ordenan-todo-lo-demás), no un hecho. Ninguna de las dos afecta el argumento: el corte por precio existe igual.
 
 **2. Es la única que puede mover DAU/MAU por sí sola.**
-Stickiness es una métrica de *regreso*. Para moverla hace falta una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo que no puede tener — el único donde una promesa a futuro tiene valor real. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso.
+Stickiness es una métrica de *regreso*. Para moverla hace falta una razón concreta para volver mañana. El muro es el único momento del producto donde el usuario quiere algo con urgencia — el único donde una promesa a futuro tiene valor real. No es que no pueda tenerlo: puede, viendo un anuncio. Es que ninguna de las salidas que tiene hoy le da una razón para volver **mañana**. Legibilidad de la moneda (I1) y progresión visible (I6) hacen mejor producto, pero no crean regreso.
 
 **2bis. Y es la única que compite contra lo que el usuario realmente hace.**
-El censo del catálogo mostró que la alternativa a pagar no es irse: es **empezar otra de las 50 series y comerse su bloque gratis** —10 episodios en la mayoría, 500 en todo el catálogo—. Eso es lo que gana hoy, y sale gratis. El Pase de la Noche es lo único en todo el producto que ofrece algo que ese camino no puede dar: **seguir donde estabas**. Empezar otra serie te devuelve al episodio 1 de una historia que todavía no te importa; el pase te devuelve al episodio 13 de *Pasión a Domicilio*, que es exactamente donde el muro te dejó.
+Hoy el usuario tiene dos alternativas a pagar, y las dos son gratis: **ver un anuncio** —treinta segundos, ahí mismo, y sigue la misma historia— o **empezar otra de las 50 series** y comerse su bloque gratis. La segunda es la que gana, porque la primera está escondida en un `0/10`.
+
+El Pase no compite con ninguna de las dos en lo que ofrecen. El anuncio también deja seguir donde estabas, y lo hace ya. **Lo que ninguna de las dos tiene es una hora.** El anuncio es transaccional: se agota en el momento en que se usa y no deja nada agendado. El Pase existe para lo que a las dos les falta — que mañana haya algo esperando en la historia que el usuario eligió. Empezar otra serie te devuelve al episodio 1 de una historia que todavía no te importa; el pase te devuelve al episodio 13 de *Pasión a Domicilio*, que es exactamente donde el muro te dejó.
 
 Por eso la elección entre series (R2) no es solo pedagógica. Es el momento en que el usuario **declara cuál historia le importa** — que es exactamente el apego que hoy no existe y que la métrica de stickiness necesita.
 
 **3. Resuelve el objetivo de experiencia como efecto secundario, no como pantalla aparte.**
-El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus sumideros y su posición. La tentación es una pantalla que lo explique. Nadie lee esa pantalla. Aquí el usuario aprende el sistema porque tiene que **operarlo**: recibe un recurso escaso (un pase), decide dónde gastarlo (qué serie), ve el efecto (episodio abierto, racha +1) y ve el precio de la alternativa ($ 540 por episodio, el peldaño regular de la tienda). Es aprendizaje por uso.
+El brief pide que el usuario entienda el valor de la moneda, sus fuentes, sus sumideros y su posición. La tentación es una pantalla que lo explique. Nadie lee esa pantalla. Aquí el usuario aprende el sistema porque tiene que **operarlo**: recibe un recurso escaso (un pase), decide dónde gastarlo (qué serie), ve el efecto (episodio abierto, racha +1) y ve lo que cuestan las alternativas — treinta segundos de anuncio, o $ 540 el episodio en la tienda. Es aprendizaje por uso.
 
 **4. Funciona para el 88% que es invitado, desde el día uno.**
 Sin cuenta, sin onboarding (la seguidilla de pantallas de bienvenida), sin perfil. El estado vive en el dispositivo y se ofrece migrar a cuenta solo cuando ya vale la pena.
@@ -46,13 +50,13 @@ Son dos cosas distintas y conviene no mezclarlas:
 
 Es la corrección directa al **19% de reclamo** de la recompensa diaria, y la evidencia detrás es más fuerte de lo que parece. Hoy esa recompensa se ofrece en un diálogo al abrir la app: es ineludible, la ve todo el mundo, y aun así cuatro de cada cinco la cierran ([F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). O sea que la visibilidad ya está resuelta y el 19% no la explica. Lo que queda es el momento y el botón. Cambiando el momento —al muro, cuando el usuario quiere el episodio— y quitando el botón, la adopción de la fuente pasa a ~100% **por construcción**.
 
-> La entrega al ver está tomada de la versión paralela de este mismo reto, donde está mejor resuelta que en la mía. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
+> La entrega al ver está tomada de la versión paralela de este mismo reto, donde estaba mejor resuelta. El razonamiento completo está en [`RECONCILIACION.md`](../RECONCILIACION.md).
 
 **R1b · Lo pendiente se acumula hasta dos, y ahí se detiene.**
 El techo de emisión es duro y por usuario, no por serie. El de acumulación es otro: **el saldo pendiente no pasa de 2**, y lo que se emite por encima de 2 mientras el usuario no aparece se pierde. Ese es el gradiente entero de la mecánica, y es fino a propósito: faltar una noche no cuesta nada —al volver hay dos esperando—, faltar dos seguidas ya deja un pase en el camino. Nadie recibe un castigo; el que vuelve seguido simplemente recoge todo lo que se emitió. El tope cubre además el caso de quien ve episodios gratis, recibe el pase y cierra la app sin llegar al muro. Se explica en §3.4bis.
 
 **R2 · El usuario elige a qué serie se lo da.**
-Con dos o más series empezadas, usar el pase abre una elección. Esta regla parece un detalle y es el centro pedagógico de todo: obliga a razonar sobre un recurso escaso. Un recurso que se asigna se entiende; uno que se recibe, no.
+Con dos o más series empezadas, usar el pase abre una elección. Esta regla parece un detalle y es el centro pedagógico de todo: obliga a razonar sobre un recurso escaso — y el Pase es lo único escaso de esta economía, porque las monedas no lo son (diez episodios diarios en anuncios). Un recurso que se asigna se entiende; uno que se recibe, no.
 
 **R3 · La unidad es la noche, y la noche corre de 5 a.m. a 5 a.m.**
 54% de las sesiones pasan entre 11 p.m. y 2 a.m. Con corte a medianoche, ver el martes a las 23:40 y el miércoles a las 00:20 cuenta como una sola visita y el martes queda roto. Con corte a las 5 a.m., son dos noches — que es como el usuario las vivió. El corte se calcula en la zona horaria del usuario, nunca en UTC.
@@ -98,6 +102,10 @@ stateDiagram-v2
     elegir --> ConSaldo: sin pase, saldo >= 15
     elegir --> Cita: sin pase, saldo < 15
 
+    Anuncio: Ver un anuncio · 30 s<br/>+15 monedas · hasta 10 al día
+    Muro --> Anuncio: la salida gratuita que el producto YA tiene
+    Anuncio --> Desbloqueo: episodio abierto
+
     PaseListo: Pase de la Noche listo
     PaseListo --> Eleccion: usar el pase
     PaseListo --> ConSaldo: saldo >= 15<br/>(abrir sin gastar el pase)
@@ -109,6 +117,8 @@ stateDiagram-v2
     ConSaldo: Abrir por 15 monedas
     ConSaldo --> Desbloqueo: pagar con saldo
     ConSaldo --> Cita: prefiero esperar
+
+    Cita --> Anuncio: no quiero esperar
 
     Cita: LA CITA<br/>«Hoy a las 21:30» + avísame
     Cita --> Tienda: no quiero esperar
@@ -150,14 +160,16 @@ No es adorno narrativo. Es que el usuario llegó ahí por la historia, y el muro
 
 ### D2 · Lo gratis siempre va arriba de lo pago
 
-El pase ocupa la posición primaria; comprar es un botón debajo. Es una decisión con costo de ingreso a corto plazo, y se sostiene en dos razones:
+El orden de la hoja es **pase → anuncio → compra**, y las dos primeras son gratis. El anuncio no lo inventa esta intervención: ya está en el muro del producto, enterrado bajo la suscripción y rotulado `0/10` — [I2](../02-estrategia/#i2--el-muro-muestra-las-salidas-que-ya-existen) lo sube y lo traduce. Va **debajo** del Pase porque el Pase es lo mismo sin los treinta segundos y sin el corte diario, y **encima** de la compra por la regla de esta decisión.
+
+Poner comprar debajo de dos salidas gratuitas es una decisión con costo de ingreso a corto plazo, y se sostiene en dos razones:
 
 1. El 95%+ de la base no paga. Para ellos, un muro que solo vende es un muro sin salida, y el resultado es abandono, no conversión.
 2. El usuario que sí iba a pagar sigue pagando: la salida de compra está **siempre**, y lo que cambia es su peso. El muro del prototipo decide primero por el saldo y recién después mira el pase:
 
    - **Con saldo suficiente —haya pase o no—:** botón entero, *«Abrirlo ahora por 15 monedas»*, y debajo cuántas monedas le quedan. Ahí no hay nada que vender: es un gasto que ya puede hacer.
    - **Sin saldo y con un pase en la mano:** baja a un link chico debajo del pase, *«o consigue monedas para no esperar»* — porque estaría compitiendo contra algo gratis que el usuario ya tiene.
-   - **Sin saldo y sin pase:** vuelve a ser un botón entero, *«No quiero esperar»*, con cuántas monedas le faltan. Es la única salida además de la cita.
+   - **Sin saldo y sin pase:** vuelve a ser un botón entero, *«No quiero esperar»*, con cuántas monedas le faltan. Es la única salida **de pago** que queda; arriba de ella siguen estando el anuncio y la cita.
 
    Son tres tratamientos para cuatro estados: el saldo manda, y solo cuando no alcanza importa si hay pase. En los tres, el precio llega con más información que antes (sabe que un episodio cuesta $ 540 y que la alternativa es esperar hasta las 21:30). Un precio con alternativa visible se juzga mejor que un precio sin ella.
 
@@ -239,7 +251,7 @@ Solo correo. Sin contraseña, sin perfil, sin foto. Todo lo que se pida de más 
 
 | Idea | Por qué no |
 |---|---|
-| Tab de "Recompensas" rediseñado | Es exactamente el error que estamos corrigiendo: mover el metajuego a un destino. |
+| Tab de "Recompensas" rediseñado | Ahí siguen viviendo las tareas sociales, los referidos y la suscripción, y ahí se quedan. Lo que esta intervención toca es el muro, que es donde el usuario está cuando quiere monedas. Rediseñar el destino no cambia que haya que decidir ir. |
 | Barra de progreso semanal en el player | El player debe seguir siendo video. El único elemento de meta permitido ahí es el chip de saldo. |
 | Racha visible en el home | El usuario nocturno entra y toca "seguir viendo". Una racha en el home la ve tarde o no la ve. |
 | Anuncio recompensado para ganar un **pase** extra | Los anuncios ya existen en Idilio y ya dan monedas — [I2](../02-estrategia/#i2--el-muro-muestra-las-salidas-que-ya-existen) los lleva al muro. Lo que no debe hacerse es dejar que compren **pases**: el techo de 1 por noche es lo que convierte al pase en una cita, y un pase que se puede comprar con tiempo deja de tener hora. Que la fuente de monedas sea ilimitada y la de pases no es justamente lo que las distingue. |
@@ -305,7 +317,7 @@ Tres lecturas que salen de ahí:
 
 La restricción del brief es explícita: *«cualquier fuente nueva de moneda debe equilibrarse con la sostenibilidad de la economía y con la conversión a pagador»*.
 
-> **La escala del problema, primero, porque cambia qué hay que defender.** Idilio ya regala **hasta 70 episodios por semana** en anuncios recompensados —15 monedas, tope de 10 diarios— más 2 al día por la recompensa diaria ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). El usuario promedio consume unos 32 episodios semanales. **La fuente gratuita recurrente ya más que duplica el consumo**, así que la economía no tiene escasez que proteger.
+> **La escala del problema, primero, porque cambia qué hay que defender.** Idilio ya regala **hasta 70 episodios por semana** en anuncios recompensados —15 monedas, tope de 10 diarios— más la racha diaria, que en una semana completa paga 450 monedas —otros 30 episodios— ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). El usuario promedio consume unos 32 episodios semanales. **La fuente gratuita recurrente ya más que duplica el consumo**, así que la economía no tiene escasez que proteger.
 >
 > Eso no vuelve irrelevante el techo del Pase — lo vuelve **secundario**. Lo que sigue muestra que el Pase agrega poco volumen sobre lo que ya se regala; lo que de verdad sostiene el argumento es que el Pase no está ahí para dar episodios, sino para ponerles hora.
 

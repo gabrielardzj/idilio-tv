@@ -117,15 +117,35 @@ Hoy la escalera se aplana y en el último escalón empeora. Los tres paquetes qu
 | **¿Pasa la pregunta ①?** | ✅ |
 
 #### I4 · Continuidad web → app
-El link compartido de idilio.tv abre la app **en ese episodio de esa serie**, no en el home. Hoy el muro web solo ofrece "Descargar la app" y el contexto se pierde.
+
+**El recorrido, tal como ocurre hoy.** Alguien comparte un episodio. Su amigo abre el link en el teléfono y cae en **idilio.tv**, que no es un landing sino un reproductor de verdad: reproduce, trae la lista de capítulos y encadena al siguiente solo. Ve unos cuantos, se engancha, y en el episodio 13 de *Pasión a Domicilio* aparece el muro web ([capturado acá](../00-dogfooding/evidencia/muro-web-ep13.png)).
+
+Ese muro no se parece al de la app. **No tiene economía:** ni saldo, ni anuncio, ni paquetes. Dice *«Se desbloquea en la app con 15 monedas»* y ofrece una sola salida — **«Descargar la app»**. Así que toca, va a la tienda, instala, abre…
+
+**…y la app lo recibe en el home.** Un catálogo de 50 series. La serie que venía viendo y el episodio donde se quedó se perdieron en el salto: ahora tiene que acordarse del nombre, encontrarlo entre los rieles y acordarse de en qué capítulo iba.
+
+**Qué se tira ahí.** No es tráfico: es la señal de intención más específica que este producto puede recibir. Esa persona no llegó queriendo *«una app de microdramas»* — llegó queriendo **el episodio 13 de una serie concreta**, a la que ya le dedicó doce. El producto convierte esa intención en la de un visitante cualquiera, y le cobra el trabajo de reconstruirla a mano, a la 1 a.m., en una app que abrió por primera vez.
+
+**Qué hace la intervención.** El link compartido abre la app **en ese episodio de esa serie**, esté la app instalada o no. Son dos piezas distintas y conviene no confundirlas, porque cuestan y fallan distinto:
+
+| Caso | Qué hace falta | Qué resuelve |
+|---|---|---|
+| **App ya instalada** | *Universal Links* (iOS) y *App Links* (Android): el sistema operativo reconoce el dominio y abre la app en vez del navegador | Que quien ya tiene la app no termine viendo en web, sin saldo, sin racha y contra un muro que no ofrece nada |
+| **App sin instalar** | Un *deferred deep link*, porque el viaje a la tienda borra el rastro y la app arranca sin saber de dónde vino nadie | Que la primera pantalla después de instalar sea el episodio que vino a ver, y no el home |
+
+*Deep link* es el enlace que abre una pantalla **adentro** de la app y no la portada. *Deferred* —diferido— es la mitad que aguanta el paso por la tienda: el clic queda registrado antes de instalar, y la app lo cobra en su primer arranque.
+
+**Y el muro web deja de ser un callejón.** Hoy pide instalar sin decir qué pasa después. Con el aterrizaje resuelto puede prometer lo que de verdad va a cumplir —*«seguí el episodio 13 en la app»*— y, con [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen) en producción, decir además que ahí adentro ese episodio se abre gratis con un anuncio.
 
 | | |
 |---|---|
-| **Hipótesis** | El compartir ya existe y funciona; lo que se rompe es el aterrizaje. Un deferred deep link (el enlace que sobrevive a la instalación y abre la app justo en el episodio compartido) recupera intención que hoy se tira. |
-| **Mueve** | Instalaciones activadas, y el primer episodio visto post-install. |
-| **Cómo lo sé** | *Leading:* % de installs desde link que llegan al episodio correcto. *Lagging:* D1 (cuántos vuelven al día siguiente) de la cohorte (el grupo que entró por ahí) de link compartido. |
-| **Costo** | ~1 semana (Branch/AppsFlyer o Universal Links propios). |
-| **¿Pasa la pregunta ①?** | ✅ |
+| **Hipótesis** | El compartir ya existe y funciona; lo que se rompe es el aterrizaje. Y no está a medias: el porcentaje de instalaciones que llegan al episodio correcto no es bajo, es **cero**, porque el camino no existe. Esto no persuade a nadie de nada — solo deja de tirar una intención que el usuario ya traía puesta. |
+| **Mueve** | Instalaciones activadas, y cuál es el primer episodio que se ve después de instalar. Sobre DAU/MAU actúa indirecto, vía [I5](#i5--el-pase-de-la-noche--la-racha-de-noches-): el Pase solo tiene sentido para alguien que está **dentro de una historia**, y quien aterriza en el home vuelve a estar eligiendo entre 50 arranques gratis, que es la conducta que el diagnóstico señala como el problema. |
+| **Cómo lo sé** | *Leading:* % de instalaciones desde link que llegan al episodio correcto (hoy 0%). *Lagging:* D1 —cuántos vuelven al día siguiente— de la cohorte (el grupo que entró por ahí) de link compartido, contra la que entró por otro lado. *Guardrail:* la tasa de instalación desde el muro web no cae; si el copy nuevo promete de más, se ve ahí. |
+| **Costo** | ~1 semana. Con proveedor (Branch, AppsFlyer) es integrar un SDK. Sin proveedor son Universal Links y App Links propios, que exigen publicar un archivo de asociación en el dominio y **no cubren el caso diferido**, que es justamente el del usuario nuevo. Es plomería, no una mecánica: no compite por el presupuesto de I5. |
+| **¿Pasa la pregunta ①?** | ✅ ocurre en el salto entre las dos superficies, que es exactamente el segundo en que el usuario quiere seguir viendo. |
+
+> **Es de las que menos mueven el objetivo, y entra igual.** No hace que nadie vuelva mañana, y eso la deja al lado de [I3](#i3--la-escalera-de-precios-vuelve-a-ser-una-escalera) en el fondo del portafolio por efecto. Entra por tres razones: cuesta una semana, arregla algo que hoy vale cero y no un poco, y le entrega a I5 gente que ya está adentro de una historia en vez de parada frente a un catálogo.
 
 ---
 
@@ -150,7 +170,7 @@ Cuatro cambios acoplados:
 | Pieza | Por qué cae dentro de I5 |
 |---|---|
 | **Interruptor del aviso del pase** | La cita manda una notificación. Si no hay dónde apagarla dentro de la app, el usuario la apaga desde los ajustes del sistema — y ahí las pierde todas, para siempre y sin vuelta atrás. Es la diferencia entre *«no me avises tanto»* y *«silenciado»*. |
-| **La línea que explica la noche** | *«Tu noche va de 5 a.m. a 5 a.m.»* Suena a detalle técnico y no lo es: con la base repartida en cuatro husos, alguien va a escribir «me entró el pase el martes y la app dice lunes». Una línea de texto responde eso; sin ella lo responde soporte. |
+| **La línea que explica la noche** | *«Tu noche va de 5 a.m. a 5 a.m.»* Suena a detalle técnico y no lo es: con la base repartida en cuatro husos horarios, alguien va a escribir «me entró el pase el martes y la app dice lunes». Una línea de texto responde eso; sin ella lo responde soporte. |
 | **Espejo de «Tu economía»** | El mismo componente que se abre desde el chip de saldo, con un segundo punto de entrada. Cuesta cero y sirve al 18% que sí entra al perfil, que es la parte más enganchada de la base. **Nunca como único camino:** la puerta principal sigue siendo el saldo, dentro del reproductor. |
 
 Ninguna de las tres mueve la métrica. Las tres se notan si faltan.
@@ -243,7 +263,7 @@ I8                                ██████
 **Los tres riesgos de I5, declarados por adelantado:**
 
 1. **El reloj no puede vivir en el dispositivo.** Un countdown en cliente se vulnera cambiando la hora del teléfono. Necesita ser server-authoritative, con el cliente mostrando un delta contra `server_time`. Presupuestado dentro de las 4–5 semanas.
-2. **La ventana de 5 a.m. necesita zona horaria del usuario, no del servidor.** MX, CO y US-Hispano cruzan cuatro husos. Si el corte se calcula en UTC, a un usuario de Los Ángeles se le rompe la racha a las 10 p.m. Esto es una decisión de producto disfrazada de detalle técnico y hay que resolverla antes de escribir el primer endpoint.
+2. **La ventana de 5 a.m. necesita zona horaria del usuario, no del servidor.** MX, CO y US-Hispano cruzan cuatro husos horarios. Si el corte se calcula en UTC, a un usuario de Los Ángeles se le rompe la racha a las 10 p.m. Esto es una decisión de producto disfrazada de detalle técnico y hay que resolverla antes de escribir el primer endpoint.
 3. **Push es el 40% del valor del pase, y hoy no está disponible para el 88%.** **Ese 40% es una estimación, no un dato medido:** no hay medición de push en este producto, y la cifra sale del argumento, no de una fuente. Un pase con countdown y sin notificación que avise que ya está listo pierde buena parte de su efecto, y sin cuenta no hay push confiable. **Mitigación:** en Etapa 2 se usa push anónimo por token de dispositivo (un identificador del teléfono, sin cuenta detrás) (iOS y Android lo permiten sin cuenta), y se acepta que el valor completo llega recién con I7.
 
 ## 2.6 Qué queda deliberadamente afuera

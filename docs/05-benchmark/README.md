@@ -61,7 +61,7 @@ por una serie lo que la suscripción cobra por todas.
 
 Con una salvedad que conviene decir, porque es la diferencia entre un argumento y un eslogan: **el
 muro no publica ese precio en ninguna parte.** Publica paquetes. Las 600 monedas hay que armarlas
-—y las conversiones de arriba son mías, no del producto—. Lo que sí es cierto sin ninguna cuenta
+—y las conversiones de arriba son de este anexo, no del producto—. Lo que sí es cierto sin ninguna cuenta
 es que la comparación está al alcance del usuario, en la única pantalla donde está mirando
 precios, y que ninguna forma de armarla favorece al pase semanal. No es un problema de cadencia —en Latinoamérica el plan semanal se lleva el **29 % de los
 ingresos de suscripción de la región**, según RevenueCat—: es un problema del número.
