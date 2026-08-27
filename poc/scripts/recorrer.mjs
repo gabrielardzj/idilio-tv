@@ -130,6 +130,16 @@ paso('la escalera no esconde el pase en las noches con bono',
 await page.locator('.sheet-close').click()
 await page.waitForTimeout(300)
 
+// ── La otra mitad de la economía: el camino de pago ──────────────────────
+// El pase ya se gastó, así que este es el muro de quien no tiene la vía gratis.
+// Nadie había recorrido esto: la tienda es donde aterriza toda la pedagogía de
+// la moneda, y hasta hoy solo se verificaba saltando a ella con el panel.
+while ((await estado()) === 'player-free') {
+  await page.locator('[aria-label^="Siguiente episodio"]').click()
+  await page.waitForTimeout(90)
+}
+paso('sin pase, el muro vuelve a aparecer', (await estado()) === 'wall-pass-spent')
+
 // ── La salida gratuita que el producto YA tenía ──────────────────────────
 // El anuncio recompensado entró al muro cuando las capturas del producto real
 // demostraron que este trabajo estaba proponiendo un muro con MENOS salidas que
@@ -161,15 +171,19 @@ paso('verlo acredita las monedas de una', saldoDespues - saldoAntes === 15,
   `${saldoAntes} → ${saldoDespues}`)
 paso('y descuenta del tope diario', /9 episodios gratis hoy/.test(await anuncio.innerText()))
 
-// ── La otra mitad de la economía: el camino de pago ──────────────────────
-// El pase ya se gastó, así que este es el muro de quien no tiene la vía gratis.
-// Nadie había recorrido esto: la tienda es donde aterriza toda la pedagogía de
-// la moneda, y hasta hoy solo se verificaba saltando a ella con el panel.
+// Y con esas monedas el muro cambia de estado solo: el pago sube a primario.
+// Es el encadenamiento que documenta la pantalla `01b-tras-el-anuncio` del
+// export, y se sigue como lo seguiría el usuario — gastarlas y volver al muro.
+paso('las monedas del anuncio suben el pago a primario', (await estado()) === 'wall-with-balance')
+await page.locator('.sheet button', { hasText: /Abrirlo ahora/ }).first().click()
+await page.waitForTimeout(500)
+await page.locator('.sheet button', { hasText: 'Ver el episodio' }).click()
+await page.waitForTimeout(500)
 while ((await estado()) === 'player-free') {
   await page.locator('[aria-label^="Siguiente episodio"]').click()
   await page.waitForTimeout(90)
 }
-paso('sin pase, el muro vuelve a aparecer', (await estado()) === 'wall-pass-spent')
+paso('gastadas, el muro vuelve a pedir', (await estado()) === 'wall-pass-spent')
 
 await page.locator('.sheet button', { hasText: /No quiero esperar|consigue monedas/i }).first().click()
 await page.waitForTimeout(500)
