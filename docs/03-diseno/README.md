@@ -290,7 +290,7 @@ La categoría directa —no cómics, microdramas— ya validó que la fuente gra
 | | ReelShort | DramaBox | **Idilio (hoy)** | **Idilio (propuesta)** |
 |---|---|---|---|---|
 | Check-in diario | ~10 monedas | Sí, y **la racha se rompe al faltar** | Diálogo al abrir la app · lo reclama el 19% | Pase de la Noche, en el muro |
-| Anuncios recompensados | Sí | Hasta **15 anuncios diarios ≈ 30 monedas** | **Sí: 15 monedas × 10 diarios = hasta 10 episodios por día** | igual, y además ofrecido en el muro (I2) |
+| Anuncios recompensados | Sí | Hasta **15 anuncios diarios ≈ 30 monedas** | **Sí: 10 anuncios al día × 15 monedas = 150 = 10 episodios más al día** | igual, y además ofrecido en el muro (I2) |
 | Suscripción | — | — | **Pase Idilio: $ 12.500/sem · $ 24.500/mes**, y vende *«sin anuncios»* | igual, ofrecida también en el muro |
 
 Tres lecturas que salen de ahí:

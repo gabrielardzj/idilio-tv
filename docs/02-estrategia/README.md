@@ -11,7 +11,7 @@ El muro real cambia el peso entre esas tres. **La economía de Idilio no vive en
 | Etapa | Semanas | Qué hace | No puede ir antes porque… | Intervenciones |
 |---|---|---|---|---|
 | **1** | 1–4 | Reordenar y terminar de traducir lo que el producto ya tiene | — | I1 la moneda habla en episodios donde todavía no lo hace · I2 el muro pone arriba la salida gratuita que ya tiene · I3 la escalera de precios vuelve a subir · I4 continuidad web→app |
-| **2** | 4–9 | Cambiar la unidad del regreso — **es la que se lleva a diseño y POC** | sin la Etapa 1, la línea base se mide contra un usuario que no sabe que ya tiene diez episodios gratis al día | I5 el Pase de la Noche y la Racha de Noches · I6 progreso de serie visible |
+| **2** | 4–9 | Cambiar la unidad del regreso — **es la que se lleva a diseño y POC** | sin la Etapa 1, la línea base se mide contra un usuario que no sabe que los anuncios le dan diez episodios más cada día | I5 el Pase de la Noche y la Racha de Noches · I6 progreso de serie visible |
 | **3** | 9–13 | Convertir el hábito en cuenta y en catálogo | pedir cuenta antes de que exista una racha es pedirla sin argumento | I7 la cuenta se pide cuando hay algo que perder · I8 el pase como puente entre series |
 
 La Etapa 1 va primero pese a mover menos: hace legible la economía sobre la que después se mide I5. Y I5 es la apuesta principal pero no abre el trimestre, porque cuesta 4–5 semanas y empezar por ahí significa llegar a la semana 9 sin haber aprendido nada.
@@ -20,7 +20,7 @@ La Etapa 1 va primero pese a mover menos: hace legible la economía sobre la que
 
 ## 2.1 La tesis
 
-> El metajuego —la economía que rodea al acto de ver: monedas, racha, recompensas, suscripción— ya está donde tiene que estar: el muro le muestra al usuario la economía entera en el momento de máxima intención. Lo que falla es **cómo la ordena y qué deja sin traducir** — abre por lo más caro y escribe la única salida gratuita como un `0/10` gris. Y le falta lo único que ninguna de sus salidas tiene: **una fecha**. La estrategia consiste en **reordenar esa pantalla y cambiar la unidad en que habla** —de monedas a episodios, de días calendario a noches— y en agregar una sola mecánica: la que convierte el muro en una cita.
+> El metajuego —la economía que rodea al acto de ver: monedas, racha, recompensas, suscripción— ya está donde tiene que estar: el muro le muestra al usuario la economía entera en el momento de máxima intención. Lo que falla es **cómo la ordena y qué deja sin traducir** — abre por lo más caro y rotula la salida gratuita con un `0/10` gris que cuenta anuncios, no los diez episodios que esos anuncios rinden. Y le falta lo único que ninguna de sus salidas tiene: **una fecha**. La estrategia consiste en **reordenar esa pantalla y cambiar la unidad en que habla** —de monedas a episodios, de días calendario a noches— y en agregar una sola mecánica: la que convierte el muro en una cita.
 
 Conviene decir qué queda descartado con eso, porque era la intervención obvia. **Si la economía viviera en otra pantalla, el trabajo grande del trimestre sería llevarla al muro.** El muro ya la tiene, así que ese traslado no hay que hacerlo — y eso abarata el trimestre y vuelve más preciso el resto: lo que queda por construir es orden, etiqueta y una mecánica.
 
@@ -36,7 +36,7 @@ Hay tres formas de fallarla, y las tres mandan la intervención al final de la l
 
 1. **Pedirle al usuario que navegue.** El 82% nunca abre el perfil.
 2. **Llegar antes de que exista la necesidad.** Es la menos evidente: el 81% que no reclama la recompensa diaria **sí la tiene delante**, en un diálogo al abrir la app, y la cierra igual. Estar a la vista no alcanza si el usuario todavía no quiere lo que se le ofrece.
-3. **Estar en el momento correcto sin decir lo que vale.** Es la que el muro real destapa: el anuncio recompensado ocurre exactamente donde tiene que ocurrir, y su tope —diez episodios gratis por día— está escrito como un `0/10` gris en la esquina de la tarjeta más apagada de la hoja ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Está en el sitio correcto y aun así falla, porque no se entiende, y el resultado para el usuario es el mismo.
+3. **Estar en el momento correcto sin decir lo que vale.** Es la que el muro real destapa: el anuncio recompensado ocurre exactamente donde tiene que ocurrir, y su tope está escrito como un `0/10` gris en la esquina de la tarjeta más apagada de la hoja. Ese contador cuenta **anuncios**, que es la unidad que menos le importa al usuario: los diez anuncios son 150 monedas, o sea diez episodios más al día ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Está en el sitio correcto y aun así falla, porque no se entiende, y el resultado para el usuario es el mismo.
 
 La tercera forma es la que reordena el portafolio: hace que la intervención más barata de todas —[I2](#i2--el-muro-muestra-las-salidas-que-ya-existen)— sea también la de mayor alcance, porque no hay nada que construir.
 
@@ -62,7 +62,7 @@ Nada de esto inventa economía ni la cambia de pantalla: el muro ya tiene las tr
 | Dónde falta hoy | Qué dice | Qué debería decir |
 |---|---|---|
 | La cabecera del muro | *«Tu balance: 0 · Costo del episodio: 15»* | *«Te falta 1 episodio»* — la resta la hace el producto, no el usuario a la 1 a.m. |
-| El contador del anuncio | `0/10` | *«te quedan 10 episodios gratis hoy»* — lo aplica [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen) |
+| El contador del anuncio — cuenta anuncios, no episodios | `0/10` | *«te quedan 10 episodios gratis hoy»* — lo aplica [I2](#i2--el-muro-muestra-las-salidas-que-ya-existen) |
 | La recompensa diaria | `15 · 40 · 60 · 50 · 40 · 45 · 200` monedas | su equivalente en episodios, que es lo único que el usuario compara |
 | Terminar la serie | 600 monedas, sin total | *«$ 21.000 en monedas · $ 24.500 el mes entero»* — la comparación que el muro pone a la vista y no hace |
 
@@ -77,11 +77,11 @@ Nada de esto inventa economía ni la cambia de pantalla: el muro ya tiene las tr
 #### I2 · El muro muestra las salidas que ya existen
 El muro ya tiene la salida gratuita: el anuncio recompensado está ahí, con su *«Desbloquea 1 episodio»* y su contador `0/10`. Lo que está mal es **el orden y la etiqueta**. La hoja abre con *«Desbloquea TODO Idilio»* —lo más caro— y deja el anuncio debajo, en la tarjeta más apagada, con su valor escrito como una fracción gris en una esquina.
 
-La intervención es reordenar y renombrar, no mover: **el anuncio arriba**, y el `0/10` traducido a lo que de verdad significa — *«te quedan 10 episodios gratis hoy»*. Es lo más barato y de mayor alcance de todo el portafolio, y no inventa nada: **el producto ya regala hasta 70 episodios por semana en anuncios** ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)) sin decírselo al usuario en el único segundo del día en que le importa.
+La intervención es reordenar y renombrar, no mover: **el anuncio arriba**, y el contador traducido de anuncios a lo que el usuario vino a buscar — *«te quedan 10 episodios gratis hoy»* en vez de `0/10`. Es lo más barato y de mayor alcance de todo el portafolio, y no inventa nada: **el producto ya regala diez episodios diarios en anuncios —70 a la semana— encima de los que trae cada serie** ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)) sin decírselo al usuario en el único segundo del día en que le importa.
 
 | | |
 |---|---|
-| **Hipótesis** | El usuario no lee el `0/10` como diez episodios gratis, y lo que sí lee primero es una suscripción de $ 24.500. Con el anuncio arriba y su contador traducido a episodios (I1), el muro deja de leerse como un callejón de pago y el usuario aprende que la economía tiene fuentes. |
+| **Hipótesis** | El `0/10` cuenta anuncios, así que para leerlo como diez episodios hay que multiplicar por 15 y dividir por 15 — nadie lo hace. Lo que sí lee primero es una suscripción de $ 24.500. Con el anuncio arriba y su contador traducido a episodios (I1), el muro deja de leerse como un callejón de pago y el usuario aprende que la economía tiene fuentes. |
 | **Mueve** | % de muros que terminan en desbloqueo y no en cierre. Anuncios vistos por DAU. Vía ambas, DAU/MAU. |
 | **Cómo lo sé** | *Leading:* % de muros que terminan en algo distinto de cerrar. *Lagging:* DAU/MAU. *Guardrail:* ARPDAU y % de pagadores no caen más de 5% relativo — si el anuncio en el muro caniboliza la compra, se ve acá. |
 | **Costo** | ~2 semanas. El SDK de anuncios y el registro de saldos ya existen; es superficie. |
@@ -208,7 +208,7 @@ I8                                ██████
      └ Etapa 1 ┘└── Etapa 2 ──┘└─ Etapa 3 ──┘
 ```
 
-**Por qué la Etapa 1 va primero aunque su efecto sobre DAU/MAU sea menor.** I1 e I2 son precondiciones del experimento de I5, y por una razón que el muro real hace más urgente, no menos: **la salida gratuita ya está en la pantalla**, así que si el Pase se lanza sin reordenarla antes, la línea base se mide contra un muro donde el usuario no sabe que tiene diez episodios gratis por día. No habría forma de distinguir "el pase no funciona" de "el usuario nunca leyó lo que ya tenía". Primero se ordena y se traduce el sistema; después se mide la mecánica dentro de él.
+**Por qué la Etapa 1 va primero aunque su efecto sobre DAU/MAU sea menor.** I1 e I2 son precondiciones del experimento de I5, y por una razón que el muro real hace más urgente, no menos: **la salida gratuita ya está en la pantalla**, así que si el Pase se lanza sin reordenarla antes, la línea base se mide contra un muro donde el usuario no sabe que los anuncios le dan diez episodios más cada día. No habría forma de distinguir "el pase no funciona" de "el usuario nunca leyó lo que ya tenía". Primero se ordena y se traduce el sistema; después se mide la mecánica dentro de él.
 
 **Por qué I5 no va primero pese a ser la apuesta principal.** Cuesta 4–5 semanas y toca timers server-authoritative con estado de invitado. Arrancar el trimestre con lo más caro y lo más lento significa llegar a la semana 9 sin haber aprendido nada. Con la Etapa 1 en producción, I5 arranca con la economía traducida, con la salida gratuita del muro ya visible y medida, y con una línea base limpia.
 

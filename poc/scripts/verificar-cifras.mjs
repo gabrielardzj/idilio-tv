@@ -7,7 +7,8 @@
  */
 import { EPISODE_COST, FREE_EPISODES, MAX_PASSES, PACKS, CATALOGO, STREAK,
          weeklyIssuance, toEpisodes, pricePerEpisode, LIVE_LADDER, SUBSCRIPTION,
-         FUENTES_HOY, episodiosGratisPorSemanaHoy, monedasRachaSemana } from '../src/lib/economy.ts'
+         FUENTES_HOY, episodiosGratisPorSemanaHoy, monedasRachaSemana,
+         episodiosPorAnunciosAlDia } from '../src/lib/economy.ts'
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -117,7 +118,13 @@ v('pase mensual (COP)', SUBSCRIPTION.mensual, 24500)
 
 console.log('\n── las fuentes gratuitas que el producto ya tiene ─────────────')
 v('monedas por anuncio', FUENTES_HOY.anuncio.monedas, 15)
-v('tope diario de anuncios', FUENTES_HOY.anuncio.topeDiario, 10)
+v('tope diario de ANUNCIOS (no de episodios)', FUENTES_HOY.anuncio.topeDiario, 10)
+v('episodios que rinden los anuncios en un día', episodiosPorAnunciosAlDia, 10)
+// Los dos «diez» del producto son independientes: si mañana el episodio costara
+// 20 monedas, el tope de anuncios seguiría en 10 y los episodios bajarían a 7.
+// Esta comprobación existe para que la coincidencia no se lea como identidad.
+v('el tope de anuncios y los episodios que rinden coinciden por aritmética, no por definición',
+  episodiosPorAnunciosAlDia === Math.floor((15 * 10) / EPISODE_COST), true)
 v('escalera de la racha diaria', FUENTES_HOY.diaria.escalera.join('·'), '15·40·60·50·40·45·200')
 v('la racha diaria paga en una semana', monedasRachaSemana, 450)
 v('la racha diaria en episodios por semana', toEpisodes(monedasRachaSemana), 30)

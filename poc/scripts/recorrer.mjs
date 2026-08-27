@@ -130,6 +130,37 @@ paso('la escalera no esconde el pase en las noches con bono',
 await page.locator('.sheet-close').click()
 await page.waitForTimeout(300)
 
+// ── La salida gratuita que el producto YA tenía ──────────────────────────
+// El anuncio recompensado entró al muro cuando las capturas del producto real
+// demostraron que este trabajo estaba proponiendo un muro con MENOS salidas que
+// el que ya existe. Nada lo guardaba, y es media intervención: si desaparece o
+// vuelve a rotularse «0/10», el entregable vuelve a proponer lo que critica.
+const anuncio = page.locator('.anuncio')
+paso('el muro ofrece el anuncio recompensado', (await anuncio.count()) === 1)
+
+const rotulo = await anuncio.innerText()
+paso('el anuncio dice los episodios, no la fracción del producto',
+  /\d+ episodios gratis hoy/.test(rotulo) && !/\d+\/\d+/.test(rotulo),
+  rotulo.replace(/\n/g, ' · '))
+
+// Y va DEBAJO del Pase: el Pase es lo mismo sin los 30 segundos ni el corte.
+const ordenOk = await page.evaluate(() => {
+  const hoja = document.querySelector('.sheet')
+  const pase = hoja?.querySelector('.pass')
+  const ad = hoja?.querySelector('.anuncio')
+  if (!pase || !ad) return false
+  return pase.compareDocumentPosition(ad) & Node.DOCUMENT_POSITION_FOLLOWING
+})
+paso('el anuncio va debajo del Pase, no encima', Boolean(ordenOk))
+
+const saldoAntes = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? -1)
+await anuncio.click()
+await page.waitForTimeout(400)
+const saldoDespues = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? -1)
+paso('verlo acredita las monedas de una', saldoDespues - saldoAntes === 15,
+  `${saldoAntes} → ${saldoDespues}`)
+paso('y descuenta del tope diario', /9 episodios gratis hoy/.test(await anuncio.innerText()))
+
 // ── La otra mitad de la economía: el camino de pago ──────────────────────
 // El pase ya se gastó, así que este es el muro de quien no tiene la vía gratis.
 // Nadie había recorrido esto: la tienda es donde aterriza toda la pedagogía de

@@ -8,13 +8,13 @@ El metajuego de Idilio no está mal diseñado: **llega en el momento equivocado*
 
 Ese diálogo es ineludible: le aparece a todo el mundo. Y aun así **el 81% no lo reclama**. Eso descarta la visibilidad como explicación y deja las dos que quedan: el regalo llega cuando el usuario todavía no necesita monedas, y está denominado en una unidad que ese diálogo nunca traduce a episodios.
 
-Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de ese contenido corren fuentes recurrentes que dan **hasta 70 episodios gratis por semana** solo por ver anuncios, contra los 32 que consume el usuario promedio. El muro tiene el anuncio y la suscripción, pero los ordena al revés: abre con lo más caro y deja la salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris.
+Debajo de esa falla hay otra mayor: **esta economía no tiene ninguna escasez.** El catálogo regala 500 episodios repartidos en 50 títulos —casi cuatro meses de consumo—, y encima de eso corren fuentes que se renuevan cada día. La mayor son los anuncios: **10 al día, a 15 monedas cada uno, son 150 monedas — diez episodios más, todos los días**, encima de los que ya trae cada serie. Setenta a la semana, contra los 32 que consume el usuario promedio. El muro tiene el anuncio y la suscripción, pero los ordena al revés: abre con lo más caro y deja la salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris.
 
 Sin escasez, la moneda no significa nada y el metajuego no puede mover el regreso. Y la alternativa a pagar nunca es irse: es empezar otra serie gratis. Quien salta de historia en historia no se apega a ninguna, así que no hay ninguna serie esperándolo mañana — que es precisamente lo que mide un DAU/MAU de 0.33.
 
 | Falla | En una línea |
 |---|---|
-| **F1** | El muro enseña la economía entera y la ordena al revés: abre por lo más caro y deja la única salida gratuita en la tarjeta más apagada, con su valor escrito como un `0/10` gris |
+| **F1** | El muro enseña la economía entera y la ordena al revés: abre por lo más caro y deja la salida gratuita en la tarjeta más apagada, rotulada `0/10` — anuncios vistos, la unidad que menos le dice al usuario |
 | **F2** | La traducción a episodios está en los paquetes y falta justo donde se decide: el saldo, el tope del anuncio y lo que sale terminar la serie |
 | **F3** | El escalón barato es **2,6 veces mejor** que los dos grandes y lleva el badge más agresivo; subir de 375 a 725 monedas cuesta casi el doble y mejora el episodio un 1,7% |
 | **F4** | La racha pide 7 días de 7 a una base que entra 2.3, y corta a medianoche en un producto que se usa de madrugada |
@@ -76,7 +76,7 @@ Obtén monedas para desbloquear episodios
 
 **El muro no esconde la economía: la enseña entera.** Dice el saldo y el costo del episodio antes que ningún precio, traduce cada paquete a episodios —*«Desbloquea 12 episodios»*, no *«180 monedas»*—, ofrece la suscripción, lleva un anuncio recompensado que abre un episodio gratis y enlaza a la pestaña de Recompensas. Cualquiera de esas cosas, por separado, sería una mejora razonable que proponer. Están todas.
 
-Lo que sí se puede leer en esta pantalla es **su orden**: abre con *«Desbloquea TODO Idilio»* —lo más caro— y la única salida gratuita queda debajo, dentro de un bloque titulado *«Obtén monedas»*, en la tarjeta más apagada de las cuatro, mientras el paquete de pago lleva borde encendido y el badge más agresivo. Y su contador, `0/10`, no dice lo que vale: son **diez episodios gratis al día**, y ahí está escrito como una fracción gris en una esquina.
+Lo que sí se puede leer en esta pantalla es **su orden**: abre con *«Desbloquea TODO Idilio»* —lo más caro— y la única salida gratuita queda debajo, dentro de un bloque titulado *«Obtén monedas»*, en la tarjeta más apagada de las cuatro, mientras el paquete de pago lleva borde encendido y el badge más agresivo. Y su contador, `0/10`, cuenta **anuncios vistos hoy**, que es la unidad que menos le importa al usuario: lo que vale son las 150 monedas que salen de completarlo, o sea **diez episodios más al día**. Ahí está escrito como una fracción gris en una esquina.
 
 > **De dónde salen estos montos.** De la app, con storefront de Colombia, no de la ficha de tienda —que publica precios en dólares y es el mismo material para todos los países—. Coinciden con lo que declara Google Play: compras dentro de la app de **$1.900 a $59.900 por elemento**.
 
@@ -135,14 +135,14 @@ Y no es la única fuente. La pestaña **Recompensas** concentra cuatro, [captura
 
 | Fuente | Cuánto da | En episodios |
 |---|---|---|
-| **Ver anuncios** | 15 monedas · tope **10 diarios** | **hasta 10 episodios por día** |
+| **Ver anuncios** | 15 monedas por anuncio · tope de **10 anuncios al día** | 150 monedas = **10 episodios más al día**, sumados a los que ya trae cada serie |
 | Recompensa diaria | escalera de 7 días: **15 · 40 · 60 · 50 · 40 · 45 · 200** | 30 episodios en una semana perfecta |
 | Tareas sociales (una sola vez) | 10 cada una · 30 por calificar | 6 en total |
 | Programa de referidos | sin cifra capturada | — |
 
 **La más grande, por mucho, es el anuncio recompensado — y cambia el diagnóstico.** Diez anuncios diarios son 150 monedas: **70 episodios gratis por semana**. El usuario promedio entra 2.3 veces y ve 14 episodios por sesión, unos 32 a la semana. **La fuente gratuita recurrente más que duplica el consumo.** Quien sepa que ese botón existe no choca nunca con un muro.
 
-**Y la mayor de las cuatro sí aparece en el muro** —[capturado dentro de la app](../00-dogfooding/evidencia/muro-nativo-real-2.png)—: el anuncio recompensado está dentro de la hoja, con su *«Desbloquea 1 episodio»* y su contador *0/10*. Lo que no está es lo que ese contador significa. Un `0/10` en gris, en la esquina de una tarjeta, no le dice a nadie que ahí hay **diez episodios gratis al día**, que es la cifra que cambia el diagnóstico. La fuente no está escondida: está sin traducir, que es el mismo defecto que este documento le señala a la moneda.
+**Y la mayor de las cuatro sí aparece en el muro** —[capturado dentro de la app](../00-dogfooding/evidencia/muro-nativo-real-2.png)—: el anuncio recompensado está dentro de la hoja, con su *«Desbloquea 1 episodio»* y su contador *0/10*. Lo que no está es lo que ese contador significa. Un `0/10` en gris, en la esquina de una tarjeta, cuenta anuncios: no le dice a nadie que completarlo son 150 monedas, ni que 150 monedas son **diez episodios más al día**, que es la cifra que cambia el diagnóstico. La fuente no está escondida: está sin traducir, que es el mismo defecto que este documento le señala a la moneda.
 
 - **19% de los usuarios activos reclama la recompensa diaria.** El diálogo no se puede no ver: se interpone entre el usuario y la app. Así que el 81% restante **no la deja pasar por no encontrarla: la descarta**.
 - **82% nunca abrió el perfil.** Lo que vive en una pestaña aparte, para este usuario, no existe — y eso sí aplica a todo lo demás del metajuego.
@@ -155,7 +155,7 @@ Ese 19% es la señal más informativa del conjunto, precisamente porque el produ
 | **No necesita monedas todavía.** El diálogo aparece antes de ver nada, con 10 episodios gratis por delante — y con 500 en el catálogo, esa necesidad tarda meses en aparecer | [Hallazgo 2](#hallazgo-2--pagar-no-es-la-única-salida-del-muro-empezar-otra-serie-es-gratis) |
 | **Está en el camino a lo que vino a hacer.** A la 1 a.m., con una mano, lo que se interpone entre abrir la app y ver se cierra por reflejo | 54% de las sesiones entre 11 p.m. y 2 a.m. |
 
-**La conclusión no es que la fuente esté escondida ni que falte del muro: es que llega sin traducir y en el peor renglón de la pantalla.** El único instante del día en que el usuario quiere monedas es cuando choca con el muro. La fuente está ahí — debajo de la suscripción, en la tarjeta más apagada, y con su tope escrito como `0/10` en vez de como los diez episodios diarios que son.
+**La conclusión no es que la fuente esté escondida ni que falte del muro: es que llega sin traducir y en el peor renglón de la pantalla.** El único instante del día en que el usuario quiere monedas es cuando choca con el muro. La fuente está ahí — debajo de la suscripción, en la tarjeta más apagada, y con su tope escrito en anuncios (`0/10`) en vez de en lo que el usuario vino a buscar: diez episodios más al día.
 
 **Y la suscripción tampoco vive afuera: encabeza el muro.** Idilio ya es un modelo híbrido —monedas y suscripción conviviendo— y el pase semanal ($12.500) y el mensual ($24.500) son lo primero que aparece al chocar, con el mensual marcado *RECOMENDADO*. El producto de mayor valor de la economía está exactamente donde tiene que estar.
 
@@ -172,7 +172,7 @@ Lo que falta son los cuatro renglones que el usuario mira para decidir. Los cuat
 | Lo que ve el usuario | Lo que significa | ¿La app se lo dice? |
 |---|---|---|
 | *«Tu balance: 0 · Costo del episodio: 15»* | te falta 1 episodio | ✗ — la resta la hace él, a la 1 a.m. |
-| `0/10` en la tarjeta del anuncio | 10 episodios gratis por día | ✗ |
+| `0/10` en la tarjeta del anuncio — son **anuncios vistos hoy**, no episodios | 10 anuncios × 15 monedas = 150 = **10 episodios** | ✗ — el contador no menciona ni monedas ni episodios |
 | La recompensa diaria: `15 · 40 · 60 · 50 · 40 · 45 · 200` | 30 episodios en una semana perfecta | ✗ |
 | 600 monedas para terminar la serie mediana | 40 episodios · unos $ 21.000, contra $ 24.500 el mes entero | ✗ |
 

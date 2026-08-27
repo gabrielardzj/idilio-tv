@@ -436,7 +436,8 @@ Eso sigue siendo original de este diagnóstico.
 1. **El muro ya ofrece la suscripción, y ese no era el problema.** Este anexo dio por hecho que no
    la mostraba, leyendo la captura de la ficha de tienda. El muro real la encabeza. Lo que entra en
    el diagnóstico como falla es el **orden**: lo más caro primero y la salida gratuita —el anuncio
-   recompensado, diez episodios diarios— en la tarjeta más apagada, con su valor escrito `0/10`.
+   recompensado, diez episodios más cada día— en la tarjeta más apagada, con su tope rotulado `0/10`,
+   que cuenta anuncios y no episodios.
 2. **La escalera de monedas está mal calibrada contra la propia suscripción.** Terminar la serie
    mediana comprando sus episodios sale ≈ $ 21.000; el mensual abre el catálogo entero por
    $ 24.500. Comprar una serie cuesta casi lo mismo que un mes de todo, y las dos ofertas están en
@@ -485,7 +486,7 @@ Eso sigue siendo original de este diagnóstico.
   es la fuente más cargada de todo el anexo sosteniendo su sección más citada.
 - ~~**La mecánica exacta de "retos" y video recompensado dentro de Idilio.**~~ **Ya no es una
   incógnita: está medida.** La pestaña Recompensas da **15 monedas por anuncio con tope de 10
-  diarios** —hasta 10 episodios gratis por día—, una racha diaria de 7 escalones que paga 450
+  diarios**, que son 150 monedas o **10 episodios más al día**, una racha diaria de 7 escalones que paga 450
   monedas la semana completa y 90 en tareas
   sociales de una sola vez. Capturas en el [registro de dogfooding](../00-dogfooding/#las-cuatro-fuentes-gratuitas-de-monedas).
   Con eso, Idilio deja de ser el caso sin anuncios de la comparación de §5.3 y pasa a estar en el

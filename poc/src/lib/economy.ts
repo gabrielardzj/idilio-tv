@@ -73,12 +73,28 @@ export const LIVE_LADDER = [
 export const SUBSCRIPTION = { semanal: 12500, mensual: 24500 } as const
 
 /** REAL · las fuentes gratuitas que el producto ya tiene, medidas en la
- *  pestaña Recompensas. La grande es el anuncio: 10 diarios × 15 monedas son
- *  150 al día, o sea **hasta 70 episodios gratis por semana** — más del doble
- *  de los ~32 que consume el usuario promedio (14 por sesión × 2.3 sesiones).
- *  Es el dato que dice que esta economía no tiene escasez que proteger, y el
- *  que obliga a que el Pase de la Noche NO se defienda por volumen. */
+ *  pestaña Recompensas y en el muro.
+ *
+ *  ⚠️ **Dos «diez» distintos, y confundirlos es fácil.** El contador que el
+ *  producto muestra —`0/10`— cuenta **ANUNCIOS vistos hoy**, no episodios. La
+ *  cadena completa es:
+ *
+ *      10 anuncios × 15 monedas = 150 monedas ÷ 15 por episodio = 10 episodios
+ *
+ *  Que el resultado también sea 10 es una coincidencia aritmética, y es lo que
+ *  hace invisible el error: escribir «el 0/10 son diez episodios» suena bien y
+ *  está mal, porque el contador no habla de episodios en ningún momento.
+ *
+ *  Y son diez episodios **adicionales** a los 10 gratis con que abre cada serie
+ *  (FREE_EPISODES). Ese es el otro diez, y no tiene nada que ver con este: uno
+ *  viene del catálogo y se agota; el otro se renueva todos los días.
+ *
+ *  A la semana son 70 episodios de anuncios, más del doble de los ~32 que
+ *  consume el usuario promedio (14 por sesión × 2.3 sesiones). Es el dato que
+ *  dice que esta economía no tiene escasez que proteger, y el que obliga a que
+ *  el Pase de la Noche NO se defienda por volumen. */
 export const FUENTES_HOY = {
+  /** `topeDiario` son ANUNCIOS por día, no episodios. Ver el aviso de arriba. */
   anuncio: { monedas: 15, topeDiario: 10 },
   /** La recompensa diaria no es una cifra fija: es una escalera de 7 días que
    *  se reinicia. Medida en el modal «IDILIO STREAK» de la app.
@@ -93,8 +109,11 @@ export const FUENTES_HOY = {
   tareasUnaVez: { monedas: 90 },
 } as const
 
-export const episodiosGratisPorSemanaHoy =
-  Math.floor((FUENTES_HOY.anuncio.monedas * FUENTES_HOY.anuncio.topeDiario * 7) / EPISODE_COST)
+/** Episodios que rinden los anuncios en un día: anuncios × monedas ÷ costo. */
+export const episodiosPorAnunciosAlDia =
+  Math.floor((FUENTES_HOY.anuncio.monedas * FUENTES_HOY.anuncio.topeDiario) / EPISODE_COST)
+
+export const episodiosGratisPorSemanaHoy = episodiosPorAnunciosAlDia * 7
 
 /** Lo que paga la racha diaria en una semana perfecta: 450 monedas, 30 episodios. */
 export const monedasRachaSemana = FUENTES_HOY.diaria.escalera.reduce((a, b) => a + b, 0)

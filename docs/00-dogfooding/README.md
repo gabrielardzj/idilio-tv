@@ -56,7 +56,7 @@ Medidas en la pestaña Recompensas de la app, con storefront de Colombia. **La m
 
 | Fuente | Cuánto da | Cadencia | En episodios |
 |---|---|---|---|
-| **Ver anuncios** | 15 monedas por anuncio · **tope 10 diarios** | recurrente, diaria | **hasta 10 episodios por día** |
+| **Ver anuncios** | 15 monedas por anuncio · tope de **10 anuncios al día** | recurrente, diaria | 150 monedas = **10 episodios más al día** |
 | **Recompensa diaria** | escalera de 7 días · 450 monedas la semana completa | recurrente, se reinicia | 30 episodios por semana |
 | Tareas sociales | 10 monedas cada una · 30 por calificar la app | **una sola vez** | 6 episodios en total |
 | Programa de referidos | sin cifra capturada | por referido | — |
