@@ -1,6 +1,6 @@
 # Sistema visual
 
-No construí un design system (un sistema de diseño completo: la biblioteca de piezas y reglas de la que sale cualquier pantalla futura) — el brief no lo pide y habría sido tiempo mal gastado. Construí lo mínimo que hace falta para que trece pantallas se vean como una sola cosa: **42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio— y siete componentes.**
+Este entregable no incluye un design system (un sistema de diseño completo: la biblioteca de piezas y reglas de la que sale cualquier pantalla futura) — el brief no lo pide y habría sido tiempo mal gastado. Construí lo mínimo que hace falta para que trece pantallas se vean como una sola cosa: **42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio— y nueve componentes.**
 
 Los tokens están en [`tokens.json`](tokens.json), en formato W3C Design Tokens, y se **generan desde el CSS del prototipo** (`npm run tokens`). El CSS es la fuente de verdad; el archivo de tokens se deriva de él y por construcción no puede desincronizarse.
 
@@ -42,7 +42,7 @@ Corolarios:
 
 ---
 
-## Los siete componentes
+## Los nueve componentes
 
 ### 1 · Chip de saldo (`.wallet`)
 La única huella permanente del metajuego dentro del reproductor.
@@ -81,18 +81,36 @@ Jerarquía deliberadamente invertida respecto de cualquier tienda: **episodios g
 
 **Variantes:** normal · destacado (`best`, borde violeta) · bienvenida (`intro`, borde punteado dorado — punteado porque es una oferta que no se repite).
 
-### 6 · Fila de elección (`.choice`)
+### 6 · Tarjeta del anuncio (`.anuncio`)
+La salida gratuita que el producto **ya tiene** y que el muro real entierra bajo la suscripción. Aquí va segunda, debajo del Pase.
+
+**Anatomía:** icono de play en círculo cian · titular *«Ver un anuncio y abrir este episodio»* · subtítulo con **los episodios que quedan hoy, no la fracción**.
+
+**Regla, y es la que le da sentido al componente:** nunca rotula el tope como `0/10`. Ese contador cuenta anuncios —la unidad que menos le importa al usuario— y hay que multiplicar por 15 y dividir por 15 para llegar a lo que sí le importa. El componente hace esa cuenta y muestra el resultado: *«Te quedan 10 episodios gratis hoy»*.
+
+**Por qué cian y no oro:** el oro está racionado a la moneda y al Pase. El anuncio es gratis pero no es del usuario todavía — cuesta treinta segundos. El cian lo marca como salida sin cobrarle la jerarquía al Pase.
+
+**Estados:** disponible (con la cifra que queda) · agotado (no se renderiza; el tope diario se acabó).
+
+### 7 · Línea de suscripción (`.sub-linea`)
+Último elemento de la hoja, y a propósito el más callado: texto centrado, sin tarjeta, sin borde y sin oro.
+
+**Contenido:** *«¿Ves mucho? El Pase Idilio abre todo el catálogo por $ 24.500 al mes»*.
+
+**La decisión que representa:** el muro real abre con esto —dos tarjetas grandes, el mensual marcado *RECOMENDADO*— y deja la salida gratuita abajo. Invertir ese orden no significa esconder la suscripción: el producto la vende y quien ve mucho merece saber que existe. Significa que deje de ser lo primero que lee alguien a quien le faltan quince monedas.
+
+### 8 · Fila de elección (`.choice`)
 Miniatura · título · próximo episodio en dorado · progreso · radio.
 Un solo seleccionable a la vez. La selección se marca con borde dorado **y** radio lleno.
 
-### 7 · Botones
+### 9 · Botones
 Tres niveles, y el nivel comunica quién paga:
 
 | | Uso | Superficie |
 |---|---|---|
 | `btn-gold` | Usar el pase | Degradado dorado, texto oscuro |
 | `btn-violet` | Pagar con monedas, comprar, continuar | Degradado violeta |
-| `btn-text` | Alternativa que no queremos empujar | Solo texto |
+| `btn-text` | Alternativa que no conviene empujar | Solo texto |
 
 Altura 54 px (50 en secundarios). Todo cae en el tercio inferior de la pantalla, alcanzable con el pulgar.
 

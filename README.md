@@ -16,7 +16,7 @@
 | **Prototipo** — home, catálogo, ficha de serie y el muro | **https://gabrielardzj.github.io/idilio-tv/** |
 | **Diagnóstico y estrategia** — los entregables de texto | **https://gabrielardzj.github.io/idilio-tv/docs/diagnostico.html** |
 | **Export de flujos** — 23 pantallas en 8 flujos | **https://gabrielardzj.github.io/idilio-tv/flujos/** |
-| **Archivo de diseño** — 10 pantallas, 4 componentes y las variables, nativas de Figma | **https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X** |
+| **Archivo de diseño** — 10 pantallas, 6 componentes y las variables, nativas de Figma | **https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X** |
 | **Diseño** — el sistema visual y cómo leer ese archivo | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
 

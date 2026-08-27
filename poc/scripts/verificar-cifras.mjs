@@ -182,7 +182,7 @@ else console.log(`· el export tiene ${EXPORT.pantallas} pantallas en ${EXPORT.f
  *  `CCI8plwuWvfTV8VBpowN5X`. Está acá y no repartido por los documentos porque
  *  «pantallas» significa dos cosas en este entregable, y sin los dos números a
  *  la vista el guardián no puede distinguir un conteo de otro. */
-const DISENO = { pantallas: 10, componentes: 4 }
+const DISENO = { pantallas: 10, componentes: 6 }
 
 /** Exención de línea, para la prosa que cita una cifra vieja al explicarla.
  *

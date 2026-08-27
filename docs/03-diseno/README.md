@@ -5,7 +5,7 @@
 > **Una frase:** el muro de desbloqueo deja de ser el final de la sesión y pasa a ser una cita con hora, en la historia que el usuario ya está viendo.
 
 **En este apartado:** la justificación de la elección · la mecánica · el diagrama de flujo · nueve decisiones de diseño · la revisión crítica del precedente · el modelo económico · los riesgos técnicos.
-**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) — 10 pantallas, 4 componentes y las variables enlazadas, construido de forma nativa. La guía de lectura de esas pantallas y el sistema visual —42 tokens (los valores del sistema: colores, tipografías y espacios, con nombre propio) y 9 componentes— están en [Sistema y archivo de diseño](sistema.md). Los tokens, en [`tokens.json`](tokens.json).
+**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) — 10 pantallas, 6 componentes y las variables enlazadas, construido de forma nativa. La guía de lectura de esas pantallas y el sistema visual —42 tokens (los valores del sistema: colores, tipografías y espacios, con nombre propio) y 9 componentes— están en [Sistema y archivo de diseño](sistema.md). Los tokens, en [`tokens.json`](tokens.json).
 
 ---
 
