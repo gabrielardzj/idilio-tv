@@ -81,6 +81,13 @@ jobs:
         run: node scripts/verificar-enlaces.mjs ../_site
         working-directory: poc
 
+      # Las páginas de los documentos son cuatro de los cinco entregables y se
+      # leen antes que nada. Se auditan acá y no con el prototipo porque hasta
+      # este punto del job no existen: las genera `publicar-docs`.
+      - name: Auditar la accesibilidad de los documentos
+        run: SITIO_DOCS=../_site/docs node scripts/verificar-a11y.mjs about:blank
+        working-directory: poc
+
       - uses: actions/upload-pages-artifact@v3
         with: { path: _site }
 

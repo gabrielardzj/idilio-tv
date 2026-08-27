@@ -15,7 +15,7 @@
  *   node scripts/verificar-a11y.mjs [url]
  */
 import { chromium } from 'playwright-core'
-import { readFile } from 'node:fs/promises'
+import { readdir, readFile } from 'node:fs/promises'
 
 const SITIO = process.argv[2] || 'http://localhost:5199/'
 const AXE = await readFile(new URL('../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8')
@@ -41,7 +41,16 @@ const browser = await chromium.launch()
 const page = await (await browser.newContext({ viewport: { width: 1280, height: 1000 }, locale: 'es-MX' })).newPage()
 
 let total = 0
-for (const [nombre, boton] of ESTADOS) {
+
+// En CI esto corre dos veces: una con el prototipo servido —para los once
+// estados— y otra ya sin servidor, solo para los documentos, que hasta ese
+// punto del job no existen. Si el prototipo no responde se dice y se sigue, en
+// vez de caerse: un verificador que muere no verifica nada.
+const vivo = SITIO !== 'about:blank' &&
+  await page.goto(SITIO, { waitUntil: 'networkidle' }).then((r) => !!r?.ok()).catch(() => false)
+if (!vivo) console.log(`· aviso: ${SITIO} no responde — no se auditan los estados del prototipo`)
+
+for (const [nombre, boton] of vivo ? ESTADOS : []) {
   await page.goto(SITIO, { waitUntil: 'networkidle' })
   await page.waitForTimeout(500)
   if (boton) {
@@ -78,7 +87,7 @@ const donde = () => page.evaluate(() => {
   return a.closest('.sheet') ? 'hoja' : a.closest('.phone') ? 'telefono' : 'panel'
 })
 
-for (const [nombre, boton] of [['muro', '2 · El muro'], ['tienda', '7 · Tienda'], ['celebración', '4 · Desbloqueo']]) {
+for (const [nombre, boton] of vivo ? [['muro', '2 · El muro'], ['tienda', '7 · Tienda'], ['celebración', '4 · Desbloqueo']] : []) {
   await page.goto(SITIO, { waitUntil: 'networkidle' })
   await page.waitForTimeout(500)
   await page.locator('.director button', { hasText: boton }).first().click()
@@ -106,6 +115,41 @@ for (const [nombre, boton] of [['muro', '2 · El muro'], ['tienda', '7 · Tienda
   const fallos = [!entra && 'el foco no entra', !contenido && `tras ${trazo.findIndex((x) => x !== 'hoja') + 1} de ${trazo.length} tabs el foco se va a ${[...new Set(trazo)].filter((x) => x !== 'hoja').join(', ')}`, !cierra && 'Escape no cierra'].filter(Boolean)
   total += fallos.length
   console.log(`${fallos.length ? '✗' : '✓'} teclado · ${nombre.padEnd(11)} ${fallos.length ? fallos.join(' · ') : 'entra, se queda dentro y Escape cierra'}`)
+}
+
+// ── Las páginas de los documentos ────────────────────────────────────────
+// Faltaban, y no era una omisión inocua: tenían 28 cabeceras de tabla vacías
+// —el patrón `| | |` con que se escribe cada ficha— que ningún guardián veía
+// porque este script solo miraba el prototipo. Son cuatro de los cinco
+// entregables y se leen antes que ninguna otra cosa.
+//
+// Se auditan desde el sitio armado, con `file://`, para no depender de que haya
+// nada desplegado. Si no está armado, se dice y se sigue.
+// La ruta va explícita, sin valor por defecto, a propósito: apuntando sola a
+// `_site/docs` auditaría el sitio que hubiera quedado de la última vez, y un
+// artefacto viejo da un resultado que parece un fallo y es un fantasma. Me pasó
+// mientras escribía esto.
+const DOCS = process.env.SITIO_DOCS
+const paginasDoc = DOCS
+  ? await readdir(DOCS).then((f) => f.filter((x) => x.endsWith('.html'))).catch(() => null)
+  : null
+
+if (!paginasDoc) {
+  console.log(DOCS
+    ? `· aviso: no hay ${DOCS} — no se auditan las páginas de documentos`
+    : '· las páginas de documentos no se auditan sin SITIO_DOCS=<dir>')
+} else {
+  for (const f of paginasDoc.sort()) {
+    await page.goto(`file://${DOCS}/${f}`, { waitUntil: 'load' })
+    await page.waitForTimeout(300)
+    await page.addScriptTag({ content: AXE })
+    const r = await page.evaluate(async () => await window.axe.run(document, {
+      runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] },
+    }))
+    total += r.violations.length
+    console.log(`${r.violations.length ? '✗' : '✓'} doc · ${f.replace('.html', '').padEnd(18)} ${r.passes.length} reglas` +
+      r.violations.map((v) => `\n      ${v.id} · ${v.help} · ${v.nodes.length} nodo(s)`).join(''))
+  }
 }
 
 // ── La versión sobre el stack real, si está levantada ────────────────────
