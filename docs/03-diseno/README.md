@@ -5,7 +5,7 @@
 > **Una frase:** el muro de desbloqueo deja de ser el final de la sesión y pasa a ser una cita con hora, en la historia que el usuario ya está viendo.
 
 **En este apartado:** la justificación de la elección · la mecánica · el diagrama de flujo · nueve decisiones de diseño · la revisión crítica del precedente · el modelo económico · los riesgos técnicos.
-**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) — 10 pantallas, 4 componentes y las variables enlazadas, construido de forma nativa. La guía de lectura de esas pantallas y el sistema visual —42 tokens (los valores del sistema: colores, tipografías y espacios, con nombre propio) y 7 componentes— están en [Sistema y archivo de diseño](sistema.md). Los tokens, en [`tokens.json`](tokens.json).
+**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) — 10 pantallas, 4 componentes y las variables enlazadas, construido de forma nativa. La guía de lectura de esas pantallas y el sistema visual —42 tokens (los valores del sistema: colores, tipografías y espacios, con nombre propio) y 9 componentes— están en [Sistema y archivo de diseño](sistema.md). Los tokens, en [`tokens.json`](tokens.json).
 
 ---
 
@@ -82,6 +82,11 @@ Las monedas solo aparecen en las noches 3, 5 y 7 — es decir, solo para quien y
 
 ---
 
+
+![¿A cuál le das el pase?](../../mobbin-export/flows/f1-pase-de-la-noche/03-eleccion-de-pase.png)
+
+*El corazón pedagógico de la mecánica: un recurso escaso que hay que asignar. Un recurso que se asigna se entiende; uno que se recibe, no.*
+
 ## 3.3 El flujo
 
 ```mermaid
@@ -157,6 +162,10 @@ stateDiagram-v2
 
 ### D1 · El muro se ordena por la historia, no por el precio
 
+![El muro, ordenado por la historia](../../mobbin-export/flows/f1-pase-de-la-noche/02-muro-pase-listo.png)
+
+*Arriba el cliffhanger y dónde va el usuario. El precio no aparece hasta después de las dos salidas gratuitas.*
+
 De arriba a abajo: **cliffhanger → dónde va el usuario → lo gratis → lo pago → su racha.**
 
 El paywall (el muro de pago) actual abre con `Costo del episodio: 15 / Tu balance: 0`. Eso enseña, en el primer segundo, que el sistema es una tienda y que el usuario no tiene con qué. La propuesta abre con *«Camila abre la puerta y el que está del otro lado no es Andrés»*.
@@ -182,6 +191,10 @@ La contrapartida honesta: si el guardrail —la métrica de guardia— de ARPDAU
 
 ### D2b · La cita se ancla a la hora de siempre, no a «+24 h desde que lo usaste»
 
+![La cita, a la hora de siempre](../../mobbin-export/flows/f2-la-cita/01-muro-pase-gastado.png)
+
+*El héroe es la hora del reloj —«hoy a las 21:30»— y no el intervalo. Debajo, el anuncio; abajo del todo, la compra.*
+
 Anclar el próximo pase a «24 horas desde el último uso» deja la cita en una hora arbitraria: si lo usaste a las 18:05, mañana a las 18:05. Por eso se ancla a **la hora en que ese usuario suele ver**. El sistema ya lo sabe —el 54% de las sesiones cae entre 11 p.m. y 2 a.m., y cada usuario tiene su franja dentro de eso— y no usarlo era desperdiciar el único dato que vuelve creíble una cita.
 
 *«Mañana a las 21:30, tu hora de siempre»* es una promesa que encaja en una vida real. *«Mañana a las 18:05»* es el residuo de un temporizador.
@@ -195,6 +208,10 @@ Por eso el estado de espera muestra **`HOY A LAS 21:30`** —la hora de siempre�
 El countdown vuelve a ser el héroe cuando falta menos de una hora — ahí sí los segundos son la información relevante y la urgencia es real.
 
 ### D4 · La moneda nunca viaja sola
+
+![La tienda, en episodios](../../mobbin-export/flows/f3-tienda/01-tienda.png)
+
+*Los episodios en grande, las monedas de subtítulo, y el precio por episodio en cada escalón.*
 
 En todo el producto, cada cifra en monedas lleva su traducción a episodios:
 

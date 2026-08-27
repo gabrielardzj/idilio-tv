@@ -79,16 +79,22 @@ for (const pagina of paginas) {
 
 // La puerta de entrada. El prototipo pinta sus enlaces con React, así que no
 // están en el HTML: se buscan en el bundle, que es donde de verdad viven.
-const bundle = (await Promise.all(
-  (await readdir(join(SITIO, 'assets'))).filter((f) => f.endsWith('.js'))
-    .map((f) => readFile(join(SITIO, 'assets', f), 'utf8')),
-)).join('')
+// Si no hay bundle no se puede comprobar la puerta de entrada, pero eso se
+// dice: un verificador que muere con una excepción no verifica nada, y esto ya
+// pasó una vez con el guardián de cifras.
+const assets = await readdir(join(SITIO, 'assets')).catch(() => null)
+if (!assets) {
+  console.log(`· aviso: no hay ${join(SITIO, 'assets')} — no se comprueba la puerta de entrada`)
+}
+const bundle = assets
+  ? (await Promise.all(assets.filter((f) => f.endsWith('.js')).map((f) => readFile(join(SITIO, 'assets', f), 'utf8')))).join('')
+  : null
 
-const faltan = IMPRESCINDIBLES.filter((r) => !bundle.includes(`./${r}`))
+const faltan = bundle === null ? [] : IMPRESCINDIBLES.filter((r) => !bundle.includes(`./${r}`))
 
 console.log(`${paginas.length} páginas revisadas`)
 if (faltan.length) console.log(`✗ la puerta de entrada no ofrece: ${faltan.join(', ')}`)
-else console.log(`✓ la puerta de entrada ofrece los ${IMPRESCINDIBLES.length} destinos del entregable`)
+else if (bundle !== null) console.log(`✓ la puerta de entrada ofrece los ${IMPRESCINDIBLES.length} destinos del entregable`)
 if (fallos.length) console.log(`✗ ${fallos.length} enlaces rotos:\n  ${fallos.slice(0, 20).join('\n  ')}`)
 else console.log('✓ ningún enlace interno roto')
 

@@ -229,6 +229,13 @@ td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:var(--m
 tr:last-child td{border-bottom:none}
 img{max-width:100%;height:auto;border-radius:14px;border:1px solid rgba(255,255,255,.1);display:block}
 /* En las tablas de pantallas, 150px no alcanza para juzgar nada. */
+/* Una captura de teléfono dentro de la prosa se sirve pequeña: a ancho de
+   columna son 1.700px de alto y cada pantalla añadiría un scroll entero, que es
+   lo contrario de lo que las imágenes vienen a hacer aquí. A 300px se reconoce
+   la pantalla y se amplía con un clic. */
+p img{max-width:300px;margin-left:auto;margin-right:auto}
+p:has(> img), p:has(> a.zoom){text-align:center}
+p img + em, .pie{display:block;text-align:center}
 td img{max-width:268px;transition:transform .18s cubic-bezier(.22,1,.36,1),border-color .18s}
 td a:hover img{transform:scale(1.02);border-color:rgba(168,85,247,.5)}
 td:has(img){width:284px;padding-right:22px}
