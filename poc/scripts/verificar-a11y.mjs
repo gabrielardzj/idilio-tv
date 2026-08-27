@@ -16,6 +16,7 @@
  */
 import { chromium } from 'playwright-core'
 import { readdir, readFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 
 const SITIO = process.argv[2] || 'http://localhost:5199/'
 const AXE = await readFile(new URL('../node_modules/axe-core/axe.min.js', import.meta.url), 'utf8')
@@ -129,7 +130,10 @@ for (const [nombre, boton] of vivo ? [['muro', '2 · El muro'], ['tienda', '7 ·
 // `_site/docs` auditaría el sitio que hubiera quedado de la última vez, y un
 // artefacto viejo da un resultado que parece un fallo y es un fantasma. Me pasó
 // mientras escribía esto.
-const DOCS = process.env.SITIO_DOCS
+// `resolve` y no la ruta cruda: un `file://` con ruta relativa no es una URL
+// válida, y falla en CI —donde el paso pasa `../_site/docs`— pero no en local,
+// donde uno escribe rutas absolutas sin pensarlo.
+const DOCS = process.env.SITIO_DOCS ? resolve(process.env.SITIO_DOCS) : null
 const paginasDoc = DOCS
   ? await readdir(DOCS).then((f) => f.filter((x) => x.endsWith('.html'))).catch(() => null)
   : null
