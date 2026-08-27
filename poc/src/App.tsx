@@ -110,12 +110,16 @@ export default function App() {
   // quedaba dentro sin él. Se resuelve en un solo sitio, consultando
   // el DOM en vez de envolver nada: la hoja está posicionada contra el teléfono
   // y un contenedor nuevo sería una oportunidad de romper el encuadre.
-  // Este efecto depende de `hojaViva` y NO de `sheet.kind`, que es lo que
-  // miraba antes. `useCapas` monta la capa desde un efecto, o sea un render
-  // DESPUÉS de que la hoja cambió: mirando `sheet.kind` el efecto corría
-  // cuando todavía no había nada en el DOM, no encontraba la hoja y se salía
-  // — el diálogo abría sin foco y sin Escape. `hojaViva` cambia justo cuando
-  // la capa ya está puesta.
+  // Lo que dispara este efecto es `hojaViva`, no `sheet.kind`. `useCapas` monta
+  // la capa desde un efecto, o sea un render DESPUÉS de que la hoja cambió:
+  // mirando solo `sheet.kind`, el efecto corría cuando todavía no había nada en
+  // el DOM, no encontraba la hoja y se salía — el diálogo abría sin foco y sin
+  // Escape. `hojaViva` cambia justo cuando la capa ya está puesta.
+  //
+  // `sheet.kind` va igualmente en las dependencias, porque el efecto lo lee y
+  // omitirlo dejaba un aviso de lint. Se comprobó que no reintroduce el fallo:
+  // la pasada temprana se sale sola por la guarda, y durante un relevo el foco
+  // no cae ni una vez en la hoja saliente.
   useEffect(() => {
     if (sheet.kind === 'none' || hojaViva === undefined) return
     // `:not(.sale)` importa: durante un relevo hay dos hojas en el DOM, y el
@@ -150,7 +154,7 @@ export default function App() {
       // de teclado al principio de la página.
       previo?.focus?.()
     }
-  }, [hojaViva])
+  }, [hojaViva, sheet.kind])
 
   const series = serieDe(state.seriesId)
   // Cuántas historias tiene empezadas de verdad. Con una sola, pedirle que
