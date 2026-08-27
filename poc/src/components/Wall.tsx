@@ -1,6 +1,6 @@
 import { Bell, Coin, Lock, Pass, Play, X } from './Icons'
 import { NextPass, StreakStrip } from './bits'
-import { EPISODE_COST, FUENTES_HOY, MAX_PASSES, episodesLabel } from '../lib/economy'
+import { EPISODE_COST, FUENTES_HOY, MAX_PASSES, SUBSCRIPTION, cop, episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
 import { desbloqueadoDe, type State } from '../lib/state'
 
@@ -133,6 +133,16 @@ export function Wall({
           </>
         )}
       </div>
+
+      {/* La suscripción, último y en una línea. El muro real la pone PRIMERA,
+          con las dos tarjetas grandes, y deja la salida gratuita abajo — es el
+          orden que el diagnóstico F1 señala como la falla. Invertirlo no
+          significa esconderla: el producto la vende, y quien ve mucho merece
+          saber que existe. Significa que deje de ser lo primero que lee alguien
+          a quien le faltan quince monedas. */}
+      <button className="sub-linea" onClick={onStore}>
+        ¿Ves mucho? El <b>Pase Idilio</b> abre todo el catálogo por {cop(SUBSCRIPTION.mensual)} al mes
+      </button>
 
       {/* 4 · la racha, como consecuencia */}
       <div className="sect-label">Tu racha</div>

@@ -11,7 +11,7 @@ El brief acota el alcance a *"la pantalla o el momento donde ocurre la mecánica
 
 | Pantalla | Para qué está |
 |---|---|
-| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, sobre la estructura de la app tal como es hoy: los rieles —las filas horizontales de pósters— en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Dos detalles son la propuesta dicha en la navegación: el saldo lleva su traducción a episodios, y **la pestaña «Recompensas» ya no existe** — su contenido se mudó al muro. |
+| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, sobre la estructura de la app tal como es hoy: los rieles —las filas horizontales de pósters— en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Un detalle es la propuesta dicha en la navegación: el saldo lleva su traducción a episodios. Y **la pestaña «Recompensas» sigue ahí** — la intervención no muda nada de sitio, y en esa pestaña se quedan las tareas sociales, los referidos y la suscripción. |
 | **Ficha de serie** | La pantalla de la app nativa tal como es hoy, capítulo por capítulo: «Volver», «Resumen» con el póster y **la sinopsis real del catálogo**, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima, tres cosas que la ficha real no dice: dónde vas, qué ya viste, y **qué abre el siguiente** —el pase si lo tienes, el precio si no— dicho en la tarjeta donde está el muro. |
 | **Player** (el reproductor) | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
 

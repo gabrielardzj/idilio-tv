@@ -282,6 +282,16 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   transition: all .16s var(--ease);
 }
 .anuncio:hover { background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.16); }
+
+/* La suscripción: presente y última. Sin tarjeta, sin borde y sin oro —el oro
+   está racionado a la moneda y al Pase (D6)—, para que exista sin competir con
+   las dos salidas gratuitas que van encima. */
+.sub-linea {
+  display: block; width: 100%; margin-top: 12px; padding: 9px 4px 2px;
+  font-size: 12px; line-height: 1.45; text-align: center; color: var(--tx-lo);
+}
+.sub-linea b { color: var(--tx-mid); font-weight: 600; }
+.sub-linea:hover { color: var(--tx-mid); }
 .anuncio-i {
   display: grid; place-items: center; width: 32px; height: 32px; flex: none;
   border-radius: 999px; background: rgba(63,224,208,.12); color: var(--cyan);

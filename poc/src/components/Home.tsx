@@ -18,9 +18,9 @@ import { Coin, Logo } from './Icons'
  * orden que la app (Estrenos → Seguir viendo → Lo más visto → los géneros → la
  * selección) y la flecha de arrastre asomando en el borde derecho.
  *
- * Dos cosas se apartan de la app, y SON la propuesta: el chip de saldo lleva su
- * traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido
- * se mudó al muro.
+ * Una sola cosa se aparta de la app, y ES la propuesta: el chip de saldo lleva
+ * su traducción a episodios. La navegación queda igual —tres pestañas— porque
+ * la intervención no muda nada de sitio: reordena el muro.
  */
 export function Home({
   state, onSerie, onWallet,
@@ -61,11 +61,16 @@ export function Home({
         </p>
       </div>
 
-      {/* Tab bar de dos, no de tres. La pestaña Recompensas se eliminó a
-          propósito: su contenido vive ahora en el muro, que es donde el 100%
-          de los usuarios pasa. Es la intervención, dicha en la navegación. */}
+      {/* Tab bar de tres, como el producto. Una versión anterior de este
+          prototipo borraba «Recompensas» porque el diagnóstico de entonces
+          decía que el metajuego había que mudarlo de ahí al muro. El muro real
+          desmintió esa premisa —ya tiene el anuncio y la suscripción— y el
+          diseño (D8) dice que en la pestaña se quedan las tareas sociales, los
+          referidos y la suscripción. Borrarla haría que el prototipo propusiera
+          quitar algo que la propuesta conserva. */}
       <nav className="tabbar" aria-label="Navegación principal">
         <span className="tab on"><Icono d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8.5Z" /> Inicio</span>
+        <span className="tab"><Icono d="M12 8v13H4a1 1 0 0 1-1-1V8m9 0v13h8a1 1 0 0 0 1-1V8M2 8h20v-.5a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1V8Zm10 0V5m0 0a2.5 2.5 0 1 1 2.5-2.5M12 5a2.5 2.5 0 1 0-2.5-2.5" /> Recompensas</span>
         <span className="tab"><Icono d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5a7.5 7.5 0 0 1 15 0" /> Perfil</span>
       </nav>
     </div>
