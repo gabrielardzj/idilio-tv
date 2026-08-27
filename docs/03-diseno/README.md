@@ -5,7 +5,7 @@
 > **Una frase:** el muro de desbloqueo deja de ser el final de la sesión y pasa a ser una cita con hora, en la historia que el usuario ya está viendo.
 
 **En este apartado:** la justificación de la elección · la mecánica · el diagrama de flujo · nueve decisiones de diseño · la revisión crítica del precedente · el modelo económico · los riesgos técnicos.
-**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) —10 pantallas, 4 componentes y las variables enlazadas, construido de forma nativa; la guía de lectura está en [`pen/`](pen/)—, [el sistema visual](sistema.md) (42 tokens —los valores del sistema, colores y tipografías y espacios, con nombre propio—, 7 componentes) y [`tokens.json`](tokens.json).
+**Además:** [el archivo de diseño en Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X) — 10 pantallas, 4 componentes y las variables enlazadas, construido de forma nativa. La guía de lectura de esas pantallas y el sistema visual —42 tokens (los valores del sistema: colores, tipografías y espacios, con nombre propio) y 7 componentes— están en [Sistema y archivo de diseño](sistema.md). Los tokens, en [`tokens.json`](tokens.json).
 
 ---
 
@@ -14,7 +14,7 @@
 De las ocho intervenciones de la estrategia, la elegida es esta, por cinco razones en orden de peso.
 
 **1. Es la única que ataca el punto exacto donde la historia se corta.**
-El corte no es un accidente: es la estructura del catálogo. La moda son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin una sola excepción en el precio. Y no lo pone el aburrimiento.
+El corte no es un accidente: es la estructura del catálogo. La moda son 10 episodios gratis —37 de las 41 series con muro— y después 15 monedas por episodio, sin una sola excepción en el precio. El usuario no se detiene ahí porque se haya cansado de la historia: se detiene porque el episodio siguiente tiene precio.
 
 Lo que sí conviene decir con precisión, porque el muro real lo cambia: **ese corte no es infranqueable.** Ahí mismo hay un anuncio de treinta segundos que abre el episodio gratis, hasta diez veces al día ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)). Así que lo que corta la historia no es el precio: es que la salida gratuita está rotulada `0/10` en la tarjeta más apagada de la pantalla. Cualquier intervención que no toque ese segundo está optimizando alrededor del problema.
 
