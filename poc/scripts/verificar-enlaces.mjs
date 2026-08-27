@@ -40,11 +40,32 @@ const existe = async (p) =>
 const fallos = []
 const paginas = await htmls(SITIO)
 
+/** Los `id` de cada página, para poder comprobar las anclas. Se lee todo una
+ *  vez: las páginas son pocas y así el chequeo no depende del orden. */
+const anclas = new Map()
+for (const pagina of paginas) {
+  anclas.set(pagina, new Set([...(await readFile(pagina, 'utf8')).matchAll(/id="([^"]+)"/g)].map((m) => m[1])))
+}
+
 for (const pagina of paginas) {
   const html = await readFile(pagina, 'utf8')
+
+  // Las anclas se comprueban aparte, y hacen falta: los documentos se enlazan
+  // entre sí por título —«§5.1», «§3.4bis»— y renombrar un título rompe el
+  // enlace sin romper nada más. Un índice que lleva al principio de la página
+  // en vez de a su sección es de los defectos que nadie reporta y todos sufren.
+  for (const m of html.matchAll(/href="([^"#]*)#([^"]+)"/g)) {
+    if (/^(https?:|mailto:)/.test(m[1])) continue
+    const destino = m[1] === '' || m[1] === './' ? pagina : resolve(dirname(pagina), m[1])
+    const ids = anclas.get(destino) ?? anclas.get(join(destino, 'index.html'))
+    if (!ids) continue   // fuera del conjunto de páginas: lo cubre la comprobación de abajo
+    const anc = decodeURIComponent(m[2])
+    if (!ids.has(anc)) fallos.push(`${relative(SITIO, pagina)} → #${anc}  (esa sección ya no existe)`)
+  }
+
   for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const href = m[1].split('#')[0].split('?')[0]
-    // Externos, anclas y protocolos raros no se comprueban acá.
+    // Externos y protocolos raros no se comprueban acá.
     if (!href || /^(https?:|mailto:|data:|\/\/)/.test(href)) continue
     // La raíz del sitio publicado vive bajo /idilio-tv/, así que un href
     // absoluto se resuelve contra SITIO y no contra el disco.
