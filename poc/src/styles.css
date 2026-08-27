@@ -48,8 +48,47 @@
   --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
   --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
 
+  /* ── Movimiento ───────────────────────────────────────────────
+     Tres curvas y cuatro duraciones, y nada fuera de esa lista. Un
+     prototipo con quince curvas distintas no se siente rico: se siente
+     desafinado, porque el ojo compara todo lo que se mueve contra lo
+     último que vio moverse.
+
+     --ease   es la de casi todo: arranca rápido y aterriza largo, que
+              es como se mueve algo que tiene peso.
+     --ease-in es para lo que SE VA POR SU CUENTA: una hoja que se
+              cierra. Acelera hacia afuera y dura menos que su entrada,
+              porque devolverle la pantalla al usuario es más urgente
+              que despedirse. Empezó siendo una curva mucho más plana
+              —(.45, 0, .85, .35)— y era un error: con y1 en cero, lo
+              que se iba se quedaba QUIETO el primer tercio del tiempo
+              y después salía disparado. Eso no se lee como energía,
+              se lee como que la app tardó en reaccionar. Ahora arranca
+              de inmediato y acelera.
+              Ojo: las pantallas NO la usan. Ver la nota de abajo.
+     --ease-suave para lo que cambia sin entrar ni salir.
+     --ease-rebote tiene sobrepaso y está racionada como el oro: solo
+              la usa lo que celebra —la medalla, la noche que se
+              cumple, el saldo que sube—. Si rebotara todo, no
+              significaría nada. */
   --ease: cubic-bezier(.22, 1, .36, 1);
-  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-in: cubic-bezier(.4, .05, .75, .7);
+  --ease-suave: cubic-bezier(.65, 0, .35, 1);
+  --ease-rebote: cubic-bezier(.34, 1.56, .64, 1);
+
+  --t-1: 140ms;   /* respuesta al dedo: por debajo de esto no se percibe */
+  --t-2: 220ms;   /* lo que se va */
+  --t-3: 300ms;   /* un cambio de estado */
+  --t-4: 380ms;   /* una hoja entera */
+  --t-nav: 320ms; /* una navegación — el MISMO valor para las dos pantallas */
+
+  /* Nota sobre `animation-fill-mode`, que en este archivo NUNCA es `both`:
+     las entradas van con `backwards` y las salidas con `forwards`.
+     `both` en una entrada deja el `forwards` puesto, y el fotograma final de
+     una entrada con `to` implícito congela propiedades que el resto del CSS
+     necesita libres — `transform`, sobre todo. El síntoma es de los que no se
+     buscan: una tarjeta que entra escalonada y después ya no responde al
+     hover, porque su `transform` sigue en manos de una animación terminada. */
 
   --font: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
@@ -112,7 +151,12 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   transform: scale(1.02);
+  /* El que llega se funde ENCIMA del que estaba —`Player` monta los dos—, así
+     que basta con que este entre: el de abajo sigue opaco todo el rato y no
+     hay ni un frame de negro. 280 ms es la misma cifra que `FUNDIDO`. */
+  animation: fotogramaEntra 280ms var(--ease-suave) backwards;
 }
+@keyframes fotogramaEntra { from { opacity: 0; transform: scale(1.055) } }
 .frame::after {
   content: ''; position: absolute; inset: 0;
   background:
@@ -133,9 +177,12 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   display: grid; place-items: center;
   background: rgba(10,6,16,.5); backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,.09);
-  transition: transform .18s var(--ease), background .18s;
+  transition: transform var(--t-1) var(--ease), background var(--t-2) var(--ease), border-color var(--t-2) var(--ease);
 }
 .icon-btn:active { transform: scale(.92); }
+@media (hover: hover) {
+  .icon-btn:hover { background: rgba(24,16,34,.7); border-color: rgba(255,255,255,.2); }
+}
 
 .p-title { flex: 1; min-width: 0; }
 .p-title b { display: block; font-size: 14px; font-weight: 600; letter-spacing: -.1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -149,16 +196,28 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   background: linear-gradient(180deg, rgba(45,30,10,.9), rgba(24,16,6,.9));
   border: 1px solid rgba(255,197,61,.26);
   backdrop-filter: blur(14px);
-  transition: transform .18s var(--ease), border-color .2s;
+  position: relative;
+  transition: transform var(--t-1) var(--ease), border-color var(--t-2) var(--ease);
 }
 .wallet:active { transform: scale(.94); }
+@media (hover: hover) { .wallet:hover { border-color: rgba(255,197,61,.5); } }
 .wallet-n { font-size: 14.5px; font-weight: 700; color: var(--gold-300); font-variant-numeric: tabular-nums; letter-spacing: -.2px; }
 .wallet-eps { font-size: 10.5px; font-weight: 600; color: rgba(255,222,138,.6); letter-spacing: .1px; }
-.wallet.pulse { animation: walletPulse .7s var(--ease); }
-@keyframes walletPulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 var(--gold-shadow); }
-  40% { transform: scale(1.1); box-shadow: 0 0 0 14px rgba(255,197,61,0); }
-  100% { transform: scale(1); }
+/* El pulso del saldo animaba `box-shadow`, que el navegador no puede componer:
+   cada frame repinta el chip y lo que tenga debajo, justo mientras se está
+   moviendo otra cosa. Ahora son dos propiedades baratas —`transform` y
+   `opacity`— sobre dos elementos: el chip late y un anillo se expande y se
+   apaga. Se ve más, cuesta menos. */
+.wallet::after {
+  content: ''; position: absolute; inset: -1px; border-radius: inherit;
+  border: 1.5px solid var(--gold-400); opacity: 0; pointer-events: none;
+}
+.wallet.pulse { animation: walletLate .62s var(--ease-rebote); }
+.wallet.pulse::after { animation: walletAnillo .62s var(--ease) }
+@keyframes walletLate { 0%, 100% { transform: scale(1) } 34% { transform: scale(1.11) } }
+@keyframes walletAnillo {
+  0% { opacity: .95; transform: scale(1) }
+  100% { opacity: 0; transform: scale(1.55) }
 }
 
 .p-rail {
@@ -168,7 +227,12 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .rail-item { display: grid; place-items: center; gap: 4px; }
 .rail-item small { font-size: 11px; font-weight: 600; color: var(--tx-mid); }
 
-.p-meta { position: absolute; left: 0; right: 78px; bottom: 96px; z-index: 20; padding: 0 var(--sp-4); }
+/* Se remonta con `key={ep}`: el título y el cliffhanger entran con el
+   fotograma en vez de reemplazarse en seco debajo de él. */
+.p-meta {
+  position: absolute; left: 0; right: 78px; bottom: 96px; z-index: 20; padding: 0 var(--sp-4);
+  animation: filaEntra var(--t-3) var(--ease) 70ms backwards;
+}
 .ep-kicker { font-size: 11.5px; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; color: var(--cyan); }
 .p-meta h1 { font-size: 21px; font-weight: 700; letter-spacing: -.5px; margin: 5px 0 3px; }
 .p-meta p { font-size: 13.5px; color: var(--tx-mid); line-height: 1.4; }
@@ -178,19 +242,56 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .p-progress .pp-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
 .p-progress .pp-row b { font-size: 12px; font-weight: 600; color: var(--tx-hi); }
 .p-progress .pp-row span { font-size: 11px; color: var(--tx-lo); }
+/* La barra crece con `transform` y no con `width`: el ancho obliga al
+   navegador a recalcular y repintar en cada frame, y esta barra crece justo
+   cuando el usuario acaba de pasar de episodio —o sea, mientras el fotograma
+   se está fundiendo—. `scaleX` lo hace el compositor y no cuesta nada.
+   El degradado se comprime igual que se comprimía con el ancho: se ve idéntico. */
 .bar { height: 3px; border-radius: 3px; background: rgba(255,255,255,.13); overflow: hidden; }
-.bar > i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--cyan), var(--violet)); transition: width .6s var(--ease); }
+.bar > i {
+  display: block; height: 100%; width: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  transform-origin: left center; transform: scaleX(var(--p, 0));
+  transition: transform .55s var(--ease);
+}
 
 .scrub { position: absolute; left: 0; right: 0; bottom: 30px; z-index: 20; padding: 0 var(--sp-4); }
 .scrub .bar > i { background: rgba(255,255,255,.85); }
 
-/* ── Sheet ─────────────────────────────────────────────────── */
+/* ── Hojas ─────────────────────────────────────────────────────
+   El velo se enciende con la primera hoja y se apaga con la última.
+   Una hoja que releva a otra —el muro que abre la tienda— no lo toca:
+   el velo no parpadea entre dos pantallas que son la misma conversación. */
 .scrim {
   position: absolute; inset: 0; z-index: 40;
   background: rgba(4,2,7,.62); backdrop-filter: blur(3px);
-  animation: fade .28s var(--ease);
+  animation: fade var(--t-3) var(--ease) backwards;
 }
+.scrim.sale { animation: fadeOut var(--t-2) var(--ease-in) forwards; }
 @keyframes fade { from { opacity: 0 } }
+@keyframes fadeOut { to { opacity: 0 } }
+
+/* La CAPA es el marco que lleva el movimiento; la hoja de adentro no cambia
+   de sitio. Existe para que una hoja pueda relevar a otra sin que la que
+   llega vuelva a subir desde abajo: ya hay una hoja ahí, y volver a subirla
+   contaba que el usuario había cerrado y abierto, que no es lo que pasó.
+
+   `pointer-events` va apagado en la capa y encendido en la hoja: la capa
+   cubre el teléfono entero y si no, se comería los toques al velo. */
+.capa-hoja { position: absolute; inset: 0; z-index: 50; pointer-events: none; }
+.capa-hoja > .sheet { pointer-events: auto; }
+
+/* Entrar: sube desde abajo. Es la única hoja en pantalla. */
+.capa-hoja > .sheet { animation: rise var(--t-4) var(--ease) backwards; }
+/* Irse: baja, y más rápido de lo que subió. */
+.capa-hoja.sale > .sheet { animation: hojaBaja var(--t-2) var(--ease-in) forwards; }
+/* Relevar: las dos se disuelven en el sitio, sin viaje. */
+.capa-hoja.releva > .sheet { animation: hojaLlega var(--t-3) var(--ease) backwards; }
+.capa-hoja.releva.sale > .sheet { animation: hojaCede 180ms var(--ease-in) forwards; }
+
+@keyframes hojaBaja { to { transform: translateY(102%) } }
+@keyframes hojaLlega { from { opacity: 0; transform: translateY(16px) scale(.99) } }
+@keyframes hojaCede { to { opacity: 0; transform: scale(.985) } }
 
 .sheet {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 50;
@@ -200,7 +301,9 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   border-top: 1px solid rgba(168,85,247,.2);
   box-shadow: 0 -28px 70px rgba(0,0,0,.8);
   padding: var(--sp-3) var(--sp-5) calc(var(--sp-6) + 10px);
-  animation: rise .42s var(--ease);
+  /* El origen abajo importa: cualquier escala de la hoja tiene que dejar el
+     borde inferior pegado al borde del teléfono, o aparece una franja negra. */
+  transform-origin: 50% 100%;
 }
 @keyframes rise { from { transform: translateY(102%) } }
 .sheet::-webkit-scrollbar { width: 0 }
@@ -225,12 +328,26 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   border: 1px solid rgba(255,197,61,.4);
   box-shadow: 0 0 34px -8px var(--gold-shadow), inset 0 1px 0 rgba(255,222,138,.16);
 }
+/* El destello del Pase. Dos cambios sobre la versión anterior:
+
+   Animaba `left`, o sea reposicionaba el elemento en cada frame de un bucle
+   infinito. Ahora es `translate3d`, que va al compositor y no toca el layout —
+   importa porque este bucle corre mientras el usuario lee y decide.
+
+   Y descansa. Antes barría cada 3,4 s con la curva de aterrizaje larga: el
+   destello daba un latigazo y luego se arrastraba, y a los diez segundos ya
+   era un tic. Ahora cruza en un tercio del ciclo y espera el resto: se ve
+   como un reflejo que pasa, que es lo que un pase dorado debería hacer. */
 .pass::before {
-  content: ''; position: absolute; top: -60%; left: -30%; width: 60%; height: 220%;
-  background: linear-gradient(90deg, transparent, rgba(255,222,138,.14), transparent);
-  transform: rotate(18deg); animation: sweep 3.4s var(--ease) infinite;
+  content: ''; position: absolute; top: -60%; left: -40%; width: 55%; height: 220%;
+  background: linear-gradient(90deg, transparent, rgba(255,222,138,.15), transparent);
+  animation: sweep 5s cubic-bezier(.5, 0, .25, 1) infinite;
+  will-change: transform;
 }
-@keyframes sweep { 0% { left: -40% } 55%, 100% { left: 130% } }
+@keyframes sweep {
+  0%        { transform: translate3d(0, 0, 0) rotate(18deg) }
+  36%, 100% { transform: translate3d(520px, 0, 0) rotate(18deg) }
+}
 .pass .pass-h { display: flex; align-items: center; gap: 11px; margin-bottom: var(--sp-3); }
 .pass .pass-h b { font-size: 16.5px; font-weight: 700; letter-spacing: -.3px; color: var(--gold-300); }
 .pass p { font-size: 13.5px; color: var(--tx-mid); line-height: 1.5; margin-bottom: var(--sp-4); position: relative; }
@@ -254,10 +371,21 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   width: 100%; height: 54px; border-radius: var(--r-full);
   display: flex; align-items: center; justify-content: center; gap: 9px;
   font-size: 15.5px; font-weight: 700; letter-spacing: -.2px;
-  transition: transform .16s var(--ease), filter .16s, opacity .16s;
+  transition: transform var(--t-1) var(--ease), filter var(--t-1) var(--ease),
+              opacity var(--t-1) var(--ease), box-shadow var(--t-2) var(--ease);
 }
-.btn:active { transform: scale(.975); filter: brightness(1.12); }
+/* El toque baja a .96 y la vuelta es con rebote: el botón se siente físico,
+   como algo que se hunde y se recupera, y no como un rectángulo que parpadea. */
+.btn:active { transform: scale(.96); filter: brightness(1.14); transition-duration: 90ms; }
 .btn:disabled { opacity: .38; }
+@media (hover: hover) {
+  .btn-gold:hover, .btn-violet:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn-gold:hover { box-shadow: 0 14px 32px -10px var(--gold-shadow); }
+  .btn-violet:hover { box-shadow: 0 14px 32px -10px rgba(124,43,212,.7); }
+  .btn-ghost:hover { background: rgba(255,255,255,.1); }
+  .btn-text:hover { color: var(--tx-hi); }
+  .btn:disabled:hover { filter: none; transform: none; }
+}
 .btn-gold { background: linear-gradient(180deg, var(--gold-400), var(--gold-500)); color: #2A1A02; box-shadow: 0 10px 26px -10px var(--gold-shadow); }
 .btn-violet { background: linear-gradient(180deg, var(--violet), var(--violet-deep)); color: #fff; box-shadow: 0 10px 26px -10px rgba(124,43,212,.6); }
 .btn-ghost { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: var(--tx-hi); height: 50px; font-size: 14.5px; }
@@ -281,7 +409,8 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09);
   transition: all .16s var(--ease);
 }
-.anuncio:hover { background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.16); }
+.anuncio:active { transform: scale(.985); }
+@media (hover: hover) { .anuncio:hover { background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.16); } }
 
 /* La suscripción: presente y última. Sin tarjeta, sin borde y sin oro —el oro
    está racionado a la moneda y al Pase (D6)—, para que exista sin competir con
@@ -307,15 +436,34 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   display: grid; place-items: center;
   background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
   font-size: 12px; font-weight: 700; color: var(--tx-lo);
-  transition: all .3s var(--ease);
+  transition: background var(--t-3) var(--ease), border-color var(--t-3) var(--ease),
+              color var(--t-3) var(--ease), box-shadow var(--t-3) var(--ease),
+              transform var(--t-2) var(--ease);
 }
 .night.done .dot { background: linear-gradient(180deg, rgba(63,224,208,.2), rgba(63,224,208,.07)); border-color: rgba(63,224,208,.45); color: var(--cyan); }
 .night.today .dot {
   background: linear-gradient(180deg, var(--gold-400), var(--gold-500)); border-color: var(--gold-300); color: #2A1A02;
   box-shadow: 0 0 0 3px rgba(255,197,61,.16), 0 6px 18px -6px var(--gold-shadow);
-  animation: todayPop .5s var(--ease);
+  /* El retardo la deja aterrizar DESPUÉS de que la tira terminó de entrar.
+     Sin él, la noche de hoy rebotaba mientras su fila todavía era invisible:
+     el único momento de celebración de la pantalla se perdía. */
+  animation: todayPop .5s var(--ease-rebote) .26s backwards;
 }
-@keyframes todayPop { 0% { transform: scale(.7) } 60% { transform: scale(1.14) } }
+@keyframes todayPop { from { transform: scale(.45) } }
+
+/* La escalera entra fila por fila, de lunes a domingo. Siete puntos que
+   aparecen de golpe son un bloque; siete puntos que aterrizan en orden son un
+   camino, que es exactamente lo que la racha es. 34 ms de paso: suficiente
+   para leer la dirección, demasiado poco para hacer esperar a nadie. */
+.nights .night { animation: nocheEntra var(--t-3) var(--ease) backwards; }
+.nights .night:nth-child(1) { animation-delay: 30ms }
+.nights .night:nth-child(2) { animation-delay: 64ms }
+.nights .night:nth-child(3) { animation-delay: 98ms }
+.nights .night:nth-child(4) { animation-delay: 132ms }
+.nights .night:nth-child(5) { animation-delay: 166ms }
+.nights .night:nth-child(6) { animation-delay: 200ms }
+.nights .night:nth-child(7) { animation-delay: 234ms }
+@keyframes nocheEntra { from { opacity: 0; transform: translateY(7px) } }
 .night.shield .dot::after { content: ''; }
 .night small { font-size: 9.5px; font-weight: 600; color: var(--tx-lo); letter-spacing: .1px; }
 .night.done small { color: var(--cyan); }
@@ -336,10 +484,17 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   width: 100%; text-align: left; padding: var(--sp-4);
   border-radius: var(--r-md); margin-bottom: var(--sp-3);
   background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-  transition: transform .16s var(--ease), border-color .2s, background .2s;
+  transition: transform var(--t-1) var(--ease), border-color var(--t-2) var(--ease), background var(--t-2) var(--ease);
   position: relative;
+  /* `--i` lo pone el componente: es el turno de la fila. */
+  animation: filaEntra var(--t-3) var(--ease) calc(90ms + var(--i, 0) * 55ms) backwards;
 }
-.pack:active { transform: scale(.985); }
+.pack:active { transform: scale(.985); transition-duration: 90ms; }
+@media (hover: hover) {
+  .pack:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); transform: translateY(-1px); }
+  .pack.best:hover { border-color: rgba(168,85,247,.65); }
+}
+@keyframes filaEntra { from { opacity: 0; transform: translateY(10px) } }
 .pack.best { border-color: rgba(168,85,247,.45); background: linear-gradient(120deg, rgba(168,85,247,.13), rgba(255,255,255,.03)); }
 .pack-tag {
   position: absolute; top: -8px; right: 13px;
@@ -359,9 +514,11 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   display: flex; align-items: center; gap: var(--sp-4); width: 100%; text-align: left;
   padding: var(--sp-3); border-radius: var(--r-md); margin-bottom: var(--sp-3);
   background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-  transition: transform .16s var(--ease), border-color .2s;
+  transition: transform var(--t-1) var(--ease), border-color var(--t-2) var(--ease), background var(--t-2) var(--ease);
+  animation: filaEntra var(--t-3) var(--ease) calc(90ms + var(--i, 0) * 55ms) backwards;
 }
-.choice:active { transform: scale(.985); }
+.choice:active { transform: scale(.985); transition-duration: 90ms; }
+@media (hover: hover) { .choice:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); } }
 .choice.sel { border-color: var(--gold-400); background: rgba(255,197,61,.09); }
 .choice .thumb { width: 52px; height: 70px; border-radius: 9px; flex-shrink: 0; background-size: cover; background-position: center; }
 .choice-body { flex: 1; min-width: 0; }
@@ -370,12 +527,21 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .choice-body .prog { font-size: 11.5px; color: var(--tx-lo); margin-top: 5px; }
 .radio { width: 22px; height: 22px; border-radius: var(--r-full); border: 2px solid rgba(255,255,255,.22); flex-shrink: 0; display: grid; place-items: center; }
 .choice.sel .radio { border-color: var(--gold-400); }
-.choice.sel .radio::after { content: ''; width: 11px; height: 11px; border-radius: var(--r-full); background: var(--gold-400); }
+.choice.sel .radio::after {
+  content: ''; width: 11px; height: 11px; border-radius: var(--r-full); background: var(--gold-400);
+  animation: radioMarca var(--t-2) var(--ease-rebote) backwards;
+}
+@keyframes radioMarca { from { transform: scale(0) } }
 
 /* ── Celebración ───────────────────────────────────────────── */
 .celebrate { text-align: center; padding: var(--sp-6) 0 var(--sp-2); }
-.celebrate .medal { width: 78px; height: 78px; margin: 0 auto var(--sp-5); display: grid; place-items: center; border-radius: var(--r-full); background: radial-gradient(circle at 40% 32%, rgba(255,222,138,.32), rgba(240,161,24,.09)); border: 1px solid rgba(255,197,61,.38); animation: medalIn .55s var(--ease); }
-@keyframes medalIn { 0% { transform: scale(.3) rotate(-25deg); opacity: 0 } 65% { transform: scale(1.14) rotate(6deg) } }
+.celebrate .medal { width: 78px; height: 78px; margin: 0 auto var(--sp-5); display: grid; place-items: center; border-radius: var(--r-full); background: radial-gradient(circle at 40% 32%, rgba(255,222,138,.32), rgba(240,161,24,.09)); border: 1px solid rgba(255,197,61,.38); animation: medalIn .6s var(--ease-rebote) backwards; }
+@keyframes medalIn { from { transform: scale(.35) rotate(-22deg); opacity: 0 } }
+/* El texto de la celebración llega detrás de la medalla, no con ella: primero
+   se entiende QUÉ pasó (el icono) y después POR QUÉ (la línea). */
+.celebrate h2 { animation: filaEntra var(--t-3) var(--ease) 130ms backwards; }
+.celebrate > p { animation: filaEntra var(--t-3) var(--ease) 190ms backwards; }
+.celebrate .reward-line { animation: filaEntra var(--t-3) var(--ease) 250ms backwards; }
 .celebrate h2 { font-size: 24px; font-weight: 700; letter-spacing: -.6px; margin-bottom: var(--sp-2); }
 .celebrate > p { font-size: 14px; color: var(--tx-mid); line-height: 1.5; margin-bottom: var(--sp-5); }
 
@@ -396,9 +562,18 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   padding: 10px 16px; border-radius: var(--r-full);
   background: rgba(20,12,27,.94); border: 1px solid rgba(255,197,61,.3);
   backdrop-filter: blur(14px); font-size: 13.5px; font-weight: 700; color: var(--gold-300);
-  animation: toastIn .4s var(--ease); white-space: nowrap;
+  /* Entra con rebote y se va solo. El retardo de salida (2,3 s) más su
+     duración (0,3 s) suman los 2,6 s que `App` tarda en desmontarlo: el acuse
+     se desvanece en vez de evaporarse.
+     La salida va con `forwards` y NO con `both` a propósito — con `both`, su
+     relleno hacia atrás pisaría a `toastIn` durante los 2,3 s de espera y la
+     entrada no se vería. */
+  animation: toastIn .42s var(--ease-rebote) backwards,
+             toastOut .3s var(--ease-in) 2.3s forwards;
+  white-space: nowrap;
 }
-@keyframes toastIn { from { transform: translate(-50%, -14px); opacity: 0 } }
+@keyframes toastIn { from { transform: translate(-50%, -16px); opacity: 0 } }
+@keyframes toastOut { to { transform: translate(-50%, -12px); opacity: 0 } }
 
 /* ── Panel de dirección (fuera del teléfono, para el recorrido) ─ */
 .director {
@@ -423,9 +598,12 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .director button {
   display: block; width: 100%; text-align: left; padding: 9px 13px; margin-bottom: 6px;
   border-radius: var(--r-sm); background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.07);
-  font-size: 12.5px; color: var(--tx-mid); transition: all .16s var(--ease);
+  font-size: 12.5px; color: var(--tx-mid);
+  transition: background var(--t-1) var(--ease), border-color var(--t-1) var(--ease),
+              color var(--t-1) var(--ease), transform var(--t-1) var(--ease);
 }
 .director button:hover { background: rgba(168,85,247,.14); border-color: rgba(168,85,247,.34); color: var(--tx-hi); }
+.director button:active { transform: scale(.985); }
 .director button.on { background: rgba(168,85,247,.2); border-color: var(--violet); color: var(--tx-hi); }
 /* Los enlaces al resto del entregable. Se parecen a los botones del panel
    —es el mismo tipo de elemento en el mismo sitio— pero llevan el peso de la
@@ -436,7 +614,8 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   padding: 9px 13px; margin-bottom: 6px; border-radius: var(--r-sm);
   background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.07);
   font-size: 12.5px; color: var(--tx-mid); text-decoration: none;
-  transition: all .16s var(--ease);
+  transition: background var(--t-1) var(--ease), border-color var(--t-1) var(--ease),
+              color var(--t-1) var(--ease);
 }
 .director .entregable a:hover { background: rgba(63,224,208,.12); border-color: rgba(63,224,208,.34); color: var(--tx-hi); }
 .director .entregable a b { font-weight: 600; }
@@ -447,8 +626,20 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+/* Quien pidió menos movimiento se queda sin ninguno. Además de las duraciones
+   hay que anular los RETARDOS —los escalonados de la escalera y de la tienda
+   llegan hasta 250 ms, y sin esto una lista tardaría un cuarto de segundo en
+   aparecer sin que nada se moviera— y los bucles infinitos, que es el destello
+   del Pase. `lib/capas.ts` hace la otra mitad: suelta en el acto lo que se va,
+   en vez de sostenerlo el tiempo de una animación que ya no existe. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+  }
 }
 
 /* Próximo pase: la hora del reloj es el héroe, el countdown es apoyo */
@@ -461,9 +652,11 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
   width: 100%; height: 42px; margin-top: var(--sp-4); border-radius: var(--r-full);
   background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.1);
   font-size: 13.5px; font-weight: 600; color: var(--tx-mid);
-  transition: all .18s var(--ease);
+  transition: background var(--t-2) var(--ease), border-color var(--t-2) var(--ease),
+              color var(--t-2) var(--ease), transform var(--t-1) var(--ease);
 }
-.remind:active { transform: scale(.97); }
+.remind:active { transform: scale(.97); transition-duration: 90ms; }
+@media (hover: hover) { .remind:hover { background: rgba(255,255,255,.09); } }
 .remind.on { background: rgba(63,224,208,.1); border-color: rgba(63,224,208,.34); color: var(--cyan); }
 
 .pack.intro { border-style: dashed; border-color: rgba(255,197,61,.34); }
@@ -518,11 +711,16 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 
 /* La portada: el título va quemado en el arte, como en la app. Debajo de la
    miniatura no cuelga nada — un riel se lee de un golpe de vista o no se lee. */
-.poster { flex: 0 0 102px; scroll-snap-align: start; transition: transform .16s var(--ease); }
-.poster:active { transform: scale(.96); }
+.poster { flex: 0 0 102px; scroll-snap-align: start; transition: transform var(--t-1) var(--ease); }
+.poster:active { transform: scale(.96); transition-duration: 90ms; }
+@media (hover: hover) {
+  .poster:hover { transform: translateY(-4px) scale(1.035); }
+  .poster:hover .poster-art { border-color: rgba(255,255,255,.22); box-shadow: 0 12px 26px -10px rgba(0,0,0,.9); }
+}
 .poster-art {
   display: block; position: relative; width: 102px; height: 132px; border-radius: 10px;
   border: 1px solid rgba(255,255,255,.06); overflow: hidden;
+  transition: border-color var(--t-2) var(--ease), box-shadow var(--t-2) var(--ease);
 }
 .poster-art::after {
   content: ''; position: absolute; inset: 0;
@@ -633,9 +831,10 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 .ep {
   width: 100%; display: flex; align-items: center; gap: 10px;
   padding: 13px 15px; border-radius: 13px; background: #1A1A1A; text-align: left;
-  transition: transform .14s var(--ease);
+  transition: transform var(--t-1) var(--ease), background var(--t-2) var(--ease);
 }
-.ep:active { transform: scale(.985); }
+.ep:active { transform: scale(.985); transition-duration: 90ms; }
+@media (hover: hover) { .ep:hover { background: #232323; } }
 .ep-txt { flex: 1; min-width: 0; }
 .ep-cap { display: flex; align-items: center; gap: 9px; }
 /* El violeta del rótulo es el del producto y da 2.54:1 sobre la tarjeta —por
@@ -668,11 +867,63 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 
 .serie-pie { font-size: 11.5px; color: var(--tx-lo); line-height: 1.5; margin: var(--sp-5) var(--sp-4) 0; text-align: center; }
 
-/* Transiciones de pantalla. El contenedor se remonta con `key`, así que basta
-   una animación de entrada: no hace falta orquestar salidas. */
-.pantalla { position: absolute; inset: 0; animation: entraSuave .3s var(--ease); }
-.pantalla.entra-derecha { animation: entraDerecha .34s var(--ease); }
-.pantalla.entra-abajo { animation: entraAbajo .32s var(--ease); }
-@keyframes entraSuave { from { opacity: 0; transform: scale(1.015) } }
-@keyframes entraDerecha { from { opacity: 0; transform: translateX(22px) } }
-@keyframes entraAbajo { from { opacity: 0; transform: translateY(18px) scale(.99) } }
+/* ═══ Transiciones de pantalla ═════════════════════════════════
+   Antes solo se animaba la entrada: React desmontaba la pantalla vieja en el
+   mismo frame, así que durante toda la animación lo que había detrás de la que
+   llegaba era el fondo negro del teléfono. Se veía como recargar, no como
+   navegar. Ahora `App` sostiene la que se va el tiempo que dura su salida
+   (`lib/capas.ts`) y las dos se mueven en direcciones complementarias:
+
+     avanza  home → serie      entra por la derecha, la vieja cede a la izquierda
+     vuelve  serie → home      al revés, y la que se va pasa POR ENCIMA
+     sube    → player          el player se levanta encima, como en el producto
+     baja    player → serie    el player se descuelga y descubre lo de atrás
+
+   Dos reglas, y las dos se aprendieron mirando fotogramas intermedios:
+
+   1 · LAS DOS MITADES COMPARTEN CURVA Y DURACIÓN. Es lo contrario de lo que
+   hacen las hojas. Una hoja que se cierra es un objeto que se va solo, y le
+   queda bien salir más rápido de lo que entró. Dos pantallas que se relevan no
+   son dos objetos: son una sola lámina que se corre de lado, y en cuanto cada
+   mitad lleva su propia curva la lámina se rompe —una arranca antes que la
+   otra, y el ojo lee dos cosas donde debería leer un gesto. De ahí --t-nav,
+   que es el único sitio donde esa cifra se escribe.
+
+   2 · QUIÉN VA ENCIMA NO ES DECORATIVO. En «avanza» manda la que llega, que
+   está entrando a un sitio nuevo. En «vuelve» y en «baja» manda la que se va,
+   porque lo que el usuario está haciendo es RETIRARLA para descubrir lo de
+   atrás. Con la profundidad al revés, un «volver» se lee como un «entrar».
+
+   El desplazamiento es corto —28 px— porque el teléfono mide 390: una pantalla
+   que viaja de borde a borde tarda una eternidad en llegar. Lo que cuenta la
+   dirección es el signo, no la distancia; el resto lo dice la opacidad. */
+.pantalla {
+  position: absolute; inset: 0; z-index: 1;
+  animation: entraSuave var(--t-nav) var(--ease) backwards;
+}
+.pantalla.sale { animation: saleSuave var(--t-nav) var(--ease) forwards; }
+
+.pantalla.avanza      { animation: entraDerecha var(--t-nav) var(--ease) backwards; }
+.pantalla.avanza.sale { animation: saleIzquierda var(--t-nav) var(--ease) forwards; }
+
+.pantalla.vuelve      { animation: entraIzquierda var(--t-nav) var(--ease) backwards; }
+.pantalla.vuelve.sale { animation: saleDerecha var(--t-nav) var(--ease) forwards; z-index: 2; }
+
+.pantalla.sube        { animation: entraAbajo var(--t-nav) var(--ease) backwards; z-index: 2; }
+.pantalla.sube.sale   { animation: cedeAlFondo var(--t-nav) var(--ease) forwards; z-index: 1; }
+
+.pantalla.baja        { animation: vuelveDelFondo var(--t-nav) var(--ease) backwards; }
+.pantalla.baja.sale   { animation: saleAbajo var(--t-nav) var(--ease) forwards; z-index: 2; }
+
+@keyframes entraSuave     { from { opacity: 0; transform: scale(1.015) } }
+@keyframes saleSuave      { to   { opacity: 0; transform: scale(.99) } }
+
+@keyframes entraDerecha   { from { opacity: 0; transform: translateX(28px) } }
+@keyframes saleIzquierda  { to   { opacity: 0; transform: translateX(-24px) } }
+@keyframes entraIzquierda { from { opacity: 0; transform: translateX(-28px) } }
+@keyframes saleDerecha    { to   { opacity: 0; transform: translateX(32px) } }
+
+@keyframes entraAbajo     { from { opacity: 0; transform: translateY(26px) scale(.985) } }
+@keyframes cedeAlFondo    { to   { opacity: 0; transform: scale(.965) } }
+@keyframes vuelveDelFondo { from { opacity: 0; transform: scale(1.03) } }
+@keyframes saleAbajo      { to   { opacity: 0; transform: translateY(38px) } }

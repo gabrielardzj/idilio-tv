@@ -1,8 +1,14 @@
 import { useRef } from 'react'
 import { Back, Chat, Heart, Logo, Share, Coin } from './Icons'
 import { frameStyle } from '../lib/frame'
+import { useCapas } from '../lib/capas'
 import { episodesLabel } from '../lib/economy'
 import type { Series } from '../lib/content'
+
+/** Cuánto dura el fundido entre fotogramas. La misma cifra vive en
+ *  `styles.css`, en `.frame` — ver la nota de `lib/capas.ts`. */
+const FUNDIDO = 280
+const claveEp = (n: number) => String(n)
 
 export function Player({
   series, ep, balance, walletPulse, onWallet, onNext, onPrev, onVolver,
@@ -27,9 +33,17 @@ export function Player({
   const epData = series.episodes[ep]
   const pct = Math.round((ep / series.total) * 100)
 
+  // Pasar de episodio es EL gesto del core loop, y era el único sitio donde
+  // el POC cortaba en seco: el fotograma cambiaba de un frame al otro. Ahora
+  // el que llega se funde encima del que estaba —dos capas, la de abajo
+  // opaca— así que el corte se vuelve un encadenado.
+  const fotogramas = useCapas(ep, claveEp, FUNDIDO)
+
   return (
     <div className="player">
-      <div className="frame grain" style={frameStyle(series.hue, ep)} />
+      {fotogramas.map((f) => (
+        <div key={f.id} className="frame grain" style={frameStyle(series.hue, f.valor)} aria-hidden="true" />
+      ))}
 
       <div className="p-top">
         <button className="icon-btn" onClick={onVolver} aria-label="Volver a la serie"><Back /></button>
@@ -55,7 +69,7 @@ export function Player({
         <div className="rail-item"><Share /><small>Enviar</small></div>
       </div>
 
-      <div className="p-meta">
+      <div className="p-meta" key={ep}>
         <div className="ep-kicker">Episodio {ep}</div>
         <h1>{epData?.title || series.title}</h1>
         <p>{epData?.cliff || ''}</p>
@@ -67,11 +81,11 @@ export function Player({
           <b>Vas {ep} de {series.total}</b>
           <span>{pct}% de la temporada</span>
         </div>
-        <div className="bar"><i style={{ width: `${pct}%` }} /></div>
+        <div className="bar"><i style={{ '--p': pct / 100 } as React.CSSProperties} /></div>
       </div>
 
       <div className="scrub">
-        <div className="bar"><i style={{ width: '86%' }} /></div>
+        <div className="bar"><i style={{ '--p': .86 } as React.CSSProperties} /></div>
       </div>
 
       <button

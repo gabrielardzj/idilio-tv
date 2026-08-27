@@ -54,8 +54,16 @@ const MAP = {
   'sp-8': ['dimension', 'espaciado', ''],
   'sp-10': ['dimension', 'espaciado', ''],
 
-  ease: ['cubicBezier', 'movimiento', 'Salida por defecto. Rápido al inicio, asentado al final.'],
-  'ease-in': ['cubicBezier', 'movimiento', 'Entradas y salidas de pantalla.'],
+  ease: ['cubicBezier', 'movimiento', 'La de casi todo, y las DOS mitades de una navegación. Rápida al inicio, asentada al final.'],
+  'ease-in': ['cubicBezier', 'movimiento', 'Solo para lo que se va por su cuenta: una hoja que se cierra. Arranca de inmediato y acelera.'],
+  'ease-suave': ['cubicBezier', 'movimiento', 'Para lo que cambia sin entrar ni salir: el fundido entre fotogramas.'],
+  'ease-rebote': ['cubicBezier', 'movimiento', 'RACIONADA. Con sobrepaso, y solo para lo que celebra: la medalla, la noche cumplida, el saldo que sube.'],
+
+  't-1': ['duration', 'movimiento', 'Respuesta al dedo. Por debajo de esto no se percibe.'],
+  't-2': ['duration', 'movimiento', 'Lo que se va.'],
+  't-3': ['duration', 'movimiento', 'Un cambio de estado.'],
+  't-4': ['duration', 'movimiento', 'Una hoja entera.'],
+  't-nav': ['duration', 'movimiento', 'Una navegación. El MISMO valor para la pantalla que entra y la que sale: si difieren, la lámina se parte en dos.'],
 }
 
 /** Escala tipográfica, tomada del uso real en los componentes. */

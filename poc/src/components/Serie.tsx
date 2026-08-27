@@ -86,7 +86,7 @@ export function Serie({
             <b>{va > 0 ? `Vas ${va} de ${s.total}` : 'Sin empezar'}</b>
             <span>{restantes > 0 ? `quedan ${restantes} por desbloquear` : 'completa'}</span>
           </div>
-          <div className="bar"><i style={{ width: `${pct}%` }} /></div>
+          <div className="bar"><i style={{ '--p': pct / 100 } as React.CSSProperties} /></div>
 
           {state.passes > 0 ? (
             <div className="serie-pase">

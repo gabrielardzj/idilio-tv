@@ -123,7 +123,7 @@ Navegación general, home, catálogo, búsqueda, perfil, reproducción de video 
 
 - Objetivos táctiles ≥44 px; todo alcanzable con el pulgar en el tercio inferior.
 - Roles y `aria-label` en diálogos, temporizador, listas de selección y el chip de saldo (que se anuncia como *"Saldo: 90 monedas, 6 episodios"*).
-- `prefers-reduced-motion` respetado: todas las animaciones se anulan.
+- `prefers-reduced-motion` respetado: se anulan las duraciones, los **retardos** de las entradas escalonadas y el único bucle del sistema. Y las capas que sostienen una salida —lo que hace que una pantalla que se va se vea irse— se sueltan en el acto en vez de esperar a una animación que ya no existe.
 - Blanco máximo `#F2EBF7` en lugar de `#FFFFFF`, pensado para brillo bajo en la franja de 11 p.m. a 2 a.m. — pero **ningún** token de texto por debajo de 4.5:1, y el ratio se calcula en el pipeline.
 - Ningún estado depende solo del color: la racha combina color, icono y etiqueta de texto.
 

@@ -7,10 +7,52 @@ import { Wall } from './components/Wall'
 import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './components/Sheets'
 import { Coin, Logo } from './components/Icons'
 import { enCurso, serieDe } from './lib/state'
+import { useCapas } from './lib/capas'
 import { CATALOGO, EPISODE_COST, MAX_PASSES, PASS_COOLDOWN_MS, episodesLabel, weeklyIssuance } from './lib/economy'
-import { initialState, proximaCita, reduce, stateName, type Action, type Ctx, type Sheet, type State } from './lib/state'
+import { initialState, proximaCita, reduce, stateName, type Action, type Ctx, type Pantalla, type Sheet, type State } from './lib/state'
 
 const T0 = 1_756_099_020_000 // reloj fijo a las 00:17: el POC vive en la franja de las 11pm-2am
+
+/* ─────────────────────────────────────────────────────────────
+   Movimiento
+
+   Las duraciones de SALIDA viven acá y en `styles.css`, y tienen
+   que coincidir: el CSS dice cómo se va una capa, esto dice cuánto
+   la sostenemos montada. Si divergen, o se ve un salto al final o
+   queda una pantalla muerta encima.
+   ───────────────────────────────────────────────────────────── */
+const SALIDA_HOJA = 220      // .capa-hoja.sale > .sheet
+const SALIDA_PANTALLA = 340  // --t-nav (320 ms) con un margen para el último frame
+
+/** Qué hace distinta a una pantalla de otra. Dos series distintas son dos
+ *  pantallas distintas; la misma serie con el saldo cambiado, no. */
+const clavePantalla = (p: Pantalla) => (p.en === 'serie' ? `serie-${p.id}` : p.en)
+
+/** Las hojas se distinguen por su tipo. `unlocked` cambia de episodio sin
+ *  cambiar de hoja: eso se refresca en su sitio, no se reanima. */
+const claveHoja = (s: Sheet) => s.kind
+
+/** Profundidad de la navegación: el home está en la superficie y el player
+ *  es lo más adentro que se llega. De ahí sale el sentido del movimiento. */
+const HONDURA: Record<Pantalla['en'], number> = { home: 0, serie: 1, player: 2 }
+
+/**
+ * Hacia dónde va la transición. Es lo que vuelve legible una navegación:
+ * entrar por la derecha y salir por la izquierda dice «avancé», y las dos
+ * mismas pantallas en sentido inverso dicen «volví». El player no avanza:
+ * se levanta encima, como el reproductor del producto real.
+ */
+function rumbo(antes: Pantalla | null, ahora: Pantalla | null) {
+  if (!antes || !ahora) return ''
+  if (ahora.en === 'player') return 'sube'
+  if (antes.en === 'player') return 'baja'
+  if (antes.en === ahora.en) return 'avanza'   // de una serie a otra
+  return HONDURA[ahora.en] > HONDURA[antes.en] ? 'avanza' : 'vuelve'
+}
+
+/** Una hoja que releva a otra no vuelve a subir desde abajo: ya está ahí.
+ *  Se disuelve en la que llega. */
+const relevo = (antes: Sheet | null, ahora: Sheet | null) => (antes && ahora ? 'releva' : '')
 
 /** Miles con punto, como se escriben en es-419. A mano y no con
  *  `toLocaleString`: ese método separa según el locale que le pasen —es-MX usa
@@ -24,6 +66,16 @@ export default function App() {
   const [pulse, setPulse] = useState(false)
   const [speed, setSpeed] = useState(1)
   const prevBalance = useRef(state.balance)
+
+  // Las capas: lo que está y, mientras dure la transición, lo que se va. Ver
+  // `lib/capas.ts` — es lo que convierte cada cambio de pantalla y cada hoja
+  // en un movimiento con principio y final en vez de en un corte.
+  const pantallas = useCapas(state.pantalla, clavePantalla, SALIDA_PANTALLA, rumbo)
+  const hojas = useCapas(sheet.kind === 'none' ? null : sheet, claveHoja, SALIDA_HOJA, relevo)
+  const cerrando = hojas.length > 0 && hojas.every((h) => h.sale)
+  // La capa que está ENTRANDO, o `undefined` si no hay ninguna. Es lo que
+  // gobierna el foco: ver la nota del efecto de abajo.
+  const hojaViva = hojas.find((h) => !h.sale)?.id
 
   // El reloj solo corre cuando hay una cuenta regresiva a la vista. Tickear
   // siempre re-renderizaba la app entera cada segundo — con 62 miniaturas en el
@@ -58,9 +110,17 @@ export default function App() {
   // quedaba dentro sin él. Se resuelve en un solo sitio, consultando
   // el DOM en vez de envolver nada: la hoja está posicionada contra el teléfono
   // y un contenedor nuevo sería una oportunidad de romper el encuadre.
+  // Este efecto depende de `hojaViva` y NO de `sheet.kind`, que es lo que
+  // miraba antes. `useCapas` monta la capa desde un efecto, o sea un render
+  // DESPUÉS de que la hoja cambió: mirando `sheet.kind` el efecto corría
+  // cuando todavía no había nada en el DOM, no encontraba la hoja y se salía
+  // — el diálogo abría sin foco y sin Escape. `hojaViva` cambia justo cuando
+  // la capa ya está puesta.
   useEffect(() => {
-    if (sheet.kind === 'none') return
-    const hoja = document.querySelector<HTMLElement>('.phone .sheet')
+    if (sheet.kind === 'none' || hojaViva === undefined) return
+    // `:not(.sale)` importa: durante un relevo hay dos hojas en el DOM, y el
+    // foco tiene que irse a la que llega, no a la que se está yendo.
+    const hoja = document.querySelector<HTMLElement>('.phone .capa-hoja:not(.sale) .sheet')
     if (!hoja) return
     const previo = document.activeElement as HTMLElement | null
     const focusables = () =>
@@ -90,7 +150,7 @@ export default function App() {
       // de teclado al principio de la página.
       previo?.focus?.()
     }
-  }, [sheet.kind])
+  }, [hojaViva])
 
   const series = serieDe(state.seriesId)
   // Cuántas historias tiene empezadas de verdad. Con una sola, pedirle que
@@ -130,41 +190,39 @@ export default function App() {
           <span className="sb-r">▪▪▪ ⌁ <b style={{ fontSize: 12 }}>38</b></span>
         </div>
 
-        {/* La pantalla se remonta con `key`, así la animación de entrada corre
-            en cada navegación. Sin transición, cambiar de pantalla se siente
-            como recargar; con ella, se siente como una app. */}
-        {state.pantalla.en === 'home' && (
-          <div className="pantalla" key="home">
-          <Home
-            state={state}
-            onSerie={(id) => dispatch({ t: 'verSerie', id })}
-            onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
-          />
+        {/* Una capa por pantalla viva. Normalmente hay una; durante una
+            navegación hay dos, y las dos se mueven: la que llega entra por
+            donde corresponde y la que se va sale por el lado contrario. Sin
+            eso, cambiar de pantalla enseñaba el fondo negro del teléfono
+            durante toda la animación de entrada. */}
+        {pantallas.map(({ id, valor, sale, dir }) => (
+          <div key={id} className={`pantalla ${dir} ${sale ? 'sale' : ''}`} inert={sale || undefined}>
+            {valor.en === 'home' && (
+              <Home
+                state={state}
+                onSerie={(sid) => dispatch({ t: 'verSerie', id: sid })}
+                onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+              />
+            )}
+            {valor.en === 'serie' && (
+              <Serie
+                id={valor.id}
+                state={state}
+                onVolver={() => dispatch({ t: 'ir', a: { en: 'home' } })}
+                onEpisodio={(n) => dispatch({ t: 'abrirEpisodio', id: valor.id, n })}
+              />
+            )}
+            {valor.en === 'player' && (
+              <Player
+                series={series} ep={state.episode} balance={state.balance} walletPulse={pulse}
+                onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+                onNext={() => dispatch({ t: 'nextEpisode' })}
+                onPrev={() => dispatch({ t: 'devSetState', patch: { episode: Math.max(1, state.episode - 1) } })}
+                onVolver={() => dispatch({ t: 'verSerie', id: state.seriesId })}
+              />
+            )}
           </div>
-        )}
-
-        {state.pantalla.en === 'serie' && (
-          <div className="pantalla entra-derecha" key={`serie-${state.pantalla.id}`}>
-          <Serie
-            id={state.pantalla.id}
-            state={state}
-            onVolver={() => dispatch({ t: 'ir', a: { en: 'home' } })}
-            onEpisodio={(n) => dispatch({ t: 'abrirEpisodio', id: (state.pantalla as { id: string }).id, n })}
-          />
-          </div>
-        )}
-
-        {state.pantalla.en === 'player' && (
-          <div className="pantalla entra-abajo" key="player">
-          <Player
-            series={series} ep={state.episode} balance={state.balance} walletPulse={pulse}
-            onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
-            onNext={() => dispatch({ t: 'nextEpisode' })}
-            onPrev={() => dispatch({ t: 'devSetState', patch: { episode: Math.max(1, state.episode - 1) } })}
-            onVolver={() => dispatch({ t: 'verSerie', id: state.seriesId })}
-          />
-          </div>
-        )}
+        ))}
 
         {/* El acuse es del player. Si hay una hoja abierta —el caso real: terminas
             el episodio, se acredita la noche y acto seguido se abre el muro— el
@@ -174,10 +232,23 @@ export default function App() {
           <div className="toast"><Coin s={16} /> {state.toast}</div>
         )}
 
-        {sheet.kind !== 'none' && (
-          <>
-            <div className="scrim" onClick={() => sheet.kind !== 'unlocked' && dispatch({ t: 'close' })} />
-            {sheet.kind === 'unlock' && (
+        {/* El velo se pinta mientras haya alguna hoja viva —incluida la que se
+            está yendo— y se apaga con ella. Un relevo de hoja a hoja no lo
+            toca: el velo no parpadea entre dos pantallas que son la misma
+            conversación. */}
+        {hojas.length > 0 && (
+          <div
+            className={`scrim ${cerrando ? 'sale' : ''}`}
+            onClick={() => sheet.kind !== 'none' && sheet.kind !== 'unlocked' && dispatch({ t: 'close' })}
+          />
+        )}
+
+        {/* Cada hoja va dentro de su capa. La capa es la que lleva el
+            movimiento; la hoja de adentro no cambia. Así una hoja puede
+            relevar a otra sin volver a subir desde abajo. */}
+        {hojas.map(({ id, valor, sale, dir }) => (
+          <div key={id} className={`capa-hoja ${dir} ${sale ? 'sale' : ''}`} inert={sale || undefined}>
+            {valor.kind === 'unlock' && (
               <Wall
                 state={state} series={series} justAdvanced={justAdvanced}
                 onClaim={openPass}
@@ -188,25 +259,25 @@ export default function App() {
                 onClose={() => dispatch({ t: 'close' })}
               />
             )}
-            {sheet.kind === 'pass-choice' && (
+            {valor.kind === 'pass-choice' && (
               <PassChoice state={state} onPick={claim} onClose={() => dispatch({ t: 'open', sheet: { kind: 'unlock' } })} />
             )}
-            {sheet.kind === 'store' && (
+            {valor.kind === 'store' && (
               <Store
                 state={state}
                 onBuy={(coins, cop) => dispatch({ t: 'buy', coins, cop })}
                 onClose={() => dispatch({ t: 'open', sheet: { kind: 'unlock' } })}
               />
             )}
-            {sheet.kind === 'unlocked' && (
-              <Celebrate state={state} via={sheet.via} ep={sheet.ep} justAdvanced={justAdvanced} onWatch={closeCelebrate} />
+            {valor.kind === 'unlocked' && (
+              <Celebrate state={state} via={valor.via} ep={valor.ep} justAdvanced={justAdvanced} onWatch={closeCelebrate} />
             )}
-            {sheet.kind === 'account' && (
+            {valor.kind === 'account' && (
               <AccountPrompt state={state} onCreate={() => dispatch({ t: 'createAccount' })} onSkip={() => dispatch({ t: 'dismissAccount' })} />
             )}
-            {sheet.kind === 'streak' && <StreakSheet state={state} onClose={() => dispatch({ t: 'close' })} />}
-          </>
-        )}
+            {valor.kind === 'streak' && <StreakSheet state={state} onClose={() => dispatch({ t: 'close' })} />}
+          </div>
+        ))}
       </main>
 
       <Director state={state} sheet={sheet} dispatch={dispatch} speed={speed} setSpeed={setSpeed} />

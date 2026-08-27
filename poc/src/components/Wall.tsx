@@ -51,7 +51,7 @@ export function Wall({
           <b style={{ fontSize: 12, fontWeight: 600 }}>Vas {abierto} de {series.total}</b>
           <span style={{ fontSize: 11, color: 'var(--tx-lo)' }}>{pct}%</span>
         </div>
-        <div className="bar"><i style={{ width: `${pct}%` }} /></div>
+        <div className="bar"><i style={{ '--p': pct / 100 } as React.CSSProperties} /></div>
       </div>
 
       {/* 3 · la decisión */}

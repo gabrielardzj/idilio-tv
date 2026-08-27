@@ -40,11 +40,11 @@ export function PassChoice({
         </p>
       </div>
 
-      {active.map((id) => {
+      {active.map((id, i) => {
         const s = serieDe(id)
         const next = desbloqueadoDe(state, id) + 1
         return (
-          <button key={id} className={`choice ${sel === id ? 'sel' : ''}`} onClick={() => setSel(id)} aria-pressed={sel === id}>
+          <button key={id} className={`choice ${sel === id ? 'sel' : ''}`} style={{ '--i': i } as React.CSSProperties} onClick={() => setSel(id)} aria-pressed={sel === id}>
             <div className="thumb" style={frameStyle(s.hue, next)} />
             <div className="choice-body">
               <b>{s.title}</b>
@@ -91,8 +91,11 @@ export function Store({
         <span className="goal-n">{restantes} episodios · {paraTerminar} monedas</span>
       </div>
 
-      {PACKS.map((p) => (
-        <button key={p.id} className={`pack ${p.id === completa ? 'best' : ''} ${p.intro ? 'intro' : ''}`} onClick={() => onBuy(p.coins, p.cop)}>
+      {/* `--i` es el turno de cada fila: el CSS lo convierte en el retardo de
+          su entrada. Una lista que aterriza escalonada se lee de arriba abajo,
+          que es el orden en que hay que compararla. */}
+      {PACKS.map((p, i) => (
+        <button key={p.id} className={`pack ${p.id === completa ? 'best' : ''} ${p.intro ? 'intro' : ''}`} style={{ '--i': i } as React.CSSProperties} onClick={() => onBuy(p.coins, p.cop)}>
           {p.id === completa
             ? <span className="pack-tag">Termina esta serie</span>
             : p.tag && <span className="pack-tag">{p.tag}</span>}

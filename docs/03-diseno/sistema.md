@@ -118,17 +118,36 @@ Altura 54 px (50 en secundarios). Todo cae en el tercio inferior de la pantalla,
 
 ## Movimiento
 
-Una sola curva, `cubic-bezier(.22, 1, .36, 1)`: rápido al inicio, asentado al final.
+Cuatro curvas y cinco duraciones, y nada fuera de esa lista. Un producto con quince curvas distintas no se siente rico: se siente desafinado, porque el ojo compara todo lo que se mueve contra lo último que vio moverse.
+
+| Curva | Valor | Quién la usa |
+|---|---|---|
+| `ease` | `cubic-bezier(.22, 1, .36, 1)` | Casi todo. Rápida al inicio, asentada al final: así se mueve algo que tiene peso |
+| `ease-in` | `cubic-bezier(.4, .05, .75, .7)` | Solo lo que se va **por su cuenta**: una hoja que se cierra |
+| `ease-suave` | `cubic-bezier(.65, 0, .35, 1)` | Lo que cambia sin entrar ni salir: el fundido entre fotogramas |
+| `ease-rebote` | `cubic-bezier(.34, 1.56, .64, 1)` | **Racionada como el oro.** Con sobrepaso, y solo para lo que celebra |
+
+`ease-rebote` está en la medalla, en la noche que se cumple, en el saldo que sube y en el acuse. En nada más. Si rebotara todo, no significaría nada — es la misma regla que gobierna el oro en la paleta.
 
 | Animación | Duración | Para qué |
 |---|---|---|
-| Entrada de hoja | 420 ms | Ubica de dónde vino |
-| Barrido del Pase | 3.4 s, en bucle | Lo único que se mueve solo. Atrae sin parpadear |
-| Pulso del saldo | 700 ms | Confirma que la cifra cambió |
+| Navegación entre pantallas | 320 ms | La que llega y la que se va, **en la misma curva y el mismo tiempo** |
+| Entrada de hoja | 380 ms | Ubica de dónde vino |
+| Salida de hoja | 220 ms | Más corta que su entrada: devolver la pantalla es más urgente que despedirse |
+| Relevo de hoja a hoja | 300 ms | Se disuelven en el sitio. La hoja ya está ahí; volver a subirla contaría un cierre que no pasó |
+| Fundido entre fotogramas | 280 ms | Pasar de episodio es el gesto del core loop, y era el único sitio que cortaba en seco |
+| Barrido del Pase | 5 s, en bucle con descanso | Lo único que se mueve solo. Cruza en un tercio del ciclo y espera el resto: un reflejo que pasa, no un tic |
+| Pulso del saldo | 620 ms | Confirma que la cifra cambió |
 | Pop de la noche | 500 ms | La única celebración del sistema |
-| Aparición de la medalla | 550 ms, con rotación | Cierra el desbloqueo |
+| Aparición de la medalla | 600 ms | Cierra el desbloqueo |
 
-`prefers-reduced-motion` anula todo. Nada de la información depende del movimiento.
+**Dos reglas que salieron de mirar fotogramas intermedios, no de escribirlas.**
+
+*Una navegación es una sola lámina.* Las dos mitades comparten curva y duración. Es lo contrario de lo que hacen las hojas —una hoja que se cierra es un objeto que se va solo, y le queda bien salir más rápido de lo que entró—, pero dos pantallas que se relevan no son dos objetos: en cuanto cada mitad lleva su propia curva, una arranca antes que la otra y el ojo lee dos cosas donde debería leer un gesto.
+
+*Quién va encima no es decorativo.* Al avanzar manda la pantalla que llega. Al volver, y al descolgar el reproductor, manda la que se va — porque lo que el usuario está haciendo es retirarla para descubrir lo de atrás. Con la profundidad al revés, un «volver» se lee como un «entrar».
+
+`prefers-reduced-motion` anula todo: duraciones, **retardos** —los escalonados llegan a 250 ms, y sin anularlos una lista tardaría un cuarto de segundo en aparecer sin que nada se moviera— y bucles. Nada de la información depende del movimiento.
 
 ---
 
