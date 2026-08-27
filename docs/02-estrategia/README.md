@@ -99,7 +99,7 @@ La intervención es reordenar y renombrar, no mover: **el anuncio arriba**, y el
 |---|---|
 | **Hipótesis** | El `0/10` cuenta anuncios, así que para leerlo como diez episodios hay que multiplicar por 15 y dividir por 15 — nadie lo hace. Lo que sí lee primero es una suscripción de $ 24.500 COP. Con el anuncio arriba y su contador traducido a episodios (I1), el muro deja de leerse como un callejón de pago y el usuario aprende que la economía tiene fuentes. |
 | **Mueve** | % de muros que terminan en desbloqueo y no en cierre. Anuncios vistos por DAU. Vía ambas, DAU/MAU. |
-| **Cómo lo sé** | *Leading:* % de muros que terminan en algo distinto de cerrar. *Lagging:* DAU/MAU. *Guardrail:* ARPDAU y % de pagadores no caen más de 5% relativo — si el anuncio en el muro caniboliza la compra, se ve acá. |
+| **Cómo lo sé** | *Leading:* **qué fracción de los muros termina en algo que no sea cerrar la pantalla** — ver el anuncio, comprar o volver al catálogo. *Lagging:* **DAU/MAU.** *Guardrail:* que el ingreso por usuario activo y el porcentaje de gente que paga no caigan más de un 5% relativo. Es el riesgo propio de esta intervención: poner el anuncio arriba puede hacer que alguien que iba a comprar mire un anuncio en vez de pagar, y ahí es donde se vería. |
 | **Costo** | ~2 semanas. El SDK de anuncios y el registro de saldos ya existen; es superficie. |
 | **¿Pasa la pregunta ①?** | ✅ |
 
@@ -112,7 +112,7 @@ Hoy la escalera se aplana y en el último escalón empeora. Los tres paquetes qu
 |---|---|
 | **Hipótesis** | Una escalera que no baja —y que en el último escalón sube— no le da al usuario ninguna razón para comprar el paquete grande, y un descuento en los tres a la vez no persuade en ninguno. Peor: el escalón barato es **2,6 veces mejor** que los otros dos y lleva el badge más agresivo, así que quien compara una sola vez aprende que fuera de la oferta el episodio cuesta el triple. Arreglar la escalera sube el ticket promedio sin tocar el tráfico. |
 | **Mueve** | Valor de la primera compra, o sea el ingreso promedio por usuario que sí paga. No mueve DAU/MAU — entra igual porque cuesta poco y protege el resto. |
-| **Cómo lo sé** | *Leading:* mix de paquetes comprados. *Lagging:* ARPPU. |
+| **Cómo lo sé** | *Leading:* **qué paquete elige la gente.** Hoy casi todos se llevan el barato, porque es 2,6 veces mejor que los otros dos; si la escalera queda bien construida, los grandes empiezan a venderse y ese reparto se mueve en la primera semana. *Lagging:* **cuánto gasta en promedio quien sí compra** (ARPPU), que es lo que la escalera existe para subir. *Guardrail:* **que no se reduzca el número de compradores.** Hacer más atractivo el paquete grande no puede espantar a quien solo iba a gastar poco: si suben los ingresos pero cae la cantidad de gente que compra, el arreglo salió mal. |
 | **Costo** | ~1 semana + config de store. |
 | **¿Pasa la pregunta ①?** | ✅ |
 
@@ -175,7 +175,7 @@ Aun así hay un daño previsible, y es el 19% que hoy sí reclama la recompensa 
 |---|---|
 | **Hipótesis** | Nadie quiere avanzar en algo cuyo avance no ve. Hacer visible la posición convierte 44 números grises en un camino. |
 | **Mueve** | Episodios por sesión; secundariamente, intención de volver. |
-| **Cómo lo sé** | *Leading:* episodios/sesión. *Lagging:* % de usuarios que completan una serie. |
+| **Cómo lo sé** | *Leading:* **cuántos episodios ve la gente por sesión.** Si ver el avance empuja a seguir, esa cifra sube antes que ninguna otra. *Lagging:* **qué fracción de usuarios termina una serie**, que es la conducta que la barra de progreso intenta provocar. *Guardrail:* que no baje el número de series distintas empezadas — hacer visible el avance de una no puede cerrar la puerta a probar otra. |
 | **Costo** | ~2 semanas. |
 | **¿Pasa la pregunta ①?** | ✅ |
 
@@ -203,7 +203,7 @@ Cuando el usuario termina una serie o se queda sin pase, se le ofrece dirigir el
 |---|---|
 | **Hipótesis** | El 23% que reve series terminadas está buscando dónde gastar atención que hoy no tiene destino. Dirigirlo con el pase convierte rever en descubrir. |
 | **Mueve** | Series iniciadas por usuario; DAU/MAU vía más series activas por persona. |
-| **Cómo lo sé** | *Leading:* series distintas iniciadas/usuario/semana. *Lagging:* DAU/MAU. |
+| **Cómo lo sé** | *Leading:* **cuántas series distintas empieza cada usuario por semana.** Es la conducta que la intervención toca directamente, y se mueve en días. *Lagging:* **DAU/MAU**, porque más historias vivas por persona deberían significar más noches con algo esperando. *Guardrail:* que no caiga el porcentaje de series que se terminan — repartir la atención entre más títulos no puede acabar en que no se termine ninguno. |
 | **Costo** | ~2 semanas (encima de I5). |
 | **¿Pasa la pregunta ①?** | ✅ |
 
