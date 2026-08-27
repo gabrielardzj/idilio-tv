@@ -186,27 +186,31 @@ body{background:var(--bg);color:var(--tx);font-family:Outfit,system-ui,sans-seri
 line-height:1.65;background-image:radial-gradient(900px 480px at 15% -8%,#1B0C2E,transparent 62%)}
 .shell{display:grid;grid-template-columns:250px minmax(0,1fr);gap:56px;max-width:1180px;margin:0 auto;padding:48px 28px 120px}
 @media(max-width:900px){.shell{grid-template-columns:1fr;gap:28px;padding:32px 20px 80px}}
-nav{position:sticky;top:32px;align-self:start}
-@media(max-width:900px){nav{position:static}}
-nav .marca{font-size:13px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px}
-nav .sub{font-size:11.5px;color:var(--lo);margin-bottom:22px;line-height:1.5}
-nav a{display:flex;gap:9px;align-items:baseline;padding:7px 11px;border-radius:9px;color:var(--mid);
+/* El scope es .shell>nav y no nav a secas: el índice de la página también es
+   un <nav>, así que con el selector suelto heredaba position:sticky y se
+   quedaba flotando encima del texto al bajar, y heredaba display:flex en sus
+   enlaces. La barra lateral es el único <nav> hijo directo del shell. */
+.shell>nav{position:sticky;top:32px;align-self:start}
+@media(max-width:900px){.shell>nav{position:static}}
+.shell>nav .marca{font-size:13px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px}
+.shell>nav .sub{font-size:11.5px;color:var(--lo);margin-bottom:22px;line-height:1.5}
+.shell>nav a{display:flex;gap:9px;align-items:baseline;padding:7px 11px;border-radius:9px;color:var(--mid);
 text-decoration:none;font-size:13.5px;transition:.15s}
-nav a b{color:var(--lo);font-size:11px;min-width:14px}
-nav a:hover{background:rgba(168,85,247,.12);color:var(--tx)}
-nav a.on{background:rgba(168,85,247,.18);color:var(--tx);font-weight:600}
-nav a.on b{color:var(--v)}
-nav .volver{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px}
-nav .volver a{padding:6px 11px}
+.shell>nav a b{color:var(--lo);font-size:11px;min-width:14px}
+.shell>nav a:hover{background:rgba(168,85,247,.12);color:var(--tx)}
+.shell>nav a.on{background:rgba(168,85,247,.18);color:var(--tx);font-weight:600}
+.shell>nav a.on b{color:var(--v)}
+.shell>nav .volver{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px}
+.shell>nav .volver a{padding:6px 11px}
 main{min-width:0;font-size:15.5px}
 main>.kicker{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--lo);margin-bottom:10px}
 h1{font-size:38px;font-weight:800;letter-spacing:-1.3px;line-height:1.1;margin:0 0 24px}
 .indice{margin:34px 0 8px;padding:16px 20px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)}
-.indice b{display:block;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-low);margin-bottom:10px;font-weight:700}
+.indice b{display:block;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--lo);margin-bottom:10px;font-weight:700}
 .indice ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
-.indice li{margin:0 0 5px;font-size:14px}
-.indice a{color:var(--ink-mid);text-decoration:none;border:0}
-.indice a:hover{color:var(--ink);text-decoration:underline}
+.indice li{margin:0 0 5px;font-size:14px;break-inside:avoid}
+.indice a{color:var(--mid);text-decoration:none;border:0}
+.indice a:hover{color:var(--tx);text-decoration:underline}
 @media(max-width:640px){.indice ol{columns:1}}
 h2{font-size:24px;font-weight:700;letter-spacing:-.6px;margin:52px 0 16px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
 h3{font-size:18px;font-weight:700;letter-spacing:-.3px;margin:34px 0 12px;color:#E6D9F5}
@@ -234,6 +238,10 @@ img{max-width:100%;height:auto;border-radius:14px;border:1px solid rgba(255,255,
    lo contrario de lo que las imágenes vienen a hacer aquí. A 300px se reconoce
    la pantalla y se amplía con un clic. */
 p img{max-width:300px;margin-left:auto;margin-right:auto}
+/* Dos capturas en el mismo párrafo son dos mitades de la misma pantalla: lado a
+   lado se leen como una, apiladas como dos cosas distintas. */
+p:has(> a.zoom + a.zoom) a.zoom{display:inline-block;vertical-align:top;width:47%;margin:0 4px}
+p:has(> a.zoom + a.zoom) img{max-width:100%}
 p:has(> img), p:has(> a.zoom){text-align:center}
 p img + em, .pie{display:block;text-align:center}
 td img{max-width:268px;transition:transform .18s cubic-bezier(.22,1,.36,1),border-color .18s}
