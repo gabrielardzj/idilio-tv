@@ -50,6 +50,18 @@ Entre dos intervenciones parecidas, gana la que se puede leer rápido: en un tri
 
 Ocho intervenciones en tres etapas, ordenadas por dependencia y no por costo. Cada una se describe con cuatro campos: hipótesis, qué mueve, cómo se sabe si funcionó y cuánto cuesta.
 
+**Las tres señales de «Cómo lo sé».** Todas las intervenciones se leen con las mismas tres, y cada una responde una pregunta distinta. Se definen acá una vez y después se nombran sueltas.
+
+| Señal | Qué mide | Cuándo se lee | Qué contesta |
+|---|---|---|---|
+| ***Leading*** | La conducta que la intervención toca directamente | Días — semana 1 o 2 | **¿pasó algo?** |
+| ***Lagging*** | El resultado de negocio al que esa conducta debería llevar | Semanas — semana 4 en adelante | **¿valió la pena?** |
+| ***Guardrail*** | Lo que **no** tiene que moverse | En paralelo, todo el tiempo | **¿hay que parar?** |
+
+Hacen falta las tres porque cada una tapa el hueco de la anterior. Sin la *leading* el equipo espera un mes para enterarse de si el cambio hizo algo. Sin la *lagging* se celebra un movimiento de conducta que nunca llegó a ingreso. Y sin el *guardrail* se puede subir una métrica rompiendo otra sin notarlo — el caso típico acá es empujar la salida gratuita y perder la compra: las dos salen del mismo muro.
+
+Cuando un *guardrail* lleva un número —*«no cae más de 5% relativo»*— ese número es el **criterio de reversión**: si se cruza, la intervención se revierte. No es una alarma para mirar, es una regla decidida de antemano.
+
 ---
 
 ### Etapa 1 — Reordenar y terminar de traducir lo que ya existe (semanas 1–4)
@@ -70,9 +82,11 @@ Nada de esto inventa economía ni la cambia de pantalla: el muro ya tiene las tr
 |---|---|
 | **Hipótesis** | El usuario no rechaza el precio del paquete: ese ya está traducido. Lo que no puede calcular es **cuánto le falta**, **cuánto le queda gratis** y **cuánto sale terminar**, que son las tres cifras que deciden si paga, si mira un anuncio o si se va a otra serie. Dándole esas tres, decide — y decidir, aunque sea que no, es mejor que abandonar. |
 | **Mueve** | Comprensión de la economía (objetivo de experiencia). Secundariamente conversión a pagador. |
-| **Cómo lo sé** | *Leading* —la señal temprana, la que se mueve en días—: tasa de interacción con el muro (hoy: cuántos tocan algo vs. cuántos cierran). *Lagging* —la señal tardía, la que confirma—: conversión a primera compra. *Guardrail* —la métrica de guardia, la que dice cuándo parar—: ARPDAU (ingreso promedio por usuario activo al día) no cae. |
+| **Cómo lo sé** | *Leading:* qué fracción de los muros termina en algo que no sea cerrar — comprar, ver el anuncio o volver al catálogo. *Lagging:* conversión a primera compra. *Guardrail:* ARPDAU (ingreso promedio por usuario activo al día) no cae más de 5% relativo. |
 | **Costo** | ~1 semana. Es copy y un componente. |
 | **¿Pasa la pregunta ①?** | ✅ ocurre en el muro, dentro del loop. |
+
+> **I1 e I2 mueven la misma señal temprana** —qué fracción de los muros termina en algo distinto de cerrar— y las dos salen en la Etapa 1. Desplegadas juntas a toda la base, el número sube y no se sabe cuál de las dos lo movió. Van en cohortes separadas, o I1 se mide antes de que I2 entre.
 
 #### I2 · El muro muestra las salidas que ya existen
 El muro ya tiene la salida gratuita: el anuncio recompensado está ahí, con su *«Desbloquea 1 episodio»* y su contador `0/10`. Lo que está mal es **el orden y la etiqueta**. La hoja abre con *«Desbloquea TODO Idilio»* —lo más caro— y deja el anuncio debajo, en la tarjeta más apagada, con su valor escrito como una fracción gris en una esquina.
