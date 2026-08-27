@@ -86,7 +86,7 @@ export function Muro({
         <span className="grid gap-0.5">
           <b className="text-[13.5px] font-semibold text-ink">Ver un anuncio y abrir este episodio</b>
           <small className="text-[11.5px] text-ink-low">
-            Te quedan {FUENTES_HOY.anuncio.topeDiario} episodios gratis hoy · 30 s cada uno
+            Puedes hacerlo {FUENTES_HOY.anuncio.topeDiario} veces hoy · 30 s cada vez
           </small>
         </span>
       </button>

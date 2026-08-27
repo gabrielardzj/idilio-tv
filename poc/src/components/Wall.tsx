@@ -99,7 +99,12 @@ export function Wall({
           <span className="anuncio-i"><Play s={17} /></span>
           <span className="anuncio-t">
             <b>Ver un anuncio y abrir este episodio</b>
-            <small>Te quedan {anunciosQuedan} episodios gratis hoy · 30 s cada uno</small>
+            {/* Cuenta ANUNCIOS, que es lo que el contador del producto cuenta —su
+                «0/10» son anuncios, no episodios—. El título ya dice que cada uno
+                abre un episodio, así que el valor se entiende sin conflar las dos
+                unidades. Y evita el «te quedan», que en esta misma hoja significa
+                el saldo: dos «te quedan» distintos serían un acertijo. */}
+            <small>Puedes hacerlo {anunciosQuedan} veces hoy · 30 s cada vez</small>
           </span>
         </button>
       )}

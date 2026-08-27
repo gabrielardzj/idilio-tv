@@ -170,7 +170,7 @@ const FLOWS = [
         estado: 'wall-with-balance',
         type: 'Paywall', patterns: ['Rewarded ad', 'Ad-gated unlock', 'Quota translated', 'Countdown'],
         elements: ['Bottom sheet', 'Reward row', 'Quota caption', 'Primary button', 'Countdown timer'],
-        note: 'La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta — el producto lo rotula «0/10» en gris, y eso son diez episodios gratis al día. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.',
+        note: 'La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta. El producto lo rotula «0/10» en gris: una fracción sin unidad, que además cuenta anuncios y no episodios. Acá dice cuántas veces se puede hacer y lo que cuesta cada vez, y el título ya dice qué abre — así el valor se entiende sin mezclar las dos unidades. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.',
         act: async (p) => {
           await click(p, '5 · El muro')
           await p.locator('.anuncio').click()

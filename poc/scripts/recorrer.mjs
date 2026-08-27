@@ -149,8 +149,8 @@ const anuncio = page.locator('.anuncio')
 paso('el muro ofrece el anuncio recompensado', (await anuncio.count()) === 1)
 
 const rotulo = await anuncio.innerText()
-paso('el anuncio dice los episodios, no la fracción del producto',
-  /\d+ episodios gratis hoy/.test(rotulo) && !/\d+\/\d+/.test(rotulo),
+paso('el anuncio traduce el tope, no lo copia',
+  /\d+ veces hoy/.test(rotulo) && !/\d+\/\d+/.test(rotulo),
   rotulo.replace(/\n/g, ' · '))
 
 // Y va DEBAJO del Pase: el Pase es lo mismo sin los 30 segundos ni el corte.
@@ -169,7 +169,7 @@ await page.waitForTimeout(400)
 const saldoDespues = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? -1)
 paso('verlo acredita las monedas de una', saldoDespues - saldoAntes === 15,
   `${saldoAntes} → ${saldoDespues}`)
-paso('y descuenta del tope diario', /9 episodios gratis hoy/.test(await anuncio.innerText()))
+paso('y descuenta del tope diario', /9 veces hoy/.test(await anuncio.innerText()))
 
 // Y con esas monedas el muro cambia de estado solo: el pago sube a primario.
 // Es el encadenamiento que documenta la pantalla `01b-tras-el-anuncio` del

@@ -69,7 +69,7 @@ El muro deja de ser un final y pasa a ser una hora. El countdown es el motivo de
 
 **Muro · faltan horas para el próximo pase** — El countdown ocupa el lugar jerárquico que antes tenía el precio. La compra queda debajo, como atajo, no como única salida.
 
-**Después del anuncio · la economía encadena** — La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta — el producto lo rotula «0/10» en gris, y eso son diez episodios gratis al día. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.
+**Después del anuncio · la economía encadena** — La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta. El producto lo rotula «0/10» en gris: una fracción sin unidad, que además cuenta anuncios y no episodios. Acá dice cuántas veces se puede hacer y lo que cuesta cada vez, y el título ya dice qué abre — así el valor se entiende sin mezclar las dos unidades. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.
 
 **Muro · con saldo suficiente** — Con saldo, la acción de pago sube a primaria — pero el saldo restante se declara en episodios, no en monedas.
 
