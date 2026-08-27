@@ -48,12 +48,29 @@ const page = await (await browser.newContext({
 })).newPage()
 
 const muertas = [], bloqueadas = [], raras = []
+/**
+ * Un fallo de navegación no significa que la fuente esté muerta: puede ser un
+ * sitio lento o uno que corta la conexión al detectar automatización. Las dos
+ * cosas aparecieron en la primera versión de esto y las dos eran falsas alarmas
+ * —una respondía 200 al reintentar y la otra 403 a una petición simple—, así que
+ * antes de mandar nada a «revisar a mano» se insiste, y de dos maneras.
+ */
+const estado = async (url) => {
+  const nav = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 25_000 }).catch(() => null)
+  if (nav) return nav.status()
+  // Segunda oportunidad, más paciente: descarta al lento.
+  const otra = await page.goto(url, { waitUntil: 'commit', timeout: 40_000 }).catch(() => null)
+  if (otra) return otra.status()
+  // Y una petición sin navegador: descarta al que bloquea la automatización.
+  const plana = await page.request.get(url, { timeout: 25_000, maxRedirects: 5 }).catch(() => null)
+  return plana ? plana.status() : 0
+}
+
 for (const [url, doc] of fuentes) {
-  const r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 25_000 }).catch(() => null)
-  const s = r?.status() ?? 0
+  const s = await estado(url)
   if (s === 404 || s === 410) muertas.push(`${s}  ${doc}  ${url}`)
   else if (s === 403 || s === 429) bloqueadas.push(`${s}  ${url}`)
-  else if (s === 0 || s >= 400) raras.push(`${s || 'ERR'}  ${doc}  ${url}`)
+  else if (s === 0 || s >= 400) raras.push(`${s || 'sin respuesta'}  ${doc}  ${url}`)
   await page.waitForTimeout(1200)   // sin ráfaga: si no, GitHub y otros devuelven 429
 }
 await browser.close()

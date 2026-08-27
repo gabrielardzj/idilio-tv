@@ -608,7 +608,7 @@ Eso sigue siendo original de este diagnóstico.
 
 **Hongguo (ByteDance, China)**
 - [FoxData · Inside the meteoric rise of Hongguo Short Drama](https://foxdata.com/en/blogs/bytedances-next-global-hit-after-tiktok-inside-the-meteoric-rise-of-hongguo-short-drama-app/) — modelo gratuito, monedas de oro, integración con Douyin
-- [QuestMobile · Informe de la industria de microdramas 2026](https://www.questmobile.com.cn/research/report/2041710682848727041/) y [199IT · la cifra de febrero](https://www.199it.com/archives/1820784.html) — **304 M de MAU en feb-2026** y ~125 minutos diarios por usuario
+- [QuestMobile · Informe de la industria de microdramas 2026](https://www.questmobile.com.cn/research/report/2041710682848727041/) y [199IT · la cifra de febrero](https://www.199it.com/archives/1820784.html) — **304 M de MAU en feb-2026** y ~125 minutos diarios por usuario. *199IT no responde desde fuera de China; la cifra se sostiene en QuestMobile, que sí abre.*
 - [Baidu Baike · 红果短剧](https://baike.baidu.com/en/item/Hongguo%20Short%20Drama/12377) — "regístrate 7 días y retira". **Ojo con las fechas:** su MAU es de marzo de 2025 (173 M) y su 1,38 h/día, de marzo de 2024. No son contemporáneos entre sí ni con la cifra de QuestMobile
 - [北京商报 · 红果短剧收费VIP：de "olvidado" a "tema candente"](https://www.bbtnews.com.cn/2026/0505/592581.shtml) y [17173 · Respuesta oficial de Hongguo al VIP de pago](https://news.17173.com/content/05032026/200254425.shtml) — la crisis de mayo-2026 y la cita sobre reescribir las reglas
 
