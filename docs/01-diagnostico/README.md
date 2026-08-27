@@ -78,6 +78,11 @@ Obtén monedas para desbloquear episodios
 
 Lo que sí se puede leer en esta pantalla es **su orden**: abre con *«Desbloquea TODO Idilio»* —lo más caro— y la única salida gratuita queda debajo, dentro de un bloque titulado *«Obtén monedas»*, en la tarjeta más apagada de las cuatro, mientras el paquete de pago lleva borde encendido y el badge más agresivo. Y su contador, `0/10`, cuenta **anuncios vistos hoy**, que es la unidad que menos le importa al usuario: lo que vale son las 150 monedas que salen de completarlo, o sea **diez episodios más al día**. Ahí está escrito como una fracción gris en una esquina.
 
+![El muro real, dentro de la app](../00-dogfooding/evidencia/muro-nativo-real-1.png)
+![El bloque de monedas, con el anuncio arriba](../00-dogfooding/evidencia/muro-nativo-real-2.png)
+
+*Las dos capturas de las que sale todo lo de arriba. La segunda es el mismo muro, desplazado: el anuncio recompensado encabeza el bloque de monedas y abajo del todo hay un enlace a Recompensas. Este documento afirmaba lo contrario hasta que aparecieron.*
+
 > **De dónde salen estos montos.** De la app, con storefront de Colombia, no de la ficha de tienda —que publica precios en dólares y es el mismo material para todos los países—. Coinciden con lo que declara Google Play: compras dentro de la app de **$1.900 a $59.900 por elemento**.
 
 ### Hallazgo 2 · Pagar no es la única salida del muro: empezar otra serie es gratis
