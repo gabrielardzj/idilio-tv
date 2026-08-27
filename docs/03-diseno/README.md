@@ -90,9 +90,15 @@ stateDiagram-v2
 
     [*] --> Player
     Player: Player · episodio desbloqueado
-    Player --> Player: siguiente episodio
+    Player --> Player: siguiente episodio de la misma noche
+
+    Acuse: El acuse de la noche · toast de 2 s<br/>pase · racha +1 · bono · comodín
+    Player --> Acuse: termina un episodio<br/>(la primera vez de cada noche)
+    Acuse --> Player: sigue viendo · no hay nada que reclamar
 
     Player --> Muro: siguiente episodio bloqueado
+    Player --> FueraDeLaApp: cierra sin llegar al muro<br/>(el pase queda guardado · tope 2)
+
     Muro: EL MURO<br/>historia · progreso · decisión · racha
 
     state elegir <<choice>>
@@ -102,8 +108,8 @@ stateDiagram-v2
     elegir --> ConSaldo: sin pase, saldo >= 15
     elegir --> Cita: sin pase, saldo < 15
 
-    Anuncio: Ver un anuncio · 30 s<br/>+15 monedas · hasta 10 al día
-    Muro --> Anuncio: la salida gratuita que el producto YA tiene
+    Anuncio: Ver un anuncio · 30 s<br/>abre 1 episodio · hasta 10 al día
+    Muro --> Anuncio: ver un anuncio
     Anuncio --> Desbloqueo: episodio abierto
 
     PaseListo: Pase de la Noche listo
@@ -118,17 +124,16 @@ stateDiagram-v2
     ConSaldo --> Desbloqueo: pagar con saldo
     ConSaldo --> Cita: prefiero esperar
 
-    Cita --> Anuncio: no quiero esperar
-
     Cita: LA CITA<br/>«Hoy a las 21:30» + avísame
-    Cita --> Tienda: no quiero esperar
+    Cita --> Anuncio: no espero · veo un anuncio
+    Cita --> Tienda: no espero · compro monedas
     Cita --> Salir: cerrar
     Cita --> Notificacion: activar aviso
 
     Tienda: Tienda · precio por episodio
     Tienda --> Muro: compra hecha
 
-    Desbloqueo: Desbloqueado<br/>racha +1 · bonos · comodín
+    Desbloqueo: Desbloqueado<br/>se abre el episodio · la racha ya avanzó en el acuse
 
     state cuenta <<choice>>
     Desbloqueo --> cuenta
@@ -141,7 +146,7 @@ stateDiagram-v2
     Salir --> FueraDeLaApp
     FueraDeLaApp: Fuera de la app
     Notificacion --> FueraDeLaApp
-    FueraDeLaApp --> Muro: vuelve · el pase está listo<br/>y la racha suma una noche
+    FueraDeLaApp --> Player: vuelve y ve · la noche se acredita ahí,<br/>no al llegar
 ```
 
 **El arco que importa es el de abajo a la derecha.** Hoy ese camino termina en `Fuera de la app` y no vuelve. La intervención entera existe para dibujar la flecha de regreso, y para que esa flecha tenga una hora concreta en vez de una esperanza.

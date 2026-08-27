@@ -163,27 +163,28 @@ const ordenOk = await page.evaluate(() => {
 })
 paso('el anuncio va debajo del Pase, no encima', Boolean(ordenOk))
 
+// El anuncio ABRE el episodio: no acredita monedas que después haya que gastar.
+// El botón promete «Ver un anuncio y abrir este episodio», así que un segundo
+// toque para gastar unas monedas intermedias sería el botón desmintiendo al
+// producto. Esto lo guarda: si alguien vuelve a poner la moneda en el medio,
+// el saldo se mueve y el recorrido falla acá.
 const saldoAntes = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? -1)
 await anuncio.click()
-await page.waitForTimeout(400)
-const saldoDespues = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? -1)
-paso('verlo acredita las monedas de una', saldoDespues - saldoAntes === 15,
-  `${saldoAntes} → ${saldoDespues}`)
-paso('y descuenta del tope diario', /9 veces hoy/.test(await anuncio.innerText()))
-
-// Y con esas monedas el muro cambia de estado solo: el pago sube a primario.
-// Es el encadenamiento que documenta la pantalla `01b-tras-el-anuncio` del
-// export, y se sigue como lo seguiría el usuario — gastarlas y volver al muro.
-paso('las monedas del anuncio suben el pago a primario', (await estado()) === 'wall-with-balance')
-await page.locator('.sheet button', { hasText: /Abrirlo ahora/ }).first().click()
 await page.waitForTimeout(500)
+paso('el anuncio abre el episodio de una', (await estado()) === 'unlocked-via-ad')
+
 await page.locator('.sheet button', { hasText: 'Ver el episodio' }).click()
 await page.waitForTimeout(500)
+const saldoDespues = Number((await page.locator('.wallet').first().innerText()).match(/\d+/)?.[0] ?? -1)
+paso('y no pasa por la moneda', saldoDespues === saldoAntes,
+  `${saldoAntes} → ${saldoDespues}`)
+
 while ((await estado()) === 'player-free') {
   await page.locator('[aria-label^="Siguiente episodio"]').click()
   await page.waitForTimeout(90)
 }
 paso('gastadas, el muro vuelve a pedir', (await estado()) === 'wall-pass-spent')
+paso('y el anuncio descuenta del tope diario', /9 veces hoy/.test(await anuncio.innerText()))
 
 await page.locator('.sheet button', { hasText: /No quiero esperar|consigue monedas/i }).first().click()
 await page.waitForTimeout(500)

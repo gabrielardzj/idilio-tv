@@ -9,7 +9,7 @@ export type Sheet =
   | { kind: 'store' }             // paquetes
   | { kind: 'streak' }            // detalle de la racha
   | { kind: 'account' }           // guardar racha + saldo
-  | { kind: 'unlocked'; via: 'pass' | 'coins'; ep: number }
+  | { kind: 'unlocked'; via: 'pass' | 'coins' | 'ad'; ep: number }
 
 /** Dónde está el usuario. El POC deja de ser una pantalla y pasa a ser una app. */
 export type Pantalla =
@@ -136,16 +136,24 @@ export function reduce(ctx: Ctx, a: Action): Ctx {
       }
 
     case 'verAnuncio': {
-      // Igual que en el producto: un anuncio da 15 monedas, con tope diario.
+      // El anuncio ABRE el episodio, no acredita monedas que después haya que
+      // gastar. El producto real hace lo segundo —15 monedas, tope de 10 al
+      // día— y ahí está el defecto: el usuario ve el anuncio para seguir viendo
+      // y la app le devuelve una moneda y un segundo toque. Un anuncio vale
+      // exactamente un episodio, así que la moneda en el medio no informa nada;
+      // solo agrega un paso a la salida gratuita, que es justo la que este
+      // muro quiere hacer fácil. El tope diario es el mismo y la emisión no
+      // cambia: 10 anuncios siguen siendo 10 episodios.
       if (s.anunciosHoy >= FUENTES_HOY.anuncio.topeDiario) return ctx
+      const ep = desbloqueadoDe(s, s.seriesId) + 1
       return {
-        ...ctx,
         state: {
           ...s,
-          balance: s.balance + FUENTES_HOY.anuncio.monedas,
           anunciosHoy: s.anunciosHoy + 1,
-          toast: `+${FUENTES_HOY.anuncio.monedas} monedas · 1 episodio`,
+          episode: ep,
+          unlocked: { ...s.unlocked, [s.seriesId]: ep },
         },
+        sheet: { kind: 'unlocked', via: 'ad', ep },
       }
     }
 

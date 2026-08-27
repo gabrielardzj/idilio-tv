@@ -166,11 +166,11 @@ const FLOWS = [
         act: async (p) => { await click(p, '5 · El muro') },
       },
       {
-        id: '01b-tras-el-anuncio', name: 'Después del anuncio · la economía encadena',
-        estado: 'wall-with-balance',
-        type: 'Paywall', patterns: ['Rewarded ad', 'Ad-gated unlock', 'Quota translated', 'Countdown'],
-        elements: ['Bottom sheet', 'Reward row', 'Quota caption', 'Primary button', 'Countdown timer'],
-        note: 'La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, 15 monedas, tope 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio y su etiqueta. El producto lo rotula «0/10» en gris: una fracción sin unidad, que además cuenta anuncios y no episodios. Acá dice cuántas veces se puede hacer y lo que cuesta cada vez, y el título ya dice qué abre — así el valor se entiende sin mezclar las dos unidades. Y al usarlo pasa algo que no estaba diseñado: las 15 monedas activan «Abrirlo ahora por 15 monedas» como acción primaria, así que la pantalla cambia de estado sola. Es la mejor prueba de que las piezas de la economía encajan.',
+        id: '01b-tras-el-anuncio', name: 'Después del anuncio · el episodio ya está abierto',
+        estado: 'unlocked-via-ad',
+        type: 'Confirmation', patterns: ['Rewarded ad', 'Ad-gated unlock', 'Quota translated', 'Success state'],
+        elements: ['Bottom sheet', 'Icon', 'Headline', 'Quota caption', 'Primary button'],
+        note: 'La salida gratuita que el producto YA tenía y que este trabajo casi propone como si fuera nueva: el anuncio recompensado, tope de 10 al día. Lo que la intervención aporta no es el anuncio sino su sitio, su etiqueta y su número de pasos. El producto lo rotula «0/10» en gris —una fracción sin unidad, que además cuenta anuncios y no episodios— y al verlo acredita 15 monedas que el usuario todavía tiene que gastar en un segundo toque. Acá el anuncio ABRE el episodio: el botón promete «Ver un anuncio y abrir este episodio» y eso es exactamente lo que pasa. Un anuncio vale un episodio, así que la moneda en el medio no informaba nada — solo agregaba un paso a la única salida que este muro quiere hacer fácil. La emisión no cambia: 10 anuncios siguen siendo 10 episodios por día.',
         act: async (p) => {
           await click(p, '5 · El muro')
           await p.locator('.anuncio').click()

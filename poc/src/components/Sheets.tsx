@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Coin, Pass, Shield, X } from './Icons'
+import { Coin, Pass, Play, Shield, X } from './Icons'
 import { StreakStrip } from './bits'
 import { frameStyle } from '../lib/frame'
-import { EPISODE_COST, MAX_PASSES, PACKS, STREAK, cop, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
+import { EPISODE_COST, FUENTES_HOY, MAX_PASSES, PACKS, STREAK, cop, episodesLabel, packThatCompletes, pricePerEpisode, toEpisodes } from '../lib/economy'
 import { citaTexto, desbloqueadoDe, enCurso, serieDe, type State } from '../lib/state'
 
 /* ═══ Elección del pase ═══════════════════════════════════════
@@ -118,12 +118,12 @@ export function Store({
 /* ═══ Celebración ═════════════════════════════════════════════ */
 export function Celebrate({
   state, via, ep, onWatch, justAdvanced,
-}: { state: State; via: 'pass' | 'coins'; ep: number; onWatch: () => void; justAdvanced: boolean }) {
+}: { state: State; via: 'pass' | 'coins' | 'ad'; ep: number; onWatch: () => void; justAdvanced: boolean }) {
   return (
     <div className="sheet" role="dialog" aria-label="Episodio desbloqueado">
       <div className="grab" />
       <div className="celebrate">
-        <div className="medal">{via === 'pass' ? <Pass s={38} /> : <Coin s={38} />}</div>
+        <div className="medal">{via === 'pass' ? <Pass s={38} /> : via === 'ad' ? <Play s={38} /> : <Coin s={38} />}</div>
         <h2>Episodio {ep} desbloqueado</h2>
         <p>
           {via === 'pass'
@@ -133,7 +133,13 @@ export function Celebrate({
                  del usuario, así que el intervalo real nunca son 24 h exactas.
                  El texto de la cita se arma en un solo sitio, `citaTexto`. */
               : <>Usaste tu Pase de la Noche. El próximo te espera {state.passNextAt ? citaTexto(state.passNextAt, state.now) : 'mañana'}.</>
-            : <>Pagaste {EPISODE_COST} monedas. Te quedan {state.balance} · {episodesLabel(state.balance)}.</>}
+            /* El anuncio se cuenta en episodios y no en monedas, que es lo
+               mismo que hace el resto del producto desde I1. Decir «+15
+               monedas» acá reintroduciría la unidad que este trabajo le está
+               sacando de encima al usuario. */
+            : via === 'ad'
+              ? <>Viste un anuncio. Puedes hacerlo {FUENTES_HOY.anuncio.topeDiario - state.anunciosHoy} {(FUENTES_HOY.anuncio.topeDiario - state.anunciosHoy) === 1 ? 'vez' : 'veces'} más hoy.</>
+              : <>Pagaste {EPISODE_COST} monedas. Te quedan {state.balance} · {episodesLabel(state.balance)}.</>}
         </p>
 
         {via === 'pass' && (
@@ -204,7 +210,14 @@ export function StreakSheet({ state, onClose }: { state: State; onClose: () => v
   const week = STREAK.slice(0, Math.max(state.nights, 1))
   const bonos = week.reduce((a, n) => a + n.coins, 0)
   const valorPases = state.passesUsed * EPISODE_COST
-  const earned = bonos + valorPases
+  // Los anuncios son la fuente MÁS GRANDE del producto —diez al día, 150
+  // monedas— y esta es la pantalla que existe para responder «de dónde salen
+  // tus monedas». Omitirla dejaba fuera justo lo que más pesa, y le hacía a
+  // esta pantalla lo mismo que el muro le hace al `0/10`: tener el dato y no
+  // decirlo.
+  const porAnuncios = state.anunciosHoy * FUENTES_HOY.anuncio.monedas
+  const anunciosQuedan = FUENTES_HOY.anuncio.topeDiario - state.anunciosHoy
+  const earned = bonos + valorPases + porAnuncios
   return (
     <div className="sheet" role="dialog" aria-label="Tu economía">
       <div className="grab" />
@@ -225,6 +238,13 @@ export function StreakSheet({ state, onClose }: { state: State; onClose: () => v
           <span style={{ color: 'var(--tx-mid)' }}>Bonos de esta vuelta</span>
           <b>+{bonos} monedas</b>
         </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 9 }}>
+          <span style={{ color: 'var(--tx-mid)' }}>Anuncios vistos hoy</span>
+          <b>{state.anunciosHoy} · +{porAnuncios} monedas</b>
+        </div>
+        <p style={{ fontSize: 11.5, color: 'var(--tx-lo)', margin: '-2px 0 9px', lineHeight: 1.45 }}>
+          Te quedan {anunciosQuedan} {anunciosQuedan === 1 ? 'episodio gratis' : 'episodios gratis'} hoy por esta vía.
+        </p>
         <div style={{ height: 1, background: 'rgba(255,255,255,.08)', margin: '11px 0' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13.5 }}>
           <span>Total ganado sin pagar</span>

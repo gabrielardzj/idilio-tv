@@ -95,12 +95,14 @@ El muro ya tiene la salida gratuita: el anuncio recompensado está ahí, con su 
 
 La intervención es reordenar y renombrar, no mover: **el anuncio arriba**, y el contador traducido de anuncios a lo que el usuario vino a buscar — *«te quedan 10 episodios gratis hoy»* en vez de `0/10`. Es lo más barato y de mayor alcance de todo el portafolio, y no inventa nada: **el producto ya regala diez episodios diarios en anuncios —70 a la semana— encima de los que trae cada serie** ([diagnóstico F1](../01-diagnostico/#f1--la-economía-está-a-la-vista-y-ordenada-al-revés)) sin decírselo al usuario en el único segundo del día en que le importa.
 
+**Y un tercer cambio, que sí es de comportamiento y conviene no colarlo entre los otros dos: el anuncio abre el episodio.** Hoy acredita 15 monedas que el usuario todavía tiene que gastar en un segundo toque. Un anuncio vale exactamente un episodio, así que la moneda en el medio no informa nada — solo agrega un paso a la única salida que esta intervención quiere hacer fácil, y obliga a la tarjeta a hablar en la unidad que [I1](#i1--la-moneda-habla-en-episodios) le está sacando de encima al usuario. La emisión no cambia —diez anuncios siguen siendo diez episodios por día, ni uno más— y el tope diario tampoco. Lo que cambia es que el botón cumple lo que dice: *«Ver un anuncio y abrir este episodio»*.
+
 | | |
 |---|---|
 | **Hipótesis** | El `0/10` cuenta anuncios, así que para leerlo como diez episodios hay que multiplicar por 15 y dividir por 15 — nadie lo hace. Lo que sí lee primero es una suscripción de $ 24.500 COP. Con el anuncio arriba y su contador traducido a episodios (I1), el muro deja de leerse como un callejón de pago y el usuario aprende que la economía tiene fuentes. |
 | **Mueve** | % de muros que terminan en desbloqueo y no en cierre. Anuncios vistos por DAU. Vía ambas, DAU/MAU. |
 | **Cómo lo sé** | *Leading:* **qué fracción de los muros termina en algo que no sea cerrar la pantalla** — ver el anuncio, comprar o volver al catálogo. *Lagging:* **DAU/MAU.** *Guardrail:* que el ingreso por usuario activo y el porcentaje de gente que paga no caigan más de un 5% relativo. Es el riesgo propio de esta intervención: poner el anuncio arriba puede hacer que alguien que iba a comprar mire un anuncio en vez de pagar, y ahí es donde se vería. |
-| **Costo** | ~2 semanas. El SDK de anuncios y el registro de saldos ya existen; es superficie. |
+| **Costo** | ~2 semanas. El SDK de anuncios y el registro de saldos ya existen, así que el orden y la etiqueta son superficie. Lo único que no lo es —y es media jornada— es que la devolución del anuncio abra el episodio en vez de acreditar monedas. |
 | **¿Pasa la pregunta ①?** | ✅ |
 
 > **Y ojo con el conflicto que esto destapa:** el Pase Idilio vende *«sin anuncios»* como una de sus dos ventajas. O sea que la suscripción cobra por quitar la fuente gratuita más generosa del producto. Poner el anuncio en el muro hace ese conflicto más visible, y es una decisión de negocio que hay que tomar a la vista y no por omisión.
