@@ -7,7 +7,7 @@
  *   node scripts/export-mobbin.mjs [baseUrl] [outDir]
  */
 import { chromium } from 'playwright-core'
-import { mkdir, writeFile, readFile, rm } from 'node:fs/promises'
+import { mkdir, writeFile, readFile, rm, rename } from 'node:fs/promises'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
@@ -330,7 +330,13 @@ const FLOWS = [
 const log = (m) => process.stdout.write(m + '\n')
 
 const run = async () => {
-  await rm(OUT, { recursive: true, force: true })
+  // Se genera en un directorio aparte y se cambia por el bueno al final. Antes
+  // esto empezaba borrando `OUT`, así que cualquier fallo a mitad —un timeout,
+  // un servidor que no responde— dejaba el entregable sin export y había que
+  // recuperarlo de git. Un generador no puede destruir su salida anterior antes
+  // de saber si va a poder producir una nueva.
+  const TMP = `${OUT}.parcial`
+  await rm(TMP, { recursive: true, force: true })
 
   const browser = await chromium.launch()
   const manifest = { ...APP, flows: [] }
@@ -362,7 +368,7 @@ const run = async () => {
       await page.waitForTimeout(900)
     }
 
-    const dir = join(OUT, 'flows', flow.id)
+    const dir = join(TMP, 'flows', flow.id)
     await mkdir(dir, { recursive: true })
 
     const screens = []
@@ -437,9 +443,22 @@ const run = async () => {
     elements: [...new Set(manifest.flows.flatMap(f => f.screens.flatMap(s => s.elements)))].sort(),
   }
 
-  await writeFile(join(OUT, 'manifest.json'), JSON.stringify(manifest, null, 2))
-  await writeFile(join(OUT, 'index.html'), gallery(manifest))
-  await writeFile(join(OUT, 'README.md'), readme(manifest))
+  await writeFile(join(TMP, 'manifest.json'), JSON.stringify(manifest, null, 2))
+  await writeFile(join(TMP, 'index.html'), gallery(manifest))
+  await writeFile(join(TMP, 'README.md'), readme(manifest))
+
+  // El cambio, al final y solo si todo salió: el export anterior sigue intacto
+  // hasta este punto. Si un flujo se saltó por falta de servidor tampoco se
+  // pisa nada — un export parcial no puede reemplazar a uno completo en
+  // silencio, porque las capturas que faltan no se notan mirando el sitio.
+  if (manifest.flows.length < FLOWS.length) {
+    console.log(`\n✗ solo ${manifest.flows.length} de ${FLOWS.length} flujos: el export anterior se deja como está.`)
+    console.log(`  lo generado queda en ${TMP} por si se quiere mirar.`)
+    process.exitCode = 1
+    return
+  }
+  await rm(OUT, { recursive: true, force: true })
+  await rename(TMP, OUT)
   console.log(`\n${total} pantallas · ${manifest.flows.length} flujos → ${OUT}`)
 }
 

@@ -4,3 +4,6 @@ _site/
 .DS_Store
 .playwright-mcp/
 *.log
+
+# Salida a medias del export, cuando un flujo no se pudo capturar.
+mobbin-export.parcial/
