@@ -21,7 +21,7 @@ const SITIO = resolve(process.argv[2] ?? '../_site')
 /** Lo que la puerta de entrada tiene que ofrecer, pase lo que pase. */
 const IMPRESCINDIBLES = [
   'docs/diagnostico.html', 'docs/estrategia.html', 'docs/intervencion.html',
-  'docs/poc.html', 'docs/diseno.html', 'flujos/', 'stack/',
+  'docs/poc.html', 'docs/diseno.html', 'flujos/', 'stack/', 'presentacion/',
 ]
 
 const htmls = async (dir) => {

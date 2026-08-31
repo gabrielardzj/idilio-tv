@@ -74,6 +74,7 @@ jobs:
           cp -r poc/dist/*      _site/
           cp -r mobbin-export   _site/flujos
           cp -r web/out         _site/stack
+          cp -r presentacion    _site/presentacion
 
       # El brief pide los cuatro entregables en un link. Esto comprueba que ese
       # link los alcance de verdad, y que ningún enlace interno del sitio caiga.

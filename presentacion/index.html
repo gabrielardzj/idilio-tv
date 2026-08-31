@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Continuará · Idilio TV — los puntos clave</title>
+<meta name="description" content="Reto de Product Designer para Idilio TV: diagnóstico, estrategia, intervención y POC, en catorce láminas.">
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<main id="deck"></main>
+
+<!-- Es una barra de navegación, no un adorno: dice dónde estás y cómo moverte.
+     Como <div> quedaba fuera de todo landmark y axe lo marcaba con razón. -->
+<nav class="barra" aria-label="Posición y controles">
+  <span id="pos" aria-live="polite">1 / 14</span>
+  <span class="pista" role="presentation"><i id="avance" style="width:7%"></i></span>
+  <span class="baja"><kbd>←</kbd> <kbd>→</kbd> para moverse</span>
+</nav>
+
+<script src="laminas.js"></script>
+<script>
+const deck = document.getElementById('deck')
+deck.innerHTML = LAMINAS.map((h, i) =>
+  `<section class="lamina" aria-hidden="true" aria-label="Lámina ${i + 1} de ${LAMINAS.length}"><div class="dentro">${h}</div></section>`
+).join('')
+
+const laminas = [...document.querySelectorAll('.lamina')]
+let n = Math.min(Math.max(parseInt(location.hash.slice(1)) || 1, 1), laminas.length) - 1
+
+function pinta() {
+  laminas.forEach((l, i) => {
+    l.classList.toggle('viva', i === n)
+    l.setAttribute('aria-hidden', String(i !== n))
+  })
+  document.getElementById('pos').textContent = `${n + 1} / ${laminas.length}`
+  document.getElementById('avance').style.width = `${((n + 1) / laminas.length) * 100}%`
+  // El hash deja compartir una lámina concreta y sobrevive a recargar.
+  if (location.hash !== `#${n + 1}`) history.pushState(null, '', `#${n + 1}`)
+}
+const ir = (d) => { n = Math.min(Math.max(n + d, 0), laminas.length - 1); pinta() }
+
+addEventListener('keydown', (e) => {
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); ir(1) }
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); ir(-1) }
+  if (e.key === 'Home') { n = 0; pinta() }
+  if (e.key === 'End') { n = laminas.length - 1; pinta() }
+})
+// En móvil no hay teclado: se avanza tocando, y se retrocede tocando el tercio izquierdo.
+addEventListener('click', (e) => { if (!e.target.closest('a')) ir(e.clientX < innerWidth / 3 ? -1 : 1) })
+
+// Atrás y adelante del navegador, y el hash editado a mano. Sin esto, compartir
+// una lámina funciona al abrirla pero el botón atrás deja el deck congelado:
+// cambia la URL y no cambia lo que se ve, que es peor que no responder.
+addEventListener('hashchange', () => {
+  const pedida = parseInt(location.hash.slice(1))
+  if (pedida >= 1 && pedida <= laminas.length && pedida - 1 !== n) { n = pedida - 1; pinta() }
+})
+pinta()
+</script>
+</body>
+</html>

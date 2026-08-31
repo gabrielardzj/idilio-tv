@@ -328,6 +328,7 @@ function Director({
           antes de tocar nada es que hay más. */}
       <div className="grp entregable">
         <h2>El entregable</h2>
+        <a href="./presentacion/"><b>Los puntos clave</b><span>14 láminas</span></a>
         <a href="./docs/diagnostico.html"><b>1 · Diagnóstico</b><span>35%</span></a>
         <a href="./docs/estrategia.html"><b>2 · Estrategia</b><span>con el diagnóstico</span></a>
         <a href="./docs/intervencion.html"><b>3 · La intervención</b><span>20% craft</span></a>
