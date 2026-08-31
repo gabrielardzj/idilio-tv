@@ -23,7 +23,11 @@ body{
    mismos del prototipo, para que la superficie no sea un negro plano. */
 .lamina{
   position:fixed; inset:0; display:grid; place-items:center;
+  /* Más aire abajo que arriba: la barra de posición flota sobre la lámina, y
+     sin reservarle sitio recortaba unos diez píxeles del último bloque en casi
+     todas — poco, pero se ve. */
   padding:clamp(28px,5vw,80px);
+  padding-bottom:calc(clamp(28px,5vw,80px) + 34px);
   opacity:0; visibility:hidden; transition:opacity .38s var(--ease);
   background:
     radial-gradient(900px 620px at 15% -10%, #1B0C2E 0%, transparent 62%),
@@ -31,7 +35,7 @@ body{
     var(--ink-1000);
 }
 .lamina.viva{opacity:1;visibility:visible}
-.dentro{width:min(1080px,100%);max-height:100%;overflow-y:auto;scrollbar-width:none}
+.dentro{width:min(1080px,100%);max-height:100%;overflow-y:auto;scrollbar-width:none;padding-bottom:4px}
 .dentro::-webkit-scrollbar{display:none}
 
 /* Al entrar, los bloques suben escalonados. Un solo momento coreografiado
@@ -72,7 +76,7 @@ b{color:var(--tx-hi);font-weight:600}
   display:block;margin:0 auto;
   /* Las capturas son de teléfono, muy verticales: sin tope se salen de la
      lámina y se cortan por abajo, que parece un fallo y no un encuadre. */
-  max-height:min(64vh,620px);object-fit:contain;object-position:top;
+  max-height:min(50vh,520px);object-fit:contain;object-position:top;
 }
 
 .lista{margin-top:22px;display:grid;gap:11px}
@@ -119,3 +123,32 @@ a{color:var(--cyan)}
   border:1px solid rgba(233,59,201,.34);background:rgba(233,59,201,.07);color:var(--tx-mid)
 }
 .aviso b{color:var(--magenta)}
+
+/* Dos capturas del mismo modal, lado a lado: son las dos mitades de una sola
+   pantalla y apiladas se leerían como dos cosas distintas. Debajo va el texto
+   a ancho completo, porque la conclusión es de las dos juntas. */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,26px);margin:18px 0 18px;align-items:start}
+.duo figure{margin:0;display:grid;gap:9px;justify-items:center}
+.duo img{
+  width:100%;max-width:250px;border-radius:16px;border:1px solid rgba(255,255,255,.1);display:block;
+  max-height:min(34vh,340px);object-fit:cover;object-position:top;
+}
+.duo figcaption{font-size:12px;color:var(--tx-lo);text-align:center;line-height:1.4}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+
+/* El cierre de una lámina: la frase que la lámina existe para dejar. */
+.cierre{
+  margin-top:22px;padding:15px 18px;border-radius:14px;
+  border:1px solid rgba(63,224,208,.3);background:rgba(63,224,208,.06);
+  font-size:clamp(15px,1.6vw,18.5px);line-height:1.55;color:var(--tx-hi)
+}
+.cierre b{color:var(--cyan)}
+
+/* Pantallas bajas —un portátil a 1280×720 es lo común—: las capturas ceden
+   altura antes que el texto, porque la lámina se lee, no se contempla. */
+@media (max-height:820px){
+  .duo{margin:14px 0}
+  .duo img{max-height:26vh}
+  .duo figcaption{font-size:11px}
+  .cierre{margin-top:16px;padding:12px 15px}
+}

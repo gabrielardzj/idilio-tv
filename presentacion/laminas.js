@@ -18,17 +18,21 @@ const LAMINAS = [
  <p class="sube" style="margin-top:26px">La economía está construida, es visible y reparte de sobra. Lo que no hay es una razón para volver mañana — y eso es lo que mide el <b>DAU/MAU, hoy en 0,33</b>: unos 2,3 días activos por semana.</p>
  <div class="cita sube"><p>¿Cómo usar mecánicas de gamificación para que <b>volver a Idilio</b> forme parte natural de la experiencia de ver microdramas?</p></div>`,
 
-// 2 · lo tiene todo · el muro
+// 2 · lo tiene todo · el muro, entero
 `<div class="sube paso">Lo tiene todo · 1 de 2</div>
- <h2 class="sube">El muro no esconde la economía: <em>la enseña entera</em></h2>
- <div class="par sube">
-   <img src="../docs/activos/docs__00-dogfooding__evidencia__muro-nativo-real-1.png" alt="El muro de pago de Idilio, con saldo, suscripción, anuncio y paquetes">
-   <div>
-     <p>Dice el saldo y el costo del episodio antes que ningún precio. Traduce cada paquete a episodios. Ofrece la suscripción. Y lleva un <b>anuncio recompensado</b> que abre un episodio gratis.</p>
-     <p>Cualquiera de esas cosas, por separado, sería una mejora razonable que proponer. Están todas.</p>
-     <p class="baja" style="font-size:15px">Lo que se lee mal es el <b>orden</b>: abre por lo más caro y deja la salida gratuita en la tarjeta más apagada, rotulada <code>0/10</code> — una fracción sin unidad que son diez episodios al día.</p>
-   </div>
- </div>`,
+ <h2 class="sube">El muro ya ofrece <em>todas las salidas</em></h2>
+ <div class="duo sube">
+   <figure>
+     <img src="../docs/activos/docs__00-dogfooding__evidencia__muro-nativo-real-1.png" alt="Parte superior del muro: saldo, costo del episodio y los dos planes de suscripción">
+     <figcaption>Arriba · el saldo, el costo del episodio y los dos planes</figcaption>
+   </figure>
+   <figure>
+     <img src="../docs/activos/docs__00-dogfooding__evidencia__muro-nativo-real-2.png" alt="Parte inferior del muro: anuncio recompensado, los tres paquetes de monedas y el enlace a Recompensas">
+     <figcaption>Abajo · el anuncio gratuito, los tres paquetes y el enlace a Recompensas</figcaption>
+   </figure>
+ </div>
+ <p class="sube">Una salida gratuita, tres de pago por monedas, dos de suscripción y un enlace a las demás. Con el saldo y el costo arriba del todo, y cada paquete traducido a episodios: <b>«desbloquea 12 episodios»</b>, no «180 monedas».</p>
+ <div class="cierre sube"><b>No hay nada que agregar a esta pantalla.</b> Todo lo que un rediseño propondría —hacer visible la economía, ofrecer una alternativa gratuita, traducir la moneda— ya está puesto. El trabajo no es añadir: es ordenar.</div>`,
 
 // 3 · lo tiene todo · el catálogo
 `<div class="sube paso">Lo tiene todo · 2 de 2</div>
