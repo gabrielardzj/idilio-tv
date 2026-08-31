@@ -25,6 +25,36 @@ const LAMINAS = [
    <div class="cifra viol"><div class="n">2,3</div><div class="q">días por semana entra el usuario medio</div></div>
  </div>`,
 
+// 3 · los datos del brief, y qué decide cada uno
+`<div class="sube paso">Datos disponibles · las nueve señales del brief</div>
+ <h2 class="sube">Cada cifra decide algo, <em>o queda descartada por escrito</em></h2>
+ <table class="senales sube">
+   <thead><tr><th>Señal</th><th>Valor</th><th>Qué decide en este trabajo</th></tr></thead>
+   <tbody>
+     <tr><td>Stickiness (DAU/MAU)</td><td class="val">0,33</td><td class="usa">El objetivo. Y sus <b>2,3 días por semana</b> obligan al comodín y al tope de dos: nadie sostiene 7 de 7.</td></tr>
+     <tr><td>Reclaman la recompensa diaria</td><td class="val">19%</td><td class="usa">La corrección directa de <b>R1</b>: el pase no se reclama. Ese 81% restante no es que no la encuentre — la descarta.</td></tr>
+     <tr><td>Llegan al 3.er día de racha</td><td class="val">6%</td><td class="usa">La métrica que <b>I5</b> mueve. Objetivo declarado: 20%.</td></tr>
+     <tr><td>Sesión promedio</td><td class="val">22 min · 14 eps</td><td class="usa">Contra los 10 gratis del censo, es el <b>Hallazgo 1</b>: lo gratis se acaba antes que la sesión.</td></tr>
+     <tr><td>Sesiones entre 11 p.m. y 2 a.m.</td><td class="val">54%</td><td class="usa">Por eso la noche corre de <b>5 a.m. a 5 a.m.</b> — con corte a medianoche, ver a las 23:40 y a las 00:20 rompería la racha.</td></tr>
+     <tr><td>Consumen como invitado</td><td class="val">88%</td><td class="usa">La cuenta se pide tarde y una sola vez (<b>I7</b>), cuando ya hay racha y saldo que perder.</td></tr>
+     <tr class="fuera"><td>Nunca abrieron el perfil</td><td class="val">82%</td><td class="usa"><b>Descarta</b> rediseñar el perfil. No se arregla un cuarto amoblándolo.</td></tr>
+     <tr class="fuera"><td>Retención D30 con racha de 3+</td><td class="val">2,4x</td><td class="usa"><b>Descartada como causa.</b> Es la señal más tentadora y la más peligrosa: quien sostiene tres días ya era el usuario fiel.</td></tr>
+     <tr class="fuera"><td>Revén series terminadas</td><td class="val">23%</td><td class="usa"><b>Descartada la lectura optimista.</b> No es amor al contenido: ya vieron lo gratis y no tienen a dónde ir.</td></tr>
+   </tbody>
+ </table>
+ <div class="aviso sube"><b>Son hipotéticas.</b> Las nueve vienen del brief y fueron preparadas para este ejercicio: no corresponden a métricas reales de Idilio TV. Lo que sí está medido —el catálogo, los precios, el muro— lo censé yo y se distingue en todo el entregable.</div>`,
+
+// 4 · de dónde sale cada cosa
+`<div class="sube paso">Procedencia · qué es dato, qué es medición, qué es propuesta</div>
+ <h2 class="sube">Tres orígenes distintos, y <em>nunca se mezclan</em></h2>
+ <p class="sube">Un diagnóstico se sostiene o se cae por esto. Las nueve señales del brief son hipotéticas; el catálogo lo medí; la mecánica es propuesta mía. Cada afirmación del entregable dice de cuál de los tres viene.</p>
+ <div class="lista sube">
+   <div class="item"><span class="k">del brief</span><span class="v"><b>Hipotéticas.</b> Las nueve señales de comportamiento. Preparadas para el ejercicio, no son métricas reales del producto.</span></div>
+   <div class="item destaca"><span class="k">medido</span><span class="v"><b>Del producto real.</b> Las 50 series y sus 2.230 episodios, los 15 monedas por episodio, los precios en pesos, el muro capturado dentro de la app. Lo levanté yo del reproductor web y de la app.</span></div>
+   <div class="item"><span class="k">propuesta</span><span class="v"><b>Mío.</b> El Pase de la Noche, la Racha, el comodín, el orden del muro. Marcado como propuesta en el modelo económico, línea por línea.</span></div>
+ </div>
+ <div class="cita sube"><p>El código lo hace explícito: cada constante lleva <code>REAL</code> o <code>PROPUESTA</code>, y un verificador falla el despliegue si un documento publica una cifra que el modelo no respalda.</p></div>`,
+
 // 3 · hallazgo 1
 `<div class="sube paso">Hallazgo 1</div>
  <h2 class="sube">Lo gratis se acaba <em>antes que la sesión</em></h2>

@@ -1,6 +1,8 @@
 # 1. Diagnóstico
 
 > **Método.** El análisis parte del uso directo del producto —el reproductor web de idilio.tv y el build nativo 1.20.0— antes de mirar las métricas, y del censo completo de las 50 series del catálogo. Las métricas se leyeron después, y el diagnóstico surge de cruzar las dos fuentes. El registro del uso está en [`docs/00-dogfooding`](../00-dogfooding/).
+>
+> **De dónde viene cada cifra, porque no todas valen igual.** Las nueve señales de comportamiento —DAU/MAU, el 19% de reclamo, el 6% de racha, el 2.4x de D30, el 82% del perfil, el 12% con cuenta, la sesión de 22 minutos, el 23% de revisionado y el 54% nocturno— **son hipotéticas: vienen del brief y fueron preparadas para este ejercicio, no son métricas reales de Idilio TV.** Todo lo demás está medido por mí: el catálogo entero, los precios en pesos, el muro capturado dentro de la app. Y la mecánica es propuesta. Los tres orígenes se distinguen en todo el documento, y en el código cada constante lleva `REAL` o `PROPUESTA`.
 
 ## Resumen
 

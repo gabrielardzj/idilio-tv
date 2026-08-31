@@ -94,3 +94,28 @@ b{color:var(--tx-hi);font-weight:600}
 .pista i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .38s var(--ease)}
 .barra kbd{font:inherit;padding:2px 7px;border-radius:5px;border:1px solid rgba(255,255,255,.14);color:var(--tx-mid)}
 a{color:var(--cyan)}
+
+/* ── La tabla de señales ──────────────────────────────────────────────────
+   Tres columnas: la señal, su valor y qué decide. La tercera es la que hace
+   que la tabla no sea un anexo: sin ella, nueve cifras sueltas; con ella, el
+   puente entre el brief y todo lo que sigue. */
+.senales{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+.senales th{
+  text-align:left;font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;
+  color:var(--tx-lo);font-weight:700;padding:0 14px 10px 0;border-bottom:1px solid rgba(255,255,255,.1)
+}
+.senales td{padding:11px 14px 11px 0;border-bottom:1px solid rgba(255,255,255,.055);vertical-align:top;color:var(--tx-mid)}
+.senales tr:last-child td{border-bottom:0}
+.senales .val{color:var(--tx-hi);font-weight:700;white-space:nowrap}
+.senales .usa{color:var(--tx-lo);font-size:13px;line-height:1.45}
+.senales .usa b{color:var(--cyan);font-weight:600}
+.senales tr.fuera .usa b{color:var(--tx-lo)}
+.senales tr.fuera td{opacity:.66}
+
+/* El aviso de procedencia. Va arriba y no en letra pequeña al pie: si las
+   cifras son hipotéticas, eso se lee antes que las cifras. */
+.aviso{
+  margin-top:18px;padding:13px 16px;border-radius:12px;font-size:13.5px;line-height:1.5;
+  border:1px solid rgba(233,59,201,.34);background:rgba(233,59,201,.07);color:var(--tx-mid)
+}
+.aviso b{color:var(--magenta)}
