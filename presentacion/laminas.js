@@ -12,26 +12,14 @@
  */
 const LAMINAS = [
 
-// 1 · la pregunta
+// 1 · el título, que es ya el diagnóstico
 `<div class="sube paso">Idilio TV · reto de Product Designer</div>
- <h1 class="sube">El muro no expulsa al usuario<br>de la app.<br>Lo expulsa de la historia.</h1>
- <p class="sube" style="margin-top:26px">¿Cómo usar mecánicas de gamificación para que <b>volver a Idilio</b> forme parte natural de la experiencia de ver microdramas?</p>
- <div class="cita sube"><p>Objetivo de negocio: subir el DAU/MAU, hoy en <b>0,33</b> — unos 2,3 días activos por semana. Objetivo de experiencia: que el usuario entienda la economía virtual.</p></div>`,
+ <h1 class="sube">El producto ya lo tiene todo,<br>menos un motivo.</h1>
+ <p class="sube" style="margin-top:26px">La economía está construida, es visible y reparte de sobra. Lo que no hay es una razón para volver mañana — y eso es lo que mide el <b>DAU/MAU, hoy en 0,33</b>: unos 2,3 días activos por semana.</p>
+ <div class="cita sube"><p>¿Cómo usar mecánicas de gamificación para que <b>volver a Idilio</b> forme parte natural de la experiencia de ver microdramas?</p></div>`,
 
-// 2 · el censo
-`<div class="sube paso">El punto de partida · censo del catálogo</div>
- <h2 class="sube">Antes de opinar del producto, <em>hay que medirlo</em></h2>
- <p class="sube">Las 50 series del catálogo, una por una: cuántos episodios tiene cada una, cuántos regala y qué cuesta desbloquear el resto. De ahí sale todo lo que viene después.</p>
- <div class="cifras sube">
-   <div class="cifra cian"><div class="n">50</div><div class="q">series · 2.230 episodios</div></div>
-   <div class="cifra oro"><div class="n">15</div><div class="q">monedas por episodio, igual en las 41 con muro</div></div>
-   <div class="cifra"><div class="n">10</div><div class="q">episodios gratis, la moda del catálogo</div></div>
-   <div class="cifra viol"><div class="n">500</div><div class="q">episodios gratis sumando el catálogo entero</div></div>
- </div>
- <p class="sube baja" style="margin-top:20px;font-size:15px">Ese último número reaparece más adelante: es el que cambia el diagnóstico.</p>`,
-
-// 3 · el muro real
-`<div class="sube paso">Qué encuentra el usuario al chocar</div>
+// 2 · lo tiene todo · el muro
+`<div class="sube paso">Lo tiene todo · 1 de 2</div>
  <h2 class="sube">El muro no esconde la economía: <em>la enseña entera</em></h2>
  <div class="par sube">
    <img src="../docs/activos/docs__00-dogfooding__evidencia__muro-nativo-real-1.png" alt="El muro de pago de Idilio, con saldo, suscripción, anuncio y paquetes">
@@ -39,6 +27,34 @@ const LAMINAS = [
      <p>Dice el saldo y el costo del episodio antes que ningún precio. Traduce cada paquete a episodios. Ofrece la suscripción. Y lleva un <b>anuncio recompensado</b> que abre un episodio gratis.</p>
      <p>Cualquiera de esas cosas, por separado, sería una mejora razonable que proponer. Están todas.</p>
      <p class="baja" style="font-size:15px">Lo que se lee mal es el <b>orden</b>: abre por lo más caro y deja la salida gratuita en la tarjeta más apagada, rotulada <code>0/10</code> — una fracción sin unidad que son diez episodios al día.</p>
+   </div>
+ </div>`,
+
+// 3 · lo tiene todo · el catálogo
+`<div class="sube paso">Lo tiene todo · 2 de 2</div>
+ <h2 class="sube">Y el catálogo <em>reparte de sobra</em></h2>
+ <p class="sube">El censo de las 50 series, una por una: cuántos episodios tiene cada una, cuántos regala y qué cuesta desbloquear el resto. La conclusión no es que falte contenido gratis.</p>
+ <div class="cifras sube">
+   <div class="cifra cian"><div class="n">50</div><div class="q">series · 2.230 episodios</div></div>
+   <div class="cifra oro"><div class="n">15</div><div class="q">monedas por episodio, igual en las 41 con muro</div></div>
+   <div class="cifra"><div class="n">10</div><div class="q">episodios gratis, la moda del catálogo</div></div>
+   <div class="cifra viol"><div class="n">500</div><div class="q">episodios gratis sumando el catálogo entero</div></div>
+ </div>
+ <p class="sube baja" style="margin-top:20px;font-size:15px">Casi cuatro meses de consumo sin pagar un peso. Ese número reaparece: es el que cambia el diagnóstico.</p>`,
+
+// 4 · y aun así
+`<div class="sube paso">Y aun así</div>
+ <h2 class="sube">El metajuego está construido, y <em>casi nadie lo juega</em></h2>
+ <div class="par sube">
+   <div>
+     <p>La recompensa diaria aparece en un diálogo que <b>no se puede no ver</b>: se interpone entre el usuario y la app. Aun así, solo el <b>19%</b> la reclama.</p>
+     <p>Eso descarta la explicación de visibilidad. El 81% restante no es que no la encuentre — la descarta. Y solo el <b>6%</b> llega al tercer día consecutivo de racha.</p>
+     <p>Quien sí sostiene tres días retiene <b>2,4 veces</b> más a 30 días. Es una correlación fuerte, no una causa demostrada: puede que la racha retenga, o que quien ya iba a quedarse sea el que la sostiene.</p>
+   </div>
+   <div class="cifras" style="grid-template-columns:1fr">
+     <div class="cifra oro"><div class="n">19%</div><div class="q">reclama la recompensa diaria</div></div>
+     <div class="cifra mag"><div class="n">6%</div><div class="q">llega al tercer día de racha</div></div>
+     <div class="cifra cian"><div class="n">2,4x</div><div class="q">retención D30 de quien la sostiene</div></div>
    </div>
  </div>`,
 
@@ -77,22 +93,6 @@ const LAMINAS = [
    <div class="cifra oro"><div class="n">70</div><div class="q">episodios gratis por semana solo con anuncios</div></div>
    <div class="cifra"><div class="n">32</div><div class="q">episodios que consume el usuario promedio</div></div>
    <div class="cifra mag"><div class="n">217%</div><div class="q">de su consumo ya está cubierto sin pagar</div></div>
- </div>`,
-
-// 7 · el síntoma en las métricas
-`<div class="sube paso">Cómo se ve eso en las métricas</div>
- <h2 class="sube">El metajuego existe, y <em>casi nadie lo juega</em></h2>
- <div class="par sube">
-   <div>
-     <p>La recompensa diaria aparece en un diálogo que <b>no se puede no ver</b>: se interpone entre el usuario y la app. Aun así, solo el <b>19%</b> la reclama.</p>
-     <p>Eso descarta la explicación de visibilidad. El 81% restante no es que no la encuentre — la descarta. Y solo el <b>6%</b> llega al tercer día consecutivo de racha.</p>
-     <p>Quien sí sostiene tres días retiene <b>2,4 veces</b> más a 30 días. Es una correlación fuerte, no una causa demostrada: puede que la racha retenga, o que quien ya iba a quedarse sea el que la sostiene.</p>
-   </div>
-   <div class="cifras" style="grid-template-columns:1fr">
-     <div class="cifra oro"><div class="n">19%</div><div class="q">reclama la recompensa diaria</div></div>
-     <div class="cifra mag"><div class="n">6%</div><div class="q">llega al tercer día de racha</div></div>
-     <div class="cifra cian"><div class="n">2,4x</div><div class="q">retención D30 de quien la sostiene</div></div>
-   </div>
  </div>`,
 
 // 8 · por dónde no se puede ir
