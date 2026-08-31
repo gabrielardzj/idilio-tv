@@ -99,22 +99,27 @@ b{color:var(--tx-hi);font-weight:600}
 .barra kbd{font:inherit;padding:2px 7px;border-radius:5px;border:1px solid rgba(255,255,255,.14);color:var(--tx-mid)}
 a{color:var(--cyan)}
 
-/* ── La tabla de señales ──────────────────────────────────────────────────
-   Tres columnas: la señal, su valor y qué decide. La tercera es la que hace
-   que la tabla no sea un anexo: sin ella, nueve cifras sueltas; con ella, el
-   puente entre el brief y todo lo que sigue. */
-.senales{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+/* ── La tabla del giro ────────────────────────────────────────────────────
+   Tres columnas: la señal, lo que parece decir y lo que dice con el censo
+   delante. La gracia está en la comparación, así que la segunda columna va
+   atenuada y la tercera al frente: se lee de izquierda a derecha como el
+   argumento que es, no como un cuadro de datos. */
+.senales{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px;table-layout:fixed}
 .senales th{
   text-align:left;font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;
   color:var(--tx-lo);font-weight:700;padding:0 14px 10px 0;border-bottom:1px solid rgba(255,255,255,.1)
 }
+.senales th:nth-child(1){width:24%} .senales th:nth-child(2){width:28%}
 .senales td{padding:11px 14px 11px 0;border-bottom:1px solid rgba(255,255,255,.055);vertical-align:top;color:var(--tx-mid)}
 .senales tr:last-child td{border-bottom:0}
-.senales .val{color:var(--tx-hi);font-weight:700;white-space:nowrap}
-.senales .usa{color:var(--tx-lo);font-size:13px;line-height:1.45}
-.senales .usa b{color:var(--cyan);font-weight:600}
-.senales tr.fuera .usa b{color:var(--tx-lo)}
-.senales tr.fuera td{opacity:.66}
+.senales .sen{color:var(--tx-mid);font-size:13px;line-height:1.35}
+.senales .val{display:block;margin-top:4px;color:var(--tx-hi);font-weight:700;font-size:14.5px}
+/* La lectura ingenua: se muestra porque hay que descartarla, no porque valga. */
+.senales .antes{color:var(--tx-lo);font-size:12.5px;line-height:1.45;font-style:italic}
+.senales .luego{font-size:13px;line-height:1.5}
+.senales .luego b{color:var(--gold-300);font-weight:600}
+/* La fila que además se descarta entera, y no solo cambia de lectura. */
+.senales tr.fuera .luego b{color:var(--magenta)}
 
 /* El aviso de procedencia. Va arriba y no en letra pequeña al pie: si las
    cifras son hipotéticas, eso se lee antes que las cifras. */
@@ -151,4 +156,60 @@ a{color:var(--cyan)}
   .duo img{max-height:26vh}
   .duo figcaption{font-size:11px}
   .cierre{margin-top:16px;padding:12px 15px}
+  /* La tabla del giro y las listas largas son lo que desborda en un portátil.
+     Ceden interlínea, que se nota poco, antes que filas, que se notan mucho. */
+  .paso{margin-bottom:13px}
+  .senales{margin-top:14px;font-size:13.5px}
+  .senales td{padding-top:7px;padding-bottom:7px}
+  .senales .antes,.senales .luego{font-size:12.5px}
+  .lista{margin-top:18px;gap:9px}
+  .item{padding:11px 15px}
+}
+
+/* Y un portátil chico —1024×640, o cualquier ventana no maximizada— aprieta
+   otro escalón. Lo que cede es el aire entre bloques, nunca el cuerpo del
+   texto: una lámina que hay que desplazar deja de funcionar en una sala. */
+@media (max-height:700px){
+  .paso{margin-bottom:10px}
+  h2{font-size:clamp(24px,3.1vw,36px);margin-bottom:14px}
+  .cifras{margin-top:18px;gap:11px}
+  .cifra{padding:15px 17px}
+  .cifra .n{font-size:clamp(26px,3vw,38px)}
+  .lista{margin-top:14px;gap:7px}
+  .item{padding:9px 14px}
+  .senales{margin-top:12px;font-size:13px}
+  .senales td{padding-top:4px;padding-bottom:4px}
+  .senales .antes,.senales .luego{font-size:12px}
+  .cita{margin-top:16px}
+  .cierre{margin-top:13px;padding:11px 14px}
+  .aviso{margin-top:13px}
+}
+
+/* El `0/10` del muro y demás literales de pantalla: se citan tal cual y tienen
+   que leerse como una etiqueta del producto, no como énfasis del autor. */
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  padding:1px 6px;border-radius:5px;background:rgba(255,255,255,.08);color:var(--tx-hi)
+}
+
+/* ── En un teléfono ───────────────────────────────────────────────────────
+   El deck se presenta en una sala, pero se comparte por un link y se abre en
+   el móvil. Ahí la tabla del giro no cabe en tres columnas: cada señal pasa a
+   ser una tarjeta y las dos lecturas se rotulan, que es lo que la cabecera
+   hacía. Las láminas largas se desplazan; arrastrar no dispara el toque que
+   avanza, así que las dos cosas conviven. */
+@media (max-width:700px){
+  .senales, .senales tbody, .senales tr, .senales td{display:block;width:auto}
+  .senales thead{position:absolute;left:-9999px}
+  .senales{table-layout:auto}
+  .senales tr{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.055)}
+  .senales tr:last-child{border-bottom:0}
+  .senales td{border-bottom:0;padding:0}
+  .senales .sen{font-size:12.5px}
+  .senales .val{margin:3px 0 8px}
+  .senales .antes::before{content:"Sin el censo · ";font-style:normal;letter-spacing:.6px;text-transform:uppercase;font-size:9.5px}
+  .senales .luego{margin-top:6px}
+  .senales .luego::before{content:"Con el catálogo · ";color:var(--tx-lo);letter-spacing:.6px;text-transform:uppercase;font-size:9.5px}
+  .cifra{padding:15px 17px}
+  .item{padding:11px 13px;gap:10px}
 }
