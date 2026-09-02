@@ -21,7 +21,7 @@ El diagnóstico de este mismo trabajo **descartó el perfil**, y con un argument
 > «El 82% nunca lo abre, así que el alcance máximo de cualquier rediseño es el 18% restante — y ese 18% es, por definición, quien ya navega por su cuenta. Una intervención cuyo techo de alcance es la quinta parte de la base no puede mover una métrica que se calcula sobre la base entera.»
 > — [Diagnóstico §1.3](../01-diagnostico/#13-qué-señales-pesaron-y-cuáles-se-descartaron)
 
-Eso no se cae con este anexo, y no voy a fingir que sí. Pero la pregunta que responde este documento es otra, y hay que decir la diferencia con precisión:
+Ese argumento no se cae con este anexo, y el documento no lo pretende. Pero la pregunta que responde es otra, y hay que decir la diferencia con precisión:
 
 | | Pregunta | Respuesta |
 |---|---|---|
@@ -60,7 +60,7 @@ Así que este anexo persigue dos cosas a la vez, y la segunda manda sobre la pri
 
 **2 · La pantalla es de ajustes, no de producto.** De los cinco bloques, cuatro son configuración: notificaciones, idioma, feedback y métodos de login. El único que no lo es —«Historial de monedas»— es una lista de transacciones.
 
-**3 · No está el saldo.** Está el *historial* de monedas, pero no cuántas tienes. El número vive en el encabezado del home y en el muro. La pantalla que se llama «tu perfil» no dice lo único de la economía que el usuario se sabe de memoria.
+**3 · No está el saldo.** Está el *historial* de monedas, pero no cuántas tiene el usuario. El número vive en el encabezado del home y en el muro. La pantalla que se llama «tu perfil» no dice lo único de la economía que el usuario se sabe de memoria.
 
 **4 · «Usuario Anónimo».** La pantalla le dice literalmente al **88% de la base** que no es nadie, con un montón de monedas donde iría su cara. Es la confirmación más directa de la decisión de [§7.5](#75--la-propuesta) de sacar el avatar y el nombre: en este producto, la identidad no es un buen anfitrión de pantalla.
 
@@ -148,7 +148,7 @@ Y explica también por qué el punto rojo no lo arregla: **ya está puesto.** El
 
 ### El principio
 
-> **La pestaña deja de ser un perfil y pasa a ser el libro mayor y la caja fuerte: qué tienes, de dónde salió y cómo no perderlo.** No es donde se gana — se sigue ganando en el player, al terminar un episodio— y eso se dice en la propia pantalla, en su última línea.
+> **La pestaña deja de ser un perfil y pasa a ser el libro mayor y la caja fuerte: qué tiene el usuario, de dónde salió y cómo no perderlo.** No es donde se gana — se sigue ganando en el player, al terminar un episodio— y eso se dice en la propia pantalla, en su última línea.
 
 Eso mantiene en pie la decisión del diagnóstico y a la vez le da a la pestaña el único trabajo que el muro no puede hacer: **el muro aparece cuando el usuario quiere ver; nunca cuando quiere entender.**
 
@@ -166,7 +166,7 @@ El material promocional enseña un **punto rojo** sobre «Perfil». Un punto roj
 
 ### La pantalla, bloque por bloque
 
-El orden **es** el argumento: primero lo que se puede usar, después dónde ibas y qué tienes, y solo al final la cuenta.
+El orden **es** el argumento: primero lo que se puede usar, después dónde iba el usuario y qué tiene, y solo al final la cuenta.
 
 | | Bloque | Por qué ahí | Patrón |
 |---|---|---|---|
@@ -189,13 +189,13 @@ Una propuesta que amputa funciones que el producto ya envió no es un rediseño,
 | Idioma · tres banderas desplegadas | **Fila con su valor** («Idioma · Español»). Ocupaba un cuarto de la pantalla para un ajuste que se toca una vez en la vida |
 | **Historial de monedas** | **Sube al bloque del saldo, traducido**: «De dónde salen tus monedas · llevas 135 monedas · 9 episodios ganados sin pagar». El dato ya existía; lo que faltaba era la traducción, que es la tesis de I1 |
 | ID `50654024` | Se conserva, al pie y en letra chica. Soporte lo necesita; no compite con nada |
-| «Hasta +30 al crear una cuenta» | Se conserva el patrón —bono, no muro— con la cifra cambiada: lo que se pone en juego es **lo tuyo** (5 noches, 45 monedas, 1 comodín), no un bono genérico |
+| «Hasta +30 al crear una cuenta» | Se conserva el patrón —bono, no muro— con la cifra cambiada: lo que se pone en juego es **lo que el usuario ya tiene** (5 noches, 45 monedas, 1 comodín), no un bono genérico |
 
 ### Lo que deliberadamente NO lleva
 
 | Fuera | Por qué |
 |---|---|
-| **Avatar, nombre y foto** | La identidad de esta pantalla es la racha. Un retrato grande arriba es la convención que anuncia «acá se habla de quién eres», y acá se habla de qué tienes. Y no es teoría: el perfil real le dice **«Usuario Anónimo»** al 88% de su base, con un montón de monedas donde iría la cara. Es la pantalla admitiendo que su bloque principal no tiene nada que decirle a nueve de cada diez usuarios |
+| **Avatar, nombre y foto** | La identidad de esta pantalla es la racha. Un retrato grande arriba es la convención que anuncia «acá se habla de quién eres», y esta pantalla habla de qué tiene el usuario. Y no es teoría: el perfil real le dice **«Usuario Anónimo»** al 88% de su base, con un montón de monedas donde iría la cara. Es la pantalla admitiendo que su bloque principal no tiene nada que decirle a nueve de cada diez usuarios |
 | **Ranking, tabla de posiciones, amigos** | Contexto de 11 p.m. a 2 a.m., consumo solitario, un género que carga pudor. Ya descartado en el [diagnóstico §1.3](../01-diagnostico/#13-qué-señales-pesaron-y-cuáles-se-descartaron): acá no motiva, expone |
 | **Insignias y coleccionables** | Nada en las señales indica motivación de coleccionista, y agregan carga a un loop que se opera con una mano |
 | **Check-in / reclamar** | Es la decisión central de toda la intervención: no hay nada que reclamar. Poner un botón de check-in acá sería reintroducir el 19% |
@@ -338,8 +338,8 @@ Entradas es la métrica de la pregunta, no la del problema. Las cuatro que cuent
 
 **Primarias (Idilio)**
 - [`docs/00-dogfooding/evidencia/recompensas-nativo.png`](../00-dogfooding/evidencia/recompensas-nativo.png) — captura dentro de la app: la barra de tres pestañas y el chip de saldo en el encabezado.
-- [`docs/00-dogfooding/evidencia/perfil-nativo-invitado.png`](../00-dogfooding/evidencia/perfil-nativo-invitado.png) y [`perfil-nativo-cuenta.png`](../00-dogfooding/evidencia/perfil-nativo-cuenta.png) — **las dos capturas de la pestaña Perfil**, aportadas el 2-sep-2026. Son la fuente de todo [§7.2](#72--el-perfil-real-de-idilio-las-dos-capturas) y las que obligan a las correcciones de este anexo.
-- [`docs/00-dogfooding/evidencia/home-nativo.jpg`](../00-dogfooding/evidencia/home-nativo.jpg) — **material promocional**, no producto. Sirvió de hipótesis para el punto rojo, que las capturas después confirmaron.
+- [`docs/00-dogfooding/evidencia/perfil-nativo-invitado.png`](../00-dogfooding/evidencia/perfil-nativo-invitado.png) y [`perfil-nativo-cuenta.png`](../00-dogfooding/evidencia/perfil-nativo-cuenta.png) — **las dos capturas de la pestaña Perfil**, aportadas el 2-sep-2026. Son la fuente de todo [§7.2](#72--el-perfil-real-de-idilio-las-dos-capturas).
+- [`docs/00-dogfooding/evidencia/home-nativo.jpg`](../00-dogfooding/evidencia/home-nativo.jpg) — **material promocional**, no producto. No se usa como evidencia.
 
 **Documentación de producto (competencia)**
 - DramaBox · política de privacidad, sección de derechos del usuario — la arquitectura de la pestaña Profile, ruta por ruta: <https://support.dramaboxdb.com/privacy.html>
@@ -352,6 +352,6 @@ Entradas es la métrica de la pregunta, no la del problema. Las cuatro que cuent
 - DramaBox · fuentes de monedas (login diario con escalera, anuncios, ruleta, referidos, logros) y VIP — <https://reelpulse.net/guides/dramabox-coins>
 - Cinco apps de microdrama · agrupación de quejas de reseñas 1–3★, incluidos los saldos perdidos del invitado — <https://unstar.app/blog/reelshort-dramabox-shortmax-goodshort-flextv-short-drama-apps-ranked-2026>
 
-**Lo que no pude verificar**
-- Los perfiles de ReelShort, DramaBox, ShortMax, GoodShort y FlexTV **con sesión iniciada**: sus webs son sitios de SEO con reproductor, sin la pestaña, y no instalé las apps con cuenta. Lo que hay de ellos en §7.3 sale de documentación y teardowns, no de dogfooding.
+**Fuera del alcance de la verificación**
+- Los perfiles de ReelShort, DramaBox, ShortMax, GoodShort y FlexTV **con sesión iniciada**: sus webs son sitios de SEO con reproductor, sin la pestaña, y no hubo acceso a las apps con sesión iniciada. Lo que hay de ellos en §7.3 sale de documentación y teardowns, no de dogfooding.
 - Cualquier tasa de toque de las entradas E1–E5. Ninguna cifra de [§7.6](#76--por-qué-entraría-más-gente-y-cuánta) es una medición: la aritmética es transparente para que cualquiera meta la suya.
