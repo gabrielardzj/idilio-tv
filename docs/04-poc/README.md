@@ -1,7 +1,7 @@
 # 4. El POC
 
 **`/poc`** · React + TypeScript + Vite, sin librerías de UI. CSS propio con tokens (los valores del sistema —colores, tipografías, espacios— con nombre propio).
-**`/mobbin-export`** · 23 pantallas en 8 flujos, capturadas automáticamente de los dos prototipos.
+**`/mobbin-export`** · 27 pantallas en 9 flujos, capturadas automáticamente de los dos prototipos.
 
 ---
 
@@ -11,11 +11,11 @@ El brief acota el alcance a *"la pantalla o el momento donde ocurre la mecánica
 
 | Pantalla | Para qué está |
 |---|---|
-| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, sobre la estructura de la app tal como es hoy: los rieles —las filas horizontales de pósters— en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Un detalle es la propuesta dicha en la navegación: el saldo lleva su traducción a episodios. Y **la pestaña «Recompensas» sigue ahí** — la intervención no muda nada de sitio, y en esa pestaña se quedan las tareas sociales, los referidos y la suscripción. |
+| **Home** | Las 41 series reales con muro, con sus cifras medidas y **sus pósters reales**, sobre la estructura de la app tal como es hoy: los rieles —las filas horizontales de pósters— en el orden real (Estrenos, Seguir viendo, Lo más visto y los géneros, de «Amores Prohibidos» a «Nuestra selección para ti»). Un detalle es la propuesta dicha en la navegación: el saldo lleva su traducción a episodios. Y **la pestaña «Recompensas» sigue ahí** — la intervención no muda nada de sitio, y en esa pestaña se quedan las tareas sociales, los referidos y la suscripción. La tercera sí cambia: se llama **«Tu noche»** y lleva un distintivo con lo que hay dentro («1 pase»), no un punto rojo. El porqué está en [el anexo del perfil](../07-perfil/). |
 | **Ficha de serie** | La pantalla de la app nativa tal como es hoy, capítulo por capítulo: «Volver», «Resumen» con el póster y **la sinopsis real del catálogo**, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima, tres cosas que la ficha real no dice: dónde vas, qué ya viste, y **qué abre el siguiente** —el pase si lo tienes, el precio si no— dicho en la tarjeta donde está el muro. |
 | **Player** (el reproductor) | Se desliza hacia arriba para avanzar y hacia abajo para retroceder, como en el producto. |
 
-Y el muro, con sus trece estados:
+Y el muro y la pestaña, con sus dieciséis estados:
 
 | # | Estado | Qué demuestra |
 |---|---|---|
@@ -32,6 +32,9 @@ Y el muro, con sus trece estados:
 | 11 | Dos pases acumulados (tope) | El anti-FOMO: faltar no cuesta, volver seguido sigue rindiendo más |
 | 12 | Guardar la racha | El prompt de cuenta con las tres cifras en juego |
 | 13 | Mi economía | Fuentes, sumidero y posición, en una sola vista |
+| 14 | Tu noche · sin cuenta | La pestaña para el 88% de la base: el pase, la racha, dónde ibas, el saldo — y qué se pierde si no guarda |
+| 15 | Tu noche · con cuenta | El mismo esqueleto con un bloque distinto, más el calendario de 31 noches que solo una cuenta habilita |
+| 16 | Tu noche · sin pase | La cita de mañana dentro de la pestaña, y el distintivo apagado |
 
 Y tres más en [`web/`](../../web/), sobre el stack real, que son **rutas prerrenderizadas** y no
 estados de un panel: el pase listo, la cita de las 21:30 con «Avísame», y el contador de 42 minutos

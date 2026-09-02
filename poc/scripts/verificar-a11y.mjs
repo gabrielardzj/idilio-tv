@@ -36,6 +36,9 @@ const ESTADOS = [
   ['guardar la racha', '8 · Guardar'],
   ['mi economía', '9 · Mi economía'],
   ['racha rota', '10 · Racha rota'],
+  ['tu noche · invitado', '11 · Sin cuenta'],
+  ['tu noche · con cuenta', '12 · Con cuenta'],
+  ['tu noche · la cita', '13 · Sin pase'],
 ]
 
 const browser = await chromium.launch()
@@ -154,6 +157,30 @@ if (!paginasDoc) {
     console.log(`${r.violations.length ? '✗' : '✓'} doc · ${f.replace('.html', '').padEnd(18)} ${r.passes.length} reglas` +
       r.violations.map((v) => `\n      ${v.id} · ${v.help} · ${v.nodes.length} nodo(s)`).join(''))
   }
+}
+
+// ── La página del anexo del perfil ──────────────────────────────────────
+// Va junto a los documentos y por la misma razón: es una página del sitio, no
+// del prototipo, y `SITIO_DOCS` es lo único que este script recibe del CI. Se
+// audita a DOS anchos porque sus fallos vivían en el estrecho: las tablas se
+// desplazan en horizontal a 390 px, y una región desplazable sin foco no se
+// puede recorrer con teclado — axe lo marca como serio y solo aparece ahí.
+const PERFIL = DOCS ? resolve(DOCS, '..', 'perfil', 'index.html') : null
+if (PERFIL) {
+  for (const ancho of [1280, 390]) {
+    await page.setViewportSize({ width: ancho, height: 1000 })
+    const ok = await page.goto(`file://${PERFIL}`, { waitUntil: 'load' }).then(() => true).catch(() => false)
+    if (!ok) { console.log(`· aviso: no hay ${PERFIL} — no se audita la página del perfil`); break }
+    await page.waitForTimeout(300)
+    await page.addScriptTag({ content: AXE })
+    const r = await page.evaluate(async () => await window.axe.run(document, {
+      runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] },
+    }))
+    total += r.violations.length
+    console.log(`${r.violations.length ? '✗' : '✓'} perfil · ${String(ancho).padEnd(13)} ${r.passes.length} reglas` +
+      r.violations.map((v) => `\n      ${v.id} · ${v.help} · ${v.nodes.length} nodo(s)`).join(''))
+  }
+  await page.setViewportSize({ width: 1280, height: 1000 })
 }
 
 // ── La versión sobre el stack real, si está levantada ────────────────────

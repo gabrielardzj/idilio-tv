@@ -251,7 +251,7 @@ const LAMINAS = [
  <p class="sube">Interactivo, con el catálogo real de 50 series, en dos implementaciones: una de producto y otra sobre el stack verdadero de Idilio —Next.js, Tailwind, Supabase— con el estado económico resuelto en servidor, que es el riesgo técnico número uno.</p>
  <div class="cifras sube">
    <div class="cifra cian"><div class="n">40</div><div class="q">pasos del recorrido, en integración continua</div></div>
-   <div class="cifra"><div class="n">23</div><div class="q">pantallas documentadas en 8 flujos</div></div>
+   <div class="cifra"><div class="n">27</div><div class="q">pantallas documentadas en 9 flujos</div></div>
    <div class="cifra oro"><div class="n">0</div><div class="q">violaciones WCAG en los 11 estados</div></div>
    <div class="cifra viol"><div class="n">67</div><div class="q">fuentes citadas, todas verificadas</div></div>
  </div>

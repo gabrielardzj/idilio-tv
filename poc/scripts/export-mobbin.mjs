@@ -49,7 +49,7 @@ const FLOWS = [
         estado: 'home',
         type: 'Home / Browse', patterns: ['Content rails', 'Continue watching', 'Currency balance'],
         elements: ['Top bar', 'Wallet chip', 'Horizontal rail', 'Poster', 'Progress bar', 'Tab bar'],
-        note: 'La estructura del producto real tal como es hoy, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.',
+        note: 'La estructura del producto real tal como es hoy, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la tercera pestaña se llama «Tu noche» y lleva un distintivo con lo que hay dentro —«1 pase»—, no un punto rojo. «Recompensas» se conserva: el muro real ya trae el anuncio y la suscripción, así que la pestaña queda con las tareas sociales, los referidos y el Pase Idilio.',
         act: async () => {},
       },
       {
@@ -284,6 +284,57 @@ const FLOWS = [
         elements: ['Bottom sheet', 'Balance headline', 'Streak strip', 'Breakdown list', 'Total row'],
         note: 'La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.',
         act: async (p) => { await click(p, '9 · Mi economía') },
+      },
+    ],
+  },
+  {
+    id: 'f8-tu-noche',
+    name: 'Tu noche · la pestaña, en sus dos estados',
+    intent: 'El 82% nunca abre el perfil. Esta pestaña no intenta arreglarlo haciéndose más bonita: cambia qué contiene —el pase, la racha, dónde ibas y el saldo, que hoy están repartidos en tres pantallas— y se llena desde el muro, el acuse y el chip de saldo. La misma pantalla en los dos estados de la base: 88% sin cuenta, 12% con cuenta. El benchmark y el argumento están en docs/07-perfil/.',
+    screens: [
+      {
+        id: '01-invitado', name: 'Sin cuenta · el 88% de la base',
+        estado: 'perfil-invitado',
+        type: 'Account / Profile', patterns: ['Guest-first', 'Wallet', 'Streak', 'Continue watching', 'Loss aversion'],
+        elements: ['Top bar', 'Reward card', 'Streak strip', 'List row', 'Thumbnail', 'Stat tiles', 'Primary button', 'Tab bar', 'Badge'],
+        note: 'No hay avatar, ni nombre, ni foto: la identidad de esta pantalla es la racha. El orden es el argumento — primero lo que se puede usar (el pase), después dónde ibas y qué tienes, y solo al final la cuenta. Pedir el correo arriba convertiría la pestaña en un muro de registro, y este producto no lo tiene: ReelShort da UID de invitado al instante y ofrece monedas por registrarse, incentivo y no requisito.',
+        act: async (p) => { await click(p, '11 · Sin cuenta') },
+      },
+      {
+        id: '02-invitado-guardar', name: 'Sin cuenta · lo que hay en juego',
+        estado: 'perfil-invitado',
+        type: 'Account / Profile', patterns: ['Loss aversion', 'Contextual auth', 'Guest-first'],
+        elements: ['Stat tiles', 'Primary button', 'List row', 'Fine print', 'Tab bar'],
+        note: 'La misma pantalla, abajo. El bloque de la cuenta va en ámbar y no en rojo: es un aviso, no un error — el usuario no hizo nada mal por no registrarse. Y la lista de ajustes trae las dos piezas que no mueven ninguna métrica y que si faltan aparecen en las reseñas de la tienda: iniciar sesión desde otro teléfono y restaurar compras.',
+        act: async (p) => { await p.locator('.perfil-scroll').evaluate((e) => { e.scrollTop = e.scrollHeight }); await p.waitForTimeout(400) },
+      },
+      {
+        id: '03-con-cuenta', name: 'Con cuenta · el 12%',
+        estado: 'perfil-con-cuenta',
+        type: 'Account / Profile', patterns: ['Activity calendar', 'Cross-device sync', 'Wallet', 'Streak'],
+        elements: ['Account chip', 'Calendar heatmap', 'List row', 'Tab bar'],
+        note: 'El mismo esqueleto y el mismo orden; cambia un bloque. Donde el invitado ve qué puede perder, quien tiene cuenta ve que está guardado — y gana lo único que una cuenta habilita de verdad: un registro que sobrevive al teléfono. El calendario de 31 noches es dato de prototipo, y su densidad (13 de 31, 2.9 por semana) se eligió apenas por encima de las 2.3 que hace hoy el usuario promedio: un calendario casi lleno sería una pantalla bonita contando un producto que no existe.',
+        act: async (p) => {
+          await click(p, '12 · Con cuenta')
+          await p.locator('.perfil-scroll').evaluate((e) => { e.scrollTop = e.scrollHeight })
+          await p.waitForTimeout(400)
+        },
+      },
+      {
+        id: '04-sin-pase', name: 'Sin pase · la cita de mañana',
+        estado: 'perfil-invitado',
+        type: 'Account / Profile', patterns: ['Countdown', 'Appointment', 'Opt-in notification', 'Wallet'],
+        elements: ['Top bar', 'Clock time', 'Reminder toggle', 'Streak strip', 'List row', 'Tab bar'],
+        note: 'Gastado el pase, la tarjeta se convierte en la cita —«mañana a las 21:30, tu hora de siempre»— y el interruptor del aviso vive acá, que es el único sitio del producto donde el usuario está mirando su propia noche. Sin pase la pestaña pierde el distintivo: si apareciera igual, dejaría de significar algo en tres días.',
+        // El scroll del contenedor sobrevive al cambio de estado —es la misma
+        // pantalla, React reusa el nodo— así que sin esto la captura sale
+        // donde la dejó la anterior, y esta lámina existe para enseñar la cita,
+        // que está arriba del todo.
+        act: async (p) => {
+          await click(p, '13 · Sin pase')
+          await p.locator('.perfil-scroll').evaluate((e) => { e.scrollTop = 0 })
+          await p.waitForTimeout(300)
+        },
       },
     ],
   },

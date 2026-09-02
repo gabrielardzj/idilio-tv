@@ -1,7 +1,7 @@
 # Export de flujos · Idilio TV
 ### Continuará · Pase de la Noche (propuesta)
 
-23 pantallas · 8 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
+27 pantallas · 9 flujos · iPhone 14 Pro · 390×844 @3x · 2026-08-25
 
 Abre `index.html` para la galería navegable. `manifest.json` tiene la taxonomía completa
 en formato consumible (flujo → pantalla → tipo · patrones · elementos · estado interno del POC).
@@ -24,7 +24,7 @@ El muro no se puede juzgar en el vacío. Hay que llegar a él como se llega de v
 | 3 | [Ficha de serie · la lista de capítulos](flows/f0-llegar-al-muro/02b-serie-capitulos.png) | Detail | Chapter list, Unlock cost, Progress indicator |
 | 4 | [Player · el core loop](flows/f0-llegar-al-muro/03-player.png) | Media player | Vertical video, Swipe navigation, Progress indicator |
 
-**Home · el catálogo** — La estructura del producto real tal como es hoy, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la pestaña «Recompensas» ya no existe — su contenido se mudó al muro, que es donde pasa el 100% de los usuarios.
+**Home · el catálogo** — La estructura del producto real tal como es hoy, con los pósters de verdad del catálogo y los rieles en el orden de la app (Estrenos, Seguir viendo, Lo más visto y los géneros —«Amores Prohibidos», «Venganza Pasional»— hasta «Nuestra selección para ti») y las 41 series con muro del catálogo, con sus cifras medidas. Dos diferencias, y son la propuesta: el chip de saldo lleva su traducción a episodios, y la tercera pestaña se llama «Tu noche» y lleva un distintivo con lo que hay dentro —«1 pase»—, no un punto rojo. «Recompensas» se conserva: el muro real ya trae el anuncio y la suscripción, así que la pestaña queda con las tareas sociales, los referidos y el Pase Idilio.
 
 **Ficha de serie · la progresión visible** — La pantalla es la de la app nativa tal como es hoy, capítulo por capítulo: «Volver», «Resumen» con el póster y la sinopsis real del catálogo, y la lista de «Capítulo N» con la píldora «Interactiva» y el candado. Encima van tres cosas, y son la propuesta: dónde vas —el contador y la barra—, qué ya viste, y qué abre el siguiente, dicho en la tarjeta donde está el muro y no en una letra chica. La ficha real muestra el candado y nunca el precio.
 
@@ -122,7 +122,26 @@ Objetivo de experiencia: que el usuario entienda fuentes, sumideros y su posici�
 
 **De dónde salen mis monedas** — La única superficie que explica la economía completa, y se llega a ella con un toque desde el player — no desde una pestaña.
 
-## Flujo 8 · Sobre el stack real de Idilio
+## Flujo 8 · Tu noche · la pestaña, en sus dos estados
+
+El 82% nunca abre el perfil. Esta pestaña no intenta arreglarlo haciéndose más bonita: cambia qué contiene —el pase, la racha, dónde ibas y el saldo, que hoy están repartidos en tres pantallas— y se llena desde el muro, el acuse y el chip de saldo. La misma pantalla en los dos estados de la base: 88% sin cuenta, 12% con cuenta. El benchmark y el argumento están en docs/07-perfil/.
+
+| # | Pantalla | Tipo | Patrones |
+|---|---|---|---|
+| 1 | [Sin cuenta · el 88% de la base](flows/f8-tu-noche/01-invitado.png) | Account / Profile | Guest-first, Wallet, Streak, Continue watching, Loss aversion |
+| 2 | [Sin cuenta · lo que hay en juego](flows/f8-tu-noche/02-invitado-guardar.png) | Account / Profile | Loss aversion, Contextual auth, Guest-first |
+| 3 | [Con cuenta · el 12%](flows/f8-tu-noche/03-con-cuenta.png) | Account / Profile | Activity calendar, Cross-device sync, Wallet, Streak |
+| 4 | [Sin pase · la cita de mañana](flows/f8-tu-noche/04-sin-pase.png) | Account / Profile | Countdown, Appointment, Opt-in notification, Wallet |
+
+**Sin cuenta · el 88% de la base** — No hay avatar, ni nombre, ni foto: la identidad de esta pantalla es la racha. El orden es el argumento — primero lo que se puede usar (el pase), después dónde ibas y qué tienes, y solo al final la cuenta. Pedir el correo arriba convertiría la pestaña en un muro de registro, y este producto no lo tiene: ReelShort da UID de invitado al instante y ofrece monedas por registrarse, incentivo y no requisito.
+
+**Sin cuenta · lo que hay en juego** — La misma pantalla, abajo. El bloque de la cuenta va en ámbar y no en rojo: es un aviso, no un error — el usuario no hizo nada mal por no registrarse. Y la lista de ajustes trae las dos piezas que no mueven ninguna métrica y que si faltan aparecen en las reseñas de la tienda: iniciar sesión desde otro teléfono y restaurar compras.
+
+**Con cuenta · el 12%** — El mismo esqueleto y el mismo orden; cambia un bloque. Donde el invitado ve qué puede perder, quien tiene cuenta ve que está guardado — y gana lo único que una cuenta habilita de verdad: un registro que sobrevive al teléfono. El calendario de 31 noches es dato de prototipo, y su densidad (13 de 31, 2.9 por semana) se eligió apenas por encima de las 2.3 que hace hoy el usuario promedio: un calendario casi lleno sería una pantalla bonita contando un producto que no existe.
+
+**Sin pase · la cita de mañana** — Gastado el pase, la tarjeta se convierte en la cita —«mañana a las 21:30, tu hora de siempre»— y el interruptor del aviso vive acá, que es el único sitio del producto donde el usuario está mirando su propia noche. Sin pase la pestaña pierde el distintivo: si apareciera igual, dejaría de significar algo en tres días.
+
+## Flujo 9 · Sobre el stack real de Idilio
 
 La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, con los tokens de producción. El estado económico se resuelve en el servidor, que es el riesgo técnico nº 1 de la propuesta.
 
@@ -140,8 +159,8 @@ La misma mecánica implementada en Next.js App Router + Tailwind v4 + Supabase, 
 
 ## Taxonomía
 
-**Tipos de pantalla:** Account / Wallet · Confirmation · Detail · Home / Browse · Media player · Paywall · Selection · Sign up · Store
+**Tipos de pantalla:** Account / Profile · Account / Wallet · Confirmation · Detail · Home / Browse · Media player · Paywall · Selection · Sign up · Store
 
-**Patrones:** Ad-gated unlock · Anti-FOMO · Appointment · Balance spend · Bottom sheet · Chapter list · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Quota translated · Resource cap · Reward claim · Reward reveal · Rewarded ad · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Success state · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video
+**Patrones:** Activity calendar · Ad-gated unlock · Anti-FOMO · Appointment · Balance spend · Bottom sheet · Chapter list · Cliffhanger · Content rails · Contextual auth · Continue watching · Countdown · Cross-content discovery · Cross-device sync · Currency balance · Forgiveness mechanic · Guest-first · IAP packs · Ledger · Loss aversion · Milestone unlock · Non-punitive feedback · Opt-in notification · Progress indicator · Quota translated · Resource cap · Reward claim · Reward reveal · Rewarded ad · Scarcity · Server-rendered state · Silent accrual · Single select · Source-sink model · Streak · Streak advance · Streak protection · Streak reset · Success state · Swipe navigation · Toast · Unit-of-value translation · Unlock cost · Value ladder · Vertical video · Wallet
 
-**Elementos:** Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Chapter list · Chevron · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Icon · Lock · Medal · Notice · Pack list · Poster · Price per unit · Price row · Primary button · Progress bar · Progress label · Quota caption · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip
+**Elementos:** Account chip · Action rail · Badge · Balance caption · Balance headline · Bottom sheet · Breakdown list · Calendar heatmap · Chapter list · Chevron · Clock time · Countdown timer · Fine print · Goal row · Headline · Horizontal rail · Icon · List row · Lock · Medal · Notice · Pack list · Poster · Price per unit · Price row · Primary button · Progress bar · Progress label · Quota caption · Radio list · Reminder toggle · Reward card · Reward lines · Scrubber · Secondary card · Stat tiles · Status row · Streak strip · Synopsis · Tab bar · Text button · Thumbnail · Toast · Top bar · Total row · Video · Wallet chip
