@@ -1,0 +1,328 @@
+/* ═══════════════════════════════════════════════════════════════
+   Anexo · la pestaña del perfil — hoja de la página
+
+   Los tokens son los del producto y los del prototipo, no unos nuevos: la
+   credibilidad de este trabajo descansa en que los colores sean los medidos
+   en la app real. --tx-lo lleva el valor corregido que pasa AA (#8F8896).
+
+   Dos colores viven SOLO acá, y están calculados, no elegidos: --dato-ok y
+   --dato-alto son los rellenos del gráfico. La banda de luminosidad OKLCH
+   para modo oscuro es L 0.48–0.67, y el cian (#3FE0D0, L .822) y el ámbar
+   (#FB923C, L .758) del sistema se salen por arriba: sobre una superficie casi
+   negra brillan tanto que la barra pesa más que el eje. Los de acá son esos
+   mismos matices bajados a la banda, y pasan las cinco comprobaciones
+   —banda, croma, separación bajo daltonismo (ΔE 15.3 protan), suelo de visión
+   normal (23.8) y contraste contra la superficie—.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --ink-1000: #060309;
+  --ink-900:  #0B0710;
+  --ink-800:  #130C1B;
+  --ink-700:  #1C1327;
+
+  --tx-hi:  #F2EBF7;
+  --tx-mid: #B7A9C4;
+  --tx-lo:  #8F8896;
+
+  --violet: #A855F7;
+  --magenta: #E93BC9;
+  --cyan: #3FE0D0;
+  --gold-300: #FFDE8A;
+  --gold-400: #FFC53D;
+  --ok: #4ADE80;
+  --warn: #FB923C;
+
+  --dato-ok:   #27A99B;   /* relleno «defendible» */
+  --dato-alto: #D97706;   /* relleno «por encima de la vara medida» */
+
+  --linea: rgba(255,255,255,.09);
+  --sup: rgba(255,255,255,.032);
+  --r: 16px;
+  --ease: cubic-bezier(.22,1,.36,1);
+  --font: Outfit, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(1100px 720px at 12% -6%, #1B0C2E 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 30%, #10202B 0%, transparent 55%),
+    var(--ink-1000);
+  background-attachment: fixed;
+  color: var(--tx-hi);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+img { display: block; max-width: 100%; }
+a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(63,224,208,.28); }
+a:hover { border-bottom-color: var(--cyan); }
+
+/* ── Navegación ──────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  padding: 11px clamp(16px, 4vw, 48px);
+  background: rgba(6,3,9,.86); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--linea);
+  font-size: 13px;
+}
+.nav .marca { font-weight: 700; letter-spacing: -.3px; margin-right: auto; color: var(--tx-hi); }
+.nav .marca span { color: var(--tx-lo); font-weight: 500; }
+.nav a {
+  padding: 6px 11px; border-radius: 999px; color: var(--tx-mid);
+  border: 1px solid transparent; font-weight: 500;
+}
+.nav a:hover { background: rgba(255,255,255,.06); color: var(--tx-hi); border-color: var(--linea); }
+
+/* ── Estructura ──────────────────────────────────────────────── */
+main { width: min(1120px, 100%); margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px) 120px; }
+section { padding-top: clamp(56px, 8vw, 104px); }
+section + section { border-top: 1px solid var(--linea); margin-top: clamp(56px, 8vw, 104px); }
+
+.kicker {
+  font-size: 11px; letter-spacing: 1.7px; text-transform: uppercase;
+  color: var(--tx-lo); font-weight: 700; margin-bottom: 16px;
+}
+h1 {
+  font-size: clamp(34px, 6vw, 66px); line-height: 1.03; letter-spacing: -2px;
+  font-weight: 800; max-width: 17ch;
+}
+h2 {
+  font-size: clamp(25px, 3.4vw, 40px); line-height: 1.13; letter-spacing: -1.1px;
+  font-weight: 700; max-width: 22ch;
+}
+h3 {
+  font-size: clamp(17px, 1.9vw, 21px); letter-spacing: -.4px; font-weight: 700;
+  margin: 38px 0 14px;
+}
+h2 em, h1 em { font-style: normal; color: var(--gold-300); }
+p { font-size: clamp(15px, 1.35vw, 17px); color: var(--tx-mid); max-width: 68ch; }
+p + p, h2 + p, h3 + p { margin-top: 14px; }
+b, strong { color: var(--tx-hi); font-weight: 600; }
+.sub { margin-top: 20px; font-size: clamp(16px, 1.7vw, 20px); color: var(--tx-mid); max-width: 56ch; }
+.pie { font-size: 12.5px; color: var(--tx-lo); line-height: 1.5; margin-top: 12px; max-width: 74ch; }
+
+/* ── Cifras (KPI row) ────────────────────────────────────────── */
+.cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 34px; }
+.cifra { padding: 20px 22px; border: 1px solid var(--linea); border-radius: var(--r); background: var(--sup); }
+.cifra .n { font-size: clamp(30px, 3.6vw, 44px); font-weight: 800; letter-spacing: -1.7px; line-height: 1; }
+.cifra .q { margin-top: 9px; font-size: 13px; line-height: 1.45; color: var(--tx-lo); }
+.oro .n { color: var(--gold-400) } .cian .n { color: var(--cyan) }
+.viol .n { color: var(--violet) } .mag .n { color: var(--magenta) }
+
+/* ── Capturas ────────────────────────────────────────────────── */
+.pantallas { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(14px, 2.4vw, 30px); margin-top: 30px; }
+figure { margin: 0; display: grid; gap: 11px; justify-items: center; }
+figure img {
+  width: 100%; max-width: 268px; border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.11);
+  background: #000;
+}
+figcaption { font-size: 12.5px; color: var(--tx-lo); text-align: center; line-height: 1.45; max-width: 30ch; }
+/* Solo el PRIMER `b` es el título del pie. Con `figcaption b` a secas,
+   cualquier negrita dentro de la frase se convertía en bloque y partía el pie
+   en tres trozos sueltos. */
+figcaption > b:first-child { display: block; color: var(--tx-hi); font-weight: 600; margin-bottom: 2px; font-size: 13px; }
+figcaption b { color: var(--tx-hi); font-weight: 600; }
+
+/* Una captura de teléfono entera al lado de un párrafo deja media columna de
+   negro. Cuando lo que importa está arriba —el acuse—, se recorta por abajo. */
+figure img.recorte { max-height: 320px; object-fit: cover; object-position: top; }
+
+/* El comparador: antes a la izquierda, después a la derecha, con la etiqueta
+   pegada a la imagen para que nunca se lea al revés. */
+.compara { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 44px); margin-top: 28px; align-items: start; }
+.compara .lado { display: grid; gap: 12px; justify-items: center; }
+.compara .rotulo {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+  padding: 5px 12px; border-radius: 999px; border: 1px solid var(--linea); color: var(--tx-lo);
+}
+.compara .antes .rotulo { border-color: rgba(255,255,255,.14); }
+.compara .despues .rotulo { border-color: rgba(63,224,208,.4); color: var(--cyan); background: rgba(63,224,208,.07); }
+@media (max-width: 720px) { .compara { grid-template-columns: 1fr; } }
+
+/* ── Tablas ──────────────────────────────────────────────────── */
+.tabla-envoltura { overflow-x: auto; margin-top: 26px; border-radius: 6px; }
+/* La región desplazable es enfocable (lo exige axe: sin foco no se puede
+   recorrer con teclado), así que tiene que enseñar dónde está el foco. */
+.tabla-envoltura:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+th {
+  text-align: left; padding: 0 16px 10px 0; font-size: 11px; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--tx-lo); font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,.13); white-space: nowrap;
+}
+td { padding: 13px 16px 13px 0; border-bottom: 1px solid rgba(255,255,255,.055); vertical-align: top; color: var(--tx-mid); line-height: 1.5; }
+tr:last-child td { border-bottom: 0; }
+td b, th b { color: var(--tx-hi); }
+.si { color: var(--ok); font-weight: 600; white-space: nowrap; }
+.no { color: var(--magenta); font-weight: 600; white-space: nowrap; }
+.medias { color: var(--warn); font-weight: 600; white-space: nowrap; }
+tr.destaca td { background: rgba(255,197,61,.055); }
+
+/* ── Listas de bloques ───────────────────────────────────────── */
+.bloques { display: grid; gap: 11px; margin-top: 26px; }
+.bloque {
+  display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+  padding: 17px 20px; border: 1px solid var(--linea); border-radius: var(--r); background: var(--sup);
+}
+.bloque .k { font-size: 13px; font-weight: 800; color: var(--cyan); letter-spacing: .5px; padding-top: 1px; }
+.bloque .v { font-size: 14.5px; line-height: 1.55; color: var(--tx-mid); }
+.bloque .v b { display: block; color: var(--tx-hi); font-weight: 600; margin-bottom: 3px; font-size: 15px; }
+.bloque.oro { border-color: rgba(255,197,61,.34); background: rgba(255,197,61,.055); }
+.bloque.oro .k { color: var(--gold-400); }
+
+/* ── Avisos y correcciones ───────────────────────────────────── */
+.aviso {
+  margin-top: 26px; padding: 18px 22px; border-radius: var(--r);
+  border: 1px solid rgba(233,59,201,.32); background: rgba(233,59,201,.06);
+}
+.aviso p { color: var(--tx-mid); max-width: none; font-size: 14.5px; }
+.aviso .t { color: var(--magenta); font-weight: 700; }
+.nota {
+  margin-top: 26px; padding: 18px 22px; border-radius: var(--r);
+  border: 1px solid var(--linea); background: var(--sup);
+}
+.nota p { max-width: none; font-size: 14.5px; }
+.cita { border-left: 2px solid var(--violet); padding: 3px 0 3px 18px; margin-top: 24px; }
+.cita p { color: var(--tx-lo); font-size: 15px; font-style: italic; }
+
+/* ── La fórmula ──────────────────────────────────────────────── */
+.formula {
+  margin-top: 28px; padding: 26px; border-radius: var(--r);
+  border: 1px solid var(--linea); background: var(--ink-900);
+  text-align: center;
+}
+.formula code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(15px, 2.1vw, 22px); color: var(--tx-hi); letter-spacing: -.2px;
+}
+.formula code em { font-style: normal; color: var(--gold-300); }
+.formula .leyenda { margin-top: 14px; font-size: 13px; color: var(--tx-lo); }
+
+/* ── El gráfico ──────────────────────────────────────────────── */
+.grafico {
+  margin-top: 30px; padding: clamp(18px, 3vw, 30px);
+  border: 1px solid var(--linea); border-radius: var(--r); background: var(--ink-900);
+  position: relative;
+  /* El ancho de la columna del eje vive en una variable porque lo usan DOS
+     cosas que tienen que coincidir al píxel: las filas y el rótulo de la vara.
+     Con `minmax()` no coincidían — la columna se resolvía a un ancho que el
+     rótulo no podía conocer, y la línea de referencia quedaba corrida respecto
+     de las barras que tiene que cortar. */
+  --eje: 108px;
+  --vara: 31.7%;   /* 19 ÷ 60, el máximo del eje */
+}
+.grafico .titulo { font-size: 16px; font-weight: 700; letter-spacing: -.3px; }
+.grafico .bajada { font-size: 13px; color: var(--tx-lo); margin-top: 5px; max-width: 60ch; }
+.leyenda-grafico { display: flex; flex-wrap: wrap; gap: 18px; margin: 20px 0 6px; font-size: 12.5px; color: var(--tx-mid); }
+.leyenda-grafico span { display: inline-flex; align-items: center; gap: 7px; }
+.leyenda-grafico i { width: 11px; height: 11px; border-radius: 3px; display: block; }
+/* La muestra de la línea de referencia se dibuja, no se escribe: un carácter
+   de guion discontinuo depende de que la tipografía lo traiga, y Outfit no. */
+.leyenda-grafico i.muestra-vara {
+  width: 18px; height: 0; border-radius: 0;
+  border-top: 2px dashed rgba(255,255,255,.5);
+}
+.leyenda-grafico .marca { font-weight: 700; }
+
+.barras { display: grid; gap: 3px; margin-top: 14px; }
+.fila-b {
+  display: grid; grid-template-columns: var(--eje) 1fr; gap: 14px; align-items: center;
+  padding: 7px 0; border-radius: 8px;
+}
+.fila-b:hover { background: rgba(255,255,255,.035); }
+.fila-b .eje { font-size: 13px; color: var(--tx-mid); text-align: right; font-variant-numeric: tabular-nums; }
+.fila-b .eje small { display: block; font-size: 11px; color: var(--tx-lo); }
+.pista { position: relative; height: 26px; }
+/* La vara se dibuja dentro de cada pista y no como una capa suelta encima: así
+   no puede desalinearse del área de barras, y cada fila enseña por sí sola si
+   cruza o no cruza. */
+.pista::after {
+  /* -10px y no -7px: el hueco entre filas mide 20px (7 de relleno + 3 de
+     separación, por dos), y con -7 la línea salía a trozos. */
+  content: ''; position: absolute; left: var(--vara); top: -10px; bottom: -10px;
+  border-left: 2px dashed rgba(255,255,255,.34); pointer-events: none;
+}
+.pista .barra {
+  position: absolute; left: 0; top: 3px; height: 20px; width: var(--w);
+  border-radius: 0 4px 4px 0;      /* extremo del dato redondeado, base anclada */
+  transition: width .7s var(--ease);
+}
+/* Las barras crecen al entrar en pantalla. Antes de eso miden cero, así que el
+   lector ve el movimiento y no un salto. Con movimiento reducido, la regla del
+   final apaga la transición y la barra aparece ya medida. */
+.grafico:not(.listo) .pista .barra { width: 0; }
+/* Por encima de la vara: la cifra del 30% cae justo sobre la línea, y una
+   línea cruzándole el glifo se lee como tachado. */
+.pista .valor {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  font-size: 12.5px; font-weight: 700; color: var(--tx-hi);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+/* El estado nunca va solo en el color: el glifo ✔/✗ acompaña siempre, y la
+   palabra aparece cuando hay sitio para ella. */
+.pista .estado { font-size: 11px; font-weight: 700; margin-left: 7px; }
+.solo-ancho { display: none; font-weight: 600; }
+@media (min-width: 900px) { .solo-ancho { display: inline; } }
+.pista .estado.ok { color: var(--dato-ok); }
+.pista .estado.alto { color: var(--warn); }
+
+/* La vara: la línea de referencia del 19% medido. Va por encima de las barras
+   y con su rótulo arriba, fuera del área de las barras, para no taparlas. */
+.vara-rotulo {
+  position: absolute; top: -2px; transform: translateX(-50%);
+  font-size: 11px; color: var(--tx-hi); background: var(--ink-800);
+  border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 3px 9px; white-space: nowrap;
+}
+.capa-vara { position: relative; height: 24px; margin-left: calc(var(--eje) + 14px); }
+@media (max-width: 620px) { .grafico { --eje: 80px; } .fila-b .eje { font-size: 12px; } }
+
+.tabla-datos { margin-top: 22px; }
+.tabla-datos summary {
+  cursor: pointer; font-size: 13px; color: var(--tx-lo); padding: 8px 0;
+  list-style: none; display: inline-flex; align-items: center; gap: 7px;
+}
+.tabla-datos summary::-webkit-details-marker { display: none; }
+.tabla-datos summary::before { content: '▸'; transition: transform .2s var(--ease); }
+.tabla-datos[open] summary::before { transform: rotate(90deg); }
+.tabla-datos table { min-width: 0; }
+
+/* El tooltip del gráfico. Sigue al puntero dentro de la tarjeta. */
+#tip {
+  position: absolute; z-index: 10; pointer-events: none; opacity: 0;
+  transform: translate(-50%, -112%); transition: opacity .14s var(--ease);
+  background: var(--ink-700); border: 1px solid rgba(255,255,255,.16);
+  border-radius: 10px; padding: 9px 12px; font-size: 12.5px; line-height: 1.5;
+  color: var(--tx-mid); max-width: 260px; box-shadow: 0 16px 40px -16px #000;
+}
+#tip b { display: block; color: var(--tx-hi); font-size: 13px; margin-bottom: 2px; }
+#tip.visible { opacity: 1; }
+
+/* ── Cierre ──────────────────────────────────────────────────── */
+.enlaces { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 30px; }
+.enlaces a {
+  display: block; padding: 18px 20px; border: 1px solid var(--linea); border-radius: var(--r);
+  background: var(--sup); border-bottom: 1px solid var(--linea); color: var(--tx-hi);
+}
+.enlaces a:hover { border-color: rgba(63,224,208,.4); background: rgba(63,224,208,.06); }
+.enlaces a b { display: block; font-weight: 600; font-size: 15px; }
+.enlaces a span { display: block; margin-top: 4px; font-size: 12.5px; color: var(--tx-lo); }
+
+.fuentes { margin-top: 26px; font-size: 13.5px; color: var(--tx-lo); }
+.fuentes li { margin-bottom: 9px; margin-left: 18px; line-height: 1.55; }
+
+footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--linea); font-size: 12.5px; color: var(--tx-lo); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Solo para lectores de pantalla. */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}

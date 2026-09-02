@@ -16,7 +16,8 @@
     "acreditacion": "node scripts/acreditacion.mjs",
     "enlaces": "node scripts/verificar-enlaces.mjs",
     "fuentes": "node scripts/verificar-fuentes.mjs",
-    "a11y": "node scripts/verificar-a11y.mjs"
+    "a11y": "node scripts/verificar-a11y.mjs",
+    "perfil": "node scripts/publicar-perfil.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",
