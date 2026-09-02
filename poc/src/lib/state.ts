@@ -14,6 +14,7 @@ export type Sheet =
 /** Dónde está el usuario. El POC deja de ser una pantalla y pasa a ser una app. */
 export type Pantalla =
   | { en: 'home' }
+  | { en: 'perfil' }
   | { en: 'serie'; id: string }
   | { en: 'player' }
 
@@ -288,6 +289,7 @@ export function stateName(s: State, sheet: Sheet): string {
     case 'unlocked': return `unlocked-via-${sheet.via}`
     default:
       return s.pantalla.en === 'home' ? 'home'
+           : s.pantalla.en === 'perfil' ? (s.hasAccount ? 'perfil-con-cuenta' : 'perfil-invitado')
            : s.pantalla.en === 'serie' ? 'serie-detalle'
            : 'player-free'
   }

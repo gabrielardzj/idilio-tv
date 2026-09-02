@@ -5,6 +5,7 @@ import { enCurso, type State } from '../lib/state'
 import { posterStyle } from '../lib/frame'
 import { arteDe, portada, semilla } from '../lib/portada'
 import { Coin, Logo } from './Icons'
+import { TabBar, type Tab } from './TabBar'
 
 /**
  * Home.
@@ -19,12 +20,14 @@ import { Coin, Logo } from './Icons'
  * selección) y la flecha de arrastre asomando en el borde derecho.
  *
  * Una sola cosa se aparta de la app, y ES la propuesta: el chip de saldo lleva
- * su traducción a episodios. La navegación queda igual —tres pestañas— porque
- * la intervención no muda nada de sitio: reordena el muro.
+ * su traducción a episodios. La navegación sigue siendo de tres pestañas —la
+ * intervención no muda nada de sitio: reordena el muro—; lo que cambia es la
+ * tercera, que se llama «Tu noche» y lleva distintivo. El porqué está en
+ * `Perfil.tsx` y en `docs/07-perfil/`.
  */
 export function Home({
-  state, onSerie, onWallet,
-}: { state: State; onSerie: (id: string) => void; onWallet: () => void }) {
+  state, onSerie, onWallet, onIr,
+}: { state: State; onSerie: (id: string) => void; onWallet: () => void; onIr: (t: Tab) => void }) {
   const siguiendo = enCurso(state)
   // Estrenos y Lo más visto repiten series que ya están en curso, igual que en
   // la app: un riel es una vitrina, no una partición del catálogo.
@@ -67,21 +70,16 @@ export function Home({
           desmintió esa premisa —ya tiene el anuncio y la suscripción— y el
           diseño (D8) dice que en la pestaña se quedan las tareas sociales, los
           referidos y la suscripción. Borrarla haría que el prototipo propusiera
-          quitar algo que la propuesta conserva. */}
-      <nav className="tabbar" aria-label="Navegación principal">
-        <span className="tab on"><Icono d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8.5Z" /> Inicio</span>
-        <span className="tab"><Icono d="M12 8v13H4a1 1 0 0 1-1-1V8m9 0v13h8a1 1 0 0 0 1-1V8M2 8h20v-.5a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1V8Zm10 0V5m0 0a2.5 2.5 0 1 1 2.5-2.5M12 5a2.5 2.5 0 1 0-2.5-2.5" /> Recompensas</span>
-        <span className="tab"><Icono d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5a7.5 7.5 0 0 1 15 0" /> Perfil</span>
-      </nav>
+          quitar algo que la propuesta conserva.
+
+          La tercera pestaña sí cambia, y es la propuesta de `Perfil.tsx`: se
+          llama «Tu noche» y lleva un distintivo con los pases. Ver ahí el
+          porqué. La barra vive en `TabBar.tsx` porque ahora la comparten dos
+          pantallas. */}
+      <TabBar activa="inicio" onIr={onIr} pases={state.passes} />
     </div>
   )
 }
-
-const Icono = ({ d }: { d: string }) => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d={d} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
 
 function Riel({
   titulo, series, state, onSerie, continuar,

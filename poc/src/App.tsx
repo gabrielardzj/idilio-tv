@@ -4,6 +4,8 @@ import { Home } from './components/Home'
 import { Player } from './components/Player'
 import { Serie } from './components/Serie'
 import { Wall } from './components/Wall'
+import { Perfil } from './components/Perfil'
+import type { Tab } from './components/TabBar'
 import { AccountPrompt, Celebrate, PassChoice, Store, StreakSheet } from './components/Sheets'
 import { Coin, Logo } from './components/Icons'
 import { enCurso, serieDe } from './lib/state'
@@ -34,7 +36,7 @@ const claveHoja = (s: Sheet) => s.kind
 
 /** Profundidad de la navegación: el home está en la superficie y el player
  *  es lo más adentro que se llega. De ahí sale el sentido del movimiento. */
-const HONDURA: Record<Pantalla['en'], number> = { home: 0, serie: 1, player: 2 }
+const HONDURA: Record<Pantalla['en'], number> = { home: 0, perfil: 1, serie: 2, player: 3 }
 
 /**
  * Hacia dónde va la transición. Es lo que vuelve legible una navegación:
@@ -173,6 +175,13 @@ export default function App() {
     else claim(state.seriesId)
   }
 
+  /** Cambiar de pestaña. «Recompensas» está fuera del alcance del POC y su
+   *  botón va deshabilitado, así que acá no puede llegar. */
+  const irA = (t: Tab) => {
+    if (t === 'recompensas') return
+    dispatch({ t: 'ir', a: { en: t === 'perfil' ? 'perfil' : 'home' } })
+  }
+
   const closeCelebrate = () => {
     dispatch({ t: 'close' })
     // El prompt de cuenta aparece una sola vez: cuando ya hay racha + saldo.
@@ -206,6 +215,19 @@ export default function App() {
                 state={state}
                 onSerie={(sid) => dispatch({ t: 'verSerie', id: sid })}
                 onWallet={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+                onIr={irA}
+              />
+            )}
+            {valor.en === 'perfil' && (
+              <Perfil
+                state={state}
+                onIr={irA}
+                onSerie={(sid) => dispatch({ t: 'verSerie', id: sid })}
+                onUsarPase={openPass}
+                onAnuncio={() => dispatch({ t: 'verAnuncio' })}
+                onDetalle={() => dispatch({ t: 'open', sheet: { kind: 'streak' } })}
+                onCrearCuenta={() => dispatch({ t: 'createAccount' })}
+                onRemind={() => dispatch({ t: 'toggleRemind' })}
               />
             )}
             {valor.en === 'serie' && (
@@ -232,8 +254,17 @@ export default function App() {
             el episodio, se acredita la noche y acto seguido se abre el muro— el
             toast taparía el encabezado, y además sobra: la tira de racha de la
             hoja ya dice lo mismo, y con más detalle. */}
+        {/* El acuse es tocable, y esa es la segunda entrada al perfil (E2 en
+            `docs/07-perfil/`). Es el instante en que el usuario acaba de ganar
+            algo: el único momento del recorrido en que la pregunta «¿cuánto
+            llevo?» aparece sola. Un toast que no lleva a ningún lado deja esa
+            pregunta sin respuesta y obliga a ir a buscarla, que es exactamente
+            lo que el 82% no hace. */}
         {state.toast && sheet.kind === 'none' && (
-          <div className="toast"><Coin s={16} /> {state.toast}</div>
+          <button className="toast" onClick={() => irA('perfil')}>
+            <Coin s={16} /> {state.toast}
+            <span className="toast-cta">Ver tu noche</span>
+          </button>
         )}
 
         {/* El velo se pinta mientras haya alguna hoja viva —incluida la que se
@@ -279,7 +310,13 @@ export default function App() {
             {valor.kind === 'account' && (
               <AccountPrompt state={state} onCreate={() => dispatch({ t: 'createAccount' })} onSkip={() => dispatch({ t: 'dismissAccount' })} />
             )}
-            {valor.kind === 'streak' && <StreakSheet state={state} onClose={() => dispatch({ t: 'close' })} />}
+            {valor.kind === 'streak' && (
+              <StreakSheet
+                state={state}
+                onClose={() => dispatch({ t: 'close' })}
+                onPerfil={() => { dispatch({ t: 'close' }); irA('perfil') }}
+              />
+            )}
           </div>
         ))}
       </main>
@@ -335,7 +372,12 @@ function Director({
         <a href="./docs/poc.html"><b>4 · Este POC, explicado</b><span>25%</span></a>
         <a href="./docs/diseno.html"><b>Sistema y archivo de diseño</b><span>Figma · Pen</span></a>
         <a href="./flujos/"><b>Los flujos, pantalla a pantalla</b><span>export</span></a>
+        <a href="./perfil/"><b>La pestaña del perfil</b><span>antes y después</span></a>
         <a href="./stack/"><b>Sobre el stack real de Idilio</b><span>Next.js</span></a>
+        {/* Monetización no la pidió el brief: sale de una pregunta posterior
+            sobre el mismo material —cómo gana plata Idilio—. Va al final y dicha
+            como lo que es, para que nadie la cuente como un quinto entregable. */}
+        <a href="./docs/monetizacion.html"><b>Monetización</b><span>fuera del reto</span></a>
       </div>
 
       <div className="grp">
@@ -381,6 +423,35 @@ function Director({
         <button className={state.streakJustBroke ? 'on' : ''}
           onClick={() => go({ nights: 0, shields: 0, shieldJustUsed: false, streakJustBroke: true, passes: 1, balance: 0 }, { kind: 'unlock' })}>
           10 · Racha rota (sin comodín)
+        </button>
+      </div>
+
+      {/* La pestaña del perfil. Va en su propio grupo y no dentro del recorrido
+          porque no es un paso del loop: es la otra pantalla del producto, y las
+          dos versiones se juzgan comparándolas. El benchmark y el argumento
+          están en `docs/07-perfil/`. */}
+      <div className="grp">
+        <h2>Tu noche · la pestaña</h2>
+        <button className={state.pantalla.en === 'perfil' && !state.hasAccount ? 'on' : ''}
+          onClick={() => {
+            dispatch({ t: 'devSetState', patch: { hasAccount: false, nights: 5, shields: 1, balance: 45, passes: 1, passesUsed: 2, anunciosHoy: 2, pantalla: { en: 'perfil' } } })
+            dispatch({ t: 'close' })
+          }}>
+          11 · Sin cuenta (88% de la base)
+        </button>
+        <button className={state.pantalla.en === 'perfil' && state.hasAccount ? 'on' : ''}
+          onClick={() => {
+            dispatch({ t: 'devSetState', patch: { hasAccount: true, nights: 5, shields: 1, balance: 45, passes: 1, passesUsed: 2, anunciosHoy: 2, pantalla: { en: 'perfil' } } })
+            dispatch({ t: 'close' })
+          }}>
+          12 · Con cuenta (12%)
+        </button>
+        <button className={state.pantalla.en === 'perfil' && state.passes === 0 ? 'on' : ''}
+          onClick={() => {
+            dispatch({ t: 'devSetState', patch: { hasAccount: false, nights: 5, shields: 1, balance: 0, passes: 0, passesUsed: 3, anunciosHoy: 0, passNextAt: proximaCita(state.now), pantalla: { en: 'perfil' } } })
+            dispatch({ t: 'close' })
+          }}>
+          13 · Sin pase · la cita de mañana
         </button>
       </div>
 

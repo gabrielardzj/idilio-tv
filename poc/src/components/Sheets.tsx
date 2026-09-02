@@ -204,7 +204,9 @@ export function AccountPrompt({
 }
 
 /* ═══ Detalle de racha (desde el chip de saldo) ═══════════════ */
-export function StreakSheet({ state, onClose }: { state: State; onClose: () => void }) {
+export function StreakSheet({
+  state, onClose, onPerfil,
+}: { state: State; onClose: () => void; onPerfil?: () => void }) {
   // Todo lo de esta pantalla se cuenta dentro de la vuelta de 7 noches, que es
   // el ciclo de la escalera. Y el total es la SUMA DE LO QUE LISTA: antes valía
   // los pases por `nights` mientras la línea de arriba decía otra cosa, así que
@@ -254,6 +256,16 @@ export function StreakSheet({ state, onClose }: { state: State; onClose: () => v
           <b style={{ color: 'var(--gold-300)' }}>{earned} monedas · {toEpisodes(earned)} eps</b>
         </div>
       </div>
+
+      {/* La tercera entrada al perfil (E3 en `docs/07-perfil/`). Esta hoja sale
+          del chip de saldo, o sea de alguien que ya vino a preguntar por su
+          economía: es el usuario con más intención de todo el recorrido, y
+          hasta ahora la conversación terminaba acá. */}
+      {onPerfil && (
+        <button className="btn btn-ghost" style={{ marginTop: 14 }} onClick={onPerfil}>
+          Ver tu noche completa
+        </button>
+      )}
     </div>
   )
 }

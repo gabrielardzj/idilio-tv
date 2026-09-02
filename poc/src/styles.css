@@ -640,6 +640,18 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
     transition-duration: .01ms !important;
     transition-delay: 0ms !important;
   }
+
+  /* Excepción, y no es un capricho: el acuse de la noche lo desmonta `App`
+     a los 2,6 s, así que su animación de salida es decorativa. La regla de
+     arriba le colapsa el retardo de 2,3 s a cero y el `forwards` lo deja en
+     opacidad 0 desde el primer fotograma — o sea que con movimiento reducido
+     el acuse NO SE VEÍA NUNCA. Es el único momento en que el metajuego
+     aparece dentro del player, y para ese usuario no existía.
+     Se descubrió mirando la captura `01b-acuse-de-la-noche` del export, que
+     lleva por nombre «El acuse de la noche» y enseñaba un player vacío: el
+     export corre con `reducedMotion: 'reduce'`, así que reproducía el fallo
+     y nadie lo leyó como fallo. */
+  .toast { animation: none !important; }
 }
 
 /* Próximo pase: la hora del reloj es el héroe, el countdown es apoyo */
@@ -927,3 +939,129 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 @keyframes cedeAlFondo    { to   { opacity: 0; transform: scale(.965) } }
 @keyframes vuelveDelFondo { from { opacity: 0; transform: scale(1.03) } }
 @keyframes saleAbajo      { to   { opacity: 0; transform: translateY(38px) } }
+
+/* ═══ «Tu noche» — la pestaña que hoy es «Perfil» ══════════════
+   El argumento completo está en `docs/07-perfil/`. Lo que hay que saber para
+   leer estas reglas: la pantalla NO es un perfil de identidad —no hay avatar,
+   no hay nombre, no hay foto— sino un libro mayor. Por eso no hay ni una
+   superficie circular en todo el archivo de esta sección: el círculo grande
+   arriba a la izquierda es la convención que anuncia «acá se habla de quién
+   eres», y esta pantalla habla de qué tienes.
+   ═════════════════════════════════════════════════════════════ */
+.perfil { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--ink-1000); }
+
+.perfil-top {
+  flex-shrink: 0; padding: 52px var(--sp-4) var(--sp-3);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-3);
+}
+.perfil-top h1 { font-size: 25px; font-weight: 700; letter-spacing: -.7px; }
+.perfil-top p { font-size: 11.5px; color: var(--tx-lo); margin-top: 2px; }
+
+/* La cuenta se dice en un chip pequeño y frío, no en una cabecera con avatar:
+   quien ya guardó no necesita que se lo celebren cada vez que entra. */
+.cuenta-chip {
+  display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0;
+  padding: 5px 10px; border-radius: var(--r-full);
+  background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.26);
+  font-size: 11px; font-weight: 600; color: var(--ok);
+}
+
+.perfil-scroll { flex: 1; overflow-y: auto; padding: 0 var(--sp-4) 84px; }
+.perfil-scroll::-webkit-scrollbar { width: 0 }
+.perfil-scroll > .pass, .perfil-scroll > .streak { margin-bottom: var(--sp-4); }
+.perfil-scroll .sect-label { margin-top: var(--sp-5); }
+
+.perfil-card {
+  background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r-md); padding: var(--sp-4);
+}
+
+/* Una fila de la tarjeta. Las filas se separan con una línea y no con un hueco:
+   el hueco haría que cada fila pareciera una tarjeta suelta, y lo que hay acá
+   es una lista. */
+.fila, .fila-serie {
+  display: flex; align-items: center; gap: var(--sp-3); width: 100%; text-align: left;
+  padding: var(--sp-3) 0; color: var(--tx-hi);
+  transition: opacity var(--t-1) var(--ease);
+}
+.fila + .fila, .fila-serie + .fila-serie, .saldo + .fila { border-top: 1px solid rgba(255,255,255,.07); }
+.fila:first-child, .fila-serie:first-child { padding-top: 0; }
+.fila:last-child, .fila-serie:last-child { padding-bottom: 0; }
+.fila:active, .fila-serie:active { opacity: .6; transition-duration: 90ms; }
+.fila:disabled { opacity: .45; }
+.fila-body { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.fila-body b { font-size: 14px; font-weight: 600; letter-spacing: -.2px; }
+.fila-body .next { font-size: 12.5px; color: var(--gold-300); font-weight: 600; }
+.fila-body .prog { font-size: 11.5px; color: var(--tx-lo); line-height: 1.4; }
+.fila-serie .thumb { width: 44px; height: 59px; border-radius: 8px; flex-shrink: 0; background-size: cover; background-position: center; }
+.fila svg, .fila-serie svg { color: var(--tx-lo); flex-shrink: 0; }
+
+.saldo { display: flex; align-items: center; gap: var(--sp-3); padding-bottom: var(--sp-3); }
+.saldo b { display: block; font-size: 19px; font-weight: 700; letter-spacing: -.4px; color: var(--gold-300); }
+.saldo span { font-size: 11.5px; color: var(--tx-lo); }
+
+/* El bloque del invitado. Ámbar y no rojo: es un aviso, no un error — el
+   usuario no hizo nada mal, y la pantalla no debe regañarlo por no haberse
+   registrado. */
+.perfil-card.riesgo { background: rgba(251,146,60,.06); border-color: rgba(251,146,60,.26); }
+.riesgo-t { font-size: 13px; color: var(--tx-mid); line-height: 1.5; }
+.riesgo-t b { color: var(--tx-hi); font-weight: 700; }
+.riesgo .stakes { margin: var(--sp-4) 0; }
+.riesgo-p { font-size: 11.5px; color: var(--tx-lo); text-align: center; margin-top: 10px; }
+
+.guardado { display: flex; gap: 9px; align-items: flex-start; padding-bottom: var(--sp-4); }
+.guardado svg { color: var(--ok); flex-shrink: 0; margin-top: 2px; }
+.guardado p { font-size: 12.5px; color: var(--tx-mid); line-height: 1.45; }
+.guardado p b { color: var(--tx-hi); font-weight: 700; }
+
+/* El calendario de noches. Es lo único que la cuenta habilita, así que va
+   dentro de su tarjeta y no en una sección propia: si viviera aparte, el
+   invitado no vería qué está comprando con su correo. */
+.historial { border-top: 1px solid rgba(255,255,255,.07); padding-top: var(--sp-4); }
+.historial-h { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 11px; }
+.historial-h b { font-size: 13.5px; font-weight: 700; }
+.historial-h span { font-size: 11.5px; color: var(--tx-lo); }
+.historial-grid { display: grid; grid-template-columns: repeat(11, 1fr); gap: 5px; }
+.historial-grid i {
+  aspect-ratio: 1; border-radius: 3px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.05);
+}
+.historial-grid i.on { background: rgba(63,224,208,.5); border-color: rgba(63,224,208,.6); }
+.historial-p { display: flex; gap: 7px; align-items: center; font-size: 12px; color: var(--tx-mid); margin-top: 11px; line-height: 1.4; }
+.historial-p svg { flex-shrink: 0; }
+
+.perfil-nota { font-size: 11px; color: var(--tx-lo); text-align: center; line-height: 1.55; padding: var(--sp-5) var(--sp-3) 0; }
+
+/* ── El distintivo de la pestaña ───────────────────────────────
+   Lleva texto y no un punto. Un punto rojo dice «hay algo» y se aprende a
+   ignorar en una semana; «1 pase» dice qué hay, y en la unidad de la propuesta.
+   Va anclado al icono y no a la pestaña entera para que no se mueva cuando el
+   texto de abajo cambie de ancho. */
+.tab-i { position: relative; display: grid; place-items: center; }
+.tab-badge {
+  position: absolute; left: 50%; bottom: calc(100% - 6px); transform: translateX(-40%);
+  padding: 2px 6px; border-radius: var(--r-full); white-space: nowrap;
+  background: linear-gradient(180deg, var(--gold-400), var(--gold-500)); color: #2A1A02;
+  font-size: 9.5px; font-weight: 700; letter-spacing: -.1px;
+  box-shadow: 0 4px 12px -4px var(--gold-shadow);
+}
+.tab:disabled { opacity: .5; cursor: default; }
+
+/* El acuse lleva a la pestaña, así que tiene que parecer tocable. */
+.toast-cta {
+  font-size: 11px; font-weight: 700; color: var(--cyan);
+  padding-left: 9px; margin-left: 3px; border-left: 1px solid rgba(255,255,255,.14);
+}
+
+/* El contador de las filas de ajustes. Es el distintivo que el perfil real ya
+   usa en «Notificaciones», y se conserva: la propuesta no discute que ahí un
+   número esté bien puesto — discute el punto rojo de la PESTAÑA, que no dice
+   qué hay detrás. */
+.pip {
+  min-width: 20px; height: 20px; padding: 0 6px; border-radius: var(--r-full);
+  display: grid; place-items: center; flex-shrink: 0;
+  background: #E5484D; color: #fff; font-size: 11.5px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.fila .prog + svg { margin-left: 2px; }
+.perfil-id { font-size: 10.5px; color: rgba(143,136,150,.7); letter-spacing: .3px; }
