@@ -10,8 +10,7 @@
 > 3. **Secundaria** — prensa de industria y teardowns públicos, con su enlace en [§7.9](#79--fuentes).
 >
 > **Lo que sigue faltando:** los perfiles de ReelShort y DramaBox **con sesión iniciada**. Las webs de esas apps (`reelshort.com`, `goodshort.com`) son sitios de SEO con reproductor, no la app: no tienen la pestaña. Lo que hay de ellas sale de documentación y teardowns.
->
-> > **Corrección, y es grande.** La primera versión de este anexo se escribió **sin haber visto el perfil de Idilio**, y lo decía: «describe el vacío alrededor de la pantalla, no la pantalla». El 2-sep-2026 el usuario aportó **las dos capturas reales** —invitado y con cuenta— y con ellas dos afirmaciones de este documento se caen y una se confirma. Van marcadas donde corresponde, en [§7.2](#72--el-perfil-real-de-idilio-las-dos-capturas) y [§7.4](#74--los-cinco-patrones-y-el-contrapatrón-de-idilio). Lo que **no** cambia es la propuesta: la evidencia la reordenó y la hizo más exigente, no la desmintió.
+
 
 ---
 
@@ -57,7 +56,7 @@ Así que este anexo persigue dos cosas a la vez, y la segunda manda sobre la pri
 
 ### Los cinco hallazgos
 
-**1 · El punto rojo existe, y es el hallazgo que más pesa.** Estaba anotado en este anexo como hipótesis sacada de material promocional. **Es real**, y además el producto usa un distintivo numérico bien puesto en «Notificaciones (2)». O sea: **Idilio ya probó el mecanismo del distintivo, y el 82% sigue sin entrar.** Eso no debilita la propuesta del distintivo con cifra — la vuelve el punto central: lo que falla no es que no haya señal, es que **la señal no dice qué hay detrás y detrás no hay nada que el usuario quiera**.
+**1 · El punto rojo existe, y es el hallazgo que más pesa.** La pestaña «Perfil» lleva un punto rojo, y el producto usa además un distintivo numérico bien puesto en «Notificaciones (2)». O sea: **Idilio ya probó el mecanismo del distintivo, y el 82% sigue sin entrar.** Eso no debilita la propuesta del distintivo con cifra — la vuelve el punto central: lo que falla no es que no haya señal, es que **la señal no dice qué hay detrás y detrás no hay nada que el usuario quiera**.
 
 **2 · La pantalla es de ajustes, no de producto.** De los cinco bloques, cuatro son configuración: notificaciones, idioma, feedback y métodos de login. El único que no lo es —«Historial de monedas»— es una lista de transacciones.
 
@@ -65,15 +64,14 @@ Así que este anexo persigue dos cosas a la vez, y la segunda manda sobre la pri
 
 **4 · «Usuario Anónimo».** La pantalla le dice literalmente al **88% de la base** que no es nadie, con un montón de monedas donde iría su cara. Es la confirmación más directa de la decisión de [§7.5](#75--la-propuesta) de sacar el avatar y el nombre: en este producto, la identidad no es un buen anfitrión de pantalla.
 
-**5 · Y una cosa está muy bien resuelta, que este anexo daba por ausente.** La píldora **«Hasta +30 al crear una cuenta»** más «Puedes registrarte en cualquier momento» es **exactamente** el patrón de ReelShort: bono por registrarse, ofrecido como incentivo y no como muro. **P4 no falta: está, y es lo mejor de la pantalla.** La propuesta lo conserva; lo único que cambia es *qué* se pone en juego —de «+30 monedas» a «tus 5 noches, tus 45 monedas y tu comodín»—, porque una cifra propia pesa más que un bono genérico.
+**5 · Y una cosa está muy bien resuelta.** La píldora **«Hasta +30 al crear una cuenta»** más «Puedes registrarte en cualquier momento» es **exactamente** el patrón de ReelShort: bono por registrarse, ofrecido como incentivo y no como muro. **P4 está resuelto, y es lo mejor de la pantalla.** La propuesta lo conserva; lo único que cambia es *qué* se pone en juego —de «+30 monedas» a «tus 5 noches, tus 45 monedas y tu comodín»—, porque una cifra propia pesa más que un bono genérico.
 
-> **Corrección explícita.** Este anexo afirmaba que en Idilio *«P4 · el registro no vive en ninguna parte»*. **Es falso**, y la captura lo desmiente. La tabla de [§7.4](#74--los-cinco-patrones-y-el-contrapatrón-de-idilio) queda corregida.
 
-### Y lo que la evidencia confirma
+### Lo que se sigue de las capturas
 
-El diagnóstico de fondo aguanta, y ahora se puede decir mirando la pantalla en vez de deduciéndolo: **de las cinco razones por las que en esta categoría se entra a un perfil, en el de Idilio hay una y media.** No hay racha, no hay pase, no hay «seguir viendo», no hay recompensas, no hay saldo. Hay un libro de transacciones y cuatro ajustes.
+**De las cinco razones por las que en esta categoría se entra a un perfil, en el de Idilio hay una y media.** No hay racha, no hay pase, no hay «seguir viendo», no hay recompensas, no hay saldo. Hay un libro de transacciones y cuatro ajustes.
 
-**No es que la pantalla esté mal hecha** —está limpia, es coherente y resuelve bien el registro del invitado—. **Es que hace un trabajo que solo se necesita una vez**: elegir idioma, conectar el correo, revisar una notificación. Un trabajo que se hace una vez no sostiene una pestaña permanente, y el 82% es exactamente eso medido.
+**La pantalla está bien hecha** —limpia, coherente, y resuelve bien el registro del invitado—. **Lo que hace es un trabajo que solo se necesita una vez**: elegir idioma, conectar el correo, revisar una notificación. Un trabajo que se hace una vez no sostiene una pestaña permanente, y el 82% es exactamente eso medido.
 
 ---
 
@@ -137,11 +135,10 @@ De los ocho salen cinco reglas que se repiten. Ninguna es sobre estética.
 | **P4 · el registro** | **En el perfil, y bien**: «Hasta +30 al crear una cuenta» + «Puedes registrarte en cualquier momento» | **Sí** |
 | **P5 · el vacío** | No hay estados vacíos que resolver: la pantalla no tiene listas | **N/A** |
 
-> **Esta tabla está corregida.** La primera versión decía que P4 no vivía «en ninguna parte» y que P1 estaba entero fuera del perfil. Las dos afirmaciones se escribieron sin la captura y las dos eran falsas. Queda a la vista porque la corrección cambia dónde está el problema.
 
 **El resultado sigue siendo el mismo, y ahora es más preciso: de las cinco razones por las que en esta categoría se entra a un perfil, el de Idilio tiene una y media** — y la que tiene entera, el registro, es **de un solo uso**. Nadie se registra dos veces.
 
-Eso explica el 82% mejor que cualquier crítica visual: **no es que la pantalla esté fea —está limpia y es coherente—, es que su trabajo se termina.** Una pestaña permanente sostenida por tareas de una sola vez tiene el tráfico de una tarea de una sola vez.
+Eso explica el 82% mejor que cualquier crítica visual: **el problema no es cómo se ve la pantalla —está limpia y es coherente— sino que su trabajo se termina.** Una pestaña permanente sostenida por tareas de una sola vez tiene el tráfico de una tarea de una sola vez.
 
 Y explica también por qué el punto rojo no lo arregla: **ya está puesto.** El producto ya usa un distintivo en esa pestaña, y encima usa uno numérico y bien resuelto en «Notificaciones». La señal existe. Lo que no existe es algo detrás que valga el viaje.
 
@@ -332,8 +329,6 @@ Entradas es la métrica de la pregunta, no la del problema. Las cuatro que cuent
 | **Export** | Flujo **`f8-tu-noche`**, 4 pantallas, en [`mobbin-export`](../../mobbin-export/) |
 | **La página** | [`/perfil`](../../perfil/) — el antes y el después lado a lado, el benchmark y el modelo de métricas, en una sola página publicada. Se regenera con `npm run perfil` (copia las capturas; correrlo después de `npm run export`) |
 | **Cómo verlo** | `cd poc && npm run dev` → panel «Tu noche · la pestaña», botones 11, 12 y 13 |
-
-**Un fallo que apareció por el camino, y no es de esta pantalla.** Al revisar el export se vio que la lámina llamada **«El acuse de la noche»** enseñaba un player vacío: el acuse no estaba. La causa es la regla de `prefers-reduced-motion` del prototipo, que le colapsa a cero el retardo de 2,3 s de la animación de salida del toast; con `forwards`, el elemento queda en opacidad 0 desde el primer fotograma. O sea que **quien navega con movimiento reducido nunca vio el único momento en que el metajuego aparece dentro del player.** Es un fallo de accesibilidad, no de captura — el export solo lo hizo visible, porque corre con `reducedMotion: 'reduce'`. Corregido con una excepción declarada en `poc/src/styles.css`; la lámina ya enseña el acuse, y ahora también su enlace a la pestaña.
 
 **Comprobado, no supuesto:** `npm run build` compila; `node scripts/verificar-a11y.mjs` audita los tres estados nuevos con axe y no encuentra violaciones WCAG A/AA; `node scripts/verificar-cifras.mjs` vuelve a dar consistente después de corregir las cifras del export en el README (eran 23 pantallas en 8 flujos, ahora 27 en 9).
 
