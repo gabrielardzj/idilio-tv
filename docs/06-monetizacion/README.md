@@ -17,16 +17,17 @@
 
 ## 6.1 En una página
 
-**El problema.** Idilio le vende a un 5% y le regala a un 95%, y a ese 95% le entrega hoy hasta
-**70 episodios gratis por semana** en anuncios recompensados [M] a cambio de un ingreso que es un
-error de redondeo. La publicidad existe en el producto, pero **no está cobrando nada**
-([§6.3](#63-el-hallazgo-idilio-regala-episodios-y-cobra-un-error-de-redondeo)).
+**El problema.** Idilio le vende a un 5% y le regala a un 95%. Y ese 95% consume por dos capas
+gratuitas que ya existen —**el bloque de 10 episodios de cada serie** y **el anuncio recompensado
+que abre uno más, hasta diez al día** [M]—, **y ninguna de las dos está cobrando nada**
+([§6.3](#63-el-hallazgo-idilio-regala-episodios-y-cobra-un-error-de-redondeo)). No falta una capa
+gratuita: **falta cobrarle a la que ya está.**
 
 **Dos propuestas, y no compiten: atacan mitades distintas de la base.**
 
 | | Propuesta | A quién monetiza | Qué gana |
 |---|---|---|---|
-| **A** | **«Idilio Libre»** — un piso gratuito con pauta sobre la biblioteca que ya dejó de vender, publicado también **fuera de la app** | **Al 95% que no paga** | ≈ **US$ 660 k/año** en el escenario base [S] — el mismo orden que todo el ingreso in-app actual |
+| **A** | **La pauta entra por las capas gratuitas que ya existen** — el bloque de episodios gratis pasa a llevar cortes, y el anuncio recompensado conserva su trato pero cambia de sitio. **Sin inventar un nivel nuevo** | **Al 95% que no paga** | ≈ **US$ 376 k/año** en el escenario base [S] · la primera columna del escenario **no requiere construir nada** |
 | **B** | **Cobrar por la resolución, no por el episodio** — el escalón alto de la tienda se vende como *«termina esta historia»*, y la suscripción como *«sin cortes»* | **Al 5% que sí paga, y al que está por hacerlo** | Ticket promedio. **Un pagador vale dos órdenes de magnitud más que un espectador con pauta** [M] |
 
 **La tesis que las une**, y sale de cruzar las dos mitades de la investigación:
@@ -91,7 +92,7 @@ que los agregadores de estadísticas.*
 | **El 34% de las cancelaciones de streaming se explica por agotamiento de catálogo** · 2026 es el año del *strategic churning*: suscribirse para un estreno y cancelar enseguida | [Retention Check](https://retentioncheck.com/churn-benchmarks/streaming-services) |
 | **ViX corre tres pisos** —gratis / premium con anuncios / premium sin anuncios— y ViX Gratis llega a **40 M** de hispanohablantes | [TelevisaUnivisión](https://corporate.televisaunivision.com/press/2024/01/17/vix-announces-new-ad-supported-premium-tier-launching-in-the-u-s-later-this-year/) |
 
-> **Conclusión: un piso gratuito con pauta no es una degradación del producto.** Es lo mejor
+> **Conclusión: una capa gratuita con pauta no es una degradación del producto.** Es lo mejor
 > calificado de la categoría, es donde crece el dinero de la región, y el competidor directo en
 > español ya lo tiene.
 
@@ -119,7 +120,7 @@ ingreso.**
 | | Hoy | Lo que tiene que ser |
 |---|---|---|
 | Qué se vende | Un desbloqueo | Tiempo de visionado |
-| Quién decide que haya anuncio | El usuario, si encuentra la tarjeta | El producto, como parte del contrato del piso gratuito |
+| Quién decide que haya anuncio | El usuario, si encuentra la tarjeta | El producto, como parte del contrato de lo gratis |
 | Techo de impresiones | 10 por usuario y día, y casi nadie llega | El contenido consumido: **~140 episodios por MAU al mes** [I] |
 
 Idilio ve unos **42 millones de episodios al mes** [I] y monetiza publicitariamente una fracción
@@ -132,49 +133,89 @@ mínima. Esa es toda la propuesta A en una frase.
 
 ---
 
-## 6.4 Propuesta A · «Idilio Libre»
+## 6.4 Propuesta A · La pauta entra por las capas gratuitas que ya existen
 
-**Qué es.** Una porción declarada del catálogo se ve **entera y gratis, sin monedas y sin muro**,
-con cortes publicitarios. No es una promoción: es un piso permanente, el mismo modelo de tres
-niveles que ya corre ViX.
+**Idilio ya tiene dos capas gratuitas, y la propuesta no agrega una tercera.** Un nivel nuevo sería
+un concepto más que aprender para obtener algo que el producto ya entrega de dos formas — y, sobre
+todo, mandaría la pauta al lugar equivocado.
 
-| | **Piso 0 · Idilio Libre** | **Piso 1 · Monedas** | **Piso 2 · Pase Idilio** |
-|---|---|---|---|
-| Qué se ve | Series **completas** de la biblioteca vencida | Estrenos: 10 gratis, después muro | Todo |
-| Qué cuesta | Nada | 15 monedas/episodio | $ 12.500/sem · $ 24.500/mes |
-| Publicidad | **Sí** — 1 corte cada 4 episodios | Solo el recompensado, opcional | **Ninguna, jamás** |
+**El inventario publicitario es tráfico.** Y el tráfico de Idilio no está en la biblioteca vencida,
+que por definición es la parte del catálogo que menos se ve: está en la puerta de entrada de cada
+serie, que hoy no lleva un solo anuncio.
 
-### La regla de entrada, que es una regla y no un juicio
-
-Un microdrama **se produce en una semana y se explota durante un mes** [M,
-[§5.3bis](../05-benchmark/)]. Pasado ese mes el muro no recauda casi nada y la serie sigue ocupando
-catálogo.
-
-> **Una serie pasa al Piso 0 cuando el ingreso semanal de su muro cae por debajo del ingreso
-> publicitario esperado de abrirla.**
->
-> Escrita así, el riesgo que más asusta —que el piso gratuito canibalice la venta— **no puede
-> materializarse**: nada entra hasta que ya dejó de venderse. Hace falta un solo dato, y Idilio lo
-> tiene ([§6.7](#67-los-seis-datos-que-faltan), dato 4).
-
-### Y sale de la app: se publica donde ya está la audiencia
-
-Si el 44% y el 38% de esta audiencia ve microdrama en YouTube y TikTok, **un piso gratuito que solo
-se puede leer estando dentro de la app no le habla a nadie que esté afuera.**
-
-ViX publica tráiler y cinco episodios en redes y deja el resto en la app. **Propongo publicar la
-serie del Piso 0 entera**, porque un adelanto compite contra el feed con las armas del feed y
-pierde: el feed tiene infinitos adelantos gratis. **Una historia completa no compite — es lo que el
-feed no tiene.**
-
-| | Qué se publica afuera | Qué queda solo en la app |
+| | Cuánto se ve | Publicidad hoy |
 |---|---|---|
-| **ViX** (hoy) | Tráiler + 5 episodios | El resto de la serie |
-| **Idilio** (propuesta) | **La serie del Piso 0, entera** | **Los estrenos, la continuidad, la racha y la cita del Pase** |
+| **El bloque gratis** — 10 episodios en 37 de las 41 series con muro [M, censo] | **Lo ve todo el mundo.** Es por donde entra cada usuario, en cada serie que empieza | **Ninguna** |
+| **El anuncio recompensado** — 15 monedas, tope de 10 diarios [M] | Casi nadie lo encuentra: vive en la tarjeta más apagada del muro | Es el único que hay |
+| **Detrás del muro** — 1.728 episodios bloqueados [M] | Muy poco: hay que pagar para llegar | Ninguna |
 
-Se publica la historia, no el producto. Y le da a
-[I4](../02-estrategia/#i4--continuidad-web--app) —la continuidad web→app— el volumen que hoy no
-tiene: hoy arregla un aterrizaje que vale cero.
+**La capa gratuita que ya existe es la superficie más transitada del producto y hoy no cobra
+nada.** Ahí va la pauta. No hace falta inventar un piso.
+
+### A1 · El bloque gratis pasa a tener cortes
+
+Los 10 episodios gratis siguen siendo 10 episodios gratis. Lo único que cambia es que **llevan
+publicidad**, como la lleva cualquier capa gratuita de cualquier plataforma — que es exactamente lo
+que hace el nivel gratis de ViX.
+
+Es el cambio de mayor alcance de toda la propuesta y no agrega ningún concepto: **el usuario ya
+sabe que esos episodios son gratis.** Lo que aprende es que lo gratis viene con pauta, que es la
+convención de toda la categoría.
+
+> **Y el riesgo, que es serio y hay que decirlo primero.** El [diagnóstico](../01-diagnostico/#14-una-palanca-fuera-del-alcance-de-este-objetivo)
+> dice que esos 10 episodios *«son exactamente lo que engancha en la primera sesión; tocarlos es
+> tocar el motor de crecimiento»*. Poner pauta ahí **es tocarlos.** Tres reglas lo acotan:
+>
+> 1. **El usuario nuevo no ve un solo anuncio en su primera sesión.** Ninguno. La primera sesión es
+>    adquisición, no inventario.
+> 2. **Dentro de un bloque gratis, la pauta arranca recién en el episodio 4.** Los tres primeros
+>    son la promesa de la serie.
+> 3. **Un corte cada 4 episodios**, con las reglas de formato de más abajo.
+>
+> **Guardrail que manda sobre todos los demás: D1 de los usuarios nuevos** —cuántos vuelven al día
+> siguiente— **medido contra holdout. Si cae, se revierte.** No es una métrica de acompañamiento:
+> es la que decide si esto sigue vivo.
+
+### A2 · El anuncio recompensado no cambia de trato, cambia de sitio
+
+**El trato se queda como está: un anuncio abre un episodio, hasta diez al día.** No se toca, no se
+recorta y no se sube el tope — la fuente ya más que duplica el consumo semanal [M], y el problema
+nunca fue cuánto da.
+
+Lo que cambia es dónde está y cómo se dice, que es literalmente
+[I2](../02-estrategia/#i2--el-muro-muestra-las-salidas-que-ya-existen) de la estrategia ya
+entregada: **el anuncio sube al primer renglón del muro**, su `0/10` pasa a decir *«te quedan 10
+episodios gratis hoy»*, y la devolución **abre el episodio** en vez de acreditar monedas que hay
+que gastar en un segundo toque.
+
+> **Por qué esto es la primera palanca de ingreso publicitario y no una mejora de comprensión:**
+> cada anuncio que hoy no se ve es una impresión que no se cobra. El SDK ya está integrado y el
+> saldo ya se escribe: **no hay nada que construir, solo que ordenar.**
+
+### A3 · Una serie que dejó de vender no estrena un piso: le crece el bloque gratis
+
+Acá sobrevive la idea que sí valía de la versión anterior, dicha en el idioma que el producto ya
+habla. **El bloque gratis ya es de tamaño variable** en el catálogo real —hay series de 7, de 10,
+de 11 y de 12, y nueve series son gratis de punta a punta [M, censo]—. Entonces no hace falta un
+nivel nuevo:
+
+> **Cuando el ingreso semanal del muro de una serie cae por debajo del ingreso publicitario
+> esperado de abrirla, su bloque gratis pasa a ser el 100% de la serie.**
+>
+> Es la misma regla de siempre con otro número, y **el riesgo de canibalización no puede
+> materializarse**: nada se abre hasta que ya dejó de venderse. Hace falta un solo dato, y Idilio
+> lo tiene ([§6.7](#67-los-seis-datos-que-faltan), dato 4).
+
+Idilio ya tomó esta decisión a mano y le salió bien: **dos de sus cuatro finalistas del India
+Catalina son series enteramente gratis** [M, [§5.1](../05-benchmark/)]. Esto la vuelve una regla en
+vez de un criterio.
+
+**Y esas series —y solo esas— se publican enteras en YouTube y TikTok**, que es donde el 44% y el
+38% de esta audiencia ya ve microdrama. ViX publica tráiler y cinco episodios; una historia
+completa es lo que el feed no tiene, y un adelanto compite contra el feed con las armas del feed.
+**Se publica la historia, no el producto:** la continuidad, la racha, los estrenos y la cita del
+Pase existen solo en la app. Le da además volumen a
+[I4](../02-estrategia/#i4--continuidad-web--app), que hoy arregla un aterrizaje que vale cero.
 
 > **Guardrail:** si en 4 semanas no crecen las instalaciones atribuidas a social, **se corta**.
 > Regalar contenido sin capturar entrada es publicidad para YouTube, no para Idilio.
@@ -183,8 +224,8 @@ tiene: hoy arregla un aterrizaje que vale cero.
 
 | | Producto | Dónde y cómo | Tope | Quién lo compra |
 |---|---|---|---|---|
-| **P1** | **Recompensado** *(existe)* | Video vertical en el muro. **Abre el episodio**, no acredita monedas | 10/día, sin cambios | Adquisición: juegos, apps, fintech |
-| **P2** | **Corte entre episodios** *(nuevo)* | Video vertical, **entre** episodios del Piso 0 | 1 cada 4 episodios · 15 s | Programático, y acuerdos privados con inventario clasificado |
+| **P1** | **Recompensado** *(existe)* | Video vertical en el muro. Abre el episodio, no acredita monedas | 10/día, **sin cambios** | Adquisición: juegos, apps, fintech |
+| **P2** | **Corte en el bloque gratis** *(nuevo)* | Video vertical, **entre** episodios, desde el episodio 4 | 1 cada 4 episodios · 15 s | Programático, y acuerdos privados con inventario clasificado |
 | **P3** | **Patrocinio de serie o riel** *(nuevo)* | **Sin video.** Marca en la ficha y en la cabecera del riel | 1 marca por riel y mes | Demanda de marca |
 | **P4** | **Microdrama de marca** *(nuevo)* | Una serie escrita alrededor de una marca y **pagada por ella** | 1 por trimestre | Marca. Contenido gratis + audiencia de regalo |
 
@@ -208,7 +249,7 @@ nuevos.
 documentada en la categoría: *«los anuncios duran más que el episodio que desbloquean»*
 [M, [§5.3](../05-benchmark/)].
 
-1. **Nunca pre-roll en el primer episodio de la sesión** — es donde se pierde el D1.
+1. **Ningún anuncio en la primera sesión de un usuario nuevo**, y ninguno antes del episodio 4 de un bloque gratis.
 2. **El corte va entre episodios, jamás dentro.** Un episodio de 90 s no tiene interior que sobreviva a una interrupción: **el cliffhanger es el producto.**
 3. **Máximo 1 corte cada 4 episodios** — carga del 4 al 7%, muy por debajo de la TV abierta (~25%). Se sube después, midiendo, nunca al lanzar.
 4. **15 s no salteable, o 30 s salteable a los 5.** Sin excepción de puja.
@@ -218,25 +259,31 @@ documentada en la categoría: *«los anuncios duran más que el episodio que des
 ### Cuánto vale
 
 **Supuestos, todos declarados:** 300.000 MAU [S] · DAU/MAU 0,33 → ~99.000 DAU [M] · 14 episodios
-por sesión [M] · 1 sesión por día activo [S, conservador] → **~41,6 M de episodios/mes** [I] ·
-eCPM recompensado US$ 3–6 y in-stream US$ 1,5–3 [S, **a reemplazar con el dato de la mediación**].
+por sesión [M] · 1 sesión por día activo [S, conservador] → **~41,6 M de episodios/mes** [I] · **el
+70% del visionado ocurre en bloques gratis** [S — es la consecuencia de que el bloque gratis sea la
+puerta de cada serie; **es el supuesto más importante de la cuenta, y el dato 6 lo reemplaza**] ·
+**de esos, el 70% queda habilitado para pauta** después de las protecciones de A1 —primera sesión y
+tres primeros episodios exentos— [S] · eCPM recompensado US$ 4,5–6 e in-stream US$ 2–2,5 [S,
+**a reemplazar con el dato de la mediación**].
 
 | | **Conservador** | **Base** | **Alto** |
 |---|---|---|---|
 | MAU a 12 meses | 300 k *(plano)* | 450 k | 750 k |
-| Qué se hizo | Solo Piso 0 sobre biblioteca vencida | Piso 0 completo + recompensado bien ubicado + distribución en social | Lo anterior + inventario clasificado y venta directa |
-| Impresiones/mes | ~5,5 M | ~19 M | ~33 M |
-| eCPM mezclado | US$ 1,9 | US$ 2,9 | US$ 4,5 |
-| **Ingreso publicitario/año** | **≈ US$ 123 k** | **≈ US$ 660 k** | **≈ US$ 1,78 M** |
-| Por MAU/mes | US$ 0,03 | US$ 0,12 | US$ 0,20 |
+| Qué se hizo | Solo el recompensado bien ubicado (A2) | A2 + cortes en el bloque gratis (A1) | Lo anterior + A3, distribución en social e inventario clasificado |
+| Impresiones/mes | ~2,4 M | ~11,2 M | ~22,6 M |
+| eCPM mezclado | US$ 4,5 | US$ 2,80 | US$ 3,66 |
+| **Ingreso publicitario/mes** | ≈ US$ 10,7 k | ≈ US$ 31 k | ≈ US$ 83 k |
+| **Al año** | **≈ US$ 128 k** | **≈ US$ 376 k** | **≈ US$ 993 k** |
+| Por MAU/mes | US$ 0,04 | US$ 0,07 | US$ 0,11 |
 | P3 y P4 | sin estimar | sin estimar | sin estimar |
 
-**No son optimismo, base y pesimismo sobre la misma acción: son tres acciones distintas.** El
-conservador es no hacer casi nada; el base es ejecutar la propuesta; el alto necesita crecimiento
-**y** mejor precio por impresión — y la venta directa a demanda de marca paga típicamente entre 2 y
-4 veces el remanente programático [S].
+**No son optimismo, base y pesimismo sobre la misma acción: son tres acciones distintas**, y **la
+primera columna no requiere construir nada** — es ordenar el muro, que ya estaba propuesto en la
+Etapa 1 de la estrategia.
 
----
+*Estas cifras modelan **el visionado que ya ocurre**, no el que un nivel nuevo podría producir.
+Es menos plata que cualquier proyección apoyada en abrir contenido hoy bloqueado — y es la única
+que se puede defender sin haber medido antes una conducta que nadie ha visto.*
 
 ## 6.5 Propuesta B · Cobrar por la resolución, no por el episodio
 
@@ -266,8 +313,8 @@ molestia que no tiene. **Con los cortes de la propuesta A el beneficio se vuelve
 literalmente lo que vende PineDrama, la app que ByteDance lanzó en enero de 2026.
 
 > **La publicidad es la mejor herramienta de venta de suscripciones que existe.** Es el mecanismo
-> con el que Hulu, Spotify, YouTube y ViX venden su nivel de pago. **El Piso 0 no compite con el
-> Pase: lo alimenta.**
+> con el que Hulu, Spotify, YouTube y ViX venden su nivel de pago. **La capa gratuita con pauta no
+> compite con el Pase: lo alimenta.**
 
 **Y nada de plan anual.** El 34% de las cancelaciones de la categoría es agotamiento de catálogo:
 cobrar doce meses por algo que se acaba en dos no produce ingreso recurrente, produce reembolsos y
@@ -285,7 +332,7 @@ de saldos:
 
   ▸ Tu Pase de la Noche llega hoy a las 21:30 · tu hora de siempre
   ▸ Ver un anuncio y abrir este episodio            te quedan 10 hoy
-  ▸ Gratis y completas en Idilio Libre              con algunos cortes
+  ▸ 6 series completas y gratis, con cortes         ver cuáles
   ─────────────────────────────────────────────────────────────────
   ▸ Termina «La Enfermera Infiltrada» · 40 episodios      $ 14.500
   ▸ Pase Idilio · todo abierto y sin cortes             $ 24.500/mes
@@ -319,8 +366,9 @@ criterio de reversión**, decidido de antemano.
 
 | Movimiento | Leading | Lagging | Guardrail y reversión |
 |---|---|---|---|
-| **Piso 0** | % de muros que terminan en «ver gratis» en vez de cerrar | DAU/MAU y horas vistas por MAU | **Ingreso in-app por DAU no cae más de 5% relativo** contra holdout |
-| **Corte in-stream** | Tasa de finalización del anuncio | Ingreso publicitario por DAU | **Episodios por sesión no caen más de 5% relativo.** Si se cruza: bajar a 1 corte cada 6 antes de revertir |
+| **A1 · cortes en el bloque gratis** | Tasa de finalización del anuncio | Ingreso publicitario por DAU | **① D1 de usuarios nuevos contra holdout — si cae, se revierte.** Manda sobre todos los demás: el bloque gratis es el motor de adquisición. **② Episodios por sesión no caen más de 5% relativo**; si se cruza, bajar a 1 corte cada 6 antes de revertir |
+| **A2 · recompensado bien ubicado** | Anuncios vistos por DAU | Ingreso publicitario por DAU | % de pagadores no cae más de 5% relativo |
+| **A3 · series abiertas** | % de muros que terminan en «ver gratis» en vez de cerrar | Horas vistas por MAU | **Ingreso in-app por DAU no cae más de 5% relativo** contra holdout |
 | **Distribución en social** | Vistas de la serie publicada afuera | **Instalaciones atribuidas a YouTube y TikTok** | **Si no crecen en 4 semanas, se corta** |
 | **«Termina esta historia»** | Qué paquete elige la gente | **Gasto promedio de quien compra** (ARPPU) | El número de compradores no baja |
 | **Suscripción «sin cortes»** | Conversión desde el muro | Suscriptores netos y retención a 3 meses | Cancelaciones no suben |
@@ -338,12 +386,12 @@ esta página por un hecho.
 
 | | Dato | De dónde sale | Qué supuesto reemplaza |
 |---|---|---|---|
-| **1** | **eCPM real** por formato, geografía y sistema operativo | Panel de la mediación | Toda la banda de ingreso de [§6.4](#64-propuesta-a--idilio-libre) |
+| **1** | **eCPM real** por formato, geografía y sistema operativo | Panel de la mediación | Toda la banda de ingreso de [§6.4](#64-propuesta-a--la-pauta-entra-por-las-capas-gratuitas-que-ya-existen) |
 | **2** | **Adopción del recompensado** — qué fracción del DAU ve ≥1 anuncio y cómo se distribuye contra el tope de 10 | Analítica propia | El producto P1, y dimensiona [I2](../02-estrategia/#i2--el-muro-muestra-las-salidas-que-ya-existen) |
 | **3** | **Conversión a pagador y ARPPU** | Facturación | Decide el peso relativo de A y B, que es la decisión de fondo |
-| **4** | **Curva de decaimiento de ingreso por serie** — semana 1, 4, 12 | Facturación por SKU | **Dimensiona el Piso 0 y elimina su riesgo por construcción** |
+| **4** | **Curva de decaimiento de ingreso por serie** — semana 1, 4, 12 | Facturación por SKU | **Dimensiona A3 y elimina su riesgo por construcción** |
 | **5** | **Atribución de instalación por fuente** — cuántas vienen de YouTube, TikTok y compartidos | Herramienta de atribución móvil | Decide si la distribución en social vale la pena |
-| **6** | **MAU y sesiones por día activo**, con precisión | Analítica propia | El volumen de inventario |
+| **6** | **Qué fracción del visionado ocurre dentro de bloques gratis**, y MAU y sesiones por día activo con precisión | Analítica propia | **El supuesto del 70%, que es del que cuelga toda la cuenta de [§6.4](#64-propuesta-a--la-pauta-entra-por-las-capas-gratuitas-que-ya-existen)** |
 
 ---
 
@@ -355,10 +403,10 @@ esta página por un hecho.
 | **Recortar los 500 episodios gratis del catálogo** | Es la palanca más pesada de la economía, pero es de **conversión** — y toca el motor de adquisición [M, [§1.4](../01-diagnostico/#14-una-palanca-fuera-del-alcance-de-este-objetivo)] |
 | **Subir el tope diario de anuncios recompensados** | La fuente gratuita ya más que duplica el consumo [M]: más volumen compra menos motivo para pagar |
 | **Un plan anual de suscripción** | 34% del churn de la categoría es agotamiento de catálogo. Doce meses sobre algo que se acaba en dos es un pasivo, no un ingreso |
-| **Publicar los estrenos en redes** | Solo sale el Piso 0. Regalar la ventana de explotación es regalar el único tramo del catálogo que todavía vende |
+| **Publicar los estrenos en redes** | Solo salen las series ya abiertas por A3. Regalar la ventana de explotación es regalar el único tramo del catálogo que todavía vende |
 | **Monetizar el comodín o el rescate de racha** | Snapchat demostró que se puede, y también que convierte la ansiedad en línea de ingreso [M, [§5.4](../05-benchmark/)/D2] |
 | **Recompensar tiempo de pantalla** | Es lo que la Comisión Europea **prohibió permanentemente** en TikTok Lite [M, §5.4/D5]. Este modelo va en la dirección contraria, y conviene que esté escrito antes de que lo pregunte alguien de afuera |
-| **Pre-roll y cortes dentro del episodio** | Ver la restricción de los 90 segundos en [§6.4](#64-propuesta-a--idilio-libre) |
+| **Pre-roll y cortes dentro del episodio** | Ver la restricción de los 90 segundos en [§6.4](#64-propuesta-a--la-pauta-entra-por-las-capas-gratuitas-que-ya-existen) |
 | **Offerwall / ganar monedas jugando a juegos de terceros** | Adjoe reporta 3× de retorno, y el número **viene del propio vendedor** [M, §5.4/D3]. Puede entrar después; no es por donde se empieza |
 
 ---
@@ -368,18 +416,19 @@ esta página por un hecho.
 ```
 Sem 1   Pedir los seis datos (§6.7) · sin ellos todo lo de acá es estructura sin números
         Mediación + medición + consentimiento: la línea base publicitaria
-Sem 2   Regla de decaimiento aplicada al catálogo → qué series entran al Piso 0
-        Rehacer el escalón alto de la tienda como «termina esta historia» (propuesta B1)
-Sem 3   Piso 0 en cohorte, con holdout · todavía sin cortes
-        Una serie del Piso 0 publicada entera en YouTube, con atribución puesta
+Sem 2   A2: el recompensado sube al primer renglón del muro y habla en episodios (= I2)
+        Rehacer el escalón alto de la tienda como «termina esta historia» (B1)
+Sem 3   A1 en cohorte, con holdout: cortes en el bloque gratis, desde el episodio 4
         Primera conversación de P4 con una marca · no depende de nada más
-Sem 4   Cortes in-stream en la cohorte, a 1 cada 4 episodios
-        Primera lectura de guardrails contra holdout
+Sem 4   Primera lectura de guardrails contra holdout — D1 de usuarios nuevos primero
+        Regla de decaimiento aplicada al catálogo → qué series abre A3
 ```
 
-**B se puede empezar antes que A y sin depender de ella** — es precio y copy sobre una tienda que
-ya existe. **A necesita mediación antes que producto:** sin eCPM propio, los números de
-[§6.4](#64-propuesta-a--idilio-libre) son una estructura vacía.
+**A2 y B se pueden hacer ya**: los dos son orden y copy sobre superficies que existen, y A2 estaba
+propuesto desde la Etapa 1 de la estrategia. **A1 necesita mediación antes que producto** —sin eCPM
+propio los números de [§6.4](#64-propuesta-a--la-pauta-entra-por-las-capas-gratuitas-que-ya-existen)
+son una estructura vacía— y **A3 necesita el dato 4**, la curva de decaimiento, o su regla de
+entrada no se puede aplicar.
 
 ---
 
