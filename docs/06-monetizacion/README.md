@@ -12,8 +12,8 @@
 >
 > **Procedencia.** **[M]** medido —censo, dogfooding o brief—, **[S]** supuesto declarado con
 > banda, **[I]** inferencia. **Ningún número de ingreso publicitario de esta página es un dato de
-> Idilio.** Lo que aporto es la estructura de la cuenta; los seis datos que la cierran están en
-> [§6.14](#614-los-seis-datos-que-faltan).
+> Idilio.** Lo que aporto es la estructura de la cuenta; los siete datos que la cierran están en
+> [§6.14](#614-los-siete-datos-que-faltan).
 
 ---
 
@@ -21,13 +21,20 @@
 
 | | |
 |---|---|
-| **1** | **La publicidad es la línea correcta, y Idilio ya la tiene — pero no le está cobrando a nadie.** Regala un episodio por anuncio, hasta diez al día [M]. Para que esa transacción cerrara, el eCPM tendría que ser de **US$ 177**; el real en Colombia está entre **US$ 2 y 6** [S]. Hoy el anuncio no es un canal de ingreso: es un cupón de descuento. La línea de verdad se cobra sobre **visionado**, no sobre desbloqueos. |
+| **1** | **La publicidad es la línea que falta — no la que manda, y esa distinción la trajo el benchmark.** Idilio ya tiene anuncios y no le cobra a nadie: regala un episodio por anuncio, hasta diez al día [M], cuando para que esa transacción cerrara el eCPM tendría que ser de **US$ 177** y el real en Colombia está entre **US$ 2 y 6** [S]. Hoy el anuncio es un cupón de descuento, no un canal de ingreso. **Pero el 60% del ingreso mundial del microdrama viene de pago directo** [M, Omdia], así que la publicidad es la segunda línea, no la primera. Se cobra sobre **visionado**, no sobre desbloqueos. |
 | **2** | **El mapeo de la premisa está invertido, y darlo vuelta la vuelve mucho más fuerte.** La publicidad no le cobra al espectador sino al anunciante. Mujeres de 25 a 54 en Latinoamérica son las decisoras de compra del hogar: **no es una audiencia pobre, es una audiencia mal vendida.** Lo que le pone techo al eCPM no es su ingreso, es que un catálogo íntegramente de romance subido de tono queda clasificado como contenido sensible y no accede a la demanda de marca. |
 | **3** | **El competidor no es ReelShort: es el feed — y el dueño del feed cobra aparte.** El **44% de quienes ven microdrama lo hacen en YouTube y el 38% en TikTok** [M, Ampere sobre 100.000 consumidores]. Y aun así ByteDance, dueña de TikTok, vende microdrama en **dos apps de pago separadas** —PineDrama y LimeShorts, a US$ 20 por semana— en vez de monetizarlo dentro de TikTok. **Lo que se paga no es el video: es saber cómo termina** ([§6.3](#63-benchmark-quién-paga-por-video-y-por-qué-no-se-va-a-tiktok)). |
 | **4** | **La publicidad es un negocio de escala, y Idilio no la tiene todavía.** Bien construida vale **≈ US$ 660 k al año** en el escenario base [S] — que con el 95%+ que no paga está en el mismo orden que todo el ingreso in-app actual. **No lo reemplaza: lo duplica.** Se vuelve el negocio principal a diez veces el MAU de hoy. |
 
 > **Los anuncios monetizan al núcleo que ya está. Los géneros nuevos hacen crecer la suscripción
 > — y, de paso, vuelven vendible el inventario del núcleo.**
+
+**Y la tesis que sale de cruzar las dos mitades del benchmark, que es más precisa que la que este
+documento tenía antes:** en el mundo, esta categoría **cobra** —60% del ingreso es pago directo, y
+el microdrama saca US$ 10–25 por usuario al mes contra los US$ 3–8 del streaming—; en
+Latinoamérica, el dinero **se está yendo a la publicidad** —AVOD +74% hasta US$ 8,0 B, y en Brasil
+ya es el 37% del ingreso de streaming—. **Idilio está justo en ese cruce, y por eso necesita las
+dos líneas y no una.** Lo que sigue construye la que falta sin tocar la que ya factura.
 
 **La propuesta, en cinco movimientos:**
 
@@ -37,7 +44,8 @@
 | **2** | **La publicidad se cobra por visionado.** Corte entre episodios con carga acotada; el recompensado deja de ser la única superficie | ~3 semanas + mediación |
 | **3** | **Cuatro productos publicitarios en vez de uno.** Recompensado · corte in-stream · patrocinio de serie · microdrama de marca | El cuarto no depende de escala |
 | **4** | **El catálogo se ensancha empezando por lo que ya está.** Dos rieles de suspenso con series que Idilio **ya tiene** | **1 semana, cero producción** |
-| **5** | **La suscripción se reempaqueta como «sin anuncios», que recién ahora es verdad** | Copy y precio |
+| **5** | **La suscripción se reempaqueta como «sin cortes»** — y **se descarta el plan anual** que este documento recomendaba antes de tener el benchmark ([§6.5](#65-la-propuesta-tres-pisos)) | Copy y precio |
+| **6** | **El Piso 0 sale a buscar a la audiencia donde ya está: YouTube y TikTok.** Es el movimiento que el benchmark agregó, y ninguno de los otros cinco lo cubría | Distribución, no producto |
 
 ---
 
@@ -234,6 +242,17 @@ por caro. **No convierte porque la razón para pagar no está dicha**, que es lo
 crece 74% hasta US$ 8,0 B y en Brasil ya es el 37% del ingreso de streaming. La pauta no es el
 plan B de esta región: es hacia donde se está moviendo el dinero.
 
+> **Dónde aterrizó cada una.** Este benchmark no se quedó en observación: la propuesta que sigue ya
+> está corregida con él, y en dos puntos **contra lo que este mismo documento decía antes**.
+>
+> | Lo que trajo el benchmark | Qué cambió en la propuesta |
+> |---|---|
+> | El 60% del ingreso de la categoría es pago directo | La publicidad pasa a ser **la línea que falta, no la que manda** ([§6.1](#61-el-veredicto), [§6.8](#68-cuánto-vale-supuestos-y-tres-escenarios)) |
+> | 44% YouTube · 38% TikTok | **Movimiento 6:** las series del Piso 0 se publican enteras en social ([§6.5](#65-la-propuesta-tres-pisos)) |
+> | 34% del churn es agotamiento de catálogo | **Se retira el plan anual** que yo mismo había propuesto ([§6.5](#65-la-propuesta-tres-pisos), decisión 12) |
+> | Lo que se paga es la resolución | El escalón alto de la escalera se vende como *«termina esta historia»* ([§6.5](#65-la-propuesta-tres-pisos), decisión 7) |
+> | La audiencia latinoamericana es más joven | La premisa queda matizada, y el dato propio sigue siendo el primer paso ([§6.2](#62-la-premisa-corregida)) |
+
 ---
 
 ## 6.4 El hallazgo: Idilio regala episodios y cobra un error de redondeo
@@ -296,7 +315,7 @@ ocupando catálogo. **Un activo depreciado vale más como inventario que como mu
 > ingreso semanal de su muro cae por debajo del ingreso publicitario esperado de abrirla.**
 > Escrita así, el riesgo que más asusta —que el Piso 0 canibalice la venta— **no puede
 > materializarse**: nada entra hasta que ya dejó de venderse. Solo hace falta un dato, y Idilio lo
-> tiene ([§6.14](#614-los-seis-datos-que-faltan), dato 5).
+> tiene ([§6.14](#614-los-siete-datos-que-faltan), dato 5).
 
 **Cómo se ve.** Un riel propio en el home —*«Gratis y completas»*—, sello en la portada, y una
 línea nueva en el muro:
@@ -325,6 +344,47 @@ Hoy «empezar otra serie» significa chocar contra otro muro dentro de diez epis
 > [I8](../02-estrategia/#i8--el-pase-como-puente-entre-series) deja de ser una intervención de
 > descubrimiento sin mucho que descubrir y pasa a ser el mecanismo que dirige el salto.
 
+### El Piso 0 no vive solo dentro de la app *(ajuste del benchmark)*
+
+Este documento planteaba el Piso 0 como reciclaje: un activo depreciado rinde más como inventario
+que como muro. Sigue siendo cierto y sigue siendo la regla de entrada. Pero el benchmark le cambia
+**el trabajo**: si el **44% de esta audiencia ve microdrama en YouTube y el 38% en TikTok**, el
+Piso 0 no es un depósito de series viejas — **es el argumento para abrir Idilio en vez de abrir el
+feed.** Y un argumento que solo se puede leer estando ya dentro de la app no le habla a nadie que
+esté afuera.
+
+**Dos consecuencias concretas, y la segunda no estaba en la propuesta.**
+
+**1 · El Piso 0 no puede ser solo lo que sobró.** Si su función es competir contra el feed, tiene
+que llevar al menos un título que alguien recomendaría. Idilio ya tomó esa decisión una vez y le
+salió bien: **dos de sus cuatro finalistas del India Catalina son series enteramente gratis**
+[M, [§5.1](../05-benchmark/)]. La muestra gratuita ya incluye su material premiado; el Piso 0 es
+esa misma decisión, sistematizada.
+
+**2 · Las series del Piso 0 se publican en YouTube y TikTok, completas.** Es exactamente lo que
+hace ViX —tráiler y cinco primeros episodios en Instagram, TikTok, Facebook y X, el resto en la
+app [M, [§5.3bis](../05-benchmark/))— y lo que Idilio no hace. La diferencia que propongo es que
+ahí vaya la **serie entera del Piso 0**, no un adelanto: el adelanto compite contra el feed con las
+armas del feed y pierde, porque el feed tiene infinitos adelantos gratis. Una historia completa no
+compite: es lo que el feed no tiene.
+
+| | Qué se publica afuera | Qué queda en la app |
+|---|---|---|
+| **ViX** (hoy) | Tráiler + 5 episodios | El resto de la serie |
+| **Idilio** (propuesta) | **La serie del Piso 0, entera** | **Los estrenos, la continuidad y la cita del Pase** |
+
+**Y esto le da a [I4](../02-estrategia/#i4--continuidad-web--app) —la continuidad web→app— el
+volumen que hoy no tiene.** Esa intervención arregla un aterrizaje que hoy vale cero; con
+distribución en social, pasa a ser el camino por donde entra la gente. La instrumentación es la
+misma; lo que cambia es cuánta gente la usa.
+
+> **El riesgo, dicho antes de que aparezca:** regalar la serie entera en YouTube puede volver
+> innecesario instalar la app. Se acota con lo mismo que hace ViX — **la continuidad vive solo en
+> la app**: el Pase de la Noche, la racha, «seguir viendo» y los estrenos no existen en YouTube.
+> Se publica la historia, no el producto. **Guardrail:** si las instalaciones atribuidas a social
+> no crecen en 4 semanas, se corta la distribución externa; regalar contenido sin capturar entrada
+> es publicidad para YouTube, no para Idilio.
+
 ### Piso 1 · monedas, sin cambios — con una regla de precio nueva
 
 Los estrenos conservan el muro, los 10 gratis, las 15 monedas y la escalera que
@@ -337,6 +397,16 @@ lo mismo que todas.
 
 > **Regla:** completar cualquier serie con monedas cuesta **como máximo el 60% del plan mensual.**
 
+**Y una segunda regla que sale del benchmark: el escalón más alto de la escalera se construye sobre
+la resolución, no sobre el volumen.** Si lo que se paga es saber cómo termina
+([§6.3.4](#634-el-mecanismo-lo-que-se-paga-no-es-el-video-es-el-final)), entonces el producto de
+mayor valor de la tienda no es «725 monedas» sino ***«termina esta historia»***, con el nombre de
+la serie adentro y su precio dicho de una vez. El paquete ya existe —*«Completa la serie»*— y hoy
+está roto: cuesta casi el doble que el anterior y mejora el precio por episodio un 1,7%
+[M, [§1.2/F3](../01-diagnostico/#f3--comprar-el-paquete-más-grande-no-le-conviene-a-nadie)]. **La
+escalera no necesita un escalón nuevo: necesita que el que ya tiene arriba deje de venderse como
+un bulto de monedas.**
+
 ### Piso 2 · el reempaquetado
 
 Hoy el Pase vende *«desbloquea todo»* y *«sin anuncios»*. **La segunda es casi ficticia**: los
@@ -347,9 +417,29 @@ molestia que no tiene. Con los cortes del Piso 0 el beneficio se vuelve real.
 > con el que Hulu, Spotify, YouTube y ViX venden su nivel de pago. El Piso 0 no compite con el
 > Piso 2: **lo alimenta.**
 
-Dos cambios: **un plan anual**, que hoy no existe —no reemplaza al semanal, que en Latinoamérica
-se lleva el 29% del ingreso de suscripción [M], sino que le da destino a la cola de usuarios
-pesados—; y la promesa escrita entera: ***«Todo Idilio, sin cortes»***.
+**Un cambio: la promesa escrita entera — *«Todo Idilio, sin cortes»*.** Sin anuncios y sin muro,
+dicho en la misma línea. Es literalmente lo que vende **PineDrama**, la app que ByteDance lanzó en
+enero de 2026: *acceso sin anuncios al género* [M, [§6.3](#63-benchmark-quién-paga-por-video-y-por-qué-no-se-va-a-tiktok)].
+
+> ### Y un cambio que retiro: el plan anual
+>
+> **Este documento recomendaba agregar un plan anual. El benchmark dice que es una mala idea para
+> este catálogo, y lo retiro.**
+>
+> El motivo es un número: **el 34% de las cancelaciones de streaming se explica por agotamiento de
+> catálogo** — se acabó lo que había que ver [M,
+> [§6.3.4](#634-el-mecanismo-lo-que-se-paga-no-es-el-video-es-el-final)]. Un plan anual sobre un
+> catálogo que se agota le cobra a alguien doce meses de algo que se le termina en dos, y eso no
+> produce ingreso recurrente: produce pedidos de reembolso y reseñas de una estrella. Es
+> exactamente el pasivo reputacional que [D4](../05-benchmark/) documenta como la queja #1 de la
+> categoría.
+>
+> **La preferencia revelada de la región apunta al otro lado y también la había leído mal:** el
+> plan semanal se lleva el **29% del ingreso de suscripción latinoamericano** [M, RevenueCat], y
+> 2026 es el año del *strategic churning* —suscribirse para un estreno y cancelar enseguida—. En
+> un catálogo que se agota, **el compromiso corto no es una debilidad del producto: es la forma
+> correcta del producto.** Semanal y mensual se quedan; el anual entra solo si algún día la
+> cadencia de estrenos supera al consumo, y eso es una medición, no un supuesto.
 
 **Y la regla que no se rompe nunca**, de [D4 del benchmark](../05-benchmark/) —la doble
 monetización es la queja #1 de la categoría—: **el suscriptor no se encuentra jamás con un muro ni
@@ -471,7 +561,7 @@ veces el remanente programático [S].
 ### El cruce que decide la estrategia
 
 El ingreso in-app por MAU es `conversión × ARPPU`. Los tres escenarios son [S]; el real lo tiene
-Idilio ([§6.14](#614-los-seis-datos-que-faltan), dato 4):
+Idilio ([§6.14](#614-los-siete-datos-que-faltan), dato 4):
 
 | Conversión | ARPPU/mes | IAP por MAU/mes | Contra la línea publicitaria |
 |---|---|---|---|
@@ -482,6 +572,22 @@ Idilio ([§6.14](#614-los-seis-datos-que-faltan), dato 4):
 Con el 95%+ que no paga [M] —lo que ubica la conversión bien por debajo del 5%—, **la línea
 publicitaria está en el mismo orden que todo el ingreso in-app actual. No lo reemplaza: lo
 duplica.**
+
+> **Y acá el benchmark obliga a corregir el énfasis de este documento.** El 60% del ingreso
+> mundial del microdrama viene de pago directo, y la categoría saca **US$ 10–25 por usuario al
+> mes contra los US$ 3–8 del streaming tradicional**
+> [M, [§6.3.2](#632-los-cuatro-modelos-y-qué-vende-realmente-cada-uno)]. Traducido: **un pagador
+> vale dos órdenes de magnitud más que un espectador con pauta.** A US$ 10 al mes, un solo punto
+> porcentual de conversión rinde US$ 0,10 por MAU — lo mismo que toda la línea publicitaria del
+> escenario base.
+>
+> Eso **no invalida** la propuesta, porque el 95% no paga y sobre esa gente la publicidad es el
+> único instrumento que existe. Lo que cambia es el orden de las prioridades: **si una decisión
+> obliga a elegir entre proteger la conversión y subir la impresión, gana la conversión.** Es
+> justo lo que ya hacen los guardrails de [§6.12](#612-cómo-se-mide-y-cuándo-se-revierte), y ahora
+> se sabe por qué el número está donde está. *(Salvedad: esos US$ 10–25 son de mercados
+> desarrollados. En Latinoamérica —ARPU de Netflix US$ 7 contra US$ 18,65 en EE.UU.— la cifra
+> real será bastante menor, y la brecha con la publicidad se achica.)*
 
 ### El límite, que hay que decir
 
@@ -513,7 +619,7 @@ categoría, textual: *«los anuncios duran más que el episodio que desbloquean�
 
 ---
 
-## 6.10 Las diez decisiones, con recomendación
+## 6.10 Las doce decisiones, con recomendación
 
 | | Decisión | Recomendación | Por qué |
 |---|---|---|---|
@@ -523,10 +629,12 @@ categoría, textual: *«los anuncios duran más que el episodio que desbloquean�
 | **4** | ¿El recompensado sigue dando monedas? | **No: abre el episodio.** Ya está en [I2](../02-estrategia/#i2--el-muro-muestra-las-salidas-que-ya-existen) | Un anuncio vale exactamente un episodio; la moneda solo agrega un toque |
 | **5** | ¿Se sube el tope de 10 anuncios/día? | **No** | La fuente gratuita ya más que duplica el consumo [M]: más volumen compra menos motivo para pagar |
 | **6** | ¿La suscripción quita los anuncios? | **Sí, sin una sola excepción** | Es la queja #1 de la categoría y es autoinfligida [M, D4] |
-| **7** | ¿Se toca el precio? | **Plan anual nuevo** + el tope del 60% para completar una serie | Hoy una serie cuesta casi lo mismo que el catálogo entero, y el muro no lo comenta |
+| **7** | ¿Se toca el precio? | **El tope del 60%** para completar una serie, y el escalón alto de la escalera se vende como *«termina esta historia»* y no como un bulto de monedas. **Sin plan anual** | Hoy una serie cuesta casi lo mismo que el catálogo entero. Y lo que se paga es la resolución, no el volumen |
 | **8** | ¿Se produce género nuevo ya? | **No hasta que la Fase 0 responda** | Cuesta una semana y puede ahorrar el presupuesto entero |
 | **9** | ¿Venta directa o solo programático? | **Programático primero.** Directo cuando exista inventario clasificado | Sin clasificación no hay nada que vender a marca; sin medición, con qué negociar |
 | **10** | ¿Se cambia el posicionamiento de «app #1 de microdramas»? | **No.** Se ensancha el catálogo sin tocar la marca | La serie premiada es del núcleo [M]. El riesgo de dilución es real y no hace falta correrlo |
+| **11** | ¿Se publican series completas en YouTube y TikTok? | **Sí, y solo las del Piso 0** | Ahí ya está el 44% y el 38% de esta audiencia. La continuidad —Pase, racha, estrenos— se queda en la app, que es lo que se va a buscar |
+| **12** | ¿Se agrega un plan anual? | **No.** *(Este documento decía que sí antes del benchmark)* | El 34% del churn de la categoría es por agotamiento de catálogo. Un anual sobre un catálogo que se agota produce reembolsos, no ingreso recurrente |
 
 ---
 
@@ -540,6 +648,8 @@ categoría, textual: *«los anuncios duran más que el episodio que desbloquean�
 | **Recompensar tiempo de pantalla** | Es lo que la Comisión Europea **prohibió permanentemente** en TikTok Lite [M, [§5.4](../05-benchmark/)/D5]. Este modelo va en la dirección contraria, y conviene que esté escrito antes de que lo pregunte alguien de afuera |
 | **Pre-roll en el primer episodio** · **cortes dentro del episodio** | [§6.9](#69-la-restricción-que-impone-un-episodio-de-90-segundos) |
 | **Offerwall / ganar monedas jugando a juegos de terceros** | Adjoe reporta 3× de retorno, y el número **viene del propio vendedor** [M, D3]. Puede entrar después; no es por donde se empieza |
+| **El plan anual de suscripción** | Lo proponía este mismo documento y lo retiro: 34% del churn de la categoría es agotamiento de catálogo, y un compromiso de doce meses sobre un catálogo que se acaba en dos es un pasivo, no un ingreso ([§6.5](#65-la-propuesta-tres-pisos)) |
+| **Publicar los estrenos en redes** | Solo sale el Piso 0. Regalar la ventana de explotación en YouTube es regalar el único tramo del catálogo que todavía vende |
 | **Ciencia ficción cara** | Rompe la economía de una serie por semana |
 
 ---
@@ -557,6 +667,7 @@ el criterio de reversión**, decidido de antemano.
 | **Recompensado bien ubicado** | Anuncios vistos por DAU | Ingreso publicitario por DAU | % de pagadores no cae más de 5% relativo |
 | **Suscripción reempaquetada** | Conversión desde el muro | Suscriptores netos y retención a 3 meses | Cancelaciones no suben |
 | **Fase 0 del catálogo** | Clics al riel nuevo | Series terminadas fuera del romance | Retención de la base actual no cae |
+| **Distribución en social** | Vistas de la serie publicada afuera | **Instalaciones atribuidas a YouTube y TikTok** | **Si en 4 semanas no crecen las instalaciones atribuidas, se corta.** Regalar contenido sin capturar entrada es publicidad para YouTube |
 
 **Y una regla de método:** la carga publicitaria entra **como experimento con grupo de control
 desde el primer día**. Es la única forma de distinguir «los anuncios molestan» de «esta semana
@@ -570,9 +681,10 @@ hubo menos contenido nuevo».
 Sem 1   Verificar la premisa demográfica · 4 fuentes que Idilio ya tiene   ← puede detenerlo todo
         Fase 0 del catálogo · dos rieles de suspenso con lo que ya está
 Sem 2   Mediación + medición + consentimiento · la línea base publicitaria
-        Pedir los seis datos (§6.14)
+        Pedir los siete datos (§6.14)
 Sem 3   Regla de decaimiento aplicada → qué series entran al Piso 0
         Primera conversación de P4 con una marca · no depende de nada más
+        Una serie del Piso 0 publicada entera en YouTube, con atribución puesta
 Sem 4   Piso 0 en cohorte, con holdout · sin cortes todavía
         Lectura de la Fase 0 → decidir si se compromete producción de género
 ```
@@ -583,9 +695,9 @@ propuesta cambia de forma antes de haber gastado un peso. Todo lo caro está des
 
 ---
 
-## 6.14 Los seis datos que faltan
+## 6.14 Los siete datos que faltan
 
-Ninguno requiere un estudio. Los seis los tiene Idilio hoy, y cada uno reemplaza un supuesto de
+Ninguno requiere un estudio. Los siete los tiene Idilio hoy, y cada uno reemplaza un supuesto de
 esta página por un hecho.
 
 | | Dato | De dónde sale | Qué supuesto reemplaza |
@@ -596,6 +708,7 @@ esta página por un hecho.
 | **4** | **Conversión a pagador y ARPPU** | Facturación | El cruce de [§6.8](#68-cuánto-vale-supuestos-y-tres-escenarios) — decide si la publicidad es la línea principal o la segunda |
 | **5** | **Curva de decaimiento de ingreso por serie** — semana 1, 4, 12 | Facturación por SKU | **Dimensiona el Piso 0 y elimina su riesgo por construcción** |
 | **6** | **MAU y sesiones por día activo**, con precisión | Analítica propia | El volumen de inventario |
+| **7** | **Atribución de instalación por fuente** — cuántas vienen de YouTube, TikTok y compartidos | Herramienta de atribución móvil | Dimensiona el movimiento 6 y decide si la distribución en social vale la pena ([§6.5](#65-la-propuesta-tres-pisos)) |
 
 > **Y el que no está en la lista porque todavía no existe: el resultado de la Fase 0.** Dos rieles
 > con el catálogo que ya está, una semana de trabajo, y la pregunta *«¿esta audiencia quiere algo
