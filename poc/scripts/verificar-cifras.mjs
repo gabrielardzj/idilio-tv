@@ -142,6 +142,10 @@ const DOCS = [
   // conserva a propósito. Vigilar solo uno deja al otro publicando cifras viejas.
   'docs/03-diseno/pen/README.md', 'docs/03-diseno/pencil/README.md',
   'docs/04-poc/README.md', 'web/README.md',
+  // Las dos de monetización: no son entregables del reto, pero sí son páginas
+  // del sitio, y publican cifras del censo —50 series, 1.728 bloqueados, 500
+  // gratis—. Vigiladas por la misma razón que el resto.
+  'docs/06-monetizacion/README.md', 'docs/06-monetizacion/propuesta.md',
   // Estos dos ya no son páginas del sitio, pero se siguen vigilando: el benchmark
   // publicaba «428 episodios gratis repartidos en 43 títulos» y el guardián no lo
   // veía porque no lo estaba mirando. Dejar de publicar un documento no lo saca
@@ -155,7 +159,7 @@ const DOCS = [
 // Un documento publicado que nadie vigila es por donde se cuela la próxima cifra
 // vieja. Si mañana se agrega una página al sitio y no a esta lista, esto avisa.
 const PUBLICADOS = ['docs/01-diagnostico', 'docs/02-estrategia', 'docs/03-diseno',
-  'docs/04-poc']
+  'docs/04-poc', 'docs/06-monetizacion']
 const sinVigilar = PUBLICADOS.filter(p => !DOCS.some(d => d.startsWith(p)))
 if (sinVigilar.length) {
   console.log(`✗ documentos publicados fuera de la lista de vigilados: ${sinVigilar.join(', ')}`)

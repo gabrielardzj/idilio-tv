@@ -19,6 +19,7 @@
 | **Archivo de diseño** — 10 pantallas, 6 componentes y las variables, nativas de Figma | **https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X** |
 | **Diseño** — el sistema visual y cómo leer ese archivo | **https://gabrielardzj.github.io/idilio-tv/docs/diseno.html** |
 | **Sobre el stack real de Idilio** | **https://gabrielardzj.github.io/idilio-tv/stack/** |
+| **Monetización** — el análisis y la propuesta, fuera del reto | **https://gabrielardzj.github.io/idilio-tv/docs/monetizacion.html** |
 
 > **El diseño es nativo de [Figma](https://www.figma.com/design/CCI8plwuWvfTV8VBpowN5X):** una
 > página con tres secciones — 31 variables con *scope* (dónde se puede usar cada una) y *code
@@ -36,6 +37,8 @@
 | **3** | **[La intervención en profundidad](docs/03-diseno/)** | El Pase de la Noche: mecánica, diagrama de flujo, nueve decisiones de diseño con su porqué, la revisión crítica del precedente, modelo económico y riesgos técnicos. Más el [archivo de diseño](docs/03-diseno/pen/), el [sistema visual](docs/03-diseno/sistema.md) y sus [tokens](docs/03-diseno/tokens.json) (los valores del sistema —colores, tipografías, espacios— con nombre propio). |
 | **4** | **[POC](docs/04-poc/)** | Prototipo funcional · [`/poc`](poc/) · y el [export de flujos](mobbin-export/) con 23 pantallas en 8 flujos. |
 | **+** | **[Sobre el stack real](web/)** | La misma intervención implementada en Next.js App Router + Tailwind v4 + Supabase, el stack que Idilio corre hoy. Incluye la migración SQL completa. Es la respuesta a *«la viabilidad de implementación hace parte de la propuesta»*. |
+
+**Fuera del reto ·** [Monetización](docs/06-monetizacion/) — [el análisis](docs/06-monetizacion/README.md) de si la publicidad es la salida y si conviene ampliar el catálogo, y [la propuesta](docs/06-monetizacion/propuesta.md) que sale de él: tres pisos, cuatro productos publicitarios y el catálogo por fases. No lo pidió el brief; nace de una pregunta posterior sobre el mismo material. Se publican como páginas del sitio.
 
 **Anexos ·** No son páginas del sitio publicado; se leen acá, en el repo. · [Registro de dogfooding](docs/00-dogfooding/) (dogfooding: usar el propio producto como un usuario más) — qué se pudo usar del producto real y qué se verificó ahí. · [Benchmark competitivo](docs/05-benchmark/) — quién más construye un metajuego sobre contenido serializado, contra qué chocó y cómo lo resolvió.
 

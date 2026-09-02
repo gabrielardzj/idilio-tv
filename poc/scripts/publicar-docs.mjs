@@ -27,11 +27,18 @@ const PAGINAS = [
   // enlaces y las imágenes de cada documento son relativos a su carpeta, no a
   // la de la página.
   { slug: 'diseno', src: ['docs/03-diseno/sistema.md', 'docs/03-diseno/pen/README.md'], titulo: 'Sistema y archivo de diseño', n: '5', peso: '20% craft' },
-  // El sitio publica los cuatro entregables y nada más. Los anexos —el registro
-  // de dogfooding, el benchmark competitivo y la nota de reconciliación entre las
-  // dos versiones— siguen en el repo pero ya no son pestañas. Lo que los
-  // documentos publicados citan de ellos se sigue enlazando: `reescribirEnlaces`
-  // manda al repo lo que no está publicado, y el repo es público.
+  // Las dos de monetización no son entregables del reto: salen de una pregunta
+  // posterior —cómo gana plata Idilio— sobre el mismo material. Se publican
+  // porque hay que poder leerlas sin entrar a GitHub, y llevan `kicker` propio
+  // para que la barra no las anuncie como un quinto y un sexto entregable que
+  // el brief nunca pidió. El análisis va primero porque la propuesta lo cita.
+  { slug: 'monetizacion', src: 'docs/06-monetizacion/README.md', titulo: 'Monetización · el análisis', n: '6', kicker: 'Fuera del reto', peso: 'el análisis' },
+  { slug: 'monetizacion-propuesta', src: 'docs/06-monetizacion/propuesta.md', titulo: 'Monetización · la propuesta', n: '7', kicker: 'Fuera del reto', peso: 'la propuesta' },
+  // El resto de los anexos —el registro de dogfooding, el benchmark competitivo
+  // y la nota de reconciliación entre las dos versiones— siguen en el repo pero
+  // no son pestañas. Lo que los documentos publicados citan de ellos se sigue
+  // enlazando: `reescribirEnlaces` manda al repo lo que no está publicado, y el
+  // repo es público.
 ]
 
 /** Una página puede armarse con más de un documento. */
@@ -304,7 +311,7 @@ ${nav(p.slug)}
 </div>
 </nav>
 <main>
-<p class="kicker">Entregable ${p.n}${p.peso ? ` · ${p.peso}` : ''}</p>
+<p class="kicker">${p.kicker ?? `Entregable ${p.n}`}${p.peso ? ` · ${p.peso}` : ''}</p>
 ${cuerpo}
 </main>
 </div>${cuerpo.includes('<pre class="mermaid">') ? `\n${scriptMermaid}` : ''}
