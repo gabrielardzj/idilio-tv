@@ -142,10 +142,10 @@ const DOCS = [
   // conserva a propósito. Vigilar solo uno deja al otro publicando cifras viejas.
   'docs/03-diseno/pen/README.md', 'docs/03-diseno/pencil/README.md',
   'docs/04-poc/README.md', 'web/README.md',
-  // Las dos de monetización: no son entregables del reto, pero sí son páginas
-  // del sitio, y publican cifras del censo —50 series, 1.728 bloqueados, 500
-  // gratis—. Vigiladas por la misma razón que el resto.
-  'docs/06-monetizacion/README.md', 'docs/06-monetizacion/propuesta.md',
+  // Monetización: no es un entregable del reto, pero sí es una página del sitio
+  // y publica cifras del censo —50 series, 1.728 bloqueados, 500 gratis—.
+  // Vigilada por la misma razón que el resto.
+  'docs/06-monetizacion/README.md',
   // Estos dos ya no son páginas del sitio, pero se siguen vigilando: el benchmark
   // publicaba «428 episodios gratis repartidos en 43 títulos» y el guardián no lo
   // veía porque no lo estaba mirando. Dejar de publicar un documento no lo saca

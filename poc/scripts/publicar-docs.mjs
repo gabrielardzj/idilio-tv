@@ -27,13 +27,13 @@ const PAGINAS = [
   // enlaces y las imágenes de cada documento son relativos a su carpeta, no a
   // la de la página.
   { slug: 'diseno', src: ['docs/03-diseno/sistema.md', 'docs/03-diseno/pen/README.md'], titulo: 'Sistema y archivo de diseño', n: '5', peso: '20% craft' },
-  // Las dos de monetización no son entregables del reto: salen de una pregunta
-  // posterior —cómo gana plata Idilio— sobre el mismo material. Se publican
-  // porque hay que poder leerlas sin entrar a GitHub, y llevan `kicker` propio
-  // para que la barra no las anuncie como un quinto y un sexto entregable que
-  // el brief nunca pidió. El análisis va primero porque la propuesta lo cita.
-  { slug: 'monetizacion', src: 'docs/06-monetizacion/README.md', titulo: 'Monetización · el análisis', n: '6', kicker: 'Fuera del reto', peso: 'el análisis' },
-  { slug: 'monetizacion-propuesta', src: 'docs/06-monetizacion/propuesta.md', titulo: 'Monetización · la propuesta', n: '7', kicker: 'Fuera del reto', peso: 'la propuesta' },
+  // Monetización no es un entregable del reto: sale de una pregunta posterior
+  // —cómo gana plata Idilio— sobre el mismo material. Se publica porque hay que
+  // poder leerla sin entrar a GitHub, y lleva `kicker` propio para que la barra
+  // no la anuncie como un quinto entregable que el brief nunca pidió. Análisis y
+  // propuesta van en la misma página: separados repetían el argumento entero dos
+  // veces, y el lector tenía que saltar entre pestañas para seguir una cuenta.
+  { slug: 'monetizacion', src: 'docs/06-monetizacion/README.md', titulo: 'Monetización', n: '6', kicker: 'Fuera del reto', peso: 'análisis y propuesta' },
   // El resto de los anexos —el registro de dogfooding, el benchmark competitivo
   // y la nota de reconciliación entre las dos versiones— siguen en el repo pero
   // no son pestañas. Lo que los documentos publicados citan de ellos se sigue

@@ -336,12 +336,10 @@ function Director({
         <a href="./docs/diseno.html"><b>Sistema y archivo de diseño</b><span>Figma · Pen</span></a>
         <a href="./flujos/"><b>Los flujos, pantalla a pantalla</b><span>export</span></a>
         <a href="./stack/"><b>Sobre el stack real de Idilio</b><span>Next.js</span></a>
-        {/* Las dos de monetización no las pidió el brief: salen de una pregunta
-            posterior sobre el mismo material —cómo gana plata Idilio—. Van al
-            final y dichas como lo que son, para que nadie las cuente como un
-            quinto entregable. */}
-        <a href="./docs/monetizacion.html"><b>Monetización · el análisis</b><span>fuera del reto</span></a>
-        <a href="./docs/monetizacion-propuesta.html"><b>Monetización · la propuesta</b><span>fuera del reto</span></a>
+        {/* Monetización no la pidió el brief: sale de una pregunta posterior
+            sobre el mismo material —cómo gana plata Idilio—. Va al final y dicha
+            como lo que es, para que nadie la cuente como un quinto entregable. */}
+        <a href="./docs/monetizacion.html"><b>Monetización</b><span>fuera del reto</span></a>
       </div>
 
       <div className="grp">
